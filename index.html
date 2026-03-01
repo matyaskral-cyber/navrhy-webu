@@ -20,17 +20,60 @@
       --radius: 16px;
     }
 
+    /* ── Animated canvas background ─────────────── */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       padding: 56px 24px 80px;
+      position: relative;
+      overflow-x: hidden;
     }
 
+    /* ── Gradient mesh overlay ───────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 20%, rgba(108,99,255,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 80% 80%, rgba(79,172,254,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      animation: meshShift 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes meshShift {
+      0%   { opacity: 1; transform: scale(1); }
+      100% { opacity: 0.6; transform: scale(1.08); }
+    }
+
+    /* ── Header ──────────────────────────────────── */
     .header {
       text-align: center;
       margin-bottom: 60px;
+      position: relative;
+      z-index: 1;
+
+      /* Výchozí stav — schovaný nad obrazovkou */
+      opacity: 0;
+      transform: translateY(-60px);
+      animation: headerFlyIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+    }
+
+    @keyframes headerFlyIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .header__eyebrow {
@@ -40,6 +83,8 @@
       text-transform: uppercase;
       color: var(--blue);
       margin-bottom: 14px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.55s forwards;
     }
 
     .header__title {
@@ -51,6 +96,8 @@
       background-clip: text;
       line-height: 1.15;
       margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.35s forwards;
     }
 
     .header__sub {
@@ -59,6 +106,13 @@
       max-width: 440px;
       margin: 0 auto;
       line-height: 1.65;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.7s forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ── Grid ─────────────────────────────────── */
@@ -68,9 +122,11 @@
       gap: 22px;
       max-width: 1100px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
-    /* ── Card ─────────────────────────────────── */
+    /* ── Card — scroll entrance ───────────────── */
     .card {
       background: var(--bg2);
       border: 1px solid var(--border);
@@ -80,13 +136,65 @@
       color: inherit;
       display: flex;
       flex-direction: column;
-      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+
+      /* Výchozí stav pro scroll animaci */
+      opacity: 0;
+      transform: translateY(40px) scale(0.97);
+      transition:
+        border-color .3s ease,
+        box-shadow .3s ease;
+
+      /* 3D tilt — transform se řídí JavaScriptem přes CSS proměnné */
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(108,99,255,0.45);
-      box-shadow: 0 20px 56px rgba(0,0,0,0.45);
+    /* Stav po vstupu do viewportu */
+    .card.is-visible {
+      animation: cardEntrance 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes cardEntrance {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg);
+      }
+    }
+
+    /* Po dokončení entrance animace přepneme na tilt transition */
+    .card.entrance-done {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition:
+        transform 0.18s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+    }
+
+    .card.entrance-done:hover {
+      border-color: rgba(108,99,255,0.55);
+      box-shadow:
+        0 24px 64px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(108,99,255,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    /* Glow ring na hover */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: calc(var(--radius) + 1px);
+      background: linear-gradient(135deg, rgba(108,99,255,0), rgba(79,172,254,0));
+      opacity: 0;
+      transition: opacity .35s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card.entrance-done:hover::before {
+      opacity: 1;
+      background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(79,172,254,0.08));
     }
 
     /* ── Preview (iframe miniatura) ───────────── */
@@ -109,7 +217,11 @@
       border: none;
       pointer-events: none;
       transform-origin: top left;
-      /* scale se nastaví JavaScriptem */
+    }
+
+    /* Plynulé přiblížení preview na hover */
+    .card.entrance-done:hover .card__preview iframe {
+      transition: transform 0.45s ease;
     }
 
     .card__preview--emoji {
@@ -118,6 +230,21 @@
       justify-content: center;
       font-size: 52px;
       background: linear-gradient(135deg, #1a1b2e, #252540);
+    }
+
+    /* Shimmer efekt na emoji kartě */
+    .card__preview--emoji::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.04) 50%, transparent 60%);
+      background-size: 200% 100%;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
     }
 
     /* Loading overlay */
@@ -141,6 +268,8 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      position: relative;
+      z-index: 1;
     }
 
     .card__top {
@@ -169,12 +298,23 @@
       color: var(--accent);
       white-space: nowrap;
       flex-shrink: 0;
+      transition: background .25s, border-color .25s;
+    }
+
+    .card.entrance-done:hover .card__badge {
+      background: rgba(108,99,255,0.22);
+      border-color: rgba(108,99,255,0.6);
     }
 
     .card__badge--live {
       background: rgba(79,172,254,0.12);
       color: var(--blue);
       border-color: rgba(79,172,254,0.3);
+    }
+
+    .card.entrance-done:hover .card__badge--live {
+      background: rgba(79,172,254,0.22);
+      border-color: rgba(79,172,254,0.6);
     }
 
     .card__desc {
@@ -205,22 +345,37 @@
       background: rgba(255,255,255,0.05);
       padding: 2px 8px;
       border-radius: 20px;
+      transition: background .2s, color .2s;
+    }
+
+    .card.entrance-done:hover .card__tag {
+      background: rgba(255,255,255,0.09);
+      color: #b8b8cc;
     }
 
     .card__arrow {
       color: var(--accent);
       font-size: 18px;
       line-height: 1;
-      transition: transform .2s;
+      transition: transform .25s cubic-bezier(0.34, 1.56, 0.64, 1), color .2s;
+      display: inline-block;
     }
 
-    .card:hover .card__arrow { transform: translateX(4px); }
+    .card.entrance-done:hover .card__arrow {
+      transform: translateX(6px) scale(1.15);
+      color: var(--blue);
+    }
 
+    /* ── Footer ──────────────────────────────── */
     .footer {
       text-align: center;
       margin-top: 72px;
       color: var(--muted);
       font-size: 0.8rem;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 1.2s forwards;
     }
 
     @media (max-width: 500px) {
@@ -230,6 +385,9 @@
   </style>
 </head>
 <body>
+
+  <!-- Plovoucí částicový canvas -->
+  <canvas id="bg-canvas"></canvas>
 
   <header class="header">
     <div class="header__eyebrow">Portfolio</div>
@@ -374,9 +532,81 @@
   </footer>
 
   <script>
+    /* ── Rok ───────────────────────────────────── */
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // Nastav scale iframů podle šířky karty
+    /* ── Plovoucí částice (canvas) ─────────────── */
+    (function () {
+      const canvas = document.getElementById('bg-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, particles;
+
+      const COLORS = ['rgba(108,99,255,', 'rgba(79,172,254,', 'rgba(160,140,255,'];
+
+      function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+
+      function createParticles(n) {
+        return Array.from({ length: n }, () => ({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: Math.random() * 1.8 + 0.4,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          alpha: Math.random() * 0.45 + 0.08,
+        }));
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+
+        /* Linky mezi blízkými částicemi */
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(108,99,255,${0.06 * (1 - dist / 120)})`;
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
+            }
+          }
+        }
+
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.color + p.alpha + ')';
+          ctx.fill();
+
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < -10) p.x = W + 10;
+          if (p.x > W + 10) p.x = -10;
+          if (p.y < -10) p.y = H + 10;
+          if (p.y > H + 10) p.y = -10;
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      particles = createParticles(80);
+      draw();
+      window.addEventListener('resize', () => {
+        resize();
+        particles = createParticles(80);
+      });
+    })();
+
+    /* ── Nastav scale iframů ───────────────────── */
     function scaleIframes() {
       document.querySelectorAll('.card__preview iframe').forEach(iframe => {
         const wrap = iframe.parentElement;
@@ -386,10 +616,60 @@
       });
     }
 
-    // Po načtení + resize
     window.addEventListener('load', scaleIframes);
     window.addEventListener('resize', scaleIframes);
     setTimeout(scaleIframes, 300);
+
+    /* ── Intersection Observer — staggered entrance ─ */
+    const cards = document.querySelectorAll('.card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          const index = parseInt(card.dataset.index, 10);
+
+          setTimeout(() => {
+            card.classList.add('is-visible');
+            card.addEventListener('animationend', () => {
+              card.classList.add('entrance-done');
+            }, { once: true });
+          }, index * 90); /* stagger 90 ms */
+
+          observer.unobserve(card);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach((card, i) => {
+      card.dataset.index = i;
+      observer.observe(card);
+    });
+
+    /* ── 3D Tilt efekt (mousemove) ─────────────── */
+    const MAX_TILT = 10; /* stupně */
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        if (!card.classList.contains('entrance-done')) return;
+
+        const rect = card.getBoundingClientRect();
+        const cx   = rect.left + rect.width  / 2;
+        const cy   = rect.top  + rect.height / 2;
+        const dx   = (e.clientX - cx) / (rect.width  / 2);
+        const dy   = (e.clientY - cy) / (rect.height / 2);
+
+        const rotateX = -dy * MAX_TILT;
+        const rotateY =  dx * MAX_TILT;
+
+        card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale(1.02)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        if (!card.classList.contains('entrance-done')) return;
+        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)';
+      });
+    });
   </script>
 
 </body>
