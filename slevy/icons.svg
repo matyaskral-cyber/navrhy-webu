@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6c63ff"/>
+      <stop offset="100%" stop-color="#ff6584"/>
+    </linearGradient>
+  </defs>
+  <!-- Background with rounded corners for maskable safe area -->
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shopping cart icon (centered, white, 20% padding = ~102px each side) -->
+  <g transform="translate(128, 118)" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Cart body -->
+    <path d="M0 0 L30 0 L62 180 L230 180 L260 50 L75 50"/>
+    <!-- Wheels -->
+    <circle cx="100" cy="230" r="22" fill="#fff"/>
+    <circle cx="200" cy="230" r="22" fill="#fff"/>
+    <!-- Handle bar -->
+    <path d="M62 120 L240 120" stroke-width="16"/>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+{
+  "name": "SlevyDnes — Akční nabídky",
+  "short_name": "SlevyDnes",
+  "description": "Aktuální slevy z českých supermarketů na jednom místě",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0f1117",
+  "theme_color": "#6c63ff",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icons.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

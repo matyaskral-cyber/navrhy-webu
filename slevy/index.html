@@ -2,8 +2,16 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>SlevyDnes — Akční nabídky supermarketů</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#6c63ff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="SlevyDnes" />
+  <link rel="apple-touch-icon" href="icons.svg" />
 
   <!--
   ╔══════════════════════════════════════════════════════════════════╗
@@ -460,15 +468,194 @@
     }
 
     /* ─── Responsive ────────────────────────────────────────────── */
+    /* ─── Offline bar ─────────────────────────────────────────── */
+    .offline-bar {
+      display: none;
+      background: linear-gradient(135deg, #b45309, #92400e);
+      color: #fef3c7;
+      text-align: center;
+      padding: .55rem 1rem;
+      font-size: .82rem;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .offline-bar.show { display: block; }
+
+    /* ─── City selector button ────────────────────────────────── */
+    .city-btn {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .4rem .75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      color: var(--text);
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--trans);
+      white-space: nowrap;
+    }
+    .city-btn:hover { border-color: var(--accent); }
+    .city-btn .city-pin { font-size: .9rem; }
+
+    /* ─── City modal ──────────────────────────────────────────── */
+    .city-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      backdrop-filter: blur(4px);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+    }
+    .city-overlay.show { display: flex; }
+
+    .city-modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      width: min(420px, 92vw);
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    }
+
+    .city-modal-header {
+      padding: 1.2rem 1.2rem .8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .city-modal-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: .25rem;
+    }
+    .city-modal-header p {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    .city-geo-btn {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      width: 100%;
+      padding: .75rem 1.2rem;
+      background: linear-gradient(135deg, #6c63ff22, #ff658422);
+      border: 1px solid rgba(108,99,255,.3);
+      border-radius: 0;
+      color: var(--accent);
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--trans);
+    }
+    .city-geo-btn:hover { background: linear-gradient(135deg, #6c63ff33, #ff658433); }
+
+    .city-list {
+      padding: .5rem 0;
+    }
+    .city-item {
+      display: block;
+      width: 100%;
+      padding: .7rem 1.2rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: .9rem;
+      text-align: left;
+      cursor: pointer;
+      transition: background var(--trans);
+    }
+    .city-item:hover { background: var(--surface2); }
+    .city-item.active { color: var(--accent); font-weight: 600; }
+
+    /* ─── Install banner ──────────────────────────────────────── */
+    .install-banner {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 300;
+      background: linear-gradient(135deg, #1a1d2e, #222539);
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.2rem;
+      box-shadow: 0 -4px 24px rgba(0,0,0,.5);
+    }
+    .install-banner.show { display: block; }
+
+    .install-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .install-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .install-text {
+      flex: 1;
+    }
+    .install-text strong {
+      display: block;
+      font-size: .92rem;
+      margin-bottom: .15rem;
+    }
+    .install-text span {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .install-btn {
+      padding: .6rem 1.2rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: .85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background var(--trans);
+      white-space: nowrap;
+    }
+    .install-btn:hover { background: #5a52e0; }
+    .install-dismiss {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding: .2rem;
+      line-height: 1;
+    }
+
     @media (max-width: 600px) {
       .header-inner { gap: .6rem; }
       .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .75rem; }
       .price-new { font-size: 1.2rem; }
       .card-name { font-size: .88rem; }
+      .install-inner { flex-wrap: wrap; }
+      .install-btn { width: 100%; text-align: center; }
     }
   </style>
 </head>
 <body>
+
+<!-- ═══ OFFLINE BAR ═══════════════════════════════════════════════ -->
+<div class="offline-bar" id="offlineBar">Jste offline — zobrazeny uložené slevy</div>
 
 <!-- ═══ HEADER ════════════════════════════════════════════════════ -->
 <header>
@@ -478,6 +665,10 @@
       <span class="logo-text">Slevy<span>Dnes</span></span>
     </a>
     <span class="header-badge" style="background:#6c63ff22;color:#6c63ff;border-color:#6c63ff40">REÁLNÁ DATA</span>
+    <button class="city-btn" id="cityBtn" onclick="toggleCityModal(true)">
+      <span class="city-pin">📍</span>
+      <span id="cityLabel">Celá ČR</span>
+    </button>
     <div class="header-right">
       <span class="last-update" id="lastUpdateLabel">Aktualizováno: —</span>
     </div>
@@ -486,7 +677,7 @@
 
 <!-- ═══ HERO ══════════════════════════════════════════════════════ -->
 <div class="hero">
-  <h1 class="hero-title">Aktuální <span>slevy</span> z českých supermarketů</h1>
+  <h1 class="hero-title" id="heroTitle">Aktuální <span>slevy</span> z českých supermarketů</h1>
   <p class="hero-sub">Albert · Penny Market · Billa · Kaufland — vše na jednom místě</p>
 </div>
 
@@ -786,6 +977,190 @@ async function loadRealData() {
 
 // === INICIALIZACE ====================================================
 loadRealData();
+
+// ═══════════════════════════════════════════════════════════════════
+// === PWA — Service Worker, Město, Install, Offline ================
+// ═══════════════════════════════════════════════════════════════════
+
+// ─── Města ───────────────────────────────────────────────────────────
+const CITIES = [
+  { id: "cz",       name: "Celá ČR",           locale: "" },
+  { id: "praha",    name: "Praha",              locale: "v Praze",             lat: 50.0755, lon: 14.4378 },
+  { id: "brno",     name: "Brno",               locale: "v Brně",              lat: 49.1951, lon: 16.6068 },
+  { id: "ostrava",  name: "Ostrava",            locale: "v Ostravě",           lat: 49.8209, lon: 18.2625 },
+  { id: "plzen",    name: "Plzeň",              locale: "v Plzni",             lat: 49.7384, lon: 13.3736 },
+  { id: "liberec",  name: "Liberec",            locale: "v Liberci",           lat: 50.7671, lon: 15.0562 },
+  { id: "olomouc",  name: "Olomouc",            locale: "v Olomouci",          lat: 49.5938, lon: 17.2509 },
+  { id: "cb",       name: "České Budějovice",   locale: "v Č. Budějovicích",   lat: 48.9745, lon: 14.4744 },
+  { id: "hk",       name: "Hradec Králové",     locale: "v Hradci Králové",    lat: 50.2104, lon: 15.8255 },
+  { id: "pardubice",name: "Pardubice",          locale: "v Pardubicích",       lat: 50.0343, lon: 15.7812 },
+  { id: "zlin",     name: "Zlín",               locale: "ve Zlíně",            lat: 49.2267, lon: 17.6700 },
+  { id: "usti",     name: "Ústí nad Labem",     locale: "v Ústí n. L.",        lat: 50.6611, lon: 14.0531 },
+  { id: "kv",       name: "Karlovy Vary",       locale: "v Karlových Varech",  lat: 50.2325, lon: 12.8714 },
+  { id: "jihlava",  name: "Jihlava",            locale: "v Jihlavě",           lat: 49.3961, lon: 15.5912 },
+];
+
+let selectedCity = localStorage.getItem("slevydnes-city") || "cz";
+
+function updateCityUI() {
+  const city = CITIES.find(c => c.id === selectedCity) || CITIES[0];
+  document.getElementById("cityLabel").textContent = city.name;
+
+  const heroEl = document.getElementById("heroTitle");
+  if (city.id === "cz") {
+    heroEl.innerHTML = 'Aktuální <span>slevy</span> z českých supermarketů';
+  } else {
+    heroEl.innerHTML = `<span>Slevy</span> ${city.locale}`;
+  }
+}
+
+function selectCity(cityId) {
+  selectedCity = cityId;
+  localStorage.setItem("slevydnes-city", cityId);
+  updateCityUI();
+  toggleCityModal(false);
+
+  // Aktualizovat aktivní položku v listu
+  document.querySelectorAll('.city-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.city === cityId);
+  });
+}
+
+function toggleCityModal(show) {
+  document.getElementById("cityOverlay").classList.toggle("show", show);
+}
+
+// ─── Geolokace ───────────────────────────────────────────────────────
+function detectCity() {
+  const geoBtn = document.getElementById("geoBtn");
+  if (!navigator.geolocation) {
+    geoBtn.textContent = "Geolokace není dostupná";
+    return;
+  }
+  geoBtn.innerHTML = "⏳ Zjišťuji polohu…";
+
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const { latitude, longitude } = pos.coords;
+      let closest = CITIES[1]; // default Praha
+      let minDist = Infinity;
+
+      CITIES.forEach(c => {
+        if (!c.lat) return;
+        const d = Math.hypot(c.lat - latitude, c.lon - longitude);
+        if (d < minDist) { minDist = d; closest = c; }
+      });
+
+      selectCity(closest.id);
+      geoBtn.innerHTML = "📍 Použít moji polohu";
+    },
+    () => {
+      geoBtn.innerHTML = "❌ Poloha zamítnuta";
+      setTimeout(() => { geoBtn.innerHTML = "📍 Použít moji polohu"; }, 2000);
+    },
+    { timeout: 8000 }
+  );
+}
+
+// ─── Inicializace city UI ────────────────────────────────────────────
+updateCityUI();
+
+// Zavřít modal kliknutím na overlay
+document.getElementById("cityOverlay").addEventListener("click", e => {
+  if (e.target === e.currentTarget) toggleCityModal(false);
+});
+
+// ─── Service Worker registrace ───────────────────────────────────────
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").then(reg => {
+    console.log("SW registrován:", reg.scope);
+  }).catch(err => {
+    console.warn("SW registrace selhala:", err);
+  });
+}
+
+// ─── Offline / Online detekce ────────────────────────────────────────
+const offlineBar = document.getElementById("offlineBar");
+
+function updateOnlineStatus() {
+  offlineBar.classList.toggle("show", !navigator.onLine);
+}
+window.addEventListener("online", updateOnlineStatus);
+window.addEventListener("offline", updateOnlineStatus);
+updateOnlineStatus();
+
+// ─── Install prompt ──────────────────────────────────────────────────
+let deferredPrompt = null;
+
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Zobrazit banner
+  document.getElementById("installBanner").classList.add("show");
+});
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(result => {
+      deferredPrompt = null;
+      document.getElementById("installBanner").classList.remove("show");
+    });
+  }
+}
+
+function dismissInstall() {
+  document.getElementById("installBanner").classList.remove("show");
+  sessionStorage.setItem("slevydnes-install-dismissed", "1");
+}
+
+// iOS detekce — na iOS není beforeinstallprompt, zobrazit manuální instrukce
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+const isStandalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+
+if (isIOS && !isStandalone && !sessionStorage.getItem("slevydnes-install-dismissed")) {
+  const banner = document.getElementById("installBanner");
+  banner.classList.add("show");
+  document.getElementById("installBtnText").textContent = "Sdílet → Přidat na plochu";
+  document.getElementById("installAction").onclick = dismissInstall;
+}
+</script>
+
+<!-- ═══ CITY MODAL ═════════════════════════════════════════════════ -->
+<div class="city-overlay" id="cityOverlay">
+  <div class="city-modal">
+    <div class="city-modal-header">
+      <h2>Vyberte město</h2>
+      <p>Slevy jsou stejné po celé ČR — město personalizuje zobrazení</p>
+    </div>
+    <button class="city-geo-btn" id="geoBtn" onclick="detectCity()">📍 Použít moji polohu</button>
+    <div class="city-list" id="cityList"></div>
+  </div>
+</div>
+
+<!-- ═══ INSTALL BANNER ═════════════════════════════════════════════ -->
+<div class="install-banner" id="installBanner">
+  <div class="install-inner">
+    <div class="install-icon">🛒</div>
+    <div class="install-text">
+      <strong>Přidat SlevyDnes na plochu</strong>
+      <span>Rychlý přístup ke slevám jako appka</span>
+    </div>
+    <button class="install-btn" id="installAction" onclick="installApp()">
+      <span id="installBtnText">Nainstalovat</span>
+    </button>
+    <button class="install-dismiss" onclick="dismissInstall()" aria-label="Zavřít">&times;</button>
+  </div>
+</div>
+
+<script>
+// Vygenerovat seznam měst
+(function() {
+  const list = document.getElementById("cityList");
+  const saved = localStorage.getItem("slevydnes-city") || "cz";
+  const html = CITIES.map(c => `<button class="city-item${c.id === saved ? ' active' : ''}" data-city="${c.id}" onclick="selectCity('${c.id}')">${c.name}</button>`).join("");
+  list.innerHTML = html;
+})();
 </script>
 </body>
 </html>
