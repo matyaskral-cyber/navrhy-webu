@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Návrhy webů</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0f1117;
+      --bg2:      #1a1d27;
+      --border:   rgba(255,255,255,0.08);
+      --text:     #e8e8f0;
+      --muted:    #8888a0;
+      --accent:   #6c63ff;
+      --accent2:  #4facfe;
+      --radius:   16px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 48px 24px 80px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .header__eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 12px;
+    }
+
+    .header__title {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 30%, var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .header__sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 460px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(108,99,255,0.4);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+
+    .card--external .card__badge {
+      background: rgba(79,172,254,0.15);
+      color: var(--accent2);
+      border-color: rgba(79,172,254,0.3);
+    }
+
+    .card__preview {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      background: #252535;
+    }
+
+    .card__preview--placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      background: linear-gradient(135deg, #1e1e30, #252540);
+    }
+
+    .card__body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .card__title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card__badge {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba(108,99,255,0.35);
+      background: rgba(108,99,255,0.12);
+      color: var(--accent);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .card__desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card__tech {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .card__tag {
+      font-size: 10px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.05);
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    .card__arrow {
+      color: var(--accent);
+      font-size: 18px;
+      line-height: 1;
+      transition: transform .2s;
+    }
+
+    .card:hover .card__arrow {
+      transform: translateX(4px);
+    }
+
+    .card--wip {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .card--wip .card__badge {
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      border-color: var(--border);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 64px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__eyebrow">Portfolio</div>
+    <h1 class="header__title">Návrhy webů</h1>
+    <p class="header__sub">Weby vytvořené na míru — klikni pro náhled nebo otevření živého projektu.</p>
+  </header>
+
+  <div class="grid">
+
+    <!-- MARBOTIM -->
+    <a href="marbotim/" class="card">
+      <div class="card__preview card__preview--placeholder">🔥</div>
+      <div class="card__body">
+        <div class="card__top">
+          <span class="card__title">MARBOTIM Hruška s.r.o.</span>
+          <span class="card__badge">Statický</span>
+        </div>
+        <p class="card__desc">Firemní web pro topenářskou firmu. Galerie realizací, rozklikávatelné služby, kontakt.</p>
+        <div class="card__footer">
+          <div class="card__tech">
+            <span class="card__tag">HTML</span>
+            <span class="card__tag">CSS</span>
+            <span class="card__tag">JS</span>
+          </div>
+          <span class="card__arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- AUTOCAMP ZVULE -->
+    <a href="autocamp/" class="card">
+      <div class="card__preview card__preview--placeholder">⛺</div>
+      <div class="card__body">
+        <div class="card__top">
+          <span class="card__title">Autocamp Zvůle</span>
+          <span class="card__badge">Flask</span>
+        </div>
+        <p class="card__desc">Web autocampu s rezervačním systémem, ceníkem a fotogalerií.</p>
+        <div class="card__footer">
+          <div class="card__tech">
+            <span class="card__tag">Python</span>
+            <span class="card__tag">Flask</span>
+            <span class="card__tag">SQLite</span>
+          </div>
+          <span class="card__arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- AZ SKI SCHOOL -->
+    <a href="ski/" class="card">
+      <div class="card__preview card__preview--placeholder">⛷️</div>
+      <div class="card__body">
+        <div class="card__top">
+          <span class="card__title">AZ Ski School</span>
+          <span class="card__badge">Statický</span>
+        </div>
+        <p class="card__desc">Web lyžařské školy s popisem kurzů, instruktory a kontaktem.</p>
+        <div class="card__footer">
+          <div class="card__tech">
+            <span class="card__tag">HTML</span>
+            <span class="card__tag">CSS</span>
+            <span class="card__tag">JS</span>
+          </div>
+          <span class="card__arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- STAVEBNÍ DENÍK -->
+    <a href="https://46.225.180.130" target="_blank" rel="noopener" class="card card--external">
+      <div class="card__preview card__preview--placeholder">🏗️</div>
+      <div class="card__body">
+        <div class="card__top">
+          <span class="card__title">Stavební deník</span>
+          <span class="card__badge">Live app</span>
+        </div>
+        <p class="card__desc">Webová aplikace pro správu stavebního deníku, pracovníků a fotek z realizace.</p>
+        <div class="card__footer">
+          <div class="card__tech">
+            <span class="card__tag">Python</span>
+            <span class="card__tag">Flask</span>
+            <span class="card__tag">Docker</span>
+          </div>
+          <span class="card__arrow">↗</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- PML APPLIKACE -->
+    <a href="https://pml-system.cz" target="_blank" rel="noopener" class="card card--external">
+      <div class="card__preview card__preview--placeholder">💊</div>
+      <div class="card__body">
+        <div class="card__top">
+          <span class="card__title">PML Systém</span>
+          <span class="card__badge">Live app</span>
+        </div>
+        <p class="card__desc">Pokladní a skladový systém pro kamennou prodejnu. Přihlášení vyžaduje oprávnění.</p>
+        <div class="card__footer">
+          <div class="card__tech">
+            <span class="card__tag">Python</span>
+            <span class="card__tag">Flask</span>
+            <span class="card__tag">SQLite</span>
+          </div>
+          <span class="card__arrow">↗</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- MPKRAL -->
+    <a href="mpkral/" class="card">
+      <div class="card__preview card__preview--placeholder">👤</div>
+      <div class="card__body">
+        <div class="card__top">
+          <span class="card__title">MPKRAL — osobní web</span>
+          <span class="card__badge">Statický</span>
+        </div>
+        <p class="card__desc">Osobní prezentační web.</p>
+        <div class="card__footer">
+          <div class="card__tech">
+            <span class="card__tag">HTML</span>
+            <span class="card__tag">CSS</span>
+          </div>
+          <span class="card__arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <footer class="footer">
+    <p>Matyáš Král &nbsp;·&nbsp; <span id="yr"></span></p>
+  </footer>
+
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
