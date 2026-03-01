@@ -762,5 +762,81 @@
       modal.querySelector('.svc-modal__cta').addEventListener('click', close);
     })();
   </script>
+
+  <!-- Dodávka animace -->
+  <div id="van-wrap" style="
+    position:fixed; bottom:0; left:-340px; z-index:9998;
+    pointer-events:none; will-change:transform;
+  ">
+    <svg width="320" height="110" viewBox="0 0 320 110" xmlns="http://www.w3.org/2000/svg">
+      <!-- Výfuk -->
+      <circle cx="22" cy="70" r="5" fill="rgba(180,180,180,0.5)" id="exhaust1"/>
+      <circle cx="12" cy="64" r="3.5" fill="rgba(180,180,180,0.35)" id="exhaust2"/>
+      <circle cx="5"  cy="57" r="2.5" fill="rgba(180,180,180,0.2)"  id="exhaust3"/>
+      <!-- Karoserie -->
+      <rect x="30" y="30" width="260" height="58" rx="8" fill="#c0392b"/>
+      <!-- Kabina -->
+      <path d="M200 30 L200 12 Q200 8 196 8 L130 8 Q110 8 96 20 L80 30 Z" fill="#a93226"/>
+      <!-- Okno kabiny -->
+      <path d="M190 28 L190 14 Q190 11 187 11 L138 11 Q122 11 110 21 L98 28 Z" fill="#d6eaf8" opacity="0.85"/>
+      <!-- Boční okno dodávky -->
+      <rect x="210" y="14" width="60" height="30" rx="4" fill="#d6eaf8" opacity="0.8"/>
+      <rect x="278" y="14" width="8" width="8" height="30" rx="2" fill="#d6eaf8" opacity="0.8"/>
+      <!-- Dveřní linka -->
+      <line x1="200" y1="30" x2="200" y2="88" stroke="#a93226" stroke-width="2"/>
+      <!-- Text MARBOTIM -->
+      <text x="215" y="64" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white" letter-spacing="1">MARBOTIM</text>
+      <text x="215" y="78" font-family="Arial,sans-serif" font-size="8.5" fill="rgba(255,255,255,0.8)">vytápění · instalace</text>
+      <!-- Plamen ikonka -->
+      <text x="168" y="68" font-size="18">🔥</text>
+      <!-- Přední světlo -->
+      <ellipse cx="292" cy="62" rx="7" ry="5" fill="#f9e94e" opacity="0.9"/>
+      <ellipse cx="295" cy="62" rx="4" ry="3" fill="white" opacity="0.7"/>
+      <!-- Zadní světlo -->
+      <rect x="30" y="52" width="8" height="14" rx="2" fill="#e74c3c"/>
+      <rect x="30" y="52" width="8" height="7" rx="2" fill="#f1948a"/>
+      <!-- Kola -->
+      <circle cx="80"  cy="91" r="18" fill="#2c3e50"/>
+      <circle cx="80"  cy="91" r="11" fill="#566573"/>
+      <circle cx="80"  cy="91" r="5"  fill="#aab7b8"/>
+      <circle cx="240" cy="91" r="18" fill="#2c3e50"/>
+      <circle cx="240" cy="91" r="11" fill="#566573"/>
+      <circle cx="240" cy="91" r="5"  fill="#aab7b8"/>
+      <!-- Podvozek / stín -->
+      <ellipse cx="160" cy="109" rx="130" ry="5" fill="rgba(0,0,0,0.15)"/>
+    </svg>
+  </div>
+
+  <style>
+    @keyframes vanDrive {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(calc(100vw + 360px)); }
+    }
+    @keyframes puff {
+      0%   { opacity: 0.6; transform: scale(1) translateY(0); }
+      100% { opacity: 0;   transform: scale(2.5) translateY(-18px); }
+    }
+    #exhaust1 { animation: puff 0.9s ease-out infinite; animation-delay: 0s; }
+    #exhaust2 { animation: puff 0.9s ease-out infinite; animation-delay: 0.3s; }
+    #exhaust3 { animation: puff 0.9s ease-out infinite; animation-delay: 0.6s; }
+  </style>
+
+  <script>
+    (function() {
+      const wrap = document.getElementById('van-wrap');
+      function driveAway() {
+        wrap.style.left = '-340px';
+        wrap.style.animation = 'none';
+        wrap.style.display = 'block';
+        // force reflow
+        void wrap.offsetWidth;
+        wrap.style.animation = 'vanDrive 3.2s cubic-bezier(0.4,0,0.6,1) forwards';
+      }
+      // Poprvé po 1.5s
+      setTimeout(driveAway, 1500);
+      // Pak každých 25s
+      setInterval(driveAway, 25000);
+    })();
+  </script>
 </body>
 </html>
