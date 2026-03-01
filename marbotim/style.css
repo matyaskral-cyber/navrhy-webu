@@ -20,15 +20,15 @@
   --clr-water-light:   #1976d2;
   --clr-water-subtle:  rgba(21, 101, 192, 0.1);
 
-  --clr-dark:          #1a1a2e;
-  --clr-dark-2:        #16213e;
-  --clr-dark-3:        #0f3460;
-  --clr-dark-card:     #222240;
+  --clr-dark:          #0b2545;
+  --clr-dark-2:        #081e3a;
+  --clr-dark-3:        #0d3a6e;
+  --clr-dark-card:     #0f2d52;
 
   --clr-white:         #ffffff;
-  --clr-off-white:     #f8f7f4;
-  --clr-text:          #2c2c3e;
-  --clr-text-muted:    #6b6b82;
+  --clr-off-white:     #eef5ff;
+  --clr-text:          #0d2137;
+  --clr-text-muted:    #4a6d8c;
   --clr-text-light:    rgba(255,255,255,0.85);
   --clr-text-muted-light: rgba(255,255,255,0.55);
 
@@ -321,7 +321,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header--scrolled {
-  background: rgba(5, 22, 44, 0.97);
+  background: rgba(8, 30, 58, 0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 4px 30px rgba(0,0,0,0.4);
@@ -456,9 +456,9 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 75% 60% at 20% 25%, rgba(56,189,248,0.45) 0%, transparent 60%),
-    radial-gradient(ellipse 55% 65% at 85% 15%, rgba(14,165,233,0.35) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 50% at 50% 90%, rgba(192,57,43,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 60% at 15% 30%, rgba(56,189,248,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 65% at 90% 10%, rgba(14,165,233,0.4) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 55% 85%, rgba(192,57,43,0.12) 0%, transparent 50%),
     radial-gradient(ellipse 100% 100% at 50% 50%, #071e36 0%, #030f1e 100%);
 }
 
@@ -467,8 +467,8 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(56,189,248,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56,189,248,0.06) 1px, transparent 1px);
+    linear-gradient(rgba(56,189,248,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.07) 1px, transparent 1px);
   background-size: 60px 60px;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
 }
