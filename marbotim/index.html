@@ -13,6 +13,23 @@
 </head>
 <body>
 
+  <!-- Portfolio back bar -->
+  <div id="portfolio-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:99999;background:rgba(15,17,23,0.95);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,0.08);padding:10px 20px;display:flex;align-items:center;gap:12px;">
+    <a href="../" style="color:#4facfe;font-family:system-ui,sans-serif;font-size:13px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:6px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Zpět na portfolio
+    </a>
+    <span style="color:rgba(255,255,255,0.2);font-size:11px;">|</span>
+    <span style="color:rgba(255,255,255,0.4);font-size:12px;font-family:system-ui,sans-serif;">MARBOTIM Hruška s.r.o.</span>
+  </div>
+  <script>
+    // Zobrazit lištu pouze jako podstránka portfolia
+    if (location.pathname.includes('navrhy-webu')) {
+      document.getElementById('portfolio-bar').style.display = 'flex';
+      document.body.style.paddingBottom = '46px';
+    }
+  </script>
+
   <!-- ===================== NAVIGATION ===================== -->
   <header class="header" id="header">
     <nav class="nav container">
