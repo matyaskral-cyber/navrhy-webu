@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MARBOTIM Hruška s.r.o. — kompletní rozvody topení, plynové kotle, podlahové vytápění, tepelná čerpadla a rekonstrukce kotelen. 20 let zkušeností." />
+  <meta name="robots" content="index, follow" />
+  <title>MARBOTIM Hruška s.r.o. — Topení a kotle</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#home" class="nav__logo">
+        <img src="logo.png" alt="MARBOTIM s.r.o." class="nav__logo-img" />
+      </a>
+
+      <button class="nav__hamburger" id="hamburger" aria-label="Otevřít menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li><a href="#about" class="nav__link">O nás</a></li>
+        <li><a href="#services" class="nav__link">Služby</a></li>
+        <li><a href="#gallery" class="nav__link">Realizace</a></li>
+        <li><a href="#why-us" class="nav__link">Proč my</a></li>
+        <li><a href="#contact" class="nav__link nav__link--cta">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="home" aria-label="Úvod">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__flame hero__flame--1"></div>
+        <div class="hero__flame hero__flame--2"></div>
+        <div class="hero__flame hero__flame--3"></div>
+        <div class="hero__grid"></div>
+      </div>
+
+      <div class="container hero__content">
+        <div class="hero__badge" data-animate="fade-up">20 let zkušeností na trhu</div>
+        <h1 class="hero__title" data-animate="fade-up" data-delay="100">
+          Kompletní rozvody topení —<br />
+          <span class="hero__title-accent">odborně</span> a spolehlivě
+        </h1>
+        <p class="hero__subtitle" data-animate="fade-up" data-delay="200">
+          Provádíme kompletní rozvody topení zkušenými odborníky ve svém oboru.<br class="hero__br" />
+          Používáme materiály od renomovaných výrobců a velkoobchodů.
+        </p>
+        <div class="hero__actions" data-animate="fade-up" data-delay="300">
+          <a href="#contact" class="btn btn--primary btn--large">
+            <svg class="btn__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 5.41 5.41l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/>
+            </svg>
+            Získat nabídku zdarma
+          </a>
+          <a href="#services" class="btn btn--ghost btn--large">
+            Naše služby
+            <svg class="btn__icon btn__icon--right" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="hero__stats" data-animate="fade-up" data-delay="400">
+          <div class="hero__stat">
+            <span class="hero__stat-number" data-count="20">0</span>
+            <span class="hero__stat-unit">+</span>
+            <span class="hero__stat-label">let zkušeností</span>
+          </div>
+          <div class="hero__stat-divider" aria-hidden="true"></div>
+          <div class="hero__stat">
+            <span class="hero__stat-number" data-count="500">0</span>
+            <span class="hero__stat-unit">+</span>
+            <span class="hero__stat-label">realizací</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="about section" id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about__inner">
+          <div class="about__visual" data-animate="fade-right">
+            <div class="about__img-wrapper">
+              <div class="about__img-block about__img-block--main">
+                <img src="images/Foto_01.jpg" alt="Realizace topení MARBOTIM" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:16px;" />
+              </div>
+              <div class="about__badge-float">
+                <div class="about__badge-icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="about__badge-text">Záruka na práci</div>
+                  <div class="about__badge-sub">do 5 let</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about__text" data-animate="fade-left">
+            <div class="section__tag">O nás</div>
+            <h2 class="section__title" id="about-heading">
+              Topení jako řemeslo —<br />s <span class="text-accent">20letou praxí</span>
+            </h2>
+            <p class="about__desc">
+              MARBOTIM Hruška s.r.o. provádí kompletní rozvody topení zkušenými odborníky ve svém oboru.
+              Realizujeme projekty od malých rekonstrukcí bytů až po velké stavby — vily, školy
+              i průmyslové budovy.
+            </p>
+            <p class="about__desc">
+              Používáme výhradně materiály od renomovaných výrobců a velkoobchodů.
+              Každé dílo předáváme v plné funkčnosti a s odbornou zárukou.
+            </p>
+            <ul class="about__list" role="list">
+              <li class="about__list-item">
+                <span class="about__list-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                Komplexní řešení od projektu po servis
+              </li>
+              <li class="about__list-item">
+                <span class="about__list-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                Certifikovaní montéři a technici
+              </li>
+              <li class="about__list-item">
+                <span class="about__list-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                Záruka až 5 let na provedenou práci
+              </li>
+              <li class="about__list-item">
+                <span class="about__list-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                Havarijní servis dostupný 24 hodin denně
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SERVICES ===================== -->
+    <section class="services section section--dark" id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section__header" data-animate="fade-up">
+          <div class="section__tag section__tag--light">Naše služby</div>
+          <h2 class="section__title section__title--light" id="services-heading">
+            Co pro vás <span class="text-accent">uděláme</span>
+          </h2>
+          <p class="section__subtitle section__subtitle--light">
+            Nabízíme kompletní portfolio topných řešení — od podlahového vytápění přes kotelny až po ekologické alternativy.
+          </p>
+        </div>
+
+        <div class="services__grid">
+
+          <article class="service-card" data-animate="fade-up" data-delay="0"
+            data-img="images/Foto_10.jpg"
+            data-detail="Podlahové a stěnové vytápění zajišťuje rovnoměrné prohřátí celé místnosti bez viditelných těles. Je ideální pro novostavby i rekonstrukce — instalujeme vodní i elektrické systémy. Stěnové vytápění využívá tepelnou kapacitu zdiva, výsledkem je příjemné a zdravé klima v interiéru s minimálními provozními náklady.">
+            <div class="service-card__icon-wrap" aria-hidden="true">
+              <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="14" fill="#c0392b" fill-opacity="0.12"/>
+                <path d="M10 36 L38 36" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M10 30 Q17 26 24 30 Q31 34 38 30" stroke="#c0392b" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <path d="M10 24 Q17 20 24 24 Q31 28 38 24" stroke="#c0392b" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+                <path d="M10 18 Q17 14 24 18 Q31 22 38 18" stroke="#c0392b" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
+                <circle cx="24" cy="13" r="4" fill="#c0392b" opacity="0.8"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Podlahové a stěnové vytápění</h3>
+            <p class="service-card__desc">Komfortní a energeticky úsporné řešení pro novostavby i rekonstrukce. Rovnoměrné prohřátí místnosti bez viditelných těles.</p>
+            <span class="service-card__arrow" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </article>
+
+          <article class="service-card" data-animate="fade-up" data-delay="80"
+            data-img="images/Foto_03.jpg"
+            data-detail="Etážové a ústřední topení tvoří základ vytápění většiny bytů a rodinných domů. Provádíme kompletní rozvody měděného nebo plastového potrubí, montáž radiátorů, konvektorů i regulačních prvků. Realizujeme nové instalace i modernizace stávajících systémů — od bytu po velký bytový dům.">
+            <div class="service-card__icon-wrap" aria-hidden="true">
+              <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="14" fill="#c0392b" fill-opacity="0.12"/>
+                <!-- Radiator -->
+                <rect x="10" y="14" width="7" height="24" rx="3" fill="#c0392b" opacity="0.8"/>
+                <rect x="20" y="14" width="7" height="24" rx="3" fill="#c0392b" opacity="0.9"/>
+                <rect x="30" y="14" width="7" height="24" rx="3" fill="#c0392b" opacity="0.8"/>
+                <rect x="9" y="19" width="30" height="3" rx="1.5" fill="#1a1a2e" opacity="0.3"/>
+                <rect x="9" y="28" width="30" height="3" rx="1.5" fill="#1a1a2e" opacity="0.3"/>
+                <!-- Pipe top -->
+                <rect x="9" y="11" width="30" height="4" rx="2" fill="#c0392b" opacity="0.5"/>
+                <!-- Pipe bottom -->
+                <rect x="9" y="37" width="30" height="4" rx="2" fill="#c0392b" opacity="0.5"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Etážové a ústřední topení</h3>
+            <p class="service-card__desc">Kompletní rozvody topení s radiátory nebo konvektory. Návrh, instalace i modernizace stávajícího systému — byty, domy i komerční objekty.</p>
+            <span class="service-card__arrow" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </article>
+
+          <article class="service-card" data-animate="fade-up" data-delay="160"
+            data-img="images/Foto_01.jpg"
+            data-detail="Plynové kotle jsou nejrozšířenějším zdrojem tepla v bytových i rodinných domech. Instalujeme závěsné i stacionární kondenzační kotle od předních výrobců. Součástí každé instalace je uvedení do provozu, zaškolení obsluhy a nastavení regulace. Nabízíme také pravidelný servis a havarijní opravy.">
+            <div class="service-card__icon-wrap" aria-hidden="true">
+              <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="14" fill="#c0392b" fill-opacity="0.12"/>
+                <!-- Boiler body -->
+                <rect x="13" y="12" width="22" height="28" rx="5" fill="#c0392b" opacity="0.15" stroke="#c0392b" stroke-width="2"/>
+                <!-- Flame inside -->
+                <path d="M22 32 C22 32 18 27 20 22 C21 19 24 17 24 17 C24 17 22 21 26 24 C27 25 26 28 26 28 C27 26 28 24 27 22 C29 25 29 30 26 33 C24.5 34.5 22 34 22 32Z" fill="#c0392b" opacity="0.8"/>
+                <!-- Dial -->
+                <circle cx="24" cy="13" r="0" fill="transparent"/>
+                <circle cx="24" cy="35" r="3" fill="#c0392b" opacity="0.5" stroke="#c0392b" stroke-width="1.5"/>
+                <!-- Pipes -->
+                <line x1="16" y1="8" x2="16" y2="12" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="32" y1="8" x2="32" y2="12" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="16" y1="40" x2="16" y2="44" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="32" y1="40" x2="32" y2="44" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Plynové kotle</h3>
+            <p class="service-card__desc">Závěsné i stacionární kondenzační kotle od předních výrobců. Instalace, uvedení do provozu a pravidelný servis pro maximální životnost.</p>
+            <span class="service-card__arrow" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </article>
+
+          <article class="service-card" data-animate="fade-up" data-delay="0"
+            data-img="images/Foto_04.jpg"
+            data-detail="Tepelná čerpadla jsou moderní a ekologické řešení vytápění s velmi nízkými provozními náklady. Pracují na principu přenosu tepla ze vzduchu, země nebo vody. Instalujeme systémy vzduch–voda i země–voda vhodné pro novostavby i rekonstrukce. Investice se zpravidla vrátí do několika let díky úsporám na energiích.">
+            <div class="service-card__icon-wrap" aria-hidden="true">
+              <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="14" fill="#1565c0" fill-opacity="0.12"/>
+                <!-- Heat pump -->
+                <!-- Outer unit -->
+                <rect x="8" y="16" width="14" height="20" rx="4" stroke="#1565c0" stroke-width="2" fill="#1565c0" fill-opacity="0.1"/>
+                <circle cx="15" cy="26" r="5" stroke="#1565c0" stroke-width="2" fill="none"/>
+                <line x1="15" y1="21" x2="15" y2="23" stroke="#1565c0" stroke-width="2" stroke-linecap="round"/>
+                <line x1="15" y1="29" x2="15" y2="31" stroke="#1565c0" stroke-width="2" stroke-linecap="round"/>
+                <line x1="10" y1="26" x2="12" y2="26" stroke="#1565c0" stroke-width="2" stroke-linecap="round"/>
+                <line x1="18" y1="26" x2="20" y2="26" stroke="#1565c0" stroke-width="2" stroke-linecap="round"/>
+                <!-- Arrow / transfer -->
+                <path d="M23 22 L25 22 Q27 22 27 24 L27 28 Q27 30 29 30 L31 30" stroke="#1565c0" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <polyline points="29,27 32,30 29,33" stroke="#1565c0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Indoor unit -->
+                <rect x="32" y="20" width="12" height="14" rx="3" stroke="#1565c0" stroke-width="2" fill="#1565c0" fill-opacity="0.15"/>
+                <line x1="34" y1="24" x2="42" y2="24" stroke="#1565c0" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                <line x1="34" y1="27" x2="42" y2="27" stroke="#1565c0" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                <line x1="34" y1="30" x2="42" y2="30" stroke="#1565c0" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Tepelná čerpadla</h3>
+            <p class="service-card__desc">Moderní ekologické vytápění s nízkými provozními náklady. Systémy vzduch-voda i země-voda pro maximální úspory energií.</p>
+            <span class="service-card__arrow" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </article>
+
+          <article class="service-card" data-animate="fade-up" data-delay="80"
+            data-img="images/Foto_07.jpg"
+            data-detail="Rekonstrukce kotelen zajišťujeme v bytových domech, školách, průmyslových objektech i vilách. Zahrnuje výměnu zastaralých zdrojů tepla za moderní kondenzační kotle, nové rozvody, armatury, expanzní nádoby i řídící systémy. Výsledkem je výrazné snížení spotřeby energie a splnění aktuálních emisních norem.">
+            <div class="service-card__icon-wrap" aria-hidden="true">
+              <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="14" fill="#c0392b" fill-opacity="0.12"/>
+                <!-- Boiler room / reconstruction -->
+                <!-- Large boiler -->
+                <rect x="10" y="14" width="16" height="26" rx="5" stroke="#c0392b" stroke-width="2" fill="#c0392b" fill-opacity="0.1"/>
+                <!-- Gauge -->
+                <circle cx="18" cy="21" r="4" stroke="#c0392b" stroke-width="1.5" fill="none"/>
+                <line x1="18" y1="21" x2="20" y2="18.5" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- Expansion vessel -->
+                <ellipse cx="18" cy="32" r="5" ry="3" stroke="#c0392b" stroke-width="1.5" fill="none" opacity="0.6"/>
+                <!-- Wrench tool -->
+                <path d="M29 20 Q35 14 39 18 L33 24" stroke="#c0392b" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <rect x="28" y="23" width="12" height="5" rx="2" stroke="#c0392b" stroke-width="1.5" fill="none" transform="rotate(-45 34 25.5)"/>
+                <!-- Pipe going right -->
+                <line x1="26" y1="26" x2="44" y2="26" stroke="#c0392b" stroke-width="2" stroke-linecap="round" stroke-dasharray="3,3" opacity="0.5"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Rekonstrukce kotelen</h3>
+            <p class="service-card__desc">Kompletní modernizace kotelen v bytových domech, školách i průmyslových objektech. Výměna zdrojů tepla, rozvody i regulace.</p>
+            <span class="service-card__arrow" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </article>
+
+          <article class="service-card" data-animate="fade-up" data-delay="160"
+            data-img="images/Foto_06.jpg"
+            data-detail="Automatické kotle na tuhá paliva jsou vhodnou alternativou tam, kde není dostupný plyn. Instalujeme kotle na uhlí, pelety, dřevní štěpku i brikety s automatickým podavačem paliva. Tyto kotle dosahují vysoké účinnosti a lze je snadno kombinovat s jiným zdrojem tepla nebo akumulační nádobou.">
+            <div class="service-card__icon-wrap" aria-hidden="true">
+              <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="14" fill="#c0392b" fill-opacity="0.12"/>
+                <!-- Leaf / biomass -->
+                <path d="M24 38 C24 38 12 32 12 20 C12 14 18 10 24 10 C30 10 36 14 36 20 C36 32 24 38 24 38Z" fill="#c0392b" opacity="0.15" stroke="#c0392b" stroke-width="2"/>
+                <path d="M24 10 C24 10 20 16 22 22 C23 25 24 26 24 26 C24 26 22 22 26 20 C29 18 30 14 28 10" fill="#c0392b" opacity="0.4"/>
+                <!-- Center vein -->
+                <line x1="24" y1="38" x2="24" y2="14" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+                <!-- Side veins -->
+                <line x1="24" y1="24" x2="16" y2="20" stroke="#c0392b" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+                <line x1="24" y1="28" x2="32" y2="24" stroke="#c0392b" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+                <!-- Pellet circles -->
+                <circle cx="14" cy="38" r="4" fill="#c0392b" opacity="0.7"/>
+                <circle cx="22" cy="41" r="3" fill="#c0392b" opacity="0.6"/>
+                <circle cx="30" cy="39" r="3.5" fill="#c0392b" opacity="0.65"/>
+                <circle cx="37" cy="37" r="3" fill="#c0392b" opacity="0.55"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Kotle na tuhá paliva</h3>
+            <p class="service-card__desc">Automatické kotle na uhlí, pelety a biomasu. Ekologické vytápění s nízkými provozními náklady a vysokou účinností spalování.</p>
+            <span class="service-card__arrow" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== GALLERY ===================== -->
+    <section class="gallery section" id="gallery" aria-labelledby="gallery-heading">
+      <div class="container">
+        <div class="section__header" data-animate="fade-up">
+          <div class="section__tag">Realizace</div>
+          <h2 class="section__title" id="gallery-heading">
+            Naše <span class="text-accent">hotové projekty</span>
+          </h2>
+          <p class="section__subtitle">
+            Ukázka z naší práce — rodinné domy, bytové domy, kotelny i průmyslové objekty.
+          </p>
+        </div>
+        <div class="gallery__grid" data-animate="fade-up">
+          <div class="gallery__item gallery__item--wide">
+            <img src="images/Foto_05.jpg" alt="Realizace topení" loading="lazy" />
+          </div>
+          <div class="gallery__item">
+            <img src="images/Foto_02.jpg" alt="Rozvody topení" loading="lazy" />
+          </div>
+          <div class="gallery__item">
+            <img src="images/Foto_03.jpg" alt="Instalace kotle" loading="lazy" />
+          </div>
+          <div class="gallery__item">
+            <img src="images/Foto_04.jpg" alt="Podlahové vytápění" loading="lazy" />
+          </div>
+          <div class="gallery__item">
+            <img src="images/Foto_06.jpg" alt="Kotelna" loading="lazy" />
+          </div>
+          <div class="gallery__item gallery__item--wide">
+            <img src="images/Foto_07.jpg" alt="Rekonstrukce topení" loading="lazy" />
+          </div>
+          <div class="gallery__item">
+            <img src="images/Foto_08.jpg" alt="Topné těleso" loading="lazy" />
+          </div>
+          <div class="gallery__item">
+            <img src="images/Foto_09.jpg" alt="Radiátor" loading="lazy" />
+          </div>
+          <div class="gallery__item">
+            <img src="images/Foto_10.jpg" alt="Tepelné čerpadlo" loading="lazy" />
+          </div>
+          <div class="gallery__item">
+            <img src="images/Foto_11.jpg" alt="Montáž topení" loading="lazy" />
+          </div>
+          <div class="gallery__item">
+            <img src="images/Foto_12.jpg" alt="Dokončená realizace" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== WHY US ===================== -->
+    <section class="why section" id="why-us" aria-labelledby="why-heading">
+      <div class="container">
+        <div class="section__header" data-animate="fade-up">
+          <div class="section__tag">Proč my</div>
+          <h2 class="section__title" id="why-heading">
+            Váš spolehlivý partner<br />pro <span class="text-accent">vytápění</span>
+          </h2>
+          <p class="section__subtitle">
+            Vybíráme si nás pro kvalitu, rychlost a férovost. Zde jsou hlavní důvody, proč nám zákazníci důvěřují.
+          </p>
+        </div>
+
+        <div class="why__grid">
+
+          <div class="why-card" data-animate="fade-up" data-delay="0">
+            <div class="why-card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3 class="why-card__title">Záruky na práci</h3>
+            <p class="why-card__desc">Poskytujeme záruky až 5 let na veškeré provedené instalace. Na použité materiály a komponenty se vztahuje záruční doba výrobce.</p>
+          </div>
+
+          <div class="why-card" data-animate="fade-up" data-delay="80">
+            <div class="why-card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="6"/>
+                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+              </svg>
+            </div>
+            <h3 class="why-card__title">Certifikovaní technici</h3>
+            <p class="why-card__desc">Všichni naši montéři jsou certifikováni příslušnými autoritami a pravidelně se vzdělávají v nových technologiích a postupech.</p>
+          </div>
+
+          <div class="why-card" data-animate="fade-up" data-delay="160">
+            <div class="why-card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+                <path d="m9 16 2 2 4-4"/>
+              </svg>
+            </div>
+            <h3 class="why-card__title">Rychlé termíny</h3>
+            <p class="why-card__desc">Víme, že čas je vzácný. Snažíme se vždy domluvit termín dle vašich potřeb a práce dokončit v dohodnutém čase bez zbytečných průtahů.</p>
+          </div>
+
+<div class="why-card" data-animate="fade-up" data-delay="320">
+            <div class="why-card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <h3 class="why-card__title">Férové ceny</h3>
+            <p class="why-card__desc">Transparentní ceník a přesné kalkulace předem. Bez skrytých poplatků a nepříjemných překvapení při vyúčtování práce.</p>
+          </div>
+
+          <div class="why-card" data-animate="fade-up" data-delay="400">
+            <div class="why-card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <h3 class="why-card__title">Malé i velké projekty</h3>
+            <p class="why-card__desc">Zvládneme vše od rekonstrukce bytu až po vytápění vil, škol a průmyslových budov. Každý projekt přistupujeme individuálně.</p>
+          </div>
+
+        </div>
+
+        <!-- Testimonial strip -->
+        <div class="testimonial" data-animate="fade-up">
+          <div class="testimonial__inner">
+            <div class="testimonial__quote" aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <text x="4" y="34" font-size="48" fill="#c0392b" opacity="0.3" font-family="Georgia, serif">"</text>
+              </svg>
+            </div>
+            <blockquote class="testimonial__text">
+              "Perfektní servis a rychlost + ochota vše vyřešit. Moc děkujeme za profesionální přístup za férovou cenu."
+            </blockquote>
+            <div class="testimonial__author">
+              <div class="testimonial__avatar" aria-hidden="true">JM</div>
+              <div>
+                <div class="testimonial__name">John Majestic</div>
+                <div class="testimonial__role">Recenze Google · před 2 lety</div>
+              </div>
+              <div class="testimonial__stars" aria-label="Hodnocení 5 z 5 hvězd">
+                <span aria-hidden="true">★★★★★</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section class="contact section section--dark" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="contact__inner">
+
+          <div class="contact__info" data-animate="fade-right">
+            <div class="section__tag section__tag--light">Kontakt</div>
+            <h2 class="section__title section__title--light" id="contact-heading">
+              Pojďme se<br /><span class="text-accent">spojit</span>
+            </h2>
+            <p class="contact__desc">
+              Máte otázky nebo zájem o nezávaznou nabídku? Kontaktujte nás — 
+              odpovíme do 24 hodin v pracovní dny.
+            </p>
+
+            <ul class="contact__details" role="list">
+              <li class="contact__detail">
+                <span class="contact__detail-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 5.41 5.41l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/>
+                  </svg>
+                </span>
+                <div>
+                  <div class="contact__detail-label">Telefon</div>
+                  <a href="tel:+420602649135" class="contact__detail-value">+420 602 649 135</a>
+                </div>
+              </li>
+              <li class="contact__detail">
+                <span class="contact__detail-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </span>
+                <div>
+                  <div class="contact__detail-label">E-mail</div>
+                  <a href="mailto:hruska@marbotim.cz" class="contact__detail-value">hruska@marbotim.cz</a>
+                </div>
+              </li>
+              <li class="contact__detail">
+                <span class="contact__detail-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </span>
+                <div>
+                  <div class="contact__detail-label">Adresa</div>
+                  <span class="contact__detail-value">Třeboňská 436, 373 12 Borovany</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="contact__form-wrap" data-animate="fade-left">
+            <form class="contact__form" id="contact-form" novalidate>
+              <h3 class="contact__form-title">Nezávazná poptávka</h3>
+
+              <div class="form__row form__row--two">
+                <div class="form__group">
+                  <label for="name" class="form__label">Jméno a příjmení <span class="form__required" aria-hidden="true">*</span></label>
+                  <input type="text" id="name" name="name" class="form__input" placeholder="Jan Novák" required autocomplete="name" />
+                  <span class="form__error" id="name-error" role="alert"></span>
+                </div>
+                <div class="form__group">
+                  <label for="phone" class="form__label">Telefon <span class="form__required" aria-hidden="true">*</span></label>
+                  <input type="tel" id="phone" name="phone" class="form__input" placeholder="+420 xxx xxx xxx" required autocomplete="tel" />
+                  <span class="form__error" id="phone-error" role="alert"></span>
+                </div>
+              </div>
+
+              <div class="form__group">
+                <label for="email" class="form__label">E-mail <span class="form__required" aria-hidden="true">*</span></label>
+                <input type="email" id="email" name="email" class="form__input" placeholder="jan@email.cz" required autocomplete="email" />
+                <span class="form__error" id="email-error" role="alert"></span>
+              </div>
+
+              <div class="form__group">
+                <label for="service" class="form__label">Typ služby</label>
+                <select id="service" name="service" class="form__input form__select">
+                  <option value="">-- Vyberte službu --</option>
+                  <option value="podlahove">Podlahové vytápění</option>
+                  <option value="ustredni">Ústřední topení</option>
+                  <option value="plyn">Plynový kotel</option>
+                  <option value="tc">Tepelné čerpadlo</option>
+                  <option value="kotelna">Rekonstrukce kotelny</option>
+                  <option value="biomasa">Biomasa / pelety</option>
+                  <option value="servis">Servis / oprava</option>
+                  <option value="jine">Jiné</option>
+                </select>
+              </div>
+
+              <div class="form__group">
+                <label for="message" class="form__label">Zpráva</label>
+                <textarea id="message" name="message" class="form__input form__textarea" placeholder="Popište nám váš projekt nebo dotaz..." rows="4"></textarea>
+              </div>
+
+              <div class="form__group form__group--checkbox">
+                <input type="checkbox" id="gdpr" name="gdpr" class="form__checkbox" required />
+                <label for="gdpr" class="form__checkbox-label">
+                  Souhlasím se zpracováním osobních údajů pro účely vyřízení poptávky. <span class="form__required" aria-hidden="true">*</span>
+                </label>
+                <span class="form__error" id="gdpr-error" role="alert"></span>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--full">
+                <svg class="btn__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="22" y1="2" x2="11" y2="13"/>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+                Odeslat poptávku
+              </button>
+
+              <p class="form__note">Pole označená <span aria-hidden="true">*</span><span class="sr-only">hvězdičkou</span> jsou povinná. Odpovíme do 24 hodin.</p>
+
+              <div class="form__success" id="form-success" role="status" aria-live="polite" hidden>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+                <h4>Děkujeme za vaši poptávku!</h4>
+                <p>Budeme vás kontaktovat co nejdříve, nejpozději do 24 hodin v pracovní dny.</p>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="#home" class="nav__logo footer__logo">
+            <img src="logo.png" alt="MARBOTIM Hruška s.r.o." style="height:48px;width:auto;object-fit:contain;" />
+          </a>
+          <p class="footer__tagline">Kompletní rozvody topení — odborně a spolehlivě.</p>
+          <p class="footer__legal">MARBOTIM Hruška s.r.o. &nbsp;|&nbsp; IČO: 07744862</p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Patička navigace">
+          <div class="footer__nav-col">
+            <h4 class="footer__nav-title">Navigace</h4>
+            <ul role="list">
+              <li><a href="#about" class="footer__link">O nás</a></li>
+              <li><a href="#services" class="footer__link">Služby</a></li>
+              <li><a href="#why-us" class="footer__link">Proč my</a></li>
+              <li><a href="#contact" class="footer__link">Kontakt</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <h4 class="footer__nav-title">Služby</h4>
+            <ul role="list">
+              <li><a href="#services" class="footer__link">Podlahové vytápění</a></li>
+              <li><a href="#services" class="footer__link">Plynové kotle</a></li>
+              <li><a href="#services" class="footer__link">Tepelná čerpadla</a></li>
+              <li><a href="#services" class="footer__link">Rekonstrukce kotelen</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <h4 class="footer__nav-title">Kontakt</h4>
+            <ul role="list">
+              <li class="footer__contact-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 5.41 5.41l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+                <a href="tel:+420602649135" class="footer__link">+420 602 649 135</a>
+              </li>
+              <li class="footer__contact-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <a href="mailto:hruska@marbotim.cz" class="footer__link">hruska@marbotim.cz</a>
+              </li>
+              <li class="footer__contact-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Třeboňská 436, 373 12 Borovany</span>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <p>&copy; <span id="year"></span> MARBOTIM Hruška s.r.o. Všechna práva vyhrazena.</p>
+        <p class="footer__bottom-right">Vyrobeno s pečlivostí v Čechách</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="back-to-top" aria-label="Zpět nahoru" hidden>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <!-- Service detail modal -->
+  <div id="serviceModal" class="svc-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="svc-modal__backdrop"></div>
+    <div class="svc-modal__box">
+      <button class="svc-modal__close" aria-label="Zavřít">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="svc-modal__img-wrap">
+        <img id="svcModalImg" src="" alt="" loading="lazy" />
+      </div>
+      <div class="svc-modal__body">
+        <h3 id="svcModalTitle" class="svc-modal__title"></h3>
+        <p id="svcModalDesc" class="svc-modal__desc"></p>
+        <a href="#contact" class="btn btn--primary svc-modal__cta">Nezávazná poptávka</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="editor.js"></script>
+  <script>
+    // Service card modal
+    (function () {
+      const modal = document.getElementById('serviceModal');
+      const backdrop = modal.querySelector('.svc-modal__backdrop');
+      const closeBtn = modal.querySelector('.svc-modal__close');
+      const img = document.getElementById('svcModalImg');
+      const title = document.getElementById('svcModalTitle');
+      const desc = document.getElementById('svcModalDesc');
+
+      function open(card) {
+        img.src = card.dataset.img || '';
+        img.alt = card.querySelector('h3').textContent;
+        title.textContent = card.querySelector('h3').textContent;
+        desc.textContent = card.dataset.detail || '';
+        modal.setAttribute('aria-hidden', 'false');
+        modal.classList.add('svc-modal--open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function close() {
+        modal.classList.remove('svc-modal--open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        setTimeout(() => { img.src = ''; }, 300);
+      }
+
+      document.querySelectorAll('.service-card[data-img]').forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => open(card));
+      });
+
+      closeBtn.addEventListener('click', close);
+      backdrop.addEventListener('click', close);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+      modal.querySelector('.svc-modal__cta').addEventListener('click', close);
+    })();
+  </script>
+</body>
+</html>
