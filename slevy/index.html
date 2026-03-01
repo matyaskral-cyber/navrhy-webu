@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SlevyDnes — Akční nabídky supermarketů</title>
+
+  <!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  VÝZKUM API — výsledek průzkumu (březen 2026)                   ║
+  ╠══════════════════════════════════════════════════════════════════╣
+  ║  Albert (albert.cz)                                              ║
+  ║    → Žádné veřejné REST API. Data dostupná jen přes             ║
+  ║      "Můj Albert" mobilní aplikaci / PDF letáky.                ║
+  ║      Endpoint pro dynamické nabídky: albert.cz/online/promo     ║
+  ║      (vyžaduje session/autentizaci, bez veřejného JSONu).        ║
+  ║                                                                  ║
+  ║  Penny Market (penny.cz)                                         ║
+  ║    → Žádné veřejné API. Letáky dostupné jako PDF/flipbook na    ║
+  ║      penny.cz/nabidky/letaky                                     ║
+  ║                                                                  ║
+  ║  Billa (billa.cz)                                                ║
+  ║    → Žádné veřejné API. Nabídky zobrazeny na webu přes SPA      ║
+  ║      (žádný přístupný JSON endpoint).                            ║
+  ║                                                                  ║
+  ║  Kaufland (kaufland.cz)                                          ║
+  ║    → sellerapi.kaufland.com existuje, ALE je to Marketplace     ║
+  ║      Seller API pro prodejce — NENÍ to API pro akční nabídky.  ║
+  ║      Leták je dostupný na prodejny.kaufland.cz/letak.html       ║
+  ║                                                                  ║
+  ║  Agregátory                                                      ║
+  ║    → kupi.cz — žádné oficální API. Existuje PyPI balíček        ║
+  ║      "kupiapi" (scraper přes BeautifulSoup, neoficiální).        ║
+  ║    → najdislevu.cz, letakomat.cz, kimbino.cz — jen weby.        ║
+  ║                                                                  ║
+  ║  ZÁVĚR: Žádný z řetězců neposkytuje veřejné JSON/REST API       ║
+  ║  pro aktuální slevy. Stránka používá ukázková data.             ║
+  ║                                                                  ║
+  ║  JAK NAPOJIT REAL DATA (možnosti):                               ║
+  ║  1. Python scraper s "kupiapi" (pip install kupiapi)             ║
+  ║     → generuje JSON → uložit do /api/slevy.json                 ║
+  ║     → JavaScript níže načítá tento soubor místo MOCK_DATA       ║
+  ║  2. Vlastní scraper (Playwright/Puppeteer) → cron job → JSON    ║
+  ║  3. Kontaktovat přímo řetězce a požádat o datový feed           ║
+  ║                                                                  ║
+  ║  KDY NAHRADIT MOCK DATA:                                         ║
+  ║  Najdi v kódu sekci "=== DATA SOURCE ===" a vyměň               ║
+  ║  loadMockData() za loadRealData() s fetch('/api/slevy.json')    ║
+  ╚══════════════════════════════════════════════════════════════════╝
+  -->
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0f1117;
+      --surface:   #1a1d2e;
+      --surface2:  #222539;
+      --border:    #2e3250;
+      --accent:    #6c63ff;
+      --accent2:   #ff6584;
+      --text:      #e8eaf6;
+      --muted:     #8b90b8;
+      --sale-bg:   #ff465420;
+      --sale-text: #ff6b6b;
+      --tag-bg:    #6c63ff22;
+
+      /* obchody */
+      --albert:    #e32020;
+      --penny:     #e30613;
+      --billa:     #ffcc00;
+      --billa-fg:  #1a1a1a;
+      --kaufland:  #e2001a;
+
+      --radius:    14px;
+      --shadow:    0 4px 24px rgba(0,0,0,.45);
+      --trans:     .2s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* ─── Header ────────────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: .9rem 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .logo-text { font-size: 1.35rem; font-weight: 700; color: var(--text); }
+    .logo-text span { color: var(--accent); }
+
+    .header-badge {
+      font-size: .7rem;
+      background: var(--sale-bg);
+      color: var(--sale-text);
+      border: 1px solid #ff465440;
+      padding: .2rem .55rem;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .last-update {
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    /* ─── Hero / Filter bar ─────────────────────────────────────── */
+    .hero {
+      max-width: 1400px;
+      margin: 2rem auto 0;
+      padding: 0 1.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: .4rem;
+    }
+    .hero-title span { color: var(--accent); }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── Search & Filters ──────────────────────────────────────── */
+    .controls {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 1.5rem;
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 1rem; top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: var(--muted);
+      pointer-events: none;
+    }
+    #searchInput {
+      width: 100%;
+      padding: .75rem 1rem .75rem 2.7rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: .95rem;
+      outline: none;
+      transition: border-color var(--trans), box-shadow var(--trans);
+    }
+    #searchInput:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(108,99,255,.18);
+    }
+    #searchInput::placeholder { color: var(--muted); }
+
+    .filter-group {
+      display: flex;
+      gap: .45rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: .55rem 1rem;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--trans);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      user-select: none;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .filter-btn.active { color: #fff; border-color: transparent; }
+
+    .filter-btn[data-store="all"].active    { background: var(--accent); }
+    .filter-btn[data-store="albert"].active  { background: var(--albert); }
+    .filter-btn[data-store="penny"].active   { background: var(--penny); }
+    .filter-btn[data-store="billa"].active   { background: var(--billa); color: var(--billa-fg); }
+    .filter-btn[data-store="kaufland"].active{ background: var(--kaufland); }
+
+    .store-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ─── Stats bar ─────────────────────────────────────────────── */
+    .stats-bar {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem .75rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: .82rem;
+      color: var(--muted);
+    }
+    .stats-count { color: var(--text); font-weight: 600; }
+
+    /* ─── Sort select ───────────────────────────────────────────── */
+    #sortSelect {
+      margin-left: auto;
+      padding: .45rem .85rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: .82rem;
+      cursor: pointer;
+      outline: none;
+    }
+    #sortSelect option { background: var(--surface2); }
+
+    /* ─── Grid ──────────────────────────────────────────────────── */
+    .grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.1rem;
+    }
+
+    /* ─── Product Card ──────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans);
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      border-color: var(--accent);
+    }
+
+    /* store stripe at top */
+    .card-stripe {
+      height: 4px;
+      width: 100%;
+    }
+    .card[data-store="albert"]  .card-stripe { background: var(--albert); }
+    .card[data-store="penny"]   .card-stripe { background: var(--penny); }
+    .card[data-store="billa"]   .card-stripe { background: var(--billa); }
+    .card[data-store="kaufland"].card-stripe { background: var(--kaufland); }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      user-select: none;
+    }
+
+    .card-body {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+
+    .store-badge {
+      font-size: .68rem;
+      font-weight: 700;
+      padding: .2rem .55rem;
+      border-radius: 20px;
+      flex-shrink: 0;
+      letter-spacing: .04em;
+    }
+    .card[data-store="albert"]   .store-badge { background: #e3202022; color: var(--albert); border: 1px solid #e3202040; }
+    .card[data-store="penny"]    .store-badge { background: #e3061322; color: #ff4444; border: 1px solid #e3061340; }
+    .card[data-store="billa"]    .store-badge { background: #ffcc0022; color: #d4aa00; border: 1px solid #ffcc0040; }
+    .card[data-store="kaufland"] .store-badge { background: #e2001a22; color: #ff4455; border: 1px solid #e2001a40; }
+
+    .card-name {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+      flex: 1;
+    }
+
+    .card-desc {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .card-category {
+      font-size: .72rem;
+      background: var(--tag-bg);
+      color: var(--accent);
+      border: 1px solid rgba(108,99,255,.25);
+      padding: .15rem .5rem;
+      border-radius: 20px;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .card-prices {
+      display: flex;
+      align-items: baseline;
+      gap: .6rem;
+      margin-top: auto;
+      padding-top: .5rem;
+    }
+
+    .price-new {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--sale-text);
+    }
+
+    .price-old {
+      font-size: .9rem;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .65rem 1rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface2);
+    }
+
+    .discount-badge {
+      background: var(--sale-bg);
+      color: var(--sale-text);
+      border: 1px solid rgba(255,70,84,.3);
+      font-size: .8rem;
+      font-weight: 700;
+      padding: .25rem .65rem;
+      border-radius: 20px;
+    }
+
+    .valid-until {
+      font-size: .72rem;
+      color: var(--muted);
+    }
+
+    /* ─── No results ────────────────────────────────────────────── */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--muted);
+    }
+    .empty-state .empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .empty-state h3 { font-size: 1.1rem; color: var(--text); margin-bottom: .4rem; }
+
+    /* ─── API Notice banner ─────────────────────────────────────── */
+    .api-notice {
+      max-width: 1400px;
+      margin: 0 auto 0;
+      padding: 0 1.5rem 1.2rem;
+    }
+    .api-notice-inner {
+      background: linear-gradient(135deg, #1e1b4b, #1a1d2e);
+      border: 1px solid rgba(108,99,255,.4);
+      border-radius: var(--radius);
+      padding: .85rem 1.2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: .8rem;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .api-notice-inner strong { color: var(--accent); }
+    .api-notice-inner a { color: var(--accent); text-decoration: underline; }
+    .notice-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: .05rem; }
+
+    /* ─── Footer ────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    /* ─── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .header-inner { gap: .6rem; }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .75rem; }
+      .price-new { font-size: 1.2rem; }
+      .card-name { font-size: .88rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ════════════════════════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">🛒</div>
+      <span class="logo-text">Slevy<span>Dnes</span></span>
+    </a>
+    <span class="header-badge">UKÁZKOVÁ DATA</span>
+    <div class="header-right">
+      <span class="last-update" id="lastUpdateLabel">Aktualizováno: —</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════ -->
+<div class="hero">
+  <h1 class="hero-title">Aktuální <span>slevy</span> z českých supermarketů</h1>
+  <p class="hero-sub">Albert · Penny Market · Billa · Kaufland — vše na jednom místě</p>
+</div>
+
+<!-- ═══ API NOTICE ════════════════════════════════════════════════ -->
+<div class="api-notice">
+  <div class="api-notice-inner">
+    <span class="notice-icon">ℹ️</span>
+    <div>
+      <strong>Ukázková data —</strong> žádný z řetězců neposkytuje veřejné REST/JSON API pro akční nabídky (ověřeno březnem 2026).
+      Pro napojení reálných dat viz komentáře v kódu: doporučená cesta je
+      <strong>Python scraper</strong> (<a href="https://pypi.org/project/kupiapi/" target="_blank">kupiapi</a> přes kupi.cz)
+      s cronovou úlohou, která generuje <code>/api/slevy.json</code>.
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONTROLS ══════════════════════════════════════════════════ -->
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="Hledat produkt, značku, kategorii…"
+      autocomplete="off"
+    />
+  </div>
+
+  <div class="filter-group" id="storeFilters">
+    <button class="filter-btn active" data-store="all">
+      Vše
+    </button>
+    <button class="filter-btn" data-store="albert">
+      <span class="store-dot" style="background:var(--albert)"></span>Albert
+    </button>
+    <button class="filter-btn" data-store="penny">
+      <span class="store-dot" style="background:var(--penny)"></span>Penny
+    </button>
+    <button class="filter-btn" data-store="billa">
+      <span class="store-dot" style="background:var(--billa)"></span>Billa
+    </button>
+    <button class="filter-btn" data-store="kaufland">
+      <span class="store-dot" style="background:var(--kaufland)"></span>Kaufland
+    </button>
+  </div>
+</div>
+
+<!-- ═══ STATS BAR ═════════════════════════════════════════════════ -->
+<div class="stats-bar">
+  <span>Zobrazeno: <span class="stats-count" id="resultCount">0</span> produktů</span>
+  <select id="sortSelect">
+    <option value="discount">Největší sleva</option>
+    <option value="price-asc">Cena: nejnižší</option>
+    <option value="price-desc">Cena: nejvyšší</option>
+    <option value="name">Název A–Z</option>
+  </select>
+</div>
+
+<!-- ═══ PRODUCT GRID ══════════════════════════════════════════════ -->
+<div class="grid" id="productGrid"></div>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════ -->
+<footer>
+  SlevyDnes &copy; 2026 · Prototyp &amp; ukázková data · Žádná data nejsou stahována z externích serverů
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   === DATA SOURCE ================================================
+   Pro přepnutí na real data:
+     1. Zakomentuj loadMockData() na konci souboru
+     2. Odkomentuj loadRealData()
+     3. Nastav správnou URL v loadRealData()
+
+   Formát očekávaného JSON:
+   [
+     {
+       "id": "unique-id",
+       "name": "Název produktu",
+       "desc": "Popis / váha / objem",
+       "store": "albert" | "penny" | "billa" | "kaufland",
+       "storeName": "Albert",
+       "category": "Mléčné výrobky",
+       "emoji": "🧀",
+       "priceNew": 29.90,
+       "priceOld": 49.90,
+       "validUntil": "2026-03-09",
+       "url": "https://..."   // volitelné
+     }, ...
+   ]
+   ════════════════════════════════════════════════════════════════ */
+
+// ─── Mock data (ukázková) ─────────────────────────────────────────
+const MOCK_DATA = [
+  // ALBERT
+  { id:"a1",  store:"albert",   storeName:"Albert",   category:"Mléčné výrobky", emoji:"🧀",
+    name:"Eidam 45% plátky",          desc:"200 g, chlazené",           priceNew:29.90, priceOld:49.90, validUntil:"2026-03-09" },
+  { id:"a2",  store:"albert",   storeName:"Albert",   category:"Nápoje",         emoji:"🥤",
+    name:"Coca-Cola Zero",             desc:"1,5 l PET",                 priceNew:18.90, priceOld:29.90, validUntil:"2026-03-09" },
+  { id:"a3",  store:"albert",   storeName:"Albert",   category:"Pečivo",         emoji:"🍞",
+    name:"Toustový chléb Penam",       desc:"500 g",                     priceNew:22.90, priceOld:34.90, validUntil:"2026-03-09" },
+  { id:"a4",  store:"albert",   storeName:"Albert",   category:"Maso & uzeniny", emoji:"🥩",
+    name:"Vepřový bůček plátky",       desc:"400 g, chlazené",           priceNew:59.90, priceOld:89.90, validUntil:"2026-03-09" },
+  { id:"a5",  store:"albert",   storeName:"Albert",   category:"Ovoce & zelenina",emoji:"🍓",
+    name:"Jahody",                     desc:"500 g, chlazené",           priceNew:49.90, priceOld:79.90, validUntil:"2026-03-09" },
+  { id:"a6",  store:"albert",   storeName:"Albert",   category:"Čistící prostředky",emoji:"🧼",
+    name:"Jar Original",               desc:"500 ml",                    priceNew:39.90, priceOld:59.90, validUntil:"2026-03-09" },
+
+  // PENNY
+  { id:"p1",  store:"penny",    storeName:"Penny",    category:"Nápoje",         emoji:"🍺",
+    name:"Plzeňský Prazdroj 10×",      desc:"10× 0,5 l plechovka",       priceNew:129.90, priceOld:189.90, validUntil:"2026-03-11" },
+  { id:"p2",  store:"penny",    storeName:"Penny",    category:"Mléčné výrobky", emoji:"🥛",
+    name:"Hollandia Bio jogurt",       desc:"150 g, bílý",               priceNew:9.90,  priceOld:15.90, validUntil:"2026-03-11" },
+  { id:"p3",  store:"penny",    storeName:"Penny",    category:"Cukrovinky",     emoji:"🍫",
+    name:"Milka Oreo",                 desc:"300 g",                     priceNew:49.90, priceOld:79.90, validUntil:"2026-03-11" },
+  { id:"p4",  store:"penny",    storeName:"Penny",    category:"Maso & uzeniny", emoji:"🌭",
+    name:"Vídeňské párky",             desc:"5× párky, 300 g",           priceNew:34.90, priceOld:54.90, validUntil:"2026-03-11" },
+  { id:"p5",  store:"penny",    storeName:"Penny",    category:"Ovoce & zelenina",emoji:"🍌",
+    name:"Banány",                     desc:"1 kg",                      priceNew:21.90, priceOld:32.90, validUntil:"2026-03-11" },
+  { id:"p6",  store:"penny",    storeName:"Penny",    category:"Mražené",        emoji:"🍕",
+    name:"Dr. Oetker Ristorante pizza",desc:"350 g, Margherita",          priceNew:79.90, priceOld:109.90, validUntil:"2026-03-11" },
+
+  // BILLA
+  { id:"b1",  store:"billa",    storeName:"Billa",    category:"Bio produkty",   emoji:"🥦",
+    name:"Bio brokolice",              desc:"ks, cca 400 g",             priceNew:24.90, priceOld:39.90, validUntil:"2026-03-08" },
+  { id:"b2",  store:"billa",    storeName:"Billa",    category:"Káva & čaj",     emoji:"☕",
+    name:"Jacobs Krönung mletá",       desc:"500 g",                     priceNew:109.90, priceOld:169.90, validUntil:"2026-03-08" },
+  { id:"b3",  store:"billa",    storeName:"Billa",    category:"Mléčné výrobky", emoji:"🧈",
+    name:"Máslo Madeta",               desc:"250 g",                     priceNew:44.90, priceOld:59.90, validUntil:"2026-03-08" },
+  { id:"b4",  store:"billa",    storeName:"Billa",    category:"Nápoje",         emoji:"🍷",
+    name:"Vino Nobile (různé)",        desc:"0,75 l",                    priceNew:99.90, priceOld:149.90, validUntil:"2026-03-08" },
+  { id:"b5",  store:"billa",    storeName:"Billa",    category:"Pečivo",         emoji:"🥐",
+    name:"Croissant máslový",          desc:"80 g, pekárna",             priceNew:9.90,  priceOld:14.90, validUntil:"2026-03-08" },
+  { id:"b6",  store:"billa",    storeName:"Billa",    category:"Konzervy",       emoji:"🥫",
+    name:"Bonduelle kukuřice",         desc:"400 g",                     priceNew:17.90, priceOld:28.90, validUntil:"2026-03-08" },
+
+  // KAUFLAND
+  { id:"k1",  store:"kaufland", storeName:"Kaufland", category:"Elektronika",    emoji:"📺",
+    name:"Sencor TV 43\" Full HD",     desc:"model SLE 43F60TCS",        priceNew:5990,  priceOld:8990, validUntil:"2026-03-12" },
+  { id:"k2",  store:"kaufland", storeName:"Kaufland", category:"Maso & uzeniny", emoji:"🥓",
+    name:"Grilované maso mix",         desc:"600 g, chlazené",           priceNew:89.90, priceOld:139.90, validUntil:"2026-03-12" },
+  { id:"k3",  store:"kaufland", storeName:"Kaufland", category:"Nápoje",         emoji:"🧃",
+    name:"Capri-Sun 10× 200 ml",       desc:"různé příchutě",            priceNew:59.90, priceOld:84.90, validUntil:"2026-03-12" },
+  { id:"k4",  store:"kaufland", storeName:"Kaufland", category:"Péče o tělo",    emoji:"🧴",
+    name:"Head & Shoulders šampon",    desc:"400 ml",                    priceNew:79.90, priceOld:119.90, validUntil:"2026-03-12" },
+  { id:"k5",  store:"kaufland", storeName:"Kaufland", category:"Ovoce & zelenina",emoji:"🍎",
+    name:"Jablka Gala",                desc:"1,5 kg sáček",              priceNew:39.90, priceOld:64.90, validUntil:"2026-03-12" },
+  { id:"k6",  store:"kaufland", storeName:"Kaufland", category:"Domácnost",      emoji:"🧹",
+    name:"Electrolux vysavač Pure F9", desc:"model PF91-3BWF",           priceNew:2999,  priceOld:4499, validUntil:"2026-03-12" },
+];
+
+// ─── Stav aplikace ────────────────────────────────────────────────
+let allProducts = [];
+let activeStore  = "all";
+let searchQuery  = "";
+let sortMode     = "discount";
+
+// ─── Výpočet % slevy ──────────────────────────────────────────────
+function discountPct(item) {
+  return Math.round((1 - item.priceNew / item.priceOld) * 100);
+}
+
+// ─── Formátování ceny ─────────────────────────────────────────────
+function fmtPrice(n) {
+  return n.toLocaleString("cs-CZ", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " Kč";
+}
+
+// ─── Formátování data ─────────────────────────────────────────────
+function fmtDate(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return "do " + d.toLocaleDateString("cs-CZ", { day:"numeric", month:"numeric" });
+}
+
+// ─── Render karet ─────────────────────────────────────────────────
+function renderCards(items) {
+  const grid = document.getElementById("productGrid");
+  document.getElementById("resultCount").textContent = items.length;
+
+  if (items.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <h3>Žádné výsledky</h3>
+        <p>Zkuste jiný výraz nebo změňte filtr obchodu.</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = items.map(item => {
+    const pct = discountPct(item);
+    return `
+    <article class="card" data-store="${item.store}" data-id="${item.id}">
+      <div class="card-stripe"></div>
+      <div class="card-img" role="img" aria-label="${item.name}">${item.emoji}</div>
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-name">${item.name}</span>
+          <span class="store-badge">${item.storeName.toUpperCase()}</span>
+        </div>
+        <div class="card-desc">${item.desc}</div>
+        <span class="card-category">${item.category}</span>
+        <div class="card-prices">
+          <span class="price-new">${fmtPrice(item.priceNew)}</span>
+          <span class="price-old">${fmtPrice(item.priceOld)}</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="discount-badge">−${pct} %</span>
+        <span class="valid-until">${fmtDate(item.validUntil)}</span>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+// ─── Filtr + řazení ───────────────────────────────────────────────
+function applyFilters() {
+  let result = allProducts.slice();
+
+  // filtr obchodu
+  if (activeStore !== "all") {
+    result = result.filter(p => p.store === activeStore);
+  }
+
+  // fulltextové hledání
+  if (searchQuery.trim()) {
+    const q = searchQuery.trim().toLowerCase();
+    result = result.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.desc.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q) ||
+      p.storeName.toLowerCase().includes(q)
+    );
+  }
+
+  // řazení
+  switch (sortMode) {
+    case "discount":
+      result.sort((a, b) => discountPct(b) - discountPct(a));
+      break;
+    case "price-asc":
+      result.sort((a, b) => a.priceNew - b.priceNew);
+      break;
+    case "price-desc":
+      result.sort((a, b) => b.priceNew - a.priceNew);
+      break;
+    case "name":
+      result.sort((a, b) => a.name.localeCompare(b.name, "cs"));
+      break;
+  }
+
+  renderCards(result);
+}
+
+// ─── Event listenery ─────────────────────────────────────────────
+document.getElementById("searchInput").addEventListener("input", e => {
+  searchQuery = e.target.value;
+  applyFilters();
+});
+
+document.getElementById("storeFilters").addEventListener("click", e => {
+  const btn = e.target.closest(".filter-btn");
+  if (!btn) return;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  activeStore = btn.dataset.store;
+  applyFilters();
+});
+
+document.getElementById("sortSelect").addEventListener("change", e => {
+  sortMode = e.target.value;
+  applyFilters();
+});
+
+// ─── Načtení mock dat ─────────────────────────────────────────────
+function loadMockData() {
+  allProducts = MOCK_DATA;
+  document.getElementById("lastUpdateLabel").textContent =
+    "Aktualizováno: " + new Date().toLocaleDateString("cs-CZ");
+  applyFilters();
+}
+
+/* ─── Načtení real dat (odkomentuj až bude k dispozici API) ────────
+async function loadRealData() {
+  try {
+    // Nahraď URL za svůj backend endpoint / generovaný JSON soubor
+    const res = await fetch("/api/slevy.json");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    allProducts = await res.json();
+    document.getElementById("lastUpdateLabel").textContent =
+      "Aktualizováno: " + new Date().toLocaleDateString("cs-CZ");
+    applyFilters();
+  } catch (err) {
+    console.error("Chyba načítání dat:", err);
+    // Fallback na mock data
+    loadMockData();
+  }
+}
+─────────────────────────────────────────────────────────────────── */
+
+// === INICIALIZACE ====================================================
+loadMockData();
+// loadRealData(); // ← odkomentuj pro real data
+</script>
+</body>
+</html>
