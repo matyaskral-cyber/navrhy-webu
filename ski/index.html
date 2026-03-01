@@ -242,6 +242,73 @@
     .instructor__name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
     .instructor__role { font-size: 12px; color: var(--muted); }
 
+    /* Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color .2s, transform .2s;
+    }
+    .feature:hover {
+      border-color: rgba(56,189,248,0.35);
+      transform: translateY(-3px);
+    }
+    .feature__icon { font-size: 32px; }
+    .feature__title { font-size: 15px; font-weight: 700; }
+    .feature__desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* Flow */
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .flow__step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      position: relative;
+    }
+    .flow__step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 44px;
+      bottom: -12px;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(56,189,248,0.3), transparent);
+    }
+    .flow__num {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(56,189,248,0.1);
+      border: 1px solid rgba(56,189,248,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--blue-light);
+      flex-shrink: 0;
+    }
+    .flow__content {
+      padding: 8px 0 32px;
+    }
+    .flow__title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .flow__desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
     /* Tech */
     .tech-list {
       display: flex;
@@ -280,55 +347,80 @@
     <div class="snowflakes" aria-hidden="true" id="snow"></div>
 
     <div class="hero__emoji">⛷️</div>
-    <div class="hero__badge">❄️ Statický web</div>
+    <div class="hero__badge">❄️ Web + rezervační systém</div>
     <h1 class="hero__title">AZ Ski School</h1>
     <p class="hero__subtitle">
-      Web lyžařské školy s přehledem kurzů pro všechny úrovně, instruktory a snadnou možností přihlášení.
+      Kompletní web pro lyžařskou školu s online přihlašováním na kurzy, přehledem termínů, profilem instruktorů a automatickým potvrzením.
     </p>
     <a href="../" class="hero__back">← Zpět na portfolio</a>
   </section>
 
   <section class="section">
-    <h2 class="section__title">Kurzy</h2>
-    <div class="courses-grid">
-      <div class="course-card">
-        <div class="course-card__level">⭐ Začátečníci</div>
-        <div class="course-card__name">Kurz pro začátečníky</div>
-        <div class="course-card__desc">Základy lyžování, bezpečnost na svahu, správná technika. Vhodné pro první kontakt s lyžemi.</div>
-        <div class="course-card__price">od 2 900 Kč</div>
+    <h2 class="section__title">Co jsme vytvořili</h2>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature__icon">📅</div>
+        <div class="feature__title">Přehled termínů kurzů</div>
+        <div class="feature__desc">Zákazníci vidí všechny dostupné termíny kurzů na jednom místě — s daty, obsazeností a typem kurzu.</div>
       </div>
-      <div class="course-card">
-        <div class="course-card__level">⭐⭐ Pokročilí</div>
-        <div class="course-card__name">Kurz pro pokročilé</div>
-        <div class="course-card__desc">Zdokonalení techniky, náročnější svahy, rychlostní trénink. Pro lyžaře se základy.</div>
-        <div class="course-card__price">od 3 500 Kč</div>
+      <div class="feature">
+        <div class="feature__icon">📝</div>
+        <div class="feature__title">Online přihlašovací formulář</div>
+        <div class="feature__desc">Přihlášení na kurz přímo z webu — zákazník vyplní dotazník s osobními údaji a vybere si termín.</div>
       </div>
-      <div class="course-card">
-        <div class="course-card__level">👶 Děti</div>
-        <div class="course-card__name">Dětský kurz</div>
-        <div class="course-card__desc">Zábavná výuka pro děti od 4 let. Důraz na bezpečnost a hravé poznávání lyžování.</div>
-        <div class="course-card__price">od 2 400 Kč</div>
+      <div class="feature">
+        <div class="feature__icon">✅</div>
+        <div class="feature__title">Potvrzení přihlášky</div>
+        <div class="feature__desc">Po odeslání formuláře zákazník dostane potvrzovací stránku s přehledem své přihlášky.</div>
+      </div>
+      <div class="feature">
+        <div class="feature__icon">🎿</div>
+        <div class="feature__title">Profily instruktorů</div>
+        <div class="feature__desc">Dedikovaná stránka s představením celého týmu instruktorů — foto, zkušenosti, specializace.</div>
+      </div>
+      <div class="feature">
+        <div class="feature__icon">🏠</div>
+        <div class="feature__title">Úvodní stránka</div>
+        <div class="feature__desc">Moderní hlavní stránka s přehledem školy, nabízenými kurzy a přímým odkazem na přihlášení.</div>
+      </div>
+      <div class="feature">
+        <div class="feature__icon">📱</div>
+        <div class="feature__title">Plně responzivní</div>
+        <div class="feature__desc">Web funguje na mobilu, tabletu i počítači — zákazník se přihlásí odkudkoliv.</div>
       </div>
     </div>
   </section>
 
   <section class="section" style="padding-top:0">
-    <h2 class="section__title">Instruktoři</h2>
-    <div class="instructor-list">
-      <div class="instructor">
-        <div class="instructor__avatar">👨‍🏫</div>
-        <div class="instructor__name">Aleš Zeman</div>
-        <div class="instructor__role">Hlavní instruktor</div>
+    <h2 class="section__title">Jak to funguje</h2>
+    <div class="flow">
+      <div class="flow__step">
+        <div class="flow__num">1</div>
+        <div class="flow__content">
+          <div class="flow__title">Zákazník si prohlédne termíny</div>
+          <div class="flow__desc">Na stránce termínů vidí všechny dostupné kurzy s daty a dostupnými místy.</div>
+        </div>
       </div>
-      <div class="instructor">
-        <div class="instructor__avatar">👩‍🏫</div>
-        <div class="instructor__name">Zuzana Horáčková</div>
-        <div class="instructor__role">Instruktorka, dětské kurzy</div>
+      <div class="flow__step">
+        <div class="flow__num">2</div>
+        <div class="flow__content">
+          <div class="flow__title">Vyplní přihlašovací dotazník</div>
+          <div class="flow__desc">Jednoduchý formulář — jméno, kontakt, úroveň lyžování, výběr termínu.</div>
+        </div>
       </div>
-      <div class="instructor">
-        <div class="instructor__avatar">👨‍🏫</div>
-        <div class="instructor__name">Martin Beneš</div>
-        <div class="instructor__role">Instruktor, pokročilí</div>
+      <div class="flow__step">
+        <div class="flow__num">3</div>
+        <div class="flow__content">
+          <div class="flow__title">Dostane potvrzení</div>
+          <div class="flow__desc">Po odeslání se zobrazí potvrzovací stránka s přehledem přihlášky.</div>
+        </div>
+      </div>
+      <div class="flow__step">
+        <div class="flow__num">4</div>
+        <div class="flow__content">
+          <div class="flow__title">Škola vidí přihlášené</div>
+          <div class="flow__desc">Majitel školy má přehled o všech přihláškách v administraci webu.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -336,9 +428,10 @@
   <section class="section" style="padding-top:0">
     <h2 class="section__title">Technologie</h2>
     <div class="tech-list">
-      <div class="tech-item">🌐 HTML</div>
-      <div class="tech-item">🎨 CSS</div>
+      <div class="tech-item">🌐 HTML / CSS</div>
       <div class="tech-item">⚡ JavaScript</div>
+      <div class="tech-item">🐍 Python</div>
+      <div class="tech-item">🌶️ Flask</div>
     </div>
   </section>
 
