@@ -450,16 +450,25 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
-/* Light blue radial gradients */
+/* Foto pozadí */
+.hero__bg-photo {
+  position: absolute;
+  inset: 0;
+  background: url('images/Foto_01.jpg') center center / cover no-repeat;
+  opacity: 0.22;
+  filter: saturate(0.7);
+}
+
+/* Light blue radial gradients — překryv přes foto */
 .hero__bg::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 15% 30%, rgba(56,189,248,0.55) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 65% at 90% 10%, rgba(14,165,233,0.4) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 50% at 55% 85%, rgba(192,57,43,0.12) 0%, transparent 50%),
-    radial-gradient(ellipse 100% 100% at 50% 50%, #071e36 0%, #030f1e 100%);
+    radial-gradient(ellipse 80% 60% at 15% 30%, rgba(56,189,248,0.45) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 65% at 90% 10%, rgba(14,165,233,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 55% 85%, rgba(192,57,43,0.1) 0%, transparent 50%),
+    linear-gradient(to bottom, rgba(7,30,54,0.7) 0%, rgba(3,15,30,0.85) 100%);
 }
 
 /* Grid overlay */
@@ -525,51 +534,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-inline: auto;
 }
 
-/* Hero photo strip */
-.hero__photos {
-  display: flex;
-  gap: 12px;
-  margin-top: 56px;
-  justify-content: center;
-  position: relative;
-}
-.hero__photo {
-  border-radius: 16px;
-  overflow: hidden;
-  flex-shrink: 0;
-  position: relative;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.1);
-}
-.hero__photo img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .5s ease;
-}
-.hero__photo:hover img { transform: scale(1.04); }
-.hero__photo--main {
-  width: 340px;
-  height: 220px;
-  transform: translateY(0);
-}
-.hero__photo--side {
-  width: 220px;
-  height: 220px;
-  transform: translateY(20px);
-}
-.hero__photo-label {
-  position: absolute;
-  bottom: 10px; left: 10px;
-  background: rgba(0,0,0,0.65);
-  backdrop-filter: blur(8px);
-  border-radius: 8px;
-  padding: 4px 10px;
-  font-size: 11px;
-  color: rgba(255,255,255,0.85);
-  font-weight: 500;
-}
 
 .hero__badge {
   display: inline-flex;
@@ -1842,12 +1806,6 @@ a.contact__detail-value:hover { color: var(--clr-accent-light); }
   }
 }
 
-/* Hero photos responsive */
-@media (max-width: 700px) {
-  .hero__photos { gap: 8px; }
-  .hero__photo--main { width: 240px; height: 160px; }
-  .hero__photo--side { width: 140px; height: 160px; transform: none; }
-}
 
 /* ============================================================
    PRINT
