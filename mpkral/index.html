@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MPKRAL — Osobní web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #12121a;
+      --card: #1a1a26;
+      --border: rgba(255,255,255,0.07);
+      --text: #e8e8f0;
+      --muted: #7070a0;
+      --accent: #7c6fff;
+      --accent2: #a89aff;
+      --radius: 18px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Back bar */
+    .back-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 100;
+    }
+    .back-bar a {
+      color: var(--accent2);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity .2s;
+    }
+    .back-bar a:hover { opacity: 0.7; }
+    .back-bar__sep { color: var(--muted); font-size: 13px; }
+    .back-bar__cur { color: var(--muted); font-size: 13px; }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(124,111,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #4facfe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 28px;
+      box-shadow: 0 0 0 3px rgba(124,111,255,0.2), 0 0 40px rgba(124,111,255,0.15);
+    }
+
+    .hero__label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 16px;
+    }
+
+    .hero__name {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff 30%, var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .hero__role {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .hero__tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .tag {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .hero__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity .2s, transform .2s;
+    }
+    .hero__cta:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    /* Skills section */
+    .section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .section__title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color .2s;
+    }
+    .skill-card:hover { border-color: rgba(124,111,255,0.3); }
+
+    .skill-card__icon { font-size: 28px; }
+    .skill-card__name { font-size: 14px; font-weight: 600; }
+    .skill-card__desc { font-size: 12px; color: var(--muted); }
+
+    /* Projects section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color .2s, transform .2s;
+    }
+    .project-card:hover {
+      border-color: rgba(124,111,255,0.4);
+      transform: translateY(-3px);
+    }
+
+    .project-card__emoji { font-size: 32px; }
+    .project-card__name { font-size: 15px; font-weight: 700; }
+    .project-card__desc { font-size: 13px; color: var(--muted); line-height: 1.5; flex: 1; }
+    .project-card__tech {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .project-card__tag {
+      font-size: 10px; color: var(--muted);
+      background: rgba(255,255,255,0.06);
+      padding: 2px 8px; border-radius: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 500px) {
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="back-bar">
+    <a href="../../">← Portfolio</a>
+    <span class="back-bar__sep">/</span>
+    <span class="back-bar__cur">MPKRAL — Osobní web</span>
+  </div>
+
+  <section class="hero">
+    <div class="avatar">👤</div>
+    <div class="hero__label">Osobní prezentace</div>
+    <h1 class="hero__name">Matyáš Král</h1>
+    <p class="hero__role">Web Developer · Python · Flask · HTML/CSS</p>
+    <div class="hero__tags">
+      <span class="tag">🇨🇿 Česká republika</span>
+      <span class="tag">Fullstack</span>
+      <span class="tag">Webové aplikace</span>
+    </div>
+    <a href="../" class="hero__cta">← Zpět na portfolio</a>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Technologie</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card__icon">🐍</div>
+        <div class="skill-card__name">Python</div>
+        <div class="skill-card__desc">Hlavní backendový jazyk, Flask aplikace</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card__icon">🌐</div>
+        <div class="skill-card__name">HTML / CSS</div>
+        <div class="skill-card__desc">Moderní responzivní weby</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card__icon">⚡</div>
+        <div class="skill-card__name">JavaScript</div>
+        <div class="skill-card__desc">Interaktivní frontendové prvky</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card__icon">🗄️</div>
+        <div class="skill-card__name">SQLite / SQL</div>
+        <div class="skill-card__desc">Databáze pro webové aplikace</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card__icon">🐳</div>
+        <div class="skill-card__name">Docker</div>
+        <div class="skill-card__desc">Kontejnerizace a nasazení</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card__icon">🔧</div>
+        <div class="skill-card__name">Git</div>
+        <div class="skill-card__desc">Verzování a spolupráce</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <h2 class="section__title">Projekty</h2>
+    <div class="projects-grid">
+      <a href="../marbotim/" class="project-card">
+        <div class="project-card__emoji">🔧</div>
+        <div class="project-card__name">MARBOTIM Hruška</div>
+        <div class="project-card__desc">Firemní web pro topenářskou firmu. Galerie realizací, rozklikávatelné služby.</div>
+        <div class="project-card__tech">
+          <span class="project-card__tag">HTML</span>
+          <span class="project-card__tag">CSS</span>
+          <span class="project-card__tag">JS</span>
+        </div>
+      </a>
+      <a href="../autocamp/" class="project-card">
+        <div class="project-card__emoji">⛺</div>
+        <div class="project-card__name">Autocamp Zvůle</div>
+        <div class="project-card__desc">Web autocampu s rezervačním systémem, ceníkem a fotogalerií.</div>
+        <div class="project-card__tech">
+          <span class="project-card__tag">Python</span>
+          <span class="project-card__tag">Flask</span>
+          <span class="project-card__tag">SQLite</span>
+        </div>
+      </a>
+      <a href="../ski/" class="project-card">
+        <div class="project-card__emoji">⛷️</div>
+        <div class="project-card__name">AZ Ski School</div>
+        <div class="project-card__desc">Web lyžařské školy s kurzy, instruktory a kontaktem.</div>
+        <div class="project-card__tech">
+          <span class="project-card__tag">HTML</span>
+          <span class="project-card__tag">CSS</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Matyáš Král &nbsp;·&nbsp; <span id="yr"></span> &nbsp;·&nbsp; <a href="../" style="color:var(--accent2);text-decoration:none">Portfolio</a></p>
+  </footer>
+
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>

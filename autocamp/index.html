@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autocamp Zvůle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #2d6a4f;
+      --green-light: #40916c;
+      --green-glow: rgba(45,106,79,0.2);
+      --bg: #050f09;
+      --bg2: #0d1f14;
+      --card: #142419;
+      --border: rgba(255,255,255,0.07);
+      --text: #e8f5ee;
+      --muted: #6b9e80;
+      --radius: 18px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Back bar */
+    .back-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(5,15,9,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 100;
+    }
+    .back-bar a {
+      color: #74c69d;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity .2s;
+    }
+    .back-bar a:hover { opacity: 0.7; }
+    .back-bar__sep { color: var(--muted); font-size: 13px; }
+    .back-bar__cur { color: var(--muted); font-size: 13px; }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, var(--green-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero__emoji {
+      font-size: 80px;
+      margin-bottom: 28px;
+      filter: drop-shadow(0 0 30px rgba(45,106,79,0.5));
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(45,106,79,0.2);
+      border: 1px solid rgba(45,106,79,0.4);
+      color: #74c69d;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero__title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #d8f3dc 30%, #74c69d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    .hero__subtitle {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .hero__server-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .hero__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity .2s, transform .2s;
+    }
+    .hero__back:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    /* Features */
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .section__title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color .2s;
+    }
+    .feature:hover { border-color: rgba(45,106,79,0.4); }
+
+    .feature__icon { font-size: 28px; }
+    .feature__title { font-size: 14px; font-weight: 700; }
+    .feature__desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* Tech stack */
+    .tech-list {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .tech-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="back-bar">
+    <a href="../../">← Portfolio</a>
+    <span class="back-bar__sep">/</span>
+    <span class="back-bar__cur">Autocamp Zvůle</span>
+  </div>
+
+  <section class="hero">
+    <div class="hero__emoji">⛺</div>
+    <div class="hero__badge">🌿 Flask webová aplikace</div>
+    <h1 class="hero__title">Autocamp Zvůle</h1>
+    <p class="hero__subtitle">
+      Kompletní webová aplikace pro správu autocampu — online rezervace, ceník, galerie a administrátorský panel.
+    </p>
+    <div class="hero__server-note">
+      🖥️ Serverová aplikace &nbsp;—&nbsp; vyžaduje Python/Flask server k provozu
+    </div>
+    <a href="../" class="hero__back">← Zpět na portfolio</a>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">Funkce aplikace</h2>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature__icon">📅</div>
+        <div class="feature__title">Online rezervace</div>
+        <div class="feature__desc">Zákazníci si mohou rezervovat místo přímo z webu s výběrem termínu a typu umístění.</div>
+      </div>
+      <div class="feature">
+        <div class="feature__icon">💰</div>
+        <div class="feature__title">Ceník</div>
+        <div class="feature__desc">Přehledný ceník sezon, typů parcel a doplňkových služeb.</div>
+      </div>
+      <div class="feature">
+        <div class="feature__icon">📸</div>
+        <div class="feature__title">Fotogalerie</div>
+        <div class="feature__desc">Galerie fotek autocampu, přírody a vybavení.</div>
+      </div>
+      <div class="feature">
+        <div class="feature__icon">🔐</div>
+        <div class="feature__title">Admin panel</div>
+        <div class="feature__desc">Správa rezervací, ceníku a obsahu webu z administrátorského rozhraní.</div>
+      </div>
+      <div class="feature">
+        <div class="feature__icon">📊</div>
+        <div class="feature__title">Přehled obsazenosti</div>
+        <div class="feature__desc">Přehled aktuální obsazenosti campingu v kalendářním zobrazení.</div>
+      </div>
+      <div class="feature">
+        <div class="feature__icon">📧</div>
+        <div class="feature__title">Potvrzení e-mailem</div>
+        <div class="feature__desc">Automatické potvrzení rezervace zákazníkovi i majiteli.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <h2 class="section__title">Technologie</h2>
+    <div class="tech-list">
+      <div class="tech-item">🐍 Python</div>
+      <div class="tech-item">🌶️ Flask</div>
+      <div class="tech-item">🗄️ SQLite</div>
+      <div class="tech-item">🌐 HTML / CSS / JS</div>
+      <div class="tech-item">📋 Jinja2</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Matyáš Král &nbsp;·&nbsp; <span id="yr"></span> &nbsp;·&nbsp; <a href="../" style="color:#74c69d;text-decoration:none">Portfolio</a></p>
+  </footer>
+
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
