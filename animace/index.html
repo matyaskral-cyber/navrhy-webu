@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animace na webu — WOW efekt zaručen | MARBOTIM</title>
+
+  <!-- GSAP + ScrollTrigger + SplitText (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- tsParticles -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tsparticles/2.12.0/tsparticles.bundle.min.js"></script>
+
+  <style>
+    /* ============================
+       CSS CUSTOM PROPERTIES
+    ============================ */
+    :root {
+      --clr-bg: #07090f;
+      --clr-surface: #0d1117;
+      --clr-accent1: #7c3aed;
+      --clr-accent2: #06b6d4;
+      --clr-accent3: #f472b6;
+      --clr-gold: #fbbf24;
+      --clr-text: #e2e8f0;
+      --clr-muted: #64748b;
+      --gradient-hero: linear-gradient(135deg, #7c3aed 0%, #06b6d4 50%, #f472b6 100%);
+      --gradient-fire: linear-gradient(135deg, #ff6b35, #f7c59f, #efefd0, #00a896, #028090);
+      --font-display: 'Segoe UI', system-ui, sans-serif;
+      --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* ============================
+       RESET & BASE
+    ============================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      font-family: var(--font-display);
+      overflow-x: hidden;
+    }
+
+    ::selection { background: var(--clr-accent1); color: #fff; }
+
+    /* ============================
+       LOADING SCREEN
+    ============================ */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--clr-bg);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .loader-logo {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: logoPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+      50% { opacity: 0.8; transform: scale(1.04); filter: brightness(1.3); }
+    }
+
+    .loader-bar-wrap {
+      width: 240px;
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .loader-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--gradient-hero);
+      border-radius: 99px;
+      animation: barFill 1.8s var(--ease-bounce) forwards;
+    }
+
+    @keyframes barFill {
+      to { width: 100%; }
+    }
+
+    .loader-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .loader-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--clr-accent1);
+      animation: dotBounce 0.6s ease-in-out infinite;
+    }
+
+    .loader-dot:nth-child(1) { animation-delay: 0s; background: var(--clr-accent1); }
+    .loader-dot:nth-child(2) { animation-delay: 0.15s; background: var(--clr-accent2); }
+    .loader-dot:nth-child(3) { animation-delay: 0.3s; background: var(--clr-accent3); }
+
+    @keyframes dotBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(-12px); opacity: 1; }
+    }
+
+    .loader-text {
+      font-size: 0.85rem;
+      color: var(--clr-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: fadeInUp 0.5s ease forwards 0.3s;
+      opacity: 0;
+    }
+
+    /* ============================
+       NAVIGATION
+    ============================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(7, 9, 15, 0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    nav.visible {
+      animation: navSlideIn 0.6s var(--ease-bounce) forwards;
+    }
+
+    @keyframes navSlideIn {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .nav-logo {
+      font-size: 1.3rem;
+      font-weight: 900;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--clr-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 2px;
+      background: var(--gradient-hero);
+      border-radius: 1px;
+      transition: width 0.35s var(--ease-bounce);
+    }
+
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ============================
+       HERO SECTION
+    ============================ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #tsparticles {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      border: 1px solid rgba(124, 58, 237, 0.4);
+      border-radius: 99px;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--clr-accent2);
+      margin-bottom: 2rem;
+      background: rgba(124, 58, 237, 0.08);
+      opacity: 0;
+      animation: fadeInDown 0.7s ease forwards 2.2s;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+    }
+
+    .hero-title .line { display: block; overflow: hidden; }
+
+    .hero-title .word {
+      display: inline-block;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: wordReveal 0.8s var(--ease-bounce) forwards;
+      transform: translateY(110%);
+    }
+
+    .hero-title .word.white {
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: var(--clr-text);
+      background-clip: unset;
+    }
+
+    .hero-title .line:nth-child(1) .word { animation-delay: 2.4s; }
+    .hero-title .line:nth-child(2) .word { animation-delay: 2.6s; }
+    .hero-title .line:nth-child(3) .word { animation-delay: 2.8s; }
+
+    @keyframes wordReveal {
+      to { transform: translateY(0); }
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--clr-muted);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease forwards 3.2s;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease forwards 3.5s;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      border-radius: 99px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.15);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .btn:hover::before { opacity: 1; }
+    .btn:hover { transform: translateY(-3px) scale(1.03); }
+    .btn:active { transform: translateY(0) scale(0.98); }
+
+    .btn-primary {
+      background: var(--gradient-hero);
+      color: #fff;
+      box-shadow: 0 0 30px rgba(124,58,237,0.4), 0 0 60px rgba(6,182,212,0.2);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 50px rgba(124,58,237,0.7), 0 0 100px rgba(6,182,212,0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--clr-text);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--clr-accent1);
+      box-shadow: 0 0 20px rgba(124,58,237,0.3);
+    }
+
+    /* Typewriter cursor */
+    .typewriter-wrap {
+      display: inline-block;
+      position: relative;
+    }
+
+    #typewriter-text {
+      border-right: 3px solid var(--clr-accent2);
+      padding-right: 4px;
+      animation: cursorBlink 0.75s step-end infinite;
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { border-color: var(--clr-accent2); }
+      50% { border-color: transparent; }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 2;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease forwards 4s;
+    }
+
+    .scroll-mouse {
+      width: 26px;
+      height: 42px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 13px;
+      position: relative;
+    }
+
+    .scroll-wheel {
+      width: 4px;
+      height: 8px;
+      background: var(--clr-accent2);
+      border-radius: 2px;
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: scrollWheel 1.5s ease infinite;
+    }
+
+    @keyframes scrollWheel {
+      0% { top: 6px; opacity: 1; }
+      100% { top: 24px; opacity: 0; }
+    }
+
+    .scroll-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--clr-muted);
+    }
+
+    /* ============================
+       SECTION BASE
+    ============================ */
+    section {
+      padding: 8rem 2rem;
+      position: relative;
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--clr-accent2);
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+    }
+
+    .section-desc {
+      font-size: 1.1rem;
+      color: var(--clr-muted);
+      max-width: 580px;
+      line-height: 1.7;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+    }
+
+    .in-view .section-label,
+    .in-view .section-title,
+    .in-view .section-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gradient-text {
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ============================
+       WHY ANIMATIONS SECTION
+    ============================ */
+    #why {
+      background: linear-gradient(180deg, var(--clr-bg) 0%, var(--clr-surface) 100%);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .why-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s var(--ease-bounce),
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .why-card:hover {
+      border-color: rgba(124,58,237,0.4);
+      box-shadow: 0 20px 60px rgba(124,58,237,0.15), 0 0 0 1px rgba(124,58,237,0.1);
+      transform: translateY(-6px) scale(1.01) !important;
+    }
+
+    .why-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gradient-hero);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+
+    .why-card:hover::before { transform: scaleX(1); }
+
+    .why-card.in-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      position: relative;
+      animation: iconFloat 3s ease-in-out infinite;
+    }
+
+    .card-icon.purple { background: rgba(124,58,237,0.15); }
+    .card-icon.cyan { background: rgba(6,182,212,0.15); }
+    .card-icon.pink { background: rgba(244,114,182,0.15); }
+    .card-icon.gold { background: rgba(251,191,36,0.15); }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-4px) rotate(2deg); }
+      66% { transform: translateY(-2px) rotate(-2deg); }
+    }
+
+    .why-card:nth-child(2) .card-icon { animation-delay: -1s; }
+    .why-card:nth-child(3) .card-icon { animation-delay: -2s; }
+    .why-card:nth-child(4) .card-icon { animation-delay: -0.5s; }
+
+    .why-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .why-card p {
+      font-size: 0.95rem;
+      color: var(--clr-muted);
+      line-height: 1.7;
+    }
+
+    .card-glow {
+      position: absolute;
+      bottom: -40px; right: -40px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.08;
+      transition: opacity 0.4s;
+    }
+
+    .why-card:hover .card-glow { opacity: 0.2; }
+
+    /* ============================
+       PARALLAX SECTION
+    ============================ */
+    #parallax-showcase {
+      min-height: 600px;
+      overflow: hidden;
+      background: var(--clr-surface);
+    }
+
+    .parallax-stage {
+      position: relative;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .parallax-layer {
+      position: absolute;
+      border-radius: 50%;
+      will-change: transform;
+    }
+
+    .p-layer-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
+      animation: floatSlow 8s ease-in-out infinite;
+    }
+
+    .p-layer-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%);
+      animation: floatSlow 6s ease-in-out infinite reverse;
+    }
+
+    .p-layer-3 {
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(244,114,182,0.1) 0%, transparent 70%);
+      animation: floatSlow 4s ease-in-out infinite;
+      animation-delay: -2s;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(20px, -30px); }
+      66% { transform: translate(-15px, 15px); }
+    }
+
+    .parallax-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .parallax-text h2 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    /* ============================
+       ANIMATION SHOWCASE CARDS
+    ============================ */
+    #showcase {
+      background: var(--clr-bg);
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .showcase-card {
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      background: var(--clr-surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.7s ease, transform 0.7s var(--ease-bounce);
+    }
+
+    .showcase-card.in-card {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .showcase-card:hover { border-color: rgba(124,58,237,0.3); }
+
+    .sc-demo {
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sc-info {
+      padding: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .sc-info h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .sc-info p {
+      font-size: 0.88rem;
+      color: var(--clr-muted);
+      line-height: 1.6;
+    }
+
+    /* DEMO 1: Morphing blob */
+    .demo-morphing {
+      background: radial-gradient(circle at 30% 50%, rgba(124,58,237,0.1), transparent 60%),
+                  radial-gradient(circle at 70% 50%, rgba(6,182,212,0.1), transparent 60%);
+    }
+
+    .blob {
+      width: 160px;
+      height: 160px;
+      background: var(--gradient-hero);
+      animation: blobMorph 8s ease-in-out infinite;
+      filter: blur(0px);
+    }
+
+    @keyframes blobMorph {
+      0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(0deg) scale(1); }
+      14%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+      28%  { border-radius: 70% 30% 50% 60% / 30% 70% 50% 40%; transform: rotate(90deg) scale(1.08); }
+      42%  { border-radius: 40% 70% 60% 30% / 70% 40% 60% 30%; }
+      57%  { border-radius: 60% 40% 30% 70% / 50% 30% 80% 50%; transform: rotate(180deg) scale(0.95); }
+      71%  { border-radius: 30% 70% 70% 30% / 30% 70% 50% 70%; }
+      85%  { border-radius: 70% 40% 30% 60% / 60% 40% 70% 40%; transform: rotate(270deg) scale(1.05); }
+      100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(360deg) scale(1); }
+    }
+
+    /* DEMO 2: Orbit animation */
+    .demo-orbit {
+      background: radial-gradient(circle, rgba(6,182,212,0.05), transparent 70%);
+    }
+
+    .orbit-system {
+      position: relative;
+      width: 160px;
+      height: 160px;
+    }
+
+    .orbit-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fbbf24, #f59e0b);
+      box-shadow: 0 0 30px rgba(251,191,36,0.6), 0 0 60px rgba(251,191,36,0.3);
+      animation: orbitCenterPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes orbitCenterPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(251,191,36,0.6), 0 0 40px rgba(251,191,36,0.3); }
+      50% { box-shadow: 0 0 40px rgba(251,191,36,0.9), 0 0 80px rgba(251,191,36,0.5); }
+    }
+
+    .orbit-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      transform: translate(-50%, -50%);
+    }
+
+    .orbit-ring-1 { width: 80px; height: 80px; animation: ringRotate 4s linear infinite; }
+    .orbit-ring-2 { width: 120px; height: 120px; animation: ringRotate 7s linear infinite reverse; }
+    .orbit-ring-3 { width: 160px; height: 160px; animation: ringRotate 11s linear infinite; }
+
+    @keyframes ringRotate { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+    .orbit-planet {
+      position: absolute;
+      border-radius: 50%;
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .planet-1 {
+      width: 10px; height: 10px;
+      background: var(--clr-accent1);
+      box-shadow: 0 0 10px var(--clr-accent1);
+    }
+
+    .planet-2 {
+      width: 8px; height: 8px;
+      background: var(--clr-accent2);
+      box-shadow: 0 0 8px var(--clr-accent2);
+    }
+
+    .planet-3 {
+      width: 6px; height: 6px;
+      background: var(--clr-accent3);
+      box-shadow: 0 0 6px var(--clr-accent3);
+    }
+
+    /* DEMO 3: Gradient wave */
+    .demo-gradient {
+      background: var(--clr-bg);
+      overflow: hidden;
+    }
+
+    .gradient-wave {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, #7c3aed, #06b6d4, #f472b6, #fbbf24, #7c3aed);
+      background-size: 300% 300%;
+      animation: gradientShift 5s ease infinite;
+      opacity: 0.15;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .gradient-text-anim {
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #7c3aed, #06b6d4, #f472b6, #fbbf24, #7c3aed);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientFlow 3s linear infinite;
+      letter-spacing: -0.03em;
+    }
+
+    @keyframes gradientFlow {
+      to { background-position: 200% center; }
+    }
+
+    /* DEMO 4: 3D Card flip */
+    .demo-3d {
+      perspective: 1000px;
+      background: radial-gradient(circle, rgba(244,114,182,0.06), transparent 70%);
+    }
+
+    .flip-card {
+      width: 160px;
+      height: 120px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: cardFlip 4s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    @keyframes cardFlip {
+      0%, 40% { transform: rotateY(0deg) rotateX(0deg); }
+      50% { transform: rotateY(180deg) rotateX(10deg); }
+      90%, 100% { transform: rotateY(360deg) rotateX(0deg); }
+    }
+
+    .flip-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .flip-front {
+      background: linear-gradient(135deg, rgba(244,114,182,0.3), rgba(124,58,237,0.3));
+      border: 1px solid rgba(244,114,182,0.3);
+      color: var(--clr-text);
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .flip-front .big-num {
+      font-size: 2rem;
+      font-weight: 900;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .flip-back {
+      background: linear-gradient(135deg, rgba(6,182,212,0.3), rgba(124,58,237,0.3));
+      border: 1px solid rgba(6,182,212,0.3);
+      color: var(--clr-text);
+      transform: rotateY(180deg);
+      font-size: 2rem;
+    }
+
+    /* DEMO 5: Glitch */
+    .demo-glitch {
+      background: #000;
+    }
+
+    .glitch-text {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #fff;
+      position: relative;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+    }
+
+    .glitch-text::before {
+      color: var(--clr-accent2);
+      animation: glitch1 3s step-end infinite;
+      clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+    }
+
+    .glitch-text::after {
+      color: var(--clr-accent3);
+      animation: glitch2 3s step-end infinite;
+      clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
+    }
+
+    @keyframes glitch1 {
+      0%, 90%, 100% { transform: none; opacity: 0; }
+      91% { transform: translate(-3px, -1px); opacity: 1; }
+      92% { transform: translate(3px, 1px); opacity: 0.8; }
+      93% { transform: translate(-2px, 2px); opacity: 1; }
+      94% { transform: translate(2px, -2px); opacity: 0.6; }
+      95% { transform: translate(0, 0); opacity: 0; }
+    }
+
+    @keyframes glitch2 {
+      0%, 85%, 100% { transform: none; opacity: 0; }
+      86% { transform: translate(3px, 1px); opacity: 1; }
+      87% { transform: translate(-3px, -1px); opacity: 0.8; }
+      88% { transform: translate(2px, -2px); opacity: 1; }
+      89% { transform: translate(-2px, 2px); opacity: 0.6; }
+      90% { transform: translate(0, 0); opacity: 0; }
+    }
+
+    /* DEMO 6: Neon pulse */
+    .demo-neon {
+      background: #050508;
+    }
+
+    .neon-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid var(--clr-accent2);
+      box-shadow:
+        0 0 10px var(--clr-accent2),
+        0 0 40px var(--clr-accent2),
+        0 0 80px rgba(6,182,212,0.5),
+        inset 0 0 20px rgba(6,182,212,0.2);
+      animation: neonPulse 2s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .neon-inner {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid var(--clr-accent1);
+      box-shadow:
+        0 0 8px var(--clr-accent1),
+        0 0 30px var(--clr-accent1),
+        inset 0 0 15px rgba(124,58,237,0.3);
+      animation: neonPulse 2s ease-in-out infinite reverse;
+    }
+
+    @keyframes neonPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+
+    /* ============================
+       STATS SECTION
+    ============================ */
+    #stats {
+      background: linear-gradient(135deg, rgba(124,58,237,0.05), rgba(6,182,212,0.05));
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+      text-align: center;
+    }
+
+    .stat-item {
+      opacity: 0;
+      transform: translateY(30px) scale(0.9);
+      transition: opacity 0.6s ease, transform 0.6s var(--ease-bounce);
+    }
+
+    .stat-item.in-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .stat-number {
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 900;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--clr-muted);
+      margin-top: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================
+       HOVER EFFECTS SHOWCASE
+    ============================ */
+    #hover-showcase {
+      background: var(--clr-surface);
+    }
+
+    .hover-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .hover-item {
+      aspect-ratio: 1;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.9rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.6s ease, transform 0.6s var(--ease-bounce);
+    }
+
+    .hover-item.in-card {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hover-icon { font-size: 2.5rem; }
+
+    /* Hover effect 1: Scale + glow */
+    .h-effect-1 {
+      background: rgba(124,58,237,0.1);
+      transition: transform 0.4s var(--ease-bounce), box-shadow 0.4s ease, background 0.4s ease;
+    }
+
+    .h-effect-1:hover {
+      transform: scale(1.1) translateY(-8px) !important;
+      box-shadow: 0 30px 60px rgba(124,58,237,0.4);
+      background: rgba(124,58,237,0.2);
+    }
+
+    /* Hover effect 2: Tilt 3D */
+    .h-effect-2 {
+      background: rgba(6,182,212,0.1);
+      transition: background 0.4s;
+    }
+
+    .h-effect-2:hover {
+      background: rgba(6,182,212,0.2);
+      animation: tilt3d 0.3s ease forwards;
+    }
+
+    @keyframes tilt3d {
+      0% { transform: scale(1) rotateX(0) rotateY(0); }
+      50% { transform: scale(1.05) rotateX(8deg) rotateY(-8deg); }
+      100% { transform: scale(1.05) rotateX(4deg) rotateY(-4deg); }
+    }
+
+    /* Hover effect 3: Ripple */
+    .h-effect-3 {
+      background: rgba(244,114,182,0.1);
+    }
+
+    .h-effect-3::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      background: rgba(244,114,182,0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+      opacity: 0;
+    }
+
+    .h-effect-3:hover::after {
+      width: 300px;
+      height: 300px;
+      opacity: 0;
+    }
+
+    /* Hover effect 4: Slide reveal */
+    .h-effect-4 {
+      background: rgba(251,191,36,0.1);
+    }
+
+    .h-effect-4 .hover-reveal {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(124,58,237,0.2));
+      transform: translateY(100%);
+      transition: transform 0.4s var(--ease-bounce);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--clr-text);
+    }
+
+    .h-effect-4:hover .hover-reveal { transform: translateY(0); }
+
+    /* Hover effect 5: Border draw */
+    .h-effect-5 {
+      background: rgba(6,182,212,0.08);
+    }
+
+    .h-effect-5::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      border: 2px solid transparent;
+      background: linear-gradient(var(--clr-surface), var(--clr-surface)) padding-box,
+                  var(--gradient-hero) border-box;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .h-effect-5:hover::before { opacity: 1; }
+
+    /* Hover effect 6: Rotate icon */
+    .h-effect-6 {
+      background: rgba(124,58,237,0.08);
+    }
+
+    .h-effect-6 .hover-icon {
+      transition: transform 0.6s var(--ease-bounce);
+    }
+
+    .h-effect-6:hover .hover-icon {
+      transform: rotate(360deg) scale(1.2);
+    }
+
+    /* ============================
+       PROCESS / STEPS SECTION
+    ============================ */
+    #process {
+      background: var(--clr-bg);
+    }
+
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 4rem;
+      position: relative;
+    }
+
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      left: 2.2rem;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--clr-accent1), var(--clr-accent2), var(--clr-accent3));
+      opacity: 0.3;
+    }
+
+    .process-step {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      padding: 2rem 0;
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.7s ease, transform 0.7s var(--ease-bounce);
+    }
+
+    .process-step.in-card {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 900;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-num-1 { background: linear-gradient(135deg, var(--clr-accent1), #9f67ff); box-shadow: 0 0 20px rgba(124,58,237,0.5); }
+    .step-num-2 { background: linear-gradient(135deg, var(--clr-accent2), #38d2f0); box-shadow: 0 0 20px rgba(6,182,212,0.5); }
+    .step-num-3 { background: linear-gradient(135deg, var(--clr-accent3), #fb7ec6); box-shadow: 0 0 20px rgba(244,114,182,0.5); }
+    .step-num-4 { background: linear-gradient(135deg, var(--clr-gold), #fcd34d); box-shadow: 0 0 20px rgba(251,191,36,0.5); }
+
+    .step-content h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .step-content p {
+      font-size: 0.93rem;
+      color: var(--clr-muted);
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    /* ============================
+       CTA SECTION
+    ============================ */
+    #cta {
+      background: var(--clr-surface);
+      text-align: center;
+    }
+
+    .cta-box {
+      position: relative;
+      border-radius: 32px;
+      padding: 6rem 3rem;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-hero);
+      opacity: 0.06;
+      animation: gradientShift 6s ease infinite;
+      background-size: 300% 300%;
+    }
+
+    .cta-glow-1 {
+      position: absolute;
+      top: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(124,58,237,0.2), transparent 70%);
+      animation: floatSlow 7s ease-in-out infinite;
+    }
+
+    .cta-glow-2 {
+      position: absolute;
+      bottom: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(6,182,212,0.15), transparent 70%);
+      animation: floatSlow 9s ease-in-out infinite reverse;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-content h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-content p {
+      font-size: 1.1rem;
+      color: var(--clr-muted);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* ============================
+       FOOTER
+    ============================ */
+    footer {
+      background: var(--clr-bg);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: var(--clr-muted);
+    }
+
+    /* ============================
+       FLOATING SHAPES (background)
+    ============================ */
+    .floating-shapes {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.04;
+    }
+
+    .shape-1 {
+      width: 500px; height: 500px;
+      background: var(--clr-accent1);
+      top: 10%; left: -10%;
+      animation: shapeFloat1 20s ease-in-out infinite;
+    }
+
+    .shape-2 {
+      width: 400px; height: 400px;
+      background: var(--clr-accent2);
+      top: 50%; right: -10%;
+      animation: shapeFloat2 25s ease-in-out infinite;
+    }
+
+    .shape-3 {
+      width: 350px; height: 350px;
+      background: var(--clr-accent3);
+      bottom: 10%; left: 20%;
+      animation: shapeFloat3 18s ease-in-out infinite;
+    }
+
+    @keyframes shapeFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(80px, -60px) scale(1.1); }
+      66% { transform: translate(-40px, 80px) scale(0.9); }
+    }
+
+    @keyframes shapeFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-70px, 50px) scale(1.15); }
+      66% { transform: translate(50px, -70px) scale(0.85); }
+    }
+
+    @keyframes shapeFloat3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, -60px) scale(1.1); }
+    }
+
+    /* ============================
+       UTILITY KEYFRAMES
+    ============================ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================
+       COUNTER ANIMATION
+    ============================ */
+    .count-up { display: inline-block; }
+
+    /* ============================
+       RESPONSIVE
+    ============================ */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-cta-group { flex-direction: column; align-items: center; }
+      .process-steps::before { left: 1.4rem; }
+      .step-num { width: 36px; height: 36px; font-size: 0.8rem; }
+    }
+
+    /* Smooth cursor glow — purely decorative */
+    .cursor-glow {
+      pointer-events: none;
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      transition: left 0.15s ease, top 0.15s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cursor glow -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- Floating background shapes -->
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+
+  <!-- ========================
+       LOADING SCREEN
+  ======================== -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-logo">MARBOTIM</div>
+    <div class="loader-dots">
+      <div class="loader-dot"></div>
+      <div class="loader-dot"></div>
+      <div class="loader-dot"></div>
+    </div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar"></div>
+    </div>
+    <div class="loader-text">Načítání animací&hellip;</div>
+  </div>
+
+  <!-- ========================
+       NAVIGATION
+  ======================== -->
+  <nav id="main-nav" role="navigation">
+    <div class="nav-logo">MARBOTIM</div>
+    <ul class="nav-links">
+      <li><a href="#why">Proč animace</a></li>
+      <li><a href="#showcase">Ukázky</a></li>
+      <li><a href="#process">Jak to děláme</a></li>
+      <li><a href="#cta">Kontakt</a></li>
+    </ul>
+    <a href="#cta" class="btn btn-primary" style="padding: 0.6rem 1.4rem; font-size: 0.85rem;">Chci animovaný web</a>
+  </nav>
+
+  <!-- ========================
+       HERO
+  ======================== -->
+  <section id="hero">
+    <div id="tsparticles"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">Web design &amp; animace</div>
+
+      <h1 class="hero-title">
+        <span class="line"><span class="word">Chcete&nbsp;web,</span></span>
+        <span class="line"><span class="word">který&nbsp;<span class="typewriter-wrap"><span id="typewriter-text"></span></span></span></span>
+        <span class="line"><span class="word white">Animace jsou&nbsp;odpověď.</span></span>
+      </h1>
+
+      <p class="hero-sub">
+        Každý pixel může být v pohybu. Každý scroll může vyprávět příběh.
+        Animace proměňují statické stránky v nezapomenutelné zážitky.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#showcase" class="btn btn-primary">Prohlédnout ukázky</a>
+        <a href="#cta" class="btn btn-outline">Nezávazná konzultace</a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span class="scroll-label">Scrollujte</span>
+    </div>
+  </section>
+
+  <!-- ========================
+       WHY ANIMATIONS
+  ======================== -->
+  <section id="why">
+    <div class="section-inner">
+      <span class="section-label">Proč to funguje</span>
+      <h2 class="section-title">
+        Animace nejsou ozdoba.<br>
+        <span class="gradient-text">Jsou nástroj.</span>
+      </h2>
+      <p class="section-desc">
+        Správně použité animace zvyšují konverze, budují důvěru a dělají
+        z návštěvníků fanoušky. Tady je proč.
+      </p>
+
+      <div class="why-grid">
+
+        <div class="why-card">
+          <div class="card-icon purple">&#9889;</div>
+          <h3>Okamžitá pozornost</h3>
+          <p>Pohyb přitahuje zrak. Animovaný web zaujme navštěvníka během prvních 0,05 sekundy — dřív, než stihne přečíst jediné slovo.</p>
+          <div class="card-glow" style="background: var(--clr-accent1);"></div>
+        </div>
+
+        <div class="why-card">
+          <div class="card-icon cyan">&#128200;</div>
+          <h3>Vyšší konverze</h3>
+          <p>Studie ukazují, že animované CTA tlačítka a micro-interakce zvyšují míru prokliků o 30&ndash;80 %. Pohyb vytváří touhu kliknout.</p>
+          <div class="card-glow" style="background: var(--clr-accent2);"></div>
+        </div>
+
+        <div class="why-card">
+          <div class="card-icon pink">&#127775;</div>
+          <h3>Silná značka</h3>
+          <p>Animovaná identita je nezapomenutelná. Zákazníci si zapamatují váš web — a vrátí se. Pohyb je váš podpis ve světě digitálu.</p>
+          <div class="card-glow" style="background: var(--clr-accent3);"></div>
+        </div>
+
+        <div class="why-card">
+          <div class="card-icon gold">&#128161;</div>
+          <h3>Lepší UX</h3>
+          <p>Animace pomáhají uživatelům pochopit rozhraní: co se kliklo, co se načítá, kam jít dál. Pohyb je nejlepší vizuální instrukce.</p>
+          <div class="card-glow" style="background: var(--clr-gold);"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       PARALLAX SHOWCASE
+  ======================== -->
+  <section id="parallax-showcase">
+    <div class="parallax-stage" id="parallaxStage">
+      <div class="parallax-layer p-layer-1" id="pLayer1"></div>
+      <div class="parallax-layer p-layer-2" id="pLayer2"></div>
+      <div class="parallax-layer p-layer-3" id="pLayer3"></div>
+
+      <div class="parallax-text">
+        <h2 class="gradient-text">Hloubka &amp; prostor</h2>
+        <p style="color: var(--clr-muted); margin-top: 1rem; font-size: 1.1rem;">
+          Parallax efekty dávají webu třetí rozměr
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       ANIMATION SHOWCASE
+  ======================== -->
+  <section id="showcase">
+    <div class="section-inner">
+      <span class="section-label">Ukázky technik</span>
+      <h2 class="section-title">
+        Animace pro<br>
+        <span class="gradient-text">každou příležitost</span>
+      </h2>
+      <p class="section-desc">
+        Od hravého morphingu po technický glitch efekt &mdash; každý projekt
+        dostane animace přesně pro svou osobnost.
+      </p>
+
+      <div class="showcase-grid">
+
+        <!-- DEMO 1 -->
+        <div class="showcase-card">
+          <div class="sc-demo demo-morphing">
+            <div class="blob"></div>
+          </div>
+          <div class="sc-info">
+            <h3>Morphing tvarů</h3>
+            <p>CSS border-radius animace vytváří organické, živé tvary. Ideální pro hero sekce a branding.</p>
+          </div>
+        </div>
+
+        <!-- DEMO 2 -->
+        <div class="showcase-card">
+          <div class="sc-demo demo-orbit">
+            <div class="orbit-system">
+              <div class="orbit-center"></div>
+              <div class="orbit-ring orbit-ring-1">
+                <div class="orbit-planet planet-1"></div>
+              </div>
+              <div class="orbit-ring orbit-ring-2">
+                <div class="orbit-planet planet-2"></div>
+              </div>
+              <div class="orbit-ring orbit-ring-3">
+                <div class="orbit-planet planet-3"></div>
+              </div>
+            </div>
+          </div>
+          <div class="sc-info">
+            <h3>Orbit &amp; planetární systémy</h3>
+            <p>Krouživé animace budují pocit dynamiky a technologie. Skvělé pro tech a SaaS produkty.</p>
+          </div>
+        </div>
+
+        <!-- DEMO 3 -->
+        <div class="showcase-card">
+          <div class="sc-demo demo-gradient">
+            <div class="gradient-wave"></div>
+            <div class="gradient-text-anim">COLOR</div>
+          </div>
+          <div class="sc-info">
+            <h3>Gradient animace</h3>
+            <p>Plynule měnící se barvy udržují pozornost a dodávají stránce energii bez rušivých prvků.</p>
+          </div>
+        </div>
+
+        <!-- DEMO 4 -->
+        <div class="showcase-card">
+          <div class="sc-demo demo-3d" style="perspective: 800px;">
+            <div class="flip-card">
+              <div class="flip-face flip-front">
+                <span class="big-num">3D</span>
+                <span>Přední strana</span>
+              </div>
+              <div class="flip-face flip-back">&#10003;</div>
+            </div>
+          </div>
+          <div class="sc-info">
+            <h3>3D CSS transformace</h3>
+            <p>Flip karty, rotate efekty a perspective transforms dodávají webu hloubku bez JavaScriptu.</p>
+          </div>
+        </div>
+
+        <!-- DEMO 5 -->
+        <div class="showcase-card">
+          <div class="sc-demo demo-glitch">
+            <div class="glitch-text" data-text="GLITCH">GLITCH</div>
+          </div>
+          <div class="sc-info">
+            <h3>Glitch efekt</h3>
+            <p>Digitální chyba jako estetika. Glitch animace jsou magnetické — zachytí oko a nevpustí ho pryč.</p>
+          </div>
+        </div>
+
+        <!-- DEMO 6 -->
+        <div class="showcase-card">
+          <div class="sc-demo demo-neon">
+            <div class="neon-circle">
+              <div class="neon-inner"></div>
+            </div>
+          </div>
+          <div class="sc-info">
+            <h3>Neon &amp; glow efekty</h3>
+            <p>CSS box-shadow animace vytvářejí neonové světlo bez SVG nebo obrázků. Retro-futuristický styl.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       STATS
+  ======================== -->
+  <section id="stats">
+    <div class="section-inner">
+      <div class="stats-grid">
+
+        <div class="stat-item">
+          <span class="stat-number count-up" data-target="87">0</span><span class="stat-number gradient-text">%</span>
+          <div class="stat-label">uživatelů zůstane déle na animovaném webu</div>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-number count-up" data-target="3">0</span><span class="stat-number gradient-text">x</span>
+          <div class="stat-label">vyšší zapamatovatelnost oproti statickému webu</div>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-number count-up" data-target="40">0</span><span class="stat-number gradient-text">%</span>
+          <div class="stat-label">nárůst konverzí s micro-animacemi</div>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-number count-up" data-target="95">0</span><span class="stat-number gradient-text">%</span>
+          <div class="stat-label">klientů doporučí web s kvalitní animací dál</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       HOVER EFFECTS
+  ======================== -->
+  <section id="hover-showcase">
+    <div class="section-inner">
+      <span class="section-label">Interaktivita</span>
+      <h2 class="section-title">
+        Hover efekty,<br>
+        <span class="gradient-text">které překvapí</span>
+      </h2>
+      <p class="section-desc">
+        Najeďte myší na karty níže a zažijte, jak malý pohyb mění celou náladu prvku.
+      </p>
+
+      <div class="hover-grid">
+
+        <div class="hover-item h-effect-1">
+          <div class="hover-icon">&#128640;</div>
+          <span>Scale + Glow</span>
+        </div>
+
+        <div class="hover-item h-effect-2">
+          <div class="hover-icon">&#127922;</div>
+          <span>3D Tilt</span>
+        </div>
+
+        <div class="hover-item h-effect-3">
+          <div class="hover-icon">&#128162;</div>
+          <span>Ripple Wave</span>
+        </div>
+
+        <div class="hover-item h-effect-4">
+          <div class="hover-icon">&#127775;</div>
+          <span>Slide Reveal</span>
+          <div class="hover-reveal">Klikni na mě!</div>
+        </div>
+
+        <div class="hover-item h-effect-5">
+          <div class="hover-icon">&#128383;</div>
+          <span>Border Draw</span>
+        </div>
+
+        <div class="hover-item h-effect-6">
+          <div class="hover-icon">&#9881;&#65039;</div>
+          <span>Rotate Icon</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       PROCESS
+  ======================== -->
+  <section id="process">
+    <div class="section-inner">
+      <span class="section-label">Náš postup</span>
+      <h2 class="section-title">
+        Od nápadu<br>
+        <span class="gradient-text">k pohybu</span>
+      </h2>
+      <p class="section-desc">
+        Každou animaci navrhujeme tak, aby sloužila cíli &mdash; ne jen vypadala skvěle.
+      </p>
+
+      <div class="process-steps">
+
+        <div class="process-step">
+          <div class="step-num step-num-1">01</div>
+          <div class="step-content">
+            <h3>Analýza &amp; strategie</h3>
+            <p>Zjistíme, co váš web potřebuje. Jaké emoce má vyvolat? Kde má uživatel kliknout? Animace navrhujeme s cílem v hlavě.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num step-num-2">02</div>
+          <div class="step-content">
+            <h3>Prototyp pohybu</h3>
+            <p>Vytvoříme interaktivní prototyp animací ještě před vývojem. Uvidíte přesně, jak se váš web bude pohybovat.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num step-num-3">03</div>
+          <div class="step-content">
+            <h3>Vývoj &amp; optimalizace</h3>
+            <p>Implementujeme animace pomocí GSAP, CSS a čistého JS. Každá animace je optimalizována — GPU-accelerated, 60fps, žádné trhání.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num step-num-4">04</div>
+          <div class="step-content">
+            <h3>Testování &amp; spuštění</h3>
+            <p>Testujeme na všech zařízeních a prohlížečích. Až je vše perfektní, spouštíme &mdash; a web začne žít.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       CTA
+  ======================== -->
+  <section id="cta">
+    <div class="section-inner">
+      <div class="cta-box">
+        <div class="cta-bg"></div>
+        <div class="cta-glow-1"></div>
+        <div class="cta-glow-2"></div>
+
+        <div class="cta-content">
+          <h2>
+            Připraveni na web,<br>
+            <span class="gradient-text">který se hýbe?</span>
+          </h2>
+          <p>
+            Ozvěte se nám. Během 48 hodin navrhneme animační koncept
+            přímo pro váš projekt &mdash; zdarma a nezávazně.
+          </p>
+          <div class="hero-cta-group" style="opacity:1; animation:none;">
+            <a href="mailto:info@marbotim.cz" class="btn btn-primary">
+              &#128235; Napsat zprávu
+            </a>
+            <a href="tel:+420000000000" class="btn btn-outline">
+              &#128222; Zavolat
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       FOOTER
+  ======================== -->
+  <footer>
+    <div class="footer-logo">MARBOTIM</div>
+    <p class="footer-text">
+      &copy; 2026 MARBOTIM &mdash; Weby, které nejdou zapomenout.
+    </p>
+  </footer>
+
+
+  <!-- ========================
+       JAVASCRIPT
+  ======================== -->
+  <script>
+  // ====================================================
+  //  LOADING SCREEN
+  // ====================================================
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    const nav    = document.getElementById('main-nav');
+
+    // Čekáme 2 sekundy (loading animace trvá ~1.8s)
+    setTimeout(() => {
+      loader.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      loader.style.opacity    = '0';
+      loader.style.transform  = 'scale(1.05)';
+      loader.style.pointerEvents = 'none';
+
+      setTimeout(() => {
+        loader.style.display = 'none';
+        nav.classList.add('visible');
+      }, 700);
+    }, 2000);
+  });
+
+  // ====================================================
+  //  CURSOR GLOW
+  // ====================================================
+  const cursorGlow = document.getElementById('cursorGlow');
+  document.addEventListener('mousemove', e => {
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top  = e.clientY + 'px';
+  });
+
+  // ====================================================
+  //  TYPEWRITER EFFECT
+  // ====================================================
+  const words  = ['zaujme?', 'prodává?', 'ohromí?', 'přesvědčí?', 'nezapomene?'];
+  let   wIdx   = 0;
+  let   cIdx   = 0;
+  let   deleting = false;
+  const el       = document.getElementById('typewriter-text');
+
+  function typeLoop() {
+    const current = words[wIdx];
+
+    if (!deleting) {
+      cIdx++;
+      el.textContent = current.slice(0, cIdx);
+      if (cIdx === current.length) {
+        deleting = true;
+        setTimeout(typeLoop, 1800);
+        return;
+      }
+      setTimeout(typeLoop, 90);
+    } else {
+      cIdx--;
+      el.textContent = current.slice(0, cIdx);
+      if (cIdx === 0) {
+        deleting = false;
+        wIdx = (wIdx + 1) % words.length;
+      }
+      setTimeout(typeLoop, 45);
+    }
+  }
+
+  // Spustit typewriter po zobrazení hero
+  setTimeout(typeLoop, 3200);
+
+  // ====================================================
+  //  tsParticles — hero particles
+  // ====================================================
+  if (window.tsParticles) {
+    tsParticles.load('tsparticles', {
+      fpsLimit: 60,
+      particles: {
+        number: { value: 70, density: { enable: true, area: 900 } },
+        color: {
+          value: ['#7c3aed', '#06b6d4', '#f472b6', '#fbbf24']
+        },
+        shape: { type: ['circle', 'triangle'] },
+        opacity: {
+          value: { min: 0.1, max: 0.5 },
+          animation: { enable: true, speed: 0.8, minimumValue: 0.05, sync: false }
+        },
+        size: {
+          value: { min: 1, max: 4 },
+          animation: { enable: true, speed: 2, minimumValue: 0.5, sync: false }
+        },
+        links: {
+          enable: true,
+          distance: 140,
+          color: '#7c3aed',
+          opacity: 0.12,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 0.6,
+          direction: 'none',
+          random: true,
+          straight: false,
+          outModes: { default: 'bounce' },
+          attract: { enable: false }
+        }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: 'repulse' },
+          onClick:  { enable: true, mode: 'push' },
+          resize: true
+        },
+        modes: {
+          repulse: { distance: 100, duration: 0.4 },
+          push:    { quantity: 3 }
+        }
+      },
+      detectRetina: true
+    });
+  }
+
+  // ====================================================
+  //  GSAP + ScrollTrigger
+  // ====================================================
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Parallax layers on scroll
+    gsap.to('#pLayer1', {
+      y: -120,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#parallax-showcase',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.5
+      }
+    });
+
+    gsap.to('#pLayer2', {
+      y: 80,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#parallax-showcase',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 2
+      }
+    });
+
+    gsap.to('#pLayer3', {
+      y: -50,
+      x: 40,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#parallax-showcase',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1
+      }
+    });
+
+    // Hero content parallax on scroll
+    gsap.to('.hero-content', {
+      y: 150,
+      opacity: 0.3,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+  }
+
+  // ====================================================
+  //  INTERSECTION OBSERVER — scroll animations
+  // ====================================================
+  const sectionObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('in-view');
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+  );
+
+  document.querySelectorAll('section').forEach(s => sectionObserver.observe(s));
+
+  // Cards
+  const cardObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          // Staggered delay for grid items
+          const siblings = [...e.target.parentElement.children];
+          const idx      = siblings.indexOf(e.target);
+          e.target.style.transitionDelay = (idx * 0.1) + 's';
+          e.target.classList.add('in-card');
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  document.querySelectorAll(
+    '.why-card, .showcase-card, .stat-item, .hover-item, .process-step'
+  ).forEach(el => cardObserver.observe(el));
+
+  // ====================================================
+  //  COUNTER ANIMATION
+  // ====================================================
+  const counterObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el     = e.target;
+        const target = parseInt(el.dataset.target);
+        let   start  = 0;
+        const dur    = 1800;
+        const step   = dur / target;
+        const timer  = setInterval(() => {
+          start = Math.min(start + Math.ceil(target / 60), target);
+          el.textContent = start;
+          if (start >= target) clearInterval(timer);
+        }, step < 16 ? 16 : step);
+        counterObserver.unobserve(el);
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  document.querySelectorAll('.count-up').forEach(el => counterObserver.observe(el));
+
+  // ====================================================
+  //  3D TILT on hover-item h-effect-2
+  // ====================================================
+  document.querySelectorAll('.h-effect-2').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect  = card.getBoundingClientRect();
+      const cx    = rect.left + rect.width  / 2;
+      const cy    = rect.top  + rect.height / 2;
+      const dx    = (e.clientX - cx) / (rect.width  / 2);
+      const dy    = (e.clientY - cy) / (rect.height / 2);
+      card.style.transform = `
+        scale(1.05)
+        rotateX(${-dy * 12}deg)
+        rotateY(${dx * 12}deg)
+      `;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  // ====================================================
+  //  SMOOTH SCROLL for nav links
+  // ====================================================
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ====================================================
+  //  NAV scroll active state
+  // ====================================================
+  const mainNav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      mainNav.style.background = 'rgba(7,9,15,0.85)';
+    } else {
+      mainNav.style.background = 'rgba(7,9,15,0.6)';
+    }
+  }, { passive: true });
+
+  // ====================================================
+  //  Fallback — pokud tsParticles nenačte CDN
+  //  (čistý JS canvas particle fallback)
+  // ====================================================
+  function maybeInitFallbackParticles() {
+    const container = document.getElementById('tsparticles');
+    if (container && container.children.length > 0) return; // tsParticles loaded
+
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+    container.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    const W   = () => canvas.width  = canvas.offsetWidth;
+    const H   = () => canvas.height = canvas.offsetHeight;
+    W(); H();
+    window.addEventListener('resize', () => { W(); H(); });
+
+    const colors = ['#7c3aed', '#06b6d4', '#f472b6', '#fbbf24'];
+    const pts    = Array.from({ length: 80 }, () => ({
+      x:  Math.random() * canvas.width,
+      y:  Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
+      r:  Math.random() * 2.5 + 0.5,
+      c:  colors[Math.floor(Math.random() * colors.length)],
+      a:  Math.random() * 0.5 + 0.1
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pts.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.c;
+        ctx.globalAlpha = p.a;
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  }
+
+  // Run fallback check after 3s
+  setTimeout(maybeInitFallbackParticles, 3000);
+  </script>
+
+</body>
+</html>
