@@ -477,7 +477,7 @@
       <div class="logo-icon">🛒</div>
       <span class="logo-text">Slevy<span>Dnes</span></span>
     </a>
-    <span class="header-badge">UKÁZKOVÁ DATA</span>
+    <span class="header-badge" style="background:#6c63ff22;color:#6c63ff;border-color:#6c63ff40">REÁLNÁ DATA</span>
     <div class="header-right">
       <span class="last-update" id="lastUpdateLabel">Aktualizováno: —</span>
     </div>
@@ -493,12 +493,11 @@
 <!-- ═══ API NOTICE ════════════════════════════════════════════════ -->
 <div class="api-notice">
   <div class="api-notice-inner">
-    <span class="notice-icon">ℹ️</span>
+    <span class="notice-icon">✅</span>
     <div>
-      <strong>Ukázková data —</strong> žádný z řetězců neposkytuje veřejné REST/JSON API pro akční nabídky (ověřeno březnem 2026).
-      Pro napojení reálných dat viz komentáře v kódu: doporučená cesta je
-      <strong>Python scraper</strong> (<a href="https://pypi.org/project/kupiapi/" target="_blank">kupiapi</a> přes kupi.cz)
-      s cronovou úlohou, která generuje <code>/api/slevy.json</code>.
+      <strong>Reálná data z kupi.cz —</strong> slevy jsou stahovány Python scraperem z veřejných stránek
+      <a href="https://www.kupi.cz" target="_blank">kupi.cz</a>.
+      Spusťte <code>python3 scraper.py</code> pro aktualizaci.
     </div>
   </div>
 </div>
@@ -550,7 +549,7 @@
 
 <!-- ═══ FOOTER ════════════════════════════════════════════════════ -->
 <footer>
-  SlevyDnes &copy; 2026 · Prototyp &amp; ukázková data · Žádná data nejsou stahována z externích serverů
+  SlevyDnes &copy; 2026 · Data z <a href="https://www.kupi.cz" target="_blank" style="color:var(--accent)">kupi.cz</a> · Aktualizujte spuštěním <code>python3 scraper.py</code>
 </footer>
 
 <script>
@@ -769,11 +768,10 @@ function loadMockData() {
   applyFilters();
 }
 
-/* ─── Načtení real dat (odkomentuj až bude k dispozici API) ────────
+// ─── Načtení real dat ze slevy.json ────────────────────────────────
 async function loadRealData() {
   try {
-    // Nahraď URL za svůj backend endpoint / generovaný JSON soubor
-    const res = await fetch("/api/slevy.json");
+    const res = await fetch("slevy.json");
     if (!res.ok) throw new Error("HTTP " + res.status);
     allProducts = await res.json();
     document.getElementById("lastUpdateLabel").textContent =
@@ -785,11 +783,9 @@ async function loadRealData() {
     loadMockData();
   }
 }
-─────────────────────────────────────────────────────────────────── */
 
 // === INICIALIZACE ====================================================
-loadMockData();
-// loadRealData(); // ← odkomentuj pro real data
+loadRealData();
 </script>
 </body>
 </html>
