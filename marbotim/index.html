@@ -765,70 +765,103 @@
 
   <!-- Dodávka animace -->
   <div id="van-wrap" style="
-    position:fixed; bottom:0; left:-500px; z-index:9998;
+    position:fixed; bottom:18px; left:-540px; z-index:9998;
     pointer-events:none; will-change:transform;
   ">
-    <svg width="460" height="140" viewBox="0 0 460 140" xmlns="http://www.w3.org/2000/svg">
-      <!-- Výfuk kouř -->
-      <circle cx="28" cy="88" r="7"   fill="rgba(180,180,180,0.55)" id="exhaust1"/>
-      <circle cx="14" cy="78" r="5"   fill="rgba(180,180,180,0.38)" id="exhaust2"/>
-      <circle cx="4"  cy="66" r="3.5" fill="rgba(180,180,180,0.22)" id="exhaust3"/>
-      <!-- Karoserie hlavní -->
-      <rect x="40" y="38" width="380" height="74" rx="10" fill="#c0392b"/>
-      <!-- Kabina (přední část) -->
-      <path d="M290 38 L290 14 Q290 8 284 8 L185 8 Q160 8 142 26 L114 38 Z" fill="#a93226"/>
-      <!-- Okno kabiny -->
-      <path d="M278 36 L278 16 Q278 12 273 12 L192 12 Q170 12 154 28 L128 36 Z" fill="#d6eaf8" opacity="0.88"/>
-      <!-- Boční okna dodávky (zadní část) -->
-      <rect x="305" y="12" width="72" height="38" rx="5" fill="#d6eaf8" opacity="0.82"/>
-      <rect x="387" y="12" width="25" height="38" rx="5" fill="#d6eaf8" opacity="0.82"/>
-      <!-- Dveřní svislá linka -->
-      <line x1="295" y1="38" x2="295" y2="112" stroke="#922b21" stroke-width="2.5"/>
-      <!-- Bílý pruh po straně -->
-      <rect x="40" y="68" width="380" height="10" rx="0" fill="rgba(255,255,255,0.15)"/>
-      <!-- Text MARBOTIM - velký -->
-      <text x="308" y="78" font-family="Arial Black,Arial,sans-serif" font-size="22" font-weight="900" fill="white" letter-spacing="2">MARBOTIM</text>
-      <!-- Podtext -->
-      <text x="312" y="97" font-family="Arial,sans-serif" font-size="12" fill="rgba(255,255,255,0.85)" letter-spacing="1">vytápění · instalace · servis</text>
-      <!-- Plamen -->
-      <text x="264" y="88" font-size="26">🔥</text>
-      <!-- Přední světlo -->
-      <ellipse cx="426" cy="80" rx="9" ry="6" fill="#f9e94e" opacity="0.95"/>
-      <ellipse cx="430" cy="80" rx="5" ry="4" fill="white" opacity="0.75"/>
+    <svg width="500" height="130" viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Výfuk kouř (za zadkem = levá strana) -->
+      <circle cx="30" cy="82" r="8"   fill="rgba(200,200,200,0.55)" id="exhaust1"/>
+      <circle cx="15" cy="70" r="6"   fill="rgba(200,200,200,0.38)" id="exhaust2"/>
+      <circle cx="5"  cy="58" r="4"   fill="rgba(200,200,200,0.22)" id="exhaust3"/>
+
+      <!-- ===== KAROSERIE ===== -->
+      <!-- Spodní část (celá šířka) -->
+      <rect x="44" y="60" width="430" height="52" rx="6" fill="#c0392b"/>
+      <!-- Střecha zadní (cargo box) -->
+      <rect x="44" y="14" width="290" height="48" rx="6" fill="#c0392b"/>
+      <!-- Přechod mezi kabinou a boxem -->
+      <rect x="330" y="14" width="8" height="98" fill="#922b21"/>
+      <!-- Kabina (přední, vyšší) -->
+      <path d="M338 60  L338 20  Q338 14 344 14  L400 14  Q428 14 450 36  L474 60 Z" fill="#a93226"/>
+      <!-- Okno kabiny - čelní sklo -->
+      <path d="M346 58  L346 24  Q346 19 351 19  L398 19  Q422 19 442 38  L462 58 Z" fill="#aed6f1" opacity="0.82"/>
+      <!-- Odlesk na skle -->
+      <path d="M352 26 L380 26 L362 52 L346 52 Z" fill="white" opacity="0.12"/>
+
+      <!-- Mřížka/nárazník vpředu -->
+      <rect x="466" y="70" width="14" height="28" rx="3" fill="#7f8c8d"/>
+      <line x1="466" y1="78" x2="480" y2="78" stroke="#5d6d7e" stroke-width="1.5"/>
+      <line x1="466" y1="86" x2="480" y2="86" stroke="#5d6d7e" stroke-width="1.5"/>
+
+      <!-- Světlo přední -->
+      <rect x="463" y="62" width="18" height="10" rx="3" fill="#f9e94e"/>
+      <rect x="463" y="62" width="18" height="5"  rx="3" fill="white" opacity="0.6"/>
+
       <!-- Zadní světla -->
-      <rect x="40" y="62" width="10" height="18" rx="3" fill="#e74c3c"/>
-      <rect x="40" y="62" width="10" height="9"  rx="3" fill="#fadbd8"/>
-      <!-- Kola -->
-      <circle cx="116" cy="116" r="22" fill="#212f3d"/>
-      <circle cx="116" cy="116" r="14" fill="#566573"/>
-      <circle cx="116" cy="116" r="6"  fill="#aab7b8"/>
-      <circle cx="348" cy="116" r="22" fill="#212f3d"/>
-      <circle cx="348" cy="116" r="14" fill="#566573"/>
-      <circle cx="348" cy="116" r="6"  fill="#aab7b8"/>
-      <!-- Stín -->
-      <ellipse cx="230" cy="138" rx="180" ry="6" fill="rgba(0,0,0,0.18)"/>
+      <rect x="44" y="64" width="12" height="22" rx="3" fill="#c0392b"/>
+      <rect x="44" y="64" width="12" height="11" rx="3" fill="#f1948a"/>
+      <rect x="44" y="86" width="12" height="8"  rx="2" fill="#f4d03f" opacity="0.9"/>
+
+      <!-- Spodní ochranka/nárazník -->
+      <rect x="44"  y="106" width="12" height="6" rx="2" fill="#5d6d7e"/>
+      <rect x="462" y="106" width="18" height="6" rx="2" fill="#5d6d7e"/>
+
+      <!-- Boční posuvné dveře (čára) -->
+      <line x1="200" y1="62" x2="200" y2="110" stroke="#922b21" stroke-width="2"/>
+      <!-- Klika dveří -->
+      <rect x="193" y="82" width="14" height="4" rx="2" fill="#922b21"/>
+
+      <!-- Bílý dekorační pruh -->
+      <rect x="44" y="76" width="418" height="6" fill="rgba(255,255,255,0.18)"/>
+
+      <!-- ===== NÁPIS MARBOTIM ===== -->
+      <text x="56"  y="58" font-family="Arial Black,Impact,sans-serif" font-size="26" font-weight="900" fill="white" letter-spacing="3">MARBOTIM</text>
+      <text x="56"  y="73" font-family="Arial,sans-serif" font-size="11" fill="rgba(255,255,255,0.9)" letter-spacing="1.5">VYTÁPĚNÍ  ·  INSTALACE  ·  SERVIS</text>
+      <!-- Plamen -->
+      <text x="286" y="58" font-size="22">🔥</text>
+      <!-- Kapka (voda) -->
+      <text x="314" y="58" font-size="20">💧</text>
+
+      <!-- ===== KOLA ===== -->
+      <!-- Zadní kolo -->
+      <circle cx="120" cy="113" r="18" fill="#1a252f"/>
+      <circle cx="120" cy="113" r="13" fill="#2c3e50"/>
+      <circle cx="120" cy="113" r="8"  fill="#5d6d7e"/>
+      <circle cx="120" cy="113" r="4"  fill="#aab7b8"/>
+      <!-- Přední kolo -->
+      <circle cx="418" cy="113" r="18" fill="#1a252f"/>
+      <circle cx="418" cy="113" r="13" fill="#2c3e50"/>
+      <circle cx="418" cy="113" r="8"  fill="#5d6d7e"/>
+      <circle cx="418" cy="113" r="4"  fill="#aab7b8"/>
+
+      <!-- Podvozek spojující kola -->
+      <rect x="100" y="108" width="340" height="8" rx="4" fill="#1a252f"/>
+
+      <!-- Stín pod autem -->
+      <ellipse cx="265" cy="128" rx="200" ry="5" fill="rgba(0,0,0,0.22)"/>
     </svg>
   </div>
 
   <style>
     @keyframes vanDrive {
       0%   { transform: translateX(0); }
-      100% { transform: translateX(calc(100vw + 520px)); }
+      100% { transform: translateX(calc(100vw + 560px)); }
     }
     @keyframes puff {
       0%   { opacity: 0.7; transform: scale(1) translateY(0); }
-      100% { opacity: 0;   transform: scale(3) translateY(-22px); }
+      100% { opacity: 0;   transform: scale(3.5) translateY(-26px); }
     }
     #exhaust1 { animation: puff 1.1s ease-out infinite; animation-delay: 0s; }
-    #exhaust2 { animation: puff 1.1s ease-out infinite; animation-delay: 0.37s; }
-    #exhaust3 { animation: puff 1.1s ease-out infinite; animation-delay: 0.74s; }
+    #exhaust2 { animation: puff 1.1s ease-out infinite; animation-delay: 0.38s; }
+    #exhaust3 { animation: puff 1.1s ease-out infinite; animation-delay: 0.76s; }
   </style>
 
   <script>
     (function() {
       const wrap = document.getElementById('van-wrap');
       function driveAway() {
-        wrap.style.left = '-500px';
+        wrap.style.left = '-540px';
         wrap.style.animation = 'none';
         void wrap.offsetWidth;
         wrap.style.animation = 'vanDrive 7s linear forwards';
