@@ -5,16 +5,25 @@
       <stop offset="100%" stop-color="#ff6584"/>
     </linearGradient>
   </defs>
-  <!-- Background with rounded corners for maskable safe area -->
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Shopping cart icon (centered, white, 20% padding = ~102px each side) -->
-  <g transform="translate(128, 118)" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Cart body -->
-    <path d="M0 0 L30 0 L62 180 L230 180 L260 50 L75 50"/>
-    <!-- Wheels -->
-    <circle cx="100" cy="230" r="22" fill="#fff"/>
-    <circle cx="200" cy="230" r="22" fill="#fff"/>
-    <!-- Handle bar -->
-    <path d="M62 120 L240 120" stroke-width="16"/>
+  <!-- Background (plný čtverec pro maskable, rx pro any) -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- Košík — safe area 20% padding (centered ~256,256) -->
+  <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Rukojeť košíku -->
+    <path d="M135 195 L165 195 L195 330 L355 330" stroke-width="20"/>
+    <!-- Tělo košíku -->
+    <path d="M195 250 L345 250 L355 330 L195 330 Z" stroke-width="18" fill="rgba(255,255,255,0.15)"/>
+    <!-- Horní okraj košíku -->
+    <path d="M370 230 L185 230" stroke-width="16"/>
+    <!-- Svislé příčky -->
+    <line x1="240" y1="260" x2="240" y2="320" stroke-width="12"/>
+    <line x1="280" y1="260" x2="280" y2="320" stroke-width="12"/>
+    <line x1="320" y1="260" x2="320" y2="320" stroke-width="12"/>
+    <!-- Kolečka -->
+    <circle cx="220" cy="365" r="18" stroke-width="16" fill="#fff"/>
+    <circle cx="330" cy="365" r="18" stroke-width="16" fill="#fff"/>
+    <!-- Procento / sleva symbol -->
+    <circle cx="340" cy="180" r="42" stroke-width="14" fill="rgba(255,255,255,0.2)"/>
+    <text x="340" y="194" text-anchor="middle" font-family="Arial,sans-serif" font-size="46" font-weight="bold" fill="#fff" stroke="none">%</text>
   </g>
 </svg>

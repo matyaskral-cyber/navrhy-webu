@@ -1,5 +1,5 @@
 // SlevyDnes Service Worker — offline cache (stale-while-revalidate)
-const CACHE_NAME = 'slevydnes-v1';
+const CACHE_NAME = 'slevydnes-v2';
 const PRECACHE = [
   './',
   './index.html',

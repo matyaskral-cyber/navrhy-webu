@@ -3,16 +3,25 @@
   "short_name": "SlevyDnes",
   "description": "Aktuální slevy z českých supermarketů na jednom místě",
   "start_url": ".",
+  "scope": ".",
   "display": "standalone",
   "background_color": "#0f1117",
   "theme_color": "#6c63ff",
   "orientation": "any",
+  "lang": "cs",
+  "categories": ["shopping", "food"],
   "icons": [
     {
       "src": "icons.svg",
-      "sizes": "512x512",
+      "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icons.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     }
   ]
 }
