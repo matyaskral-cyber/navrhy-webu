@@ -483,6 +483,25 @@
       gap: 10px;
     }
 
+    /* Category card product image */
+    .cat-img {
+      width: 100%;
+      height: 160px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      background: var(--gray-5);
+    }
+    .cat-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+    .category-card:hover .cat-img img {
+      transform: scale(1.08);
+    }
+
     /* ─── GALLERY ─── */
     .gallery-section {
       background: var(--white);
@@ -1044,45 +1063,51 @@
       <div class="categories-grid">
 
         <div class="category-card reveal delay-1">
+          <div class="cat-img"><img src="images/sortiment/bu-king.jpg" alt="Pracovní bunda King" loading="lazy" /></div>
           <div class="cat-icon">🦺</div>
           <div class="cat-name">Pracovní oděvy</div>
           <p class="cat-desc">Montérky, pracovní kalhoty, bundy a komplety pro průmysl, řemesla a technické profese. Šité na míru i ze standardních modelů.</p>
-          <a href="https://mpkral.cz" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
+          <a href="https://mpkral.cz/pracovni-odevy.html" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
         </div>
 
         <div class="category-card reveal delay-2">
+          <div class="cat-img"><img src="images/sortiment/br-ab002.jpg" alt="Reflexní bunda AB002" loading="lazy" /></div>
           <div class="cat-icon">🔆</div>
           <div class="cat-name">Reflexní oděvy</div>
           <p class="cat-desc">Bezpečnostní oděvy s reflexními prvky pro práci v silničním provozu, stavebnictví a dalších rizikových prostředích.</p>
-          <a href="https://mpkral.cz" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
+          <a href="https://mpkral.cz/reflexni-odevy.html" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
         </div>
 
         <div class="category-card reveal delay-3">
+          <div class="cat-img"><img src="images/sortiment/ros-anat.jpg" alt="Anatomická rouška" loading="lazy" /></div>
           <div class="cat-icon">😷</div>
           <div class="cat-name">Roušky a jednorázové oděvy</div>
           <p class="cat-desc">Ochranné prostředky a jednorázové oděvy pro zdravotní, farmaceutické a čisté provozy vyžadující vysokou hygienu.</p>
-          <a href="https://mpkral.cz" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
+          <a href="https://mpkral.cz/jednorazove-rousky.html" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
         </div>
 
         <div class="category-card reveal delay-1">
+          <div class="cat-img"><img src="images/sortiment/hal-hela.jpg" alt="Zdravotnická halena Hela" loading="lazy" /></div>
           <div class="cat-icon">🩺</div>
           <div class="cat-name">Zdravotnické a potravinářské oděvy</div>
           <p class="cat-desc">Zdravotnické uniformy, pláště a oděvy pro potravinářský průmysl splňující přísné hygienické a bezpečnostní normy.</p>
-          <a href="https://mpkral.cz" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
+          <a href="https://mpkral.cz/zdravotnicke-potravinarske.html" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
         </div>
 
         <div class="category-card reveal delay-2">
+          <div class="cat-img"><img src="images/sortiment/db-soft.jpg" alt="Dětská bunda Softshell" loading="lazy" /></div>
           <div class="cat-icon">🧒</div>
           <div class="cat-name">Dětské oděvy</div>
           <p class="cat-desc">Funkční a odolné oděvy pro nejmenší — od mateřských škol přes základní školy až po dětské pracovní a sportovní oblečení.</p>
-          <a href="https://mpkral.cz" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
+          <a href="https://mpkral.cz/detske-odevy.html" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
         </div>
 
         <div class="category-card reveal delay-3">
+          <div class="cat-img"><img src="images/sortiment/kp-mat.jpg" alt="Kalhoty pro volný čas Mat" loading="lazy" /></div>
           <div class="cat-icon">🏃</div>
           <div class="cat-name">Pro volný čas</div>
           <p class="cat-desc">Pohodlné a stylové oblečení pro aktivní trávení volného času, turistiku, sport a rekreaci s důrazem na odolnost materiálu.</p>
-          <a href="https://mpkral.cz" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
+          <a href="https://mpkral.cz/volny-cas.html" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
         </div>
 
       </div>
@@ -1103,31 +1128,31 @@
 
       <div class="gallery-grid">
         <div class="g-item reveal delay-1">
-          <img src="https://mpkral.cz/images/mpgal-00.jpg" alt="Ukázka pracovních oděvů M+P" loading="lazy" />
+          <img src="images/mpgal-00.jpg" alt="Provozovna M+P Kunžak" loading="lazy" />
         </div>
         <div class="g-item reveal delay-2">
-          <img src="https://mpkral.cz/images/mpgal-01.jpg" alt="Pracovní oděvy realizace" loading="lazy" />
+          <img src="images/mpgal-01.jpg" alt="Pracovní oděvy realizace" loading="lazy" />
         </div>
         <div class="g-item reveal delay-1">
-          <img src="https://mpkral.cz/images/mpgal-02.jpg" alt="Výroba pracovních oděvů" loading="lazy" />
+          <img src="images/mpgal-02.jpg" alt="Výrobní dílna M+P" loading="lazy" />
         </div>
         <div class="g-item reveal delay-2">
-          <img src="https://mpkral.cz/images/mpgal-05.jpg" alt="Zakázkové šití oděvů" loading="lazy" />
+          <img src="images/mpgal-05.jpg" alt="Zakázkové šití oděvů" loading="lazy" />
         </div>
         <div class="g-item reveal delay-3">
-          <img src="https://mpkral.cz/images/mpgal-06.jpg" alt="M+P kolekce oděvů" loading="lazy" />
+          <img src="images/mpgal-06.jpg" alt="M+P kolekce oděvů" loading="lazy" />
         </div>
         <div class="g-item reveal delay-1">
-          <img src="https://mpkral.cz/images/mpgal-07.jpg" alt="Pracovní uniformy" loading="lazy" />
+          <img src="images/mpgal-07.jpg" alt="Pracovní uniformy" loading="lazy" />
         </div>
         <div class="g-item reveal delay-2">
-          <img src="https://mpkral.cz/images/mpgal-08.jpg" alt="Reflexní pracovní oděvy" loading="lazy" />
+          <img src="images/mpgal-08.jpg" alt="Reflexní pracovní oděvy" loading="lazy" />
         </div>
         <div class="g-item reveal delay-3">
-          <img src="https://mpkral.cz/images/mpgal-09.jpg" alt="Zdravotnické oděvy" loading="lazy" />
+          <img src="images/mpgal-09.jpg" alt="Zdravotnické oděvy" loading="lazy" />
         </div>
         <div class="g-item reveal delay-1">
-          <img src="https://mpkral.cz/images/mpgal-10.jpg" alt="Šití na zakázku Kunžak" loading="lazy" />
+          <img src="images/mpgal-10.jpg" alt="Šití na zakázku Kunžak" loading="lazy" />
         </div>
       </div>
     </div>
