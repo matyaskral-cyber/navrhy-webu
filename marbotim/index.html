@@ -770,76 +770,69 @@
   ">
     <svg width="500" height="130" viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg">
 
-      <!-- Výfuk kouř (za zadkem = levá strana) -->
-      <circle cx="30" cy="82" r="8"   fill="rgba(200,200,200,0.55)" id="exhaust1"/>
-      <circle cx="15" cy="70" r="6"   fill="rgba(200,200,200,0.38)" id="exhaust2"/>
-      <circle cx="5"  cy="58" r="4"   fill="rgba(200,200,200,0.22)" id="exhaust3"/>
+      <!-- Výfuk kouř -->
+      <circle cx="30" cy="82" r="8"   fill="rgba(180,180,180,0.55)" id="exhaust1"/>
+      <circle cx="15" cy="70" r="6"   fill="rgba(180,180,180,0.38)" id="exhaust2"/>
+      <circle cx="5"  cy="58" r="4"   fill="rgba(180,180,180,0.22)" id="exhaust3"/>
 
-      <!-- ===== KAROSERIE ===== -->
-      <!-- Spodní část (celá šířka) -->
-      <rect x="44" y="60" width="430" height="52" rx="6" fill="#c0392b"/>
-      <!-- Střecha zadní (cargo box) -->
-      <rect x="44" y="14" width="290" height="48" rx="6" fill="#c0392b"/>
-      <!-- Přechod mezi kabinou a boxem -->
-      <rect x="330" y="14" width="8" height="98" fill="#922b21"/>
-      <!-- Kabina (přední, vyšší) -->
-      <path d="M338 60  L338 20  Q338 14 344 14  L400 14  Q428 14 450 36  L474 60 Z" fill="#a93226"/>
-      <!-- Okno kabiny - čelní sklo -->
-      <path d="M346 58  L346 24  Q346 19 351 19  L398 19  Q422 19 442 38  L462 58 Z" fill="#aed6f1" opacity="0.82"/>
-      <!-- Odlesk na skle -->
-      <path d="M352 26 L380 26 L362 52 L346 52 Z" fill="white" opacity="0.12"/>
+      <!-- ===== KAROSERIE bílá ===== -->
+      <rect x="44" y="60" width="430" height="52" rx="6" fill="white" stroke="#d0d5dd" stroke-width="1.5"/>
+      <!-- Cargo box -->
+      <rect x="44" y="14" width="290" height="48" rx="6" fill="white" stroke="#d0d5dd" stroke-width="1.5"/>
+      <!-- Dělící sloupek kabina/box -->
+      <rect x="330" y="14" width="10" height="98" fill="#bdc3c7"/>
+      <!-- Kabina -->
+      <path d="M338 60 L338 20 Q338 14 344 14 L400 14 Q428 14 450 36 L474 60 Z" fill="white" stroke="#d0d5dd" stroke-width="1.5"/>
+      <!-- Čelní sklo -->
+      <path d="M346 58 L346 24 Q346 19 351 19 L398 19 Q422 19 442 38 L462 58 Z" fill="#b3d9f5" opacity="0.75"/>
+      <!-- Odlesk skla -->
+      <path d="M352 26 L376 26 L358 50 L346 50 Z" fill="white" opacity="0.25"/>
 
-      <!-- Mřížka/nárazník vpředu -->
-      <rect x="466" y="70" width="14" height="28" rx="3" fill="#7f8c8d"/>
-      <line x1="466" y1="78" x2="480" y2="78" stroke="#5d6d7e" stroke-width="1.5"/>
-      <line x1="466" y1="86" x2="480" y2="86" stroke="#5d6d7e" stroke-width="1.5"/>
+      <!-- Dekorační pruh červený podél spodu -->
+      <rect x="44" y="98" width="430" height="8" rx="0" fill="#c0392b"/>
+      <rect x="44" y="98" width="430" height="8" rx="0" fill="#c0392b"/>
 
-      <!-- Světlo přední -->
-      <rect x="463" y="62" width="18" height="10" rx="3" fill="#f9e94e"/>
-      <rect x="463" y="62" width="18" height="5"  rx="3" fill="white" opacity="0.6"/>
+      <!-- Mřížka vpředu -->
+      <rect x="468" y="70" width="12" height="24" rx="3" fill="#95a5a6"/>
+      <line x1="468" y1="78" x2="480" y2="78" stroke="#7f8c8d" stroke-width="1.5"/>
+      <line x1="468" y1="86" x2="480" y2="86" stroke="#7f8c8d" stroke-width="1.5"/>
+
+      <!-- Přední světlo -->
+      <rect x="464" y="62" width="16" height="9" rx="3" fill="#fdeaa8"/>
+      <rect x="464" y="62" width="16" height="4" rx="3" fill="white" opacity="0.7"/>
 
       <!-- Zadní světla -->
-      <rect x="44" y="64" width="12" height="22" rx="3" fill="#c0392b"/>
-      <rect x="44" y="64" width="12" height="11" rx="3" fill="#f1948a"/>
-      <rect x="44" y="86" width="12" height="8"  rx="2" fill="#f4d03f" opacity="0.9"/>
+      <rect x="44" y="64" width="11" height="20" rx="3" fill="#e74c3c"/>
+      <rect x="44" y="64" width="11" height="10" rx="3" fill="#fadbd8"/>
+      <rect x="44" y="85" width="11" height="7"  rx="2" fill="#f4d03f" opacity="0.85"/>
 
-      <!-- Spodní ochranka/nárazník -->
-      <rect x="44"  y="106" width="12" height="6" rx="2" fill="#5d6d7e"/>
-      <rect x="462" y="106" width="18" height="6" rx="2" fill="#5d6d7e"/>
+      <!-- Nárazníky -->
+      <rect x="44"  y="106" width="14" height="5" rx="2" fill="#95a5a6"/>
+      <rect x="464" y="106" width="16" height="5" rx="2" fill="#95a5a6"/>
 
-      <!-- Boční posuvné dveře (čára) -->
-      <line x1="200" y1="62" x2="200" y2="110" stroke="#922b21" stroke-width="2"/>
-      <!-- Klika dveří -->
-      <rect x="193" y="82" width="14" height="4" rx="2" fill="#922b21"/>
+      <!-- Dveřní čára -->
+      <line x1="200" y1="62" x2="200" y2="98" stroke="#bdc3c7" stroke-width="1.5"/>
+      <rect x="193" y="80" width="14" height="4" rx="2" fill="#bdc3c7"/>
 
-      <!-- Bílý dekorační pruh -->
-      <rect x="44" y="76" width="418" height="6" fill="rgba(255,255,255,0.18)"/>
-
-      <!-- ===== NÁPIS MARBOTIM ===== -->
-      <text x="56"  y="58" font-family="Arial Black,Impact,sans-serif" font-size="26" font-weight="900" fill="white" letter-spacing="3">MARBOTIM</text>
-      <text x="56"  y="73" font-family="Arial,sans-serif" font-size="11" fill="rgba(255,255,255,0.9)" letter-spacing="1.5">VYTÁPĚNÍ  ·  INSTALACE  ·  SERVIS</text>
-      <!-- Plamen -->
-      <text x="286" y="58" font-size="22">🔥</text>
-      <!-- Kapka (voda) -->
-      <text x="314" y="58" font-size="20">💧</text>
+      <!-- ===== LOGO MARBOTIM (obrázek) ===== -->
+      <image href="../marbotim/logo.png" x="52" y="18" width="260" height="72"
+             preserveAspectRatio="xMidYMid meet"/>
 
       <!-- ===== KOLA ===== -->
-      <!-- Zadní kolo -->
-      <circle cx="120" cy="113" r="18" fill="#1a252f"/>
+      <circle cx="120" cy="113" r="18" fill="#1c2833"/>
       <circle cx="120" cy="113" r="13" fill="#2c3e50"/>
-      <circle cx="120" cy="113" r="8"  fill="#5d6d7e"/>
+      <circle cx="120" cy="113" r="8"  fill="#626567"/>
       <circle cx="120" cy="113" r="4"  fill="#aab7b8"/>
-      <!-- Přední kolo -->
-      <circle cx="418" cy="113" r="18" fill="#1a252f"/>
+      <circle cx="418" cy="113" r="18" fill="#1c2833"/>
       <circle cx="418" cy="113" r="13" fill="#2c3e50"/>
-      <circle cx="418" cy="113" r="8"  fill="#5d6d7e"/>
+      <circle cx="418" cy="113" r="8"  fill="#626567"/>
       <circle cx="418" cy="113" r="4"  fill="#aab7b8"/>
 
-      <!-- Podvozek spojující kola -->
-      <rect x="100" y="108" width="340" height="8" rx="4" fill="#1a252f"/>
+      <!-- Podvozek -->
+      <rect x="100" y="108" width="340" height="8" rx="4" fill="#1c2833"/>
 
-      <!-- Stín pod autem -->
-      <ellipse cx="265" cy="128" rx="200" ry="5" fill="rgba(0,0,0,0.22)"/>
+      <!-- Stín -->
+      <ellipse cx="265" cy="128" rx="200" ry="5" fill="rgba(0,0,0,0.2)"/>
     </svg>
   </div>
 
