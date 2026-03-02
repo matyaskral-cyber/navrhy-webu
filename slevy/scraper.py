@@ -265,6 +265,22 @@ def scrape_product_detail(url: str, store_info: dict) -> Optional[dict]:
 
     emoji = get_emoji(name, category)
 
+    # Obrázek produktu z JSON-LD
+    image = ""
+    img_raw = product.get("image")
+    if isinstance(img_raw, list) and img_raw:
+        image = img_raw[0] if isinstance(img_raw[0], str) else img_raw[0].get("url", "")
+    elif isinstance(img_raw, str):
+        image = img_raw
+    elif isinstance(img_raw, dict):
+        image = img_raw.get("url", "")
+
+    # Záložní: hledej og:image meta tag
+    if not image:
+        og = soup.find("meta", property="og:image")
+        if og and og.get("content"):
+            image = og["content"]
+
     return {
         "id": make_id(store_info["store"], name),
         "name": name,
@@ -273,6 +289,7 @@ def scrape_product_detail(url: str, store_info: dict) -> Optional[dict]:
         "storeName": store_info["storeName"],
         "category": category,
         "emoji": emoji,
+        "image": image,
         "priceNew": price_new,
         "priceOld": price_old,
         "validUntil": valid_until or "",
