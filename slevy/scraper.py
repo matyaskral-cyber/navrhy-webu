@@ -19,11 +19,41 @@ from bs4 import BeautifulSoup
 
 # ── Konfigurace ───────────────────────────────────────────────────────
 STORES = {
-    "albert": {"url": "https://www.kupi.cz/letaky/albert", "storeName": "Albert", "store": "albert"},
-    "penny":  {"url": "https://www.kupi.cz/letaky/penny-market", "storeName": "Penny", "store": "penny"},
-    "billa":  {"url": "https://www.kupi.cz/letaky/billa", "storeName": "Billa", "store": "billa"},
-    "kaufland": {"url": "https://www.kupi.cz/letaky/kaufland", "storeName": "Kaufland", "store": "kaufland"},
+    "albert":   {"storeName": "Albert",   "store": "albert"},
+    "penny":    {"storeName": "Penny",    "store": "penny"},
+    "billa":    {"storeName": "Billa",    "store": "billa"},
+    "kaufland": {"storeName": "Kaufland", "store": "kaufland"},
 }
+
+# Zdroje odkazů — letáky + kategorie
+LISTING_URLS = {
+    "albert":   ["https://www.kupi.cz/letaky/albert",        "https://www.kupi.cz/slevy/albert"],
+    "penny":    ["https://www.kupi.cz/letaky/penny-market",   "https://www.kupi.cz/slevy/penny-market"],
+    "billa":    ["https://www.kupi.cz/letaky/billa",          "https://www.kupi.cz/slevy/billa"],
+    "kaufland": ["https://www.kupi.cz/letaky/kaufland",       "https://www.kupi.cz/slevy/kaufland"],
+}
+
+# Kategorie na kupi.cz — procházet pro víc produktů
+CATEGORY_URLS = [
+    "https://www.kupi.cz/slevy/mlecne-vyrobky-a-vejce",
+    "https://www.kupi.cz/slevy/maso-drubez-a-ryby",
+    "https://www.kupi.cz/slevy/ovoce-a-zelenina",
+    "https://www.kupi.cz/slevy/nealko-napoje",
+    "https://www.kupi.cz/slevy/pivo",
+    "https://www.kupi.cz/slevy/alkohol",
+    "https://www.kupi.cz/slevy/kava",
+    "https://www.kupi.cz/slevy/sladkosti-a-slane-snacky",
+    "https://www.kupi.cz/slevy/pecivo",
+    "https://www.kupi.cz/slevy/konzervy",
+    "https://www.kupi.cz/slevy/drogerie",
+    "https://www.kupi.cz/slevy/mrazene-a-instantni-potraviny",
+    "https://www.kupi.cz/slevy/vareni-a-peceni",
+    "https://www.kupi.cz/slevy/masla",
+    "https://www.kupi.cz/slevy/lahudky",
+    "https://www.kupi.cz/slevy/mazlicci",
+    "https://www.kupi.cz/slevy/domacnost",
+    "https://www.kupi.cz/slevy/drubez",
+]
 
 OUTPUT_FILE = Path(__file__).parent / "slevy.json"
 
@@ -96,34 +126,30 @@ def parse_price(text: str) -> Optional[float]:
     return None
 
 
-def scrape_listing(store_key: str, store_info: dict) -> List[str]:
-    """Stáhne listing stránku obchodu a vrátí seznam URL na detaily produktů."""
-    print(f"\n📦 Stahuji listing: {store_info['storeName']} ...")
-    soup = fetch_page(store_info["url"])
+def scrape_links_from_page(url: str) -> List[str]:
+    """Stáhne stránku a vrátí seznam unikátních /sleva/ odkazů."""
+    soup = fetch_page(url)
     if not soup:
         return []
 
-    product_links = []
+    links = []
     for a_tag in soup.find_all("a", href=True):
         href = a_tag["href"]
         if href.startswith("/sleva/"):
             full_url = f"https://www.kupi.cz{href}"
-            if full_url not in product_links:
-                product_links.append(full_url)
-
-    print(f"  Nalezeno {len(product_links)} odkazů na produkty")
-    return product_links
+            if full_url not in links:
+                links.append(full_url)
+    return links
 
 
-def scrape_product_detail(url: str, store_info: dict) -> Optional[dict]:
-    """Stáhne detail produktu a extrahuje data z JSON-LD a HTML."""
-    soup = fetch_page(url)
-    if not soup:
-        return None
+def scrape_product_offers(url: str, soup: Optional[BeautifulSoup] = None) -> List[dict]:
+    """Extrahuje produkty z JSON-LD — vrátí seznam (jeden per obchod)."""
+    if soup is None:
+        soup = fetch_page(url)
+        if not soup:
+            return []
 
     product = None
-
-    # 1) Zkus JSON-LD
     for script in soup.find_all("script", type="application/ld+json"):
         try:
             data = json.loads(script.string)
@@ -139,133 +165,37 @@ def scrape_product_detail(url: str, store_info: dict) -> Optional[dict]:
             continue
 
     if not product:
-        return None
+        return []
 
     name = product.get("name", "").strip()
     if not name:
-        return None
+        return []
 
-    # Ceny z offers
-    offers = product.get("offers", {})
-    price_new = None
-    valid_until = None
-
-    if offers.get("@type") == "AggregateOffer":
-        price_new = parse_price(str(offers.get("lowPrice", "")))
-        valid_until = offers.get("priceValidUntil")
-    elif offers.get("@type") == "Offer":
-        price_new = parse_price(str(offers.get("price", "")))
-        valid_until = offers.get("priceValidUntil")
-
-    if not price_new:
-        return None
-
-    # 2) Původní cena — hledej v HTML
-    price_old = None
-    # Hledej přeškrtnutou cenu nebo text "Běžná cena"
-    for el in soup.find_all(["s", "del", "span"]):
-        text = el.get_text(strip=True)
-        if "Kč" in text or re.search(r"\d+[.,]\d{2}", text):
-            cls = " ".join(el.get("class", []))
-            if "original" in cls or "old" in cls or "strike" in cls or el.name in ("s", "del"):
-                p = parse_price(text)
-                if p and p > price_new:
-                    price_old = p
-                    break
-
-    # Záložní: hledej "Běžná cena" text
-    if not price_old:
-        for el in soup.find_all(string=re.compile(r"[Bb]ěžná\s+cena|[Pp]ůvodní\s+cena|[Pp]řed\s+slevou")):
-            parent = el.parent
-            if parent:
-                p = parse_price(parent.get_text())
-                if p and p > price_new:
-                    price_old = p
-                    break
-
-    # Pokud nemáme původní cenu, zkusíme najít procento slevy
-    if not price_old:
-        discount_match = soup.find(string=re.compile(r"-?\s*\d+\s*%"))
-        if discount_match:
-            pct_match = re.search(r"(\d+)\s*%", discount_match)
-            if pct_match:
-                pct = int(pct_match.group(1))
-                if 5 <= pct <= 90:
-                    price_old = round(price_new / (1 - pct / 100), 2)
-
-    # Pokud stále nemáme, zkus "běžně stojí X Kč" v textu stránky
-    if not price_old:
-        page_text = soup.get_text()
-        m = re.search(r"běžně\s+stojí\s+([\d\s,]+)\s*Kč", page_text, re.I)
-        if m:
-            p = parse_price(m.group(1))
-            if p and p > price_new:
-                price_old = p
-
-    # Pokud stále nemáme, odhadni 30% slevu jako fallback
-    if not price_old:
-        price_old = round(price_new * 1.43, 2)
-
-    # Kategorie — breadcrumb na kupi.cz: Slevy > Kategorie > Podkategorie
+    # ── Společné atributy ──
+    # Kategorie
     category = ""
-    # Hledej breadcrumb odkazy (href začíná /slevy/)
     breadcrumb_links = soup.find_all("a", href=re.compile(r"^/slevy/"))
     if breadcrumb_links:
-        # Vezmi poslední kategorii (nejkonkrétnější)
         for link in reversed(breadcrumb_links):
             text = link.get_text(strip=True)
             if text and text != "Slevy" and len(text) < 40:
                 category = text
                 break
-
-    # Záložní: hledej text "v kategorii X"
-    if not category:
-        page_text = soup.get_text()
-        m = re.search(r"v\s+kategorii\s+\[?([^\].\n]+)", page_text, re.I)
-        if m:
-            category = m.group(1).strip()
-
     if not category:
         category = "Ostatní"
 
-    # Platnost — hledej "platí do" text pro konkrétní obchod
-    if not valid_until:
-        page_text = soup.get_text()
-        # Hledej datum ve formátu "do DD. MM." nebo "platí do DATUM"
-        m = re.search(
-            r"platí\s+do\s+\w+\s+(\d{1,2})\.\s*(\d{1,2})\.",
-            page_text, re.I
-        )
-        if m:
-            day, month = int(m.group(1)), int(m.group(2))
-            year = datetime.now().year
-            try:
-                valid_until = f"{year}-{month:02d}-{day:02d}"
-            except ValueError:
-                pass
-
-    # Popis — zkus gramáž/objem z textu
+    # Popis (gramáž)
     desc = ""
     page_text = soup.get_text()
-    # Hledej gramáž: "120 g", "500 ml", "1 l", "1 kg" atd.
-    size_match = re.search(
-        r"(\d+(?:[.,]\d+)?\s*(?:g|kg|ml|l|cl|ks|pcs))\b",
-        page_text, re.I
-    )
+    size_match = re.search(r"(\d+(?:[.,]\d+)?\s*(?:g|kg|ml|l|cl|ks|pcs))\b", page_text, re.I)
     if size_match:
         desc = size_match.group(1).strip()
-
-    # Pokud nic, vezmi desc z JSON-LD ale zkrať
     if not desc:
         raw_desc = product.get("description", "")
         if raw_desc:
-            # Vezmi jen první větu nebo max 60 znaků
-            first_sentence = raw_desc.split(".")[0]
-            desc = first_sentence[:60]
+            desc = raw_desc.split(".")[0][:60]
 
-    emoji = get_emoji(name, category)
-
-    # Obrázek produktu z JSON-LD
+    # Obrázek
     image = ""
     img_raw = product.get("image")
     if isinstance(img_raw, list) and img_raw:
@@ -274,27 +204,98 @@ def scrape_product_detail(url: str, store_info: dict) -> Optional[dict]:
         image = img_raw
     elif isinstance(img_raw, dict):
         image = img_raw.get("url", "")
-
-    # Záložní: hledej og:image meta tag
     if not image:
         og = soup.find("meta", property="og:image")
         if og and og.get("content"):
             image = og["content"]
 
-    return {
-        "id": make_id(store_info["store"], name),
-        "name": name,
-        "desc": desc[:80] if desc else "",
-        "store": store_info["store"],
-        "storeName": store_info["storeName"],
-        "category": category,
-        "emoji": emoji,
-        "image": image,
-        "priceNew": price_new,
-        "priceOld": price_old,
-        "validUntil": valid_until or "",
-        "url": url,
+    emoji = get_emoji(name, category)
+
+    # Původní cena z HTML
+    price_old_html = None
+    for el in soup.find_all(["s", "del", "span"]):
+        text = el.get_text(strip=True)
+        if "Kč" in text or re.search(r"\d+[.,]\d{2}", text):
+            cls = " ".join(el.get("class", []))
+            if "original" in cls or "old" in cls or "strike" in cls or el.name in ("s", "del"):
+                p = parse_price(text)
+                if p and p > 0:
+                    price_old_html = p
+                    break
+
+    if not price_old_html:
+        for el in soup.find_all(string=re.compile(r"běžně\s+stojí", re.I)):
+            parent = el.parent
+            if parent:
+                m = re.search(r"([\d\s,]+)\s*Kč", parent.get_text())
+                if m:
+                    price_old_html = parse_price(m.group(1))
+                    break
+
+    # ── Nabídky per obchod ──
+    STORE_MAP = {
+        "albert": STORES["albert"], "penny": STORES["penny"], "penny market": STORES["penny"],
+        "billa": STORES["billa"], "kaufland": STORES["kaufland"],
     }
+
+    offers_raw = product.get("offers", {})
+    offer_list = offers_raw.get("offers", [])
+
+    # Fallback: single offer
+    if not offer_list:
+        if offers_raw.get("@type") in ("Offer", "AggregateOffer"):
+            offer_list = [offers_raw]
+
+    results = []
+    seen_stores = set()
+
+    for offer in offer_list:
+        price_new = parse_price(str(offer.get("price", offer.get("lowPrice", ""))))
+        if not price_new:
+            continue
+
+        valid_until = offer.get("priceValidUntil", "")
+
+        # Zjisti obchod
+        offered_by = str(offer.get("offeredBy", "")).strip().lower()
+        seller = offer.get("seller", {})
+        if isinstance(seller, dict):
+            offered_by = offered_by or seller.get("name", "").strip().lower()
+
+        store_info = STORE_MAP.get(offered_by)
+        if not store_info:
+            # Zkus částečnou shodu
+            for key, info in STORE_MAP.items():
+                if key in offered_by or offered_by in key:
+                    store_info = info
+                    break
+
+        if not store_info:
+            continue
+
+        store_key = store_info["store"]
+        if store_key in seen_stores:
+            continue
+        seen_stores.add(store_key)
+
+        price_old = price_old_html if (price_old_html and price_old_html > price_new) else round(price_new * 1.43, 2)
+
+        results.append({
+            "id": make_id(store_key, name),
+            "name": name,
+            "desc": desc[:80] if desc else "",
+            "store": store_key,
+            "storeName": store_info["storeName"],
+            "category": category,
+            "emoji": emoji,
+            "image": image,
+            "priceNew": price_new,
+            "priceOld": price_old,
+            "validUntil": valid_until or "",
+            "url": url,
+        })
+
+    return results
 
 
 def main():
@@ -303,36 +304,61 @@ def main():
     print(f"   {datetime.now().strftime('%d.%m.%Y %H:%M')}")
     print("=" * 60)
 
+    all_product_urls = set()
+
+    # 1) Sbírání odkazů z letáků a obchodů
+    for store_key, urls in LISTING_URLS.items():
+        for url in urls:
+            print(f"\n📦 Listing: {url}")
+            links = scrape_links_from_page(url)
+            before = len(all_product_urls)
+            all_product_urls.update(links)
+            print(f"  +{len(all_product_urls) - before} nových (celkem {len(all_product_urls)})")
+            time.sleep(REQUEST_DELAY * 0.5)
+
+    # 2) Sbírání odkazů z kategorií
+    print("\n📂 Procházím kategorie...")
+    for url in CATEGORY_URLS:
+        cat_name = url.split("/")[-1]
+        links = scrape_links_from_page(url)
+        before = len(all_product_urls)
+        all_product_urls.update(links)
+        added = len(all_product_urls) - before
+        if added > 0:
+            print(f"  {cat_name}: +{added} nových")
+        time.sleep(REQUEST_DELAY * 0.5)
+
+    print(f"\n🔗 Celkem unikátních odkazů: {len(all_product_urls)}")
+
+    # 3) Stahování detailů produktů
     all_products = []
     seen_names = set()
+    skipped = 0
 
-    for store_key, store_info in STORES.items():
-        product_urls = scrape_listing(store_key, store_info)
+    for i, url in enumerate(sorted(all_product_urls), 1):
+        if i % 20 == 0:
+            print(f"\n  ... zpracováno {i}/{len(all_product_urls)}")
+
         time.sleep(REQUEST_DELAY)
+        soup = fetch_page(url)
+        if not soup:
+            continue
 
-        # Omez na max 15 produktů per obchod
-        max_per_store = 15
-        count = 0
+        offers = scrape_product_offers(url, soup=soup)
+        if not offers:
+            skipped += 1
+            continue
 
-        for url in product_urls:
-            if count >= max_per_store:
-                break
+        for product in offers:
+            dedup_key = f"{product['store']}:{product['name']}"
+            if dedup_key in seen_names:
+                skipped += 1
+                continue
 
-            time.sleep(REQUEST_DELAY)
-            product = scrape_product_detail(url, store_info)
-
-            if product and product["name"] not in seen_names:
-                seen_names.add(product["name"])
-                all_products.append(product)
-                count += 1
-                print(f"  ✅ {product['name']} — {product['priceNew']} Kč"
-                      f" (bylo {product['priceOld']} Kč)")
-            elif product:
-                print(f"  ⏭️  Duplicita: {product['name']}")
-            else:
-                print(f"  ❌ Nepodařilo se zpracovat: {url.split('/')[-1]}")
-
-        print(f"  → {store_info['storeName']}: {count} produktů")
+            seen_names.add(dedup_key)
+            all_products.append(product)
+            print(f"  ✅ [{product['storeName']}] {product['name']} — "
+                  f"{product['priceNew']} Kč (bylo {product['priceOld']} Kč)")
 
     # Ulož JSON
     print(f"\n💾 Ukládám {len(all_products)} produktů do {OUTPUT_FILE}")
@@ -341,8 +367,8 @@ def main():
         encoding="utf-8",
     )
 
-    print(f"✅ Hotovo! Soubor: {OUTPUT_FILE}")
-    print(f"   Celkem: {len(all_products)} produktů")
+    print(f"\n✅ Hotovo! Soubor: {OUTPUT_FILE}")
+    print(f"   Celkem: {len(all_products)} produktů (přeskočeno: {skipped})")
     for store_key, store_info in STORES.items():
         n = sum(1 for p in all_products if p["store"] == store_key)
         print(f"   {store_info['storeName']}: {n}")
