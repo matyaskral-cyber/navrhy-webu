@@ -1,10 +1,13 @@
 // SlevyDnes Service Worker — offline cache (stale-while-revalidate)
-const CACHE_NAME = 'slevydnes-v3';
+const CACHE_NAME = 'slevydnes-v4';
 const PRECACHE = [
   './',
   './index.html',
   './manifest.json',
   './icons.svg',
+  './icon-192.png',
+  './icon-512.png',
+  './apple-touch-icon.png',
   './slevy.json'
 ];
 
