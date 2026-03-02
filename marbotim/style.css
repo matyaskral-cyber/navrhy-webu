@@ -10,10 +10,10 @@
    ============================================================ */
 :root {
   /* Colors */
-  --clr-accent:        #c0392b;
-  --clr-accent-dark:   #962d22;
-  --clr-accent-light:  #e74c3c;
-  --clr-accent-subtle: rgba(192, 57, 43, 0.1);
+  --clr-accent:        #50aadc;
+  --clr-accent-dark:   #3a8abf;
+  --clr-accent-light:  #64b4e6;
+  --clr-accent-subtle: rgba(80, 170, 220, 0.1);
 
   --clr-water:         #1565c0;
   --clr-water-dark:    #0d47a1;
@@ -1199,7 +1199,7 @@ a.contact__detail-value:hover { color: var(--clr-accent-light); }
 }
 
 .form__input.is-invalid {
-  border-color: #e74c3c;
+  border-color: #64b4e6;
   box-shadow: 0 0 0 3px rgba(231,76,60,0.12);
 }
 
@@ -1243,7 +1243,7 @@ a.contact__detail-value:hover { color: var(--clr-accent-light); }
 
 .form__error {
   font-size: var(--fs-xs);
-  color: #e74c3c;
+  color: #64b4e6;
   min-height: 1rem;
   display: block;
   font-weight: var(--fw-medium);

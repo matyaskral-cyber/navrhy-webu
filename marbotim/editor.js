@@ -37,7 +37,7 @@
     {
       group: 'Barvy',
       items: [
-        { label: 'Červená (vytápění)',  prop: '--editor-clr-accent', type: 'color', default: '#c0392b' },
+        { label: 'Modrá (accent)',      prop: '--editor-clr-accent', type: 'color', default: '#50aadc' },
         { label: 'Modrá (voda)',        prop: '--editor-clr-water',  type: 'color', default: '#1565c0' },
         { label: 'Tmavé pozadí',        prop: '--editor-clr-dark',   type: 'color', default: '#1a1a2e' },
       ]
@@ -48,7 +48,7 @@
   const BRIDGE_CSS = `
     :root {
       font-size: var(--editor-fs-base, 16px);
-      --clr-accent:        var(--editor-clr-accent, #c0392b);
+      --clr-accent:        var(--editor-clr-accent, #50aadc);
       --clr-water:         var(--editor-clr-water,  #1565c0);
       --clr-dark:          var(--editor-clr-dark,   #1a1a2e);
       --header-h:          var(--editor-header-h,   70px);
@@ -99,7 +99,7 @@
     `;
 
     let html = `
-      <div style="padding:16px 20px; background:#c0392b; display:flex; align-items:center; justify-content:space-between; flex-shrink:0">
+      <div style="padding:16px 20px; background:#50aadc; display:flex; align-items:center; justify-content:space-between; flex-shrink:0">
         <span style="font-weight:700; font-size:15px; letter-spacing:.04em">✏️ Editor webu</span>
         <button id="editorClose" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1">×</button>
       </div>
@@ -130,7 +130,7 @@
               </div>
               <input type="range" data-prop="${c.prop}" data-unit="${c.unit}"
                 min="${c.min}" max="${c.max}" step="${c.step}" value="${val}"
-                style="width:100%;accent-color:#c0392b;cursor:pointer">
+                style="width:100%;accent-color:#50aadc;cursor:pointer">
             </div>`;
         }
       });
@@ -143,7 +143,7 @@
         <button id="editorReset" style="flex:1;padding:9px;background:rgba(255,255,255,.1);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px">
           Resetovat
         </button>
-        <button id="editorExport" style="flex:2;padding:9px;background:#c0392b;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:700;font-size:13px">
+        <button id="editorExport" style="flex:2;padding:9px;background:#50aadc;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:700;font-size:13px">
           ⬇ Stáhnout CSS
         </button>
       </div>

@@ -628,7 +628,7 @@ function initFocusVisible() {
   const style = document.createElement('style');
   style.textContent = `
     :focus-visible {
-      outline: 2px solid #c0392b !important;
+      outline: 2px solid #50aadc !important;
       outline-offset: 3px !important;
     }
     :focus:not(:focus-visible) {
