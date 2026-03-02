@@ -357,7 +357,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav__logo-img {
-  height: var(--editor-logo-h, 112px);
+  height: var(--editor-logo-h, 60px);
   width: auto;
   object-fit: contain;
   display: block;
