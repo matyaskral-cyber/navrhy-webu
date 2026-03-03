@@ -1,0 +1,5 @@
+node_modules/
+*.jks
+*.keystore
+builds/*-unsigned.apk
+builds/*.idsig

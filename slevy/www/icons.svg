@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6c63ff"/>
+      <stop offset="100%" stop-color="#ff6584"/>
+    </linearGradient>
+  </defs>
+  <!-- Background (plný čtverec pro maskable, rx pro any) -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- Košík — safe area 20% padding (centered ~256,256) -->
+  <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Rukojeť košíku -->
+    <path d="M135 195 L165 195 L195 330 L355 330" stroke-width="20"/>
+    <!-- Tělo košíku -->
+    <path d="M195 250 L345 250 L355 330 L195 330 Z" stroke-width="18" fill="rgba(255,255,255,0.15)"/>
+    <!-- Horní okraj košíku -->
+    <path d="M370 230 L185 230" stroke-width="16"/>
+    <!-- Svislé příčky -->
+    <line x1="240" y1="260" x2="240" y2="320" stroke-width="12"/>
+    <line x1="280" y1="260" x2="280" y2="320" stroke-width="12"/>
+    <line x1="320" y1="260" x2="320" y2="320" stroke-width="12"/>
+    <!-- Kolečka -->
+    <circle cx="220" cy="365" r="18" stroke-width="16" fill="#fff"/>
+    <circle cx="330" cy="365" r="18" stroke-width="16" fill="#fff"/>
+    <!-- Procento / sleva symbol -->
+    <circle cx="340" cy="180" r="42" stroke-width="14" fill="rgba(255,255,255,0.2)"/>
+    <text x="340" y="194" text-anchor="middle" font-family="Arial,sans-serif" font-size="46" font-weight="bold" fill="#fff" stroke="none">%</text>
+  </g>
+</svg>

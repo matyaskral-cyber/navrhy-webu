@@ -1,0 +1,25 @@
+{
+  "appId": "cz.slevydnes.app",
+  "appName": "SlevyDnes",
+  "webDir": "www",
+  "plugins": {
+    "StatusBar": {
+      "backgroundColor": "#0f1117",
+      "style": "LIGHT"
+    },
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#0f1117",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": false
+    }
+  },
+  "android": {
+    "backgroundColor": "#0f1117"
+  },
+  "ios": {
+    "backgroundColor": "#0f1117",
+    "contentInset": "always"
+  }
+}

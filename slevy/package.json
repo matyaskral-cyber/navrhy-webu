@@ -1,0 +1,22 @@
+{
+  "name": "slevy",
+  "version": "1.0.0",
+  "main": "sw.js",
+  "scripts": {
+    "build": "mkdir -p www && cp index.html slevy.json manifest.json sw.js icons.svg icon-192.png icon-512.png apple-touch-icon.png www/",
+    "cap:sync": "npm run build && npx cap sync",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@capacitor/android": "^8.1.0",
+    "@capacitor/cli": "^7.5.0",
+    "@capacitor/core": "^8.1.0",
+    "@capacitor/ios": "^8.1.0",
+    "@capacitor/splash-screen": "^8.0.1",
+    "@capacitor/status-bar": "^8.0.1"
+  }
+}

@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>SlevyDnes — Akční nabídky supermarketů</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#6c63ff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="SlevyDnes" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  ZDROJE DAT (březen 2026)                                        ║
+  ╠══════════════════════════════════════════════════════════════════╣
+  ║  Penny:    penny.cz JSON API (přímý)                             ║
+  ║  Billa:    billa.cz JSON API (přímý, REWE platforma)             ║
+  ║  Lidl:     lidl.cz HTML data-grid-data (přímý)                   ║
+  ║  Albert:   kupi.cz (albert.cz eshop ukončen 12/2025)             ║
+  ║  Kaufland: kupi.cz (kaufland.cz blokuje scrapy)                  ║
+  ║  Tesco:    kupi.cz (itesco.cz blokuje scrapy)                    ║
+  ║                                                                  ║
+  ║  Scraper: slevy/scraper.py → slevy.json                          ║
+  ║  Auto-update: GitHub Actions (.github/workflows/update-slevy.yml)║
+  ╚══════════════════════════════════════════════════════════════════╝
+  -->
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0f1117;
+      --surface:   #1a1d2e;
+      --surface2:  #222539;
+      --border:    #2e3250;
+      --accent:    #6c63ff;
+      --accent2:   #ff6584;
+      --text:      #e8eaf6;
+      --muted:     #8b90b8;
+      --sale-bg:   #ff465420;
+      --sale-text: #ff6b6b;
+      --tag-bg:    #6c63ff22;
+
+      /* obchody */
+      --albert:    #e32020;
+      --penny:     #e30613;
+      --billa:     #ffcc00;
+      --billa-fg:  #1a1a1a;
+      --kaufland:  #e2001a;
+      --lidl:      #0050aa;
+      --tesco:     #00539f;
+
+      --radius:    14px;
+      --shadow:    0 4px 24px rgba(0,0,0,.45);
+      --trans:     .2s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* ─── Header ────────────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: .9rem 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .logo-text { font-size: 1.35rem; font-weight: 700; color: var(--text); }
+    .logo-text span { color: var(--accent); }
+
+    .header-badge {
+      font-size: .7rem;
+      background: var(--sale-bg);
+      color: var(--sale-text);
+      border: 1px solid #ff465440;
+      padding: .2rem .55rem;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .last-update {
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    /* ─── Hero / Filter bar ─────────────────────────────────────── */
+    .hero {
+      max-width: 1400px;
+      margin: 2rem auto 0;
+      padding: 0 1.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: .4rem;
+    }
+    .hero-title span { color: var(--accent); }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── Search & Filters ──────────────────────────────────────── */
+    .controls {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 1.5rem;
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 1rem; top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: var(--muted);
+      pointer-events: none;
+    }
+    #searchInput {
+      width: 100%;
+      padding: .75rem 1rem .75rem 2.7rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: .95rem;
+      outline: none;
+      transition: border-color var(--trans), box-shadow var(--trans);
+    }
+    #searchInput:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(108,99,255,.18);
+    }
+    #searchInput::placeholder { color: var(--muted); }
+
+    .filter-group {
+      display: flex;
+      gap: .45rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: .55rem 1rem;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--trans);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      user-select: none;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .filter-btn.active { color: #fff; border-color: transparent; }
+
+    .filter-btn[data-store="all"].active    { background: var(--accent); }
+    .filter-btn[data-store="albert"].active  { background: var(--albert); }
+    .filter-btn[data-store="penny"].active   { background: var(--penny); }
+    .filter-btn[data-store="billa"].active   { background: var(--billa); color: var(--billa-fg); }
+    .filter-btn[data-store="kaufland"].active{ background: var(--kaufland); }
+    .filter-btn[data-store="lidl"].active    { background: var(--lidl); }
+    .filter-btn[data-store="tesco"].active   { background: var(--tesco); }
+
+    .store-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ─── Stats bar ─────────────────────────────────────────────── */
+    .stats-bar {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem .75rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: .82rem;
+      color: var(--muted);
+    }
+    .stats-count { color: var(--text); font-weight: 600; }
+
+    /* ─── Sort select ───────────────────────────────────────────── */
+    #sortSelect {
+      margin-left: auto;
+      padding: .45rem .85rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: .82rem;
+      cursor: pointer;
+      outline: none;
+    }
+    #sortSelect option { background: var(--surface2); }
+
+    /* ─── Grid ──────────────────────────────────────────────────── */
+    .grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.1rem;
+    }
+
+    /* ─── Product Card ──────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans);
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      border-color: var(--accent);
+    }
+
+    /* store stripe at top */
+    .card-stripe {
+      height: 4px;
+      width: 100%;
+    }
+    .card[data-store="albert"]  .card-stripe { background: var(--albert); }
+    .card[data-store="penny"]   .card-stripe { background: var(--penny); }
+    .card[data-store="billa"]   .card-stripe { background: var(--billa); }
+    .card[data-store="kaufland"].card-stripe { background: var(--kaufland); }
+    .card[data-store="lidl"]    .card-stripe { background: var(--lidl); }
+    .card[data-store="tesco"]   .card-stripe { background: var(--tesco); }
+
+    img.card-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+      background: #fff;
+      display: block;
+    }
+    .card-img-fallback {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--muted);
+      user-select: none;
+    }
+
+    .card-body {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+
+    .store-badge {
+      font-size: .68rem;
+      font-weight: 700;
+      padding: .2rem .55rem;
+      border-radius: 20px;
+      flex-shrink: 0;
+      letter-spacing: .04em;
+    }
+    .card[data-store="albert"]   .store-badge { background: #e3202022; color: var(--albert); border: 1px solid #e3202040; }
+    .card[data-store="penny"]    .store-badge { background: #e3061322; color: #ff4444; border: 1px solid #e3061340; }
+    .card[data-store="billa"]    .store-badge { background: #ffcc0022; color: #d4aa00; border: 1px solid #ffcc0040; }
+    .card[data-store="kaufland"] .store-badge { background: #e2001a22; color: #ff4455; border: 1px solid #e2001a40; }
+    .card[data-store="lidl"]     .store-badge { background: #0050aa22; color: #4d9fff; border: 1px solid #0050aa40; }
+    .card[data-store="tesco"]    .store-badge { background: #00539f22; color: #4da3ff; border: 1px solid #00539f40; }
+
+    .card-name {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+      flex: 1;
+    }
+
+    .card-desc {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .card-category {
+      font-size: .72rem;
+      background: var(--tag-bg);
+      color: var(--accent);
+      border: 1px solid rgba(108,99,255,.25);
+      padding: .15rem .5rem;
+      border-radius: 20px;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .card-prices {
+      display: flex;
+      align-items: baseline;
+      gap: .6rem;
+      margin-top: auto;
+      padding-top: .5rem;
+    }
+
+    .price-new {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--sale-text);
+    }
+
+    .price-old {
+      font-size: .9rem;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .65rem 1rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface2);
+    }
+
+    .discount-badge {
+      background: var(--sale-bg);
+      color: var(--sale-text);
+      border: 1px solid rgba(255,70,84,.3);
+      font-size: .8rem;
+      font-weight: 700;
+      padding: .25rem .65rem;
+      border-radius: 20px;
+    }
+
+    .valid-until {
+      font-size: .72rem;
+      color: var(--muted);
+    }
+
+    /* ─── No results ────────────────────────────────────────────── */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--muted);
+    }
+    .empty-state .empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .empty-state h3 { font-size: 1.1rem; color: var(--text); margin-bottom: .4rem; }
+
+    /* ─── API Notice banner ─────────────────────────────────────── */
+    .api-notice {
+      max-width: 1400px;
+      margin: 0 auto 0;
+      padding: 0 1.5rem 1.2rem;
+    }
+    .api-notice-inner {
+      background: linear-gradient(135deg, #1e1b4b, #1a1d2e);
+      border: 1px solid rgba(108,99,255,.4);
+      border-radius: var(--radius);
+      padding: .85rem 1.2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: .8rem;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .api-notice-inner strong { color: var(--accent); }
+    .api-notice-inner a { color: var(--accent); text-decoration: underline; }
+    .notice-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: .05rem; }
+
+    /* ─── Footer ────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    /* ─── Responsive ────────────────────────────────────────────── */
+    /* ─── Offline bar ─────────────────────────────────────────── */
+    .offline-bar {
+      display: none;
+      background: linear-gradient(135deg, #b45309, #92400e);
+      color: #fef3c7;
+      text-align: center;
+      padding: .55rem 1rem;
+      font-size: .82rem;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .offline-bar.show { display: block; }
+
+    /* ─── City selector button ────────────────────────────────── */
+    .city-btn {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .4rem .75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      color: var(--text);
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--trans);
+      white-space: nowrap;
+    }
+    .city-btn:hover { border-color: var(--accent); }
+    .city-btn .city-pin { font-size: .9rem; }
+
+    /* ─── City modal ──────────────────────────────────────────── */
+    .city-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      backdrop-filter: blur(4px);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+    }
+    .city-overlay.show { display: flex; }
+
+    .city-modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      width: min(420px, 92vw);
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    }
+
+    .city-modal-header {
+      padding: 1.2rem 1.2rem .8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .city-modal-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: .25rem;
+    }
+    .city-modal-header p {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    .city-geo-btn {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      width: 100%;
+      padding: .75rem 1.2rem;
+      background: linear-gradient(135deg, #6c63ff22, #ff658422);
+      border: 1px solid rgba(108,99,255,.3);
+      border-radius: 0;
+      color: var(--accent);
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--trans);
+    }
+    .city-geo-btn:hover { background: linear-gradient(135deg, #6c63ff33, #ff658433); }
+
+    .city-search {
+      width: 100%;
+      padding: .65rem 1.2rem;
+      background: var(--surface2);
+      border: none;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      font-size: .88rem;
+      outline: none;
+    }
+    .city-search::placeholder { color: var(--muted); }
+    .city-search:focus { background: #282b40; }
+
+    .city-list {
+      padding: .3rem 0;
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+    .city-item {
+      display: block;
+      width: 100%;
+      padding: .6rem 1.2rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: .88rem;
+      text-align: left;
+      cursor: pointer;
+      transition: background var(--trans);
+    }
+    .city-item:hover { background: var(--surface2); }
+    .city-item.active { color: var(--accent); font-weight: 600; }
+    .city-item.hidden { display: none; }
+
+    /* ─── Cart add button on card ─────────────────────────────── */
+    .card-cart-btn {
+      background: none;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--trans);
+      flex-shrink: 0;
+      padding: 0;
+      line-height: 1;
+    }
+    .card-cart-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .card-cart-btn.in-list { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* ─── Shopping list header button ─────────────────────────── */
+    .cart-header-btn {
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+      padding: .4rem .7rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      color: var(--text);
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--trans);
+      position: relative;
+    }
+    .cart-header-btn:hover { border-color: var(--accent); }
+    .cart-badge {
+      background: var(--accent2);
+      color: #fff;
+      font-size: .65rem;
+      font-weight: 700;
+      min-width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+    }
+    .cart-badge:empty { display: none; }
+
+    /* ─── Shopping list drawer ────────────────────────────────── */
+    .cart-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.6);
+      backdrop-filter: blur(4px);
+      z-index: 500;
+    }
+    .cart-overlay.show { display: block; }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(400px, 92vw);
+      height: 100%;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      box-shadow: -8px 0 30px rgba(0,0,0,.5);
+      display: flex;
+      flex-direction: column;
+      z-index: 501;
+      transform: translateX(100%);
+      transition: transform .3s ease;
+    }
+    .cart-overlay.show .cart-drawer { transform: translateX(0); }
+
+    .cart-drawer-header {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cart-drawer-header h2 { font-size: 1.1rem; font-weight: 700; }
+    .cart-close-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .cart-savings {
+      padding: .8rem 1.2rem;
+      background: linear-gradient(135deg, #6c63ff15, #ff658415);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-size: .85rem;
+    }
+    .cart-savings .savings-label { color: var(--muted); }
+    .cart-savings .savings-value { color: var(--accent2); font-weight: 700; }
+    .cart-savings .savings-year { color: var(--accent); font-weight: 700; }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: .5rem 0;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      padding: .6rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      transition: background var(--trans);
+    }
+    .cart-item:hover { background: var(--surface2); }
+    .cart-item.checked { opacity: .5; }
+    .cart-item.checked .ci-name { text-decoration: line-through; }
+
+    .ci-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--trans);
+      background: none;
+      color: transparent;
+      font-size: .75rem;
+      padding: 0;
+    }
+    .cart-item.checked .ci-check {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .ci-info { flex: 1; min-width: 0; }
+    .ci-name { font-size: .85rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ci-meta { font-size: .72rem; color: var(--muted); }
+    .ci-price { font-size: .9rem; font-weight: 700; color: var(--sale-text); flex-shrink: 0; }
+    .ci-remove {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: .2rem;
+      line-height: 1;
+      flex-shrink: 0;
+      opacity: .5;
+      transition: opacity var(--trans);
+    }
+    .ci-remove:hover { opacity: 1; color: var(--accent2); }
+
+    .cart-empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+    .cart-empty-icon { font-size: 2.5rem; margin-bottom: .7rem; }
+
+    .cart-footer {
+      padding: .8rem 1.2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: .5rem;
+    }
+    .cart-clear-btn {
+      flex: 1;
+      padding: .55rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: .82rem;
+      cursor: pointer;
+      transition: all var(--trans);
+    }
+    .cart-clear-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    /* ─── Install banner ──────────────────────────────────────── */
+    .install-banner {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 300;
+      background: linear-gradient(135deg, #1a1d2e, #222539);
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.2rem;
+      box-shadow: 0 -4px 24px rgba(0,0,0,.5);
+    }
+    .install-banner.show { display: block; }
+
+    .install-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .install-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .install-text {
+      flex: 1;
+    }
+    .install-text strong {
+      display: block;
+      font-size: .92rem;
+      margin-bottom: .15rem;
+    }
+    .install-text span {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .install-btn {
+      padding: .6rem 1.2rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: .85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background var(--trans);
+      white-space: nowrap;
+    }
+    .install-btn:hover { background: #5a52e0; }
+    .install-dismiss {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding: .2rem;
+      line-height: 1;
+    }
+
+    @media (max-width: 600px) {
+      .header-inner { gap: .6rem; }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .75rem; }
+      .price-new { font-size: 1.2rem; }
+      .card-name { font-size: .88rem; }
+      .install-inner { flex-wrap: wrap; }
+      .install-btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ OFFLINE BAR ═══════════════════════════════════════════════ -->
+<div class="offline-bar" id="offlineBar">Jste offline — zobrazeny uložené slevy</div>
+
+<!-- ═══ HEADER ════════════════════════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">🛒</div>
+      <span class="logo-text">Slevy<span>Dnes</span></span>
+    </a>
+    <span class="header-badge" style="background:#6c63ff22;color:#6c63ff;border-color:#6c63ff40">REÁLNÁ DATA</span>
+    <button class="city-btn" id="cityBtn" onclick="toggleCityModal(true)">
+      <span class="city-pin">📍</span>
+      <span id="cityLabel">Celá ČR</span>
+    </button>
+    <button class="cart-header-btn" onclick="toggleCart(true)">
+      🛒 <span id="cartBadge" class="cart-badge"></span>
+    </button>
+    <div class="header-right">
+      <span class="last-update" id="lastUpdateLabel">Aktualizováno: —</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════ -->
+<div class="hero">
+  <h1 class="hero-title" id="heroTitle">Aktuální <span>slevy</span> z českých supermarketů</h1>
+  <p class="hero-sub">Albert · Penny Market · Billa · Kaufland — vše na jednom místě</p>
+</div>
+
+<!-- ═══ API NOTICE ════════════════════════════════════════════════ -->
+<div class="api-notice">
+  <div class="api-notice-inner">
+    <span class="notice-icon">✅</span>
+    <div>
+      <strong>Reálná data z kupi.cz —</strong> slevy jsou stahovány Python scraperem z veřejných stránek
+      <a href="https://www.kupi.cz" target="_blank">kupi.cz</a>.
+      Spusťte <code>python3 scraper.py</code> pro aktualizaci.
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONTROLS ══════════════════════════════════════════════════ -->
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="Hledat produkt, značku, kategorii…"
+      autocomplete="off"
+    />
+  </div>
+
+  <div class="filter-group" id="storeFilters">
+    <button class="filter-btn active" data-store="all">
+      Vše
+    </button>
+    <button class="filter-btn" data-store="albert">
+      <span class="store-dot" style="background:var(--albert)"></span>Albert
+    </button>
+    <button class="filter-btn" data-store="penny">
+      <span class="store-dot" style="background:var(--penny)"></span>Penny
+    </button>
+    <button class="filter-btn" data-store="billa">
+      <span class="store-dot" style="background:var(--billa)"></span>Billa
+    </button>
+    <button class="filter-btn" data-store="kaufland">
+      <span class="store-dot" style="background:var(--kaufland)"></span>Kaufland
+    </button>
+    <button class="filter-btn" data-store="lidl">
+      <span class="store-dot" style="background:var(--lidl)"></span>Lidl
+    </button>
+    <button class="filter-btn" data-store="tesco">
+      <span class="store-dot" style="background:var(--tesco)"></span>Tesco
+    </button>
+  </div>
+</div>
+
+<!-- ═══ STATS BAR ═════════════════════════════════════════════════ -->
+<div class="stats-bar">
+  <span>Zobrazeno: <span class="stats-count" id="resultCount">0</span> produktů</span>
+  <select id="sortSelect">
+    <option value="discount">Největší sleva</option>
+    <option value="price-asc">Cena: nejnižší</option>
+    <option value="price-desc">Cena: nejvyšší</option>
+    <option value="name">Název A–Z</option>
+  </select>
+</div>
+
+<!-- ═══ PRODUCT GRID ══════════════════════════════════════════════ -->
+<div class="grid" id="productGrid"></div>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════ -->
+<footer>
+  SlevyDnes &copy; 2026 · Data z <a href="https://www.kupi.cz" target="_blank" style="color:var(--accent)">kupi.cz</a> · Aktualizujte spuštěním <code>python3 scraper.py</code>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   === DATA SOURCE ================================================
+   Pro přepnutí na real data:
+     1. Zakomentuj loadMockData() na konci souboru
+     2. Odkomentuj loadRealData()
+     3. Nastav správnou URL v loadRealData()
+
+   Formát očekávaného JSON:
+   [
+     {
+       "id": "unique-id",
+       "name": "Název produktu",
+       "desc": "Popis / váha / objem",
+       "store": "albert" | "penny" | "billa" | "kaufland" | "lidl" | "tesco",
+       "storeName": "Albert",
+       "category": "Mléčné výrobky",
+       "emoji": "🧀",
+       "priceNew": 29.90,
+       "priceOld": 49.90,
+       "validUntil": "2026-03-09",
+       "url": "https://..."   // volitelné
+     }, ...
+   ]
+   ════════════════════════════════════════════════════════════════ */
+
+// ─── Mock data (ukázková) ─────────────────────────────────────────
+const MOCK_DATA = [
+  // ALBERT
+  { id:"a1",  store:"albert",   storeName:"Albert",   category:"Mléčné výrobky", emoji:"🧀",
+    name:"Eidam 45% plátky",          desc:"200 g, chlazené",           priceNew:29.90, priceOld:49.90, validUntil:"2026-03-09" },
+  { id:"a2",  store:"albert",   storeName:"Albert",   category:"Nápoje",         emoji:"🥤",
+    name:"Coca-Cola Zero",             desc:"1,5 l PET",                 priceNew:18.90, priceOld:29.90, validUntil:"2026-03-09" },
+  { id:"a3",  store:"albert",   storeName:"Albert",   category:"Pečivo",         emoji:"🍞",
+    name:"Toustový chléb Penam",       desc:"500 g",                     priceNew:22.90, priceOld:34.90, validUntil:"2026-03-09" },
+  { id:"a4",  store:"albert",   storeName:"Albert",   category:"Maso & uzeniny", emoji:"🥩",
+    name:"Vepřový bůček plátky",       desc:"400 g, chlazené",           priceNew:59.90, priceOld:89.90, validUntil:"2026-03-09" },
+  { id:"a5",  store:"albert",   storeName:"Albert",   category:"Ovoce & zelenina",emoji:"🍓",
+    name:"Jahody",                     desc:"500 g, chlazené",           priceNew:49.90, priceOld:79.90, validUntil:"2026-03-09" },
+  { id:"a6",  store:"albert",   storeName:"Albert",   category:"Čistící prostředky",emoji:"🧼",
+    name:"Jar Original",               desc:"500 ml",                    priceNew:39.90, priceOld:59.90, validUntil:"2026-03-09" },
+
+  // PENNY
+  { id:"p1",  store:"penny",    storeName:"Penny",    category:"Nápoje",         emoji:"🍺",
+    name:"Plzeňský Prazdroj 10×",      desc:"10× 0,5 l plechovka",       priceNew:129.90, priceOld:189.90, validUntil:"2026-03-11" },
+  { id:"p2",  store:"penny",    storeName:"Penny",    category:"Mléčné výrobky", emoji:"🥛",
+    name:"Hollandia Bio jogurt",       desc:"150 g, bílý",               priceNew:9.90,  priceOld:15.90, validUntil:"2026-03-11" },
+  { id:"p3",  store:"penny",    storeName:"Penny",    category:"Cukrovinky",     emoji:"🍫",
+    name:"Milka Oreo",                 desc:"300 g",                     priceNew:49.90, priceOld:79.90, validUntil:"2026-03-11" },
+  { id:"p4",  store:"penny",    storeName:"Penny",    category:"Maso & uzeniny", emoji:"🌭",
+    name:"Vídeňské párky",             desc:"5× párky, 300 g",           priceNew:34.90, priceOld:54.90, validUntil:"2026-03-11" },
+  { id:"p5",  store:"penny",    storeName:"Penny",    category:"Ovoce & zelenina",emoji:"🍌",
+    name:"Banány",                     desc:"1 kg",                      priceNew:21.90, priceOld:32.90, validUntil:"2026-03-11" },
+  { id:"p6",  store:"penny",    storeName:"Penny",    category:"Mražené",        emoji:"🍕",
+    name:"Dr. Oetker Ristorante pizza",desc:"350 g, Margherita",          priceNew:79.90, priceOld:109.90, validUntil:"2026-03-11" },
+
+  // BILLA
+  { id:"b1",  store:"billa",    storeName:"Billa",    category:"Bio produkty",   emoji:"🥦",
+    name:"Bio brokolice",              desc:"ks, cca 400 g",             priceNew:24.90, priceOld:39.90, validUntil:"2026-03-08" },
+  { id:"b2",  store:"billa",    storeName:"Billa",    category:"Káva & čaj",     emoji:"☕",
+    name:"Jacobs Krönung mletá",       desc:"500 g",                     priceNew:109.90, priceOld:169.90, validUntil:"2026-03-08" },
+  { id:"b3",  store:"billa",    storeName:"Billa",    category:"Mléčné výrobky", emoji:"🧈",
+    name:"Máslo Madeta",               desc:"250 g",                     priceNew:44.90, priceOld:59.90, validUntil:"2026-03-08" },
+  { id:"b4",  store:"billa",    storeName:"Billa",    category:"Nápoje",         emoji:"🍷",
+    name:"Vino Nobile (různé)",        desc:"0,75 l",                    priceNew:99.90, priceOld:149.90, validUntil:"2026-03-08" },
+  { id:"b5",  store:"billa",    storeName:"Billa",    category:"Pečivo",         emoji:"🥐",
+    name:"Croissant máslový",          desc:"80 g, pekárna",             priceNew:9.90,  priceOld:14.90, validUntil:"2026-03-08" },
+  { id:"b6",  store:"billa",    storeName:"Billa",    category:"Konzervy",       emoji:"🥫",
+    name:"Bonduelle kukuřice",         desc:"400 g",                     priceNew:17.90, priceOld:28.90, validUntil:"2026-03-08" },
+
+  // KAUFLAND
+  { id:"k1",  store:"kaufland", storeName:"Kaufland", category:"Elektronika",    emoji:"📺",
+    name:"Sencor TV 43\" Full HD",     desc:"model SLE 43F60TCS",        priceNew:5990,  priceOld:8990, validUntil:"2026-03-12" },
+  { id:"k2",  store:"kaufland", storeName:"Kaufland", category:"Maso & uzeniny", emoji:"🥓",
+    name:"Grilované maso mix",         desc:"600 g, chlazené",           priceNew:89.90, priceOld:139.90, validUntil:"2026-03-12" },
+  { id:"k3",  store:"kaufland", storeName:"Kaufland", category:"Nápoje",         emoji:"🧃",
+    name:"Capri-Sun 10× 200 ml",       desc:"různé příchutě",            priceNew:59.90, priceOld:84.90, validUntil:"2026-03-12" },
+  { id:"k4",  store:"kaufland", storeName:"Kaufland", category:"Péče o tělo",    emoji:"🧴",
+    name:"Head & Shoulders šampon",    desc:"400 ml",                    priceNew:79.90, priceOld:119.90, validUntil:"2026-03-12" },
+  { id:"k5",  store:"kaufland", storeName:"Kaufland", category:"Ovoce & zelenina",emoji:"🍎",
+    name:"Jablka Gala",                desc:"1,5 kg sáček",              priceNew:39.90, priceOld:64.90, validUntil:"2026-03-12" },
+  { id:"k6",  store:"kaufland", storeName:"Kaufland", category:"Domácnost",      emoji:"🧹",
+    name:"Electrolux vysavač Pure F9", desc:"model PF91-3BWF",           priceNew:2999,  priceOld:4499, validUntil:"2026-03-12" },
+];
+
+// ─── Stav aplikace ────────────────────────────────────────────────
+let allProducts = [];
+let activeStore  = "all";
+let searchQuery  = "";
+let sortMode     = "discount";
+
+// ─── Výpočet % slevy ──────────────────────────────────────────────
+function discountPct(item) {
+  return Math.round((1 - item.priceNew / item.priceOld) * 100);
+}
+
+// ─── Formátování ceny ─────────────────────────────────────────────
+function fmtPrice(n) {
+  return n.toLocaleString("cs-CZ", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " Kč";
+}
+
+// ─── Formátování data ─────────────────────────────────────────────
+function fmtDate(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return "do " + d.toLocaleDateString("cs-CZ", { day:"numeric", month:"numeric" });
+}
+
+// ─── Render karet ─────────────────────────────────────────────────
+function renderCards(items) {
+  const grid = document.getElementById("productGrid");
+  document.getElementById("resultCount").textContent = items.length;
+
+  if (items.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <h3>Žádné výsledky</h3>
+        <p>Zkuste jiný výraz nebo změňte filtr obchodu.</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = items.map(item => {
+    const pct = discountPct(item);
+    return `
+    <article class="card" data-store="${item.store}" data-id="${item.id}">
+      <div class="card-stripe"></div>
+      ${item.image
+        ? `<img class="card-img" src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.outerHTML='<div class=\\'card-img card-img-fallback\\'>'+this.alt.charAt(0)+'</div>'">`
+        : `<div class="card-img card-img-fallback">${item.emoji || item.name.charAt(0)}</div>`
+      }
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-name">${item.name}</span>
+          <span class="store-badge">${item.storeName.toUpperCase()}</span>
+        </div>
+        <div class="card-desc">${item.desc}</div>
+        <span class="card-category">${item.category}</span>
+        <div class="card-prices">
+          <span class="price-new">${fmtPrice(item.priceNew)}</span>
+          <span class="price-old">${fmtPrice(item.priceOld)}</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="discount-badge">−${pct} %</span>
+        <span class="valid-until">${fmtDate(item.validUntil)}</span>
+        <button class="card-cart-btn${isInCart(item.id) ? ' in-list' : ''}" onclick="toggleCartItem('${item.id}', event)" title="Přidat na seznam">${isInCart(item.id) ? '✓' : '+'}</button>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+// ─── Filtr + řazení ───────────────────────────────────────────────
+function applyFilters() {
+  let result = allProducts.slice();
+
+  // filtr obchodu
+  if (activeStore !== "all") {
+    result = result.filter(p => p.store === activeStore);
+  }
+
+  // fulltextové hledání
+  if (searchQuery.trim()) {
+    const q = searchQuery.trim().toLowerCase();
+    result = result.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.desc.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q) ||
+      p.storeName.toLowerCase().includes(q)
+    );
+  }
+
+  // řazení
+  switch (sortMode) {
+    case "discount":
+      result.sort((a, b) => discountPct(b) - discountPct(a));
+      break;
+    case "price-asc":
+      result.sort((a, b) => a.priceNew - b.priceNew);
+      break;
+    case "price-desc":
+      result.sort((a, b) => b.priceNew - a.priceNew);
+      break;
+    case "name":
+      result.sort((a, b) => a.name.localeCompare(b.name, "cs"));
+      break;
+  }
+
+  renderCards(result);
+}
+
+// ─── Event listenery ─────────────────────────────────────────────
+document.getElementById("searchInput").addEventListener("input", e => {
+  searchQuery = e.target.value;
+  applyFilters();
+});
+
+document.getElementById("storeFilters").addEventListener("click", e => {
+  const btn = e.target.closest(".filter-btn");
+  if (!btn) return;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  activeStore = btn.dataset.store;
+  applyFilters();
+});
+
+document.getElementById("sortSelect").addEventListener("change", e => {
+  sortMode = e.target.value;
+  applyFilters();
+});
+
+// ─── Načtení mock dat ─────────────────────────────────────────────
+function loadMockData() {
+  allProducts = MOCK_DATA;
+  document.getElementById("lastUpdateLabel").textContent =
+    "Aktualizováno: " + new Date().toLocaleDateString("cs-CZ");
+  applyFilters();
+}
+
+// ─── Načtení real dat ze slevy.json ────────────────────────────────
+async function loadRealData() {
+  try {
+    const res = await fetch("slevy.json");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    allProducts = await res.json();
+    document.getElementById("lastUpdateLabel").textContent =
+      "Aktualizováno: " + new Date().toLocaleDateString("cs-CZ");
+    applyFilters();
+  } catch (err) {
+    console.error("Chyba načítání dat:", err);
+    // Fallback na mock data
+    loadMockData();
+  }
+}
+
+// === INICIALIZACE ====================================================
+loadRealData();
+
+// ═══════════════════════════════════════════════════════════════════
+// === PWA — Service Worker, Město, Install, Offline ================
+// ═══════════════════════════════════════════════════════════════════
+
+// ─── Města ───────────────────────────────────────────────────────────
+const CITIES = [
+  { id: "cz",       name: "Celá ČR",           locale: "" },
+  // Krajská města
+  { id: "praha",    name: "Praha",              locale: "v Praze",             lat: 50.0755, lon: 14.4378 },
+  { id: "brno",     name: "Brno",               locale: "v Brně",              lat: 49.1951, lon: 16.6068 },
+  { id: "ostrava",  name: "Ostrava",            locale: "v Ostravě",           lat: 49.8209, lon: 18.2625 },
+  { id: "plzen",    name: "Plzeň",              locale: "v Plzni",             lat: 49.7384, lon: 13.3736 },
+  { id: "liberec",  name: "Liberec",            locale: "v Liberci",           lat: 50.7671, lon: 15.0562 },
+  { id: "olomouc",  name: "Olomouc",            locale: "v Olomouci",          lat: 49.5938, lon: 17.2509 },
+  { id: "cb",       name: "České Budějovice",   locale: "v Č. Budějovicích",   lat: 48.9745, lon: 14.4744 },
+  { id: "hk",       name: "Hradec Králové",     locale: "v Hradci Králové",    lat: 50.2104, lon: 15.8255 },
+  { id: "pardubice",name: "Pardubice",          locale: "v Pardubicích",       lat: 50.0343, lon: 15.7812 },
+  { id: "zlin",     name: "Zlín",               locale: "ve Zlíně",            lat: 49.2267, lon: 17.6700 },
+  { id: "usti",     name: "Ústí nad Labem",     locale: "v Ústí n. L.",        lat: 50.6611, lon: 14.0531 },
+  { id: "kv",       name: "Karlovy Vary",       locale: "v Karlových Varech",  lat: 50.2325, lon: 12.8714 },
+  { id: "jihlava",  name: "Jihlava",            locale: "v Jihlavě",           lat: 49.3961, lon: 15.5912 },
+  // Menší města
+  { id: "jh",       name: "Jindřichův Hradec",  locale: "v J. Hradci",         lat: 49.1441, lon: 15.0029 },
+  { id: "tabor",    name: "Tábor",              locale: "v Táboře",            lat: 49.4147, lon: 14.6578 },
+  { id: "pisek",    name: "Písek",              locale: "v Písku",             lat: 49.3088, lon: 14.1475 },
+  { id: "strakonice", name: "Strakonice",       locale: "ve Strakonicích",     lat: 49.2614, lon: 13.9025 },
+  { id: "kladno",   name: "Kladno",             locale: "v Kladně",            lat: 50.1473, lon: 14.1044 },
+  { id: "mb",       name: "Mladá Boleslav",     locale: "v Ml. Boleslavi",     lat: 50.4113, lon: 14.9068 },
+  { id: "kolin",    name: "Kolín",              locale: "v Kolíně",            lat: 50.0283, lon: 15.2005 },
+  { id: "havirov",  name: "Havířov",            locale: "v Havířově",          lat: 49.7798, lon: 18.4310 },
+  { id: "karvina",  name: "Karviná",            locale: "v Karviné",           lat: 49.8542, lon: 18.5428 },
+  { id: "fm",       name: "Frýdek-Místek",      locale: "ve Frýdku-Místku",    lat: 49.6879, lon: 18.3531 },
+  { id: "opava",    name: "Opava",              locale: "v Opavě",             lat: 49.9382, lon: 17.9047 },
+  { id: "most",     name: "Most",               locale: "v Mostě",             lat: 50.5031, lon: 13.6367 },
+  { id: "teplice",  name: "Teplice",            locale: "v Teplicích",         lat: 50.6404, lon: 13.8245 },
+  { id: "decin",    name: "Děčín",              locale: "v Děčíně",            lat: 50.7726, lon: 14.2146 },
+  { id: "chomutov", name: "Chomutov",           locale: "v Chomutově",         lat: 50.4603, lon: 13.4179 },
+  { id: "jablonec", name: "Jablonec n. Nisou",  locale: "v Jablonci n. N.",    lat: 50.7275, lon: 15.1710 },
+  { id: "prostejov",name: "Prostějov",          locale: "v Prostějově",        lat: 49.4718, lon: 17.1118 },
+  { id: "prerov",   name: "Přerov",             locale: "v Přerově",           lat: 49.4553, lon: 17.4514 },
+  { id: "trebic",   name: "Třebíč",             locale: "v Třebíči",           lat: 49.2148, lon: 15.8814 },
+  { id: "znojmo",   name: "Znojmo",             locale: "ve Znojmě",           lat: 48.8555, lon: 16.0488 },
+  { id: "chrudim",  name: "Chrudim",            locale: "v Chrudimi",          lat: 49.9510, lon: 15.7960 },
+  { id: "svitavy",  name: "Svitavy",            locale: "ve Svitavách",        lat: 49.7557, lon: 16.4688 },
+  { id: "trutnov",  name: "Trutnov",            locale: "v Trutnově",          lat: 50.5608, lon: 15.9130 },
+  { id: "nachod",   name: "Náchod",             locale: "v Náchodě",           lat: 50.4164, lon: 16.1628 },
+  { id: "pelhrimov",name: "Pelhřimov",          locale: "v Pelhřimově",        lat: 49.4314, lon: 15.2233 },
+  { id: "benesov",  name: "Benešov",            locale: "v Benešově",          lat: 49.7813, lon: 14.6869 },
+  { id: "pribram",  name: "Příbram",            locale: "v Příbrami",          lat: 49.6893, lon: 14.0107 },
+  { id: "beroun",   name: "Beroun",             locale: "v Berouně",           lat: 49.9638, lon: 14.0723 },
+  { id: "rakovnik", name: "Rakovník",           locale: "v Rakovníku",         lat: 50.1044, lon: 13.7336 },
+  { id: "kutnahora",name: "Kutná Hora",         locale: "v Kutné Hoře",        lat: 49.9481, lon: 15.2681 },
+  { id: "litomerice",name:"Litoměřice",         locale: "v Litoměřicích",      lat: 50.5336, lon: 14.1319 },
+  { id: "sokolov",  name: "Sokolov",            locale: "v Sokolově",          lat: 50.1816, lon: 12.6388 },
+  { id: "cheb",     name: "Cheb",               locale: "v Chebu",             lat: 50.0796, lon: 12.3698 },
+  { id: "kromeriz", name: "Kroměříž",           locale: "v Kroměříži",         lat: 49.2975, lon: 17.3932 },
+  { id: "vsetin",   name: "Vsetín",             locale: "ve Vsetíně",          lat: 49.3387, lon: 17.9961 },
+  { id: "uhbrod",   name: "Uherské Hradiště",   locale: "v Uh. Hradišti",      lat: 49.0698, lon: 17.4597 },
+  { id: "bruntal",  name: "Bruntál",            locale: "v Bruntále",          lat: 49.9884, lon: 17.4650 },
+  { id: "sumperk",  name: "Šumperk",            locale: "v Šumperku",          lat: 49.9652, lon: 16.9710 },
+  { id: "jesenik",  name: "Jeseník",            locale: "v Jeseníku",          lat: 50.2290, lon: 17.1982 },
+  { id: "nj",       name: "Nový Jičín",         locale: "v Novém Jičíně",      lat: 49.5943, lon: 18.0103 },
+  { id: "ceskylipa",name: "Česká Lípa",         locale: "v České Lípě",        lat: 50.6858, lon: 14.5377 },
+  { id: "semily",   name: "Semily",             locale: "v Semilech",          lat: 50.6026, lon: 15.3342 },
+  { id: "ceskatrebova",name:"Česká Třebová",    locale: "v České Třebové",     lat: 49.9045, lon: 16.4431 },
+  { id: "domažlice",name: "Domažlice",          locale: "v Domažlicích",       lat: 49.4407, lon: 12.9298 },
+  { id: "klatovy",  name: "Klatovy",            locale: "v Klatovech",         lat: 49.3955, lon: 13.2950 },
+  { id: "rokycany", name: "Rokycany",           locale: "v Rokycanech",        lat: 49.7427, lon: 13.5946 },
+  { id: "tachov",   name: "Tachov",             locale: "v Tachově",           lat: 49.7953, lon: 12.6330 },
+  { id: "ck",       name: "Český Krumlov",      locale: "v Č. Krumlově",       lat: 48.8109, lon: 14.3152 },
+  { id: "prachatice",name:"Prachatice",         locale: "v Prachaticích",      lat: 49.0122, lon: 14.0011 },
+];
+
+let selectedCity = localStorage.getItem("slevydnes-city") || "cz";
+
+function updateCityUI() {
+  const city = CITIES.find(c => c.id === selectedCity) || CITIES[0];
+  document.getElementById("cityLabel").textContent = city.name;
+
+  const heroEl = document.getElementById("heroTitle");
+  if (city.id === "cz") {
+    heroEl.innerHTML = 'Aktuální <span>slevy</span> z českých supermarketů';
+  } else {
+    heroEl.innerHTML = `<span>Slevy</span> ${city.locale}`;
+  }
+}
+
+function selectCity(cityId) {
+  selectedCity = cityId;
+  localStorage.setItem("slevydnes-city", cityId);
+  updateCityUI();
+  toggleCityModal(false);
+
+  // Aktualizovat aktivní položku v listu
+  document.querySelectorAll('.city-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.city === cityId);
+  });
+}
+
+function toggleCityModal(show) {
+  document.getElementById("cityOverlay").classList.toggle("show", show);
+}
+
+// ─── Geolokace ───────────────────────────────────────────────────────
+function detectCity() {
+  const geoBtn = document.getElementById("geoBtn");
+  if (!navigator.geolocation) {
+    geoBtn.textContent = "Geolokace není dostupná";
+    return;
+  }
+  geoBtn.innerHTML = "⏳ Zjišťuji polohu…";
+
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const { latitude, longitude } = pos.coords;
+      let closest = CITIES[1]; // default Praha
+      let minDist = Infinity;
+
+      CITIES.forEach(c => {
+        if (!c.lat) return;
+        const d = Math.hypot(c.lat - latitude, c.lon - longitude);
+        if (d < minDist) { minDist = d; closest = c; }
+      });
+
+      selectCity(closest.id);
+      geoBtn.innerHTML = "📍 Použít moji polohu";
+    },
+    () => {
+      geoBtn.innerHTML = "❌ Poloha zamítnuta";
+      setTimeout(() => { geoBtn.innerHTML = "📍 Použít moji polohu"; }, 2000);
+    },
+    { timeout: 8000 }
+  );
+}
+
+// ─── Inicializace city UI ────────────────────────────────────────────
+updateCityUI();
+
+// Zavřít modal kliknutím na overlay
+document.getElementById("cityOverlay").addEventListener("click", e => {
+  if (e.target === e.currentTarget) toggleCityModal(false);
+});
+
+// ─── Service Worker registrace ───────────────────────────────────────
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").then(reg => {
+    console.log("SW registrován:", reg.scope);
+  }).catch(err => {
+    console.warn("SW registrace selhala:", err);
+  });
+}
+
+// ─── Offline / Online detekce ────────────────────────────────────────
+const offlineBar = document.getElementById("offlineBar");
+
+function updateOnlineStatus() {
+  offlineBar.classList.toggle("show", !navigator.onLine);
+}
+window.addEventListener("online", updateOnlineStatus);
+window.addEventListener("offline", updateOnlineStatus);
+updateOnlineStatus();
+
+// ─── Install prompt ──────────────────────────────────────────────────
+let deferredPrompt = null;
+
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Zobrazit banner
+  document.getElementById("installBanner").classList.add("show");
+});
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(result => {
+      deferredPrompt = null;
+      document.getElementById("installBanner").classList.remove("show");
+    });
+  }
+}
+
+function dismissInstall() {
+  document.getElementById("installBanner").classList.remove("show");
+  sessionStorage.setItem("slevydnes-install-dismissed", "1");
+}
+
+// iOS detekce — na iOS není beforeinstallprompt, zobrazit manuální instrukce
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+const isStandalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+
+if (isIOS && !isStandalone && !sessionStorage.getItem("slevydnes-install-dismissed")) {
+  const banner = document.getElementById("installBanner");
+  banner.classList.add("show");
+  document.getElementById("installBtnText").textContent = "Sdílet → Přidat na plochu";
+  document.getElementById("installAction").onclick = dismissInstall;
+}
+</script>
+
+<!-- ═══ CITY MODAL ═════════════════════════════════════════════════ -->
+<div class="city-overlay" id="cityOverlay">
+  <div class="city-modal">
+    <div class="city-modal-header">
+      <h2>Vyberte město</h2>
+      <p>Slevy jsou stejné po celé ČR — město personalizuje zobrazení</p>
+    </div>
+    <button class="city-geo-btn" id="geoBtn" onclick="detectCity()">📍 Použít moji polohu</button>
+    <input type="search" class="city-search" id="citySearch" placeholder="Hledat město…" autocomplete="off" />
+    <div class="city-list" id="cityList"></div>
+  </div>
+</div>
+
+<!-- ═══ INSTALL BANNER ═════════════════════════════════════════════ -->
+<div class="install-banner" id="installBanner">
+  <div class="install-inner">
+    <div class="install-icon">🛒</div>
+    <div class="install-text">
+      <strong>Přidat SlevyDnes na plochu</strong>
+      <span>Rychlý přístup ke slevám jako appka</span>
+    </div>
+    <button class="install-btn" id="installAction" onclick="installApp()">
+      <span id="installBtnText">Nainstalovat</span>
+    </button>
+    <button class="install-dismiss" onclick="dismissInstall()" aria-label="Zavřít">&times;</button>
+  </div>
+</div>
+
+<!-- ═══ SHOPPING LIST DRAWER ══════════════════════════════════════ -->
+<div class="cart-overlay" id="cartOverlay" onclick="if(event.target===this)toggleCart(false)">
+  <div class="cart-drawer">
+    <div class="cart-drawer-header">
+      <h2>Nákupní seznam</h2>
+      <button class="cart-close-btn" onclick="toggleCart(false)">&times;</button>
+    </div>
+    <div class="cart-savings">
+      <span><span class="savings-label">Tento nákup ušetříte: </span><span class="savings-value" id="savingsNow">0 Kč</span></span>
+      <span><span class="savings-label">Letos celkem: </span><span class="savings-year" id="savingsYear">0 Kč</span></span>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <button class="cart-clear-btn" onclick="checkoutCart()">Nakoupeno — uložit úsporu</button>
+      <button class="cart-clear-btn" onclick="clearCart()">Smazat vše</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══ SHOPPING LIST / NÁKUPNÍ SEZNAM ══════════════════════════════
+let cartList = JSON.parse(localStorage.getItem("slevydnes-cart") || "[]");
+let cartChecked = JSON.parse(localStorage.getItem("slevydnes-cart-checked") || "{}");
+let yearlySavings = parseFloat(localStorage.getItem("slevydnes-savings-year") || "0");
+let savingsYearKey = localStorage.getItem("slevydnes-savings-year-key") || "";
+
+// Reset roční úspory pokud je nový rok
+const currentYearKey = new Date().getFullYear().toString();
+if (savingsYearKey !== currentYearKey) {
+  yearlySavings = 0;
+  savingsYearKey = currentYearKey;
+  localStorage.setItem("slevydnes-savings-year", "0");
+  localStorage.setItem("slevydnes-savings-year-key", currentYearKey);
+}
+
+function saveCart() {
+  localStorage.setItem("slevydnes-cart", JSON.stringify(cartList));
+  localStorage.setItem("slevydnes-cart-checked", JSON.stringify(cartChecked));
+}
+
+function isInCart(id) {
+  return cartList.some(c => c.id === id);
+}
+
+function toggleCartItem(id, event) {
+  if (event) event.stopPropagation();
+  if (isInCart(id)) {
+    cartList = cartList.filter(c => c.id !== id);
+    delete cartChecked[id];
+  } else {
+    const item = allProducts.find(p => p.id === id);
+    if (item) cartList.push({ id: item.id, name: item.name, store: item.storeName, priceNew: item.priceNew, priceOld: item.priceOld });
+  }
+  saveCart();
+  updateCartUI();
+  applyFilters(); // re-render card buttons
+}
+
+function toggleCartCheck(id) {
+  cartChecked[id] = !cartChecked[id];
+  saveCart();
+  updateCartUI();
+}
+
+function toggleCart(show) {
+  document.getElementById("cartOverlay").classList.toggle("show", show);
+  if (show) renderCartItems();
+}
+
+function calcSavings() {
+  return cartList.reduce((sum, c) => sum + (c.priceOld - c.priceNew), 0);
+}
+
+function calcCheckedSavings() {
+  return cartList.filter(c => cartChecked[c.id]).reduce((sum, c) => sum + (c.priceOld - c.priceNew), 0);
+}
+
+function updateCartUI() {
+  const badge = document.getElementById("cartBadge");
+  badge.textContent = cartList.length || "";
+  document.getElementById("savingsNow").textContent = fmtPrice(calcSavings());
+  document.getElementById("savingsYear").textContent = fmtPrice(yearlySavings);
+  renderCartItems();
+}
+
+function renderCartItems() {
+  const container = document.getElementById("cartItems");
+  if (cartList.length === 0) {
+    container.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">📋</div>Seznam je prázdný<br><small>Klikněte + u produktu pro přidání</small></div>';
+    return;
+  }
+  container.innerHTML = cartList.map(c => `
+    <div class="cart-item${cartChecked[c.id] ? ' checked' : ''}" data-id="${c.id}">
+      <button class="ci-check" onclick="toggleCartCheck('${c.id}')">✓</button>
+      <div class="ci-info">
+        <div class="ci-name">${c.name}</div>
+        <div class="ci-meta">${c.store} · sleva ${fmtPrice(c.priceOld - c.priceNew)}</div>
+      </div>
+      <span class="ci-price">${fmtPrice(c.priceNew)}</span>
+      <button class="ci-remove" onclick="toggleCartItem('${c.id}')" title="Odebrat">&times;</button>
+    </div>
+  `).join("");
+}
+
+function checkoutCart() {
+  const saved = calcSavings();
+  if (saved > 0) {
+    yearlySavings += saved;
+    localStorage.setItem("slevydnes-savings-year", yearlySavings.toString());
+  }
+  cartList = [];
+  cartChecked = {};
+  saveCart();
+  updateCartUI();
+  applyFilters();
+}
+
+function clearCart() {
+  cartList = [];
+  cartChecked = {};
+  saveCart();
+  updateCartUI();
+  applyFilters();
+}
+
+// Init cart UI
+updateCartUI();
+</script>
+
+<script>
+// Vygenerovat seznam měst
+(function() {
+  const list = document.getElementById("cityList");
+  const saved = localStorage.getItem("slevydnes-city") || "cz";
+  const html = CITIES.map(c => `<button class="city-item${c.id === saved ? ' active' : ''}" data-city="${c.id}" onclick="selectCity('${c.id}')">${c.name}</button>`).join("");
+  list.innerHTML = html;
+
+  // Filtrování měst v search
+  document.getElementById("citySearch").addEventListener("input", e => {
+    const q = e.target.value.trim().toLowerCase();
+    list.querySelectorAll(".city-item").forEach(el => {
+      el.classList.toggle("hidden", q && !el.textContent.toLowerCase().includes(q));
+    });
+  });
+})();
+</script>
+</body>
+</html>
