@@ -177,6 +177,11 @@
             opacity: 0;
             pointer-events: none;
             z-index: 5;
+            transition: opacity 0.6s ease;
+        }
+
+        .car-detail-photo.visible {
+            opacity: 1;
         }
 
         .car-detail-photo img {
@@ -1307,8 +1312,8 @@
         { scale: 1.15, x: 0, y: -2, rotate: 0, brightness: 0.5, detailImg: null },
         // 1: Diagnostika - zoom rovně na kapotu (ne nahoru), pak cross-fade do galerie03
         { scale: 2.8, x: 18, y: 0, rotate: -1, brightness: 0.4, detailImg: 'detail1' },
-        // 2: Kola/geometrie - zoom zadní kolo, bez překrytí
-        { scale: 3.0, x: -20, y: -6, rotate: -1.5, brightness: 0.4, detailImg: null },
+        // 2: Kola/geometrie - zoom zadní pneumatika (vpravo nahoře na zvedáku)
+        { scale: 3.0, x: -20, y: 6, rotate: -1.5, brightness: 0.4, detailImg: null },
         // 3: Karoserie/klempírna - zoom bok
         { scale: 2.2, x: -3, y: 2, rotate: 2.5, brightness: 0.35, detailImg: null },
         // 4: Motor/elektro - zoom pod kapotu, cross-fade do galerie01 (motor detail)
@@ -1357,22 +1362,16 @@
             }
         }
 
-        // Cross-fade detail photos
-        // Detail fades in fully during second half of scene
+        // Cross-fade detail photos using CSS transitions
+        // Show detail after 40% into the scene, hide when leaving
         const currentDetail = scenes[sceneIndex].detailImg;
-        // Start fade at 35%, fully opaque by 65% of scene
-        const detailOpacity = Math.max(0, Math.min(1, (sceneFraction - 0.35) / 0.3));
+        const showDetail = currentDetail && sceneFraction > 0.4;
 
         allDetails.forEach(d => {
-            if (currentDetail && d.id === currentDetail) {
-                // Fade IN to full opacity (1.0)
-                d.style.opacity = detailOpacity;
+            if (showDetail && d.id === currentDetail) {
+                d.classList.add('visible');
             } else {
-                // Fade OUT immediately when leaving scene
-                const cur = parseFloat(d.style.opacity) || 0;
-                if (cur > 0) {
-                    d.style.opacity = Math.max(0, cur - 0.08);
-                }
+                d.classList.remove('visible');
             }
         });
 
