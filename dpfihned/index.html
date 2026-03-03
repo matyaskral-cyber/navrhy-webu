@@ -67,34 +67,21 @@
         .hero {
             min-height: 100vh; display: flex; align-items: center;
             position: relative; overflow: hidden;
-            background: radial-gradient(ellipse at 30% 50%, rgba(106,176,35,0.06) 0%, transparent 60%),
-                        radial-gradient(ellipse at 70% 80%, rgba(232,114,42,0.04) 0%, transparent 50%),
-                        var(--bg);
         }
 
-        .hero-grid-bg {
-            position: absolute; inset: 0; opacity: 0.03;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 60px 60px;
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('img/stroj.jpg') center center / cover no-repeat;
         }
 
-        .hero-glow {
-            position: absolute; width: 500px; height: 500px; border-radius: 50%;
-            background: radial-gradient(circle, var(--green-glow) 0%, transparent 70%);
-            top: 20%; left: -10%; filter: blur(80px); opacity: 0.3;
-            animation: glowPulse 6s ease-in-out infinite;
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.1); }
+        .hero-bg::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.75) 100%);
         }
 
         .hero-inner {
-            max-width: 1200px; margin: 0 auto; padding: 120px 24px 80px;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+            max-width: 1200px; margin: 0 auto; padding: 140px 24px 80px;
+            display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center;
             position: relative; z-index: 2; width: 100%;
         }
 
@@ -130,55 +117,49 @@
         .metric-val { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; line-height: 1; }
         .metric-label { font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
 
-        /* HERO RIGHT - DPF visual */
+        /* HERO RIGHT - price card */
         .hero-visual {
-            position: relative; display: flex; align-items: center; justify-content: center;
-        }
-
-        .dpf-ring {
-            width: 340px; height: 340px; border-radius: 50%;
-            border: 1px solid rgba(106,176,35,0.15);
             display: flex; align-items: center; justify-content: center;
-            position: relative;
-            animation: ringRotate 20s linear infinite;
         }
 
-        .dpf-ring::before {
-            content: ''; position: absolute; inset: 20px; border-radius: 50%;
-            border: 1px solid rgba(106,176,35,0.1);
+        .hero-card {
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px; padding: 48px 40px; text-align: center;
+            max-width: 340px; width: 100%;
         }
 
-        .dpf-ring::after {
-            content: ''; position: absolute; inset: 40px; border-radius: 50%;
-            border: 1px dashed rgba(106,176,35,0.08);
+        .hero-card-label {
+            font-size: 0.7rem; color: #666; text-transform: uppercase;
+            letter-spacing: 0.12em; margin-bottom: 12px;
         }
 
-        @keyframes ringRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .dpf-center {
-            width: 160px; height: 160px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(106,176,35,0.15) 0%, transparent 70%);
-            display: flex; align-items: center; justify-content: center; flex-direction: column;
-            animation: ringRotate 20s linear infinite reverse;
-        }
-
-        .dpf-center-price {
+        .hero-card-price {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem; font-weight: 700; color: var(--green); line-height: 1;
+            font-size: 3.5rem; font-weight: 700; color: #fff; line-height: 1;
+            margin-bottom: 4px;
         }
 
-        .dpf-center-label { font-size: 0.65rem; color: #555; text-transform: uppercase; letter-spacing: 0.1em; }
+        .hero-card-price span { color: var(--green); }
 
-        .orbit-dot {
-            position: absolute; width: 10px; height: 10px; border-radius: 50%;
-            background: var(--green);
-            box-shadow: 0 0 20px var(--green-glow);
+        .hero-card-note {
+            font-size: 0.8rem; color: #555; margin-bottom: 28px;
         }
 
-        .orbit-dot:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
-        .orbit-dot:nth-child(2) { bottom: 0; left: 50%; transform: translateX(-50%); }
-        .orbit-dot:nth-child(3) { left: 0; top: 50%; transform: translateY(-50%); }
-        .orbit-dot:nth-child(4) { right: 0; top: 50%; transform: translateY(-50%); }
+        .hero-card-features {
+            list-style: none; text-align: left; margin-bottom: 28px;
+        }
+
+        .hero-card-features li {
+            padding: 8px 0; font-size: 0.85rem; color: #999;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .hero-card-features li::before {
+            content: '\2713'; color: var(--green); font-weight: 700; font-size: 0.9rem;
+        }
 
         /* BUTTONS */
         .btn {
@@ -514,11 +495,10 @@
             }
             .hamburger { display: flex; }
 
-            .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 100px 24px 60px; }
+            .hero-inner { grid-template-columns: 1fr; gap: 32px; padding: 100px 24px 60px; }
             .hero-visual { order: -1; }
-            .dpf-ring { width: 220px; height: 220px; }
-            .dpf-center { width: 100px; height: 100px; }
-            .dpf-center-price { font-size: 1.3rem; }
+            .hero-card { padding: 32px 28px; max-width: 100%; }
+            .hero-card-price { font-size: 2.5rem; }
             .hero-text h1 { font-size: 2.2rem; }
             .hero-metrics { gap: 24px; flex-wrap: wrap; }
             .metric-val { font-size: 1.4rem; }
@@ -588,8 +568,7 @@
 
 <!-- HERO -->
 <section class="hero">
-    <div class="hero-grid-bg"></div>
-    <div class="hero-glow"></div>
+    <div class="hero-bg"></div>
     <div class="hero-inner">
         <div class="hero-text">
             <div class="overline">DPF IHNED s.r.o.</div>
@@ -607,15 +586,17 @@
             </div>
         </div>
         <div class="hero-visual">
-            <div class="dpf-ring">
-                <div class="orbit-dot"></div>
-                <div class="orbit-dot"></div>
-                <div class="orbit-dot"></div>
-                <div class="orbit-dot"></div>
-                <div class="dpf-center">
-                    <div class="dpf-center-price">2 990 Kč</div>
-                    <div class="dpf-center-label">Jednotná cena</div>
-                </div>
+            <div class="hero-card">
+                <div class="hero-card-label">Čištění DPF filtru</div>
+                <div class="hero-card-price">2 990<span> Kč</span></div>
+                <div class="hero-card-note">bez DPH &middot; jakákoliv značka</div>
+                <ul class="hero-card-features">
+                    <li>Obnovení až 98 % hodnot</li>
+                    <li>Na počkání</li>
+                    <li>Osobní i nákladní vozy</li>
+                    <li>Ekologický proces</li>
+                </ul>
+                <a href="tel:720970120" class="btn btn-green" style="width:100%;justify-content:center;">Objednat se</a>
             </div>
         </div>
     </div>
