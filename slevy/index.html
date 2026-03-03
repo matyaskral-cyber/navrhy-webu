@@ -1116,6 +1116,10 @@ function renderCards(items) {
 function applyFilters() {
   let result = allProducts.slice();
 
+  // filtr podle dostupných obchodů ve městě
+  const cityStores = getCityStores();
+  result = result.filter(p => cityStores.includes(p.store));
+
   // filtr obchodu
   if (activeStore !== "all") {
     result = result.filter(p => p.store === activeStore);
@@ -1202,76 +1206,98 @@ loadRealData();
 // === PWA — Service Worker, Město, Install, Offline ================
 // ═══════════════════════════════════════════════════════════════════
 
-// ─── Města ───────────────────────────────────────────────────────────
+// ─── Města + dostupné obchody ───────────────────────────────────────
+// stores: které řetězce mají v daném městě pobočku
+const ALL_STORES = ["albert","penny","billa","kaufland","lidl","tesco"];
 const CITIES = [
-  { id: "cz",       name: "Celá ČR",           locale: "" },
-  // Krajská města
-  { id: "praha",    name: "Praha",              locale: "v Praze",             lat: 50.0755, lon: 14.4378 },
-  { id: "brno",     name: "Brno",               locale: "v Brně",              lat: 49.1951, lon: 16.6068 },
-  { id: "ostrava",  name: "Ostrava",            locale: "v Ostravě",           lat: 49.8209, lon: 18.2625 },
-  { id: "plzen",    name: "Plzeň",              locale: "v Plzni",             lat: 49.7384, lon: 13.3736 },
-  { id: "liberec",  name: "Liberec",            locale: "v Liberci",           lat: 50.7671, lon: 15.0562 },
-  { id: "olomouc",  name: "Olomouc",            locale: "v Olomouci",          lat: 49.5938, lon: 17.2509 },
-  { id: "cb",       name: "České Budějovice",   locale: "v Č. Budějovicích",   lat: 48.9745, lon: 14.4744 },
-  { id: "hk",       name: "Hradec Králové",     locale: "v Hradci Králové",    lat: 50.2104, lon: 15.8255 },
-  { id: "pardubice",name: "Pardubice",          locale: "v Pardubicích",       lat: 50.0343, lon: 15.7812 },
-  { id: "zlin",     name: "Zlín",               locale: "ve Zlíně",            lat: 49.2267, lon: 17.6700 },
-  { id: "usti",     name: "Ústí nad Labem",     locale: "v Ústí n. L.",        lat: 50.6611, lon: 14.0531 },
-  { id: "kv",       name: "Karlovy Vary",       locale: "v Karlových Varech",  lat: 50.2325, lon: 12.8714 },
-  { id: "jihlava",  name: "Jihlava",            locale: "v Jihlavě",           lat: 49.3961, lon: 15.5912 },
+  { id: "cz",       name: "Celá ČR",           locale: "",                    stores: ALL_STORES },
+  // Krajská města — všechny řetězce
+  { id: "praha",    name: "Praha",              locale: "v Praze",             lat: 50.0755, lon: 14.4378, stores: ALL_STORES },
+  { id: "brno",     name: "Brno",               locale: "v Brně",              lat: 49.1951, lon: 16.6068, stores: ALL_STORES },
+  { id: "ostrava",  name: "Ostrava",            locale: "v Ostravě",           lat: 49.8209, lon: 18.2625, stores: ALL_STORES },
+  { id: "plzen",    name: "Plzeň",              locale: "v Plzni",             lat: 49.7384, lon: 13.3736, stores: ALL_STORES },
+  { id: "liberec",  name: "Liberec",            locale: "v Liberci",           lat: 50.7671, lon: 15.0562, stores: ALL_STORES },
+  { id: "olomouc",  name: "Olomouc",            locale: "v Olomouci",          lat: 49.5938, lon: 17.2509, stores: ALL_STORES },
+  { id: "cb",       name: "České Budějovice",   locale: "v Č. Budějovicích",   lat: 48.9745, lon: 14.4744, stores: ALL_STORES },
+  { id: "hk",       name: "Hradec Králové",     locale: "v Hradci Králové",    lat: 50.2104, lon: 15.8255, stores: ALL_STORES },
+  { id: "pardubice",name: "Pardubice",          locale: "v Pardubicích",       lat: 50.0343, lon: 15.7812, stores: ALL_STORES },
+  { id: "zlin",     name: "Zlín",               locale: "ve Zlíně",            lat: 49.2267, lon: 17.6700, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "usti",     name: "Ústí nad Labem",     locale: "v Ústí n. L.",        lat: 50.6611, lon: 14.0531, stores: ALL_STORES },
+  { id: "kv",       name: "Karlovy Vary",       locale: "v Karlových Varech",  lat: 50.2325, lon: 12.8714, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "jihlava",  name: "Jihlava",            locale: "v Jihlavě",           lat: 49.3961, lon: 15.5912, stores: ["albert","penny","billa","kaufland","lidl","tesco"] },
   // Menší města
-  { id: "jh",       name: "Jindřichův Hradec",  locale: "v J. Hradci",         lat: 49.1441, lon: 15.0029 },
-  { id: "tabor",    name: "Tábor",              locale: "v Táboře",            lat: 49.4147, lon: 14.6578 },
-  { id: "pisek",    name: "Písek",              locale: "v Písku",             lat: 49.3088, lon: 14.1475 },
-  { id: "strakonice", name: "Strakonice",       locale: "ve Strakonicích",     lat: 49.2614, lon: 13.9025 },
-  { id: "kladno",   name: "Kladno",             locale: "v Kladně",            lat: 50.1473, lon: 14.1044 },
-  { id: "mb",       name: "Mladá Boleslav",     locale: "v Ml. Boleslavi",     lat: 50.4113, lon: 14.9068 },
-  { id: "kolin",    name: "Kolín",              locale: "v Kolíně",            lat: 50.0283, lon: 15.2005 },
-  { id: "havirov",  name: "Havířov",            locale: "v Havířově",          lat: 49.7798, lon: 18.4310 },
-  { id: "karvina",  name: "Karviná",            locale: "v Karviné",           lat: 49.8542, lon: 18.5428 },
-  { id: "fm",       name: "Frýdek-Místek",      locale: "ve Frýdku-Místku",    lat: 49.6879, lon: 18.3531 },
-  { id: "opava",    name: "Opava",              locale: "v Opavě",             lat: 49.9382, lon: 17.9047 },
-  { id: "most",     name: "Most",               locale: "v Mostě",             lat: 50.5031, lon: 13.6367 },
-  { id: "teplice",  name: "Teplice",            locale: "v Teplicích",         lat: 50.6404, lon: 13.8245 },
-  { id: "decin",    name: "Děčín",              locale: "v Děčíně",            lat: 50.7726, lon: 14.2146 },
-  { id: "chomutov", name: "Chomutov",           locale: "v Chomutově",         lat: 50.4603, lon: 13.4179 },
-  { id: "jablonec", name: "Jablonec n. Nisou",  locale: "v Jablonci n. N.",    lat: 50.7275, lon: 15.1710 },
-  { id: "prostejov",name: "Prostějov",          locale: "v Prostějově",        lat: 49.4718, lon: 17.1118 },
-  { id: "prerov",   name: "Přerov",             locale: "v Přerově",           lat: 49.4553, lon: 17.4514 },
-  { id: "trebic",   name: "Třebíč",             locale: "v Třebíči",           lat: 49.2148, lon: 15.8814 },
-  { id: "znojmo",   name: "Znojmo",             locale: "ve Znojmě",           lat: 48.8555, lon: 16.0488 },
-  { id: "chrudim",  name: "Chrudim",            locale: "v Chrudimi",          lat: 49.9510, lon: 15.7960 },
-  { id: "svitavy",  name: "Svitavy",            locale: "ve Svitavách",        lat: 49.7557, lon: 16.4688 },
-  { id: "trutnov",  name: "Trutnov",            locale: "v Trutnově",          lat: 50.5608, lon: 15.9130 },
-  { id: "nachod",   name: "Náchod",             locale: "v Náchodě",           lat: 50.4164, lon: 16.1628 },
-  { id: "pelhrimov",name: "Pelhřimov",          locale: "v Pelhřimově",        lat: 49.4314, lon: 15.2233 },
-  { id: "benesov",  name: "Benešov",            locale: "v Benešově",          lat: 49.7813, lon: 14.6869 },
-  { id: "pribram",  name: "Příbram",            locale: "v Příbrami",          lat: 49.6893, lon: 14.0107 },
-  { id: "beroun",   name: "Beroun",             locale: "v Berouně",           lat: 49.9638, lon: 14.0723 },
-  { id: "rakovnik", name: "Rakovník",           locale: "v Rakovníku",         lat: 50.1044, lon: 13.7336 },
-  { id: "kutnahora",name: "Kutná Hora",         locale: "v Kutné Hoře",        lat: 49.9481, lon: 15.2681 },
-  { id: "litomerice",name:"Litoměřice",         locale: "v Litoměřicích",      lat: 50.5336, lon: 14.1319 },
-  { id: "sokolov",  name: "Sokolov",            locale: "v Sokolově",          lat: 50.1816, lon: 12.6388 },
-  { id: "cheb",     name: "Cheb",               locale: "v Chebu",             lat: 50.0796, lon: 12.3698 },
-  { id: "kromeriz", name: "Kroměříž",           locale: "v Kroměříži",         lat: 49.2975, lon: 17.3932 },
-  { id: "vsetin",   name: "Vsetín",             locale: "ve Vsetíně",          lat: 49.3387, lon: 17.9961 },
-  { id: "uhbrod",   name: "Uherské Hradiště",   locale: "v Uh. Hradišti",      lat: 49.0698, lon: 17.4597 },
-  { id: "bruntal",  name: "Bruntál",            locale: "v Bruntále",          lat: 49.9884, lon: 17.4650 },
-  { id: "sumperk",  name: "Šumperk",            locale: "v Šumperku",          lat: 49.9652, lon: 16.9710 },
-  { id: "jesenik",  name: "Jeseník",            locale: "v Jeseníku",          lat: 50.2290, lon: 17.1982 },
-  { id: "nj",       name: "Nový Jičín",         locale: "v Novém Jičíně",      lat: 49.5943, lon: 18.0103 },
-  { id: "ceskylipa",name: "Česká Lípa",         locale: "v České Lípě",        lat: 50.6858, lon: 14.5377 },
-  { id: "semily",   name: "Semily",             locale: "v Semilech",          lat: 50.6026, lon: 15.3342 },
-  { id: "ceskatrebova",name:"Česká Třebová",    locale: "v České Třebové",     lat: 49.9045, lon: 16.4431 },
-  { id: "domažlice",name: "Domažlice",          locale: "v Domažlicích",       lat: 49.4407, lon: 12.9298 },
-  { id: "klatovy",  name: "Klatovy",            locale: "v Klatovech",         lat: 49.3955, lon: 13.2950 },
-  { id: "rokycany", name: "Rokycany",           locale: "v Rokycanech",        lat: 49.7427, lon: 13.5946 },
-  { id: "tachov",   name: "Tachov",             locale: "v Tachově",           lat: 49.7953, lon: 12.6330 },
-  { id: "ck",       name: "Český Krumlov",      locale: "v Č. Krumlově",       lat: 48.8109, lon: 14.3152 },
-  { id: "prachatice",name:"Prachatice",         locale: "v Prachaticích",      lat: 49.0122, lon: 14.0011 },
+  { id: "jh",       name: "Jindřichův Hradec",  locale: "v J. Hradci",         lat: 49.1441, lon: 15.0029, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "tabor",    name: "Tábor",              locale: "v Táboře",            lat: 49.4147, lon: 14.6578, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "pisek",    name: "Písek",              locale: "v Písku",             lat: 49.3088, lon: 14.1475, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "strakonice", name: "Strakonice",       locale: "ve Strakonicích",     lat: 49.2614, lon: 13.9025, stores: ["penny","lidl","kaufland"] },
+  { id: "kladno",   name: "Kladno",             locale: "v Kladně",            lat: 50.1473, lon: 14.1044, stores: ALL_STORES },
+  { id: "mb",       name: "Mladá Boleslav",     locale: "v Ml. Boleslavi",     lat: 50.4113, lon: 14.9068, stores: ["albert","penny","billa","kaufland","lidl","tesco"] },
+  { id: "kolin",    name: "Kolín",              locale: "v Kolíně",            lat: 50.0283, lon: 15.2005, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "havirov",  name: "Havířov",            locale: "v Havířově",          lat: 49.7798, lon: 18.4310, stores: ["albert","penny","kaufland","lidl","tesco"] },
+  { id: "karvina",  name: "Karviná",            locale: "v Karviné",           lat: 49.8542, lon: 18.5428, stores: ["albert","penny","kaufland","lidl"] },
+  { id: "fm",       name: "Frýdek-Místek",      locale: "ve Frýdku-Místku",    lat: 49.6879, lon: 18.3531, stores: ["albert","penny","billa","kaufland","lidl","tesco"] },
+  { id: "opava",    name: "Opava",              locale: "v Opavě",             lat: 49.9382, lon: 17.9047, stores: ["albert","penny","billa","kaufland","lidl","tesco"] },
+  { id: "most",     name: "Most",               locale: "v Mostě",             lat: 50.5031, lon: 13.6367, stores: ["albert","penny","kaufland","lidl","tesco"] },
+  { id: "teplice",  name: "Teplice",            locale: "v Teplicích",         lat: 50.6404, lon: 13.8245, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "decin",    name: "Děčín",              locale: "v Děčíně",            lat: 50.7726, lon: 14.2146, stores: ["albert","penny","kaufland","lidl"] },
+  { id: "chomutov", name: "Chomutov",           locale: "v Chomutově",         lat: 50.4603, lon: 13.4179, stores: ["albert","penny","kaufland","lidl","tesco"] },
+  { id: "jablonec", name: "Jablonec n. Nisou",  locale: "v Jablonci n. N.",    lat: 50.7275, lon: 15.1710, stores: ["albert","penny","billa","lidl"] },
+  { id: "prostejov",name: "Prostějov",          locale: "v Prostějově",        lat: 49.4718, lon: 17.1118, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "prerov",   name: "Přerov",             locale: "v Přerově",           lat: 49.4553, lon: 17.4514, stores: ["albert","penny","billa","kaufland","lidl","tesco"] },
+  { id: "trebic",   name: "Třebíč",             locale: "v Třebíči",           lat: 49.2148, lon: 15.8814, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "znojmo",   name: "Znojmo",             locale: "ve Znojmě",           lat: 48.8555, lon: 16.0488, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "chrudim",  name: "Chrudim",            locale: "v Chrudimi",          lat: 49.9510, lon: 15.7960, stores: ["albert","penny","billa","lidl"] },
+  { id: "svitavy",  name: "Svitavy",            locale: "ve Svitavách",        lat: 49.7557, lon: 16.4688, stores: ["penny","billa","lidl"] },
+  { id: "trutnov",  name: "Trutnov",            locale: "v Trutnově",          lat: 50.5608, lon: 15.9130, stores: ["albert","penny","billa","lidl"] },
+  { id: "nachod",   name: "Náchod",             locale: "v Náchodě",           lat: 50.4164, lon: 16.1628, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "pelhrimov",name: "Pelhřimov",          locale: "v Pelhřimově",        lat: 49.4314, lon: 15.2233, stores: ["penny","billa","lidl"] },
+  { id: "benesov",  name: "Benešov",            locale: "v Benešově",          lat: 49.7813, lon: 14.6869, stores: ["albert","penny","billa","lidl"] },
+  { id: "pribram",  name: "Příbram",            locale: "v Příbrami",          lat: 49.6893, lon: 14.0107, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "beroun",   name: "Beroun",             locale: "v Berouně",           lat: 49.9638, lon: 14.0723, stores: ["albert","penny","billa","lidl"] },
+  { id: "rakovnik", name: "Rakovník",           locale: "v Rakovníku",         lat: 50.1044, lon: 13.7336, stores: ["penny","billa","lidl"] },
+  { id: "kutnahora",name: "Kutná Hora",         locale: "v Kutné Hoře",        lat: 49.9481, lon: 15.2681, stores: ["albert","penny","billa","lidl"] },
+  { id: "litomerice",name:"Litoměřice",         locale: "v Litoměřicích",      lat: 50.5336, lon: 14.1319, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "sokolov",  name: "Sokolov",            locale: "v Sokolově",          lat: 50.1816, lon: 12.6388, stores: ["albert","penny","kaufland","lidl"] },
+  { id: "cheb",     name: "Cheb",               locale: "v Chebu",             lat: 50.0796, lon: 12.3698, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "kromeriz", name: "Kroměříž",           locale: "v Kroměříži",         lat: 49.2975, lon: 17.3932, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "vsetin",   name: "Vsetín",             locale: "ve Vsetíně",          lat: 49.3387, lon: 17.9961, stores: ["albert","penny","billa","lidl"] },
+  { id: "uhbrod",   name: "Uherské Hradiště",   locale: "v Uh. Hradišti",      lat: 49.0698, lon: 17.4597, stores: ["albert","penny","billa","kaufland","lidl","tesco"] },
+  { id: "bruntal",  name: "Bruntál",            locale: "v Bruntále",          lat: 49.9884, lon: 17.4650, stores: ["penny","kaufland","lidl"] },
+  { id: "sumperk",  name: "Šumperk",            locale: "v Šumperku",          lat: 49.9652, lon: 16.9710, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "jesenik",  name: "Jeseník",            locale: "v Jeseníku",          lat: 50.2290, lon: 17.1982, stores: ["penny","lidl"] },
+  { id: "nj",       name: "Nový Jičín",         locale: "v Novém Jičíně",      lat: 49.5943, lon: 18.0103, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "ceskylipa",name: "Česká Lípa",         locale: "v České Lípě",        lat: 50.6858, lon: 14.5377, stores: ["albert","penny","kaufland","lidl"] },
+  { id: "semily",   name: "Semily",             locale: "v Semilech",          lat: 50.6026, lon: 15.3342, stores: ["penny","lidl"] },
+  { id: "ceskatrebova",name:"Česká Třebová",    locale: "v České Třebové",     lat: 49.9045, lon: 16.4431, stores: ["penny","billa","lidl"] },
+  { id: "domažlice",name: "Domažlice",          locale: "v Domažlicích",       lat: 49.4407, lon: 12.9298, stores: ["penny","kaufland","lidl"] },
+  { id: "klatovy",  name: "Klatovy",            locale: "v Klatovech",         lat: 49.3955, lon: 13.2950, stores: ["albert","penny","billa","kaufland","lidl"] },
+  { id: "rokycany", name: "Rokycany",           locale: "v Rokycanech",        lat: 49.7427, lon: 13.5946, stores: ["penny","lidl"] },
+  { id: "tachov",   name: "Tachov",             locale: "v Tachově",           lat: 49.7953, lon: 12.6330, stores: ["penny","lidl"] },
+  { id: "ck",       name: "Český Krumlov",      locale: "v Č. Krumlově",       lat: 48.8109, lon: 14.3152, stores: ["penny","billa","lidl"] },
+  { id: "prachatice",name:"Prachatice",         locale: "v Prachaticích",      lat: 49.0122, lon: 14.0011, stores: ["penny","lidl"] },
 ];
 
 let selectedCity = localStorage.getItem("slevydnes-city") || "cz";
+
+function getCityStores() {
+  const city = CITIES.find(c => c.id === selectedCity) || CITIES[0];
+  return city.stores || ALL_STORES;
+}
+
+function updateStoreButtons() {
+  const available = getCityStores();
+  document.querySelectorAll('#storeFilters .filter-btn').forEach(btn => {
+    const store = btn.dataset.store;
+    if (store === "all") return;
+    btn.style.display = available.includes(store) ? "" : "none";
+    // Pokud je aktivní filtr na obchod co v městě není, přepni na "Vše"
+    if (!available.includes(store) && btn.classList.contains("active")) {
+      btn.classList.remove("active");
+      document.querySelector('.filter-btn[data-store="all"]').classList.add("active");
+      activeStore = "all";
+    }
+  });
+}
 
 function updateCityUI() {
   const city = CITIES.find(c => c.id === selectedCity) || CITIES[0];
@@ -1283,6 +1309,7 @@ function updateCityUI() {
   } else {
     heroEl.innerHTML = `<span>Slevy</span> ${city.locale}`;
   }
+  updateStoreButtons();
 }
 
 function selectCity(cityId) {
@@ -1290,6 +1317,7 @@ function selectCity(cityId) {
   localStorage.setItem("slevydnes-city", cityId);
   updateCityUI();
   toggleCityModal(false);
+  applyFilters();
 
   // Aktualizovat aktivní položku v listu
   document.querySelectorAll('.city-item').forEach(el => {
