@@ -144,6 +144,13 @@
             background: #000;
         }
 
+        /* Lock body scroll when showcase is active */
+        body.showcase-locked {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
+
         .car-image-wrapper {
             position: absolute;
             inset: 0;
@@ -1388,7 +1395,7 @@
 
 <script>
     // ==============================
-    // CAR SHOWCASE - event driven (no scroll)
+    // CAR SHOWCASE - locks page, event driven
     // ==============================
     const carShowcase = document.getElementById('carShowcase');
     const carImg = document.getElementById('carImg');
@@ -1419,100 +1426,103 @@
     const scenes = isMobile ? mobileScenes : desktopScenes;
     let activeScene = 0;
     let locked = false;
+    let showcaseActive = false;
+    let savedScrollY = 0;
+
+    function lockPage() {
+        if (showcaseActive) return;
+        showcaseActive = true;
+        savedScrollY = window.scrollY;
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${savedScrollY}px`;
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function unlockPage() {
+        if (!showcaseActive) return;
+        showcaseActive = false;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, savedScrollY);
+    }
 
     function goToScene(idx) {
         if (idx < 0 || idx >= totalScenes) return;
         activeScene = idx;
         const s = scenes[idx];
 
-        // Animate car image
         carImg.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.8s ease';
         carImg.style.transform = `scale(${s.scale}) translate(${s.x}%, ${s.y}%) rotate(${s.rotate}deg)`;
         carImg.style.filter = `brightness(${s.brightness})`;
 
-        // Labels
         for (let i = 0; i < totalScenes; i++) {
-            const label = document.getElementById('scene' + i);
-            const dot = dots[i];
-            if (i === idx) {
-                label.classList.add('active');
-                dot.classList.add('active');
-            } else {
-                label.classList.remove('active');
-                dot.classList.remove('active');
-            }
+            document.getElementById('scene' + i).classList.toggle('active', i === idx);
+            dots[i].classList.toggle('active', i === idx);
         }
 
-        // Detail photos
         allDetails.forEach(d => {
-            if (s.detailImg && d.id === s.detailImg) {
-                d.classList.add('visible');
-            } else {
-                d.classList.remove('visible');
-            }
+            d.classList.toggle('visible', !!(s.detailImg && d.id === s.detailImg));
         });
 
-        // Zoomed class
         carShowcase.classList.toggle('zoomed', idx > 0);
-
-        // Scroll hint
         scrollHint.classList.toggle('hidden', idx > 0);
     }
 
-    function nextScene() {
+    function handleInput(direction) {
+        // direction: 1 = down/next, -1 = up/prev
         if (locked) return;
-        if (activeScene >= totalScenes - 1) {
-            // Exit showcase → scroll to services
-            document.getElementById('sluzby').scrollIntoView({ behavior: 'smooth' });
-            return;
+
+        if (direction === 1) {
+            if (activeScene < totalScenes - 1) {
+                locked = true;
+                goToScene(activeScene + 1);
+                setTimeout(() => { locked = false; }, 700);
+            } else {
+                // Last scene, scroll down → release page, scroll to services
+                unlockPage();
+                setTimeout(() => {
+                    document.getElementById('sluzby').scrollIntoView({ behavior: 'smooth' });
+                }, 50);
+            }
+        } else {
+            if (activeScene > 0) {
+                locked = true;
+                goToScene(activeScene - 1);
+                setTimeout(() => { locked = false; }, 700);
+            } else {
+                // First scene, scroll up → release page, scroll above showcase
+                unlockPage();
+            }
         }
-        locked = true;
-        goToScene(activeScene + 1);
-        setTimeout(() => { locked = false; }, 700);
     }
 
-    function prevScene() {
-        if (locked) return;
-        if (activeScene <= 0) return; // already at start, normal scroll handles it
-        locked = true;
-        goToScene(activeScene - 1);
-        setTimeout(() => { locked = false; }, 700);
-    }
-
-    // Is showcase in view?
-    function showcaseInView() {
-        const rect = carShowcase.getBoundingClientRect();
-        return rect.top <= 5 && rect.bottom >= window.innerHeight - 5;
-    }
-
-    // WHEEL (desktop)
+    // WHEEL
     window.addEventListener('wheel', (e) => {
-        if (!showcaseInView()) return;
-        // Allow scrolling up past showcase when at scene 0
-        if (activeScene === 0 && e.deltaY < 0) return;
-
+        if (!showcaseActive) return;
         e.preventDefault();
-        if (e.deltaY > 5) nextScene();
-        else if (e.deltaY < -5) prevScene();
+        if (e.deltaY > 5) handleInput(1);
+        else if (e.deltaY < -5) handleInput(-1);
     }, { passive: false });
 
-    // TOUCH (mobile)
+    // TOUCH
     let touchY = 0;
-    let touchActive = false;
+    let touchDone = false;
 
-    carShowcase.addEventListener('touchstart', (e) => {
+    window.addEventListener('touchstart', (e) => {
         touchY = e.touches[0].clientY;
-        touchActive = false;
+        touchDone = false;
     }, { passive: true });
 
-    carShowcase.addEventListener('touchmove', (e) => {
-        if (touchActive || locked) return;
+    window.addEventListener('touchmove', (e) => {
+        if (!showcaseActive || touchDone) return;
         const dy = touchY - e.touches[0].clientY;
         if (Math.abs(dy) < 40) return;
-        touchActive = true;
+        touchDone = true;
         e.preventDefault();
-        if (dy > 0) nextScene();
-        else prevScene();
+        handleInput(dy > 0 ? 1 : -1);
     }, { passive: false });
 
     // Dot click
@@ -1525,17 +1535,27 @@
         });
     });
 
-    // Lock page scroll when showcase is in view (except scene 0 scroll up)
-    // This prevents the page from scrolling past the showcase
-    function handlePageScroll() {
-        if (showcaseInView() && activeScene > 0) {
-            // Keep page pinned to showcase
-            window.scrollTo({ top: carShowcase.offsetTop });
-        }
-    }
+    // Detect when showcase enters viewport → lock page
+    const showcaseObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                lockPage();
+            }
+        });
+    }, { threshold: 0.5 });
 
+    showcaseObserver.observe(carShowcase);
+
+    // Also check on scroll - if user scrolls back up to showcase from below
     window.addEventListener('scroll', () => {
-        requestAnimationFrame(handlePageScroll);
+        if (showcaseActive) return;
+        const rect = carShowcase.getBoundingClientRect();
+        // Entering from below (scrolling up)
+        if (rect.bottom >= window.innerHeight * 0.5 && rect.top <= 0) {
+            activeScene = totalScenes - 1;
+            goToScene(activeScene);
+            lockPage();
+        }
     }, { passive: true });
 
     // Init
