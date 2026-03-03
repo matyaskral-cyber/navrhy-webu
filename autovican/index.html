@@ -62,14 +62,40 @@
         }
 
         .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
             text-decoration: none;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-sub {
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--white);
             letter-spacing: -0.02em;
         }
 
-        .logo span { color: var(--primary); }
+        .logo-main span { color: var(--primary); }
+
+        .logo-elit {
+            height: 28px;
+            width: auto;
+            opacity: 0.85;
+        }
 
         .nav-links {
             display: flex;
@@ -972,7 +998,9 @@
             .service-card { padding: 20px; }
             .gallery-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
             .nav-inner { height: 60px; }
-            .logo { font-size: 1.2rem; }
+            .logo-main { font-size: 1.1rem; }
+            .logo-sub { font-size: 0.45rem; }
+            .logo-elit { height: 22px; }
             .pricing-card .price { font-size: 1.8rem; }
             .contact-card { padding: 16px; gap: 12px; }
             .contact-form { padding: 20px; }
@@ -996,7 +1024,13 @@
 <!-- NAV -->
 <nav id="nav">
     <div class="nav-inner">
-        <a href="#" class="logo">AUTO<span>VICAN</span></a>
+        <a href="#" class="logo">
+            <img src="img/elit.png" alt="ELIT Partner" class="logo-elit">
+            <div class="logo-text">
+                <span class="logo-sub">Autoservis & Pneuservis</span>
+                <span class="logo-main">AUTO<span>VICAN</span></span>
+            </div>
+        </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#sluzby">Služby</a></li>
             <li><a href="#o-nas">O nás</a></li>
@@ -1392,7 +1426,13 @@
 <footer>
     <div class="footer-inner">
         <div class="footer-left">
-            <a href="#" class="logo" style="margin-bottom:8px;display:inline-block;">AUTO<span>VICAN</span></a>
+            <a href="#" class="logo" style="margin-bottom:8px;display:inline-flex;">
+                <img src="img/elit.png" alt="ELIT Partner" class="logo-elit">
+                <div class="logo-text">
+                    <span class="logo-sub">Autoservis & Pneuservis</span>
+                    <span class="logo-main">AUTO<span>VICAN</span></span>
+                </div>
+            </a>
             <p>&copy; 2026 Autoservis Vican. Všechna práva vyhrazena.</p>
         </div>
         <div class="footer-right">
