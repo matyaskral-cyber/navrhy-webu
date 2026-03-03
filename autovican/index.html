@@ -139,12 +139,6 @@
            ============================================ */
         .car-showcase {
             position: relative;
-            height: 600vh; /* tall scroll area */
-        }
-
-        .car-showcase-sticky {
-            position: sticky;
-            top: 0;
             height: 100vh;
             overflow: hidden;
             background: #000;
@@ -198,7 +192,7 @@
             z-index: 3;
         }
 
-        .car-showcase-sticky.zoomed .car-overlay {
+        .car-showcase.zoomed .car-overlay {
             background: rgba(0,0,0,0.5);
         }
 
@@ -847,8 +841,7 @@
             }
             .hamburger { display: flex; }
 
-            /* Car showcase - shorter scroll on mobile */
-            .car-showcase { height: 400vh; }
+            /* Car showcase on mobile */
             .car-image-wrapper img.car-main {
                 width: 260%;
                 min-height: 100%;
@@ -952,7 +945,7 @@
 
         /* Small phones */
         @media (max-width: 480px) {
-            .car-showcase { height: 350vh; }
+            /* car showcase already 100vh */
             .car-label h2 { font-size: 1.3rem; }
             .car-label p { font-size: 0.8rem; max-width: 280px; }
             .services-grid { gap: 10px; }
@@ -999,7 +992,6 @@
 
 <!-- CAR SHOWCASE - scroll-driven zoom & rotate -->
 <div class="car-showcase" id="carShowcase">
-    <div class="car-showcase-sticky" id="carSticky">
         <div class="car-image-wrapper">
             <img src="img/galerie08.jpg" alt="Auto na zvedáku v servisu" id="carImg" class="car-main">
         </div>
@@ -1082,7 +1074,6 @@
             <span>Scrollujte dolů</span>
             <div class="scroll-hint-arrow"></div>
         </div>
-    </div>
 </div>
 
 <!-- SERVICES -->
@@ -1397,18 +1388,16 @@
 
 <script>
     // ==============================
-    // CAR SHOWCASE - scroll driven
+    // CAR SHOWCASE - event driven (no scroll)
     // ==============================
     const carShowcase = document.getElementById('carShowcase');
     const carImg = document.getElementById('carImg');
-    const carSticky = document.getElementById('carSticky');
     const scrollHint = document.getElementById('scrollHint');
     const dots = document.querySelectorAll('.car-dot');
+    const allDetails = document.querySelectorAll('.car-detail-photo');
     const totalScenes = 6;
-
     const isMobile = window.innerWidth <= 768;
 
-    // Desktop scenes
     const desktopScenes = [
         { scale: 1.15, x: 0, y: -2, rotate: 0, brightness: 0.5, detailImg: null },
         { scale: 2.8, x: 18, y: 0, rotate: -1, brightness: 0.4, detailImg: 'detail1' },
@@ -1418,7 +1407,6 @@
         { scale: 1.3, x: -2, y: -2, rotate: 1, brightness: 0.3, detailImg: null }
     ];
 
-    // Mobile - gentler zooms (image is already bigger), less rotation
     const mobileScenes = [
         { scale: 1.0, x: 0, y: 0, rotate: 0, brightness: 0.5, detailImg: null },
         { scale: 1.8, x: 12, y: 0, rotate: -0.5, brightness: 0.4, detailImg: 'detail1' },
@@ -1429,186 +1417,129 @@
     ];
 
     const scenes = isMobile ? mobileScenes : desktopScenes;
+    let activeScene = 0;
+    let locked = false;
 
-    let currentScene = -1;
-    const allDetails = document.querySelectorAll('.car-detail-photo');
+    function goToScene(idx) {
+        if (idx < 0 || idx >= totalScenes) return;
+        activeScene = idx;
+        const s = scenes[idx];
 
-    function updateCarScene(progress) {
-        // progress: 0 to 1 across the entire scroll
-        const sceneFloat = progress * (totalScenes - 1);
-        const sceneIndex = Math.min(Math.floor(sceneFloat), totalScenes - 1);
-        const sceneFraction = sceneFloat - sceneIndex;
+        // Animate car image
+        carImg.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.8s ease';
+        carImg.style.transform = `scale(${s.scale}) translate(${s.x}%, ${s.y}%) rotate(${s.rotate}deg)`;
+        carImg.style.filter = `brightness(${s.brightness})`;
 
-        // Interpolate between current and next scene
-        const from = scenes[sceneIndex];
-        const to = scenes[Math.min(sceneIndex + 1, totalScenes - 1)];
-
-        const eased = easeInOutCubic(sceneFraction);
-
-        const scale = lerp(from.scale, to.scale, eased);
-        const x = lerp(from.x, to.x, eased);
-        const y = lerp(from.y, to.y, eased);
-        const rotate = lerp(from.rotate, to.rotate, eased);
-        const brightness = lerp(from.brightness, to.brightness, eased);
-
-        carImg.style.transform = `scale(${scale}) translate(${x}%, ${y}%) rotate(${rotate}deg)`;
-        carImg.style.filter = `brightness(${brightness})`;
-
-        // Update labels
-        if (sceneIndex !== currentScene) {
-            currentScene = sceneIndex;
-            for (let i = 0; i < totalScenes; i++) {
-                const label = document.getElementById('scene' + i);
-                const dot = dots[i];
-                if (i === sceneIndex) {
-                    label.classList.add('active');
-                    dot.classList.add('active');
-                } else {
-                    label.classList.remove('active');
-                    dot.classList.remove('active');
-                }
+        // Labels
+        for (let i = 0; i < totalScenes; i++) {
+            const label = document.getElementById('scene' + i);
+            const dot = dots[i];
+            if (i === idx) {
+                label.classList.add('active');
+                dot.classList.add('active');
+            } else {
+                label.classList.remove('active');
+                dot.classList.remove('active');
             }
         }
 
-        // Cross-fade detail photos - show for entire scene duration
-        const currentDetail = scenes[sceneIndex].detailImg;
-
+        // Detail photos
         allDetails.forEach(d => {
-            if (currentDetail && d.id === currentDetail) {
+            if (s.detailImg && d.id === s.detailImg) {
                 d.classList.add('visible');
             } else {
                 d.classList.remove('visible');
             }
         });
 
-        // Toggle zoomed class
-        carSticky.classList.toggle('zoomed', sceneIndex > 0);
+        // Zoomed class
+        carShowcase.classList.toggle('zoomed', idx > 0);
 
-        // Hide scroll hint after first scene
-        scrollHint.classList.toggle('hidden', progress > 0.05);
+        // Scroll hint
+        scrollHint.classList.toggle('hidden', idx > 0);
     }
 
-    function lerp(a, b, t) { return a + (b - a) * t; }
-    function easeInOutCubic(t) {
-        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-
-    // ==============================
-    // SNAP SCROLL - one gesture = one scene
-    // ==============================
-    let activeScene = 0;
-    let isAnimating = false;
-
-    function getSceneScrollPos(sceneIdx) {
-        const scrollableHeight = carShowcase.offsetHeight - window.innerHeight;
-        return carShowcase.offsetTop + (sceneIdx / (totalScenes - 1)) * scrollableHeight;
-    }
-
-    function snapToScene(idx) {
-        if (idx < 0 || idx >= totalScenes || isAnimating) return;
-        activeScene = idx;
-        isAnimating = true;
-        window.scrollTo({ top: getSceneScrollPos(idx), behavior: 'smooth' });
-        // Unlock after animation
-        setTimeout(() => { isAnimating = false; }, 600);
-    }
-
-    // Is the showcase currently in viewport/active?
-    function isInShowcase() {
-        const rect = carShowcase.getBoundingClientRect();
-        return rect.top <= 10 && rect.bottom > window.innerHeight;
-    }
-
-    // Wheel (desktop)
-    window.addEventListener('wheel', (e) => {
-        if (!isInShowcase() || isAnimating) return;
-        e.preventDefault();
-        if (e.deltaY > 20) {
-            // Scroll down
-            if (activeScene < totalScenes - 1) {
-                snapToScene(activeScene + 1);
-            } else {
-                // Last scene -> let page scroll normally
-                isAnimating = true;
-                window.scrollBy({ top: 200, behavior: 'smooth' });
-                setTimeout(() => { isAnimating = false; }, 400);
-            }
-        } else if (e.deltaY < -20) {
-            // Scroll up
-            if (activeScene > 0) {
-                snapToScene(activeScene - 1);
-            } else {
-                // First scene -> let page scroll up normally
-                isAnimating = true;
-                window.scrollBy({ top: -200, behavior: 'smooth' });
-                setTimeout(() => { isAnimating = false; }, 400);
-            }
+    function nextScene() {
+        if (locked) return;
+        if (activeScene >= totalScenes - 1) {
+            // Exit showcase → scroll to services
+            document.getElementById('sluzby').scrollIntoView({ behavior: 'smooth' });
+            return;
         }
+        locked = true;
+        goToScene(activeScene + 1);
+        setTimeout(() => { locked = false; }, 700);
+    }
+
+    function prevScene() {
+        if (locked) return;
+        if (activeScene <= 0) return; // already at start, normal scroll handles it
+        locked = true;
+        goToScene(activeScene - 1);
+        setTimeout(() => { locked = false; }, 700);
+    }
+
+    // Is showcase in view?
+    function showcaseInView() {
+        const rect = carShowcase.getBoundingClientRect();
+        return rect.top <= 5 && rect.bottom >= window.innerHeight - 5;
+    }
+
+    // WHEEL (desktop)
+    window.addEventListener('wheel', (e) => {
+        if (!showcaseInView()) return;
+        // Allow scrolling up past showcase when at scene 0
+        if (activeScene === 0 && e.deltaY < 0) return;
+
+        e.preventDefault();
+        if (e.deltaY > 5) nextScene();
+        else if (e.deltaY < -5) prevScene();
     }, { passive: false });
 
-    // Touch (mobile)
-    let touchStartY = 0;
-    let touchHandled = false;
+    // TOUCH (mobile)
+    let touchY = 0;
+    let touchActive = false;
 
-    window.addEventListener('touchstart', (e) => {
-        touchStartY = e.touches[0].clientY;
-        touchHandled = false;
+    carShowcase.addEventListener('touchstart', (e) => {
+        touchY = e.touches[0].clientY;
+        touchActive = false;
     }, { passive: true });
 
-    window.addEventListener('touchmove', (e) => {
-        if (!isInShowcase() || isAnimating || touchHandled) return;
-        const deltaY = touchStartY - e.touches[0].clientY;
-        if (Math.abs(deltaY) < 30) return; // ignore tiny moves
-        touchHandled = true;
+    carShowcase.addEventListener('touchmove', (e) => {
+        if (touchActive || locked) return;
+        const dy = touchY - e.touches[0].clientY;
+        if (Math.abs(dy) < 40) return;
+        touchActive = true;
         e.preventDefault();
-        if (deltaY > 0) {
-            // Swipe up = next
-            if (activeScene < totalScenes - 1) {
-                snapToScene(activeScene + 1);
-            } else {
-                isAnimating = true;
-                window.scrollBy({ top: 200, behavior: 'smooth' });
-                setTimeout(() => { isAnimating = false; }, 400);
-            }
-        } else {
-            // Swipe down = prev
-            if (activeScene > 0) {
-                snapToScene(activeScene - 1);
-            } else {
-                isAnimating = true;
-                window.scrollBy({ top: -200, behavior: 'smooth' });
-                setTimeout(() => { isAnimating = false; }, 400);
-            }
-        }
+        if (dy > 0) nextScene();
+        else prevScene();
     }, { passive: false });
 
     // Dot click
     dots.forEach(dot => {
         dot.addEventListener('click', () => {
-            snapToScene(parseInt(dot.dataset.scene));
+            if (locked) return;
+            locked = true;
+            goToScene(parseInt(dot.dataset.scene));
+            setTimeout(() => { locked = false; }, 700);
         });
     });
 
-    // Sync scene from scroll position (for initial load & when entering showcase)
-    function syncFromScroll() {
-        const rect = carShowcase.getBoundingClientRect();
-        const scrollableHeight = carShowcase.offsetHeight - window.innerHeight;
-        const scrolled = -rect.top;
-        const progress = Math.max(0, Math.min(1, scrolled / scrollableHeight));
-        updateCarScene(progress);
-
-        // Keep activeScene in sync
-        if (!isAnimating) {
-            activeScene = Math.round(progress * (totalScenes - 1));
+    // Lock page scroll when showcase is in view (except scene 0 scroll up)
+    // This prevents the page from scrolling past the showcase
+    function handlePageScroll() {
+        if (showcaseInView() && activeScene > 0) {
+            // Keep page pinned to showcase
+            window.scrollTo({ top: carShowcase.offsetTop });
         }
     }
 
     window.addEventListener('scroll', () => {
-        requestAnimationFrame(syncFromScroll);
+        requestAnimationFrame(handlePageScroll);
     }, { passive: true });
 
     // Init
-    syncFromScroll();
+    goToScene(0);
 
     // ==============================
     // NAV
