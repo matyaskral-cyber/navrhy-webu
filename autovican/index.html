@@ -158,7 +158,7 @@
             justify-content: center;
         }
 
-        .car-image-wrapper img {
+        .car-image-wrapper img.car-main {
             width: 180%;
             max-width: none;
             height: auto;
@@ -170,12 +170,33 @@
             will-change: transform;
         }
 
+        /* Detail photo overlays - fade in during specific scenes */
+        .car-detail-photo {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .car-detail-photo.active {
+            opacity: 1;
+        }
+
+        .car-detail-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .car-overlay {
             position: absolute;
             inset: 0;
             background: rgba(0,0,0,0.35);
             transition: background 0.8s ease;
             pointer-events: none;
+            z-index: 3;
         }
 
         .car-showcase-sticky.zoomed .car-overlay {
@@ -874,8 +895,20 @@
 <div class="car-showcase" id="carShowcase">
     <div class="car-showcase-sticky" id="carSticky">
         <div class="car-image-wrapper">
-            <img src="img/galerie08.jpg" alt="Auto na zvedáku v servisu" id="carImg">
+            <img src="img/galerie08.jpg" alt="Auto na zvedáku v servisu" id="carImg" class="car-main">
         </div>
+
+        <!-- Detail photos that fade in during specific scenes -->
+        <div class="car-detail-photo" id="detail1">
+            <img src="img/galerie03.jpg" alt="Diagnostika motoru">
+        </div>
+        <div class="car-detail-photo" id="detail2">
+            <img src="img/galerie07.jpg" alt="Pneuservis">
+        </div>
+        <div class="car-detail-photo" id="detail4">
+            <img src="img/galerie01.jpg" alt="Motor detail">
+        </div>
+
         <div class="car-overlay" id="carOverlay"></div>
 
         <!-- Scene 0: Intro -->
@@ -889,11 +922,11 @@
             </div>
         </div>
 
-        <!-- Scene 1: Motor / Mechanika -->
+        <!-- Scene 1: Diagnostika -->
         <div class="car-label" id="scene1" style="inset:0; display:flex;">
             <div class="car-label-tag">Pod kapotou</div>
-            <h2>Mechanické opravy<br>& diagnostika</h2>
-            <p>Pozáruční servis, vyhledávání závad počítačovou diagnostikou, dekarbonizace naftových i benzínových motorů.</p>
+            <h2>Počítačová<br>diagnostika</h2>
+            <p>Vyhledávání a odstranění závad moderní diagnostikou. Přesná identifikace problému na první pokus.</p>
         </div>
 
         <!-- Scene 2: Kola / Pneuservis -->
@@ -910,11 +943,11 @@
             <p>Klempířské, karosářské a lakýrnické práce. Od lokálních oprav po celolaky s přesným namícháním odstínu.</p>
         </div>
 
-        <!-- Scene 4: Interiér / Klimatizace -->
+        <!-- Scene 4: Motor / Elektro -->
         <div class="car-label" id="scene4" style="inset:0; display:flex;">
-            <div class="car-label-tag">Interiér & komfort</div>
-            <h2>Servis klimatizací<br>& elektro</h2>
-            <p>Plnění a opravy klimatizací. Diagnostika a opravy elektrických systémů, osvětlení a elektroniky vozidla.</p>
+            <div class="car-label-tag">Srdce vozu</div>
+            <h2>Mechanické opravy<br>& servis</h2>
+            <p>Pozáruční servis, výměna olejů TOTAL, dekarbonizace motorů, servis klimatizací a kompletní elektropráce.</p>
         </div>
 
         <!-- Scene 5: CTA -->
@@ -1268,24 +1301,28 @@
     const totalScenes = 6;
 
     // galerie08.jpg = BMW M4 on lift, side view facing LEFT
-    // Front/hood = LEFT side, rear = RIGHT, wheels = BOTTOM, cabin/windows = CENTER-TOP
-    // translate: +X moves img right (shows LEFT), -X shows RIGHT, +Y shows TOP, -Y shows BOTTOM
+    // Front/hood = LEFT, rear = RIGHT, wheels = BOTTOM, cabin = CENTER-TOP, lift = CENTER
+    // translate: +X → shows LEFT, -X → shows RIGHT, +Y → shows TOP, -Y → shows BOTTOM
+    //
+    // detailImg: which detail photo fades in (null = none)
+    // detailAt: at what fraction (0-1) within the scene the detail starts fading in
     const scenes = [
-        // 0: Intro - full car on lift, dramatic
-        { scale: 1.15, x: 0, y: -2, rotate: 0, brightness: 0.5 },
-        // 1: Motor - zoom front/hood area (LEFT side of image)
-        { scale: 2.8, x: 18, y: 5, rotate: -2, brightness: 0.4 },
-        // 2: Kola/geometrie - zoom zadní kolo (RIGHT-BOTTOM)
-        { scale: 3.2, x: -14, y: -12, rotate: -1.5, brightness: 0.4 },
-        // 3: Karoserie - zoom side panel / doors (CENTER of car)
-        { scale: 2.2, x: -3, y: 2, rotate: 2.5, brightness: 0.35 },
-        // 4: Interiér - zoom cabin / windows (CENTER-TOP)
-        { scale: 2.8, x: 2, y: 8, rotate: -1.5, brightness: 0.35 },
-        // 5: CTA - pull back, slight angle, whole car
-        { scale: 1.3, x: -2, y: -2, rotate: 1, brightness: 0.3 }
+        // 0: Intro - full car on lift
+        { scale: 1.15, x: 0, y: -2, rotate: 0, brightness: 0.5, detailImg: null },
+        // 1: Diagnostika - zoom kapota zezhora, pak cross-fade do galerie03 (tablet na motoru)
+        { scale: 2.8, x: 18, y: 8, rotate: -2, brightness: 0.4, detailImg: 'detail1' },
+        // 2: Kola/geometrie - zoom zadní kolo (víc dozadu a nahoru)
+        { scale: 3.0, x: -20, y: -6, rotate: -1.5, brightness: 0.4, detailImg: 'detail2' },
+        // 3: Karoserie/klempírna - zoom bok
+        { scale: 2.2, x: -3, y: 2, rotate: 2.5, brightness: 0.35, detailImg: null },
+        // 4: Motor/elektro - zoom pod kapotu, cross-fade do galerie01 (motor detail)
+        { scale: 2.8, x: 2, y: 8, rotate: -1.5, brightness: 0.35, detailImg: 'detail4' },
+        // 5: CTA - pull back
+        { scale: 1.3, x: -2, y: -2, rotate: 1, brightness: 0.3, detailImg: null }
     ];
 
     let currentScene = -1;
+    const allDetails = document.querySelectorAll('.car-detail-photo');
 
     function updateCarScene(progress) {
         // progress: 0 to 1 across the entire scroll
@@ -1323,6 +1360,26 @@
                 }
             }
         }
+
+        // Cross-fade detail photos
+        // Detail fades in during second half of scene (sceneFraction > 0.4)
+        // and fades out during first part of next scene
+        const currentDetail = scenes[sceneIndex].detailImg;
+        const detailOpacity = Math.max(0, Math.min(1, (sceneFraction - 0.3) / 0.3));
+
+        allDetails.forEach(d => {
+            if (currentDetail && d.id === currentDetail) {
+                d.style.opacity = detailOpacity;
+                d.classList.toggle('active', detailOpacity > 0.1);
+            } else {
+                // Fade out quickly if it was showing from previous scene
+                d.style.opacity = Math.max(0, d.style.opacity - 0.05);
+                if (parseFloat(d.style.opacity) < 0.05) {
+                    d.classList.remove('active');
+                    d.style.opacity = 0;
+                }
+            }
+        });
 
         // Toggle zoomed class
         carSticky.classList.toggle('zoomed', sceneIndex > 0);
