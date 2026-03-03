@@ -74,7 +74,7 @@
     header {
       background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 100%);
       border-bottom: 1px solid var(--border);
-      padding: 0 1.5rem;
+      padding: env(safe-area-inset-top) 1.5rem 0;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -1047,6 +1047,13 @@ function discountPct(item) {
   return Math.round((1 - item.priceNew / item.priceOld) * 100);
 }
 
+// ─── Escape HTML (XSS ochrana) ──────────────────────────────────
+function esc(s) {
+  const d = document.createElement("div");
+  d.textContent = s;
+  return d.innerHTML;
+}
+
 // ─── Formátování ceny ─────────────────────────────────────────────
 function fmtPrice(n) {
   return n.toLocaleString("cs-CZ", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " Kč";
@@ -1076,20 +1083,21 @@ function renderCards(items) {
 
   grid.innerHTML = items.map(item => {
     const pct = discountPct(item);
+    const safeId = esc(item.id);
     return `
-    <article class="card" data-store="${item.store}" data-id="${item.id}">
+    <article class="card" data-store="${esc(item.store)}" data-id="${safeId}">
       <div class="card-stripe"></div>
       ${item.image
-        ? `<img class="card-img" src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.outerHTML='<div class=\\'card-img card-img-fallback\\'>'+this.alt.charAt(0)+'</div>'">`
-        : `<div class="card-img card-img-fallback">${item.emoji || item.name.charAt(0)}</div>`
+        ? `<img class="card-img" src="${esc(item.image)}" alt="${esc(item.name)}" loading="lazy" onerror="this.outerHTML='<div class=\\'card-img card-img-fallback\\'>'+this.alt.charAt(0)+'</div>'">`
+        : `<div class="card-img card-img-fallback">${item.emoji ? esc(item.emoji) : esc(item.name.charAt(0))}</div>`
       }
       <div class="card-body">
         <div class="card-header">
-          <span class="card-name">${item.name}</span>
-          <span class="store-badge">${item.storeName.toUpperCase()}</span>
+          <span class="card-name">${esc(item.name)}</span>
+          <span class="store-badge">${esc(item.storeName.toUpperCase())}</span>
         </div>
-        <div class="card-desc">${item.desc}</div>
-        <span class="card-category">${item.category}</span>
+        <div class="card-desc">${esc(item.desc)}</div>
+        <span class="card-category">${esc(item.category)}</span>
         <div class="card-prices">
           <span class="price-new">${fmtPrice(item.priceNew)}</span>
           <span class="price-old">${fmtPrice(item.priceOld)}</span>
@@ -1098,7 +1106,7 @@ function renderCards(items) {
       <div class="card-footer">
         <span class="discount-badge">−${pct} %</span>
         <span class="valid-until">${fmtDate(item.validUntil)}</span>
-        <button class="card-cart-btn${isInCart(item.id) ? ' in-list' : ''}" onclick="toggleCartItem('${item.id}', event)" title="Přidat na seznam">${isInCart(item.id) ? '✓' : '+'}</button>
+        <button class="card-cart-btn${isInCart(item.id) ? ' in-list' : ''}" onclick="toggleCartItem('${safeId}', event)" title="Přidat na seznam">${isInCart(item.id) ? '✓' : '+'}</button>
       </div>
     </article>`;
   }).join("");
@@ -1508,17 +1516,19 @@ function renderCartItems() {
     container.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">📋</div>Seznam je prázdný<br><small>Klikněte + u produktu pro přidání</small></div>';
     return;
   }
-  container.innerHTML = cartList.map(c => `
-    <div class="cart-item${cartChecked[c.id] ? ' checked' : ''}" data-id="${c.id}">
-      <button class="ci-check" onclick="toggleCartCheck('${c.id}')">✓</button>
+  container.innerHTML = cartList.map(c => {
+    const safeId = esc(c.id);
+    return `
+    <div class="cart-item${cartChecked[c.id] ? ' checked' : ''}" data-id="${safeId}">
+      <button class="ci-check" onclick="toggleCartCheck('${safeId}')">✓</button>
       <div class="ci-info">
-        <div class="ci-name">${c.name}</div>
-        <div class="ci-meta">${c.store} · sleva ${fmtPrice(c.priceOld - c.priceNew)}</div>
+        <div class="ci-name">${esc(c.name)}</div>
+        <div class="ci-meta">${esc(c.store)} · sleva ${fmtPrice(c.priceOld - c.priceNew)}</div>
       </div>
       <span class="ci-price">${fmtPrice(c.priceNew)}</span>
-      <button class="ci-remove" onclick="toggleCartItem('${c.id}')" title="Odebrat">&times;</button>
-    </div>
-  `).join("");
+      <button class="ci-remove" onclick="toggleCartItem('${safeId}')" title="Odebrat">&times;</button>
+    </div>`;
+  }).join("");
 }
 
 function checkoutCart() {
