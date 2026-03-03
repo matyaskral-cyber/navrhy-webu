@@ -1362,13 +1362,11 @@
             }
         }
 
-        // Cross-fade detail photos using CSS transitions
-        // Show detail after 40% into the scene, hide when leaving
+        // Cross-fade detail photos - show for entire scene duration
         const currentDetail = scenes[sceneIndex].detailImg;
-        const showDetail = currentDetail && sceneFraction > 0.4;
 
         allDetails.forEach(d => {
-            if (showDetail && d.id === currentDetail) {
+            if (currentDetail && d.id === currentDetail) {
                 d.classList.add('visible');
             } else {
                 d.classList.remove('visible');
