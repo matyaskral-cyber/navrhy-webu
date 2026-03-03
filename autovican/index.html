@@ -164,8 +164,6 @@
             height: auto;
             min-height: 120%;
             object-fit: cover;
-            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                        filter 1.2s ease;
             transform-origin: center center;
             will-change: transform;
         }
@@ -848,16 +846,123 @@
                 gap: 20px;
             }
             .hamburger { display: flex; }
+
+            /* Car showcase - shorter scroll on mobile */
+            .car-showcase { height: 400vh; }
+            .car-image-wrapper img.car-main {
+                width: 260%;
+                min-height: 100%;
+            }
+            .car-label {
+                padding: 0 20px;
+                bottom: 60px;
+                top: auto;
+                justify-content: flex-end;
+            }
+            .car-label h2 {
+                font-size: 1.6rem;
+                margin-bottom: 8px;
+            }
+            .car-label p {
+                font-size: 0.85rem;
+                max-width: 320px;
+            }
+            .car-label-tag {
+                font-size: 0.7rem;
+                padding: 6px 14px;
+                margin-bottom: 10px;
+            }
+            .car-label .btn {
+                padding: 14px 24px;
+                font-size: 0.9rem;
+            }
+            .car-progress {
+                right: 10px;
+                gap: 10px;
+            }
+            .car-dot {
+                width: 10px;
+                height: 10px;
+            }
+            .scroll-hint span { font-size: 0.7rem; }
+
+            /* Sections - tighter spacing */
+            section { padding: 60px 16px; }
+            .section-title { font-size: 1.6rem; }
+            .section-desc { font-size: 0.95rem; margin-bottom: 32px; }
+
+            /* Services grid - 1 column on small phones */
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .service-card { padding: 24px; }
+            .service-card h3 { font-size: 1.05rem; }
+            .service-card p { font-size: 0.85rem; }
+            .service-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.3rem;
+                margin-bottom: 14px;
+            }
+
+            /* About */
             .about-grid { grid-template-columns: 1fr; gap: 32px; }
             .about-features { grid-template-columns: 1fr; }
-            .contact-grid { grid-template-columns: 1fr; }
-            .form-row { grid-template-columns: 1fr; }
+            .about-text h2 { font-size: 1.6rem; }
+            .about-text p { font-size: 0.95rem; }
+
+            /* Pricing */
             .pricing-grid { grid-template-columns: 1fr; }
+            .pricing-card { padding: 28px; }
+            .pricing-card .price { font-size: 2rem; }
+
+            /* Gallery - 2 columns */
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .gallery-item { border-radius: 8px; }
+
+            /* Contact */
+            .contact-grid { grid-template-columns: 1fr; }
+            .contact-card { padding: 20px; gap: 14px; }
+            .contact-card-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            .contact-form { padding: 24px; }
+            .form-row { grid-template-columns: 1fr; }
+
+            /* Footer */
             .footer-inner { flex-direction: column; text-align: center; }
-            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
-            .car-progress { right: 12px; }
-            .car-label h2 { font-size: 2rem; }
-            .car-label { padding: 0 20px; }
+        }
+
+        /* Tablet */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+        }
+
+        /* Map on mobile */
+        @media (max-width: 768px) {
+            #mapFrame { height: 280px; }
+        }
+
+        /* Small phones */
+        @media (max-width: 480px) {
+            .car-showcase { height: 350vh; }
+            .car-label h2 { font-size: 1.3rem; }
+            .car-label p { font-size: 0.8rem; max-width: 280px; }
+            .services-grid { gap: 10px; }
+            .service-card { padding: 20px; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .nav-inner { height: 60px; }
+            .logo { font-size: 1.2rem; }
+            .pricing-card .price { font-size: 1.8rem; }
+            .contact-card { padding: 16px; gap: 12px; }
+            .contact-form { padding: 20px; }
         }
 
         /* ANIMATIONS */
@@ -1268,7 +1373,7 @@
 
 <!-- MAP -->
 <section style="padding:0;">
-    <iframe src="https://frame.mapy.cz/s/guzerovado" width="100%" height="400" frameborder="0" style="display:block; filter: grayscale(0.5) brightness(0.8);" loading="lazy" title="Mapa - Autoservis Vican"></iframe>
+    <iframe src="https://frame.mapy.cz/s/guzerovado" width="100%" height="400" frameborder="0" style="display:block; filter: grayscale(0.5) brightness(0.8);" loading="lazy" title="Mapa - Autoservis Vican" id="mapFrame"></iframe>
 </section>
 
 <!-- FOOTER -->
@@ -1301,26 +1406,29 @@
     const dots = document.querySelectorAll('.car-dot');
     const totalScenes = 6;
 
-    // galerie08.jpg = BMW M4 on lift, side view facing LEFT
-    // Front/hood = LEFT, rear = RIGHT, wheels = BOTTOM, cabin = CENTER-TOP, lift = CENTER
-    // translate: +X → shows LEFT, -X → shows RIGHT, +Y → shows TOP, -Y → shows BOTTOM
-    //
-    // detailImg: which detail photo fades in (null = none)
-    // detailAt: at what fraction (0-1) within the scene the detail starts fading in
-    const scenes = [
-        // 0: Intro - full car on lift
+    const isMobile = window.innerWidth <= 768;
+
+    // Desktop scenes
+    const desktopScenes = [
         { scale: 1.15, x: 0, y: -2, rotate: 0, brightness: 0.5, detailImg: null },
-        // 1: Diagnostika - zoom rovně na kapotu (ne nahoru), pak cross-fade do galerie03
         { scale: 2.8, x: 18, y: 0, rotate: -1, brightness: 0.4, detailImg: 'detail1' },
-        // 2: Kola/geometrie - zoom zadní pneumatika (vpravo nahoře na zvedáku)
         { scale: 3.0, x: -20, y: 6, rotate: -1.5, brightness: 0.4, detailImg: null },
-        // 3: Karoserie/klempírna - zoom bok
         { scale: 2.2, x: -3, y: 2, rotate: 2.5, brightness: 0.35, detailImg: null },
-        // 4: Motor/elektro - zoom pod kapotu, cross-fade do galerie01 (motor detail)
         { scale: 2.8, x: 2, y: 8, rotate: -1.5, brightness: 0.35, detailImg: 'detail4' },
-        // 5: CTA - pull back
         { scale: 1.3, x: -2, y: -2, rotate: 1, brightness: 0.3, detailImg: null }
     ];
+
+    // Mobile - gentler zooms (image is already bigger), less rotation
+    const mobileScenes = [
+        { scale: 1.0, x: 0, y: 0, rotate: 0, brightness: 0.5, detailImg: null },
+        { scale: 1.8, x: 12, y: 0, rotate: -0.5, brightness: 0.4, detailImg: 'detail1' },
+        { scale: 2.0, x: -14, y: 5, rotate: -0.5, brightness: 0.4, detailImg: null },
+        { scale: 1.6, x: -2, y: 2, rotate: 1, brightness: 0.35, detailImg: null },
+        { scale: 1.8, x: 2, y: 6, rotate: -0.5, brightness: 0.35, detailImg: 'detail4' },
+        { scale: 1.1, x: 0, y: 0, rotate: 0, brightness: 0.3, detailImg: null }
+    ];
+
+    const scenes = isMobile ? mobileScenes : desktopScenes;
 
     let currentScene = -1;
     const allDetails = document.querySelectorAll('.car-detail-photo');
