@@ -874,7 +874,7 @@
 <div class="car-showcase" id="carShowcase">
     <div class="car-showcase-sticky" id="carSticky">
         <div class="car-image-wrapper">
-            <img src="img/img_20251115_110613.jpg" alt="Auto v servisu" id="carImg">
+            <img src="img/galerie08.jpg" alt="Auto na zvedáku v servisu" id="carImg">
         </div>
         <div class="car-overlay" id="carOverlay"></div>
 
@@ -1267,21 +1267,22 @@
     const dots = document.querySelectorAll('.car-dot');
     const totalScenes = 6;
 
-    // Each scene: transform applied to car image (zoom, pan, rotate)
-    // transform-origin is center, so we use translate to "look at" parts
+    // galerie08.jpg = BMW M4 on lift, side view facing LEFT
+    // Front/hood = LEFT side, rear = RIGHT, wheels = BOTTOM, cabin/windows = CENTER-TOP
+    // translate: +X moves img right (shows LEFT), -X shows RIGHT, +Y shows TOP, -Y shows BOTTOM
     const scenes = [
-        // 0: Intro - full car, slight zoom
-        { scale: 1.1, x: 0, y: 0, rotate: 0, brightness: 0.45 },
-        // 1: Motor - zoom front/hood area, slight tilt
-        { scale: 2.4, x: 25, y: 15, rotate: -2, brightness: 0.35 },
-        // 2: Kola - zoom bottom-left (wheel area)
-        { scale: 2.8, x: 20, y: -25, rotate: 1.5, brightness: 0.35 },
-        // 3: Karoserie - zoom side panel, slight rotate
-        { scale: 2.0, x: -10, y: 5, rotate: 3, brightness: 0.3 },
-        // 4: Interiér - zoom into windshield/cabin area
-        { scale: 2.6, x: 10, y: 20, rotate: -1.5, brightness: 0.3 },
-        // 5: CTA - pull back, dramatic angle
-        { scale: 1.3, x: -5, y: -5, rotate: 1, brightness: 0.25 }
+        // 0: Intro - full car on lift, dramatic
+        { scale: 1.15, x: 0, y: -2, rotate: 0, brightness: 0.5 },
+        // 1: Motor - zoom front/hood area (LEFT side of image)
+        { scale: 2.8, x: 18, y: 5, rotate: -2, brightness: 0.4 },
+        // 2: Kola - zoom front wheel (LEFT-BOTTOM)
+        { scale: 3.2, x: 14, y: -12, rotate: 1.5, brightness: 0.4 },
+        // 3: Karoserie - zoom side panel / doors (CENTER of car)
+        { scale: 2.2, x: -3, y: 2, rotate: 2.5, brightness: 0.35 },
+        // 4: Interiér - zoom cabin / windows (CENTER-TOP)
+        { scale: 2.8, x: 2, y: 8, rotate: -1.5, brightness: 0.35 },
+        // 5: CTA - pull back, slight angle, whole car
+        { scale: 1.3, x: -2, y: -2, rotate: 1, brightness: 0.3 }
     ];
 
     let currentScene = -1;
