@@ -3,3 +3,4 @@ node_modules/
 *.keystore
 builds/*-unsigned.apk
 builds/*.idsig
+builds/*.xcarchive/
