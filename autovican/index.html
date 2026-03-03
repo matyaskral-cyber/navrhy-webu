@@ -175,19 +175,15 @@
             position: absolute;
             inset: 0;
             opacity: 0;
-            transition: opacity 0.8s ease;
             pointer-events: none;
-            z-index: 2;
-        }
-
-        .car-detail-photo.active {
-            opacity: 1;
+            z-index: 5;
         }
 
         .car-detail-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: brightness(0.55);
         }
 
         .car-overlay {
@@ -1309,8 +1305,8 @@
     const scenes = [
         // 0: Intro - full car on lift
         { scale: 1.15, x: 0, y: -2, rotate: 0, brightness: 0.5, detailImg: null },
-        // 1: Diagnostika - zoom kapota zezhora, pak cross-fade do galerie03 (tablet na motoru)
-        { scale: 2.8, x: 18, y: 8, rotate: -2, brightness: 0.4, detailImg: 'detail1' },
+        // 1: Diagnostika - zoom rovně na kapotu (ne nahoru), pak cross-fade do galerie03
+        { scale: 2.8, x: 18, y: 0, rotate: -1, brightness: 0.4, detailImg: 'detail1' },
         // 2: Kola/geometrie - zoom zadní kolo (víc dozadu a nahoru)
         { scale: 3.0, x: -20, y: -6, rotate: -1.5, brightness: 0.4, detailImg: 'detail2' },
         // 3: Karoserie/klempírna - zoom bok
@@ -1362,21 +1358,20 @@
         }
 
         // Cross-fade detail photos
-        // Detail fades in during second half of scene (sceneFraction > 0.4)
-        // and fades out during first part of next scene
+        // Detail fades in fully during second half of scene
         const currentDetail = scenes[sceneIndex].detailImg;
-        const detailOpacity = Math.max(0, Math.min(1, (sceneFraction - 0.3) / 0.3));
+        // Start fade at 35%, fully opaque by 65% of scene
+        const detailOpacity = Math.max(0, Math.min(1, (sceneFraction - 0.35) / 0.3));
 
         allDetails.forEach(d => {
             if (currentDetail && d.id === currentDetail) {
+                // Fade IN to full opacity (1.0)
                 d.style.opacity = detailOpacity;
-                d.classList.toggle('active', detailOpacity > 0.1);
             } else {
-                // Fade out quickly if it was showing from previous scene
-                d.style.opacity = Math.max(0, d.style.opacity - 0.05);
-                if (parseFloat(d.style.opacity) < 0.05) {
-                    d.classList.remove('active');
-                    d.style.opacity = 0;
+                // Fade OUT immediately when leaving scene
+                const cur = parseFloat(d.style.opacity) || 0;
+                if (cur > 0) {
+                    d.style.opacity = Math.max(0, cur - 0.08);
                 }
             }
         });
