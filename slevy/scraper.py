@@ -5,12 +5,15 @@ SlevyDnes scraper v2 — stahuje aktuální slevy PŘÍMO z obchodů.
 Zdroje:
   - Penny:    penny.cz JSON API (/api/product-discovery/)
   - Billa:    billa.cz JSON API (stejná REWE platforma)
-  - Albert:   albert.cz GraphQL API (letáky) + kupi.cz fallback
-  - Kaufland: kupi.cz (fallback — kaufland.cz blokuje scrapy)
+  - Lidl:     lidl.cz HTML (data-grid-data, veřejné stránky)
+  - Albert:   kupi.cz (albert.cz eshop ukončen 12/2025)
+  - Kaufland: kupi.cz (kaufland.cz blokuje scrapy)
+  - Tesco:    kupi.cz (itesco.cz blokuje scrapy)
 
 Výstup: slevy.json ve formátu kompatibilním s index.html
 """
 
+import html as html_module
 import json
 import re
 import time
@@ -431,11 +434,200 @@ def _parse_rewe_item(item: dict, store: str, store_name: str) -> Optional[dict]:
 
 
 # ══════════════════════════════════════════════════════════════════════
-#  ALBERT — kupi.cz (GraphQL API vrací málo dat bez store kontextu)
+#  LIDL — lidl.cz (veřejné HTML stránky, data v data-grid-data)
+# ══════════════════════════════════════════════════════════════════════
+
+# Stabilní kategorie (slug se nemění), ID kampaní se mění každý týden
+LIDL_HUB_URL = "https://www.lidl.cz/c/akcni-letak/s10008644"
+
+# Záložní přímé URL (slug zůstává, jen ID se mění)
+LIDL_KNOWN_SLUGS = [
+    "pondelni-nabidka",
+    "ctvrtecni-nabidka",
+    "vikendova-nabidka",
+    "ceny-v-klidu",
+    "ovoce-a-zelenina",
+]
+
+
+def scrape_lidl() -> List[dict]:
+    """Stáhne akční nabídky z lidl.cz (veřejné HTML stránky)."""
+    print("\n🟠 LIDL — lidl.cz")
+    products = []
+    seen = set()
+
+    # 1) Najdi aktuální kampanové URL z hub stránky
+    campaign_urls = _discover_lidl_campaigns()
+
+    if not campaign_urls:
+        print("  ⚠️  Nepodařilo se najít kampaně, zkouším záložní URL")
+        # Zkus sitemap pro nalezení aktuálních URL
+        campaign_urls = _discover_lidl_from_sitemap()
+
+    print(f"  🔗 Nalezeno {len(campaign_urls)} kampanových stránek")
+
+    # 2) Stahuj produkty z každé kampanové stránky
+    for url in campaign_urls:
+        page_products = _scrape_lidl_page(url, seen)
+        if page_products:
+            slug = url.split("/c/")[-1].split("/")[0] if "/c/" in url else url
+            print(f"  📦 {slug}: {len(page_products)} produktů")
+            products.extend(page_products)
+        time.sleep(REQUEST_DELAY * 0.5)
+
+    print(f"  ✅ Lidl: {len(products)} produktů")
+    return products
+
+
+def _discover_lidl_campaigns() -> List[str]:
+    """Najde aktuální kampanové URL z Lidl hub stránky."""
+    urls = []
+    try:
+        resp = requests.get(LIDL_HUB_URL, headers=HEADERS, timeout=15)
+        if resp.status_code != 200:
+            return []
+
+        # Hledej odkazy na kampanové stránky
+        for match in re.findall(r'href="(/c/[^"]+)"', resp.text):
+            full = f"https://www.lidl.cz{match}"
+            # Filtruj jen nabídkové stránky (ne linkové)
+            slug = match.split("/c/")[-1].split("/")[0] if "/c/" in match else ""
+            if any(kw in slug for kw in ["nabidka", "nabidky", "ceny-v-klidu",
+                                          "ovoce", "zelenina", "pecivo", "maso",
+                                          "mlecne", "napoje", "drogerie"]):
+                if full not in urls:
+                    urls.append(full)
+
+        # Přidej i přímé kampanové odkazy
+        for match in re.findall(r'href="(/c/[^"]+/a\d+)"', resp.text):
+            full = f"https://www.lidl.cz{match}"
+            if full not in urls:
+                urls.append(full)
+
+    except requests.RequestException as e:
+        print(f"  [CHYBA] Lidl hub: {e}")
+
+    return urls
+
+
+def _discover_lidl_from_sitemap() -> List[str]:
+    """Záložní: hledej kampanové stránky v Lidl sitemap."""
+    urls = []
+    try:
+        resp = requests.get("https://www.lidl.cz/static/sitemap.xml",
+                           headers=HEADERS, timeout=15)
+        if resp.status_code == 200:
+            for match in re.findall(r'<loc>(https://www\.lidl\.cz/c/[^<]+)</loc>', resp.text):
+                for slug in LIDL_KNOWN_SLUGS:
+                    if slug in match and match not in urls:
+                        urls.append(match)
+    except requests.RequestException:
+        pass
+    return urls
+
+
+def _scrape_lidl_page(url: str, seen: set) -> List[dict]:
+    """Extrahuje produkty z Lidl stránky pomocí data-grid-data atributů."""
+    products = []
+
+    try:
+        resp = requests.get(url, headers=HEADERS, timeout=15)
+        if resp.status_code != 200:
+            return []
+
+        # Extrahuj data-grid-data atributy
+        matches = re.findall(r'data-grid-data="([^"]+)"', resp.text)
+        if not matches:
+            return []
+
+        for encoded_json in matches:
+            try:
+                data = json.loads(html_module.unescape(encoded_json))
+            except (json.JSONDecodeError, TypeError):
+                continue
+
+            name = data.get("fullTitle") or data.get("title", "")
+            if not name:
+                continue
+
+            # Deduplikace
+            key = re.sub(r'\s+', ' ', name.lower().strip())
+            if key in seen:
+                continue
+            seen.add(key)
+
+            # Cena
+            price_info = data.get("price", {})
+            price_new = price_info.get("price")
+            if not price_new:
+                continue
+
+            # Původní cena
+            price_old = price_info.get("oldPrice")
+            discount = price_info.get("discount", {})
+            if not price_old and discount:
+                price_old = discount.get("deletedPrice")
+            if not price_old or price_old <= price_new:
+                price_old = round(price_new * 1.35, 2)
+
+            # Platnost (unix timestamp → datum)
+            valid_until = ""
+            end_ts = data.get("storeEndDate")
+            if end_ts and isinstance(end_ts, (int, float)):
+                try:
+                    valid_until = datetime.fromtimestamp(end_ts).strftime("%Y-%m-%d")
+                except (ValueError, OSError):
+                    pass
+
+            # Obrázek
+            image = data.get("image", "")
+
+            # Popis (balení)
+            desc = ""
+            packaging = price_info.get("packaging", {})
+            if isinstance(packaging, dict):
+                desc = packaging.get("text", "")
+
+            # Kategorie
+            keyfacts = data.get("keyfacts", {})
+            cat_path = keyfacts.get("wonCategoryPrimary", "")
+            if cat_path and "/" in cat_path:
+                parts = cat_path.split("/")
+                category = parts[-1].strip() if len(parts) > 1 else parts[0].strip()
+            else:
+                category = data.get("category", "")
+
+            # URL
+            canon = data.get("canonicalUrl", "")
+            prod_url = f"https://www.lidl.cz{canon}" if canon else url
+
+            products.append({
+                "id": make_id("lidl", name),
+                "name": name,
+                "desc": desc[:80],
+                "store": "lidl",
+                "storeName": "Lidl",
+                "category": category or guess_category(name),
+                "emoji": get_emoji(name, category),
+                "image": image,
+                "priceNew": price_new,
+                "priceOld": price_old,
+                "validUntil": valid_until,
+                "url": prod_url,
+            })
+
+    except requests.RequestException as e:
+        print(f"  [CHYBA] {url}: {e}")
+
+    return products
+
+
+# ══════════════════════════════════════════════════════════════════════
+#  ALBERT — kupi.cz (albert.cz eshop ukončen 12/2025)
 # ══════════════════════════════════════════════════════════════════════
 
 def scrape_albert() -> List[dict]:
-    """Stáhne Albert slevy z kupi.cz (albert.cz GraphQL potřebuje store kontext)."""
+    """Stáhne Albert slevy z kupi.cz."""
     print("\n🔵 ALBERT — kupi.cz")
     return _scrape_kupicz("albert", "Albert")
 
@@ -451,12 +643,23 @@ def scrape_kaufland() -> List[dict]:
 
 
 # ══════════════════════════════════════════════════════════════════════
-#  Sdílený kupi.cz scraper pro Albert + Kaufland
+#  TESCO — kupi.cz (itesco.cz blokuje scrapy)
+# ══════════════════════════════════════════════════════════════════════
+
+def scrape_tesco() -> List[dict]:
+    """Stáhne Tesco slevy z kupi.cz."""
+    print("\n🔴 TESCO — kupi.cz")
+    return _scrape_kupicz("tesco", "Tesco")
+
+
+# ══════════════════════════════════════════════════════════════════════
+#  Sdílený kupi.cz scraper pro Albert + Kaufland + Tesco
 # ══════════════════════════════════════════════════════════════════════
 
 KUPICZ_STORE_SLUGS = {
     "albert": "albert",
     "kaufland": "kaufland",
+    "tesco": "tesco",
 }
 
 KUPICZ_CATEGORY_URLS = [
@@ -661,8 +864,9 @@ def main():
     print("=" * 60)
     print("🛒 SlevyDnes Scraper v2 — přímé zdroje")
     print(f"   {datetime.now().strftime('%d.%m.%Y %H:%M')}")
-    print("   Penny + Billa: přímo z obchodu")
-    print("   Albert + Kaufland: kupi.cz")
+    print("   Penny + Billa: přímo z obchodu (JSON API)")
+    print("   Lidl: přímo z lidl.cz (HTML)")
+    print("   Albert + Kaufland + Tesco: kupi.cz")
     print("=" * 60)
 
     all_products = []
@@ -675,13 +879,21 @@ def main():
     billa = scrape_billa()
     all_products.extend(billa)
 
-    # 3) Albert — kupi.cz
+    # 3) Lidl — přímo z lidl.cz
+    lidl = scrape_lidl()
+    all_products.extend(lidl)
+
+    # 4) Albert — kupi.cz
     albert = scrape_albert()
     all_products.extend(albert)
 
-    # 4) Kaufland — kupi.cz
+    # 5) Kaufland — kupi.cz
     kaufland = scrape_kaufland()
     all_products.extend(kaufland)
+
+    # 6) Tesco — kupi.cz
+    tesco = scrape_tesco()
+    all_products.extend(tesco)
 
     # ── Uložit ──
     print(f"\n{'=' * 60}")
@@ -704,8 +916,10 @@ def main():
     print(f"\n📊 Zdroje dat:")
     print(f"   Penny:    penny.cz (přímý API)")
     print(f"   Billa:    billa.cz (přímý API)")
+    print(f"   Lidl:     lidl.cz (přímý HTML)")
     print(f"   Albert:   kupi.cz")
     print(f"   Kaufland: kupi.cz")
+    print(f"   Tesco:    kupi.cz")
 
 
 if __name__ == "__main__":

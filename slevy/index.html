@@ -80,6 +80,8 @@
       --billa:     #ffcc00;
       --billa-fg:  #1a1a1a;
       --kaufland:  #e2001a;
+      --lidl:      #0050aa;
+      --tesco:     #00539f;
 
       --radius:    14px;
       --shadow:    0 4px 24px rgba(0,0,0,.45);
@@ -248,6 +250,8 @@
     .filter-btn[data-store="penny"].active   { background: var(--penny); }
     .filter-btn[data-store="billa"].active   { background: var(--billa); color: var(--billa-fg); }
     .filter-btn[data-store="kaufland"].active{ background: var(--kaufland); }
+    .filter-btn[data-store="lidl"].active    { background: var(--lidl); }
+    .filter-btn[data-store="tesco"].active   { background: var(--tesco); }
 
     .store-dot {
       width: 8px; height: 8px;
@@ -318,6 +322,8 @@
     .card[data-store="penny"]   .card-stripe { background: var(--penny); }
     .card[data-store="billa"]   .card-stripe { background: var(--billa); }
     .card[data-store="kaufland"].card-stripe { background: var(--kaufland); }
+    .card[data-store="lidl"]    .card-stripe { background: var(--lidl); }
+    .card[data-store="tesco"]   .card-stripe { background: var(--tesco); }
 
     img.card-img {
       width: 100%;
@@ -366,6 +372,8 @@
     .card[data-store="penny"]    .store-badge { background: #e3061322; color: #ff4444; border: 1px solid #e3061340; }
     .card[data-store="billa"]    .store-badge { background: #ffcc0022; color: #d4aa00; border: 1px solid #ffcc0040; }
     .card[data-store="kaufland"] .store-badge { background: #e2001a22; color: #ff4455; border: 1px solid #e2001a40; }
+    .card[data-store="lidl"]     .store-badge { background: #0050aa22; color: #4d9fff; border: 1px solid #0050aa40; }
+    .card[data-store="tesco"]    .store-badge { background: #00539f22; color: #4da3ff; border: 1px solid #00539f40; }
 
     .card-name {
       font-size: .95rem;
@@ -943,6 +951,12 @@
     <button class="filter-btn" data-store="kaufland">
       <span class="store-dot" style="background:var(--kaufland)"></span>Kaufland
     </button>
+    <button class="filter-btn" data-store="lidl">
+      <span class="store-dot" style="background:var(--lidl)"></span>Lidl
+    </button>
+    <button class="filter-btn" data-store="tesco">
+      <span class="store-dot" style="background:var(--tesco)"></span>Tesco
+    </button>
   </div>
 </div>
 
@@ -979,7 +993,7 @@
        "id": "unique-id",
        "name": "Název produktu",
        "desc": "Popis / váha / objem",
-       "store": "albert" | "penny" | "billa" | "kaufland",
+       "store": "albert" | "penny" | "billa" | "kaufland" | "lidl" | "tesco",
        "storeName": "Albert",
        "category": "Mléčné výrobky",
        "emoji": "🧀",
