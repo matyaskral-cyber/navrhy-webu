@@ -320,23 +320,6 @@
             box-shadow: 0 0 12px rgba(230, 57, 70, 0.5);
         }
 
-        /* Hint */
-        .car-hint {
-            position: absolute;
-            bottom: 56px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 20;
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.4);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            white-space: nowrap;
-            transition: opacity 0.5s;
-        }
-
-        .car-hint.hidden { opacity: 0; }
-
         /* ============================================ */
 
         .btn {
@@ -870,9 +853,9 @@
             }
             .car-label {
                 padding: 0 50px;
-                bottom: 70px;
-                top: auto;
-                justify-content: flex-end;
+                bottom: 50px;
+                top: 80px;
+                justify-content: center;
             }
             .car-label h2 {
                 font-size: 1.5rem;
@@ -903,7 +886,6 @@
                 width: 9px;
                 height: 9px;
             }
-            .car-hint { font-size: 0.6rem; bottom: 38px; }
 
             /* Sections - tighter spacing */
             section { padding: 60px 16px; }
@@ -1102,7 +1084,6 @@
         </div>
 
         <!-- Hint -->
-        <div class="car-hint" id="carHint">Swipněte nebo použijte šipky</div>
 </div>
 
 <!-- SERVICES -->
@@ -1423,7 +1404,6 @@
     // ==============================
     const carShowcase = document.getElementById('carShowcase');
     const carImg = document.getElementById('carImg');
-    const carHint = document.getElementById('carHint');
     const arrowLeft = document.getElementById('arrowLeft');
     const arrowRight = document.getElementById('arrowRight');
     const dots = document.querySelectorAll('.car-dot');
@@ -1477,8 +1457,6 @@
         arrowLeft.classList.toggle('disabled', idx === 0);
         arrowRight.classList.toggle('disabled', idx === totalScenes - 1);
 
-        // Hide hint after first interaction
-        if (idx > 0) carHint.classList.add('hidden');
     }
 
     function navigate(direction) {
