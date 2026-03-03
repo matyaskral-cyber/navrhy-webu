@@ -1493,33 +1493,122 @@
         return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     }
 
-    // Dot click -> scroll to scene
+    // ==============================
+    // SNAP SCROLL - one gesture = one scene
+    // ==============================
+    let activeScene = 0;
+    let isAnimating = false;
+
+    function getSceneScrollPos(sceneIdx) {
+        const scrollableHeight = carShowcase.offsetHeight - window.innerHeight;
+        return carShowcase.offsetTop + (sceneIdx / (totalScenes - 1)) * scrollableHeight;
+    }
+
+    function snapToScene(idx) {
+        if (idx < 0 || idx >= totalScenes || isAnimating) return;
+        activeScene = idx;
+        isAnimating = true;
+        window.scrollTo({ top: getSceneScrollPos(idx), behavior: 'smooth' });
+        // Unlock after animation
+        setTimeout(() => { isAnimating = false; }, 600);
+    }
+
+    // Is the showcase currently in viewport/active?
+    function isInShowcase() {
+        const rect = carShowcase.getBoundingClientRect();
+        return rect.top <= 10 && rect.bottom > window.innerHeight;
+    }
+
+    // Wheel (desktop)
+    window.addEventListener('wheel', (e) => {
+        if (!isInShowcase() || isAnimating) return;
+        e.preventDefault();
+        if (e.deltaY > 20) {
+            // Scroll down
+            if (activeScene < totalScenes - 1) {
+                snapToScene(activeScene + 1);
+            } else {
+                // Last scene -> let page scroll normally
+                isAnimating = true;
+                window.scrollBy({ top: 200, behavior: 'smooth' });
+                setTimeout(() => { isAnimating = false; }, 400);
+            }
+        } else if (e.deltaY < -20) {
+            // Scroll up
+            if (activeScene > 0) {
+                snapToScene(activeScene - 1);
+            } else {
+                // First scene -> let page scroll up normally
+                isAnimating = true;
+                window.scrollBy({ top: -200, behavior: 'smooth' });
+                setTimeout(() => { isAnimating = false; }, 400);
+            }
+        }
+    }, { passive: false });
+
+    // Touch (mobile)
+    let touchStartY = 0;
+    let touchHandled = false;
+
+    window.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+        touchHandled = false;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+        if (!isInShowcase() || isAnimating || touchHandled) return;
+        const deltaY = touchStartY - e.touches[0].clientY;
+        if (Math.abs(deltaY) < 30) return; // ignore tiny moves
+        touchHandled = true;
+        e.preventDefault();
+        if (deltaY > 0) {
+            // Swipe up = next
+            if (activeScene < totalScenes - 1) {
+                snapToScene(activeScene + 1);
+            } else {
+                isAnimating = true;
+                window.scrollBy({ top: 200, behavior: 'smooth' });
+                setTimeout(() => { isAnimating = false; }, 400);
+            }
+        } else {
+            // Swipe down = prev
+            if (activeScene > 0) {
+                snapToScene(activeScene - 1);
+            } else {
+                isAnimating = true;
+                window.scrollBy({ top: -200, behavior: 'smooth' });
+                setTimeout(() => { isAnimating = false; }, 400);
+            }
+        }
+    }, { passive: false });
+
+    // Dot click
     dots.forEach(dot => {
         dot.addEventListener('click', () => {
-            const scene = parseInt(dot.dataset.scene);
-            const scrollTarget = carShowcase.offsetTop + (scene / (totalScenes - 1)) * (carShowcase.offsetHeight - window.innerHeight);
-            window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+            snapToScene(parseInt(dot.dataset.scene));
         });
     });
 
-    // ==============================
-    // SCROLL HANDLER
-    // ==============================
-    function onScroll() {
+    // Sync scene from scroll position (for initial load & when entering showcase)
+    function syncFromScroll() {
         const rect = carShowcase.getBoundingClientRect();
         const scrollableHeight = carShowcase.offsetHeight - window.innerHeight;
         const scrolled = -rect.top;
         const progress = Math.max(0, Math.min(1, scrolled / scrollableHeight));
-
         updateCarScene(progress);
+
+        // Keep activeScene in sync
+        if (!isAnimating) {
+            activeScene = Math.round(progress * (totalScenes - 1));
+        }
     }
 
     window.addEventListener('scroll', () => {
-        requestAnimationFrame(onScroll);
+        requestAnimationFrame(syncFromScroll);
     }, { passive: true });
 
     // Init
-    onScroll();
+    syncFromScroll();
 
     // ==============================
     // NAV
