@@ -15,45 +15,17 @@
 
   <!--
   ╔══════════════════════════════════════════════════════════════════╗
-  ║  VÝZKUM API — výsledek průzkumu (březen 2026)                   ║
+  ║  ZDROJE DAT (březen 2026)                                        ║
   ╠══════════════════════════════════════════════════════════════════╣
-  ║  Albert (albert.cz)                                              ║
-  ║    → Žádné veřejné REST API. Data dostupná jen přes             ║
-  ║      "Můj Albert" mobilní aplikaci / PDF letáky.                ║
-  ║      Endpoint pro dynamické nabídky: albert.cz/online/promo     ║
-  ║      (vyžaduje session/autentizaci, bez veřejného JSONu).        ║
+  ║  Penny:    penny.cz JSON API (přímý)                             ║
+  ║  Billa:    billa.cz JSON API (přímý, REWE platforma)             ║
+  ║  Lidl:     lidl.cz HTML data-grid-data (přímý)                   ║
+  ║  Albert:   kupi.cz (albert.cz eshop ukončen 12/2025)             ║
+  ║  Kaufland: kupi.cz (kaufland.cz blokuje scrapy)                  ║
+  ║  Tesco:    kupi.cz (itesco.cz blokuje scrapy)                    ║
   ║                                                                  ║
-  ║  Penny Market (penny.cz)                                         ║
-  ║    → Žádné veřejné API. Letáky dostupné jako PDF/flipbook na    ║
-  ║      penny.cz/nabidky/letaky                                     ║
-  ║                                                                  ║
-  ║  Billa (billa.cz)                                                ║
-  ║    → Žádné veřejné API. Nabídky zobrazeny na webu přes SPA      ║
-  ║      (žádný přístupný JSON endpoint).                            ║
-  ║                                                                  ║
-  ║  Kaufland (kaufland.cz)                                          ║
-  ║    → sellerapi.kaufland.com existuje, ALE je to Marketplace     ║
-  ║      Seller API pro prodejce — NENÍ to API pro akční nabídky.  ║
-  ║      Leták je dostupný na prodejny.kaufland.cz/letak.html       ║
-  ║                                                                  ║
-  ║  Agregátory                                                      ║
-  ║    → kupi.cz — žádné oficální API. Existuje PyPI balíček        ║
-  ║      "kupiapi" (scraper přes BeautifulSoup, neoficiální).        ║
-  ║    → najdislevu.cz, letakomat.cz, kimbino.cz — jen weby.        ║
-  ║                                                                  ║
-  ║  ZÁVĚR: Žádný z řetězců neposkytuje veřejné JSON/REST API       ║
-  ║  pro aktuální slevy. Stránka používá ukázková data.             ║
-  ║                                                                  ║
-  ║  JAK NAPOJIT REAL DATA (možnosti):                               ║
-  ║  1. Python scraper s "kupiapi" (pip install kupiapi)             ║
-  ║     → generuje JSON → uložit do /api/slevy.json                 ║
-  ║     → JavaScript níže načítá tento soubor místo MOCK_DATA       ║
-  ║  2. Vlastní scraper (Playwright/Puppeteer) → cron job → JSON    ║
-  ║  3. Kontaktovat přímo řetězce a požádat o datový feed           ║
-  ║                                                                  ║
-  ║  KDY NAHRADIT MOCK DATA:                                         ║
-  ║  Najdi v kódu sekci "=== DATA SOURCE ===" a vyměň               ║
-  ║  loadMockData() za loadRealData() s fetch('/api/slevy.json')    ║
+  ║  Scraper: slevy/scraper.py → slevy.json                          ║
+  ║  Auto-update: GitHub Actions (.github/workflows/update-slevy.yml)║
   ╚══════════════════════════════════════════════════════════════════╝
   -->
 
