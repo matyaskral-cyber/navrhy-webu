@@ -520,37 +520,13 @@
             margin: 0 auto 3rem;
         }
 
-        .menu-date-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            background: linear-gradient(135deg, var(--color-accent), var(--color-gold));
-            color: #1a1714;
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 0.7rem 1.8rem;
-            border-radius: 50px;
-            margin-bottom: 2rem;
-            letter-spacing: 0.02em;
-            animation: pulse-badge 2s ease-in-out infinite;
-        }
-
-        .menu-date-badge .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #2ecc40;
-            animation: blink 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse-badge {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(200, 149, 108, 0.4); }
-            50% { box-shadow: 0 0 0 8px rgba(200, 149, 108, 0); }
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+        .menu-date-text {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            color: var(--color-accent);
+            font-weight: 400;
+            font-style: italic;
+            margin-top: 0.3rem;
         }
 
         .menu-note {
@@ -583,11 +559,12 @@
         .menu-card {
             background: var(--color-bg-card);
             border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid var(--color-border);
+            padding: 2.2rem;
+            border: 1px solid rgba(200, 149, 108, 0.25);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
         }
 
         .menu-card::before {
@@ -596,20 +573,15 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
             background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            opacity: 1;
         }
 
         .menu-card:hover {
-            border-color: var(--color-accent-dark);
+            border-color: var(--color-accent);
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-        }
-
-        .menu-card:hover::before {
-            opacity: 1;
+            box-shadow: 0 16px 50px rgba(0,0,0,0.35);
         }
 
         .menu-card-icon {
@@ -1244,11 +1216,9 @@
     <section id="menu">
         <div class="container">
             <div class="section-header reveal">
-                <div class="section-tag">Co vaříme</div>
-                <h2 class="section-title">Denní menu</h2>
-                <p class="section-desc">Každý pracovní den pro vás připravujeme pestré polední menu. Vyberte si z&nbsp;polévek, hlavních chodů i sladkých variant.</p>
+                <h2 class="section-title" style="font-size: 2.8rem;">Denní menu</h2>
+                <p class="menu-date-text" id="menu-date">Pátek 6. března 2026</p>
                 <div class="divider"></div>
-                <div class="menu-date-badge"><span class="dot"></span> <span id="menu-date">Pátek 6. března 2026</span></div>
             </div>
 
             <div class="menu-grid">
