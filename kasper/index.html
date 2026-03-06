@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penzion Kasper *** | Jindrichův Hradec - Ubytování, Kavárna, Wellness</title>
+    <meta name="description" content="Cyklopenzion Kasper - rodinný penzion v srdci Jindřichova Hradce. Stylové ubytování, kavárna s vinotékou, wellness, gotické sklepy a půjčovna kol. Nominace na Penzion roku 2018.">
+    <meta name="keywords" content="penzion Jindřichův Hradec, ubytování Jindřichův Hradec, cyklopenzion, kavárna, wellness, sauna, vinný sklep, půjčovna kol, jižní Čechy">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --deep: #1a2e1a;
+            --deep-90: rgba(26, 46, 26, 0.9);
+            --deep-70: rgba(26, 46, 26, 0.7);
+            --deep-light: #243824;
+            --gold: #d4a96a;
+            --gold-light: #e8c99a;
+            --gold-dark: #b8894a;
+            --cream: #f5f0e8;
+            --cream-dark: #e8dfd2;
+            --white: #ffffff;
+            --text: #2a2a2a;
+            --text-light: #6b6b6b;
+            --text-on-dark: rgba(255,255,255,0.85);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --shadow: 0 4px 30px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; transition: color var(--transition); }
+
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+        /* ===== SECTION COMMON ===== */
+        .section { padding: 100px 0; }
+        .section--dark { background: var(--deep); color: var(--text-on-dark); }
+        .section--cream { background: var(--cream); }
+        .section--white { background: var(--white); }
+
+        .section-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin-bottom: 20px;
+        }
+
+        .section-title--light { color: var(--white); }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 640px;
+            line-height: 1.8;
+        }
+
+        .section--dark .section-desc { color: rgba(255,255,255,0.65); }
+
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header .section-desc { margin: 0 auto; }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(26, 46, 26, 0.97);
+            backdrop-filter: blur(20px);
+            padding: 12px 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+        }
+
+        .nav__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav__logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav__logo-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--gold);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--deep);
+        }
+
+        .nav__logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: var(--white);
+        }
+
+        .nav__logo-stars {
+            color: var(--gold);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
+
+        .nav__links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav__links a {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color var(--transition);
+            position: relative;
+        }
+
+        .nav__links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width var(--transition);
+        }
+
+        .nav__links a:hover { color: var(--white); }
+        .nav__links a:hover::after { width: 100%; }
+
+        .nav__cta {
+            background: var(--gold);
+            color: var(--deep) !important;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: all var(--transition);
+        }
+
+        .nav__cta:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212,169,106,0.3);
+        }
+
+        .nav__cta::after { display: none !important; }
+
+        .nav__burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav__burger span {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--deep);
+            overflow: hidden;
+        }
+
+        .hero__bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #1a3a1a 0%, #0d1f0d 50%, #1a2e1a 100%);
+        }
+
+        .hero__bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(212,169,106,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(212,169,106,0.05) 0%, transparent 40%),
+                radial-gradient(ellipse at 60% 80%, rgba(26,46,26,0.5) 0%, transparent 50%);
+        }
+
+        .hero__pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='%23d4a96a' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 2;
+            padding-top: 120px;
+        }
+
+        .hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(212,169,106,0.12);
+            border: 1px solid rgba(212,169,106,0.25);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 28px;
+            letter-spacing: 1px;
+        }
+
+        .hero__badge svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--gold);
+        }
+
+        .hero__title {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            color: var(--white);
+            margin-bottom: 10px;
+            line-height: 1.05;
+            max-width: 700px;
+        }
+
+        .hero__title span {
+            display: block;
+            color: var(--gold);
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-top: 8px;
+        }
+
+        .hero__subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.6);
+            max-width: 520px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .hero__actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn--primary {
+            background: var(--gold);
+            color: var(--deep);
+        }
+
+        .btn--primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(212,169,106,0.35);
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: var(--white);
+            border: 1.5px solid rgba(255,255,255,0.25);
+        }
+
+        .btn--outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            transition: transform var(--transition);
+        }
+
+        .btn:hover svg { transform: translateX(3px); }
+
+        .hero__features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.06);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            max-width: 800px;
+        }
+
+        .hero__feature {
+            padding: 28px 24px;
+            background: rgba(26,46,26,0.6);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: background var(--transition);
+        }
+
+        .hero__feature:hover { background: rgba(212,169,106,0.08); }
+
+        .hero__feature-icon {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .hero__feature-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 0.5px;
+        }
+
+        /* Decorative side element */
+        .hero__deco {
+            position: absolute;
+            right: -5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            height: 70%;
+            border-radius: 30px;
+            overflow: hidden;
+            opacity: 0.15;
+        }
+
+        .hero__deco-inner {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold) 0%, transparent 100%);
+            border-radius: 30px;
+        }
+
+        /* ===== ABOUT STRIP ===== */
+        .about-strip {
+            background: var(--white);
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .about-strip__inner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .about-strip__item { padding: 10px; }
+
+        .about-strip__number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--deep);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .about-strip__number span { color: var(--gold); }
+
+        .about-strip__text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* ===== ROOMS / UBYTOVANI ===== */
+        .rooms__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .room-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+        }
+
+        .room-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .room-card__image {
+            height: 240px;
+            background: var(--deep);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-card__image-bg {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .room-card:hover .room-card__image-bg { transform: scale(1.08); }
+
+        .room-card__badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--gold);
+            color: var(--deep);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .room-card__body { padding: 28px; }
+
+        .room-card__title {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: var(--deep);
+        }
+
+        .room-card__desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .room-card__amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .room-card__amenity {
+            background: var(--cream);
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .room-card__footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px solid var(--cream-dark);
+        }
+
+        .room-card__price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .room-card__price strong {
+            display: block;
+            font-size: 1.3rem;
+            color: var(--deep);
+        }
+
+        .room-card__link {
+            color: var(--gold-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color var(--transition);
+        }
+
+        .room-card__link:hover { color: var(--deep); }
+
+        .rooms__info {
+            margin-top: 50px;
+            background: var(--deep);
+            border-radius: var(--radius-lg);
+            padding: 40px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .rooms__info-text {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+            max-width: 600px;
+        }
+
+        .rooms__info-text strong { color: var(--gold); }
+
+        /* ===== KAVARNA ===== */
+        .kavarna__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .kavarna__visual {
+            position: relative;
+        }
+
+        .kavarna__image-main {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(145deg, #2a1810, #1a1008);
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kavarna__image-main::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(212,169,106,0.15) 0%, transparent 70%);
+        }
+
+        .kavarna__image-main-inner {
+            position: absolute;
+            inset: 30px;
+            border: 1px solid rgba(212,169,106,0.2);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .kavarna__image-main-inner .icon-big {
+            font-size: 4rem;
+            opacity: 0.6;
+        }
+
+        .kavarna__image-main-inner .text-deco {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--gold);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+        }
+
+        .kavarna__float-card {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            background: var(--gold);
+            color: var(--deep);
+            padding: 24px 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .kavarna__float-card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .kavarna__float-card-time {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .kavarna__content { padding-left: 20px; }
+
+        .kavarna__features {
+            display: grid;
+            gap: 24px;
+            margin-top: 36px;
+        }
+
+        .kavarna__feature {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .kavarna__feature-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: var(--cream);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .kavarna__feature-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--deep);
+        }
+
+        .kavarna__feature-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ===== WELLNESS ===== */
+        .wellness__top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .wellness__cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .wellness-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            text-align: center;
+            transition: all var(--transition);
+        }
+
+        .wellness-card:hover {
+            background: rgba(212,169,106,0.08);
+            border-color: rgba(212,169,106,0.2);
+            transform: translateY(-6px);
+        }
+
+        .wellness-card__icon {
+            font-size: 2.4rem;
+            margin-bottom: 20px;
+        }
+
+        .wellness-card__title {
+            font-size: 1.15rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .wellness-card__desc {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .wellness-card__price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Wine cellar special card */
+        .wellness__cellar {
+            margin-top: 50px;
+            background: linear-gradient(135deg, rgba(212,169,106,0.1) 0%, rgba(212,169,106,0.02) 100%);
+            border: 1px solid rgba(212,169,106,0.15);
+            border-radius: var(--radius-lg);
+            padding: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .wellness__cellar-visual {
+            height: 300px;
+            background: linear-gradient(145deg, rgba(26,14,8,0.8), rgba(40,25,15,0.6));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            border: 1px solid rgba(212,169,106,0.1);
+        }
+
+        .wellness__cellar-visual .icon-big {
+            font-size: 3.5rem;
+            opacity: 0.7;
+        }
+
+        .wellness__cellar-visual .text-deco {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .wellness__cellar-stat {
+            display: flex;
+            gap: 40px;
+            margin-top: 24px;
+        }
+
+        .wellness__cellar-stat-item {
+            text-align: center;
+        }
+
+        .wellness__cellar-stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .wellness__cellar-stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 4px;
+        }
+
+        /* ===== PUJCOVNA ===== */
+        .pujcovna__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .pujcovna__visual {
+            position: relative;
+            height: 480px;
+            background: linear-gradient(145deg, var(--deep), #0d1f0d);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .pujcovna__visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 50%, rgba(212,169,106,0.08) 0%, transparent 60%);
+        }
+
+        .pujcovna__visual .icon-big {
+            font-size: 5rem;
+            opacity: 0.5;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pujcovna__visual .text-deco {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pujcovna__pricing {
+            margin-top: 36px;
+        }
+
+        .pujcovna__price-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--cream-dark);
+        }
+
+        .pujcovna__price-item:last-child { border-bottom: none; }
+
+        .pujcovna__price-name {
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .pujcovna__price-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            color: var(--deep);
+        }
+
+        .pujcovna__note {
+            margin-top: 24px;
+            padding: 20px 24px;
+            background: var(--cream);
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            border-left: 3px solid var(--gold);
+        }
+
+        /* ===== OKOLI ===== */
+        .okoli__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .okoli-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            transition: all var(--transition);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .okoli-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(212,169,106,0.2);
+        }
+
+        .okoli-card__icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .okoli-card__title {
+            font-size: 1.1rem;
+            color: var(--deep);
+            margin-bottom: 10px;
+        }
+
+        .okoli-card__list {
+            list-style: none;
+            font-size: 0.88rem;
+            color: var(--text-light);
+        }
+
+        .okoli-card__list li {
+            padding: 6px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .okoli-card__list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .okoli-card__distance {
+            color: var(--gold-dark);
+            font-weight: 500;
+        }
+
+        /* ===== KONTAKT ===== */
+        .kontakt__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .kontakt__info {
+            display: grid;
+            gap: 32px;
+        }
+
+        .kontakt__item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .kontakt__item-icon {
+            width: 56px;
+            height: 56px;
+            min-width: 56px;
+            background: var(--cream);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .kontakt__item-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .kontakt__item-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--deep);
+        }
+
+        .kontakt__item-value a {
+            color: var(--deep);
+            transition: color var(--transition);
+        }
+
+        .kontakt__item-value a:hover { color: var(--gold-dark); }
+
+        .kontakt__map {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            height: 100%;
+            min-height: 420px;
+            box-shadow: var(--shadow);
+        }
+
+        .kontakt__map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .kontakt__checkin {
+            margin-top: 32px;
+            padding: 24px;
+            background: var(--cream);
+            border-radius: var(--radius);
+        }
+
+        .kontakt__checkin-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            color: var(--deep);
+        }
+
+        .kontakt__checkin-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            padding: 6px 0;
+            color: var(--text-light);
+        }
+
+        .kontakt__checkin-row strong { color: var(--text); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--deep);
+            padding: 60px 0 30px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer__top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 30px;
+        }
+
+        .footer__brand-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .footer__brand-stars {
+            color: var(--gold);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .footer__brand-desc {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            max-width: 320px;
+        }
+
+        .footer__col-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+
+        .footer__col-list {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .footer__col-list li { padding: 5px 0; }
+
+        .footer__col-list a {
+            color: rgba(255,255,255,0.5);
+            transition: color var(--transition);
+        }
+
+        .footer__col-list a:hover { color: var(--gold); }
+
+        .footer__bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.82rem;
+        }
+
+        .footer__credit a {
+            color: var(--gold);
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+
+        .footer__credit a:hover { color: var(--gold-light); }
+
+        /* ===== REVEAL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero__features { grid-template-columns: repeat(2, 1fr); }
+            .rooms__grid { grid-template-columns: repeat(2, 1fr); }
+            .wellness__cards { grid-template-columns: repeat(2, 1fr); }
+            .wellness__cellar { grid-template-columns: 1fr; }
+            .okoli__grid { grid-template-columns: repeat(2, 1fr); }
+            .footer__top { grid-template-columns: 1fr 1fr; gap: 30px; }
+        }
+
+        @media (max-width: 768px) {
+            .section { padding: 70px 0; }
+
+            .nav__links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(26,46,26,0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 24px;
+                z-index: 999;
+            }
+
+            .nav__links.active { display: flex; }
+            .nav__links a { font-size: 1.2rem; color: var(--white); }
+
+            .nav__burger { display: flex; z-index: 1001; }
+            .nav__burger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .nav__burger.active span:nth-child(2) { opacity: 0; }
+            .nav__burger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+            .hero__title { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+            .hero__features { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+            .hero__deco { display: none; }
+
+            .about-strip__inner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
+            .rooms__grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+            .rooms__info { flex-direction: column; text-align: center; padding: 30px; }
+
+            .kavarna__grid,
+            .pujcovna__grid,
+            .kontakt__grid { grid-template-columns: 1fr; gap: 40px; }
+
+            .kavarna__content { padding-left: 0; }
+            .kavarna__float-card { right: 20px; bottom: -20px; }
+
+            .wellness__top { grid-template-columns: 1fr; }
+            .wellness__cards { grid-template-columns: 1fr; }
+
+            .okoli__grid { grid-template-columns: 1fr; }
+
+            .kontakt__map { min-height: 300px; }
+
+            .footer__top { grid-template-columns: 1fr; }
+            .footer__bottom { flex-direction: column; gap: 12px; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero__actions { flex-direction: column; }
+            .hero__actions .btn { justify-content: center; }
+            .hero__features { grid-template-columns: 1fr 1fr; }
+            .about-strip__inner { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <div class="nav__inner">
+                <a href="#hero" class="nav__logo">
+                    <div class="nav__logo-icon">K</div>
+                    <div>
+                        <div class="nav__logo-text">Penzion Kasper</div>
+                        <div class="nav__logo-stars">&#9733; &#9733; &#9733;</div>
+                    </div>
+                </a>
+                <ul class="nav__links" id="navLinks">
+                    <li><a href="#ubytovani" onclick="closeMenu()">Ubytovani</a></li>
+                    <li><a href="#kavarna" onclick="closeMenu()">Kavarna</a></li>
+                    <li><a href="#wellness" onclick="closeMenu()">Wellness</a></li>
+                    <li><a href="#pujcovna" onclick="closeMenu()">Pujcovna</a></li>
+                    <li><a href="#okoli" onclick="closeMenu()">Okoli</a></li>
+                    <li><a href="#kontakt" onclick="closeMenu()">Kontakt</a></li>
+                    <li><a href="https://www.secure-hotel-booking.com/smart/Penzion-Kasper/JISS/cs/" target="_blank" class="nav__cta">Rezervovat</a></li>
+                </ul>
+                <button class="nav__burger" id="navBurger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="hero__bg">
+            <div class="hero__pattern"></div>
+        </div>
+        <div class="hero__deco"><div class="hero__deco-inner"></div></div>
+        <div class="container">
+            <div class="hero__content">
+                <div class="hero__badge">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Nominace na Penzion roku 2018 -- TOP 10 v CR
+                </div>
+                <h1 class="hero__title">
+                    Cyklopenzion Kasper
+                    <span>Jindr&#237;chuv Hradec &bull; ji&#382;n&#237; Cechy</span>
+                </h1>
+                <p class="hero__subtitle">
+                    Rodinn&#253; penzion v srdci historick&#233;ho města, jen p&#225;r kroků od třet&#237;ho největš&#237;ho z&#225;mku v &#268;ech&#225;ch. Stylov&#233; ubytov&#225;n&#237;, kavárna s vinotékou a wellness.
+                </p>
+                <div class="hero__actions">
+                    <a href="https://www.secure-hotel-booking.com/smart/Penzion-Kasper/JISS/cs/" target="_blank" class="btn btn--primary">
+                        Rezervovat pobyt
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                    <a href="#ubytovani" class="btn btn--outline">
+                        Prohlédnout pokoje
+                    </a>
+                </div>
+                <div class="hero__features">
+                    <div class="hero__feature">
+                        <div class="hero__feature-icon">&#127968;</div>
+                        <div class="hero__feature-text">20 pokojů</div>
+                    </div>
+                    <div class="hero__feature">
+                        <div class="hero__feature-icon">&#9749;</div>
+                        <div class="hero__feature-text">Kavárna</div>
+                    </div>
+                    <div class="hero__feature">
+                        <div class="hero__feature-icon">&#128167;</div>
+                        <div class="hero__feature-text">Wellness</div>
+                    </div>
+                    <div class="hero__feature">
+                        <div class="hero__feature-icon">&#128690;</div>
+                        <div class="hero__feature-text">Půjčovna kol</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT STRIP ===== -->
+    <section class="about-strip">
+        <div class="container">
+            <div class="about-strip__inner">
+                <div class="about-strip__item reveal">
+                    <div class="about-strip__number">20<span>+</span></div>
+                    <div class="about-strip__text">let tradice</div>
+                </div>
+                <div class="about-strip__item reveal reveal-delay-1">
+                    <div class="about-strip__number">39</div>
+                    <div class="about-strip__text">lůžek + 6 přistýlek</div>
+                </div>
+                <div class="about-strip__item reveal reveal-delay-2">
+                    <div class="about-strip__number">80<span>m</span></div>
+                    <div class="about-strip__text">od zámku</div>
+                </div>
+                <div class="about-strip__item reveal reveal-delay-3">
+                    <div class="about-strip__number">2</div>
+                    <div class="about-strip__text">gotické budovy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== UBYTOVANI ===== -->
+    <section class="section section--white" id="ubytovani">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Ubytování</div>
+                <h2 class="section-title">Stylově zař&#237;zené pokoje</h2>
+                <p class="section-desc">
+                    Každ&#253; z 20 pokojů ve dvou gotick&#253;ch budov&#225;ch m&#225; svou vlastn&#237; atmosf&#233;ru. Vybavení odpov&#237;d&#225; ofici&#225;ln&#237; certifikaci AHR &#268;R.
+                </p>
+            </div>
+            <div class="rooms__grid">
+                <div class="room-card reveal">
+                    <div class="room-card__image">
+                        <div class="room-card__image-bg" style="background: linear-gradient(145deg, #2a3a2a, #1a2a1a); display: flex; align-items: center; justify-content: center; font-size: 3rem; opacity: 0.4;">&#128716;</div>
+                    </div>
+                    <div class="room-card__body">
+                        <h3 class="room-card__title">Jednolůžkov&#253; pokoj</h3>
+                        <p class="room-card__desc">Ůtuln&#253; pokoj ide&#225;ln&#237; pro obchodn&#237; cestuj&#237;c&#237;. Plně vybaven&#253; s vlastn&#237; koupelnou, TV a Wi-Fi.</p>
+                        <div class="room-card__amenities">
+                            <span class="room-card__amenity">Wi-Fi</span>
+                            <span class="room-card__amenity">TV</span>
+                            <span class="room-card__amenity">Minibar</span>
+                            <span class="room-card__amenity">Sprcha</span>
+                        </div>
+                        <div class="room-card__footer">
+                            <div class="room-card__price">
+                                <strong>od 990 Kč</strong>
+                                za pokoj / noc
+                            </div>
+                            <a href="https://www.secure-hotel-booking.com/smart/Penzion-Kasper/JISS/cs/" target="_blank" class="room-card__link">
+                                Rezervovat &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="room-card reveal reveal-delay-1">
+                    <div class="room-card__image">
+                        <div class="room-card__image-bg" style="background: linear-gradient(145deg, #2a2a3a, #1a1a2a); display: flex; align-items: center; justify-content: center; font-size: 3rem; opacity: 0.4;">&#128716;</div>
+                        <div class="room-card__badge">Nejoblíbenější</div>
+                    </div>
+                    <div class="room-card__body">
+                        <h3 class="room-card__title">Dvoulůžkov&#253; pokoj</h3>
+                        <p class="room-card__desc">Prostorn&#253; pokoj s manželsk&#253;m lůžkem nebo twin postelemi. Koupelna s vanou nebo sprchou.</p>
+                        <div class="room-card__amenities">
+                            <span class="room-card__amenity">Wi-Fi</span>
+                            <span class="room-card__amenity">TV</span>
+                            <span class="room-card__amenity">Minibar</span>
+                            <span class="room-card__amenity">Vysoušeč</span>
+                            <span class="room-card__amenity">Rádio</span>
+                        </div>
+                        <div class="room-card__footer">
+                            <div class="room-card__price">
+                                <strong>od 1 490 Kč</strong>
+                                za pokoj / noc
+                            </div>
+                            <a href="https://www.secure-hotel-booking.com/smart/Penzion-Kasper/JISS/cs/" target="_blank" class="room-card__link">
+                                Rezervovat &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="room-card reveal reveal-delay-2">
+                    <div class="room-card__image">
+                        <div class="room-card__image-bg" style="background: linear-gradient(145deg, #3a2a1a, #2a1a0a); display: flex; align-items: center; justify-content: center; font-size: 3rem; opacity: 0.4;">&#127775;</div>
+                        <div class="room-card__badge">Exclusive</div>
+                    </div>
+                    <div class="room-card__body">
+                        <h3 class="room-card__title">Exclusive pokoj</h3>
+                        <p class="room-card__desc">Nadstandardně vybaven&#253; pokoj s v&#253;hledem na z&#225;mek. Pokoje č. 11, 14 a 15 v budově Svatoj&#225;nsk&#225; 157.</p>
+                        <div class="room-card__amenities">
+                            <span class="room-card__amenity">Wi-Fi</span>
+                            <span class="room-card__amenity">TV</span>
+                            <span class="room-card__amenity">Minibar</span>
+                            <span class="room-card__amenity">Vana</span>
+                            <span class="room-card__amenity">Výhled</span>
+                        </div>
+                        <div class="room-card__footer">
+                            <div class="room-card__price">
+                                <strong>od 1 990 Kč</strong>
+                                za pokoj / noc
+                            </div>
+                            <a href="https://www.secure-hotel-booking.com/smart/Penzion-Kasper/JISS/cs/" target="_blank" class="room-card__link">
+                                Rezervovat &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rooms__info reveal">
+                <div class="rooms__info-text">
+                    <strong>Snídaně formou švédských stolů</strong> s neomezeným přístupem k automatickému kávovaru. Ceny pokojů jsou včetně snídaně a DPH. <strong>Příjezd na kole = sleva 50 Kč/osoba!</strong> Celý penzion je nekuřácký.
+                </div>
+                <a href="https://www.secure-hotel-booking.com/smart/Penzion-Kasper/JISS/cs/" target="_blank" class="btn btn--primary">Rezervovat pokoj</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KAVARNA ===== -->
+    <section class="section section--cream" id="kavarna">
+        <div class="container">
+            <div class="kavarna__grid">
+                <div class="kavarna__visual reveal">
+                    <div class="kavarna__image-main">
+                        <div class="kavarna__image-main-inner">
+                            <div class="icon-big">&#9749;</div>
+                            <div class="text-deco">Kavárna</div>
+                        </div>
+                    </div>
+                    <div class="kavarna__float-card">
+                        <div class="kavarna__float-card-title">Otevřeno</div>
+                        <div class="kavarna__float-card-time">Po--So 12:00--20:00</div>
+                    </div>
+                </div>
+                <div class="kavarna__content reveal reveal-delay-1">
+                    <div class="section-label">Kavárna & Vinotéka</div>
+                    <h2 class="section-title">M&#237;sto, kde se setk&#225;v&#225; tradice s chut&#237;</h2>
+                    <p class="section-desc">
+                        V polovin&#283; roku 2017 jsme otevřeli nov&#253; penzion se stylovou kav&#225;rnou, recepc&#237; a vinn&#253;m sklepem přímo ve Svatoj&#225;nsk&#233; ulici.
+                    </p>
+                    <div class="kavarna__features">
+                        <div class="kavarna__feature">
+                            <div class="kavarna__feature-icon">&#9749;</div>
+                            <div>
+                                <div class="kavarna__feature-title">V&#253;born&#225; k&#225;va</div>
+                                <div class="kavarna__feature-desc">Espresso, cappuccino a dal&#353;&#237; speciality z kvalitn&#237;ch zrn. Točen&#225; čokol&#225;da v několika variac&#237;ch -- mléčn&#225;, hořk&#225;, s kokosem.</div>
+                            </div>
+                        </div>
+                        <div class="kavarna__feature">
+                            <div class="kavarna__feature-icon">&#127863;</div>
+                            <div>
+                                <div class="kavarna__feature-title">P&#345;&#237;vlastkov&#225; v&#237;na</div>
+                                <div class="kavarna__feature-desc">V denn&#237; nab&#237;dce okolo 7 z pades&#225;ti šarž&#237; přív&#237;lastkových vín. Pravidelné degustace s someli&#233;rem.</div>
+                            </div>
+                        </div>
+                        <div class="kavarna__feature">
+                            <div class="kavarna__feature-icon">&#127856;</div>
+                            <div>
+                                <div class="kavarna__feature-title">Z&#225;kusky & pralinky</div>
+                                <div class="kavarna__feature-desc">Čokol&#225;dov&#233; pralinky, z&#225;kusky a slan&#233; doplňky k v&#237;nu pro povzbuzen&#237; Va&#353;&#237; chuti.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WELLNESS ===== -->
+    <section class="section section--dark" id="wellness">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Wellness & Relaxace</div>
+                <h2 class="section-title section-title--light">Odpočinek po aktivn&#237;m dni</h2>
+                <p class="section-desc">
+                    Finsk&#225; sauna, biosauna i infrasauna. Prostěradlo a nealkoholick&#253; n&#225;poj v ceně. Ide&#225;ln&#237; relaxace po cyklov&#253;letě.
+                </p>
+            </div>
+            <div class="wellness__cards">
+                <div class="wellness-card reveal">
+                    <div class="wellness-card__icon">&#128293;</div>
+                    <h3 class="wellness-card__title">Finsk&#225; sauna</h3>
+                    <p class="wellness-card__desc">Klasick&#225; finsk&#225; sauna 90°C s l&#225;vov&#253;mi kameny. Možnost regulace vlhkosti pol&#233;v&#225;n&#237;m kamenů studenou vodou.</p>
+                    <div class="wellness-card__price">od 250 Kč / 2 hod.</div>
+                </div>
+                <div class="wellness-card reveal reveal-delay-1">
+                    <div class="wellness-card__icon">&#127811;</div>
+                    <h3 class="wellness-card__title">Biosauna</h3>
+                    <p class="wellness-card__desc">Šetrn&#225; sauna 60--70°C s 50% vlhkost&#237;. Vhodn&#225; pro začín&#225;j&#237;cí saunaře, děti a kardiaky. Možnost aromaterapie.</p>
+                    <div class="wellness-card__price">od 250 Kč / 2 hod.</div>
+                </div>
+                <div class="wellness-card reveal reveal-delay-2">
+                    <div class="wellness-card__icon">&#10024;</div>
+                    <h3 class="wellness-card__title">Infrasauna</h3>
+                    <p class="wellness-card__desc">Relaxace při relativně n&#237;zk&#233; teplotě s infračerven&#253;m teplem. Ide&#225;ln&#237; pro ty, kter&#253;m klasick&#225; sauna nevyhovuje.</p>
+                    <div class="wellness-card__price">200 Kč / 1 hod.</div>
+                </div>
+            </div>
+
+            <!-- Vinny sklep -->
+            <div class="wellness__cellar reveal">
+                <div class="wellness__cellar-visual">
+                    <div class="icon-big">&#127863;</div>
+                    <div class="text-deco">Vinn&#253; sklep</div>
+                </div>
+                <div>
+                    <div class="section-label">Gotick&#233; sklepy z 16. stolet&#237;</div>
+                    <h3 class="section-title section-title--light" style="font-size: 1.8rem;">Vinn&#253; sklep & vinotéka</h3>
+                    <p class="section-desc" style="margin-bottom: 20px;">
+                        Dva gotick&#233; sklepy ze 16. stolet&#237; -- v budově Dobrovsk&#233;ho 178 (rekonstrukce 2003) a Svatoj&#225;nsk&#225; 157 (rekonstrukce 2017). Vyt&#225;p&#283;n&#253; vinn&#253; skl&#237;pek s kapacitou do 25 osob je vhodn&#253; pro firemn&#237; v&#283;č&#237;rky, narozeniny a degustace.
+                    </p>
+                    <div class="wellness__cellar-stat">
+                        <div class="wellness__cellar-stat-item">
+                            <div class="wellness__cellar-stat-number">1000+</div>
+                            <div class="wellness__cellar-stat-label">lahv&#237; v&#237;na</div>
+                        </div>
+                        <div class="wellness__cellar-stat-item">
+                            <div class="wellness__cellar-stat-number">50</div>
+                            <div class="wellness__cellar-stat-label">šarží v&#237;n</div>
+                        </div>
+                        <div class="wellness__cellar-stat-item">
+                            <div class="wellness__cellar-stat-number">25</div>
+                            <div class="wellness__cellar-stat-label">míst k sezení</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PUJCOVNA ===== -->
+    <section class="section section--white" id="pujcovna">
+        <div class="container">
+            <div class="pujcovna__grid">
+                <div class="pujcovna__visual reveal">
+                    <div class="icon-big">&#128690;</div>
+                    <div class="text-deco">Cyklopůjčovna</div>
+                </div>
+                <div class="reveal reveal-delay-1">
+                    <div class="section-label">Půjčovna kol</div>
+                    <h2 class="section-title">Objevte kr&#225;sy Jindřichohradecka</h2>
+                    <p class="section-desc">
+                        V naší cyklopůjčovně nabízíme 9 trekinkov&#253;ch kol a 2 koloběžky. Vybavení je pravidelně servisov&#225;no, při zapůjčení obdrží­te vše nafoukané, čisté, se z&#225;mkem a světly. Na m&#237;stě ho s V&#225;mi seřídíme na m&#237;ru.
+                    </p>
+                    <div class="pujcovna__pricing">
+                        <div class="pujcovna__price-item">
+                            <span class="pujcovna__price-name">Trekinkov&#233; kolo</span>
+                            <span class="pujcovna__price-value">250 Kč / den</span>
+                        </div>
+                        <div class="pujcovna__price-item">
+                            <span class="pujcovna__price-name">Koloběžka</span>
+                            <span class="pujcovna__price-value">250 Kč / den</span>
+                        </div>
+                        <div class="pujcovna__price-item">
+                            <span class="pujcovna__price-name">Cyklomapa</span>
+                            <span class="pujcovna__price-value">110 Kč</span>
+                        </div>
+                    </div>
+                    <div class="pujcovna__note">
+                        Pom&#367;žeme V&#225;m napl&#225;novat cyklotrasu přesně podle přání na d&#233;lku i n&#225;ročnost. Nab&#237;z&#237;me i vyzvednut&#237; vybaven&#237; ve Vašem c&#237;lov&#233;m m&#237;stě s převozem zavazadel.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== OKOLI ===== -->
+    <section class="section section--cream" id="okoli">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Okolí & Aktivity</div>
+                <h2 class="section-title">Co podniknout v okol&#237;</h2>
+                <p class="section-desc">
+                    Jižn&#237; &#268;echy nab&#237;z&#237; nespočet z&#225;žitků -- od historick&#253;ch pam&#225;tek přes cyklotrasy až po koupání v p&#237;skovn&#225;ch.
+                </p>
+            </div>
+            <div class="okoli__grid">
+                <div class="okoli-card reveal">
+                    <div class="okoli-card__icon">&#127984;</div>
+                    <h3 class="okoli-card__title">Pam&#225;tky</h3>
+                    <ul class="okoli-card__list">
+                        <li>Z&#225;mek Jindřichův Hradec <span class="okoli-card__distance">80 m</span></li>
+                        <li>Z&#225;mek Červen&#225; Lhota <span class="okoli-card__distance">18 km</span></li>
+                        <li>Hrad Landštejn <span class="okoli-card__distance">28 km</span></li>
+                        <li>Z&#225;mek Třeboň <span class="okoli-card__distance">30 km</span></li>
+                        <li>Z&#225;mek Telč (UNESCO) <span class="okoli-card__distance">41 km</span></li>
+                    </ul>
+                </div>
+                <div class="okoli-card reveal reveal-delay-1">
+                    <div class="okoli-card__icon">&#128690;</div>
+                    <h3 class="okoli-card__title">Cyklotrasy</h3>
+                    <ul class="okoli-card__list">
+                        <li>S dětmi na kole <span class="okoli-card__distance">27 km</span></li>
+                        <li>Jindrovou stezkou za rybníky <span class="okoli-card__distance">39 km</span></li>
+                        <li>Za červeným pokladem <span class="okoli-card__distance">45 km</span></li>
+                        <li>Krajem jemčinsk&#253;ch lesů <span class="okoli-card__distance">46 km</span></li>
+                        <li>Do srdce &#268;esk&#233; Kanady <span class="okoli-card__distance">80 km</span></li>
+                    </ul>
+                </div>
+                <div class="okoli-card reveal reveal-delay-2">
+                    <div class="okoli-card__icon">&#127754;</div>
+                    <h3 class="okoli-card__title">Koup&#225;n&#237;</h3>
+                    <ul class="okoli-card__list">
+                        <li>Plovárna u rybníka Vajgar</li>
+                        <li>Jindřišsk&#225; p&#237;skovna</li>
+                        <li>P&#237;skovny Majdalena</li>
+                        <li>Aquapark Jindřichův Hradec</li>
+                        <li>Lázně Aurora Třeboň <span class="okoli-card__distance">30 km</span></li>
+                    </ul>
+                </div>
+                <div class="okoli-card reveal">
+                    <div class="okoli-card__icon">&#128652;</div>
+                    <h3 class="okoli-card__title">Parn&#237; vlak</h3>
+                    <ul class="okoli-card__list">
+                        <li>Úzkorozchodn&#225; trať JHMD</li>
+                        <li>Trasa do Nov&#233; Bystřice</li>
+                        <li>Trasa do Obrataně</li>
+                        <li>Pravideln&#233; parní vlaky</li>
+                        <li>Jedineč&#253; z&#225;žitek pro rodiny</li>
+                    </ul>
+                </div>
+                <div class="okoli-card reveal reveal-delay-1">
+                    <div class="okoli-card__icon">&#127963;</div>
+                    <h3 class="okoli-card__title">Muzea</h3>
+                    <ul class="okoli-card__list">
+                        <li>Muzeum Jindřichův Hradec</li>
+                        <li>Muzeum Gobel&#237;nů</li>
+                        <li>N&#225;rodn&#237; muzeum fotografie</li>
+                        <li>Provaznick&#233; muzeum <span class="okoli-card__distance">16 km</span></li>
+                        <li>Leteck&#233; muzeum <span class="okoli-card__distance">16 km</span></li>
+                    </ul>
+                </div>
+                <div class="okoli-card reveal reveal-delay-2">
+                    <div class="okoli-card__icon">&#9917;</div>
+                    <h3 class="okoli-card__title">Sport</h3>
+                    <ul class="okoli-card__list">
+                        <li>Cykloturistika a koloběžky</li>
+                        <li>Tenis a beach volejbal</li>
+                        <li>Plav&#225;n&#237; a bowling</li>
+                        <li>Golf</li>
+                        <li>J&#237;zda na koni</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KONTAKT ===== -->
+    <section class="section section--white" id="kontakt">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Kontakt</div>
+                <h2 class="section-title">Přijeďte n&#225;s nav&#353;t&#237;vit</h2>
+                <p class="section-desc">
+                    Přímo v centru Jindřichova Hradce, kousek od n&#225;měst&#237; M&#237;ru a z&#225;mku.
+                </p>
+            </div>
+            <div class="kontakt__grid">
+                <div class="reveal">
+                    <div class="kontakt__info">
+                        <div class="kontakt__item">
+                            <div class="kontakt__item-icon">&#128205;</div>
+                            <div>
+                                <div class="kontakt__item-label">Adresa</div>
+                                <div class="kontakt__item-value">
+                                    Svatoj&#225;nsk&#225; 157/I<br>
+                                    377 01 Jindřichův Hradec
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kontakt__item">
+                            <div class="kontakt__item-icon">&#128222;</div>
+                            <div>
+                                <div class="kontakt__item-label">Telefon</div>
+                                <div class="kontakt__item-value">
+                                    <a href="tel:+420777043666">+420 777 043 666</a><br>
+                                    <a href="tel:+420384361474">+420 384 361 474</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kontakt__item">
+                            <div class="kontakt__item-icon">&#9993;</div>
+                            <div>
+                                <div class="kontakt__item-label">E-mail</div>
+                                <div class="kontakt__item-value">
+                                    <a href="mailto:kasper@cyklopenzion.cz">kasper@cyklopenzion.cz</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kontakt__item">
+                            <div class="kontakt__item-icon">&#127760;</div>
+                            <div>
+                                <div class="kontakt__item-label">Soci&#225;ln&#237; s&#237;tě</div>
+                                <div class="kontakt__item-value">
+                                    <a href="https://www.facebook.com/CyklopenzionKasper" target="_blank">Facebook - Cyklopenzion Kasper</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kontakt__checkin">
+                        <div class="kontakt__checkin-title">Příjezd a odjezd</div>
+                        <div class="kontakt__checkin-row">
+                            <span>Check-in</span>
+                            <strong>14:00 -- 20:00</strong>
+                        </div>
+                        <div class="kontakt__checkin-row">
+                            <span>Check-out</span>
+                            <strong>do 10:00</strong>
+                        </div>
+                        <div class="kontakt__checkin-row">
+                            <span>Parkování (vlastní)</span>
+                            <strong>od 120 Kč / den</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="kontakt__map reveal reveal-delay-1">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d633.9230011261056!2d15.00435317018415!3d49.14374908817422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470cce2044da9c33%3A0xc1b41ec012f79fad!2sCyklopenzion%2C+Penzion*2A*2A*2AKasper+Jind%C5%99ich%C5%AFv+Hradec!5e0!3m2!1scs!2scz!4v1519403954367"
+                        allowfullscreen
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <div>
+                    <div class="footer__brand-name">Penzion Kasper</div>
+                    <div class="footer__brand-stars">&#9733; &#9733; &#9733;</div>
+                    <p class="footer__brand-desc">
+                        Rodinný penzion v srdci Jindřichova Hradce. Dvě gotické budovy s 20 stylově zařízenými pokoji, kavárnou, vinotékou a wellness. Od roku 2002.
+                    </p>
+                </div>
+                <div>
+                    <div class="footer__col-title">Navigace</div>
+                    <ul class="footer__col-list">
+                        <li><a href="#ubytovani">Ubytování</a></li>
+                        <li><a href="#kavarna">Kavárna</a></li>
+                        <li><a href="#wellness">Wellness</a></li>
+                        <li><a href="#pujcovna">Půjčovna kol</a></li>
+                        <li><a href="#okoli">Okolí</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer__col-title">Služby</div>
+                    <ul class="footer__col-list">
+                        <li><a href="#wellness">Finská sauna</a></li>
+                        <li><a href="#wellness">Vinný sklep</a></li>
+                        <li><a href="#pujcovna">Cyklopůjčovna</a></li>
+                        <li><a href="#kontakt">Parkování</a></li>
+                        <li><a href="#ubytovani">Snídaně</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer__col-title">Kontakt</div>
+                    <ul class="footer__col-list">
+                        <li><a href="tel:+420777043666">+420 777 043 666</a></li>
+                        <li><a href="tel:+420384361474">+420 384 361 474</a></li>
+                        <li><a href="mailto:kasper@cyklopenzion.cz">kasper@cyklopenzion.cz</a></li>
+                        <li><a href="https://www.facebook.com/CyklopenzionKasper" target="_blank">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <span>&copy; 2007 -- 2026 Cyklopenzion Kasper. Všechna pr&#225;va vyhrazena.</span>
+                <span class="footer__credit">Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Navbar scroll effect
+        const nav = document.getElementById('nav');
+        const navBurger = document.getElementById('navBurger');
+        const navLinks = document.getElementById('navLinks');
+
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // Mobile menu
+        navBurger.addEventListener('click', () => {
+            navBurger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        function closeMenu() {
+            navBurger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Reveal on scroll
+        const reveals = document.querySelectorAll('.reveal');
+
+        function checkReveal() {
+            const trigger = window.innerHeight * 0.88;
+            reveals.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < trigger) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkReveal);
+        window.addEventListener('load', checkReveal);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    const offset = 80;
+                    const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Counter animation for about strip
+        function animateCounters() {
+            const counters = document.querySelectorAll('.about-strip__number');
+            counters.forEach(counter => {
+                const text = counter.textContent;
+                const match = text.match(/(\d+)/);
+                if (!match || counter.dataset.animated) return;
+
+                const target = parseInt(match[1]);
+                const suffix = text.replace(match[1], '').trim();
+                const span = counter.querySelector('span');
+                const spanText = span ? span.outerHTML : '';
+
+                const rect = counter.getBoundingClientRect();
+                if (rect.top > window.innerHeight) return;
+
+                counter.dataset.animated = 'true';
+                let current = 0;
+                const increment = target / 40;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.innerHTML = Math.floor(current) + spanText;
+                }, 30);
+            });
+        }
+
+        window.addEventListener('scroll', animateCounters);
+        window.addEventListener('load', animateCounters);
+    </script>
+
+</body>
+</html>

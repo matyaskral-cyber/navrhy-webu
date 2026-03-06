@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Černej Pták — Restaurace a penzion | Jindřichův Hradec</title>
+    <meta name="description" content="Restaurace s otevřenou kuchyní a penzion v srdci Jindřichova Hradce. Grilované speciality, domácí dezerty a útulné ubytování.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #141210;
+            --bg-light: #1c1a17;
+            --bg-card: #1f1d19;
+            --accent: #d4956a;
+            --accent-light: #e8b08a;
+            --accent-dark: #b07a52;
+            --text: #e8e2da;
+            --text-muted: #9a9188;
+            --text-dim: #6b645c;
+            --gold: #c9a96e;
+            --border: rgba(212, 149, 106, 0.12);
+            --border-light: rgba(212, 149, 106, 0.06);
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-dark) var(--bg);
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 3px; }
+
+        img { max-width: 100%; display: block; }
+        a { color: var(--accent); text-decoration: none; transition: color 0.3s; }
+        a:hover { color: var(--accent-light); }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; line-height: 1.2; }
+
+        .section-label {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .section-label::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            color: var(--text);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            line-height: 1.8;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 7rem 0;
+            position: relative;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.2rem 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav.scrolled {
+            background: rgba(20, 18, 16, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .nav-logo img {
+            height: 42px;
+            width: auto;
+            filter: brightness(1.1);
+        }
+        .nav-logo-text {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: 0.02em;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent) !important;
+            padding: 0.55rem 1.4rem;
+            border-radius: 2px;
+            font-size: 0.78rem !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.1em !important;
+            transition: all 0.3s !important;
+        }
+        .nav-cta:hover {
+            background: var(--accent) !important;
+            color: var(--bg) !important;
+        }
+        .nav-cta::after { display: none !important; }
+
+        /* Mobile menu */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            background: none;
+            border: none;
+        }
+        .nav-toggle span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--text);
+            transition: all 0.3s;
+            display: block;
+        }
+        .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+        .nav-toggle.active span:nth-child(2) { opacity: 0; }
+        .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.35) saturate(0.8);
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(20, 18, 16, 0.85) 0%,
+                rgba(20, 18, 16, 0.5) 40%,
+                rgba(20, 18, 16, 0.3) 60%,
+                rgba(20, 18, 16, 0.7) 100%
+            );
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            padding: 0 2rem;
+            margin-left: 8%;
+        }
+        .hero-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .hero-badge::before {
+            content: '';
+            width: 50px;
+            height: 1px;
+            background: var(--accent);
+        }
+        .hero h1 {
+            font-size: clamp(3rem, 6.5vw, 5.5rem);
+            color: var(--text);
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.02em;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+            font-weight: 400;
+        }
+        .hero-tagline {
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-muted);
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 2.5rem;
+            line-height: 1.5;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 2.2rem;
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 2px;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+        }
+        .btn-primary:hover {
+            background: var(--accent-light);
+            color: var(--bg);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 149, 106, 0.25);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-dim);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: float 3s ease-in-out infinite;
+        }
+        .hero-scroll .line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-8px); }
+        }
+
+        /* ===== INTRO STRIP ===== */
+        .intro-strip {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+        .intro-item {
+            padding: 2rem;
+        }
+        .intro-icon {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            color: var(--accent);
+        }
+        .intro-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
+            color: var(--text);
+        }
+        .intro-item p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ===== RESTAURACE ===== */
+        .restaurace {
+            background: var(--bg);
+        }
+        .rest-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+        .rest-image {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .rest-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .rest-image:hover img {
+            transform: scale(1.03);
+        }
+        .rest-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+        .rest-detail {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+            margin-top: 1.5rem;
+        }
+
+        /* Menu */
+        .menu-section { margin-top: 2rem; }
+        .menu-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        .menu-header .section-label { justify-content: center; }
+        .menu-header .section-label::before { display: none; }
+        .menu-header .section-subtitle { margin: 0 auto; }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .menu-tab {
+            padding: 0.6rem 1.5rem;
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .menu-tab:hover, .menu-tab.active {
+            background: var(--accent);
+            color: var(--bg);
+            border-color: var(--accent);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+        }
+        .menu-item {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: background 0.3s;
+        }
+        .menu-item:hover {
+            background: rgba(212, 149, 106, 0.03);
+        }
+        .menu-item-name {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+        .menu-item-desc {
+            font-size: 0.82rem;
+            color: var(--text-dim);
+        }
+        .menu-item-price {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--accent);
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .menu-panel { display: none; }
+        .menu-panel.active { display: block; }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+        }
+        .divider-line {
+            width: 60px;
+            height: 1px;
+            background: var(--accent);
+            margin: 0 auto;
+            position: relative;
+        }
+        .divider-line::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            background: var(--bg);
+        }
+
+        /* ===== PENZION ===== */
+        .penzion {
+            background: var(--bg-light);
+        }
+        .penzion-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+        .penzion-intro .section-subtitle { max-width: 100%; }
+        .penzion-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+        .penzion-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .penzion-feature svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+        .penzion-image {
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        .penzion-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Room cards */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .room-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2rem 2.2rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .room-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .room-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 149, 106, 0.25);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        .room-card:hover::before { opacity: 1; }
+        .room-type {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+        .room-desc {
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            margin-bottom: 1.2rem;
+        }
+        .room-price {
+            display: flex;
+            align-items: baseline;
+            gap: 0.4rem;
+        }
+        .room-price-value {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .room-price-unit {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+        }
+        .room-note {
+            margin-top: 0.8rem;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        /* ===== OTVIRACKA ===== */
+        .hours {
+            background: var(--bg);
+        }
+        .hours-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .hours-table {
+            margin-top: 2rem;
+        }
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .hours-day {
+            font-size: 0.92rem;
+            color: var(--text);
+        }
+        .hours-time {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            color: var(--accent);
+        }
+        .hours-closed {
+            color: var(--text-dim);
+            font-size: 0.88rem;
+        }
+        .hours-note {
+            margin-top: 1.5rem;
+            padding: 1.2rem 1.5rem;
+            background: rgba(212, 149, 106, 0.05);
+            border-left: 2px solid var(--accent);
+            border-radius: 0 4px 4px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        .hours-image {
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .hours-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+        }
+
+        /* ===== GALERIE ===== */
+        .galerie {
+            background: var(--bg-light);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s;
+            filter: brightness(0.85) saturate(0.9);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: brightness(1) saturate(1);
+        }
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(20, 18, 16, 0.4) 0%, transparent 50%);
+            opacity: 1;
+            transition: opacity 0.4s;
+        }
+        .gallery-item:hover::after { opacity: 0; }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(10, 9, 8, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s;
+        }
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .lightbox.active img {
+            transform: scale(1);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            background: none;
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .lightbox-close:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            background: none;
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .lightbox-nav:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .lightbox-prev { left: 2rem; }
+        .lightbox-next { right: 2rem; }
+
+        /* ===== KONTAKT ===== */
+        .kontakt { background: var(--bg); }
+        .kontakt-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .kontakt-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+        .kontakt-item {
+            display: flex;
+            gap: 1.2rem;
+        }
+        .kontakt-icon {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent);
+            transition: all 0.3s;
+        }
+        .kontakt-item:hover .kontakt-icon {
+            background: rgba(212, 149, 106, 0.1);
+            border-color: var(--accent);
+        }
+        .kontakt-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+        .kontakt-text h4 {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 0.35rem;
+        }
+        .kontakt-text p, .kontakt-text a {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .kontakt-map {
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            height: 100%;
+            min-height: 400px;
+        }
+        .kontakt-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border: none;
+            filter: grayscale(0.6) brightness(0.7) contrast(1.1);
+            transition: filter 0.4s;
+        }
+        .kontakt-map:hover iframe {
+            filter: grayscale(0.2) brightness(0.85) contrast(1);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .footer-left img {
+            height: 30px;
+            filter: brightness(0.8);
+        }
+        .footer-copy {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+        }
+        .footer-credit {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+        .footer-credit a {
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+        .footer-credit a:hover { color: var(--accent); }
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dim);
+            transition: all 0.3s;
+        }
+        .footer-social a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(212, 149, 106, 0.08);
+        }
+        .footer-social a svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ===== REVEAL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .rest-top, .penzion-intro, .hours-wrapper, .kontakt-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 5rem 0; }
+            .container { padding: 0 1.5rem; }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(20, 18, 16, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                z-index: 999;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { font-size: 1.1rem; }
+            .nav-toggle { display: flex; z-index: 1001; }
+
+            .hero-content { margin-left: 0; }
+            .hero h1 { font-size: clamp(2.4rem, 8vw, 3.5rem); }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+            }
+
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .penzion-features {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-actions {
+                flex-direction: column;
+            }
+            .btn { width: 100%; justify-content: center; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-item:nth-child(1) { grid-column: span 2; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <a href="#hero" class="nav-logo">
+                <img src="https://cernejptak.cz/wp-content/uploads/2020/06/cernej_logo.png" alt="Černej Pták logo">
+                <span class="nav-logo-text">Černej Pták</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#restaurace" onclick="closeMenu()">Restaurace</a></li>
+                <li><a href="#menu" onclick="closeMenu()">Jídelní lístek</a></li>
+                <li><a href="#penzion" onclick="closeMenu()">Penzion</a></li>
+                <li><a href="#hodiny" onclick="closeMenu()">Otevírací doba</a></li>
+                <li><a href="#galerie" onclick="closeMenu()">Galerie</a></li>
+                <li><a href="#kontakt" onclick="closeMenu()" class="nav-cta">Kontakt</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="https://cernejptak.cz/wp-content/uploads/2020/06/1_28-1-scaled.jpg" alt="Restaurace Černej Pták - interiér">
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">Jindřichův Hradec</div>
+            <h1>Černej<br><em>Pták</em></h1>
+            <p class="hero-tagline">Restaurace s otevřenou kuchyní<br>a útulný penzion v srdci města</p>
+            <div class="hero-actions">
+                <a href="#menu" class="btn btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M7 7h10M7 12h10M7 17h6"/></svg>
+                    Jídelní lístek
+                </a>
+                <a href="#penzion" class="btn btn-outline">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V7l9-4 9 4v14"/><path d="M9 21V11h6v10"/></svg>
+                    Ubytování
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            Scroll
+            <div class="line"></div>
+        </div>
+    </section>
+
+    <!-- INTRO STRIP -->
+    <div class="intro-strip">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-item reveal">
+                    <div class="intro-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6 2 10.5c0 3 2.5 5.5 5 7l5 4.5 5-4.5c2.5-1.5 5-4 5-7C22 6 17.52 2 12 2z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <h3>Otevřená kuchyně</h3>
+                    <p>Sledujte přípravu jídel přímo z vašeho stolu. Kuchyně situovaná do středu restaurace.</p>
+                </div>
+                <div class="intro-item reveal reveal-delay-1">
+                    <div class="intro-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+                    </div>
+                    <h3>Grilované speciality</h3>
+                    <p>Steaky, panenky a řízky z grilu. Čerstvé suroviny, poctivá příprava, autentická chuť.</p>
+                </div>
+                <div class="intro-item reveal reveal-delay-2">
+                    <div class="intro-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21V7l9-4 9 4v14"/><path d="M9 21V11h6v10"/></svg>
+                    </div>
+                    <h3>Útulný penzion</h3>
+                    <p>8 pokojů s vlastním sociálním zařízením. Snídaně v ceně, Wi-Fi, terasa v přízemí.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESTAURACE -->
+    <section class="restaurace" id="restaurace">
+        <div class="container">
+            <div class="rest-top">
+                <div class="reveal">
+                    <div class="section-label">Restaurace</div>
+                    <h2 class="section-title">Kde jídlo ožívá<br>přímo před vámi</h2>
+                    <p class="section-subtitle">
+                        Restaurace s otevřenou kuchyní situovanou do středu provozovny.
+                        Kapacita 55 míst v interiéru a 35 míst na letní zahrádce.
+                    </p>
+                    <p class="rest-detail">
+                        Nabízíme především pokrmy z grilu -- steaky, panenky, kuřecí
+                        i vepřové speciality. Doplněno o rizota, těstoviny, saláty a bezmasá
+                        jídla. Dezerty připravuje cukrářka Jana Horníčková. K pití nabízíme
+                        domácí limonády, ledové čaje, točený Pilsner Urquell a pečlivě
+                        vybraná moravská vína.
+                    </p>
+                </div>
+                <div class="rest-image reveal reveal-delay-2">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/rest-min-scaled.jpg" alt="Restaurace Černej Pták">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"><div class="divider-line"></div></div>
+
+    <!-- JIDELNI LISTEK -->
+    <section id="menu">
+        <div class="container">
+            <div class="menu-header reveal">
+                <div class="section-label">Jídelní lístek</div>
+                <h2 class="section-title">Z naší kuchyně</h2>
+                <p class="section-subtitle">Čerstvé suroviny, poctivé recepty. Každý den také nabízíme polední menu.</p>
+            </div>
+
+            <div class="menu-tabs reveal">
+                <button class="menu-tab active" data-tab="hlavni">Hlavní chody</button>
+                <button class="menu-tab" data-tab="predkrmy">Polévky a předkrmy</button>
+                <button class="menu-tab" data-tab="prilohy">Přílohy</button>
+                <button class="menu-tab" data-tab="napoje">Nápoje</button>
+            </div>
+
+            <!-- Hlavni chody -->
+            <div class="menu-panel active" id="panel-hlavni">
+                <div class="menu-grid reveal">
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Hovězí ball tip steak</div>
+                            <div class="menu-item-desc">200g, se zeleným pepřem</div>
+                        </div>
+                        <div class="menu-item-price">295 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Grilovaná vepřová panenka</div>
+                            <div class="menu-item-desc">200g, s hříbkovou omáčkou</div>
+                        </div>
+                        <div class="menu-item-price">210 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Steak z vepřové kotlety</div>
+                            <div class="menu-item-desc">200g, v pepřové krustě</div>
+                        </div>
+                        <div class="menu-item-price">195 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Grilovaný kuřecí prsíček</div>
+                            <div class="menu-item-desc">200g, s čedarovou omáčkou</div>
+                        </div>
+                        <div class="menu-item-price">195 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Smažený vepřový řízek</div>
+                            <div class="menu-item-desc">200g, s okurkou</div>
+                        </div>
+                        <div class="menu-item-price">180 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Smažený kuřecí řízek</div>
+                            <div class="menu-item-desc">200g</div>
+                        </div>
+                        <div class="menu-item-price">180 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Houbové rizoto</div>
+                            <div class="menu-item-desc">300g, se slaninou, špenátem a sýrem</div>
+                        </div>
+                        <div class="menu-item-price">195 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Těstoviny s uzeným lososem</div>
+                            <div class="menu-item-desc">300g, sušená rajčata, česnek, smetana</div>
+                        </div>
+                        <div class="menu-item-price">215 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Kuřecí salát</div>
+                            <div class="menu-item-desc">300g, grilované kuřecí, zelenina, toast</div>
+                        </div>
+                        <div class="menu-item-price">180 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Kozí sýr na salátu</div>
+                            <div class="menu-item-desc">300g, s vlašskými ořechy a toustem</div>
+                        </div>
+                        <div class="menu-item-price">180 Kč</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predkrmy -->
+            <div class="menu-panel" id="panel-predkrmy">
+                <div class="menu-grid reveal">
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Minestrone</div>
+                            <div class="menu-item-desc">0,3l, italská zeleninová polévka</div>
+                        </div>
+                        <div class="menu-item-price">60 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Pikantní toast</div>
+                            <div class="menu-item-desc">1 ks, s kuřecím masem, zeleninou a sýrem</div>
+                        </div>
+                        <div class="menu-item-price">110 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Horké maliny</div>
+                            <div class="menu-item-desc">90g, s vanilkovou zmrzlinou a šlehačkou</div>
+                        </div>
+                        <div class="menu-item-price">105 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Denní zákusek</div>
+                            <div class="menu-item-desc">1 ks, od cukrářky Jany Horníčkové</div>
+                        </div>
+                        <div class="menu-item-price">dle nabídky</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prilohy -->
+            <div class="menu-panel" id="panel-prilohy">
+                <div class="menu-grid reveal">
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Hranolky</div>
+                            <div class="menu-item-desc">150g</div>
+                        </div>
+                        <div class="menu-item-price">55 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Pečené brambory</div>
+                            <div class="menu-item-desc">200g, se slaninou a jarní cibulkou</div>
+                        </div>
+                        <div class="menu-item-price">65 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Šťouchané brambory</div>
+                            <div class="menu-item-desc">200g, se špenátem a cibulkou</div>
+                        </div>
+                        <div class="menu-item-price">55 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Pečená zelenina</div>
+                            <div class="menu-item-desc">200g, s tymiánem</div>
+                        </div>
+                        <div class="menu-item-price">90 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Zeleninový salát</div>
+                            <div class="menu-item-desc">150g, mix čerstvé zeleniny</div>
+                        </div>
+                        <div class="menu-item-price">80 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Tatarská omáčka</div>
+                            <div class="menu-item-desc">50g, domácí</div>
+                        </div>
+                        <div class="menu-item-price">30 Kč</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Napoje -->
+            <div class="menu-panel" id="panel-napoje">
+                <div class="menu-grid reveal">
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Pilsner Urquell</div>
+                            <div class="menu-item-desc">Točený, 0,5l</div>
+                        </div>
+                        <div class="menu-item-price">58 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Domácí limonáda limetková</div>
+                            <div class="menu-item-desc">0,5l</div>
+                        </div>
+                        <div class="menu-item-price">90 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Cappuccino</div>
+                            <div class="menu-item-desc">Čerstvě mletá káva</div>
+                        </div>
+                        <div class="menu-item-price">65 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Latte Macchiato</div>
+                            <div class="menu-item-desc">Vrstvená káva s mlékem</div>
+                        </div>
+                        <div class="menu-item-price">70 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Sauvignon / Riesling / Tramín</div>
+                            <div class="menu-item-desc">Moravské víno, 0,1l</div>
+                        </div>
+                        <div class="menu-item-price">39 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Baron Hildprandt</div>
+                            <div class="menu-item-desc">Ovocné destiláty, 0,04l</div>
+                        </div>
+                        <div class="menu-item-price">90 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Mattoni</div>
+                            <div class="menu-item-desc">Perlivá / jemně perlivá / neperlivá, 0,25l</div>
+                        </div>
+                        <div class="menu-item-price">45 Kč</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="menu-item-name">Espresso</div>
+                            <div class="menu-item-desc">Čerstvě mletá káva</div>
+                        </div>
+                        <div class="menu-item-price">55 Kč</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"><div class="divider-line"></div></div>
+
+    <!-- PENZION -->
+    <section class="penzion" id="penzion">
+        <div class="container">
+            <div class="penzion-intro">
+                <div class="reveal">
+                    <div class="section-label">Penzion</div>
+                    <h2 class="section-title">Pohodlné ubytování<br>v centru města</h2>
+                    <p class="section-subtitle">
+                        8 útulných pokojů na dvou podlažích. Pokoje v přízemí s přístupem
+                        na společnou terasu. Snídaně podáváme v restauraci od 8:00 do 9:30.
+                    </p>
+                    <div class="penzion-features">
+                        <div class="penzion-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+                            Wi-Fi zdarma
+                        </div>
+                        <div class="penzion-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M17 2l-5 5-5-5"/></svg>
+                            TV s plochou obrazovkou
+                        </div>
+                        <div class="penzion-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 12h20"/><path d="M12 3v18"/></svg>
+                            Mini chladnička
+                        </div>
+                        <div class="penzion-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2v20M18 2v20M6 12h12M6 7h12M6 17h12"/></svg>
+                            Vlastní koupelna
+                        </div>
+                        <div class="penzion-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 0 0-5 5v3H5v12h14V10h-2V7a5 5 0 0 0-5-5z"/></svg>
+                            Fén
+                        </div>
+                        <div class="penzion-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                            Snídaně v ceně
+                        </div>
+                    </div>
+                </div>
+                <div class="penzion-image reveal reveal-delay-2">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/1_14-1024x683.jpg" alt="Pokoj v penzionu Černej Pták">
+                </div>
+            </div>
+
+            <!-- Room cards -->
+            <div class="rooms-grid">
+                <div class="room-card reveal">
+                    <div class="room-type">Jednolůžkový pokoj</div>
+                    <div class="room-desc">Útulný pokoj pro jednoho hosta</div>
+                    <div class="room-price">
+                        <span class="room-price-value">1 100</span>
+                        <span class="room-price-unit">Kč / noc</span>
+                    </div>
+                    <div class="room-note">Včetně snídaně. Rekreační poplatek 21 Kč/os./noc.</div>
+                </div>
+                <div class="room-card reveal reveal-delay-1">
+                    <div class="room-type">Dvoulůžkový s terasou</div>
+                    <div class="room-desc">Přízemí, přístup na společnou terasu</div>
+                    <div class="room-price">
+                        <span class="room-price-value">1 900</span>
+                        <span class="room-price-unit">Kč / noc</span>
+                    </div>
+                    <div class="room-note">Včetně snídaně. Rekreační poplatek 21 Kč/os./noc.</div>
+                </div>
+                <div class="room-card reveal reveal-delay-2">
+                    <div class="room-type">Dvoulůžkový, 2. patro</div>
+                    <div class="room-desc">Prostorný pokoj v patře</div>
+                    <div class="room-price">
+                        <span class="room-price-value">1 650</span>
+                        <span class="room-price-unit">Kč / noc</span>
+                    </div>
+                    <div class="room-note">Včetně snídaně. Rekreační poplatek 21 Kč/os./noc.</div>
+                </div>
+                <div class="room-card reveal reveal-delay-1">
+                    <div class="room-type">Třílůžkový s terasou</div>
+                    <div class="room-desc">2 ložnice, přízemí s terasou</div>
+                    <div class="room-price">
+                        <span class="room-price-value">2 250</span>
+                        <span class="room-price-unit">Kč / noc</span>
+                    </div>
+                    <div class="room-note">Včetně snídaně. Rekreační poplatek 21 Kč/os./noc.</div>
+                </div>
+                <div class="room-card reveal reveal-delay-2">
+                    <div class="room-type">Třílůžkový, 2. patro</div>
+                    <div class="room-desc">2 ložnice v patře</div>
+                    <div class="room-price">
+                        <span class="room-price-value">2 100</span>
+                        <span class="room-price-unit">Kč / noc</span>
+                    </div>
+                    <div class="room-note">Včetně snídaně. Rekreační poplatek 21 Kč/os./noc.</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;" class="reveal">
+                <a href="tel:+420774046234" class="btn btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Rezervovat pokoj
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- OTEVIRACI DOBA -->
+    <section class="hours" id="hodiny">
+        <div class="container">
+            <div class="hours-wrapper">
+                <div class="reveal">
+                    <div class="section-label">Otevírací doba</div>
+                    <h2 class="section-title">Kdy nás najdete</h2>
+                    <div class="hours-table">
+                        <div class="hours-row">
+                            <span class="hours-day">Pondělí</span>
+                            <span class="hours-time">11:00 — 22:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Úterý</span>
+                            <span class="hours-time">11:00 — 22:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Středa</span>
+                            <span class="hours-time">11:00 — 22:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Čtvrtek</span>
+                            <span class="hours-time">11:00 — 22:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Pátek</span>
+                            <span class="hours-time">11:00 — 23:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Sobota</span>
+                            <span class="hours-time">11:00 — 23:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Neděle</span>
+                            <span class="hours-closed">Zavřeno</span>
+                        </div>
+                    </div>
+                    <div class="hours-note">
+                        Kuchyně přijímá objednávky do 30 minut před zavírací dobou.
+                        V letní sezóně otevíráme letní zahrádku s 35 místy k sezení.
+                        Snídaně pro hosty penzionu: 8:00 — 9:30.
+                    </div>
+                </div>
+                <div class="hours-image reveal reveal-delay-2">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/1_30-scaled.jpg" alt="Interiér restaurace Černej Pták">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"><div class="divider-line"></div></div>
+
+    <!-- GALERIE -->
+    <section class="galerie" id="galerie">
+        <div class="container">
+            <div class="reveal" style="text-align: center; margin-bottom: 3.5rem;">
+                <div class="section-label" style="justify-content: center;"><span style="display:none"></span>Galerie</div>
+                <h2 class="section-title">Nahlédněte k nám</h2>
+            </div>
+            <div class="gallery-grid reveal">
+                <div class="gallery-item" onclick="openLightbox(0)">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/1_28-1-scaled.jpg" alt="Interiér restaurace" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(1)">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/rest-min-scaled.jpg" alt="Otevřená kuchyně" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(2)">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/1_29-scaled.jpg" alt="Detail restaurace" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(3)">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/1_30-scaled.jpg" alt="Prostory restaurace" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(4)">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/1_31-scaled.jpg" alt="Záběr z restaurace" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(5)">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/048-min-scaled.jpg" alt="Detail jídla" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(6)">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/IMG_0062-scaled.jpg" alt="Jídlo z grilu" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(7)">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/IMG_0063-scaled.jpg" alt="Restaurace detail" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(8)">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/IMG_3172-1024x682.jpeg" alt="Pokoj v penzionu" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">&#8249;</button>
+        <img src="" alt="Galerie" id="lightboxImg">
+        <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#8250;</button>
+    </div>
+
+    <!-- KONTAKT -->
+    <section class="kontakt" id="kontakt">
+        <div class="container">
+            <div class="reveal" style="margin-bottom: 3.5rem;">
+                <div class="section-label">Kontakt</div>
+                <h2 class="section-title">Těšíme se na vás</h2>
+            </div>
+            <div class="kontakt-grid">
+                <div class="kontakt-info reveal">
+                    <div class="kontakt-item">
+                        <div class="kontakt-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div class="kontakt-text">
+                            <h4>Adresa</h4>
+                            <p>Štítného 117/I<br>377 01 Jindřichův Hradec</p>
+                        </div>
+                    </div>
+                    <div class="kontakt-item">
+                        <div class="kontakt-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                        <div class="kontakt-text">
+                            <h4>Telefon</h4>
+                            <p>
+                                Restaurace: <a href="tel:+420384390790">+420 384 390 790</a><br>
+                                Penzion: <a href="tel:+420774046234">+420 774 046 234</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="kontakt-item">
+                        <div class="kontakt-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <div class="kontakt-text">
+                            <h4>E-mail</h4>
+                            <p><a href="mailto:cernejptak@cernejptak.cz">cernejptak@cernejptak.cz</a></p>
+                        </div>
+                    </div>
+                    <div class="kontakt-item">
+                        <div class="kontakt-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        </div>
+                        <div class="kontakt-text">
+                            <h4>Web</h4>
+                            <p><a href="https://cernejptak.cz" target="_blank">cernejptak.cz</a></p>
+                        </div>
+                    </div>
+                    <div class="kontakt-item">
+                        <div class="kontakt-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </div>
+                        <div class="kontakt-text">
+                            <h4>Parkování</h4>
+                            <p>Bezplatné parkování cca 300 m od penzionu</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="kontakt-map reveal reveal-delay-2">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2610.5!2d15.0028!3d49.1442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4772e3a4b8f9a1c1%3A0x400af0f6614d8e0!2s%C4%8Cernej%20Pt%C3%A1k!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa - Černej Pták, Jindřichův Hradec">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <img src="https://cernejptak.cz/wp-content/uploads/2020/06/cernej_logo.png" alt="Černej Pták">
+                    <span class="footer-copy">&copy; 2025 Černej Pták. Všechna práva vyhrazena.</span>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/cernejptak" target="_blank" rel="noopener" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/cernejptak" target="_blank" rel="noopener" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                </div>
+                <div class="footer-credit">
+                    Vytvořil <a href="https://kshpartners.cz" target="_blank" rel="noopener">KSH Partners s.r.o.</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== NAVBAR SCROLL =====
+        const nav = document.getElementById('nav');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            if (currentScroll > 60) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        // ===== MOBILE MENU =====
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('open');
+            document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+        });
+
+        function closeMenu() {
+            navToggle.classList.remove('active');
+            navLinks.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // ===== MENU TABS =====
+        const menuTabs = document.querySelectorAll('.menu-tab');
+        const menuPanels = document.querySelectorAll('.menu-panel');
+
+        menuTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                menuTabs.forEach(t => t.classList.remove('active'));
+                menuPanels.forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // ===== GALLERY LIGHTBOX =====
+        const galleryImages = [
+            'https://cernejptak.cz/wp-content/uploads/2020/06/1_28-1-scaled.jpg',
+            'https://cernejptak.cz/wp-content/uploads/2020/06/rest-min-scaled.jpg',
+            'https://cernejptak.cz/wp-content/uploads/2020/06/1_29-scaled.jpg',
+            'https://cernejptak.cz/wp-content/uploads/2020/06/1_30-scaled.jpg',
+            'https://cernejptak.cz/wp-content/uploads/2020/06/1_31-scaled.jpg',
+            'https://cernejptak.cz/wp-content/uploads/2020/06/048-min-scaled.jpg',
+            'https://cernejptak.cz/wp-content/uploads/2020/06/IMG_0062-scaled.jpg',
+            'https://cernejptak.cz/wp-content/uploads/2020/06/IMG_0063-scaled.jpg',
+            'https://cernejptak.cz/wp-content/uploads/2020/06/IMG_3172-1024x682.jpeg'
+        ];
+        let currentLightbox = 0;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+
+        function openLightbox(index) {
+            currentLightbox = index;
+            lightboxImg.src = galleryImages[index];
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function navLightbox(dir) {
+            currentLightbox = (currentLightbox + dir + galleryImages.length) % galleryImages.length;
+            lightboxImg.src = galleryImages[currentLightbox];
+        }
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navLightbox(-1);
+            if (e.key === 'ArrowRight') navLightbox(1);
+        });
+
+        // ===== REVEAL ON SCROLL =====
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        reveals.forEach(el => revealObserver.observe(el));
+
+        // ===== SMOOTH SCROLL OFFSET =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const position = target.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top: position, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

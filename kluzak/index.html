@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truhlářství Milan Kluzák | Nábytek na míru - Jindřichův Hradec</title>
+    <meta name="description" content="Truhlářství Milan Kluzák - kuchyně na míru, obývací pokoje, kancelářský nábytek, sauny a včelí úly. Kvalitní řemeslná práce z Jindřichova Hradce.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════
+           RESET & BASE
+           ═══════════════════════════════════════ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-dark: #1c1915;
+            --bg-card: #252119;
+            --bg-card-hover: #2e2720;
+            --bg-surface: #1f1b17;
+            --accent: #b8865a;
+            --accent-light: #d4a574;
+            --accent-dark: #8f6840;
+            --text: #f0ebe4;
+            --text-muted: #a89e93;
+            --text-dim: #7a7068;
+            --border: rgba(184, 134, 90, 0.15);
+            --border-accent: rgba(184, 134, 90, 0.3);
+            --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-dark) var(--bg-dark);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: var(--grain);
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.5;
+        }
+
+        /* ═══════════════════════════════════════
+           TYPOGRAPHY
+           ═══════════════════════════════════════ */
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        /* ═══════════════════════════════════════
+           LAYOUT
+           ═══════════════════════════════════════ */
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        /* ═══════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav.scrolled {
+            background: rgba(28, 25, 21, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .nav-logo-icon {
+            width: 42px;
+            height: 42px;
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-logo-icon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(184,134,90,0.15), transparent);
+        }
+
+        .nav-logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo-text span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: var(--bg-dark) !important;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+        }
+
+        .nav-cta::after { display: none !important; }
+
+        /* Hamburger */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: none;
+            border: none;
+            z-index: 1002;
+        }
+
+        .nav-hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--text);
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ═══════════════════════════════════════
+           HERO
+           ═══════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 70% 40%, rgba(184, 134, 90, 0.08), transparent),
+                radial-gradient(ellipse 60% 80% at 20% 80%, rgba(184, 134, 90, 0.05), transparent);
+        }
+
+        /* Animated wood grain lines */
+        .hero-lines {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            opacity: 0.06;
+        }
+
+        .hero-lines span {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: grain-line 8s linear infinite;
+        }
+
+        .hero-lines span:nth-child(1) { top: 20%; width: 60%; left: -10%; animation-delay: 0s; }
+        .hero-lines span:nth-child(2) { top: 35%; width: 80%; left: 10%; animation-delay: 2s; }
+        .hero-lines span:nth-child(3) { top: 55%; width: 50%; left: 20%; animation-delay: 4s; }
+        .hero-lines span:nth-child(4) { top: 70%; width: 70%; left: -5%; animation-delay: 1s; }
+        .hero-lines span:nth-child(5) { top: 85%; width: 90%; left: 5%; animation-delay: 3s; }
+
+        @keyframes grain-line {
+            0% { transform: translateX(-100%); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 18px;
+            background: rgba(184, 134, 90, 0.1);
+            border: 1px solid var(--border-accent);
+            border-radius: 100px;
+            font-size: 0.82rem;
+            color: var(--accent-light);
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+
+        .hero-badge svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--accent);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.08;
+            margin-bottom: 28px;
+            max-width: 700px;
+        }
+
+        .hero h1 .accent {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin-bottom: 44px;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(184, 134, 90, 0.25);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: transparent;
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: 12px;
+            border: 1px solid var(--border-accent);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(184, 134, 90, 0.08);
+            border-color: var(--accent);
+        }
+
+        /* Hero stats */
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 72px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .hero-stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 6px;
+        }
+
+        /* ═══════════════════════════════════════
+           SERVICES (SLUZBY)
+           ═══════════════════════════════════════ */
+        .services {
+            background: var(--bg-surface);
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .services-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px 32px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+            background: var(--bg-card-hover);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: rgba(184, 134, 90, 0.1);
+            border: 1px solid var(--border-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Bee hive special card */
+        .service-card.highlight {
+            border-color: var(--accent-dark);
+            background: linear-gradient(135deg, rgba(184, 134, 90, 0.08), var(--bg-card));
+            grid-column: span 2;
+        }
+
+        .service-card.highlight .highlight-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(184, 134, 90, 0.15);
+            color: var(--accent-light);
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+        }
+
+        .highlight-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .highlight-features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .highlight-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .highlight-feature svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════
+           GALLERY (REALIZACE)
+           ═══════════════════════════════════════ */
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .gallery-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .gallery-filter {
+            padding: 10px 22px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .gallery-filter:hover,
+        .gallery-filter.active {
+            background: var(--accent);
+            color: var(--bg-dark);
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .gallery-item.tall {
+            grid-row: span 2;
+            aspect-ratio: auto;
+        }
+
+        .gallery-item.wide {
+            grid-column: span 2;
+        }
+
+        .gallery-item-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-item:hover .gallery-item-img {
+            transform: scale(1.06);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(28, 25, 21, 0.85) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: flex-end;
+            padding: 24px;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        /* Placeholder pattern for gallery items without real images */
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card-hover) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.06;
+            background-image:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 20px,
+                    var(--accent) 20px,
+                    var(--accent) 21px
+                );
+        }
+
+        .gallery-placeholder svg {
+            width: 48px;
+            height: 48px;
+            opacity: 0.15;
+            fill: var(--accent);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* ═══════════════════════════════════════
+           PROCESS
+           ═══════════════════════════════════════ */
+        .process {
+            background: var(--bg-surface);
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .process-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 15%;
+            right: 15%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-dark), var(--accent-dark), transparent);
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step-num {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: var(--bg-surface);
+            position: relative;
+            z-index: 2;
+        }
+
+        .process-step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .process-step p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════
+           ABOUT (O NAS)
+           ═══════════════════════════════════════ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .about-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-card-hover));
+            position: relative;
+        }
+
+        .about-image-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            background-image:
+                repeating-linear-gradient(
+                    30deg,
+                    transparent,
+                    transparent 30px,
+                    var(--accent) 30px,
+                    var(--accent) 31px
+                );
+        }
+
+        .about-image-placeholder svg {
+            width: 72px;
+            height: 72px;
+            fill: var(--accent);
+            opacity: 0.2;
+        }
+
+        .about-image-placeholder span {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .about-accent-box {
+            position: absolute;
+            bottom: -24px;
+            right: -24px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 28px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(184, 134, 90, 0.3);
+        }
+
+        .about-accent-box .number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .about-accent-box .label {
+            font-size: 0.82rem;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .about-text h2 {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            margin-bottom: 24px;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .about-values {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 36px;
+        }
+
+        .about-value {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .about-value-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(184, 134, 90, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .about-value-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--accent);
+        }
+
+        .about-value h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .about-value p {
+            font-size: 0.85rem !important;
+            color: var(--text-dim) !important;
+            margin-bottom: 0 !important;
+        }
+
+        /* ═══════════════════════════════════════
+           TESTIMONIAL / BANNER
+           ═══════════════════════════════════════ */
+        .cta-banner {
+            background: var(--bg-surface);
+        }
+
+        .cta-banner-inner {
+            background: linear-gradient(135deg, rgba(184, 134, 90, 0.12), rgba(184, 134, 90, 0.04));
+            border: 1px solid var(--border-accent);
+            border-radius: 24px;
+            padding: 72px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner-inner::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(184, 134, 90, 0.1), transparent);
+            top: -200px;
+            right: -100px;
+        }
+
+        .cta-banner-inner h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .cta-banner-inner p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 36px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        .cta-banner-inner .btn-primary {
+            position: relative;
+        }
+
+        /* ═══════════════════════════════════════
+           CONTACT (KONTAKT)
+           ═══════════════════════════════════════ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 16px;
+        }
+
+        .contact-info > p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+        }
+
+        .contact-item-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(184, 134, 90, 0.1);
+            border: 1px solid var(--border-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-item-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--accent);
+        }
+
+        .contact-item-text h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .contact-item-text p,
+        .contact-item-text a {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item-text a:hover {
+            color: var(--accent);
+        }
+
+        .contact-map {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(0.8) brightness(0.7) contrast(1.1) sepia(0.2);
+            transition: filter 0.5s;
+        }
+
+        .contact-map:hover iframe {
+            filter: grayscale(0.3) brightness(0.8) contrast(1.05) sepia(0.1);
+        }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════ */
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            background: var(--bg-dark);
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .footer-credit {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .footer-credit a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .footer-credit a:hover {
+            color: var(--accent-light);
+        }
+
+        /* ═══════════════════════════════════════
+           REVEAL ANIMATIONS
+           ═══════════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .service-card.highlight {
+                grid-column: span 2;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 0;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 360px;
+                height: 100vh;
+                background: rgba(28, 25, 21, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 100px 40px 40px;
+                gap: 24px;
+                transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                border-left: 1px solid var(--border);
+            }
+
+            .nav-links.open {
+                right: 0;
+            }
+
+            .nav-hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 3.2rem);
+            }
+
+            .hero-stats {
+                gap: 32px;
+                flex-wrap: wrap;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card.highlight {
+                grid-column: span 1;
+            }
+
+            .highlight-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item.tall {
+                grid-row: span 1;
+                aspect-ratio: 4/3;
+            }
+
+            .gallery-item.wide {
+                grid-column: span 1;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px 24px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .about-accent-box {
+                bottom: -16px;
+                right: -8px;
+                padding: 20px;
+            }
+
+            .about-accent-box .number {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .cta-banner-inner {
+                padding: 48px 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .about-values {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-filters {
+                gap: 6px;
+            }
+
+            .gallery-filter {
+                padding: 8px 16px;
+                font-size: 0.82rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════ NAVIGATION ═══════════ -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="#hero" class="nav-logo">
+                    <div class="nav-logo-icon">MK</div>
+                    <div class="nav-logo-text">Truhlářství <span>Kluzák</span></div>
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#sluzby">Služby</a></li>
+                    <li><a href="#realizace">Realizace</a></li>
+                    <li><a href="#postup">Jak pracujeme</a></li>
+                    <li><a href="#onas">O nás</a></li>
+                    <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
+                </ul>
+                <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-lines">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    Truhlářství s tradicí v Jindřichově Hradci
+                </div>
+                <h1>Nábytek na míru<br>s&nbsp;<span class="accent">řemeslnou precizností</span></h1>
+                <p class="hero-desc">
+                    Od kuchyňských linek přes obývací pokoje až po unikátní včelí úly.
+                    Každý kus vyrábíme s&nbsp;láskou ke dřevu a&nbsp;důrazem na detail.
+                </p>
+                <div class="hero-actions">
+                    <a href="#kontakt" class="btn-primary">
+                        Nezávazná konzultace
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#realizace" class="btn-secondary">
+                        Zobrazit realizace
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div>
+                        <div class="hero-stat-number" data-count="20">0</div>
+                        <div class="hero-stat-label">let zkušeností</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-number" data-count="500">0</div>
+                        <div class="hero-stat-label">spokojených zákazníků</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-number" data-count="100">0</div>
+                        <div class="hero-stat-label">% na míru</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ SERVICES ═══════════ -->
+    <section class="services" id="sluzby">
+        <div class="container">
+            <div class="services-header reveal">
+                <div class="section-label">Co nabízíme</div>
+                <h2 class="section-title">Služby na míru<br>vašim představám</h2>
+                <p class="section-subtitle">
+                    Specializujeme se na zakázkovou výrobu nábytku z&nbsp;kvalitních materiálů.
+                    Každý projekt je originál.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Kuchyne -->
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8865a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><path d="M7 10V4"/><circle cx="15" cy="7" r="1"/><circle cx="12" cy="15" r="2"/>
+                        </svg>
+                    </div>
+                    <h3>Kuchyně na míru</h3>
+                    <p>Kvalitní kuchyňské linky navržené přesně pro váš prostor. Široký výběr materiálů, pracovních desek a&nbsp;kování od předních výrobců.</p>
+                </div>
+
+                <!-- Obyvaky -->
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8865a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 9V6a2 2 0 00-2-2H6a2 2 0 00-2 2v3"/><path d="M2 11v5a2 2 0 002 2h16a2 2 0 002-2v-5a2 2 0 00-4 0v2H6v-2a2 2 0 00-4 0z"/><path d="M4 18v2"/><path d="M20 18v2"/>
+                        </svg>
+                    </div>
+                    <h3>Obývací pokoje</h3>
+                    <p>Precizní nábytek do obývacích prostor, obklady stěn, krbové obložení. Vytvoříme harmonický celek, který dýchá vaším stylem.</p>
+                </div>
+
+                <!-- Kancelare -->
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8865a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V4a1 1 0 00-1-1H9a1 1 0 00-1 1v3"/><path d="M2 12h20"/><path d="M12 12v4"/>
+                        </svg>
+                    </div>
+                    <h3>Kancelářský nábytek</h3>
+                    <p>Kompletní vybavení kancelářských prostor a&nbsp;komerčních objektů. Funkční řešení, které reprezentuje vaši firmu.</p>
+                </div>
+
+                <!-- Sauny -->
+                <div class="service-card reveal reveal-delay-4">
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8865a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 2c0 0-2 4-2 6a2 2 0 104 0c0-2-2-6-2-6z"/><path d="M16 2c0 0-2 4-2 6a2 2 0 104 0c0-2-2-6-2-6z"/><path d="M12 6c0 0-2 4-2 6a2 2 0 104 0c0-2-2-6-2-6z"/><rect x="3" y="16" width="18" height="6" rx="1"/>
+                        </svg>
+                    </div>
+                    <h3>Sauny</h3>
+                    <p>Výroba saun a&nbsp;saunového vybavení z&nbsp;kvalitních dřevin. Od návrhu po realizaci, včetně lavic a&nbsp;obkladů.</p>
+                </div>
+
+                <!-- Vceli uly - HIGHLIGHT -->
+                <div class="service-card highlight reveal reveal-delay-5">
+                    <div class="highlight-badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#b8865a"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        Unikátní specialita
+                    </div>
+                    <div class="highlight-inner">
+                        <div>
+                            <h3>Včelí úly</h3>
+                            <p>Ruční výroba kvalitních včelích úlů z&nbsp;masivního dřeva. Spojujeme tradiční truhlářské řemeslo s&nbsp;potřebami moderního včelaření.</p>
+                            <div class="highlight-features">
+                                <div class="highlight-feature">
+                                    <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                                    Masivní dřevo, dlouhá životnost
+                                </div>
+                                <div class="highlight-feature">
+                                    <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                                    Přesné rozměry dle typu úlu
+                                </div>
+                                <div class="highlight-feature">
+                                    <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                                    Ošetřeno pro venkovní použití
+                                </div>
+                                <div class="highlight-feature">
+                                    <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                                    Individuální výroba i&nbsp;série
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:center;">
+                            <svg width="180" height="180" viewBox="0 0 200 200" fill="none" style="opacity:0.12">
+                                <!-- Honeycomb pattern -->
+                                <polygon points="100,30 130,48 130,82 100,100 70,82 70,48" stroke="#b8865a" stroke-width="2" fill="none"/>
+                                <polygon points="100,100 130,118 130,152 100,170 70,152 70,118" stroke="#b8865a" stroke-width="2" fill="none"/>
+                                <polygon points="40,65 70,83 70,117 40,135 10,117 10,83" stroke="#b8865a" stroke-width="2" fill="none"/>
+                                <polygon points="160,65 190,83 190,117 160,135 130,117 130,83" stroke="#b8865a" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ GALLERY ═══════════ -->
+    <section class="gallery" id="realizace">
+        <div class="container">
+            <div class="gallery-header reveal">
+                <div class="section-label">Portfolio</div>
+                <h2 class="section-title">Naše realizace</h2>
+                <p class="section-subtitle">
+                    Ukázky hotových projektů, na které jsme hrdí. Každý kus je originál vyrobený na míru.
+                </p>
+            </div>
+
+            <div class="gallery-filters reveal">
+                <button class="gallery-filter active" data-filter="all">Vše</button>
+                <button class="gallery-filter" data-filter="kuchyne">Kuchyně</button>
+                <button class="gallery-filter" data-filter="obyvaky">Obývací pokoje</button>
+                <button class="gallery-filter" data-filter="kancelare">Kanceláře</button>
+                <button class="gallery-filter" data-filter="sauny">Sauny</button>
+                <button class="gallery-filter" data-filter="uly">Včelí úly</button>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item wide reveal" data-category="kuchyne">
+                    <div class="gallery-placeholder">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
+                    </div>
+                    <div class="gallery-item-overlay">
+                        <span class="gallery-item-label">Kuchyně na míru - moderní provedení</span>
+                    </div>
+                </div>
+                <div class="gallery-item reveal reveal-delay-1" data-category="obyvaky">
+                    <div class="gallery-placeholder">
+                        <svg viewBox="0 0 24 24"><path d="M20 9V6a2 2 0 00-2-2H6a2 2 0 00-2 2v3" stroke="#b8865a" fill="none" stroke-width="1.5"/><path d="M2 11v5a2 2 0 002 2h16a2 2 0 002-2v-5a2 2 0 00-4 0v2H6v-2a2 2 0 00-4 0z" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
+                    </div>
+                    <div class="gallery-item-overlay">
+                        <span class="gallery-item-label">Obývací pokoj - dubový dekor</span>
+                    </div>
+                </div>
+                <div class="gallery-item tall reveal reveal-delay-2" data-category="kuchyne">
+                    <div class="gallery-placeholder">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
+                    </div>
+                    <div class="gallery-item-overlay">
+                        <span class="gallery-item-label">Kuchyňská linka - klasické provedení</span>
+                    </div>
+                </div>
+                <div class="gallery-item reveal reveal-delay-1" data-category="kancelare">
+                    <div class="gallery-placeholder">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" stroke="#b8865a" fill="none" stroke-width="1.5"/><path d="M16 7V4a1 1 0 00-1-1H9a1 1 0 00-1 1v3" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
+                    </div>
+                    <div class="gallery-item-overlay">
+                        <span class="gallery-item-label">Kancelářský nábytek</span>
+                    </div>
+                </div>
+                <div class="gallery-item reveal reveal-delay-2" data-category="sauny">
+                    <div class="gallery-placeholder">
+                        <svg viewBox="0 0 24 24"><path d="M8 2c0 0-2 4-2 6a2 2 0 104 0c0-2-2-6-2-6z" stroke="#b8865a" fill="none" stroke-width="1.5"/><rect x="3" y="16" width="18" height="6" rx="1" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
+                    </div>
+                    <div class="gallery-item-overlay">
+                        <span class="gallery-item-label">Finská sauna - interiér</span>
+                    </div>
+                </div>
+                <div class="gallery-item reveal reveal-delay-3" data-category="uly">
+                    <div class="gallery-placeholder">
+                        <svg viewBox="0 0 24 24"><polygon points="12,2 19,7 19,17 12,22 5,17 5,7" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
+                    </div>
+                    <div class="gallery-item-overlay">
+                        <span class="gallery-item-label">Včelí úly - masivní dřevo</span>
+                    </div>
+                </div>
+                <div class="gallery-item wide reveal reveal-delay-2" data-category="obyvaky">
+                    <div class="gallery-placeholder">
+                        <svg viewBox="0 0 24 24"><path d="M20 9V6a2 2 0 00-2-2H6a2 2 0 00-2 2v3" stroke="#b8865a" fill="none" stroke-width="1.5"/><path d="M2 11v5a2 2 0 002 2h16a2 2 0 002-2v-5a2 2 0 00-4 0v2H6v-2a2 2 0 00-4 0z" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
+                    </div>
+                    <div class="gallery-item-overlay">
+                        <span class="gallery-item-label">Obložení stěn a krbový obklad</span>
+                    </div>
+                </div>
+                <div class="gallery-item reveal reveal-delay-3" data-category="kuchyne">
+                    <div class="gallery-placeholder">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
+                    </div>
+                    <div class="gallery-item-overlay">
+                        <span class="gallery-item-label">Kuchyně - vysoký lesk</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ PROCESS ═══════════ -->
+    <section class="process" id="postup">
+        <div class="container">
+            <div class="process-header reveal">
+                <div class="section-label">Jak pracujeme</div>
+                <h2 class="section-title">Od prvního návrhu<br>po finální montáž</h2>
+                <p class="section-subtitle">
+                    Transparentní postup, kdy víte přesně, co a&nbsp;kdy se bude dít.
+                </p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step reveal reveal-delay-1">
+                    <div class="process-step-num">01</div>
+                    <h3>Konzultace</h3>
+                    <p>Probereme vaše požadavky, zaměříme prostor a&nbsp;navrhneme řešení na míru.</p>
+                </div>
+                <div class="process-step reveal reveal-delay-2">
+                    <div class="process-step-num">02</div>
+                    <h3>Návrh & cenová nabídka</h3>
+                    <p>Připravíme detailní návrh včetně vizualizace a&nbsp;transparentní kalkulace.</p>
+                </div>
+                <div class="process-step reveal reveal-delay-3">
+                    <div class="process-step-num">03</div>
+                    <h3>Výroba</h3>
+                    <p>V naší dílně pečlivě vyrobíme každý díl. Používáme kvalitní materiály a&nbsp;osvědčené postupy.</p>
+                </div>
+                <div class="process-step reveal reveal-delay-4">
+                    <div class="process-step-num">04</div>
+                    <h3>Montáž & předání</h3>
+                    <p>Profesionální montáž u&nbsp;vás. Zkontrolujeme každý detail a&nbsp;předáme hotové dílo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ ABOUT ═══════════ -->
+    <section class="about" id="onas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-wrapper reveal">
+                    <div class="about-image">
+                        <div class="about-image-placeholder">
+                            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
+                            <span>Fotografie dílny</span>
+                        </div>
+                    </div>
+                    <div class="about-accent-box">
+                        <div class="number">20+</div>
+                        <div class="label">let v oboru</div>
+                    </div>
+                </div>
+                <div class="about-text reveal reveal-delay-2">
+                    <div class="section-label">O nás</div>
+                    <h2>Řemeslná tradice<br>v&nbsp;moderním pojetí</h2>
+                    <p>
+                        Truhlářství Milan Kluzák je rodinná dílna v&nbsp;Jindřichově Hradci s&nbsp;dlouholetou tradicí.
+                        Specializujeme se na zakázkovou výrobu nábytku, kde spojujeme tradiční řemeslné postupy
+                        s&nbsp;moderními technologiemi.
+                    </p>
+                    <p>
+                        Každý projekt bereme jako výzvu a&nbsp;příležitost vytvořit něco jedinečného.
+                        Od první konzultace po finální montáž dbáme na kvalitu, preciznost a&nbsp;spokojenost zákazníka.
+                    </p>
+                    <div class="about-values">
+                        <div class="about-value">
+                            <div class="about-value-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Kvalita</h4>
+                                <p>Pouze ověřené materiály a&nbsp;postupy</p>
+                            </div>
+                        </div>
+                        <div class="about-value">
+                            <div class="about-value-icon">
+                                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                            </div>
+                            <div>
+                                <h4>Preciznost</h4>
+                                <p>Důraz na každý detail</p>
+                            </div>
+                        </div>
+                        <div class="about-value">
+                            <div class="about-value-icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            </div>
+                            <div>
+                                <h4>Spolehlivost</h4>
+                                <p>Termíny dodržujeme</p>
+                            </div>
+                        </div>
+                        <div class="about-value">
+                            <div class="about-value-icon">
+                                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                            </div>
+                            <div>
+                                <h4>Osobní přístup</h4>
+                                <p>Řešíme přímo s&nbsp;vámi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ CTA BANNER ═══════════ -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-banner-inner reveal">
+                <h2>Máte projekt na srdci?</h2>
+                <p>Rádi vám připravíme nezávaznou nabídku. Stačí nám zavolat nebo napsat.</p>
+                <a href="tel:+420602612613" class="btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                    602 612 613
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ CONTACT ═══════════ -->
+    <section class="contact" id="kontakt">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <div class="section-label">Kontakt</div>
+                    <h2>Spojte se s&nbsp;námi</h2>
+                    <p>Rádi s vámi probereme váš projekt. Navštivte naši dílnu nebo nám zavolejte.</p>
+
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>Telefon</h4>
+                                <a href="tel:+420602612613">+420 602 612 613</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>Email</h4>
+                                <a href="mailto:info@truhlarstvikluzak.cz">info@truhlarstvikluzak.cz</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>Dílna</h4>
+                                <p>Jarošovská 1162/II<br>Areál Kili<br>377 01 Jindřichův Hradec</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>Otevírací doba</h4>
+                                <p>Po-Pá: 7:00 - 16:00<br>So-Ne: po domluvě</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map reveal reveal-delay-2">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2610.5!2d15.0025!3d49.1425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4712f5d3b1c0e4e9%3A0x400af0f661c11e0!2sJaro%C5%A1ovsk%C3%A1%2C%20Jind%C5%99ich%C5%AFv%20Hradec!5e0!3m2!1scs!2scz!4v1710000000000!5m2!1scs!2scz"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa - Truhlářství Kluzák">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-copy">
+                    &copy; 2026 Truhlářství Milan Kluzák. Všechna práva vyhrazena.
+                </div>
+                <div class="footer-credit">
+                    Vytvořil <a href="https://kshpartners.cz" target="_blank" rel="noopener">KSH Partners s.r.o.</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════ LIGHTBOX ═══════════ -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <img src="" alt="" id="lightboxImg">
+    </div>
+
+    <!-- ═══════════ JAVASCRIPT ═══════════ -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ── Navigation scroll effect ──
+        const nav = document.getElementById('nav');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 60) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        // ── Mobile menu ──
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // ── Smooth scroll ──
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ── Reveal on scroll (IntersectionObserver) ──
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        reveals.forEach(el => revealObserver.observe(el));
+
+        // ── Counter animation ──
+        const counters = document.querySelectorAll('.hero-stat-number[data-count]');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.getAttribute('data-count'));
+                    const suffix = el.closest('.hero-stats').children.length; // just for check
+                    let current = 0;
+                    const step = target / 60;
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) {
+                            el.textContent = target + '+';
+                            clearInterval(timer);
+                        } else {
+                            el.textContent = Math.floor(current) + '+';
+                        }
+                    }, 20);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(c => counterObserver.observe(c));
+
+        // ── Gallery filter ──
+        const filters = document.querySelectorAll('.gallery-filter');
+        const items = document.querySelectorAll('.gallery-item');
+
+        filters.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filters.forEach(f => f.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+
+                items.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = '';
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.95)';
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                item.style.transition = 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                            });
+                        });
+                    } else {
+                        item.style.transition = 'all 0.3s';
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.95)';
+                        setTimeout(() => { item.style.display = 'none'; }, 300);
+                    }
+                });
+            });
+        });
+
+        // ── Lightbox (placeholder for real images) ──
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                if (img) {
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target === lightboxClose) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+    })();
+    </script>
+</body>
+</html>
