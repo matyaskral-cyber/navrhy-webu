@@ -285,8 +285,8 @@
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(ellipse 80% 60% at 70% 40%, rgba(184, 134, 90, 0.08), transparent),
-                radial-gradient(ellipse 60% 80% at 20% 80%, rgba(184, 134, 90, 0.05), transparent);
+                linear-gradient(135deg, rgba(28, 25, 21, 0.82) 0%, rgba(28, 25, 21, 0.6) 50%, rgba(28, 25, 21, 0.85) 100%),
+                url('images/05-dilna.jpg') center/cover no-repeat;
         }
 
         /* Animated wood grain lines */
@@ -467,10 +467,28 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 36px 32px;
+            padding: 0;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
+        }
+
+        .service-card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.85);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s;
+        }
+
+        .service-card:hover .service-card-img {
+            transform: scale(1.05);
+            filter: brightness(0.95);
+        }
+
+        .service-card-body {
+            padding: 28px 32px 36px;
         }
 
         .service-card::before {
@@ -1378,46 +1396,66 @@
             <div class="services-grid">
                 <!-- Kuchyne -->
                 <div class="service-card reveal reveal-delay-1">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8865a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><path d="M7 10V4"/><circle cx="15" cy="7" r="1"/><circle cx="12" cy="15" r="2"/>
-                        </svg>
+                    <div style="overflow:hidden;height:180px;">
+                        <img class="service-card-img" src="images/01-kuchyne.jpg" alt="Kuchyně na míru" loading="lazy">
                     </div>
-                    <h3>Kuchyně na míru</h3>
-                    <p>Kvalitní kuchyňské linky navržené přesně pro váš prostor. Široký výběr materiálů, pracovních desek a&nbsp;kování od předních výrobců.</p>
+                    <div class="service-card-body">
+                        <div class="service-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8865a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><path d="M7 10V4"/><circle cx="15" cy="7" r="1"/><circle cx="12" cy="15" r="2"/>
+                            </svg>
+                        </div>
+                        <h3>Kuchyně na míru</h3>
+                        <p>Kvalitní kuchyňské linky navržené přesně pro váš prostor. Široký výběr materiálů, pracovních desek a&nbsp;kování od předních výrobců.</p>
+                    </div>
                 </div>
 
                 <!-- Obyvaky -->
                 <div class="service-card reveal reveal-delay-2">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8865a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20 9V6a2 2 0 00-2-2H6a2 2 0 00-2 2v3"/><path d="M2 11v5a2 2 0 002 2h16a2 2 0 002-2v-5a2 2 0 00-4 0v2H6v-2a2 2 0 00-4 0z"/><path d="M4 18v2"/><path d="M20 18v2"/>
-                        </svg>
+                    <div style="overflow:hidden;height:180px;">
+                        <img class="service-card-img" src="images/02-obyvaky.jpg" alt="Obývací pokoje" loading="lazy">
                     </div>
-                    <h3>Obývací pokoje</h3>
-                    <p>Precizní nábytek do obývacích prostor, obklady stěn, krbové obložení. Vytvoříme harmonický celek, který dýchá vaším stylem.</p>
+                    <div class="service-card-body">
+                        <div class="service-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8865a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 9V6a2 2 0 00-2-2H6a2 2 0 00-2 2v3"/><path d="M2 11v5a2 2 0 002 2h16a2 2 0 002-2v-5a2 2 0 00-4 0v2H6v-2a2 2 0 00-4 0z"/><path d="M4 18v2"/><path d="M20 18v2"/>
+                            </svg>
+                        </div>
+                        <h3>Obývací pokoje</h3>
+                        <p>Precizní nábytek do obývacích prostor, obklady stěn, krbové obložení. Vytvoříme harmonický celek, který dýchá vaším stylem.</p>
+                    </div>
                 </div>
 
                 <!-- Kancelare -->
                 <div class="service-card reveal reveal-delay-3">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8865a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V4a1 1 0 00-1-1H9a1 1 0 00-1 1v3"/><path d="M2 12h20"/><path d="M12 12v4"/>
-                        </svg>
+                    <div style="overflow:hidden;height:180px;">
+                        <img class="service-card-img" src="images/03-kancelare.jpg" alt="Kancelářský nábytek" loading="lazy">
                     </div>
-                    <h3>Kancelářský nábytek</h3>
-                    <p>Kompletní vybavení kancelářských prostor a&nbsp;komerčních objektů. Funkční řešení, které reprezentuje vaši firmu.</p>
+                    <div class="service-card-body">
+                        <div class="service-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8865a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V4a1 1 0 00-1-1H9a1 1 0 00-1 1v3"/><path d="M2 12h20"/><path d="M12 12v4"/>
+                            </svg>
+                        </div>
+                        <h3>Kancelářský nábytek</h3>
+                        <p>Kompletní vybavení kancelářských prostor a&nbsp;komerčních objektů. Funkční řešení, které reprezentuje vaši firmu.</p>
+                    </div>
                 </div>
 
                 <!-- Sauny -->
                 <div class="service-card reveal reveal-delay-4">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8865a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M8 2c0 0-2 4-2 6a2 2 0 104 0c0-2-2-6-2-6z"/><path d="M16 2c0 0-2 4-2 6a2 2 0 104 0c0-2-2-6-2-6z"/><path d="M12 6c0 0-2 4-2 6a2 2 0 104 0c0-2-2-6-2-6z"/><rect x="3" y="16" width="18" height="6" rx="1"/>
-                        </svg>
+                    <div style="overflow:hidden;height:180px;">
+                        <img class="service-card-img" src="images/04-ostatni.jpg" alt="Sauna" loading="lazy">
                     </div>
-                    <h3>Sauny</h3>
-                    <p>Výroba saun a&nbsp;saunového vybavení z&nbsp;kvalitních dřevin. Od návrhu po realizaci, včetně lavic a&nbsp;obkladů.</p>
+                    <div class="service-card-body">
+                        <div class="service-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8865a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M8 2c0 0-2 4-2 6a2 2 0 104 0c0-2-2-6-2-6z"/><path d="M16 2c0 0-2 4-2 6a2 2 0 104 0c0-2-2-6-2-6z"/><path d="M12 6c0 0-2 4-2 6a2 2 0 104 0c0-2-2-6-2-6z"/><rect x="3" y="16" width="18" height="6" rx="1"/>
+                            </svg>
+                        </div>
+                        <h3>Sauny</h3>
+                        <p>Výroba saun a&nbsp;saunového vybavení z&nbsp;kvalitních dřevin. Od návrhu po realizaci, včetně lavic a&nbsp;obkladů.</p>
+                    </div>
                 </div>
 
                 <!-- Vceli uly - HIGHLIGHT -->
@@ -1449,14 +1487,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="display:flex;align-items:center;justify-content:center;">
-                            <svg width="180" height="180" viewBox="0 0 200 200" fill="none" style="opacity:0.12">
-                                <!-- Honeycomb pattern -->
-                                <polygon points="100,30 130,48 130,82 100,100 70,82 70,48" stroke="#b8865a" stroke-width="2" fill="none"/>
-                                <polygon points="100,100 130,118 130,152 100,170 70,152 70,118" stroke="#b8865a" stroke-width="2" fill="none"/>
-                                <polygon points="40,65 70,83 70,117 40,135 10,117 10,83" stroke="#b8865a" stroke-width="2" fill="none"/>
-                                <polygon points="160,65 190,83 190,117 160,135 130,117 130,83" stroke="#b8865a" stroke-width="2" fill="none"/>
-                            </svg>
+                        <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border-accent);">
+                            <img src="images/04-ostatni.jpg" alt="Ruční práce ze dřeva - ukázka saunového interiéru" style="width:100%;height:220px;object-fit:cover;display:block;filter:brightness(0.9);" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -1481,72 +1513,55 @@
                 <button class="gallery-filter" data-filter="obyvaky">Obývací pokoje</button>
                 <button class="gallery-filter" data-filter="kancelare">Kanceláře</button>
                 <button class="gallery-filter" data-filter="sauny">Sauny</button>
-                <button class="gallery-filter" data-filter="uly">Včelí úly</button>
             </div>
 
             <div class="gallery-grid">
                 <div class="gallery-item wide reveal" data-category="kuchyne">
-                    <div class="gallery-placeholder">
-                        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
-                    </div>
+                    <img class="gallery-item-img" src="images/01-kuchyne.jpg" alt="Kuchyně na míru - moderní bílá linka s dřevěnou pracovní deskou" loading="lazy">
                     <div class="gallery-item-overlay">
                         <span class="gallery-item-label">Kuchyně na míru - moderní provedení</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal reveal-delay-1" data-category="obyvaky">
-                    <div class="gallery-placeholder">
-                        <svg viewBox="0 0 24 24"><path d="M20 9V6a2 2 0 00-2-2H6a2 2 0 00-2 2v3" stroke="#b8865a" fill="none" stroke-width="1.5"/><path d="M2 11v5a2 2 0 002 2h16a2 2 0 002-2v-5a2 2 0 00-4 0v2H6v-2a2 2 0 00-4 0z" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
-                    </div>
+                    <img class="gallery-item-img" src="images/02-obyvaky.jpg" alt="Obývací pokoj - prosklená vitrina a úložný nábytek" loading="lazy">
                     <div class="gallery-item-overlay">
-                        <span class="gallery-item-label">Obývací pokoj - dubový dekor</span>
+                        <span class="gallery-item-label">Obývací pokoj - vitrinová sestava</span>
                     </div>
                 </div>
-                <div class="gallery-item tall reveal reveal-delay-2" data-category="kuchyne">
-                    <div class="gallery-placeholder">
-                        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
-                    </div>
+                <div class="gallery-item tall reveal reveal-delay-2" data-category="kancelare">
+                    <img class="gallery-item-img" src="images/05-dilna.jpg" alt="Kancelářský nábytek na míru - pracovní stůl se zásuvkami" loading="lazy">
                     <div class="gallery-item-overlay">
-                        <span class="gallery-item-label">Kuchyňská linka - klasické provedení</span>
+                        <span class="gallery-item-label">Kancelářský nábytek - kompletní vybavení</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal reveal-delay-1" data-category="kancelare">
-                    <div class="gallery-placeholder">
-                        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" stroke="#b8865a" fill="none" stroke-width="1.5"/><path d="M16 7V4a1 1 0 00-1-1H9a1 1 0 00-1 1v3" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
-                    </div>
+                    <img class="gallery-item-img" src="images/03-kancelare.jpg" alt="Kancelářský stůl a kontejner" loading="lazy">
                     <div class="gallery-item-overlay">
                         <span class="gallery-item-label">Kancelářský nábytek</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal reveal-delay-2" data-category="sauny">
-                    <div class="gallery-placeholder">
-                        <svg viewBox="0 0 24 24"><path d="M8 2c0 0-2 4-2 6a2 2 0 104 0c0-2-2-6-2-6z" stroke="#b8865a" fill="none" stroke-width="1.5"/><rect x="3" y="16" width="18" height="6" rx="1" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
-                    </div>
+                    <img class="gallery-item-img" src="images/04-ostatni.jpg" alt="Finská sauna - dřevěný interiér s lavicemi" loading="lazy">
                     <div class="gallery-item-overlay">
                         <span class="gallery-item-label">Finská sauna - interiér</span>
                     </div>
                 </div>
-                <div class="gallery-item reveal reveal-delay-3" data-category="uly">
-                    <div class="gallery-placeholder">
-                        <svg viewBox="0 0 24 24"><polygon points="12,2 19,7 19,17 12,22 5,17 5,7" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
-                    </div>
+                <div class="gallery-item reveal reveal-delay-3" data-category="kuchyne">
+                    <img class="gallery-item-img" src="images/01-kuchyne.jpg" alt="Kuchyňská linka - detail pracovní desky a dřezu" loading="lazy">
                     <div class="gallery-item-overlay">
-                        <span class="gallery-item-label">Včelí úly - masivní dřevo</span>
+                        <span class="gallery-item-label">Kuchyňská linka - detail provedení</span>
                     </div>
                 </div>
                 <div class="gallery-item wide reveal reveal-delay-2" data-category="obyvaky">
-                    <div class="gallery-placeholder">
-                        <svg viewBox="0 0 24 24"><path d="M20 9V6a2 2 0 00-2-2H6a2 2 0 00-2 2v3" stroke="#b8865a" fill="none" stroke-width="1.5"/><path d="M2 11v5a2 2 0 002 2h16a2 2 0 002-2v-5a2 2 0 00-4 0v2H6v-2a2 2 0 00-4 0z" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
-                    </div>
+                    <img class="gallery-item-img" src="images/02-obyvaky.jpg" alt="Obývací stěna - dřevěný dekor s prosklenými dvířky" loading="lazy">
                     <div class="gallery-item-overlay">
-                        <span class="gallery-item-label">Obložení stěn a krbový obklad</span>
+                        <span class="gallery-item-label">Obývací stěna - kombinace skla a dřeva</span>
                     </div>
                 </div>
-                <div class="gallery-item reveal reveal-delay-3" data-category="kuchyne">
-                    <div class="gallery-placeholder">
-                        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
-                    </div>
+                <div class="gallery-item reveal reveal-delay-3" data-category="sauny">
+                    <img class="gallery-item-img" src="images/04-ostatni.jpg" alt="Sauna - lavice a obklady z kvalitního dřeva" loading="lazy">
                     <div class="gallery-item-overlay">
-                        <span class="gallery-item-label">Kuchyně - vysoký lesk</span>
+                        <span class="gallery-item-label">Sauna - dřevěné lavice a obklady</span>
                     </div>
                 </div>
             </div>
@@ -1595,10 +1610,7 @@
             <div class="about-grid">
                 <div class="about-image-wrapper reveal">
                     <div class="about-image">
-                        <div class="about-image-placeholder">
-                            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke="#b8865a" fill="none" stroke-width="1.5"/></svg>
-                            <span>Fotografie dílny</span>
-                        </div>
+                        <img src="images/05-dilna.jpg" alt="Truhlářství Milan Kluzák - kancelářský nábytek a vybavení" style="width:100%;height:100%;object-fit:cover;">
                     </div>
                     <div class="about-accent-box">
                         <div class="number">20+</div>
