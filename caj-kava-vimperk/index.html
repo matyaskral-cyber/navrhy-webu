@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Čaj, Káva... Vimperk — Sypané čaje a kvalitní káva</title>
+    <meta name="description" content="Čaj, Káva... Vimperk — prodej sypaných a porcovaných čajů, kvalitní kávy Petr Frolík. 1. máje 144/3, Vimperk. Po-Pá 9:00-16:00.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-dark: #1a0e08;
+            --bg-darker: #130a05;
+            --bg-card: #241810;
+            --bg-card-hover: #2d1f15;
+            --accent: #c68642;
+            --accent-light: #d4994f;
+            --accent-dark: #a86e30;
+            --surface: #f5ebe0;
+            --text: #e8ddd0;
+            --text-muted: #9a8a78;
+            --text-dim: #6b5d50;
+            --white: #f5ebe0;
+            --border: rgba(198, 134, 66, 0.2);
+            --border-light: rgba(198, 134, 66, 0.1);
+            --shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-darker); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* ===== UTILITY ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        /* ===== REVEAL ANIMATION ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+        .reveal-delay-6 { transition-delay: 0.6s; }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(19, 10, 5, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-logo-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--bg-dark);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .nav-logo-text {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .nav-logo-text span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            background: transparent;
+            border: 1.5px solid var(--accent);
+            color: var(--accent) !important;
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600 !important;
+            transition: all 0.3s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent) !important;
+            color: var(--bg-dark) !important;
+        }
+
+        .nav-cta::after { display: none !important; }
+
+        /* Hamburger */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1001;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: var(--text);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .nav-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+        .nav-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: url('images/obchod.jpg') center center / cover no-repeat;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(19, 10, 5, 0.93) 0%, rgba(19, 10, 5, 0.78) 50%, rgba(19, 10, 5, 0.65) 100%),
+                radial-gradient(ellipse 80% 60% at 70% 40%, rgba(198, 134, 66, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-deco {
+            position: absolute;
+            right: -5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+
+        .hero-deco svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 680px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(198, 134, 66, 0.1);
+            border: 1px solid var(--border);
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 32px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            color: var(--white);
+            margin-bottom: 28px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 .accent {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .hero-text {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+            margin-bottom: 44px;
+            max-width: 520px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: var(--bg-dark);
+            padding: 16px 36px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(198, 134, 66, 0.35);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--text);
+            padding: 16px 36px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border: 1.5px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .hero-hours {
+            display: flex;
+            gap: 32px;
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-light);
+            align-items: center;
+        }
+
+        .hero-hours-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border: 1.5px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-hours-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .hero-hours-text {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .hero-hours-sub {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .about-gallery-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            aspect-ratio: 1;
+            background-size: cover;
+            background-position: center;
+            transition: all var(--transition);
+        }
+
+        .about-gallery-item:first-child {
+            grid-row: span 2;
+            aspect-ratio: auto;
+        }
+
+        .about-gallery-item:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .about-text {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.9;
+            margin-bottom: 24px;
+        }
+
+        .about-features {
+            list-style: none;
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .about-features li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .about-features li .check {
+            width: 28px;
+            height: 28px;
+            min-width: 28px;
+            background: rgba(198, 134, 66, 0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-features li .check svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 2.5;
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            padding: 120px 0;
+            background: var(--bg-darker);
+            position: relative;
+        }
+
+        .services::before,
+        .services::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+        .services::before { top: 0; }
+        .services::after { bottom: 0; }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .services-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .service-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-card:hover::before { opacity: 1; }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(198, 134, 66, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background: rgba(198, 134, 66, 0.18);
+            transform: scale(1.05);
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .gallery::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 48px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 4/3;
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-light);
+            transition: all var(--transition);
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            padding: 120px 0;
+            background: var(--bg-darker);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 28px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--border);
+            transform: translateX(4px);
+        }
+
+        .contact-card-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: rgba(198, 134, 66, 0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-card-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .contact-card-label {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+        }
+
+        .contact-card-value {
+            color: var(--white);
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .contact-card-value a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-card-value a:hover {
+            color: var(--accent);
+        }
+
+        .contact-card-sub {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .contact-map {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            min-height: 400px;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border: none;
+            filter: grayscale(0.5) brightness(0.8) contrast(1.1);
+            transition: filter 0.3s;
+        }
+
+        .contact-map:hover iframe {
+            filter: grayscale(0.2) brightness(0.85) contrast(1.05);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border-light);
+            padding: 48px 0;
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--bg-dark);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .footer-brand {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .footer-social a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+        }
+
+        .footer-credit {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .footer-credit a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-credit a:hover {
+            color: var(--accent);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                inset: 0;
+                background: rgba(19, 10, 5, 0.98);
+                backdrop-filter: blur(20px);
+                justify-content: center;
+                align-items: center;
+                gap: 28px;
+                z-index: 999;
+            }
+
+            .nav-links.open a {
+                font-size: 1.2rem;
+                color: var(--text);
+            }
+
+            .nav-hamburger { display: flex; }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .contact-grid { grid-template-columns: 1fr; }
+
+            .hero-hours {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+
+            .about,
+            .services,
+            .gallery,
+            .contact {
+                padding: 80px 0;
+            }
+
+            .about-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .about-gallery-item:first-child {
+                grid-row: auto;
+                aspect-ratio: 4/3;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                </div>
+                <div class="nav-logo-text">Čaj, <span>Káva...</span></div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#o-nas" onclick="closeMenu()">O nás</a></li>
+                <li><a href="#nabidka" onclick="closeMenu()">Nabídka</a></li>
+                <li><a href="#galerie" onclick="closeMenu()">Galerie</a></li>
+                <li><a href="#kontakt" onclick="closeMenu()" class="nav-cta">Kontakt</a></li>
+            </ul>
+            <div class="nav-hamburger" id="navHamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-deco">
+            <svg viewBox="0 0 500 500" fill="none">
+                <circle cx="250" cy="250" r="200" stroke="currentColor" stroke-width="0.5" opacity="0.3" style="color: var(--accent);"/>
+                <circle cx="250" cy="250" r="150" stroke="currentColor" stroke-width="0.3" opacity="0.2" style="color: var(--accent);"/>
+                <circle cx="250" cy="250" r="100" stroke="currentColor" stroke-width="0.3" opacity="0.15" style="color: var(--accent);"/>
+            </svg>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge reveal">
+                    <span class="hero-badge-dot"></span>
+                    Vimperk &mdash; 1. máje 144/3
+                </div>
+                <h1 class="reveal reveal-delay-1">
+                    Čaj, Káva...<br>
+                    <span class="accent">Vimperk</span>
+                </h1>
+                <p class="hero-text reveal reveal-delay-2">
+                    Objevte svět vůní a&nbsp;chutí. Nabízíme pečlivě vybrané sypané
+                    i&nbsp;porcované čaje z&nbsp;celého světa a&nbsp;kvalitní kávu
+                    od českého pražiče Petra Frolíka.
+                </p>
+                <div class="hero-actions reveal reveal-delay-3">
+                    <a href="#kontakt" class="btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Navštivte nás
+                    </a>
+                    <a href="#nabidka" class="btn-secondary">
+                        Naše nabídka
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+                <div class="hero-hours reveal reveal-delay-4">
+                    <div class="hero-hours-icon">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div>
+                        <div class="hero-hours-text">Po &ndash; Pá: 9:00 &ndash; 16:00</div>
+                        <div class="hero-hours-sub">Víkend: zavřeno</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-gallery reveal">
+                    <div class="about-gallery-item" style="background-image: url('images/napis.jpg');"></div>
+                    <div class="about-gallery-item" style="background-image: url('images/galerie1.jpg');"></div>
+                    <div class="about-gallery-item" style="background-image: url('images/galerie2.jpg');"></div>
+                </div>
+                <div class="about-content">
+                    <div class="section-label reveal">O nás</div>
+                    <h2 class="section-title reveal reveal-delay-1">Místo, kde se<br>zastavíte</h2>
+                    <p class="about-text reveal reveal-delay-2">
+                        Čaj, Káva... Vimperk je malý obchůdek v&nbsp;centru Vimperka,
+                        kde najdete pečlivě vybrané sypané i&nbsp;porcované čaje z&nbsp;celého
+                        světa &mdash; od ceylonských a&nbsp;indických čajů přes oolongy
+                        až po zelené čaje.
+                    </p>
+                    <p class="about-text reveal reveal-delay-3">
+                        Nabízíme také kvalitní kávu od českého pražiče Petra Frolíka,
+                        která potěší každého milovníka dobrého šálku. Přijďte ochutnat
+                        a&nbsp;nechat se inspirovat.
+                    </p>
+                    <ul class="about-features reveal reveal-delay-4">
+                        <li>
+                            <span class="check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            Sypané a porcované čaje z celého světa
+                        </li>
+                        <li>
+                            <span class="check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            Kvalitní káva od pražiče Petra Frolíka
+                        </li>
+                        <li>
+                            <span class="check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            Osobní přístup a odborné poradenství
+                        </li>
+                        <li>
+                            <span class="check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            Příjemné prostředí v centru Vimperka
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="nabidka">
+        <div class="container">
+            <div class="services-header">
+                <div class="section-label reveal">Nabídka</div>
+                <h2 class="section-title reveal reveal-delay-1">Co u&nbsp;nás najdete</h2>
+                <p class="section-desc reveal reveal-delay-2">
+                    Pečlivě vybraný sortiment čajů a&nbsp;kávy pro ty, kteří si potrpí na kvalitu.
+                </p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                    </div>
+                    <h3>Ceylonské čaje</h3>
+                    <p>Výběrové ceylonské čaje ze Srí Lanky &mdash; plné, aromatické a&nbsp;s&nbsp;charakteristickou jemnou chutí.</p>
+                </div>
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Indické čaje</h3>
+                    <p>Čaje z&nbsp;indických plantáží &mdash; Darjeeling, Assam a&nbsp;další. Bohatá paleta chutí a&nbsp;vůní.</p>
+                </div>
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>Oolongy a zelené čaje</h3>
+                    <p>Polofermentované oolongy i&nbsp;zelené čaje pro milovníky lehčích a&nbsp;rafinovanějších chutí.</p>
+                </div>
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                    </div>
+                    <h3>Porcované čaje</h3>
+                    <p>Praktické porcované čaje v&nbsp;kvalitních sáčcích pro rychlou přípravu doma i&nbsp;v&nbsp;kanceláři.</p>
+                </div>
+                <div class="service-card reveal reveal-delay-4">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 110 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/></svg>
+                    </div>
+                    <h3>Káva Petr Frolík</h3>
+                    <p>Kvalitní čerstvě pražená káva od uznávaného českého pražiče Petra Frolíka. Výběrové směsi i&nbsp;single origin.</p>
+                </div>
+                <div class="service-card reveal reveal-delay-5">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                    </div>
+                    <h3>Dárkové balení</h3>
+                    <p>Krásně zabalené dárkové sady čajů a&nbsp;kávy &mdash; ideální dárek pro milovníky dobrého pití.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery" id="galerie">
+        <div class="container">
+            <div class="section-label reveal">Galerie</div>
+            <h2 class="section-title reveal reveal-delay-1">Nahlédněte k&nbsp;nám</h2>
+            <p class="section-desc reveal reveal-delay-2">
+                Atmosféra našeho obchůdku ve Vimperku.
+            </p>
+            <div class="gallery-grid">
+                <div class="gallery-item reveal" style="background-image: url('images/galerie3.jpg');"></div>
+                <div class="gallery-item reveal reveal-delay-1" style="background-image: url('images/galerie4.jpg');"></div>
+                <div class="gallery-item reveal reveal-delay-2" style="background-image: url('images/galerie5.jpg');"></div>
+                <div class="gallery-item reveal reveal-delay-3" style="background-image: url('images/galerie6.jpg');"></div>
+                <div class="gallery-item reveal reveal-delay-4" style="background-image: url('images/products1.jpg');"></div>
+                <div class="gallery-item reveal reveal-delay-5" style="background-image: url('images/products2.jpg');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="kontakt">
+        <div class="container">
+            <div class="section-label reveal">Kontakt</div>
+            <h2 class="section-title reveal reveal-delay-1">Stavte se k&nbsp;nám</h2>
+            <p class="section-desc reveal reveal-delay-2" style="margin-bottom: 56px;">
+                Najdete nás v&nbsp;centru Vimperka na ulici 1. máje.
+                Těšíme se na vaši návštěvu.
+            </p>
+            <div class="contact-grid">
+                <div class="contact-info reveal reveal-delay-3">
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">Telefon</div>
+                            <div class="contact-card-value">
+                                <a href="tel:+420732359516">732 359 516</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">E-mail</div>
+                            <div class="contact-card-value">
+                                <a href="mailto:cajkavavimperk@seznam.cz">cajkavavimperk@seznam.cz</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">Adresa</div>
+                            <div class="contact-card-value">1. máje 144/3</div>
+                            <div class="contact-card-sub">Vimperk</div>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">Otevírací doba</div>
+                            <div class="contact-card-value">Po &ndash; Pá: 9:00 &ndash; 16:00</div>
+                            <div class="contact-card-sub">So &ndash; Ne: zavřeno</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map reveal reveal-delay-4">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2620.5!2d13.7789!3d49.0546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4774ae0a95a77b3d%3A0x400af0f66154f00!2s1.%20m%C3%A1je%20144%2F3%2C%20385%2001%20Vimperk!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                </div>
+                <div class="footer-brand">Čaj, Káva... Vimperk</div>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/cajkavavimperk" target="_blank" rel="noopener">@cajkavavimperk</a>
+            </div>
+            <div class="footer-credit">
+                Vytvořil <a href="https://kshpartners.cz" target="_blank" rel="noopener">KSH Partners s.r.o.</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ===== NAVBAR SCROLL =====
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 60) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }, { passive: true });
+
+        // ===== MOBILE MENU =====
+        const navLinks = document.getElementById('navLinks');
+        const navHamburger = document.getElementById('navHamburger');
+
+        function toggleMenu() {
+            navLinks.classList.toggle('open');
+            navHamburger.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+        }
+
+        function closeMenu() {
+            navLinks.classList.remove('open');
+            navHamburger.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ===== SCROLL REVEAL =====
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -60px 0px'
+        });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ===== PARALLAX =====
+        const heroDeco = document.querySelector('.hero-deco');
+        window.addEventListener('mousemove', (e) => {
+            if (window.innerWidth < 768) return;
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            if (heroDeco) {
+                heroDeco.style.transform = `translateY(-50%) translate(${x}px, ${y}px)`;
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>
