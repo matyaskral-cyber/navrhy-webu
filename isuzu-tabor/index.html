@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ISUZU Tábor - MK Service s.r.o. Autorizovaný dealer a servis vozidel ISUZU. Prodej užitkových vozidel, servis, náhradní díly a hydraulické jeřáby FASSI.">
+    <meta name="keywords" content="ISUZU, Tábor, dealer, servis, užitkové vozy, nákladní vozy, MK Service, FASSI">
+    <title>ISUZU Tábor | MK Service s.r.o. - Autorizovaný dealer a servis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #b71c1c;
+            --primary-light: #d32f2f;
+            --primary-dark: #7f0000;
+            --primary-rgb: 183, 28, 28;
+            --accent: #212121;
+            --accent-light: #424242;
+            --accent-dark: #000000;
+            --accent-rgb: 33, 33, 33;
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --text-light: #717171;
+            --bg-light: #f5f5f5;
+            --bg-white: #ffffff;
+            --bg-card: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
+            --shadow-xl: 0 16px 60px rgba(0,0,0,0.2);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --font-heading: 'Oswald', sans-serif;
+            --font-body: 'Lato', sans-serif;
+            --max-width: 1200px;
+            --header-height: 80px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { font-family: var(--font-body); color: var(--text-dark); background: var(--bg-white); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; line-height: 1.15; text-transform: uppercase; letter-spacing: 1px; }
+        h1 { font-size: clamp(2.4rem, 5.5vw, 4.2rem); }
+        h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+        h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
+        p { margin-bottom: 1rem; color: var(--text-medium); }
+        a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+        img { max-width: 100%; height: auto; display: block; }
+        ul, ol { list-style: none; }
+        .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+        .section { padding: 100px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { margin-bottom: 16px; position: relative; display: inline-block; }
+        .section-header h2::after { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--primary); border-radius: 2px; }
+        .section-header p { max-width: 600px; margin: 24px auto 0; font-size: 1.05rem; color: var(--text-light); }
+        section[id] { scroll-margin-top: var(--header-height); }
+        ::selection { background: var(--primary); color: #fff; }
+
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: var(--radius-sm); font-family: var(--font-heading); font-weight: 500; font-size: 1rem; cursor: pointer; border: 2px solid transparent; transition: all var(--transition-normal); text-transform: uppercase; letter-spacing: 1.5px; }
+        .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(183,28,28,0.4); }
+        .btn-outline { background: transparent; color: #fff; border-color: #fff; }
+        .btn-outline:hover { background: #fff; color: var(--accent); transform: translateY(-2px); }
+        .btn-dark { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .btn-dark:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in-left.visible { opacity: 1; transform: translateX(0); }
+        .fade-in-right { opacity: 0; transform: translateX(50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in-right.visible { opacity: 1; transform: translateX(0); }
+        .scale-in { opacity: 0; transform: scale(0.9); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .scale-in.visible { opacity: 1; transform: scale(1); }
+        .stagger-1 { transition-delay: 0.1s; } .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; } .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; } .stagger-6 { transition-delay: 0.6s; }
+
+        /* Header */
+        .header { position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); z-index: 1000; transition: all var(--transition-normal); background: transparent; }
+        .header.scrolled { background: rgba(33,33,33,0.97); backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+        .logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-heading); font-weight: 700; font-size: 1.5rem; color: #fff; z-index: 1001; text-transform: uppercase; letter-spacing: 3px; }
+        .logo-icon { width: 48px; height: 48px; background: var(--primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #fff; font-weight: 900; letter-spacing: 0; }
+        .logo-text span { display: block; font-size: 0.6rem; font-weight: 300; opacity: 0.7; letter-spacing: 3px; }
+
+        .nav-links { display: flex; align-items: center; gap: 28px; }
+        .nav-links a { font-family: var(--font-heading); font-weight: 400; font-size: 0.9rem; color: rgba(255,255,255,0.85); padding: 4px 0; position: relative; text-transform: uppercase; letter-spacing: 1.5px; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width var(--transition-normal); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover { color: #fff; }
+        .nav-cta { padding: 10px 22px !important; background: var(--primary); color: #fff !important; border-radius: var(--radius-sm); }
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover { background: var(--primary-light) !important; }
+
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1001; padding: 8px; }
+        .hamburger span { width: 28px; height: 3px; background: #fff; border-radius: 3px; transition: all var(--transition-normal); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        .mobile-nav { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100vh; background: var(--accent-dark); z-index: 999; display: flex; flex-direction: column; justify-content: center; padding: 60px 40px; transition: right var(--transition-normal); }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 998; opacity: 0; visibility: hidden; transition: all var(--transition-normal); }
+        .mobile-nav-overlay.active { opacity: 1; visibility: visible; }
+        .mobile-nav a { display: block; font-family: var(--font-heading); font-size: 1.4rem; font-weight: 500; color: #fff; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.1); text-transform: uppercase; letter-spacing: 3px; }
+        .mobile-nav a:hover { padding-left: 12px; color: var(--primary); }
+
+        /* Hero */
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, rgba(33,33,33,0.95), rgba(0,0,0,0.85)), url('images/hero-truck.jpg') center/cover no-repeat; overflow: hidden; }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--primary); }
+        .hero-content { position: relative; z-index: 2; max-width: 700px; padding-top: 40px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(183,28,28,0.15); border: 1px solid rgba(183,28,28,0.4); border-radius: 4px; color: var(--primary-light); font-family: var(--font-heading); font-size: 0.85rem; font-weight: 500; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 3px; }
+        .hero h1 { color: #fff; margin-bottom: 20px; font-weight: 700; }
+        .hero h1 .highlight { color: var(--primary); }
+        .hero-description { font-size: 1.15rem; color: rgba(255,255,255,0.75); margin-bottom: 36px; max-width: 560px; line-height: 1.8; }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+        .hero-stats { display: flex; gap: 40px; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .hero-stat { text-align: center; }
+        .hero-stat-number { font-family: var(--font-heading); font-size: 2.6rem; font-weight: 700; color: var(--primary); line-height: 1; }
+        .hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 8px; text-transform: uppercase; letter-spacing: 1.5px; font-family: var(--font-heading); font-weight: 300; }
+
+        /* Vehicles */
+        .vehicles { background: var(--bg-white); }
+        .vehicles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .vehicle-card { background: var(--bg-card); border-radius: var(--radius-md); overflow: hidden; transition: all var(--transition-normal); border: 1px solid var(--border-color); }
+        .vehicle-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
+        .vehicle-img { height: 220px; overflow: hidden; position: relative; }
+        .vehicle-img img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); }
+        .vehicle-card:hover .vehicle-img img { transform: scale(1.08); }
+        .vehicle-badge { position: absolute; top: 16px; left: 16px; padding: 6px 14px; background: var(--primary); color: #fff; font-family: var(--font-heading); font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 4px; }
+        .vehicle-info { padding: 28px; }
+        .vehicle-info h3 { margin-bottom: 10px; color: var(--accent); }
+        .vehicle-info p { font-size: 0.95rem; color: var(--text-light); margin-bottom: 16px; }
+        .vehicle-specs { display: flex; gap: 16px; flex-wrap: wrap; }
+        .vehicle-spec { padding: 6px 12px; background: var(--bg-light); border-radius: 4px; font-size: 0.8rem; font-weight: 700; color: var(--text-medium); font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Services */
+        .services { background: var(--bg-light); }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .service-card { background: var(--bg-card); border-radius: var(--radius-md); padding: 40px 30px; text-align: center; transition: all var(--transition-normal); border: 1px solid var(--border-color); position: relative; overflow: hidden; }
+        .service-card::after { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 0; background: var(--primary); transition: height var(--transition-normal); }
+        .service-card:hover::after { height: 100%; }
+        .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+        .service-icon { width: 72px; height: 72px; margin: 0 auto 24px; background: var(--accent); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; transition: all var(--transition-normal); }
+        .service-card:hover .service-icon { background: var(--primary); transform: scale(1.1); }
+        .service-card h3 { margin-bottom: 12px; }
+        .service-card p { font-size: 0.95rem; color: var(--text-light); }
+
+        /* About */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-image { border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-lg); position: relative; }
+        .about-image img { width: 100%; height: 450px; object-fit: cover; transition: transform var(--transition-slow); }
+        .about-image:hover img { transform: scale(1.05); }
+        .about-badge { position: absolute; top: 20px; left: 20px; padding: 12px 20px; background: var(--primary); color: #fff; font-family: var(--font-heading); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; }
+        .about-content h2 { margin-bottom: 20px; }
+        .about-content h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary); border-radius: 2px; margin-top: 12px; }
+        .about-text { font-size: 1.05rem; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 30px; }
+        .about-feature { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--bg-light); border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.5px; transition: all var(--transition-fast); }
+        .about-feature:hover { background: var(--primary); color: #fff; transform: translateX(4px); }
+        .about-feature-icon { color: var(--primary); font-size: 1.2rem; flex-shrink: 0; transition: color var(--transition-fast); }
+        .about-feature:hover .about-feature-icon { color: #fff; }
+
+        /* Stats bar */
+        .stats-bar { background: var(--accent); color: #fff; padding: 60px 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+        .stat-item { padding: 20px; }
+        .stat-number { font-family: var(--font-heading); font-size: 3rem; font-weight: 700; color: var(--primary); line-height: 1; }
+        .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 10px; text-transform: uppercase; letter-spacing: 1.5px; font-family: var(--font-heading); font-weight: 300; }
+
+        /* CTA */
+        .cta-banner { background: var(--primary); color: #fff; padding: 80px 0; text-align: center; position: relative; overflow: hidden; }
+        .cta-banner::before { content: ''; position: absolute; inset: 0; background: url('images/showroom.jpg') center/cover no-repeat; opacity: 0.1; }
+        .cta-banner .container { position: relative; z-index: 1; }
+        .cta-banner h2 { color: #fff; margin-bottom: 16px; }
+        .cta-banner p { color: rgba(255,255,255,0.85); font-size: 1.15rem; max-width: 600px; margin: 0 auto 30px; }
+
+        /* Contact */
+        .contact { background: var(--bg-light); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .contact-info { padding: 40px; background: var(--accent); color: #fff; border-radius: var(--radius-md); }
+        .contact-info h3 { color: #fff; margin-bottom: 24px; font-size: 1.5rem; letter-spacing: 2px; }
+        .contact-info-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+        .contact-info-icon { width: 44px; height: 44px; background: rgba(183,28,28,0.2); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; color: var(--primary-light); }
+        .contact-info-text h4 { color: var(--primary-light); font-size: 0.8rem; font-weight: 500; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 2px; }
+        .contact-info-text p { color: #fff; font-size: 1.05rem; margin: 0; }
+        .contact-info-text a { color: #fff; } .contact-info-text a:hover { color: var(--primary-light); }
+        .contact-map { border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md); min-height: 400px; }
+        .contact-map iframe { width: 100%; height: 100%; min-height: 400px; border: 0; }
+
+        /* Footer */
+        .footer { background: var(--accent-dark); color: #fff; padding: 60px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-brand p { color: rgba(255,255,255,0.5); margin-top: 16px; font-size: 0.95rem; max-width: 320px; }
+        .footer-links h4, .footer-contact h4 { color: var(--primary-light); margin-bottom: 20px; font-size: 1.1rem; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 2px; }
+        .footer-links a { display: block; color: rgba(255,255,255,0.5); padding: 6px 0; font-size: 0.95rem; transition: all var(--transition-fast); }
+        .footer-links a:hover { color: var(--primary-light); padding-left: 8px; }
+        .footer-contact-item { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.5); padding: 6px 0; font-size: 0.95rem; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { color: rgba(255,255,255,0.35); font-size: 0.85rem; margin: 0; }
+        .footer-bottom a { color: rgba(255,255,255,0.5); } .footer-bottom a:hover { color: var(--primary-light); }
+
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all var(--transition-normal); box-shadow: 0 4px 20px rgba(183,28,28,0.4); z-index: 100; }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--primary-light); transform: translateY(-4px); }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--accent-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
+
+        @media (max-width: 1024px) {
+            .vehicles-grid, .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .section { padding: 70px 0; }
+            .hero { text-align: center; }
+            .hero-content { max-width: 100%; }
+            .hero-description { margin: 0 auto 36px; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; gap: 30px; }
+            .vehicles-grid, .services-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; gap: 16px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; justify-content: center; }
+            .about-features { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#hero" class="logo">
+                <div class="logo-icon">ISZ</div>
+                <div class="logo-text">ISUZU Tábor<span>MK Service s.r.o.</span></div>
+            </a>
+            <nav class="nav-links">
+                <a href="#vozidla">Vozidla</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#o-nas">O nás</a>
+                <a href="#reference">Reference</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </nav>
+            <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#vozidla">Vozidla</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#o-nas">O nás</a>
+        <a href="#reference">Reference</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">Autorizovaný dealer ISUZU</div>
+                <h1>Váš dealer <span class="highlight">ISUZU</span> v Táboře</h1>
+                <p class="hero-description">
+                    MK Service s.r.o. je autorizovaný dealer a servisní partner ISUZU v Táboře.
+                    Nabízíme prodej nových užitkových vozidel, kompletní servis, náhradní díly
+                    a hydraulické jeřáby FASSI.
+                </p>
+                <div class="hero-buttons">
+                    <a href="tel:+420775363135" class="btn btn-primary">&#9742; 775 363 135</a>
+                    <a href="#vozidla" class="btn btn-outline">Nabídka vozidel &#8594;</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">3.5t</div>
+                        <div class="hero-stat-label">Od hmotnosti</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">9.5t</div>
+                        <div class="hero-stat-label">Do hmotnosti</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">E6</div>
+                        <div class="hero-stat-label">Euro norma</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VEHICLES -->
+    <section class="section vehicles" id="vozidla">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Nabídka vozidel</h2>
+                <p class="fade-in stagger-1">Autorizovaný prodej užitkových vozidel a autobusů ISUZU. Spolehlivost a výkon pro vaše podnikání.</p>
+            </div>
+            <div class="vehicles-grid">
+                <div class="vehicle-card fade-in stagger-1">
+                    <div class="vehicle-img">
+                        <img src="images/hero-truck.jpg" alt="ISUZU M21" loading="lazy">
+                        <div class="vehicle-badge">Bestseller</div>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>ISUZU M21</h3>
+                        <p>Kompaktní užitkové vozidlo do 3,5 tuny. Euro 6 bez potřeby AdBlue. Ideální pro městskou distribuci a řemeslníky.</p>
+                        <div class="vehicle-specs">
+                            <span class="vehicle-spec">3.5t</span>
+                            <span class="vehicle-spec">Euro 6</span>
+                            <span class="vehicle-spec">Bez AdBlue</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vehicle-card fade-in stagger-2">
+                    <div class="vehicle-img">
+                        <img src="images/truck-delivery.jpg" alt="ISUZU Q95" loading="lazy">
+                        <div class="vehicle-badge">Výkonný</div>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>ISUZU Q95</h3>
+                        <p>Výkonné nákladní vozidlo s celkovou hmotností až 9,5 tuny. Různé délky rozvoru pro maximální flexibilitu nástaveb.</p>
+                        <div class="vehicle-specs">
+                            <span class="vehicle-spec">9.5t</span>
+                            <span class="vehicle-spec">Euro 6</span>
+                            <span class="vehicle-spec">3 rozvory</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vehicle-card fade-in stagger-3">
+                    <div class="vehicle-img">
+                        <img src="images/truck-service.jpg" alt="ISUZU Autobusy" loading="lazy">
+                        <div class="vehicle-badge">Autobus</div>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>ISUZU Autobusy</h3>
+                        <p>Spolehlivé autobusy ISUZU pro městskou i meziměstskou přepravu. Ekonomický provoz a vysoký komfort cestujících.</p>
+                        <div class="vehicle-specs">
+                            <span class="vehicle-spec">MHD</span>
+                            <span class="vehicle-spec">Meziměstský</span>
+                            <span class="vehicle-spec">Euro 6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section services" id="sluzby">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Naše služby</h2>
+                <p class="fade-in stagger-1">Kompletní zázemí pro prodej, servis a údržbu vozidel ISUZU.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in stagger-1">
+                    <div class="service-icon">&#x1F69A;</div>
+                    <h3>Prodej vozidel</h3>
+                    <p>Autorizovaný prodej nových užitkových vozidel a autobusů ISUZU s kompletní konfigurací dle vašich potřeb.</p>
+                </div>
+                <div class="service-card fade-in stagger-2">
+                    <div class="service-icon">&#x1F527;</div>
+                    <h3>Autorizovaný servis</h3>
+                    <p>Kompletní servis a údržba vozidel ISUZU. Pravidelné prohlídky, opravy a diagnostika originálními nástroji.</p>
+                </div>
+                <div class="service-card fade-in stagger-3">
+                    <div class="service-icon">&#x2699;</div>
+                    <h3>Náhradní díly</h3>
+                    <p>Originální náhradní díly ISUZU skladem i na objednávku. Kvalita a kompatibilita garantována výrobcem.</p>
+                </div>
+                <div class="service-card fade-in stagger-4">
+                    <div class="service-icon">&#x1F3D7;</div>
+                    <h3>Hydraulické jeřáby FASSI</h3>
+                    <p>Prodej a servis hydraulických nakládacích jeřábů FASSI. Montáž na vozidla ISUZU i další značky.</p>
+                </div>
+                <div class="service-card fade-in stagger-5">
+                    <div class="service-icon">&#x1F4C5;</div>
+                    <h3>Online objednávky servisu</h3>
+                    <p>Pohodlné objednání servisních prací online. Vyberte si termín, který vám vyhovuje, a my se postaráme o zbytek.</p>
+                </div>
+                <div class="service-card fade-in stagger-6">
+                    <div class="service-icon">&#x1F4B0;</div>
+                    <h3>Financování</h3>
+                    <p>Pomůžeme vám s financováním nového vozidla. Leasing, úvěr nebo operativní leasing dle vašich potřeb.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-in-left">
+                    <img src="images/showroom.jpg" alt="MK Service ISUZU Tábor" loading="lazy">
+                    <div class="about-badge">Autorizovaný dealer</div>
+                </div>
+                <div class="about-content fade-in-right">
+                    <h2>O společnosti</h2>
+                    <p class="about-text">
+                        MK Service s.r.o. je autorizovaný dealer a servisní partner značky ISUZU v Táboře.
+                        Zajišťujeme kompletní prodejní a poprodejní služby pro užitková vozidla ISUZU
+                        na jihu Čech.
+                    </p>
+                    <p class="about-text">
+                        Naším cílem je poskytovat zákazníkům profesionální servis a kvalitní poradenství
+                        při výběru vhodného vozidla. Účastníme se oborových veletrhů a výstav, kde
+                        představujeme nejnovější modely a technologie ISUZU.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature"><span class="about-feature-icon">&#10003;</span> Autorizovaný prodej</div>
+                        <div class="about-feature"><span class="about-feature-icon">&#10003;</span> Servis ISUZU</div>
+                        <div class="about-feature"><span class="about-feature-icon">&#10003;</span> Originální díly</div>
+                        <div class="about-feature"><span class="about-feature-icon">&#10003;</span> Jeřáby FASSI</div>
+                        <div class="about-feature"><span class="about-feature-icon">&#10003;</span> Financování</div>
+                        <div class="about-feature"><span class="about-feature-icon">&#10003;</span> Online objednávky</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <section class="stats-bar" id="reference">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-in stagger-1">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Prodaných vozidel</div>
+                </div>
+                <div class="stat-item fade-in stagger-2">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Servisních zásahů</div>
+                </div>
+                <div class="stat-item fade-in stagger-3">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Spokojenost zákazníků</div>
+                </div>
+                <div class="stat-item fade-in stagger-4">
+                    <div class="stat-number">24h</div>
+                    <div class="stat-label">Servisní podpora</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-banner">
+        <div class="container">
+            <h2 class="fade-in">Hledáte spolehlivé užitkové vozidlo?</h2>
+            <p class="fade-in stagger-1">Kontaktujte nás pro nezávaznou nabídku. Pomůžeme vám vybrat ideální ISUZU pro vaše podnikání.</p>
+            <div class="fade-in stagger-2">
+                <a href="tel:+420775363135" class="btn btn-dark">&#9742; 775 363 135</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Kontakt</h2>
+                <p class="fade-in stagger-1">Navštivte nás v Táboře nebo se ozvěte telefonicky či emailem.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info fade-in-left">
+                    <h3>Kontaktní údaje</h3>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#x1F4CD;</div>
+                        <div class="contact-info-text"><h4>Adresa</h4><p>Kpt. Jaroše 450<br>390 03 Tábor</p></div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#9742;</div>
+                        <div class="contact-info-text"><h4>Telefon</h4><p><a href="tel:+420775363135">+420 775 363 135</a></p></div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#9993;</div>
+                        <div class="contact-info-text"><h4>Email</h4><p><a href="mailto:daniel.kicka@mk-service.cz">daniel.kicka@mk-service.cz</a></p></div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#x1F310;</div>
+                        <div class="contact-info-text"><h4>Web</h4><p><a href="https://isuzu-tabor.webnode.cz" target="_blank">isuzu-tabor.webnode.cz</a></p></div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#x1F3E2;</div>
+                        <div class="contact-info-text"><h4>Společnost</h4><p>MK Service s.r.o.</p></div>
+                    </div>
+                </div>
+                <div class="contact-map fade-in-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2600.0!2d14.6578!3d49.4147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470c8a0e0e4b0a0d%3A0x400af0f6614e850!2sKpt.%20Jaro%C5%A1e%20450%2C%20390%2003%20T%C3%A1bor!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - ISUZU Tábor"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#hero" class="logo" style="color:#fff;margin-bottom:8px;">
+                        <div class="logo-icon">ISZ</div>
+                        <div class="logo-text">ISUZU Tábor<span>MK Service s.r.o.</span></div>
+                    </a>
+                    <p>Autorizovaný dealer a servisní partner ISUZU v Táboře. Prodej užitkových vozidel, servis, díly a hydraulické jeřáby FASSI.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Odkazy</h4>
+                    <a href="#vozidla">Vozidla</a>
+                    <a href="#sluzby">Služby</a>
+                    <a href="#o-nas">O nás</a>
+                    <a href="#reference">Reference</a>
+                    <a href="#kontakt">Kontakt</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Kontakt</h4>
+                    <div class="footer-contact-item">&#x1F4CD; Kpt. Jaroše 450, Tábor</div>
+                    <div class="footer-contact-item">&#9742; +420 775 363 135</div>
+                    <div class="footer-contact-item">&#9993; daniel.kicka@mk-service.cz</div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MK Service s.r.o. (ISUZU Tábor). Všechna práva vyhrazena.</p>
+                <p>Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Zpět nahoru">&#8593;</button>
+
+    <script>
+        (function(){var h=document.getElementById('hamburger'),n=document.getElementById('mobileNav'),o=document.getElementById('mobileOverlay'),links=n.querySelectorAll('a');function toggle(){h.classList.toggle('active');n.classList.toggle('active');o.classList.toggle('active');document.body.style.overflow=n.classList.contains('active')?'hidden':'';}function close(){h.classList.remove('active');n.classList.remove('active');o.classList.remove('active');document.body.style.overflow='';}h.addEventListener('click',toggle);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});o.addEventListener('click',close);links.forEach(function(l){l.addEventListener('click',close);});})();
+        (function(){var header=document.getElementById('header');window.addEventListener('scroll',function(){header.classList.toggle('scrolled',window.scrollY>100);},{passive:true});})();
+        (function(){var btn=document.getElementById('backToTop');window.addEventListener('scroll',function(){btn.classList.toggle('visible',window.scrollY>500);},{passive:true});btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});})();
+        (function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{root:null,rootMargin:'0px 0px -80px 0px',threshold:0.1});document.querySelectorAll('.fade-in,.fade-in-left,.fade-in-right,.scale-in').forEach(function(el){obs.observe(el);});})();
+        (function(){var sections=document.querySelectorAll('section[id]'),navLinks=document.querySelectorAll('.nav-links a:not(.nav-cta)');var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var id=e.target.getAttribute('id');navLinks.forEach(function(l){l.classList.remove('active');if(l.getAttribute('href')==='#'+id)l.classList.add('active');});}});},{rootMargin:'-40% 0px -60% 0px',threshold:0});sections.forEach(function(s){obs.observe(s);});})();
+        (function(){document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=this.getAttribute('href');if(t==='#')return;var el=document.querySelector(t);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}});});})();
+        (function(){var stats=document.querySelectorAll('.hero-stat-number, .stat-number'),animated=new Set();function animate(els){els.forEach(function(s){if(animated.has(s))return;animated.add(s);var t=s.textContent,m=t.match(/(\d+)/);if(!m)return;var target=parseInt(m[1]),suffix=t.replace(m[1],''),current=0,inc=Math.ceil(target/50),step=1200/(target/inc);var timer=setInterval(function(){current+=inc;if(current>=target){current=target;clearInterval(timer);}s.textContent=current+suffix;},step);});}
+        var el1=document.querySelector('.hero-stats');if(el1){var o1=new IntersectionObserver(function(e){if(e[0].isIntersecting){animate(document.querySelectorAll('.hero-stat-number'));o1.disconnect();}},{threshold:0.5});o1.observe(el1);}
+        var el2=document.querySelector('.stats-bar');if(el2){var o2=new IntersectionObserver(function(e){if(e[0].isIntersecting){animate(document.querySelectorAll('.stat-number'));o2.disconnect();}},{threshold:0.5});o2.observe(el2);}})();
+        (function(){document.querySelectorAll('.service-card').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;c.style.transform='perspective(1000px) rotateX('+((y-r.height/2)/20)+'deg) rotateY('+((r.width/2-x)/20)+'deg) translateY(-8px)';});c.addEventListener('mouseleave',function(){c.style.transform='';});});})();
+        console.log('%cISUZU Tábor - MK Service s.r.o.','color:#b71c1c;font-size:16px;font-weight:bold;');
+        console.log('%cWeb vytvořil KSH Partners s.r.o.','color:#666;font-size:12px;');
+    </script>
+</body>
+</html>

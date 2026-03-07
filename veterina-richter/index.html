@@ -1,0 +1,2404 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Veterinární ordinace MVDr. Vojtech Richter - Týn nad Vltavou. Preventivní i léčebná péče, čipování, RTG, sonografie, laboratorní rozbory.">
+    <meta name="keywords" content="veterinář, Týn nad Vltavou, MVDr. Richter, veterinární ordinace, čipování, RTG, sonografie">
+    <title>MVDr. Vojtech Richter | Veterinární ordinace Týn nad Vltavou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS CUSTOM PROPERTIES
+           ======================================== */
+        :root {
+            --primary: #1b5e20;
+            --primary-light: #2e7d32;
+            --primary-dark: #0d3d13;
+            --primary-rgb: 27, 94, 32;
+            --accent: #ffffff;
+            --accent-dark: #e8e8e8;
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --text-light: #717171;
+            --bg-light: #f5f9f5;
+            --bg-white: #ffffff;
+            --bg-card: #ffffff;
+            --border-color: #e0e8e0;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
+            --shadow-xl: 0 16px 60px rgba(0,0,0,0.2);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --max-width: 1200px;
+            --header-height: 80px;
+        }
+
+        /* ========================================
+           RESET & BASE STYLES
+           ======================================== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+        h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
+        h4 { font-size: clamp(1.1rem, 2vw, 1.3rem); }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-medium);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition-fast);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            margin-bottom: 16px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            max-width: 600px;
+            margin: 24px auto 0;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all var(--transition-normal);
+            text-transform: none;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--accent);
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            border-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-white {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        .btn-white:hover {
+            background: transparent;
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* ========================================
+           SCROLL ANIMATIONS
+           ======================================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* ========================================
+           HEADER / NAVIGATION
+           ======================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            z-index: 1000;
+            transition: all var(--transition-normal);
+            background: transparent;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--accent);
+            transition: color var(--transition-normal);
+            z-index: 1001;
+        }
+
+        .header.scrolled .logo {
+            color: var(--primary);
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent);
+            transition: background var(--transition-normal);
+        }
+
+        .header.scrolled .logo-icon {
+            background: var(--primary);
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-links a {
+            font-family: var(--font-heading);
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--accent);
+            position: relative;
+            padding: 4px 0;
+            transition: color var(--transition-normal);
+        }
+
+        .header.scrolled .nav-links a {
+            color: var(--text-dark);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width var(--transition-normal);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .header.scrolled .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            padding: 10px 24px !important;
+            background: var(--primary);
+            color: var(--accent) !important;
+            border-radius: var(--radius-sm);
+            font-weight: 600 !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-light) !important;
+            transform: translateY(-1px);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            z-index: 1001;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+            transition: all var(--transition-normal);
+        }
+
+        .header.scrolled .hamburger span {
+            background: var(--text-dark);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--primary-dark);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 40px;
+            transition: right var(--transition-normal);
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-normal);
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav a {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: padding-left var(--transition-normal);
+        }
+
+        .mobile-nav a:hover {
+            padding-left: 12px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(27, 94, 32, 0.92), rgba(13, 61, 19, 0.88)),
+                        url('images/hero-vet.jpg') center/cover no-repeat;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            padding-top: 40px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            color: var(--accent);
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+            backdrop-filter: blur(4px);
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.4); }
+        }
+
+        .hero h1 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero h1 .highlight {
+            color: #a5d6a7;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 36px;
+            max-width: 560px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-family: var(--font-heading);
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.65);
+            margin-top: 8px;
+        }
+
+        .hero-image-float {
+            position: absolute;
+            right: 5%;
+            bottom: 8%;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid rgba(255,255,255,0.2);
+            box-shadow: var(--shadow-xl);
+            display: none;
+        }
+
+        .hero-image-float img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ========================================
+           SERVICES SECTION
+           ======================================== */
+        .services {
+            background: var(--bg-light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 40px 30px;
+            text-align: center;
+            transition: all var(--transition-normal);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .service-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 24px;
+            background: var(--bg-light);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all var(--transition-normal);
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--primary);
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           ABOUT SECTION
+           ======================================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-image-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--primary);
+            color: var(--accent);
+            padding: 20px 28px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .about-image-badge .badge-number {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .about-image-badge .badge-text {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .about-content h2 {
+            margin-bottom: 20px;
+        }
+
+        .about-content h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+            margin-top: 12px;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 30px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--bg-light);
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+        }
+
+        .about-feature:hover {
+            background: var(--primary);
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .about-feature-icon {
+            color: var(--primary);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: color var(--transition-fast);
+        }
+
+        .about-feature:hover .about-feature-icon {
+            color: var(--accent);
+        }
+
+        /* ========================================
+           GALLERY SECTION
+           ======================================== */
+        .gallery {
+            background: var(--bg-light);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(27,94,32,0.85), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 24px;
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h4 {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .gallery-overlay p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        /* ========================================
+           HOURS SECTION
+           ======================================== */
+        .hours {
+            background: var(--primary);
+            color: var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hours::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+
+        .hours .section-header h2 {
+            color: var(--accent);
+        }
+
+        .hours .section-header h2::after {
+            background: rgba(255,255,255,0.5);
+        }
+
+        .hours .section-header p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hours-table {
+            background: rgba(255,255,255,0.08);
+            border-radius: var(--radius-md);
+            padding: 40px;
+            backdrop-filter: blur(4px);
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.05rem;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .hours-day {
+            font-weight: 600;
+            font-family: var(--font-heading);
+        }
+
+        .hours-time {
+            color: #a5d6a7;
+            font-weight: 500;
+        }
+
+        .hours-emergency {
+            margin-top: 30px;
+            padding: 24px;
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            border-left: 4px solid #4caf50;
+        }
+
+        .hours-emergency h4 {
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-size: 1.15rem;
+        }
+
+        .hours-emergency p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .hours-info {
+            padding: 20px 0;
+        }
+
+        .hours-info h3 {
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+        }
+
+        .hours-info p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .hours-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .hours-contact-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.12);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        /* ========================================
+           TESTIMONIALS SECTION
+           ======================================== */
+        .testimonials {
+            background: var(--bg-white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 36px;
+            position: relative;
+            transition: all var(--transition-normal);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .testimonial-stars {
+            color: #ffc107;
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            font-family: var(--font-heading);
+        }
+
+        .testimonial-pet {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* ========================================
+           CONTACT SECTION
+           ======================================== */
+        .contact {
+            background: var(--bg-light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info {
+            padding: 40px;
+            background: var(--primary);
+            color: var(--accent);
+            border-radius: var(--radius-md);
+        }
+
+        .contact-info h3 {
+            color: var(--accent);
+            margin-bottom: 24px;
+            font-size: 1.6rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .contact-info-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.12);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info-text h4 {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.7;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-info-text p {
+            color: var(--accent);
+            font-size: 1.05rem;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .contact-info-text a {
+            color: var(--accent);
+        }
+
+        .contact-info-text a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-map {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            min-height: 400px;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border: 0;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            background: var(--primary-dark);
+            color: var(--accent);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            margin-top: 16px;
+            font-size: 0.95rem;
+            max-width: 320px;
+        }
+
+        .footer-links h4,
+        .footer-contact h4 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-family: var(--font-heading);
+        }
+
+        .footer-links a {
+            display: block;
+            color: rgba(255,255,255,0.7);
+            padding: 6px 0;
+            transition: all var(--transition-fast);
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 8px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,0.7);
+            padding: 6px 0;
+            font-size: 0.95rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .footer-bottom a {
+            color: rgba(255,255,255,0.7);
+            transition: color var(--transition-fast);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--accent);
+        }
+
+        /* ========================================
+           BACK TO TOP BUTTON
+           ======================================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--accent);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-md);
+            z-index: 100;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-light);
+            transform: translateY(-4px);
+        }
+
+        /* ========================================
+           RESPONSIVE BREAKPOINTS
+           ======================================== */
+        @media (min-width: 1024px) {
+            .hero-image-float {
+                display: block;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+
+            .hero {
+                min-height: 100vh;
+                text-align: center;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+                gap: 30px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-image-badge {
+                right: 10px;
+                bottom: -15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .hours-table {
+                padding: 24px;
+            }
+        }
+
+        /* ========================================
+           ADDITIONAL UTILITY & DECORATION
+           ======================================== */
+        .text-primary { color: var(--primary); }
+        .text-accent { color: var(--accent); }
+        .bg-primary { background-color: var(--primary); }
+        .bg-light { background-color: var(--bg-light); }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+            margin: 0 auto;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Smooth scroll offset for fixed header */
+        section[id] {
+            scroll-margin-top: var(--header-height);
+        }
+
+        /* Selection color */
+        ::selection {
+            background: var(--primary);
+            color: var(--accent);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+
+        /* Loading animation for images */
+        .img-loading {
+            background: linear-gradient(110deg, #f0f0f0 8%, #e0e0e0 18%, #f0f0f0 33%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* CTA banner */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--accent);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/dog-care.jpg') center/cover no-repeat;
+            opacity: 0.1;
+        }
+
+        .cta-banner .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-banner h2 {
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .cta-banner p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        /* Process / How it works */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '';
+            position: absolute;
+            top: 35px;
+            right: -15px;
+            width: 30px;
+            height: 2px;
+            background: var(--border-color);
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .process-number {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: var(--bg-light);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: all var(--transition-normal);
+        }
+
+        .process-step:hover .process-number {
+            background: var(--primary);
+            color: var(--accent);
+        }
+
+        .process-step h4 {
+            margin-bottom: 8px;
+        }
+
+        .process-step p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .process-step::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+         HEADER
+         ======================================== -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#hero" class="logo">
+                <div class="logo-icon">&#x1F43E;</div>
+                <div class="logo-text">
+                    MVDr. Richter
+                    <span>Veterinární ordinace</span>
+                </div>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#sluzby">Služby</a>
+                <a href="#o-nas">O nás</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#ordinacni-hodiny">Ordinační hodiny</a>
+                <a href="#reference">Reference</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </nav>
+
+            <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#sluzby">Služby</a>
+        <a href="#o-nas">O nás</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#ordinacni-hodiny">Ordinační hodiny</a>
+        <a href="#reference">Reference</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- ========================================
+         HERO SECTION
+         ======================================== -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Veterinární ordinace v Týně nad Vltavou
+                </div>
+                <h1>Profesionální péče o vaše <span class="highlight">domácí mazlíčky</span></h1>
+                <p class="hero-description">
+                    MVDr. Vojtech Richter nabízí kompletní veterinární služby včetně preventivní i léčebné péče,
+                    čipování, RTG vyšetření, sonografie a laboratorních rozborů. Vaši mazlíčci si zaslouží to nejlepší.
+                </p>
+                <div class="hero-buttons">
+                    <a href="tel:+420605473668" class="btn btn-white">
+                        &#9742; Zavolejte nám
+                    </a>
+                    <a href="#sluzby" class="btn btn-outline">
+                        Naše služby &#8594;
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">20+</div>
+                        <div class="hero-stat-label">Let praxe</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">5000+</div>
+                        <div class="hero-stat-label">Spokojených pacientů</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">24/7</div>
+                        <div class="hero-stat-label">Pohotovostní služba</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image-float">
+                <img src="images/dog-care.jpg" alt="Péče o psa" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SERVICES SECTION
+         ======================================== -->
+    <section class="section services" id="sluzby">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Naše služby</h2>
+                <p class="fade-in stagger-1">Poskytujeme komplexní veterinární péči pro vaše domácí mazlíčky s využitím moderního vybavení a bohatých zkušeností.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card fade-in stagger-1">
+                    <div class="service-icon">&#x1F3E5;</div>
+                    <h3>Preventivní péče</h3>
+                    <p>Pravidelné kontroly zdravotního stavu, očkování, odčervení a poradenství ohledně správné výživy a péče o vašeho mazlíčka.</p>
+                </div>
+
+                <div class="service-card fade-in stagger-2">
+                    <div class="service-icon">&#x1F489;</div>
+                    <h3>Léčebná péče</h3>
+                    <p>Diagnostika a léčba onemocnění, chirurgické zákroky, ošetření úrazů a pooperační péče s individuálním přístupem.</p>
+                </div>
+
+                <div class="service-card fade-in stagger-3">
+                    <div class="service-icon">&#x1F4CB;</div>
+                    <h3>Čipování zvířat</h3>
+                    <p>Označení domácích zvířat mikročipem pro jejich snadnou identifikaci a registraci v centrálním registru.</p>
+                </div>
+
+                <div class="service-card fade-in stagger-4">
+                    <div class="service-icon">&#x1F4F7;</div>
+                    <h3>RTG vyšetření</h3>
+                    <p>Rentgenové vyšetření kostí a vnitřních orgánů pro přesnou diagnostiku zlomenin, nádorů a dalších patologií.</p>
+                </div>
+
+                <div class="service-card fade-in stagger-5">
+                    <div class="service-icon">&#x1F50D;</div>
+                    <h3>Sonografie (UZ)</h3>
+                    <p>Ultrazvukové vyšetření orgánů břišní a hrudní dutiny, kontrola březosti a sledování vývoje plodů.</p>
+                </div>
+
+                <div class="service-card fade-in stagger-6">
+                    <div class="service-icon">&#x1F9EA;</div>
+                    <h3>Laboratorní rozbory</h3>
+                    <p>Zajištění krevních testů, biochemických vyšetření a dalších laboratorních rozborů pro přesnou diagnózu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         ABOUT SECTION
+         ======================================== -->
+    <section class="section" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-wrapper fade-in-left">
+                    <div class="about-image">
+                        <img src="images/about-vet.jpg" alt="MVDr. Vojtech Richter - veterinární ordinace" loading="lazy">
+                    </div>
+                    <div class="about-image-badge">
+                        <div class="badge-number">20+</div>
+                        <div class="badge-text">let zkušeností</div>
+                    </div>
+                </div>
+
+                <div class="about-content fade-in-right">
+                    <h2>O naší ordinaci</h2>
+                    <p class="about-text">
+                        Veterinární ordinace MVDr. Vojtecha Richtera v Týně nad Vltavou poskytuje komplexní
+                        veterinární služby pro malá i velká zvířata. S více než dvacetiletou praxí v oboru
+                        zajišťujeme profesionální péči na nejvyšší úrovni.
+                    </p>
+                    <p class="about-text">
+                        Naše ordinace je vybavena moderním diagnostickým přístrojovým vybavením včetně
+                        rentgenu a ultrazvuku. Nabízíme také výjezdy k pacientům a pohotovostní služby
+                        pro akutní případy mimo ordinační hodiny.
+                    </p>
+
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <span class="about-feature-icon">&#10003;</span>
+                            Preventivní péče
+                        </div>
+                        <div class="about-feature">
+                            <span class="about-feature-icon">&#10003;</span>
+                            Výjezdy k pacientům
+                        </div>
+                        <div class="about-feature">
+                            <span class="about-feature-icon">&#10003;</span>
+                            Moderní vybavení
+                        </div>
+                        <div class="about-feature">
+                            <span class="about-feature-icon">&#10003;</span>
+                            Pohotovostní služba
+                        </div>
+                        <div class="about-feature">
+                            <span class="about-feature-icon">&#10003;</span>
+                            Individuální přístup
+                        </div>
+                        <div class="about-feature">
+                            <span class="about-feature-icon">&#10003;</span>
+                            Laboratorní rozbory
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         PROCESS SECTION
+         ======================================== -->
+    <section class="section" style="background: var(--bg-light);" id="jak-to-funguje">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Jak probíhá návštěva</h2>
+                <p class="fade-in stagger-1">Jednoduchý a přehledný proces od objednání po péči o vašeho mazlíčka.</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step fade-in stagger-1">
+                    <div class="process-number">1</div>
+                    <h4>Objednání</h4>
+                    <p>Zavolejte nám na telefon 605 473 668 nebo navštivte ordinaci v ordinačních hodinách.</p>
+                </div>
+                <div class="process-step fade-in stagger-2">
+                    <div class="process-number">2</div>
+                    <h4>Vyšetření</h4>
+                    <p>Provedeme důkladné vyšetření vašeho mazlíčka a stanovíme přesnou diagnózu.</p>
+                </div>
+                <div class="process-step fade-in stagger-3">
+                    <div class="process-number">3</div>
+                    <h4>Léčba</h4>
+                    <p>Navrhneme optimální léčebný plán a zahájíme terapii s ohledem na potřeby pacienta.</p>
+                </div>
+                <div class="process-step fade-in stagger-4">
+                    <div class="process-number">4</div>
+                    <h4>Kontrola</h4>
+                    <p>Sledujeme průběh léčby a zajistíme kontrolní vyšetření pro úplné zotavení.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         GALLERY SECTION
+         ======================================== -->
+    <section class="section gallery" id="galerie">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Galerie</h2>
+                <p class="fade-in stagger-1">Nahlédněte do naší ordinace a podívejte se, jak pečujeme o vaše mazlíčky.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item scale-in stagger-1">
+                    <img src="images/vet-exam.jpg" alt="Veterinární vyšetření" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div>
+                            <h4>Vyšetření pacienta</h4>
+                            <p>Důkladné klinické vyšetření</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item scale-in stagger-2">
+                    <img src="images/dog-care.jpg" alt="Péče o psy" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div>
+                            <h4>Péče o psy</h4>
+                            <p>Komplexní zdravotní péče</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item scale-in stagger-3">
+                    <img src="images/cat-care.jpg" alt="Péče o kočky" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div>
+                            <h4>Péče o kočky</h4>
+                            <p>Jemný a citlivý přístup</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item scale-in stagger-4">
+                    <img src="images/vet-xray.jpg" alt="RTG vyšetření" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div>
+                            <h4>RTG diagnostika</h4>
+                            <p>Moderní rentgenové přístroje</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item scale-in stagger-5">
+                    <img src="images/about-vet.jpg" alt="Veterinární ordinace" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div>
+                            <h4>Naše ordinace</h4>
+                            <p>Moderní a čisté prostředí</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item scale-in stagger-6">
+                    <img src="images/hero-vet.jpg" alt="Šťastní mazlíčci" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div>
+                            <h4>Šťastní pacienti</h4>
+                            <p>Spokojení a zdraví mazlíčci</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         HOURS SECTION
+         ======================================== -->
+    <section class="section hours" id="ordinacni-hodiny">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Ordinační hodiny</h2>
+                <p class="fade-in stagger-1">Jsme tu pro vás a vaše mazlíčky. V akutních případech jsme k dispozici kdykoliv.</p>
+            </div>
+
+            <div class="hours-grid">
+                <div class="hours-table fade-in-left">
+                    <div class="hours-row">
+                        <span class="hours-day">Pondělí</span>
+                        <span class="hours-time">15:00 - 18:00</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="hours-day">Úterý</span>
+                        <span class="hours-time">15:00 - 18:00</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="hours-day">Středa</span>
+                        <span class="hours-time">15:00 - 18:00</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="hours-day">Čtvrtek</span>
+                        <span class="hours-time">15:00 - 18:00</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="hours-day">Pátek</span>
+                        <span class="hours-time">15:00 - 18:00</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="hours-day">Sobota</span>
+                        <span class="hours-time">15:00 - 17:00</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="hours-day">Neděle</span>
+                        <span class="hours-time">Zavřeno</span>
+                    </div>
+
+                    <div class="hours-emergency">
+                        <h4>&#9888; Pohotovostní služba</h4>
+                        <p>V akutních a naléhavých případech jsme k dispozici kdykoliv. Neváhejte zavolat na číslo <strong>605 473 668</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="hours-info fade-in-right">
+                    <h3>Potřebujete poradit?</h3>
+                    <p>Neváhejte nás kontaktovat s jakýmkoliv dotazem ohledně zdraví vašeho mazlíčka. Poskytujeme telefonické konzultace a v případě potřeby zajistíme okamžitou pomoc.</p>
+                    <p>Pro objednání k vyšetření nebo konzultaci využijte telefonický kontakt nebo nás navštivte osobně v ordinačních hodinách.</p>
+
+                    <div class="hours-contact-item">
+                        <div class="hours-contact-icon">&#9742;</div>
+                        <div>
+                            <strong>605 473 668</strong><br>
+                            <small style="opacity:0.7">Volejte kdykoliv</small>
+                        </div>
+                    </div>
+
+                    <div class="hours-contact-item">
+                        <div class="hours-contact-icon">&#9993;</div>
+                        <div>
+                            <strong>dr.richter@seznam.cz</strong><br>
+                            <small style="opacity:0.7">Odpovíme do 24 hodin</small>
+                        </div>
+                    </div>
+
+                    <div class="hours-contact-item">
+                        <div class="hours-contact-icon">&#x1F3E0;</div>
+                        <div>
+                            <strong>Komenského 670</strong><br>
+                            <small style="opacity:0.7">375 01 Týn nad Vltavou</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         TESTIMONIALS SECTION
+         ======================================== -->
+    <section class="section testimonials" id="reference">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Co říkají naši klienti</h2>
+                <p class="fade-in stagger-1">Důvěra a spokojenost našich klientů je pro nás tou nejlepší odměnou.</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in stagger-1">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-text">"Pan doktor Richter se o našeho psa postaral naprosto profesionálně. Operace proběhla bez komplikací a pooperační péče byla skvělá. Vřele doporučuji."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JN</div>
+                        <div>
+                            <div class="testimonial-name">Jana Nováková</div>
+                            <div class="testimonial-pet">Labrador Rex, 5 let</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card fade-in stagger-2">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-text">"Naše kočka měla vážné zažívací problémy. Díky důkladné diagnostice a správné léčbě je teď úplně v pořádku. Děkujeme za skvělou péči!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">PK</div>
+                        <div>
+                            <div class="testimonial-name">Petr Kolář</div>
+                            <div class="testimonial-pet">Kočka Mici, 8 let</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card fade-in stagger-3">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-text">"Oceňuji profesionální přístup a trpělivost. Sonografické vyšetření bylo provedeno pečlivě a výsledky jsme dostali hned. Výborná veterinární ordinace!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MH</div>
+                        <div>
+                            <div class="testimonial-name">Marie Horáková</div>
+                            <div class="testimonial-pet">Německý ovčák Aron, 3 roky</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         CTA BANNER
+         ======================================== -->
+    <section class="cta-banner">
+        <div class="container">
+            <h2 class="fade-in">Potřebujete veterinární péči?</h2>
+            <p class="fade-in stagger-1">Neváhejte se objednat nebo zavolejte v případě akutních problémů. Jsme tu pro vás a vaše mazlíčky.</p>
+            <div class="fade-in stagger-2">
+                <a href="tel:+420605473668" class="btn btn-white">&#9742; 605 473 668</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         CONTACT SECTION
+         ======================================== -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Kontakt</h2>
+                <p class="fade-in stagger-1">Navštivte nás nebo se objednejte telefonicky. Těšíme se na vás.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info fade-in-left">
+                    <h3>Kontaktní údaje</h3>
+
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#x1F3E0;</div>
+                        <div class="contact-info-text">
+                            <h4>Adresa</h4>
+                            <p>Komenského 670<br>375 01 Týn nad Vltavou</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#9742;</div>
+                        <div class="contact-info-text">
+                            <h4>Telefon</h4>
+                            <p><a href="tel:+420605473668">605 473 668</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#9993;</div>
+                        <div class="contact-info-text">
+                            <h4>Email</h4>
+                            <p><a href="mailto:dr.richter@seznam.cz">dr.richter@seznam.cz</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#9201;</div>
+                        <div class="contact-info-text">
+                            <h4>Ordinační hodiny</h4>
+                            <p>Po-Pá: 15:00 - 18:00<br>So: 15:00 - 17:00</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#9888;</div>
+                        <div class="contact-info-text">
+                            <h4>Pohotovost</h4>
+                            <p>Akutní případy kdykoli na telefonu</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-map fade-in-right">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2601.5!2d14.4213!3d49.2233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470c9a0b0e4b0a0d%3A0x400af0f6614e850!2sKomensk%C3%A9ho%20670%2C%20375%2001%20T%C3%BDn%20nad%20Vltavou!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa - Veterinární ordinace MVDr. Richter">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#hero" class="logo" style="color: var(--accent); margin-bottom: 8px;">
+                        <div class="logo-icon">&#x1F43E;</div>
+                        <div class="logo-text">
+                            MVDr. Richter
+                            <span>Veterinární ordinace</span>
+                        </div>
+                    </a>
+                    <p>Profesionální veterinární péče v Týně nad Vltavou. Preventivní i léčebná péče, moderní diagnostika a pohotovostní služby pro vaše domácí mazlíčky.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Rychlé odkazy</h4>
+                    <a href="#sluzby">Služby</a>
+                    <a href="#o-nas">O nás</a>
+                    <a href="#galerie">Galerie</a>
+                    <a href="#ordinacni-hodiny">Ordinační hodiny</a>
+                    <a href="#reference">Reference</a>
+                    <a href="#kontakt">Kontakt</a>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>Kontakt</h4>
+                    <div class="footer-contact-item">
+                        &#x1F3E0; Komenského 670, Týn nad Vltavou
+                    </div>
+                    <div class="footer-contact-item">
+                        &#9742; 605 473 668
+                    </div>
+                    <div class="footer-contact-item">
+                        &#9993; dr.richter@seznam.cz
+                    </div>
+                    <div class="footer-contact-item">
+                        &#9201; Po-Pá: 15:00-18:00, So: 15:00-17:00
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 MVDr. Vojtech Richter. Všechna práva vyhrazena.</p>
+                <p>Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Zpět nahoru">&#8593;</button>
+
+    <!-- ========================================
+         JAVASCRIPT
+         ======================================== -->
+    <script>
+        /* ========================================
+           MOBILE NAVIGATION
+           ======================================== */
+        (function() {
+            var hamburger = document.getElementById('hamburger');
+            var mobileNav = document.getElementById('mobileNav');
+            var mobileOverlay = document.getElementById('mobileOverlay');
+            var mobileLinks = mobileNav.querySelectorAll('a');
+
+            function toggleMenu() {
+                hamburger.classList.toggle('active');
+                mobileNav.classList.toggle('active');
+                mobileOverlay.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            }
+
+            function closeMenu() {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            hamburger.addEventListener('click', toggleMenu);
+            hamburger.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleMenu();
+                }
+            });
+            mobileOverlay.addEventListener('click', closeMenu);
+
+            mobileLinks.forEach(function(link) {
+                link.addEventListener('click', closeMenu);
+            });
+        })();
+
+        /* ========================================
+           HEADER SCROLL EFFECT
+           ======================================== */
+        (function() {
+            var header = document.getElementById('header');
+            var scrollThreshold = 100;
+
+            function updateHeader() {
+                if (window.scrollY > scrollThreshold) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+
+            window.addEventListener('scroll', updateHeader, { passive: true });
+            updateHeader();
+        })();
+
+        /* ========================================
+           BACK TO TOP BUTTON
+           ======================================== */
+        (function() {
+            var backToTop = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 500) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }, { passive: true });
+
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+
+        /* ========================================
+           INTERSECTION OBSERVER - SCROLL ANIMATIONS
+           ======================================== */
+        (function() {
+            var observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -80px 0px',
+                threshold: 0.1
+            };
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            var animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in');
+            animatedElements.forEach(function(el) {
+                observer.observe(el);
+            });
+        })();
+
+        /* ========================================
+           ACTIVE NAV LINK HIGHLIGHTING
+           ======================================== */
+        (function() {
+            var sections = document.querySelectorAll('section[id]');
+            var navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+
+            var sectionObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        var id = entry.target.getAttribute('id');
+                        navLinks.forEach(function(link) {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '-40% 0px -60% 0px',
+                threshold: 0
+            });
+
+            sections.forEach(function(section) {
+                sectionObserver.observe(section);
+            });
+        })();
+
+        /* ========================================
+           SMOOTH SCROLL FOR ANCHOR LINKS
+           ======================================== */
+        (function() {
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    var targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    var targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        })();
+
+        /* ========================================
+           PARALLAX EFFECT ON HERO
+           ======================================== */
+        (function() {
+            var hero = document.querySelector('.hero');
+            var heroFloat = document.querySelector('.hero-image-float');
+
+            window.addEventListener('scroll', function() {
+                var scrolled = window.scrollY;
+                if (scrolled < window.innerHeight && heroFloat) {
+                    heroFloat.style.transform = 'translateY(' + (scrolled * 0.15) + 'px)';
+                }
+            }, { passive: true });
+        })();
+
+        /* ========================================
+           COUNTER ANIMATION
+           ======================================== */
+        (function() {
+            var stats = document.querySelectorAll('.hero-stat-number');
+            var animated = false;
+
+            function animateCounters() {
+                if (animated) return;
+                animated = true;
+
+                stats.forEach(function(stat) {
+                    var text = stat.textContent;
+                    var match = text.match(/(\d+)/);
+                    if (!match) return;
+
+                    var target = parseInt(match[1]);
+                    var suffix = text.replace(match[1], '');
+                    var current = 0;
+                    var increment = Math.ceil(target / 60);
+                    var duration = 1500;
+                    var step = duration / (target / increment);
+
+                    var timer = setInterval(function() {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = current + suffix;
+                    }, step);
+                });
+            }
+
+            var heroSection = document.querySelector('.hero-stats');
+            if (heroSection) {
+                var counterObserver = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        animateCounters();
+                        counterObserver.disconnect();
+                    }
+                }, { threshold: 0.5 });
+
+                counterObserver.observe(heroSection);
+            }
+        })();
+
+        /* ========================================
+           IMAGE LAZY LOAD FALLBACK
+           ======================================== */
+        (function() {
+            if ('loading' in HTMLImageElement.prototype) return;
+
+            var lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            var imageObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        var img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            lazyImages.forEach(function(img) {
+                imageObserver.observe(img);
+            });
+        })();
+
+        /* ========================================
+           SERVICE CARD TILT EFFECT
+           ======================================== */
+        (function() {
+            var cards = document.querySelectorAll('.service-card');
+
+            cards.forEach(function(card) {
+                card.addEventListener('mousemove', function(e) {
+                    var rect = card.getBoundingClientRect();
+                    var x = e.clientX - rect.left;
+                    var y = e.clientY - rect.top;
+                    var centerX = rect.width / 2;
+                    var centerY = rect.height / 2;
+                    var rotateX = (y - centerY) / 20;
+                    var rotateY = (centerX - x) / 20;
+
+                    card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-8px)';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    card.style.transform = '';
+                });
+            });
+        })();
+
+        /* ========================================
+           PRELOAD CRITICAL IMAGES
+           ======================================== */
+        (function() {
+            var criticalImages = ['images/hero-vet.jpg'];
+            criticalImages.forEach(function(src) {
+                var link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'image';
+                link.href = src;
+                document.head.appendChild(link);
+            });
+        })();
+
+        /* ========================================
+           CONSOLE SIGNATURE
+           ======================================== */
+        console.log('%cMVDr. Vojtech Richter - Veterinární ordinace', 'color: #1b5e20; font-size: 16px; font-weight: bold;');
+        console.log('%cWeb vytvořil KSH Partners s.r.o. - https://kshpartners.cz', 'color: #666; font-size: 12px;');
+    </script>
+</body>
+</html>

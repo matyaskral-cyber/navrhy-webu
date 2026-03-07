@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="STAVBY STRNAD s.r.o. - Rodinná stavební firma od roku 1992. Stavby rodinných domů na klíč, průmyslové stavby, rekonstrukce a vlastní pila. Polepy.">
+    <meta name="keywords" content="stavby, stavební firma, rodinné domy, rekonstrukce, pila, Strnad, Polepy">
+    <title>STAVBY STRNAD s.r.o. | Stavební práce a pila od roku 1992</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS CUSTOM PROPERTIES
+           ======================================== */
+        :root {
+            --primary: #37474f;
+            --primary-light: #546e7a;
+            --primary-dark: #263238;
+            --primary-rgb: 55, 71, 79;
+            --accent: #ff8f00;
+            --accent-light: #ffa726;
+            --accent-dark: #e65100;
+            --accent-rgb: 255, 143, 0;
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --text-light: #717171;
+            --bg-light: #f5f5f5;
+            --bg-white: #ffffff;
+            --bg-card: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
+            --shadow-xl: 0 16px 60px rgba(0,0,0,0.2);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --font-heading: 'Rubik', sans-serif;
+            --font-body: 'Work Sans', sans-serif;
+            --max-width: 1200px;
+            --header-height: 80px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background: var(--bg-white);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+        h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
+        p { margin-bottom: 1rem; color: var(--text-medium); }
+        a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+        img { max-width: 100%; height: auto; display: block; }
+        ul, ol { list-style: none; }
+
+        .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+        .section { padding: 100px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { margin-bottom: 16px; position: relative; display: inline-block; }
+        .section-header h2::after {
+            content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+            width: 60px; height: 4px; background: var(--accent); border-radius: 2px;
+        }
+        .section-header p { max-width: 600px; margin: 24px auto 0; font-size: 1.1rem; color: var(--text-light); }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px;
+            border-radius: var(--radius-sm); font-family: var(--font-heading); font-weight: 600;
+            font-size: 1rem; cursor: pointer; border: 2px solid transparent;
+            transition: all var(--transition-normal);
+        }
+        .btn-primary { background: var(--accent); color: var(--primary-dark); border-color: var(--accent); }
+        .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-outline { background: transparent; color: #fff; border-color: #fff; }
+        .btn-outline:hover { background: #fff; color: var(--primary-dark); transform: translateY(-2px); }
+        .btn-dark { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .btn-dark:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        /* Animations */
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in-left.visible { opacity: 1; transform: translateX(0); }
+        .fade-in-right { opacity: 0; transform: translateX(50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in-right.visible { opacity: 1; transform: translateX(0); }
+        .scale-in { opacity: 0; transform: scale(0.9); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .scale-in.visible { opacity: 1; transform: scale(1); }
+        .stagger-1 { transition-delay: 0.1s; } .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; } .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; } .stagger-6 { transition-delay: 0.6s; }
+
+        section[id] { scroll-margin-top: var(--header-height); }
+        ::selection { background: var(--accent); color: var(--primary-dark); }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
+            z-index: 1000; transition: all var(--transition-normal); background: transparent;
+        }
+        .header.scrolled {
+            background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: var(--shadow-sm);
+        }
+        .header-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 24px;
+        }
+        .logo {
+            display: flex; align-items: center; gap: 12px; font-family: var(--font-heading);
+            font-weight: 700; font-size: 1.3rem; color: #fff; z-index: 1001;
+            transition: color var(--transition-normal);
+        }
+        .header.scrolled .logo { color: var(--primary-dark); }
+        .logo-icon {
+            width: 44px; height: 44px; background: var(--accent); border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: #fff;
+        }
+        .logo-text span { display: block; font-size: 0.65rem; font-weight: 400; opacity: 0.8; letter-spacing: 1.5px; text-transform: uppercase; }
+
+        .nav-links { display: flex; align-items: center; gap: 32px; }
+        .nav-links a {
+            font-family: var(--font-heading); font-weight: 500; font-size: 0.95rem;
+            color: #fff; position: relative; padding: 4px 0; transition: color var(--transition-normal);
+        }
+        .header.scrolled .nav-links a { color: var(--text-dark); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
+            background: var(--accent); transition: width var(--transition-normal);
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-cta {
+            padding: 10px 24px !important; background: var(--accent); color: var(--primary-dark) !important;
+            border-radius: var(--radius-sm); font-weight: 600 !important;
+        }
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover { background: var(--accent-light) !important; }
+
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1001; padding: 8px; }
+        .hamburger span { width: 28px; height: 3px; background: #fff; border-radius: 3px; transition: all var(--transition-normal); }
+        .header.scrolled .hamburger span { background: var(--text-dark); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        .mobile-nav {
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100vh;
+            background: var(--primary-dark); z-index: 999; display: flex; flex-direction: column;
+            justify-content: center; padding: 60px 40px; transition: right var(--transition-normal);
+        }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 998; opacity: 0; visibility: hidden;
+            transition: all var(--transition-normal);
+        }
+        .mobile-nav-overlay.active { opacity: 1; visibility: visible; }
+        .mobile-nav a {
+            display: block; font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600;
+            color: #fff; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .mobile-nav a:hover { padding-left: 12px; }
+
+        /* ========================================
+           HERO
+           ======================================== */
+        .hero {
+            position: relative; min-height: 100vh; display: flex; align-items: center;
+            background: linear-gradient(135deg, rgba(38,50,56,0.93), rgba(55,71,79,0.88)),
+                        url('images/hero-construction.jpg') center/cover no-repeat;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 120px;
+            background: linear-gradient(to top, var(--bg-white), transparent); z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 700px; padding-top: 40px; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px;
+            background: rgba(255,143,0,0.15); border: 1px solid rgba(255,143,0,0.4);
+            border-radius: 50px; color: var(--accent); font-family: var(--font-heading);
+            font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;
+        }
+        .hero h1 { color: #fff; margin-bottom: 20px; font-weight: 800; }
+        .hero h1 .highlight { color: var(--accent); }
+        .hero-description { font-size: 1.2rem; color: rgba(255,255,255,0.85); margin-bottom: 36px; max-width: 560px; line-height: 1.8; }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+        .hero-stats { display: flex; gap: 40px; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); }
+        .hero-stat { text-align: center; }
+        .hero-stat-number { font-family: var(--font-heading); font-size: 2.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
+        .hero-stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.65); margin-top: 8px; }
+
+        /* ========================================
+           SERVICES
+           ======================================== */
+        .services { background: var(--bg-white); }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .service-card {
+            background: var(--bg-card); border-radius: var(--radius-md); padding: 40px 30px;
+            text-align: center; transition: all var(--transition-normal); border: 1px solid var(--border-color);
+            position: relative; overflow: hidden;
+        }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--accent); transform: scaleX(0); transition: transform var(--transition-normal);
+        }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .service-icon {
+            width: 72px; height: 72px; margin: 0 auto 24px; background: var(--bg-light);
+            border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; transition: all var(--transition-normal);
+        }
+        .service-card:hover .service-icon { background: var(--accent); color: #fff; transform: scale(1.1); }
+        .service-card h3 { margin-bottom: 12px; }
+        .service-card p { font-size: 0.95rem; color: var(--text-light); }
+
+        /* ========================================
+           ABOUT
+           ======================================== */
+        .about { background: var(--bg-light); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-image { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); position: relative; }
+        .about-image img { width: 100%; height: 450px; object-fit: cover; transition: transform var(--transition-slow); }
+        .about-image:hover img { transform: scale(1.05); }
+        .about-badge {
+            position: absolute; bottom: -20px; right: -20px; background: var(--accent); color: #fff;
+            padding: 20px 28px; border-radius: var(--radius-md); box-shadow: var(--shadow-md); text-align: center;
+        }
+        .about-badge .num { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; line-height: 1; }
+        .about-badge .txt { font-size: 0.8rem; font-weight: 500; margin-top: 4px; }
+        .about-content h2 { margin-bottom: 20px; }
+        .about-content h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent); border-radius: 2px; margin-top: 12px; }
+        .about-text { font-size: 1.05rem; margin-bottom: 16px; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+        .about-feature {
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #fff;
+            border-radius: var(--radius-sm); font-weight: 500; font-size: 0.95rem;
+            transition: all var(--transition-fast);
+        }
+        .about-feature:hover { background: var(--accent); color: #fff; transform: translateX(4px); }
+        .about-feature-icon { color: var(--accent); font-size: 1.2rem; flex-shrink: 0; transition: color var(--transition-fast); }
+        .about-feature:hover .about-feature-icon { color: #fff; }
+
+        /* ========================================
+           PROJECTS / GALLERY
+           ======================================== */
+        .projects { background: var(--bg-white); }
+        .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .project-card { position: relative; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 4/3; cursor: pointer; }
+        .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); }
+        .project-card:hover img { transform: scale(1.1); }
+        .project-overlay {
+            position: absolute; inset: 0; background: linear-gradient(to top, rgba(38,50,56,0.9), transparent);
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 24px;
+            opacity: 0; transition: opacity var(--transition-normal);
+        }
+        .project-card:hover .project-overlay { opacity: 1; }
+        .project-overlay h4 { color: #fff; font-size: 1.1rem; }
+        .project-overlay p { color: rgba(255,255,255,0.8); font-size: 0.85rem; margin: 4px 0 0; }
+        .project-tag {
+            display: inline-block; padding: 4px 12px; background: var(--accent); color: #fff;
+            border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 8px;
+        }
+
+        /* ========================================
+           SAWMILL (PILA)
+           ======================================== */
+        .sawmill { background: var(--primary-dark); color: #fff; position: relative; overflow: hidden; }
+        .sawmill::before {
+            content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px;
+            background: rgba(255,143,0,0.05); border-radius: 50%;
+        }
+        .sawmill .section-header h2 { color: #fff; }
+        .sawmill .section-header h2::after { background: var(--accent); }
+        .sawmill .section-header p { color: rgba(255,255,255,0.7); }
+        .sawmill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .sawmill-services { display: grid; gap: 20px; }
+        .sawmill-item {
+            display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: rgba(255,255,255,0.06);
+            border-radius: var(--radius-sm); border-left: 3px solid var(--accent); transition: all var(--transition-normal);
+        }
+        .sawmill-item:hover { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .sawmill-item-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+        .sawmill-item h4 { color: #fff; margin-bottom: 6px; }
+        .sawmill-item p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin: 0; }
+        .sawmill-image { border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-xl); }
+        .sawmill-image img { width: 100%; height: 400px; object-fit: cover; }
+
+        /* ========================================
+           WHY US
+           ======================================== */
+        .why-us { background: var(--bg-light); }
+        .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .why-card {
+            text-align: center; padding: 40px 24px; background: #fff; border-radius: var(--radius-md);
+            transition: all var(--transition-normal); border: 1px solid var(--border-color);
+        }
+        .why-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+        .why-number {
+            font-family: var(--font-heading); font-size: 3rem; font-weight: 800; color: var(--accent);
+            line-height: 1; margin-bottom: 16px;
+        }
+        .why-card h4 { margin-bottom: 8px; }
+        .why-card p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
+
+        /* ========================================
+           CTA
+           ======================================== */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff;
+            padding: 80px 0; text-align: center; position: relative; overflow: hidden;
+        }
+        .cta-banner::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: url('images/team-work.jpg') center/cover no-repeat; opacity: 0.1;
+        }
+        .cta-banner .container { position: relative; z-index: 1; }
+        .cta-banner h2 { color: #fff; margin-bottom: 16px; }
+        .cta-banner p { color: rgba(255,255,255,0.85); font-size: 1.15rem; max-width: 600px; margin: 0 auto 30px; }
+
+        /* ========================================
+           CONTACT
+           ======================================== */
+        .contact { background: var(--bg-white); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .contact-info { padding: 40px; background: var(--primary); color: #fff; border-radius: var(--radius-md); }
+        .contact-info h3 { color: #fff; margin-bottom: 24px; font-size: 1.6rem; }
+        .contact-info-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+        .contact-info-icon {
+            width: 44px; height: 44px; background: rgba(255,255,255,0.12); border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+        }
+        .contact-info-text h4 { color: #fff; font-size: 0.9rem; font-weight: 500; opacity: 0.7; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+        .contact-info-text p { color: #fff; font-size: 1.05rem; margin: 0; font-weight: 500; }
+        .contact-info-text a { color: #fff; }
+        .contact-info-text a:hover { text-decoration: underline; }
+        .contact-map { border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md); min-height: 400px; }
+        .contact-map iframe { width: 100%; height: 100%; min-height: 400px; border: 0; }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer { background: var(--primary-dark); color: #fff; padding: 60px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-brand p { color: rgba(255,255,255,0.7); margin-top: 16px; font-size: 0.95rem; max-width: 320px; }
+        .footer-links h4, .footer-contact h4 { color: #fff; margin-bottom: 20px; font-size: 1.1rem; font-family: var(--font-heading); }
+        .footer-links a { display: block; color: rgba(255,255,255,0.7); padding: 6px 0; font-size: 0.95rem; transition: all var(--transition-fast); }
+        .footer-links a:hover { color: var(--accent); padding-left: 8px; }
+        .footer-contact-item { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.7); padding: 6px 0; font-size: 0.95rem; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+        }
+        .footer-bottom p { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin: 0; }
+        .footer-bottom a { color: rgba(255,255,255,0.7); }
+        .footer-bottom a:hover { color: var(--accent); }
+
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+            background: var(--accent); color: #fff; border: none; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+            opacity: 0; visibility: hidden; transform: translateY(20px);
+            transition: all var(--transition-normal); box-shadow: var(--shadow-md); z-index: 100;
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--accent-light); transform: translateY(-4px); }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-light); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-light); }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-grid, .sawmill-grid { grid-template-columns: 1fr; gap: 40px; }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .section { padding: 70px 0; }
+            .hero { text-align: center; }
+            .hero-content { max-width: 100%; }
+            .hero-description { margin: 0 auto 36px; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; gap: 30px; }
+            .services-grid, .projects-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; justify-content: center; }
+            .about-features { grid-template-columns: 1fr; }
+            .about-badge { right: 10px; bottom: -15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#hero" class="logo">
+                <div class="logo-icon">&#x1F3D7;</div>
+                <div class="logo-text">STAVBY STRNAD<span>Stavební firma od 1992</span></div>
+            </a>
+            <nav class="nav-links">
+                <a href="#sluzby">Služby</a>
+                <a href="#o-nas">O nás</a>
+                <a href="#realizace">Realizace</a>
+                <a href="#pila">Pila</a>
+                <a href="#proc-my">Proč my</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </nav>
+            <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#sluzby">Služby</a>
+        <a href="#o-nas">O nás</a>
+        <a href="#realizace">Realizace</a>
+        <a href="#pila">Pila</a>
+        <a href="#proc-my">Proč my</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">&#x1F3D7; Rodinná firma od roku 1992</div>
+                <h1>Stavíme vaše <span class="highlight">sny</span> na pevných základech</h1>
+                <p class="hero-description">
+                    STAVBY STRNAD s.r.o. je rodinná firma s více než 30letou tradicí. Realizujeme stavby rodinných domů na klíč,
+                    průmyslové stavby, rekonstrukce a provozujeme vlastní rámovou a pásovou pilu.
+                </p>
+                <div class="hero-buttons">
+                    <a href="tel:+420777341706" class="btn btn-primary">&#9742; Zavolejte nám</a>
+                    <a href="#sluzby" class="btn btn-outline">Naše služby &#8594;</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">30+</div>
+                        <div class="hero-stat-label">Let zkušeností</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">500+</div>
+                        <div class="hero-stat-label">Realizovaných projektů</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">100%</div>
+                        <div class="hero-stat-label">Spokojenost klientů</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section services" id="sluzby">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Naše služby</h2>
+                <p class="fade-in stagger-1">Od projektu po kolaudaci - postaráme se o vše. Vaše vize, naše spolehlivá realizace.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in stagger-1">
+                    <div class="service-icon">&#x1F3E0;</div>
+                    <h3>Rodinné domy na klíč</h3>
+                    <p>Kompletní výstavba rodinných domů od základové desky po střechu. Zděné i dřevostavby podle vašich představ.</p>
+                </div>
+                <div class="service-card fade-in stagger-2">
+                    <div class="service-icon">&#x1F3ED;</div>
+                    <h3>Průmyslové stavby</h3>
+                    <p>Realizace průmyslových a komerčních objektů včetně hal, skladů a výrobních prostor.</p>
+                </div>
+                <div class="service-card fade-in stagger-3">
+                    <div class="service-icon">&#x1F527;</div>
+                    <h3>Rekonstrukce</h3>
+                    <p>Generální rekonstrukce a opravy objektů včetně nástaveb, přístaveb a zateplení budov.</p>
+                </div>
+                <div class="service-card fade-in stagger-4">
+                    <div class="service-icon">&#x1F9F1;</div>
+                    <h3>Zednické práce</h3>
+                    <p>Zdění, omítky, obklady, podlahy, fasády a veškeré zednické práce profesionálně a kvalitně.</p>
+                </div>
+                <div class="service-card fade-in stagger-5">
+                    <div class="service-icon">&#x1FAB5;</div>
+                    <h3>Vlastní pila</h3>
+                    <p>Rámová a pásová pila pro zakázkové řezání dřeva, výroba střešních krovů a stavebního řeziva.</p>
+                </div>
+                <div class="service-card fade-in stagger-6">
+                    <div class="service-icon">&#x1F69A;</div>
+                    <h3>Doprava a pronájem</h3>
+                    <p>Zajištění dopravy materiálu a pronájem stavební mechanizace pro vaše projekty.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section about" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-in-left" style="position:relative;">
+                    <img src="images/team-work.jpg" alt="Stavební tým STAVBY STRNAD" loading="lazy">
+                    <div class="about-badge">
+                        <div class="num">1992</div>
+                        <div class="txt">Založení firmy</div>
+                    </div>
+                </div>
+                <div class="about-content fade-in-right">
+                    <h2>O naší firmě</h2>
+                    <p class="about-text">
+                        STAVBY STRNAD s.r.o. je rodinná firma působící v oboru stavebních prací od roku 1992.
+                        Za více než 30 let existence jsme realizovali stovky projektů od rodinných domů po
+                        průmyslové objekty.
+                    </p>
+                    <p class="about-text">
+                        Provozujeme vlastní rámovou a pásovou pilu přímo v areálu v Polepech, což nám umožňuje
+                        vyrábět stavební řezivo a střešní krovy dle individuálních požadavků zákazníků.
+                        Nabízíme zakázkové řezání dřeva až do průměru 75 cm.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <span class="about-feature-icon">&#10003;</span> Stavby na klíč
+                        </div>
+                        <div class="about-feature">
+                            <span class="about-feature-icon">&#10003;</span> Vlastní pila
+                        </div>
+                        <div class="about-feature">
+                            <span class="about-feature-icon">&#10003;</span> Rekonstrukce
+                        </div>
+                        <div class="about-feature">
+                            <span class="about-feature-icon">&#10003;</span> Doprava materiálu
+                        </div>
+                        <div class="about-feature">
+                            <span class="about-feature-icon">&#10003;</span> Zateplení budov
+                        </div>
+                        <div class="about-feature">
+                            <span class="about-feature-icon">&#10003;</span> Prodej palivového dřeva
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section projects" id="realizace">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Naše realizace</h2>
+                <p class="fade-in stagger-1">Podívejte se na ukázky naší práce - od rodinných domů po průmyslové stavby.</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card scale-in stagger-1">
+                    <img src="images/hero-construction.jpg" alt="Novostavba" loading="lazy">
+                    <div class="project-overlay">
+                        <span class="project-tag">Novostavba</span>
+                        <h4>Rodinný dům na klíč</h4>
+                        <p>Kompletní výstavba moderního rodinného domu</p>
+                    </div>
+                </div>
+                <div class="project-card scale-in stagger-2">
+                    <img src="images/renovation.jpg" alt="Rekonstrukce" loading="lazy">
+                    <div class="project-overlay">
+                        <span class="project-tag">Rekonstrukce</span>
+                        <h4>Generální rekonstrukce</h4>
+                        <p>Kompletní přestavba starší nemovitosti</p>
+                    </div>
+                </div>
+                <div class="project-card scale-in stagger-3">
+                    <img src="images/industrial.jpg" alt="Průmyslová stavba" loading="lazy">
+                    <div class="project-overlay">
+                        <span class="project-tag">Průmyslová</span>
+                        <h4>Průmyslový objekt</h4>
+                        <p>Výstavba komerčního a průmyslového prostoru</p>
+                    </div>
+                </div>
+                <div class="project-card scale-in stagger-4">
+                    <img src="images/team-work.jpg" alt="Stavební práce" loading="lazy">
+                    <div class="project-overlay">
+                        <span class="project-tag">Stavba</span>
+                        <h4>Stavební práce</h4>
+                        <p>Profesionální zednické a stavební práce</p>
+                    </div>
+                </div>
+                <div class="project-card scale-in stagger-5">
+                    <img src="images/industrial.jpg" alt="Hala" loading="lazy">
+                    <div class="project-overlay">
+                        <span class="project-tag">Hala</span>
+                        <h4>Skladová hala</h4>
+                        <p>Výstavba skladových a logistických prostor</p>
+                    </div>
+                </div>
+                <div class="project-card scale-in stagger-6">
+                    <img src="images/renovation.jpg" alt="Zateplení" loading="lazy">
+                    <div class="project-overlay">
+                        <span class="project-tag">Zateplení</span>
+                        <h4>Zateplení fasády</h4>
+                        <p>Kontaktní zateplovací systém ETICS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SAWMILL -->
+    <section class="section sawmill" id="pila">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Vlastní pila</h2>
+                <p class="fade-in stagger-1">Provozujeme rámovou a pásovou pilu přímo v areálu v Polepech.</p>
+            </div>
+            <div class="sawmill-grid">
+                <div class="sawmill-services fade-in-left">
+                    <div class="sawmill-item">
+                        <div class="sawmill-item-icon">&#x1FAB5;</div>
+                        <div>
+                            <h4>Střešní krovy na míru</h4>
+                            <p>Výroba střešních krovů až do délky 12 metrů dle projektu.</p>
+                        </div>
+                    </div>
+                    <div class="sawmill-item">
+                        <div class="sawmill-item-icon">&#x1F4CF;</div>
+                        <div>
+                            <h4>Stavební řezivo</h4>
+                            <p>Prkna, fošny, hranoly a latě z vlastní výroby.</p>
+                        </div>
+                    </div>
+                    <div class="sawmill-item">
+                        <div class="sawmill-item-icon">&#x1FA93;</div>
+                        <div>
+                            <h4>Zakázkové řezání</h4>
+                            <p>Řezání kulatiny až do průměru 75 cm na pásové pile.</p>
+                        </div>
+                    </div>
+                    <div class="sawmill-item">
+                        <div class="sawmill-item-icon">&#x1F525;</div>
+                        <div>
+                            <h4>Palivové dřevo</h4>
+                            <p>Prodej palivového dřeva - tvrdé i měkké, štípané a řezané.</p>
+                        </div>
+                    </div>
+                    <div class="sawmill-item">
+                        <div class="sawmill-item-icon">&#x2728;</div>
+                        <div>
+                            <h4>Hoblovací služby</h4>
+                            <p>Hoblování a opracování dřeva dle vašich požadavků.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sawmill-image fade-in-right">
+                    <img src="images/industrial.jpg" alt="Pila STAVBY STRNAD" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY US -->
+    <section class="section why-us" id="proc-my">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Proč zvolit nás</h2>
+                <p class="fade-in stagger-1">Rodinná firma s tradicí, odborností a osobním přístupem ke každému projektu.</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card fade-in stagger-1">
+                    <div class="why-number">30+</div>
+                    <h4>Let na trhu</h4>
+                    <p>Rodinná firma s tradicí od roku 1992 a bohatými zkušenostmi.</p>
+                </div>
+                <div class="why-card fade-in stagger-2">
+                    <div class="why-number">500+</div>
+                    <h4>Projektů</h4>
+                    <p>Stovky úspěšně realizovaných stavebních projektů.</p>
+                </div>
+                <div class="why-card fade-in stagger-3">
+                    <div class="why-number">12m</div>
+                    <h4>Krov na míru</h4>
+                    <p>Střešní krovy vlastní výroby až do délky 12 metrů.</p>
+                </div>
+                <div class="why-card fade-in stagger-4">
+                    <div class="why-number">75cm</div>
+                    <h4>Průměr kulatiny</h4>
+                    <p>Řezání kulatiny na pásové pile do průměru 75 cm.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-banner">
+        <div class="container">
+            <h2 class="fade-in">Máte stavební projekt?</h2>
+            <p class="fade-in stagger-1">Kontaktujte nás a společně naplánujeme realizaci vašeho projektu. Rádi vám poradíme a připravíme cenovou nabídku.</p>
+            <div class="fade-in stagger-2">
+                <a href="tel:+420777341706" class="btn btn-primary">&#9742; 777 341 706</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Kontakt</h2>
+                <p class="fade-in stagger-1">Navštivte nás nebo se ozvěte telefonicky. Rádi vám poradíme.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info fade-in-left">
+                    <h3>Kontaktní údaje</h3>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#x1F3E0;</div>
+                        <div class="contact-info-text">
+                            <h4>Adresa</h4>
+                            <p>Polepy 215<br>411 47 Polepy</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#9742;</div>
+                        <div class="contact-info-text">
+                            <h4>Telefon</h4>
+                            <p><a href="tel:+420777341706">+420 777 341 706</a><br><a href="tel:+420777307224">+420 777 307 224</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#9993;</div>
+                        <div class="contact-info-text">
+                            <h4>Email</h4>
+                            <p><a href="mailto:stav.strnad@seznam.cz">stav.strnad@seznam.cz</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#9201;</div>
+                        <div class="contact-info-text">
+                            <h4>Provozní doba</h4>
+                            <p>Po - Pá: 07:00 - 15:00</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#x1F310;</div>
+                        <div class="contact-info-text">
+                            <h4>Web</h4>
+                            <p><a href="https://stavstrnad.cz" target="_blank">stavstrnad.cz</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map fade-in-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2545.0!2d14.2!3d50.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470be3d2e5f9c8c1%3A0x400af0f6614d0b0!2sPolepy%20215%2C%20411%2047%20Polepy!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - STAVBY STRNAD s.r.o."></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#hero" class="logo" style="color:#fff;margin-bottom:8px;">
+                        <div class="logo-icon">&#x1F3D7;</div>
+                        <div class="logo-text">STAVBY STRNAD<span>Stavební firma od 1992</span></div>
+                    </a>
+                    <p>Rodinná stavební firma s více než 30letou tradicí. Stavby na klíč, rekonstrukce, vlastní pila a prodej řeziva.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Rychlé odkazy</h4>
+                    <a href="#sluzby">Služby</a>
+                    <a href="#o-nas">O nás</a>
+                    <a href="#realizace">Realizace</a>
+                    <a href="#pila">Pila</a>
+                    <a href="#kontakt">Kontakt</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Kontakt</h4>
+                    <div class="footer-contact-item">&#x1F3E0; Polepy 215, 411 47</div>
+                    <div class="footer-contact-item">&#9742; +420 777 341 706</div>
+                    <div class="footer-contact-item">&#9993; stav.strnad@seznam.cz</div>
+                    <div class="footer-contact-item">&#9201; Po-Pá: 07:00-15:00</div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 STAVBY STRNAD s.r.o. Všechna práva vyhrazena.</p>
+                <p>Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Zpět nahoru">&#8593;</button>
+
+    <script>
+        /* Mobile Navigation */
+        (function(){
+            var h=document.getElementById('hamburger'),n=document.getElementById('mobileNav'),
+                o=document.getElementById('mobileOverlay'),links=n.querySelectorAll('a');
+            function toggle(){h.classList.toggle('active');n.classList.toggle('active');o.classList.toggle('active');document.body.style.overflow=n.classList.contains('active')?'hidden':'';}
+            function close(){h.classList.remove('active');n.classList.remove('active');o.classList.remove('active');document.body.style.overflow='';}
+            h.addEventListener('click',toggle);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+            o.addEventListener('click',close);links.forEach(function(l){l.addEventListener('click',close);});
+        })();
+
+        /* Header Scroll */
+        (function(){
+            var header=document.getElementById('header');
+            window.addEventListener('scroll',function(){header.classList.toggle('scrolled',window.scrollY>100);},{passive:true});
+        })();
+
+        /* Back to Top */
+        (function(){
+            var btn=document.getElementById('backToTop');
+            window.addEventListener('scroll',function(){btn.classList.toggle('visible',window.scrollY>500);},{passive:true});
+            btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+        })();
+
+        /* IntersectionObserver Scroll Animations */
+        (function(){
+            var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{root:null,rootMargin:'0px 0px -80px 0px',threshold:0.1});
+            document.querySelectorAll('.fade-in,.fade-in-left,.fade-in-right,.scale-in').forEach(function(el){obs.observe(el);});
+        })();
+
+        /* Active Nav Link */
+        (function(){
+            var sections=document.querySelectorAll('section[id]'),navLinks=document.querySelectorAll('.nav-links a:not(.nav-cta)');
+            var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var id=e.target.getAttribute('id');navLinks.forEach(function(l){l.classList.remove('active');if(l.getAttribute('href')==='#'+id)l.classList.add('active');});}});},{rootMargin:'-40% 0px -60% 0px',threshold:0});
+            sections.forEach(function(s){obs.observe(s);});
+        })();
+
+        /* Smooth Scroll */
+        (function(){
+            document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=this.getAttribute('href');if(t==='#')return;var el=document.querySelector(t);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}});});
+        })();
+
+        /* Counter Animation */
+        (function(){
+            var stats=document.querySelectorAll('.hero-stat-number'),animated=false;
+            function animate(){if(animated)return;animated=true;stats.forEach(function(s){var t=s.textContent,m=t.match(/(\d+)/);if(!m)return;var target=parseInt(m[1]),suffix=t.replace(m[1],''),current=0,inc=Math.ceil(target/60),step=1500/(target/inc);var timer=setInterval(function(){current+=inc;if(current>=target){current=target;clearInterval(timer);}s.textContent=current+suffix;},step);});}
+            var el=document.querySelector('.hero-stats');if(el){var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){animate();o.disconnect();}},{threshold:0.5});o.observe(el);}
+        })();
+
+        /* Service Card Tilt */
+        (function(){
+            document.querySelectorAll('.service-card').forEach(function(c){
+                c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;c.style.transform='perspective(1000px) rotateX('+((y-r.height/2)/20)+'deg) rotateY('+((r.width/2-x)/20)+'deg) translateY(-8px)';});
+                c.addEventListener('mouseleave',function(){c.style.transform='';});
+            });
+        })();
+
+        console.log('%cSTAVBY STRNAD s.r.o.','color:#37474f;font-size:16px;font-weight:bold;');
+        console.log('%cWeb vytvořil KSH Partners s.r.o.','color:#666;font-size:12px;');
+    </script>
+</body>
+</html>

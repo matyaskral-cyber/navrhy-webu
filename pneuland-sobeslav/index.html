@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pneu Soběslav - Prodej nových i použitých pneumatik, alu disků a ocelových disků. Pneuservis, opravy a přezutí pneumatik. Nová 543, Soběslav.">
+    <meta name="keywords" content="pneumatiky, pneuservis, Soběslav, alu disky, přezutí, pneu, zimní pneumatiky, letní pneumatiky">
+    <title>Pneuland Soběslav | Pneumatiky, disky a pneuservis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --primary-light: #2d2d4a;
+            --primary-dark: #0f0f1e;
+            --primary-rgb: 26, 26, 46;
+            --accent: #00bcd4;
+            --accent-light: #26c6da;
+            --accent-dark: #0097a7;
+            --accent-rgb: 0, 188, 212;
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --text-light: #717171;
+            --bg-light: #f0f4f8;
+            --bg-white: #ffffff;
+            --bg-card: #ffffff;
+            --border-color: #e0e4e8;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
+            --shadow-xl: 0 16px 60px rgba(0,0,0,0.2);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --font-heading: 'Rajdhani', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --max-width: 1200px;
+            --header-height: 80px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { font-family: var(--font-body); color: var(--text-dark); background: var(--bg-white); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.5px; }
+        h1 { font-size: clamp(2.4rem, 5vw, 4rem); }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+        h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
+        p { margin-bottom: 1rem; color: var(--text-medium); }
+        a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+        img { max-width: 100%; height: auto; display: block; }
+        ul, ol { list-style: none; }
+        .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+        .section { padding: 100px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { margin-bottom: 16px; position: relative; display: inline-block; }
+        .section-header h2::after { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent); border-radius: 2px; }
+        .section-header p { max-width: 600px; margin: 24px auto 0; font-size: 1.05rem; color: var(--text-light); }
+        section[id] { scroll-margin-top: var(--header-height); }
+        ::selection { background: var(--accent); color: #fff; }
+
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: var(--radius-sm); font-family: var(--font-heading); font-weight: 700; font-size: 1rem; cursor: pointer; border: 2px solid transparent; transition: all var(--transition-normal); text-transform: uppercase; letter-spacing: 1px; }
+        .btn-accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .btn-accent:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,188,212,0.4); }
+        .btn-outline { background: transparent; color: #fff; border-color: #fff; }
+        .btn-outline:hover { background: #fff; color: var(--primary); transform: translateY(-2px); }
+        .btn-dark { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .btn-dark:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        /* Animations */
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in-left.visible { opacity: 1; transform: translateX(0); }
+        .fade-in-right { opacity: 0; transform: translateX(50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in-right.visible { opacity: 1; transform: translateX(0); }
+        .scale-in { opacity: 0; transform: scale(0.9); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .scale-in.visible { opacity: 1; transform: scale(1); }
+        .stagger-1 { transition-delay: 0.1s; } .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; } .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; } .stagger-6 { transition-delay: 0.6s; }
+
+        /* Header */
+        .header { position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); z-index: 1000; transition: all var(--transition-normal); background: transparent; }
+        .header.scrolled { background: rgba(26,26,46,0.97); backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+        .logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-heading); font-weight: 700; font-size: 1.4rem; color: #fff; z-index: 1001; text-transform: uppercase; letter-spacing: 2px; }
+        .logo-icon { width: 44px; height: 44px; background: var(--accent); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #fff; }
+        .logo-text span { display: block; font-size: 0.6rem; font-weight: 400; opacity: 0.7; letter-spacing: 2px; text-transform: uppercase; }
+
+        .nav-links { display: flex; align-items: center; gap: 32px; }
+        .nav-links a { font-family: var(--font-heading); font-weight: 600; font-size: 0.9rem; color: rgba(255,255,255,0.85); padding: 4px 0; position: relative; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width var(--transition-normal); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-cta { padding: 10px 24px !important; background: var(--accent); color: #fff !important; border-radius: var(--radius-sm); }
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover { background: var(--accent-light) !important; }
+
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1001; padding: 8px; }
+        .hamburger span { width: 28px; height: 3px; background: #fff; border-radius: 3px; transition: all var(--transition-normal); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        .mobile-nav { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100vh; background: var(--primary-dark); z-index: 999; display: flex; flex-direction: column; justify-content: center; padding: 60px 40px; transition: right var(--transition-normal); }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 998; opacity: 0; visibility: hidden; transition: all var(--transition-normal); }
+        .mobile-nav-overlay.active { opacity: 1; visibility: visible; }
+        .mobile-nav a { display: block; font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: #fff; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.1); text-transform: uppercase; letter-spacing: 2px; }
+        .mobile-nav a:hover { padding-left: 12px; color: var(--accent); }
+
+        /* Hero */
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, rgba(26,26,46,0.95), rgba(15,15,30,0.9)), url('images/hero-tires.jpg') center/cover no-repeat; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 200%; background: radial-gradient(ellipse, rgba(0,188,212,0.08) 0%, transparent 70%); pointer-events: none; }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+        .hero-content { position: relative; z-index: 2; max-width: 700px; padding-top: 40px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(0,188,212,0.1); border: 1px solid rgba(0,188,212,0.3); border-radius: 50px; color: var(--accent); font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 2px; }
+        .hero h1 { color: #fff; margin-bottom: 20px; font-weight: 700; }
+        .hero h1 .highlight { color: var(--accent); text-shadow: 0 0 30px rgba(0,188,212,0.3); }
+        .hero-description { font-size: 1.15rem; color: rgba(255,255,255,0.8); margin-bottom: 36px; max-width: 560px; line-height: 1.8; }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+        .hero-stats { display: flex; gap: 40px; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .hero-stat { text-align: center; }
+        .hero-stat-number { font-family: var(--font-heading); font-size: 2.4rem; font-weight: 700; color: var(--accent); line-height: 1; }
+        .hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Services */
+        .services { background: var(--bg-light); }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .service-card { background: var(--bg-card); border-radius: var(--radius-md); padding: 40px 30px; text-align: center; transition: all var(--transition-normal); border: 1px solid var(--border-color); position: relative; overflow: hidden; }
+        .service-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-light)); transform: scaleX(0); transition: transform var(--transition-normal); }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .service-icon { width: 72px; height: 72px; margin: 0 auto 24px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--accent); transition: all var(--transition-normal); }
+        .service-card:hover .service-icon { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; transform: scale(1.1) rotate(5deg); }
+        .service-card h3 { margin-bottom: 12px; color: var(--primary); }
+        .service-card p { font-size: 0.95rem; color: var(--text-light); }
+
+        /* About */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-image { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); position: relative; }
+        .about-image img { width: 100%; height: 450px; object-fit: cover; transition: transform var(--transition-slow); }
+        .about-image:hover img { transform: scale(1.05); }
+        .about-image::after { content: ''; position: absolute; inset: 0; border: 2px solid var(--accent); border-radius: var(--radius-lg); opacity: 0; transition: opacity var(--transition-normal); pointer-events: none; }
+        .about-image:hover::after { opacity: 1; }
+        .about-content h2 { margin-bottom: 20px; }
+        .about-content h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent); border-radius: 2px; margin-top: 12px; }
+        .about-text { font-size: 1.05rem; margin-bottom: 16px; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 30px; }
+        .about-feature { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--bg-light); border-radius: var(--radius-sm); font-weight: 500; font-size: 0.95rem; transition: all var(--transition-fast); border-left: 3px solid transparent; }
+        .about-feature:hover { background: var(--primary); color: #fff; border-left-color: var(--accent); transform: translateX(4px); }
+        .about-feature-icon { color: var(--accent); font-size: 1.2rem; flex-shrink: 0; }
+
+        /* Products */
+        .products { background: var(--primary); color: #fff; position: relative; overflow: hidden; }
+        .products::before { content: ''; position: absolute; top: -200px; left: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,188,212,0.05), transparent); }
+        .products .section-header h2 { color: #fff; }
+        .products .section-header h2::after { background: var(--accent); }
+        .products .section-header p { color: rgba(255,255,255,0.6); }
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .product-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); overflow: hidden; transition: all var(--transition-normal); }
+        .product-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 8px 40px rgba(0,188,212,0.2); }
+        .product-img { height: 200px; overflow: hidden; }
+        .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); }
+        .product-card:hover .product-img img { transform: scale(1.1); }
+        .product-info { padding: 24px; }
+        .product-tag { display: inline-block; padding: 4px 12px; background: rgba(0,188,212,0.2); color: var(--accent); border-radius: 20px; font-size: 0.75rem; font-weight: 700; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .product-info h3 { color: #fff; margin-bottom: 8px; }
+        .product-info p { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin: 0; }
+
+        /* Tire Info Section */
+        .tire-info { background: var(--bg-light); }
+        .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .info-card { background: #fff; border-radius: var(--radius-md); padding: 32px 24px; text-align: center; transition: all var(--transition-normal); border: 1px solid var(--border-color); }
+        .info-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+        .info-icon { width: 64px; height: 64px; margin: 0 auto 20px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--accent); transition: all var(--transition-normal); }
+        .info-card:hover .info-icon { transform: scale(1.1); background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; }
+        .info-card h4 { margin-bottom: 8px; color: var(--primary); font-size: 1.1rem; }
+        .info-card p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+
+        /* Hours */
+        .hours-section { background: var(--bg-white); }
+        .hours-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .hours-card { background: var(--primary); color: #fff; border-radius: var(--radius-md); padding: 40px; }
+        .hours-card h3 { color: var(--accent); margin-bottom: 24px; font-size: 1.5rem; }
+        .hours-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 1rem; }
+        .hours-row:last-child { border-bottom: none; }
+        .hours-day { font-weight: 600; font-family: var(--font-heading); letter-spacing: 0.5px; }
+        .hours-time { color: var(--accent); font-weight: 600; }
+        .hours-note { margin-top: 24px; padding: 16px; background: rgba(0,188,212,0.1); border-radius: var(--radius-sm); border-left: 3px solid var(--accent); }
+        .hours-note p { color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; }
+        .hours-content h3 { margin-bottom: 16px; }
+        .hours-content p { font-size: 1.05rem; line-height: 1.8; }
+        .hours-contact { margin-top: 30px; }
+        .hours-contact-item { display: flex; align-items: center; gap: 16px; padding: 14px 0; }
+        .hours-contact-icon { width: 48px; height: 48px; background: var(--bg-light); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--accent); }
+
+        /* CTA */
+        .cta-banner { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; padding: 80px 0; text-align: center; position: relative; overflow: hidden; }
+        .cta-banner::before { content: ''; position: absolute; inset: 0; background: url('images/tire-service.jpg') center/cover no-repeat; opacity: 0.08; }
+        .cta-banner::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+        .cta-banner .container { position: relative; z-index: 1; }
+        .cta-banner h2 { color: #fff; margin-bottom: 16px; }
+        .cta-banner p { color: rgba(255,255,255,0.8); font-size: 1.15rem; max-width: 600px; margin: 0 auto 30px; }
+
+        /* Contact */
+        .contact { background: var(--bg-light); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .contact-info { padding: 40px; background: var(--primary); color: #fff; border-radius: var(--radius-md); }
+        .contact-info h3 { color: var(--accent); margin-bottom: 24px; font-size: 1.6rem; }
+        .contact-info-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+        .contact-info-icon { width: 44px; height: 44px; background: rgba(0,188,212,0.15); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; color: var(--accent); }
+        .contact-info-text h4 { color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1.5px; }
+        .contact-info-text p { color: #fff; font-size: 1.05rem; margin: 0; }
+        .contact-info-text a { color: #fff; } .contact-info-text a:hover { color: var(--accent); }
+        .contact-map { border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md); min-height: 400px; }
+        .contact-map iframe { width: 100%; height: 100%; min-height: 400px; border: 0; }
+
+        /* Footer */
+        .footer { background: var(--primary-dark); color: #fff; padding: 60px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-brand p { color: rgba(255,255,255,0.6); margin-top: 16px; font-size: 0.95rem; max-width: 320px; }
+        .footer-links h4, .footer-contact h4 { color: var(--accent); margin-bottom: 20px; font-size: 1.1rem; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1px; }
+        .footer-links a { display: block; color: rgba(255,255,255,0.6); padding: 6px 0; font-size: 0.95rem; transition: all var(--transition-fast); }
+        .footer-links a:hover { color: var(--accent); padding-left: 8px; }
+        .footer-contact-item { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.6); padding: 6px 0; font-size: 0.95rem; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 0.85rem; margin: 0; }
+        .footer-bottom a { color: rgba(255,255,255,0.6); } .footer-bottom a:hover { color: var(--accent); }
+
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--accent); color: #fff; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all var(--transition-normal); box-shadow: 0 4px 20px rgba(0,188,212,0.4); z-index: 100; }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--accent-light); transform: translateY(-4px); }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--primary-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 5px; }
+
+        @media (max-width: 1024px) {
+            .services-grid, .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-grid, .hours-wrapper { grid-template-columns: 1fr; gap: 40px; }
+            .info-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .section { padding: 70px 0; }
+            .hero { text-align: center; }
+            .hero-content { max-width: 100%; }
+            .hero-description { margin: 0 auto 36px; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; gap: 30px; }
+            .services-grid, .products-grid { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; justify-content: center; }
+            .about-features { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#hero" class="logo">
+                <div class="logo-icon">&#x1F6DE;</div>
+                <div class="logo-text">Pneuland<span>Soběslav</span></div>
+            </a>
+            <nav class="nav-links">
+                <a href="#sluzby">Služby</a>
+                <a href="#o-nas">O nás</a>
+                <a href="#sortiment">Sortiment</a>
+                <a href="#informace">Informace</a>
+                <a href="#oteviraci-doba">Otevírací doba</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </nav>
+            <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#sluzby">Služby</a>
+        <a href="#o-nas">O nás</a>
+        <a href="#sortiment">Sortiment</a>
+        <a href="#informace">Informace</a>
+        <a href="#oteviraci-doba">Otevírací doba</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">&#x1F6DE; Pneuservis Soběslav</div>
+                <h1>Vaše pneumatiky v <span class="highlight">nejlepších rukou</span></h1>
+                <p class="hero-description">
+                    Pneu Soběslav nabízí kompletní sortiment nových i použitých pneumatik, hliníkových a ocelových disků
+                    pro osobní i užitkové vozy. Profesionální pneuservis s osobním přístupem.
+                </p>
+                <div class="hero-buttons">
+                    <a href="tel:+420603523978" class="btn btn-accent">&#9742; 603 523 978</a>
+                    <a href="#sluzby" class="btn btn-outline">Služby &#8594;</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">1000+</div>
+                        <div class="hero-stat-label">Pneumatik skladem</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">15+</div>
+                        <div class="hero-stat-label">Let zkušeností</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">100%</div>
+                        <div class="hero-stat-label">Spokojenost</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section services" id="sluzby">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Naše služby</h2>
+                <p class="fade-in stagger-1">Kompletní pneuservis pro všechny typy vozidel. Od přezutí po prodej nových pneumatik.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in stagger-1">
+                    <div class="service-icon">&#x1F6DE;</div>
+                    <h3>Prodej pneumatik</h3>
+                    <p>Široký výběr nových i použitých pneumatik pro osobní, SUV a užitkové vozy. Letní i zimní směsi od renomovaných výrobců.</p>
+                </div>
+                <div class="service-card fade-in stagger-2">
+                    <div class="service-icon">&#x2699;</div>
+                    <h3>Přezutí pneumatik</h3>
+                    <p>Rychlé a profesionální přezutí pneumatik sezónní i celoroční. Montáž a demontáž na moderním vybavení.</p>
+                </div>
+                <div class="service-card fade-in stagger-3">
+                    <div class="service-icon">&#x1F527;</div>
+                    <h3>Opravy pneumatik</h3>
+                    <p>Opravy defektů a poškozených pneumatik. Včetně montáže a demontáže RFT (run-flat) pneumatik.</p>
+                </div>
+                <div class="service-card fade-in stagger-4">
+                    <div class="service-icon">&#x1F4AB;</div>
+                    <h3>Alu a ocelové disky</h3>
+                    <p>Prodej nových i použitých hliníkových a ocelových disků. Široká nabídka rozměrů a designů.</p>
+                </div>
+                <div class="service-card fade-in stagger-5">
+                    <div class="service-icon">&#x267B;</div>
+                    <h3>Likvidace pneumatik</h3>
+                    <p>Ekologická likvidace a odvoz starých pneumatik v souladu s platnou legislativou.</p>
+                </div>
+                <div class="service-card fade-in stagger-6">
+                    <div class="service-icon">&#x1F4DE;</div>
+                    <h3>Poradenství</h3>
+                    <p>Odborné poradenství při výběru pneumatik a disků. Pomůžeme vám najít optimální řešení pro váš vůz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-in-left">
+                    <img src="images/tire-service.jpg" alt="Pneuservis Soběslav" loading="lazy">
+                </div>
+                <div class="about-content fade-in-right">
+                    <h2>O naší provozovně</h2>
+                    <p class="about-text">
+                        Pneu Soběslav je specializovaná prodejna pneumatik a disků v Soběslavi. Nabízíme kompletní
+                        sortiment pro osobní i užitkové vozy s důrazem na kvalitu a příznivé ceny.
+                    </p>
+                    <p class="about-text">
+                        Veškeré zboží udržujeme skladem a je možné jej zakoupit přímo na provozovně
+                        nebo po telefonické domluvě zajistíme alternativní formu vyzvednutí.
+                        Spolupracujeme s místními autodíly a servisy v okolí Soběslavi.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature"><span class="about-feature-icon">&#10003;</span> Nové pneumatiky</div>
+                        <div class="about-feature"><span class="about-feature-icon">&#10003;</span> Použité pneumatiky</div>
+                        <div class="about-feature"><span class="about-feature-icon">&#10003;</span> Alu disky</div>
+                        <div class="about-feature"><span class="about-feature-icon">&#10003;</span> Ocelové disky</div>
+                        <div class="about-feature"><span class="about-feature-icon">&#10003;</span> Opravy defektů</div>
+                        <div class="about-feature"><span class="about-feature-icon">&#10003;</span> RFT montáž</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section products" id="sortiment">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Náš sortiment</h2>
+                <p class="fade-in stagger-1">Pneumatiky a disky pro všechny typy vozidel. Vše skladem k okamžitému odběru.</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card fade-in stagger-1">
+                    <div class="product-img"><img src="images/hero-tires.jpg" alt="Letní pneumatiky" loading="lazy"></div>
+                    <div class="product-info">
+                        <span class="product-tag">Letní</span>
+                        <h3>Letní pneumatiky</h3>
+                        <p>Široký výběr letních pneumatik pro bezpečnou jízdu v teplých měsících.</p>
+                    </div>
+                </div>
+                <div class="product-card fade-in stagger-2">
+                    <div class="product-img"><img src="images/car-lift.jpg" alt="Zimní pneumatiky" loading="lazy"></div>
+                    <div class="product-info">
+                        <span class="product-tag">Zimní</span>
+                        <h3>Zimní pneumatiky</h3>
+                        <p>Spolehlivé zimní pneumatiky pro maximální přilnavost na sněhu a ledu.</p>
+                    </div>
+                </div>
+                <div class="product-card fade-in stagger-3">
+                    <div class="product-img"><img src="images/alloy-wheels.jpg" alt="Alu disky" loading="lazy"></div>
+                    <div class="product-info">
+                        <span class="product-tag">Disky</span>
+                        <h3>Hliníkové disky</h3>
+                        <p>Nové i použité alu disky v různých rozměrech a designových provedeních.</p>
+                    </div>
+                </div>
+                <div class="product-card fade-in stagger-4">
+                    <div class="product-img"><img src="images/wheel-align.jpg" alt="Celoroční pneumatiky" loading="lazy"></div>
+                    <div class="product-info">
+                        <span class="product-tag">Celoroční</span>
+                        <h3>Celoroční pneumatiky</h3>
+                        <p>Kompromisní řešení pro celoroční provoz bez nutnosti sezónního přezouvání.</p>
+                    </div>
+                </div>
+                <div class="product-card fade-in stagger-5">
+                    <div class="product-img"><img src="images/tire-service.jpg" alt="Ocelové disky" loading="lazy"></div>
+                    <div class="product-info">
+                        <span class="product-tag">Ocel</span>
+                        <h3>Ocelové disky</h3>
+                        <p>Odolné ocelové disky pro zimní sezónu i každodenní provoz.</p>
+                    </div>
+                </div>
+                <div class="product-card fade-in stagger-6">
+                    <div class="product-img"><img src="images/car-lift.jpg" alt="Použité pneu" loading="lazy"></div>
+                    <div class="product-info">
+                        <span class="product-tag">Bazar</span>
+                        <h3>Použité pneumatiky</h3>
+                        <p>Kvalitní použité pneumatiky s dostatečným vzorkem za příznivé ceny.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIRE INFO -->
+    <section class="section tire-info" id="informace">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Užitečné informace</h2>
+                <p class="fade-in stagger-1">Co byste měli vědět o pneumatikách pro bezpečný a ekonomický provoz vašeho vozu.</p>
+            </div>
+            <div class="info-grid">
+                <div class="info-card fade-in stagger-1">
+                    <div class="info-icon">&#x1F4C5;</div>
+                    <h4>Stáří pneumatik (DOT)</h4>
+                    <p>Číslo DOT na boku pneumatiky udává týden a rok výroby. Doporučená maximální životnost je 6-10 let.</p>
+                </div>
+                <div class="info-card fade-in stagger-2">
+                    <div class="info-icon">&#x1F4A8;</div>
+                    <h4>Správný tlak</h4>
+                    <p>Kontrolujte tlak v pneumatikách minimálně jednou měsíčně. Správný tlak šetří palivo a prodlužuje životnost.</p>
+                </div>
+                <div class="info-card fade-in stagger-3">
+                    <div class="info-icon">&#x1F4CF;</div>
+                    <h4>Hloubka vzorku</h4>
+                    <p>Minimální zákonná hloubka vzorku je 1,6 mm. Pro zimní pneumatiky doporučujeme minimálně 4 mm.</p>
+                </div>
+                <div class="info-card fade-in stagger-4">
+                    <div class="info-icon">&#x2744;</div>
+                    <h4>Sezónní přezouvání</h4>
+                    <p>Zimní pneumatiky nasazujte při teplotách pod 7 stupňů. Včasné přezutí zvýší bezpečnost jízdy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOURS -->
+    <section class="section hours-section" id="oteviraci-doba">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Otevírací doba</h2>
+                <p class="fade-in stagger-1">Navštivte nás osobně nebo se domluvte telefonicky na individuálním termínu.</p>
+            </div>
+            <div class="hours-wrapper">
+                <div class="hours-card fade-in-left">
+                    <h3>Provozní hodiny</h3>
+                    <div class="hours-row"><span class="hours-day">Pondělí</span><span class="hours-time">9:00 - 17:00</span></div>
+                    <div class="hours-row"><span class="hours-day">Úterý</span><span class="hours-time">9:00 - 17:00</span></div>
+                    <div class="hours-row"><span class="hours-day">Středa</span><span class="hours-time">9:00 - 17:00</span></div>
+                    <div class="hours-row"><span class="hours-day">Čtvrtek</span><span class="hours-time">9:00 - 17:00</span></div>
+                    <div class="hours-row"><span class="hours-day">Pátek</span><span class="hours-time">9:00 - 17:00</span></div>
+                    <div class="hours-row"><span class="hours-day">Sobota</span><span class="hours-time">9:00 - 12:00</span></div>
+                    <div class="hours-row"><span class="hours-day">Neděle</span><span class="hours-time">Zavřeno</span></div>
+                    <div class="hours-note">
+                        <p>V jiný čas je možné návštěvu domluvit telefonicky na čísle 603 523 978.</p>
+                    </div>
+                </div>
+                <div class="hours-content fade-in-right">
+                    <h3>Potřebujete poradit?</h3>
+                    <p>Nejste si jisti, jaké pneumatiky nebo disky jsou vhodné pro váš vůz? Neváhejte nás kontaktovat. Rádi vám poradíme s výběrem na základě vašich požadavků a rozpočtu.</p>
+                    <p>Veškeré zboží máme skladem a je připraveno k okamžitému odběru přímo na provozovně v Soběslavi.</p>
+                    <div class="hours-contact">
+                        <div class="hours-contact-item">
+                            <div class="hours-contact-icon">&#9742;</div>
+                            <div><strong>603 523 978</strong><br><small style="color:var(--text-light)">Volejte v provozní době</small></div>
+                        </div>
+                        <div class="hours-contact-item">
+                            <div class="hours-contact-icon">&#9993;</div>
+                            <div><strong>pneusobeslav@seznam.cz</strong><br><small style="color:var(--text-light)">Odpovíme do 24 hodin</small></div>
+                        </div>
+                        <div class="hours-contact-item">
+                            <div class="hours-contact-icon">&#x1F4CD;</div>
+                            <div><strong>Nová 543</strong><br><small style="color:var(--text-light)">392 01 Soběslav</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-banner">
+        <div class="container">
+            <h2 class="fade-in">Hledáte pneumatiky?</h2>
+            <p class="fade-in stagger-1">Zavolejte nám a poradíme vám s výběrem. Široký sortiment skladem za příznivé ceny.</p>
+            <div class="fade-in stagger-2">
+                <a href="tel:+420603523978" class="btn btn-accent">&#9742; 603 523 978</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="fade-in">Kontakt</h2>
+                <p class="fade-in stagger-1">Navštivte naši provozovnu v Soběslavi nebo nás kontaktujte telefonicky.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info fade-in-left">
+                    <h3>Kontaktní údaje</h3>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#x1F4CD;</div>
+                        <div class="contact-info-text"><h4>Adresa</h4><p>Nová 543<br>392 01 Soběslav</p></div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#9742;</div>
+                        <div class="contact-info-text"><h4>Telefon</h4><p><a href="tel:+420603523978">603 523 978</a></p></div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#9993;</div>
+                        <div class="contact-info-text"><h4>Email</h4><p><a href="mailto:pneusobeslav@seznam.cz">pneusobeslav@seznam.cz</a></p></div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">&#9201;</div>
+                        <div class="contact-info-text"><h4>Otevírací doba</h4><p>Po-Pá: 9:00 - 17:00<br>So: 9:00 - 12:00</p></div>
+                    </div>
+                </div>
+                <div class="contact-map fade-in-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2598.0!2d14.7186!3d49.2603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470c8f0e0e4b0a0d%3A0x400af0f6614e850!2sNov%C3%A1%20543%2C%20392%2001%20Sob%C4%9Bslav!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - Pneuland Soběslav"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#hero" class="logo" style="color:#fff;margin-bottom:8px;">
+                        <div class="logo-icon">&#x1F6DE;</div>
+                        <div class="logo-text">Pneuland<span>Soběslav</span></div>
+                    </a>
+                    <p>Specializovaná prodejna pneumatik a disků v Soběslavi. Nové i použité pneumatiky, alu disky, pneuservis.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Odkazy</h4>
+                    <a href="#sluzby">Služby</a>
+                    <a href="#o-nas">O nás</a>
+                    <a href="#sortiment">Sortiment</a>
+                    <a href="#informace">Informace</a>
+                    <a href="#kontakt">Kontakt</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Kontakt</h4>
+                    <div class="footer-contact-item">&#x1F4CD; Nová 543, Soběslav</div>
+                    <div class="footer-contact-item">&#9742; 603 523 978</div>
+                    <div class="footer-contact-item">&#9993; pneusobeslav@seznam.cz</div>
+                    <div class="footer-contact-item">&#9201; Po-Pá: 9-17, So: 9-12</div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Pneu Soběslav. Všechna práva vyhrazena.</p>
+                <p>Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Zpět nahoru">&#8593;</button>
+
+    <script>
+        (function(){var h=document.getElementById('hamburger'),n=document.getElementById('mobileNav'),o=document.getElementById('mobileOverlay'),links=n.querySelectorAll('a');function toggle(){h.classList.toggle('active');n.classList.toggle('active');o.classList.toggle('active');document.body.style.overflow=n.classList.contains('active')?'hidden':'';}function close(){h.classList.remove('active');n.classList.remove('active');o.classList.remove('active');document.body.style.overflow='';}h.addEventListener('click',toggle);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});o.addEventListener('click',close);links.forEach(function(l){l.addEventListener('click',close);});})();
+        (function(){var header=document.getElementById('header');window.addEventListener('scroll',function(){header.classList.toggle('scrolled',window.scrollY>100);},{passive:true});})();
+        (function(){var btn=document.getElementById('backToTop');window.addEventListener('scroll',function(){btn.classList.toggle('visible',window.scrollY>500);},{passive:true});btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});})();
+        (function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{root:null,rootMargin:'0px 0px -80px 0px',threshold:0.1});document.querySelectorAll('.fade-in,.fade-in-left,.fade-in-right,.scale-in').forEach(function(el){obs.observe(el);});})();
+        (function(){var sections=document.querySelectorAll('section[id]'),navLinks=document.querySelectorAll('.nav-links a:not(.nav-cta)');var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var id=e.target.getAttribute('id');navLinks.forEach(function(l){l.classList.remove('active');if(l.getAttribute('href')==='#'+id)l.classList.add('active');});}});},{rootMargin:'-40% 0px -60% 0px',threshold:0});sections.forEach(function(s){obs.observe(s);});})();
+        (function(){document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=this.getAttribute('href');if(t==='#')return;var el=document.querySelector(t);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}});});})();
+        (function(){var stats=document.querySelectorAll('.hero-stat-number'),animated=false;function animate(){if(animated)return;animated=true;stats.forEach(function(s){var t=s.textContent,m=t.match(/(\d+)/);if(!m)return;var target=parseInt(m[1]),suffix=t.replace(m[1],''),current=0,inc=Math.ceil(target/60),step=1500/(target/inc);var timer=setInterval(function(){current+=inc;if(current>=target){current=target;clearInterval(timer);}s.textContent=current+suffix;},step);});}var el=document.querySelector('.hero-stats');if(el){var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){animate();o.disconnect();}},{threshold:0.5});o.observe(el);}})();
+        (function(){document.querySelectorAll('.service-card').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;c.style.transform='perspective(1000px) rotateX('+((y-r.height/2)/20)+'deg) rotateY('+((r.width/2-x)/20)+'deg) translateY(-8px)';});c.addEventListener('mouseleave',function(){c.style.transform='';});});})();
+        console.log('%cPneuland Soběslav','color:#00bcd4;font-size:16px;font-weight:bold;');
+        console.log('%cWeb vytvořil KSH Partners s.r.o.','color:#666;font-size:12px;');
+    </script>
+</body>
+</html>
