@@ -319,12 +319,22 @@
             width: 100%;
             height: 100%;
             z-index: 0;
+            background: linear-gradient(135deg, #1a1015 0%, #2d1f28 25%, #d4a5a5 50%, #e8c4c4 75%, #fef5f5 100%);
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(212, 165, 165, 0.3) 0%, transparent 70%);
+            z-index: 0;
         }
 
         .hero-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            display: none;
         }
 
         .hero-bg::after {
@@ -336,9 +346,9 @@
             height: 100%;
             background: linear-gradient(
                 to bottom,
-                rgba(26, 16, 21, 0.4) 0%,
-                rgba(26, 16, 21, 0.2) 40%,
-                rgba(26, 16, 21, 0.6) 100%
+                rgba(26, 16, 21, 0.3) 0%,
+                rgba(26, 16, 21, 0.1) 40%,
+                rgba(26, 16, 21, 0.5) 100%
             );
         }
 
@@ -839,11 +849,39 @@
         }
 
         .atmosphere-image img {
+            display: none;
+        }
+
+        .atmosphere-image {
             width: 100%;
             height: 480px;
-            object-fit: cover;
             border-radius: var(--radius-xl);
             box-shadow: var(--shadow-xl);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 40%, var(--primary-light) 70%, #fef5f5 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .atmosphere-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+        }
+
+        .atmosphere-image::after {
+            content: '\2702';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: rgba(255,255,255,0.4);
         }
 
         /* ===========================
@@ -1444,7 +1482,7 @@
                     </div>
                 </div>
                 <div class="intro-image fade-in-right">
-                    <img src="images/salon.jpg" alt="Interiér kadeřnického salonu Na Kopci" loading="lazy">
+                    <img src="images/salon_exterior.jpg" alt="Kadeřnictví Na Kopci - budova salonu, Na Výsluní 1232, Chrudim" loading="lazy">
                     <div class="intro-image-badge">
                         <span class="badge-num">Na Kopci</span>
                         <span class="badge-txt">Studio</span>
