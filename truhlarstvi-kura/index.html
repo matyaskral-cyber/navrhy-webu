@@ -1290,7 +1290,66 @@
             }
         }
 
-    </style>
+    
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all var(--transition);
+            z-index: 900;
+            box-shadow: var(--shadow);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .scroll-top svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        /* ===== LOADING ANIMATION ===== */
+        .hero__content > * {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: heroFadeIn 0.8s ease forwards;
+        }
+
+        .hero__content > *:nth-child(1) { animation-delay: 0.2s; }
+        .hero__content > *:nth-child(2) { animation-delay: 0.4s; }
+        .hero__content > *:nth-child(3) { animation-delay: 0.6s; }
+        .hero__content > *:nth-child(4) { animation-delay: 0.8s; }
+        .hero__content > *:nth-child(5) { animation-delay: 1.0s; }
+
+        @keyframes heroFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+</style>
 </head>
 <body>
 
@@ -1544,6 +1603,53 @@
         </div>
     </section>
 
+
+
+    <!-- INFORMACE -->
+    <section class="faq section--deep">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Dobré vědět</div>
+                <h2 class="section-title">Jak spolupráce probíhá</h2>
+            </div>
+            <div class="faq__grid">
+                <div class="faq__item reveal" style="transition-delay:0s">
+                    <h3 class="faq__item-title">Nezávazná konzultace</h3>
+                    <p class="faq__item-text">Kontaktujte nás telefonicky nebo e-mailem. Probereme vaše představy, zaměříme prostor a připravíme cenový odhad.</p>
+                </div>
+                <div class="faq__item reveal" style="transition-delay:0.1s">
+                    <h3 class="faq__item-title">Návrh a výběr materiálů</h3>
+                    <p class="faq__item-text">Navrhneme řešení přesně na míru vašemu prostoru. Pomůžeme vám s výběrem materiálů, barev a kování.</p>
+                </div>
+                <div class="faq__item reveal" style="transition-delay:0.2s">
+                    <h3 class="faq__item-title">Výroba v naší dílně</h3>
+                    <p class="faq__item-text">Nábytek vyrábíme v naší truhlářské dílně v Písku. Každý kus je vyráběn individuálně s důrazem na kvalitu zpracování.</p>
+                </div>
+                <div class="faq__item reveal" style="transition-delay:0.3s">
+                    <h3 class="faq__item-title">Montáž a předání</h3>
+                    <p class="faq__item-text">Hotový nábytek dovezeme a profesionálně namontujeme přímo u vás. Vše nastavíme a seřídíme do posledního detailu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner section--dark">
+        <div class="cta-banner__pattern"></div>
+        <div class="container">
+            <div class="cta-banner__inner">
+                <div class="cta-banner__content reveal-left">
+                    <h2 class="cta-banner__title">Máte zájem o nábytek na míru?</h2>
+                    <p class="cta-banner__desc">Kontaktujte nás pro nezávaznou konzultaci. Probereme vaše představy a připravíme návrh přesně na míru.</p>
+                </div>
+                <a href="tel:605419457" class="btn btn--primary reveal-right">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    605 419 457
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- KONTAKT -->
     <section class="section section--dark" id="kontakt">
         <div class="container">
@@ -1601,23 +1707,62 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            <div class="footer__inner">
-                <div class="footer__logo">
-                    <div class="footer__logo-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+            <div class="footer__top">
+                <div>
+                    <div class="footer__logo">
+                        <div class="footer__logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <span class="footer__logo-text">Truhlarstvi Kura</span>
                     </div>
-                    <span class="footer__logo-text">Truhlářství Kůra</span>
+                    <p class="footer__about-text">Truhlářství Vladislav Kůra — výroba nábytku na míru v Písku. Kuchyně, vestavěné skříně, schodiště a kompletní interiéry.</p>
                 </div>
-                <p class="footer__copy">&copy; 2026 Truhlářství Vladislav Kůra. Všechna práva vyhrazena.</p>
+                <div>
+                    <h4 class="footer__col-title">Navigace</h4>
+                    <ul class="footer__col-links">
+                        <li><a href="#o-nas">O nás</a></li>
+                        <li><a href="#sluzby">Služby</a></li>
+                        <li><a href="#kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer__col-title">Kontakt</h4>
+                    <div class="footer__contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <span>Obecní 33, 397 01 Písek - Semice</span>
+                    </div>
+                    <div class="footer__contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <span>605 419 457</span>
+                    </div>
+                    <div class="footer__contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <span>vladislav.kura@seznam.cz</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer__col-title">Informace</h4>
+                    <ul class="footer__col-links">
+                        <li><a href="#hero">Domů</a></li>
+                        <li><a href="#o-nas">O nás</a></li>
+                        <li><a href="#kontakt">Kde nás najdete</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__inner">
+                <p class="footer__copy">&copy; 2026 Všechna práva vyhrazena.</p>
                 <ul class="footer__links">
-                    <li><a href="#o-nas">O nás</a></li>
-                    <li><a href="#sluzby">Služby</a></li>
-                    <li><a href="#galerie">Galerie</a></li>
-                    <li><a href="#kontakt">Kontakt</a></li>
+                    <li><a href="#hero">Zpět nahoru</a></li>
                 </ul>
             </div>
         </div>
     </footer>
+
+
+    <!-- SCROLL TO TOP -->
+    <button class="scroll-top" id="scrollTop" aria-label="Zpět nahoru">
+        <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" transform="rotate(-90 12 12)"/></svg>
+    </button>
 
     <script>
         /* ===== NAVBAR SCROLL ===== */
@@ -1674,6 +1819,21 @@
                 heroBg.style.transform = `translateY(${scrolled * 0.3}px)`;
             }
         });
+
+        /* ===== SCROLL TO TOP ===== */
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 500) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
     </script>
 </body>
 </html>
