@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Autoservis & Pneuservis Lemberka Tábor - rodinný autoservis s 20letou tradicí. Mechanické opravy, karosářské práce, pneuservis a autoelektrika.">
+    <title>Autoservis & Pneuservis Lemberka | Tábor – Na Kopečku</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS Custom Properties
+           ======================================== */
+        :root {
+            --primary: #212121;
+            --primary-light: #424242;
+            --primary-dark: #0a0a0a;
+            --accent: #1976d2;
+            --accent-light: #42a5f5;
+            --accent-dark: #0d47a1;
+            --white: #ffffff;
+            --off-white: #f5f5f5;
+            --gray-50: #fafafa;
+            --gray-100: #f0f0f0;
+            --gray-200: #e0e0e0;
+            --gray-300: #bdbdbd;
+            --gray-400: #9e9e9e;
+            --gray-500: #757575;
+            --gray-600: #616161;
+            --gray-700: #424242;
+            --gray-800: #303030;
+            --gray-900: #1a1a1a;
+            --red: #d32f2f;
+            --green: #388e3c;
+            --text: #1a1a1a;
+            --text-muted: #666;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+            --shadow-xl: 0 16px 48px rgba(0,0,0,0.16);
+            --radius: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --transition: 0.3s ease;
+            --max-width: 1200px;
+            --header-h: 76px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            color: var(--text);
+            line-height: 1.65;
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            line-height: 1.15;
+            text-transform: uppercase;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Animations */
+        .anim-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .anim-up.visible { opacity: 1; transform: translateY(0); }
+        .anim-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .anim-left.visible { opacity: 1; transform: translateX(0); }
+        .anim-right { opacity: 0; transform: translateX(50px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .anim-right.visible { opacity: 1; transform: translateX(0); }
+        .anim-scale { opacity: 0; transform: scale(0.88); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .anim-scale.visible { opacity: 1; transform: scale(1); }
+
+        /* ========================================
+           Header — Dark Industrial
+           ======================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-h);
+            z-index: 1000;
+            background: rgba(33,33,33,0.95);
+            backdrop-filter: blur(8px);
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 6px 0;
+        }
+
+        .nav-links a:hover { color: var(--accent-light); }
+
+        .nav-phone {
+            color: var(--accent-light) !important;
+            font-weight: 700 !important;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            z-index: 1001;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            width: 26px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .mobile-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 998;
+            opacity: 0; visibility: hidden; transition: var(--transition);
+        }
+        .mobile-overlay.active { opacity: 1; visibility: visible; }
+
+        .mobile-nav {
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 360px;
+            height: 100vh; background: var(--primary); z-index: 999;
+            transition: 0.5s ease; padding: 100px 36px 40px;
+        }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav a {
+            display: block;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .mobile-nav a:hover { color: var(--accent-light); }
+
+        /* ========================================
+           Hero — Full Width Dark Overlay
+           ======================================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: var(--header-h);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('images/hero-auto.jpg') center/cover no-repeat;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.75) 0%, rgba(33,33,33,0.85) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 40px 20px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 20px;
+            background: rgba(25,118,210,0.2);
+            border: 1px solid rgba(25,118,210,0.4);
+            border-radius: 30px;
+            color: var(--accent-light);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5rem);
+            color: var(--white);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            line-height: 1.05;
+        }
+
+        .hero h1 .blue { color: var(--accent-light); }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 36px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: var(--radius);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-blue {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 4px 16px rgba(25,118,210,0.4);
+        }
+        .btn-blue:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(25,118,210,0.5);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-scroll-dot {
+            width: 4px;
+            height: 10px;
+            background: var(--accent-light);
+            border-radius: 4px;
+            margin-top: 8px;
+            animation: scrollDot 2s infinite;
+        }
+
+        @keyframes scrollDot {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(16px); opacity: 0.3; }
+        }
+
+        /* ========================================
+           Section Base
+           ======================================== */
+        .section { padding: 100px 0; }
+
+        .section-header { text-align: center; margin-bottom: 60px; }
+
+        .section-label {
+            display: inline-block;
+            padding: 5px 16px;
+            background: rgba(25,118,210,0.08);
+            color: var(--accent);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-radius: 4px;
+            margin-bottom: 14px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--gray-900);
+            letter-spacing: 1px;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--gray-500);
+            max-width: 560px;
+            margin: 12px auto 0;
+        }
+
+        /* ========================================
+           About — Side by Side
+           ======================================== */
+        .about { background: var(--off-white); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-visual { position: relative; }
+
+        .about-img {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 460px;
+            object-fit: cover;
+        }
+
+        .about-experience {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-experience .num {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .about-experience .label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-text h2 {
+            font-size: 2.4rem;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .about-text h2 .blue { color: var(--accent); }
+
+        .about-text p {
+            color: var(--gray-600);
+            margin-bottom: 14px;
+            font-size: 1.05rem;
+        }
+
+        .about-values {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        .value-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .value-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(25,118,210,0.08);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .value-item span {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--gray-800);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========================================
+           Services — Cards with Icons
+           ======================================== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-card:hover::after { transform: scaleX(1); }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--primary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--accent);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            color: var(--gray-900);
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .service-card p {
+            color: var(--gray-500);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        /* ========================================
+           CTA — Dark Stripe
+           ======================================== */
+        .cta-stripe {
+            background: var(--primary);
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-stripe::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: var(--accent);
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .cta-inner {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .cta-text h2 {
+            font-size: 2.2rem;
+            color: var(--white);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .cta-text p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--primary);
+            padding: 16px 40px;
+            font-size: 1.05rem;
+        }
+
+        .btn-white:hover {
+            background: var(--gray-100);
+            transform: translateY(-2px);
+        }
+
+        /* ========================================
+           Pneuservis Feature
+           ======================================== */
+        .pneuservis { background: var(--off-white); }
+
+        .pneu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .pneu-content h2 {
+            font-size: 2.2rem;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+
+        .pneu-content p {
+            color: var(--gray-600);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .pneu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .pneu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+            color: var(--gray-700);
+        }
+
+        .pneu-check {
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .pneu-image {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pneu-image img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+        }
+
+        /* ========================================
+           Team / Family Section
+           ======================================== */
+        .team {
+            background: var(--white);
+        }
+
+        .team-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .team-card {
+            background: var(--off-white);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            border: 1px solid var(--gray-200);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--white);
+        }
+
+        .team-card h3 {
+            font-size: 1.4rem;
+            color: var(--gray-900);
+            margin-bottom: 6px;
+        }
+
+        .team-role {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .team-phone {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: var(--white);
+            border-radius: var(--radius);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .team-phone:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        /* ========================================
+           Contact Section
+           ======================================== */
+        .contact { background: var(--off-white); }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 24px;
+            border: 1px solid var(--gray-200);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover { border-color: var(--accent); box-shadow: var(--shadow-sm); }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-card h3 {
+            font-size: 1rem;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-card p { font-size: 0.95rem; color: var(--gray-600); }
+        .contact-card a { color: var(--accent); font-weight: 600; }
+        .contact-card a:hover { color: var(--accent-dark); }
+
+        .map-box {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .map-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 400px;
+        }
+
+        /* ========================================
+           Footer — Dark
+           ======================================== */
+        .footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+        }
+
+        .footer-content {
+            padding: 56px 0;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-brand .logo { font-size: 1.6rem; margin-bottom: 14px; }
+        .footer-brand p { font-size: 0.9rem; line-height: 1.7; }
+
+        .footer-col h4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        .footer-col ul li { margin-bottom: 8px; }
+        .footer-col ul li a { color: var(--gray-400); font-size: 0.9rem; }
+        .footer-col ul li a:hover { color: var(--accent-light); }
+
+        .footer-bottom {
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.82rem;
+        }
+
+        .footer-bottom a { color: var(--accent-light); }
+        .footer-bottom a:hover { color: var(--accent); }
+
+        /* ========================================
+           FAQ Section
+           ======================================== */
+        .faq-section { background: var(--white); }
+        .faq-list {
+            max-width: 750px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .faq-item {
+            background: var(--off-white);
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .faq-item:hover { border-color: var(--accent); }
+        .faq-question {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: left;
+        }
+        .faq-arrow {
+            font-size: 0.8rem;
+            color: var(--accent);
+            transition: var(--transition);
+        }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 24px;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 200px;
+            padding: 0 24px 18px;
+        }
+        .faq-answer p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           Testimonials Section
+           ======================================== */
+        .testimonials-section { background: var(--off-white); }
+        .testimonials-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .testimonial-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .testimonial-card:hover { box-shadow: var(--shadow-md); }
+        .testimonial-stars {
+            color: #f59e0b;
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+        .testimonial-text {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            font-style: italic;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+        .testimonial-author-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--gray-800);
+            text-transform: uppercase;
+        }
+        .testimonial-author-note {
+            font-size: 0.8rem;
+            color: var(--gray-400);
+        }
+
+        /* ========================================
+           Process Section
+           ======================================== */
+        .process-section { background: var(--white); }
+        .process-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+        .process-step {
+            text-align: center;
+            padding: 30px 24px;
+            flex: 1;
+            min-width: 200px;
+        }
+        .step-number {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .process-step h3 {
+            font-size: 1.1rem;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        .process-step p {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+        .process-connector {
+            width: 60px;
+            height: 2px;
+            background: var(--gray-300);
+            flex-shrink: 0;
+        }
+
+        /* ========================================
+           Responsive
+           ======================================== */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .about-grid, .pneu-grid, .contact-grid, .team-layout { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .testimonials-row { grid-template-columns: 1fr; }
+            .process-connector { width: 2px; height: 30px; }
+            .process-steps { flex-direction: column; }
+            .footer-content { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .section { padding: 64px 0; }
+            .about-experience { top: 10px; right: 10px; }
+            .cta-stripe::before { display: none; }
+            .cta-inner { flex-direction: column; text-align: center; }
+            .about-values { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#" class="logo">Lemberka <span>Auto</span></a>
+            <nav class="nav-links">
+                <a href="#o-nas">O nás</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#pneuservis">Pneuservis</a>
+                <a href="#tym">Kontakty</a>
+                <a href="tel:+420608840890" class="nav-phone">608 840 890</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-overlay" id="overlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#o-nas">O nás</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#pneuservis">Pneuservis</a>
+        <a href="#tym">Kontakty</a>
+        <a href="tel:+420608840890">608 840 890</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Rodinný autoservis od roku 2004</div>
+            <h1>Autoservis &<br><span class="blue">Pneuservis</span> Tábor</h1>
+            <p class="hero-desc">Malý rodinný autoservis otce a syna s více než 20 lety zkušeností. Servisujeme osobní i užitková vozidla všech značek. Spokojení zákazníci se k nám rádi vracejí.</p>
+            <div class="hero-buttons">
+                <a href="tel:+420608840890" class="btn btn-blue">Zavolat nyní</a>
+                <a href="#sluzby" class="btn btn-ghost">Naše služby</a>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="hero-scroll-dot"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-visual anim-left">
+                    <div class="about-img">
+                        <img src="images/mechanic.jpg" alt="Aleš a Vlastimil Lemberka" loading="lazy">
+                    </div>
+                    <div class="about-experience">
+                        <div class="num">20+</div>
+                        <div class="label">let praxe</div>
+                    </div>
+                </div>
+                <div class="about-text anim-right">
+                    <div class="section-label">O nás</div>
+                    <h2>Rodinný servis, <span class="blue">kterému můžete věřit</span></h2>
+                    <p>Jsme malý rodinný autoservis, který provozuje otec se synem. S více než dvacetiletou praxí v oboru nabízíme profesionální služby za férové ceny.</p>
+                    <p>Najdete nás v Táboře na Kopečku, v areálu Vasa nábytek na adrese Měšická 2697. Naši spokojení zákazníci se k nám rádi vracejí.</p>
+                    <div class="about-values">
+                        <div class="value-item">
+                            <div class="value-icon">&#128736;</div>
+                            <span>Všechny značky</span>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">&#128176;</div>
+                            <span>Férové ceny</span>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">&#129309;</div>
+                            <span>Rodinný přístup</span>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">&#9733;</div>
+                            <span>20+ let zkušeností</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="sluzby">
+        <div class="container">
+            <div class="section-header anim-up">
+                <div class="section-label">Služby</div>
+                <h2 class="section-title">Co pro vás uděláme</h2>
+                <p class="section-desc">Kompletní servis osobních a užitkových vozidel všech typů a značek</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card anim-scale">
+                    <div class="service-icon">&#128295;</div>
+                    <h3>Mechanické opravy</h3>
+                    <p>Kompletní mechanické opravy motorů, převodovek, brzd, podvozků a dalších komponent. Diagnostika závad moderním vybavením.</p>
+                </div>
+                <div class="service-card anim-scale">
+                    <div class="service-icon">&#128663;</div>
+                    <h3>Karosářské práce</h3>
+                    <p>Opravy karoserií po nehodách, odstraňování promáčklin, lakýrnické práce a renovace povrchů. Vrátíme vašemu autu původní vzhled.</p>
+                </div>
+                <div class="service-card anim-scale">
+                    <div class="service-icon">&#9881;</div>
+                    <h3>Pneuservis</h3>
+                    <p>Přezutí pneumatik, vyvažování kol, opravy defektů, uskladnění pneumatik a prodej nových pneu. Celoroční servis.</p>
+                </div>
+                <div class="service-card anim-scale">
+                    <div class="service-icon">&#9889;</div>
+                    <h3>Autoelektrika</h3>
+                    <p>Diagnostika a opravy elektrických systémů vozidla. Výměna baterií, alternátorů, startérů a opravy kabeláže.</p>
+                </div>
+                <div class="service-card anim-scale">
+                    <div class="service-icon">&#128230;</div>
+                    <h3>Prodej náhradních dílů</h3>
+                    <p>Zajistíme originální i alternativní náhradní díly pro všechny typy a značky vozidel za výhodné ceny.</p>
+                </div>
+                <div class="service-card anim-scale">
+                    <div class="service-icon">&#128269;</div>
+                    <h3>Diagnostika</h3>
+                    <p>Elektronická diagnostika závad pomocí moderních diagnostických přístrojů. Přesná identifikace problémů vašeho vozu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-stripe">
+        <div class="container">
+            <div class="cta-inner">
+                <div class="cta-text">
+                    <h2>Potřebujete opravit auto?</h2>
+                    <p>Zavolejte nám a domluvíme termín, který vám vyhovuje.</p>
+                </div>
+                <a href="tel:+420608840890" class="btn btn-white">608 840 890</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pneuservis Feature -->
+    <section class="section pneuservis" id="pneuservis">
+        <div class="container">
+            <div class="pneu-grid">
+                <div class="pneu-content anim-left">
+                    <div class="section-label">Pneuservis</div>
+                    <h2>Kompletní péče o vaše pneumatiky</h2>
+                    <p>Nabízíme celoroční pneuservis pro osobní i užitková vozidla. Od přezutí a vyvažování přes opravu defektů až po prodej nových pneumatik.</p>
+                    <div class="pneu-list">
+                        <div class="pneu-item">
+                            <span class="pneu-check">&#10003;</span>
+                            Přezutí a vyvažování pneumatik
+                        </div>
+                        <div class="pneu-item">
+                            <span class="pneu-check">&#10003;</span>
+                            Opravy defektů
+                        </div>
+                        <div class="pneu-item">
+                            <span class="pneu-check">&#10003;</span>
+                            Uskladnění pneumatik
+                        </div>
+                        <div class="pneu-item">
+                            <span class="pneu-check">&#10003;</span>
+                            Prodej nových pneumatik
+                        </div>
+                        <div class="pneu-item">
+                            <span class="pneu-check">&#10003;</span>
+                            Poradenství při výběru
+                        </div>
+                    </div>
+                </div>
+                <div class="pneu-image anim-right">
+                    <img src="images/tires.jpg" alt="Pneuservis Lemberka" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="section team" id="tym">
+        <div class="container">
+            <div class="section-header anim-up">
+                <div class="section-label">Náš tým</div>
+                <h2 class="section-title">Rodinný podnik otce a syna</h2>
+                <p class="section-desc">Kontaktujte nás přímo telefonicky</p>
+            </div>
+            <div class="team-layout">
+                <div class="team-card anim-left">
+                    <div class="team-avatar">AL</div>
+                    <h3>Aleš Lemberka</h3>
+                    <div class="team-role">Automechanik</div>
+                    <a href="tel:+420608840890" class="team-phone">&#128222; 608 840 890</a>
+                </div>
+                <div class="team-card anim-right">
+                    <div class="team-avatar">VL</div>
+                    <h3>Vlastimil Lemberka</h3>
+                    <div class="team-role">Automechanik</div>
+                    <a href="tel:+420776574951" class="team-phone">&#128222; 776 574 951</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq-section" id="faq">
+        <div class="container">
+            <div class="section-header anim-up">
+                <div class="section-label">Časté dotazy</div>
+                <h2 class="section-title">Odpovědi na vaše otázky</h2>
+                <p class="section-desc">Přečtěte si odpovědi na nejčastější dotazy našich zákazníků</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item anim-up">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Jak si mohu domluvit termín opravy?</span>
+                        <span class="faq-arrow">&#9660;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Stačí nám zavolat na telefon 608 840 890 nebo 776 574 951 a domluvíme termín, který vám bude vyhovovat. Snažíme se zákazníky obsloužit co nejdříve, často i tentýž den.</p>
+                    </div>
+                </div>
+                <div class="faq-item anim-up">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Servisujete všechny značky vozidel?</span>
+                        <span class="faq-arrow">&#9660;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ano, servisujeme osobní i užitková vozidla všech typů a značek. Nezáleží na tom, jestli máte Škodu, Ford, Volkswagen nebo jakoukoli jinou značku.</p>
+                    </div>
+                </div>
+                <div class="faq-item anim-up">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Nabízíte uskladnění pneumatik?</span>
+                        <span class="faq-arrow">&#9660;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ano, nabízíme sezónní uskladnění pneumatik. Vaše pneu bezpečně uskladníme a při příští návštěvě je přezujeme. Nemusíte se starat o skladování doma.</p>
+                    </div>
+                </div>
+                <div class="faq-item anim-up">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Jak dlouho trvá běžný servis?</span>
+                        <span class="faq-arrow">&#9660;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Záleží na rozsahu prací. Přezutí pneumatik trvá přibližně 30-45 minut. Běžný servis (výměna oleje, filtrů) zvládneme do 1-2 hodin. U složitějších oprav vás informujeme předem o předpokládané době.</p>
+                    </div>
+                </div>
+                <div class="faq-item anim-up">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        <span>Kde přesně se váš autoservis nachází?</span>
+                        <span class="faq-arrow">&#9660;</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Najdete nás v Táboře, na Kopečku v areálu Vasa nábytek, na adrese Měšická 2697. Příjezd je snadný a parkování přímo u servisu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials-section" id="hodnoceni">
+        <div class="container">
+            <div class="section-header anim-up">
+                <div class="section-label">Reference</div>
+                <h2 class="section-title">Co říkají naši zákazníci</h2>
+                <p class="section-desc">Spokojení zákazníci se k nám rádi vracejí</p>
+            </div>
+            <div class="testimonials-row">
+                <div class="testimonial-card anim-scale">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-text">Skvělý rodinný autoservis. Poctivá práce, férové ceny a rychlé jednání. Aleš vždy poradí a udělá práci na výbornou. Doporučuji všem.</p>
+                    <div class="testimonial-author-name">Martin Kratochvíl</div>
+                    <div class="testimonial-author-note">Škoda Octavia, Tábor</div>
+                </div>
+                <div class="testimonial-card anim-scale">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-text">Jezdím sem přes 10 let. Vždy spolehlivě, rychle a za rozumné ceny. Otec se synem jsou profíci, kteří rozumí svému řemeslu.</p>
+                    <div class="testimonial-author-name">Jana Šimánková</div>
+                    <div class="testimonial-author-note">VW Golf, Sezimovo Ústí</div>
+                </div>
+                <div class="testimonial-card anim-scale">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-text">Potřeboval jsem urgentně opravit brzdy a Lemberkovi mě vzali ještě ten den. Kvalitní práce za férovou cenu. Jednoznačně doporučuji.</p>
+                    <div class="testimonial-author-name">Petr Beneš</div>
+                    <div class="testimonial-author-note">Ford Focus, Tábor</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section process-section">
+        <div class="container">
+            <div class="section-header anim-up">
+                <div class="section-label">Postup</div>
+                <h2 class="section-title">Jak to u nás funguje</h2>
+                <p class="section-desc">Jednoduchý proces od objednání až po předání vozu</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step anim-up">
+                    <div class="step-number">01</div>
+                    <h3>Zavolejte nám</h3>
+                    <p>Kontaktujte nás telefonicky a popište problém nebo požadovanou službu.</p>
+                </div>
+                <div class="process-connector"></div>
+                <div class="process-step anim-up">
+                    <div class="step-number">02</div>
+                    <h3>Domluvíme termín</h3>
+                    <p>Společně najdeme termín, který vám bude vyhovovat. Často i ten samý den.</p>
+                </div>
+                <div class="process-connector"></div>
+                <div class="process-step anim-up">
+                    <div class="step-number">03</div>
+                    <h3>Diagnostika a oprava</h3>
+                    <p>Provedeme diagnostiku a opravu. O případných vícepracích vás informujeme předem.</p>
+                </div>
+                <div class="process-connector"></div>
+                <div class="process-step anim-up">
+                    <div class="step-number">04</div>
+                    <h3>Předání vozu</h3>
+                    <p>Vůz vám předáme v dohodnutém stavu. Vše vysvětlíme a poradíme s další údržbou.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header anim-up">
+                <div class="section-label">Kontakt</div>
+                <h2 class="section-title">Kde nás najdete</h2>
+                <p class="section-desc">Tábor - Na Kopečku, areál Vasa nábytek</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-cards">
+                    <div class="contact-card anim-left">
+                        <div class="contact-icon">&#128205;</div>
+                        <div>
+                            <h3>Adresa</h3>
+                            <p>Měšická 2697<br>390 02 Tábor<br>Areál Vasa nábytek, Na Kopečku</p>
+                        </div>
+                    </div>
+                    <div class="contact-card anim-left">
+                        <div class="contact-icon">&#128222;</div>
+                        <div>
+                            <h3>Telefon</h3>
+                            <p><a href="tel:+420608840890">Aleš: 608 840 890</a><br><a href="tel:+420776574951">Vlastimil: 776 574 951</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-card anim-left">
+                        <div class="contact-icon">&#9993;</div>
+                        <div>
+                            <h3>E-mail</h3>
+                            <p><a href="mailto:aleslemberka@seznam.cz">aleslemberka@seznam.cz</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-card anim-left">
+                        <div class="contact-icon">&#128337;</div>
+                        <div>
+                            <h3>Otevírací doba</h3>
+                            <p>Po - Pá: 8:00 - 16:00<br>So - Ne: Zavřeno</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-box anim-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2598.2!2d14.6650!3d49.4100!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470d9e2d8c2a6b9f%3A0x400af0f661540b0!2sM%C4%9B%C5%A1ick%C3%A1%202697%2C%20390%2002%20T%C3%A1bor!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - Autoservis Lemberka"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">Lemberka <span>Auto</span></div>
+                    <p>Rodinný autoservis a pneuservis v Táboře s více než 20 lety zkušeností. Servisujeme osobní i užitková vozidla všech značek.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Služby</h4>
+                    <ul>
+                        <li><a href="#sluzby">Mechanické opravy</a></li>
+                        <li><a href="#sluzby">Karosářské práce</a></li>
+                        <li><a href="#pneuservis">Pneuservis</a></li>
+                        <li><a href="#sluzby">Autoelektrika</a></li>
+                        <li><a href="#sluzby">Náhradní díly</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><a href="tel:+420608840890">608 840 890</a></li>
+                        <li><a href="tel:+420776574951">776 574 951</a></li>
+                        <li><a href="mailto:aleslemberka@seznam.cz">aleslemberka@seznam.cz</a></li>
+                        <li><a href="#kontakt">Najít na mapě</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Autoservis & Pneuservis Lemberka. Všechna práva vyhrazena.</span>
+                <span>Vytvořil <a href="https://kshpartners.cz" target="_blank" rel="noopener">KSH Partners s.r.o.</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* Header scroll */
+        (function(){
+            var header = document.getElementById('header');
+            window.addEventListener('scroll', function(){
+                header.classList.toggle('scrolled', window.pageYOffset > 50);
+            });
+        })();
+
+        /* Hamburger */
+        (function(){
+            var hamburger = document.getElementById('hamburger');
+            var mobileNav = document.getElementById('mobileNav');
+            var overlay = document.getElementById('overlay');
+            var links = mobileNav.querySelectorAll('a');
+
+            function toggle(){
+                hamburger.classList.toggle('active');
+                mobileNav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            }
+            function close(){
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            hamburger.addEventListener('click', toggle);
+            overlay.addEventListener('click', close);
+            links.forEach(function(l){ l.addEventListener('click', close); });
+        })();
+
+        /* IntersectionObserver */
+        (function(){
+            var els = document.querySelectorAll('.anim-up, .anim-left, .anim-right, .anim-scale');
+            if ('IntersectionObserver' in window) {
+                var obs = new IntersectionObserver(function(entries){
+                    entries.forEach(function(e){
+                        if (e.isIntersecting) {
+                            e.target.classList.add('visible');
+                            obs.unobserve(e.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+                els.forEach(function(el){ obs.observe(el); });
+            } else {
+                els.forEach(function(el){ el.classList.add('visible'); });
+            }
+        })();
+
+        /* Smooth scroll */
+        (function(){
+            document.querySelectorAll('a[href^="#"]').forEach(function(a){
+                a.addEventListener('click', function(e){
+                    var id = this.getAttribute('href');
+                    if (id === '#') return;
+                    var t = document.querySelector(id);
+                    if (t) {
+                        e.preventDefault();
+                        var h = document.getElementById('header').offsetHeight;
+                        window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - h, behavior: 'smooth' });
+                    }
+                });
+            });
+        })();
+
+        /* Parallax hero bg */
+        (function(){
+            var bg = document.querySelector('.hero-bg');
+            window.addEventListener('scroll', function(){
+                var y = window.pageYOffset;
+                if (y < window.innerHeight) {
+                    bg.style.transform = 'translateY(' + (y * 0.35) + 'px)';
+                }
+            });
+        })();
+
+        /* Lazy image fade */
+        (function(){
+            document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.6s ease';
+                if (img.complete) { img.style.opacity = '1'; }
+                else { img.addEventListener('load', function(){ img.style.opacity = '1'; }); }
+            });
+        })();
+
+        /* Active nav */
+        (function(){
+            var secs = document.querySelectorAll('section[id]');
+            var links = document.querySelectorAll('.nav-links a:not(.nav-phone)');
+            window.addEventListener('scroll', function(){
+                var pos = window.pageYOffset + 100;
+                secs.forEach(function(sec){
+                    if (pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight) {
+                        var id = sec.getAttribute('id');
+                        links.forEach(function(l){
+                            l.style.color = l.getAttribute('href') === '#' + id ? 'var(--accent-light)' : '';
+                        });
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

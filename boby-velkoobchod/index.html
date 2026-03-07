@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BOBY-H s.r.o. - Velkoobchod a maloobchod s nápoji, Tábor. Alko i nealko nápoje, pivo, víno, tabák, cukrovinky a gastronomické potřeby.">
+    <title>BOBY-H | Velkoobchod & Maloobchod s nápoji – Tábor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS Custom Properties
+           ======================================== */
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --primary-dark: #0d1259;
+            --accent: #ff9800;
+            --accent-light: #ffb74d;
+            --accent-dark: #e65100;
+            --white: #ffffff;
+            --off-white: #f8f9fa;
+            --gray-100: #f1f3f5;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --text: #2c2c2c;
+            --text-light: #5a5a5a;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.15);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.2);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 1200px;
+            --header-height: 80px;
+        }
+
+        /* ========================================
+           Reset & Base
+           ======================================== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Archivo', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========================================
+           Scroll Animation Classes
+           ======================================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .slide-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.85);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ========================================
+           Header / Navigation
+           ======================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            padding: 5px;
+            z-index: 1001;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -5px);
+        }
+
+        /* ========================================
+           Hero Section
+           ======================================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            overflow: hidden;
+            padding-top: var(--header-height);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/hero-beverages.jpg') center/cover no-repeat;
+            opacity: 0.15;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 80%, rgba(255,152,0,0.15) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 20%, rgba(255,152,0,0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            padding: 40px 0;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 152, 0, 0.2);
+            border: 1px solid rgba(255, 152, 0, 0.4);
+            border-radius: var(--radius-xl);
+            color: var(--accent-light);
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--white);
+            margin-bottom: 20px;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent);
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+            max-width: 550px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: var(--radius-sm);
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--white);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Archivo', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Floating shapes */
+        .hero-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.06;
+            background: var(--accent);
+        }
+
+        .hero-shape-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            right: -100px;
+        }
+
+        .hero-shape-2 {
+            width: 250px;
+            height: 250px;
+            bottom: 50px;
+            right: 20%;
+        }
+
+        .hero-shape-3 {
+            width: 150px;
+            height: 150px;
+            top: 30%;
+            right: 10%;
+        }
+
+        /* ========================================
+           Section Styles
+           ======================================== */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(26, 35, 126, 0.08);
+            color: var(--primary);
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: var(--radius-xl);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========================================
+           About Section
+           ======================================== */
+        .about {
+            background: var(--off-white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+        }
+
+        .about-image-badge {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 16px 24px;
+            border-radius: var(--radius-md);
+            font-family: 'Archivo', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            line-height: 1.2;
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-image-badge small {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            color: var(--gray-900);
+            margin-bottom: 20px;
+        }
+
+        .about-text h2 span {
+            color: var(--accent);
+        }
+
+        .about-text p {
+            color: var(--gray-600);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 30px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .about-feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(26, 35, 126, 0.08);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .about-feature span {
+            font-family: 'Archivo', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--gray-800);
+        }
+
+        /* ========================================
+           Products / Categories Section
+           ======================================== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .product-card-image {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .product-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-card-image img {
+            transform: scale(1.08);
+        }
+
+        .product-card-body {
+            padding: 28px;
+        }
+
+        .product-card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--white);
+        }
+
+        .product-card h3 {
+            font-size: 1.3rem;
+            color: var(--gray-900);
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           Services / Why Us Section
+           ======================================== */
+        .services {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 10% 90%, rgba(255,152,0,0.1) 0%, transparent 50%);
+        }
+
+        .services .section-tag {
+            background: rgba(255, 152, 0, 0.2);
+            color: var(--accent-light);
+        }
+
+        .services .section-title {
+            color: var(--white);
+        }
+
+        .services .section-subtitle {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card {
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: var(--radius-md);
+            padding: 36px 28px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateY(-5px);
+            border-color: rgba(255, 152, 0, 0.3);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 152, 0, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           CTA Banner
+           ======================================== */
+        .cta-banner {
+            background: var(--accent);
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -10%;
+            width: 120%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .cta-banner h2 {
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .cta-banner p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--primary);
+            padding: 16px 40px;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .btn-white:hover {
+            background: var(--gray-100);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ========================================
+           Branches Section
+           ======================================== */
+        .branches-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .branch-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 36px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .branch-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            transform: scaleY(0);
+            transition: var(--transition);
+        }
+
+        .branch-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .branch-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .branch-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .branch-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .branch-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: var(--gray-600);
+        }
+
+        .branch-info-icon {
+            color: var(--accent);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* ========================================
+           Contact Section
+           ======================================== */
+        .contact {
+            background: var(--off-white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+
+        .contact-card-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .contact-card h3 {
+            font-size: 1.1rem;
+            color: var(--gray-900);
+            margin-bottom: 6px;
+        }
+
+        .contact-card p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+
+        .contact-card a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .contact-card a:hover {
+            color: var(--accent);
+        }
+
+        .map-container {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 400px;
+        }
+
+        /* ========================================
+           Footer
+           ======================================== */
+        .footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-brand .logo {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.08);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .footer-col h4 {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--white);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--gray-400);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--accent-light);
+        }
+
+        /* ========================================
+           Mobile Navigation Overlay
+           ======================================== */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 380px;
+            height: 100vh;
+            background: var(--white);
+            z-index: 999;
+            transition: var(--transition-slow);
+            box-shadow: var(--shadow-xl);
+            padding: 100px 40px 40px;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav a {
+            display: block;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            padding: 16px 0;
+            border-bottom: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent);
+            padding-left: 12px;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ========================================
+           Opening Hours Table
+           ======================================== */
+        .hours-table {
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--gray-200);
+            font-size: 0.9rem;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .hours-day {
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .hours-time {
+            color: var(--gray-600);
+        }
+
+        /* ========================================
+           Partners / Brands Marquee
+           ======================================== */
+        .brands {
+            padding: 50px 0;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .brands-text {
+            text-align: center;
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gray-500);
+            margin-bottom: 30px;
+        }
+
+        .brands-track {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .brand-item {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--gray-400);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .brand-item:hover {
+            color: var(--primary);
+        }
+
+        /* ========================================
+           Testimonials
+           ======================================== */
+        .testimonials {
+            background: var(--off-white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 36px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 3rem;
+            color: var(--accent);
+            font-family: 'Archivo', sans-serif;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-card p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            font-family: 'Archivo', sans-serif;
+            font-weight: 700;
+            color: var(--gray-800);
+            font-size: 0.95rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+
+        /* ========================================
+           Responsive Design
+           ======================================== */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-stats {
+                gap: 24px;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .branches-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-banner h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#hero" class="logo">BOBY<span>-H</span></a>
+            <nav class="nav-links">
+                <a href="#o-nas">O nás</a>
+                <a href="#sortiment">Sortiment</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#pobocky">Pobočky</a>
+                <a href="#reference">Reference</a>
+                <a href="#kontakt">Kontakt</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#o-nas">O nás</a>
+        <a href="#sortiment">Sortiment</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#pobocky">Pobočky</a>
+        <a href="#reference">Reference</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-shape hero-shape-1"></div>
+        <div class="hero-shape hero-shape-2"></div>
+        <div class="hero-shape hero-shape-3"></div>
+        <div class="hero-pattern"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">Od roku 1989</div>
+                <h1>
+                    Velkoobchod s nápoji
+                    <span class="highlight">pro celý Jihočeský kraj</span>
+                </h1>
+                <p>Spolehlivý partner pro gastro, maloobchody i velkoobchody. Široký sortiment alkoholických i nealkoholických nápojů, piva, vína, tabáku a cukrovinek.</p>
+                <div class="hero-buttons">
+                    <a href="#kontakt" class="btn btn-primary">Kontaktujte nás</a>
+                    <a href="#sortiment" class="btn btn-outline">Náš sortiment</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">35+</div>
+                        <div class="stat-label">Let zkušeností</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2300m²</div>
+                        <div class="stat-label">Skladové plochy</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Pobočky</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands -->
+    <div class="brands">
+        <div class="container">
+            <div class="brands-text">Nabízíme značky, které znáte</div>
+            <div class="brands-track">
+                <div class="brand-item">Pilsner Urquell</div>
+                <div class="brand-item">Zwack</div>
+                <div class="brand-item">Coca-Cola</div>
+                <div class="brand-item">Mattoni</div>
+                <div class="brand-item">Budvar</div>
+                <div class="brand-item">Bohemia Sekt</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section about" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image slide-left">
+                    <img src="images/warehouse.jpg" alt="Sklad BOBY-H Tábor" loading="lazy">
+                    <div class="about-image-badge">
+                        35+
+                        <small>let na trhu</small>
+                    </div>
+                </div>
+                <div class="about-text slide-right">
+                    <div class="section-tag">O společnosti</div>
+                    <h2>Tradice a <span>kvalita</span> od roku 1989</h2>
+                    <p>Společnost BOBY-H byla založena v roce 1989 a od té doby se stala jedním z předních distributorů nápojů v Jihočeském kraji. Název firmy je odvozen od zakladatele Bohuslava Hrušky.</p>
+                    <p>Hlavní sídlo společnosti se nachází v obci Sepekov, kde disponujeme moderními skladovacími prostory o rozloze 2 300 m² s odpovídajícími manipulačními plochami a parkovištěm.</p>
+                    <div class="about-features">
+                        <div class="about-feature fade-in">
+                            <div class="about-feature-icon">&#9733;</div>
+                            <span>Široký sortiment</span>
+                        </div>
+                        <div class="about-feature fade-in">
+                            <div class="about-feature-icon">&#9881;</div>
+                            <span>Vlastní logistika</span>
+                        </div>
+                        <div class="about-feature fade-in">
+                            <div class="about-feature-icon">&#10004;</div>
+                            <span>Rozvoz po kraji</span>
+                        </div>
+                        <div class="about-feature fade-in">
+                            <div class="about-feature-icon">&#9829;</div>
+                            <span>Osobní přístup</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section" id="sortiment">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-tag">Sortiment</div>
+                <h2 class="section-title">Co u nás najdete</h2>
+                <p class="section-subtitle">Kompletní nabídka nápojů a doplňkového zboží pro vaše podnikání</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card scale-in">
+                    <div class="product-card-image">
+                        <img src="images/beer.jpg" alt="Pivo" loading="lazy">
+                    </div>
+                    <div class="product-card-body">
+                        <div class="product-card-icon">&#127866;</div>
+                        <h3>Pivo</h3>
+                        <p>Široký výběr tuzemských i zahraničních piv. Sudové, lahvové i plechovkové. Spolupracujeme s největšími pivovary v ČR.</p>
+                    </div>
+                </div>
+                <div class="product-card scale-in">
+                    <div class="product-card-image">
+                        <img src="images/wine.jpg" alt="Víno" loading="lazy">
+                    </div>
+                    <div class="product-card-body">
+                        <div class="product-card-icon">&#127863;</div>
+                        <h3>Víno a lihoviny</h3>
+                        <p>Kvalitní česká i zahraniční vína, destiláty a likéry. Jsme výhradní distributor maďarského likéru Zwack pro ČR.</p>
+                    </div>
+                </div>
+                <div class="product-card scale-in">
+                    <div class="product-card-image">
+                        <img src="images/delivery.jpg" alt="Nealkoholické nápoje" loading="lazy">
+                    </div>
+                    <div class="product-card-body">
+                        <div class="product-card-icon">&#127867;</div>
+                        <h3>Nealkoholické nápoje</h3>
+                        <p>Minerální vody, džusy, energy drinky, sirupy a další. Kompletní portfolio od značek Mattoni, Coca-Cola a dalších.</p>
+                    </div>
+                </div>
+                <div class="product-card scale-in">
+                    <div class="product-card-image">
+                        <img src="images/hero-beverages.jpg" alt="Tabák" loading="lazy">
+                    </div>
+                    <div class="product-card-body">
+                        <div class="product-card-icon">&#128684;</div>
+                        <h3>Tabákové výrobky</h3>
+                        <p>Kompletní sortiment cigaret a tabákových výrobků pro vaši prodejnu, restauraci či benzínovou stanici.</p>
+                    </div>
+                </div>
+                <div class="product-card scale-in">
+                    <div class="product-card-image">
+                        <img src="images/warehouse.jpg" alt="Cukrovinky a pochutiny" loading="lazy">
+                    </div>
+                    <div class="product-card-body">
+                        <div class="product-card-icon">&#127852;</div>
+                        <h3>Cukrovinky a pochutiny</h3>
+                        <p>Sladké i slané pochutiny, čokolády, bonbóny a další doplňkový sortiment pro vaše zákazníky.</p>
+                    </div>
+                </div>
+                <div class="product-card scale-in">
+                    <div class="product-card-image">
+                        <img src="images/delivery.jpg" alt="Gastro potřeby" loading="lazy">
+                    </div>
+                    <div class="product-card-body">
+                        <div class="product-card-icon">&#127869;</div>
+                        <h3>Gastro potřeby</h3>
+                        <p>Barové vybavení, sklo, hygienické prostředky a vše potřebné pro provoz gastronomických zařízení.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="sluzby">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-tag">Proč právě my</div>
+                <h2 class="section-title">Služby pro vaše podnikání</h2>
+                <p class="section-subtitle">Komplexní servis od objednávky až po dodání přímo k vám</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">&#128666;</div>
+                    <h3>Rozvoz po kraji</h3>
+                    <p>Pravidelné rozvozy po celém Jihočeském kraji přímo do vašeho provozu.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">&#128176;</div>
+                    <h3>Velkoobchodní ceny</h3>
+                    <p>Výhodné velkoobchodní ceny a individuální cenové nabídky pro stálé zákazníky.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">&#128221;</div>
+                    <h3>E-shop</h3>
+                    <p>Objednávejte pohodlně z domova přes náš e-shop na eshop.boby-h.cz.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">&#128222;</div>
+                    <h3>Osobní přístup</h3>
+                    <p>Každý zákazník je pro nás důležitý. Poradíme s výběrem a přizpůsobíme nabídku.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">&#128197;</div>
+                    <h3>Akční leták</h3>
+                    <p>Měsíční akční leták s výhodnými nabídkami a novinkami v sortimentu.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">&#127942;</div>
+                    <h3>Exkluzivní značky</h3>
+                    <p>Výhradní distribuce vybraných značek, jako je maďarský likér Zwack.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">&#128230;</div>
+                    <h3>Skladové zásoby</h3>
+                    <p>Rozsáhlé sklady o ploše 2 300 m² zajišťují okamžitou dostupnost zboží.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">&#129309;</div>
+                    <h3>Dlouholeté partnerství</h3>
+                    <p>Budujeme dlouhodobé vztahy se zákazníky i dodavateli na základě důvěry.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <div class="container fade-in">
+            <h2>Máte zájem o spolupráci?</h2>
+            <p>Ozvěte se nám a připravíme cenovou nabídku na míru vašemu podnikání.</p>
+            <a href="#kontakt" class="btn btn-white">Napište nám</a>
+        </div>
+    </section>
+
+    <!-- Branches Section -->
+    <section class="section" id="pobocky">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-tag">Pobočky</div>
+                <h2 class="section-title">Kde nás najdete</h2>
+                <p class="section-subtitle">Síť poboček a prodejen po celém Jihočeském kraji</p>
+            </div>
+            <div class="branches-grid">
+                <div class="branch-card slide-left">
+                    <h3>Tábor - Měšická</h3>
+                    <div class="branch-info">
+                        <div class="branch-info-item">
+                            <span class="branch-info-icon">&#128205;</span>
+                            <span>Měšická 2505, 390 02 Tábor</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <span class="branch-info-icon">&#128222;</span>
+                            <span>+420 734 316 626</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <span class="branch-info-icon">&#9993;</span>
+                            <span>bobytabor@boby-h.cz</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <span class="branch-info-icon">&#128337;</span>
+                            <div>
+                                <div>Po-Pá: 7:30 - 16:00</div>
+                                <div>So: 8:00 - 12:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="branch-card fade-in">
+                    <h3>Tábor - Husovo nám.</h3>
+                    <div class="branch-info">
+                        <div class="branch-info-item">
+                            <span class="branch-info-icon">&#128205;</span>
+                            <span>Husovo náměstí, 390 01 Tábor</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <span class="branch-info-icon">&#128222;</span>
+                            <span>+420 777 710 662</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <span class="branch-info-icon">&#9993;</span>
+                            <span>obchod@boby-h.cz</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <span class="branch-info-icon">&#128337;</span>
+                            <div>
+                                <div>Po-Pá: 7:30 - 17:00</div>
+                                <div>So: 8:00 - 12:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="branch-card slide-right">
+                    <h3>Sepekov - Sklad</h3>
+                    <div class="branch-info">
+                        <div class="branch-info-item">
+                            <span class="branch-info-icon">&#128205;</span>
+                            <span>Sepekov (hlavní sídlo)</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <span class="branch-info-icon">&#128222;</span>
+                            <span>+420 777 710 662</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <span class="branch-info-icon">&#9993;</span>
+                            <span>obchod@boby-h.cz</span>
+                        </div>
+                        <div class="branch-info-item">
+                            <span class="branch-info-icon">&#128230;</span>
+                            <span>Skladové prostory 2 300 m²</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials" id="reference">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-tag">Reference</div>
+                <h2 class="section-title">Co o nás říkají zákazníci</h2>
+                <p class="section-subtitle">Desítky spokojených zákazníků z celého Jihočeského kraje</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card scale-in">
+                    <div class="testimonial-quote">"</div>
+                    <p>S firmou BOBY-H spolupracujeme již přes 10 let. Spolehlivé dodávky, kvalitní zboží a skvělý přístup. Mohu jen doporučit.</p>
+                    <div class="testimonial-author">Jan Procházka</div>
+                    <div class="testimonial-role">Restaurace U Zlatého lva, Tábor</div>
+                </div>
+                <div class="testimonial-card scale-in">
+                    <div class="testimonial-quote">"</div>
+                    <p>Oceňujeme především osobní přístup a flexibilitu. Když potřebujeme něco narychlo, vždy se domluví. Spolehlivý partner pro naši prodejnu.</p>
+                    <div class="testimonial-author">Marie Dvořáková</div>
+                    <div class="testimonial-role">Potraviny U Marie, Milevsko</div>
+                </div>
+                <div class="testimonial-card scale-in">
+                    <div class="testimonial-quote">"</div>
+                    <p>Velkoobchodní ceny, pravidelné rozvozy a vždy čerstvé zboží. S BOBY-H jsme spokojeni a jiného dodavatele nehledáme.</p>
+                    <div class="testimonial-author">Petr Novotný</div>
+                    <div class="testimonial-role">Hotel Palcát, Tábor</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-tag">Kontakt</div>
+                <h2 class="section-title">Spojte se s námi</h2>
+                <p class="section-subtitle">Rádi zodpovíme vaše dotazy a připravíme nabídku na míru</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info-cards">
+                    <div class="contact-card slide-left">
+                        <div class="contact-card-icon">&#128205;</div>
+                        <div>
+                            <h3>Adresa pobočky Tábor</h3>
+                            <p>Měšická 2505<br>390 02 Tábor</p>
+                        </div>
+                    </div>
+                    <div class="contact-card slide-left">
+                        <div class="contact-card-icon">&#128222;</div>
+                        <div>
+                            <h3>Telefon</h3>
+                            <p><a href="tel:+420734316626">+420 734 316 626</a><br><a href="tel:+420381212312">+420 381 212 312</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-card slide-left">
+                        <div class="contact-card-icon">&#9993;</div>
+                        <div>
+                            <h3>E-mail</h3>
+                            <p><a href="mailto:bobytabor@boby-h.cz">bobytabor@boby-h.cz</a><br><a href="mailto:obchod@boby-h.cz">obchod@boby-h.cz</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-card slide-left">
+                        <div class="contact-card-icon">&#128337;</div>
+                        <div>
+                            <h3>Otevírací doba</h3>
+                            <div class="hours-table">
+                                <div class="hours-row">
+                                    <span class="hours-day">Po - Pá</span>
+                                    <span class="hours-time">7:30 - 16:00</span>
+                                </div>
+                                <div class="hours-row">
+                                    <span class="hours-day">Sobota</span>
+                                    <span class="hours-time">8:00 - 12:00</span>
+                                </div>
+                                <div class="hours-row">
+                                    <span class="hours-day">Neděle</span>
+                                    <span class="hours-time">Zavřeno</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-container slide-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2597.8!2d14.6578!3d49.4148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470d9e2c5e8f1b7d%3A0x400af0f66154090!2sM%C4%9B%C5%A1ick%C3%A1%2C%20390%2002%20T%C3%A1bor!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - BOBY-H Tábor"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">BOBY<span>-H</span></div>
+                    <p>Velkoobchod a maloobchod s nápoji s tradicí od roku 1989. Spolehlivý partner pro gastronomii, maloobchody i velkoobchody v Jihočeském kraji.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/p/Boby-H-100057178070949/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Sortiment</h4>
+                    <ul>
+                        <li><a href="#sortiment">Pivo</a></li>
+                        <li><a href="#sortiment">Víno a lihoviny</a></li>
+                        <li><a href="#sortiment">Nealko nápoje</a></li>
+                        <li><a href="#sortiment">Tabák</a></li>
+                        <li><a href="#sortiment">Cukrovinky</a></li>
+                        <li><a href="#sortiment">Gastro potřeby</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Služby</h4>
+                    <ul>
+                        <li><a href="#sluzby">Rozvoz</a></li>
+                        <li><a href="#sluzby">E-shop</a></li>
+                        <li><a href="#sluzby">Akční leták</a></li>
+                        <li><a href="#sluzby">Velkoobchod</a></li>
+                        <li><a href="#sluzby">Maloobchod</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><a href="tel:+420734316626">+420 734 316 626</a></li>
+                        <li><a href="mailto:obchod@boby-h.cz">obchod@boby-h.cz</a></li>
+                        <li><a href="#pobocky">Pobočky</a></li>
+                        <li><a href="https://eshop.boby-h.cz" target="_blank" rel="noopener">E-shop</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 BOBY-H s.r.o. Všechna práva vyhrazena.</span>
+                <span>Vytvořil <a href="https://kshpartners.cz" target="_blank" rel="noopener">KSH Partners s.r.o.</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        /* ========================================
+           Header Scroll Effect
+           ======================================== */
+        (function() {
+            const header = document.getElementById('header');
+            let lastScroll = 0;
+
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset;
+                if (currentScroll > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                lastScroll = currentScroll;
+            });
+        })();
+
+        /* ========================================
+           Hamburger Menu
+           ======================================== */
+        (function() {
+            const hamburger = document.getElementById('hamburger');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileOverlay = document.getElementById('mobileOverlay');
+            const mobileLinks = mobileNav.querySelectorAll('a');
+
+            function toggleMenu() {
+                hamburger.classList.toggle('active');
+                mobileNav.classList.toggle('active');
+                mobileOverlay.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            }
+
+            function closeMenu() {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            hamburger.addEventListener('click', toggleMenu);
+            mobileOverlay.addEventListener('click', closeMenu);
+            mobileLinks.forEach(function(link) {
+                link.addEventListener('click', closeMenu);
+            });
+        })();
+
+        /* ========================================
+           IntersectionObserver Scroll Animations
+           ======================================== */
+        (function() {
+            var animatedElements = document.querySelectorAll('.fade-in, .slide-left, .slide-right, .scale-in');
+
+            if ('IntersectionObserver' in window) {
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.15,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+
+                animatedElements.forEach(function(el) {
+                    observer.observe(el);
+                });
+            } else {
+                animatedElements.forEach(function(el) {
+                    el.classList.add('visible');
+                });
+            }
+        })();
+
+        /* ========================================
+           Smooth Scroll for Anchor Links
+           ======================================== */
+        (function() {
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    var targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    var target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        var headerHeight = document.getElementById('header').offsetHeight;
+                        var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        })();
+
+        /* ========================================
+           Counter Animation
+           ======================================== */
+        (function() {
+            var statNumbers = document.querySelectorAll('.stat-number');
+            var animated = false;
+
+            function animateCounters() {
+                if (animated) return;
+                statNumbers.forEach(function(el) {
+                    var text = el.textContent;
+                    var num = parseInt(text);
+                    if (isNaN(num)) return;
+                    var suffix = text.replace(/[0-9]/g, '');
+                    var duration = 2000;
+                    var start = 0;
+                    var startTime = null;
+
+                    function step(timestamp) {
+                        if (!startTime) startTime = timestamp;
+                        var progress = Math.min((timestamp - startTime) / duration, 1);
+                        var eased = 1 - Math.pow(1 - progress, 3);
+                        el.textContent = Math.floor(eased * num) + suffix;
+                        if (progress < 1) {
+                            requestAnimationFrame(step);
+                        }
+                    }
+                    requestAnimationFrame(step);
+                });
+                animated = true;
+            }
+
+            var heroStats = document.querySelector('.hero-stats');
+            if (heroStats && 'IntersectionObserver' in window) {
+                var statsObserver = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        animateCounters();
+                        statsObserver.unobserve(heroStats);
+                    }
+                }, { threshold: 0.5 });
+                statsObserver.observe(heroStats);
+            }
+        })();
+
+        /* ========================================
+           Active Navigation Highlight
+           ======================================== */
+        (function() {
+            var sections = document.querySelectorAll('section[id]');
+            var navLinks = document.querySelectorAll('.nav-links a');
+
+            function highlightNav() {
+                var scrollPos = window.pageYOffset + 100;
+                sections.forEach(function(section) {
+                    var top = section.offsetTop;
+                    var height = section.offsetHeight;
+                    var id = section.getAttribute('id');
+                    if (scrollPos >= top && scrollPos < top + height) {
+                        navLinks.forEach(function(link) {
+                            link.style.color = '';
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.style.color = 'var(--primary)';
+                            }
+                        });
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', highlightNav);
+        })();
+
+        /* ========================================
+           Parallax Effect for Hero
+           ======================================== */
+        (function() {
+            var heroShapes = document.querySelectorAll('.hero-shape');
+            window.addEventListener('scroll', function() {
+                var scrolled = window.pageYOffset;
+                heroShapes.forEach(function(shape, index) {
+                    var speed = (index + 1) * 0.15;
+                    shape.style.transform = 'translateY(' + (scrolled * speed) + 'px)';
+                });
+            });
+        })();
+
+        /* ========================================
+           Lazy Image Loading Enhancement
+           ======================================== */
+        (function() {
+            if ('loading' in HTMLImageElement.prototype) {
+                var images = document.querySelectorAll('img[loading="lazy"]');
+                images.forEach(function(img) {
+                    img.style.opacity = '0';
+                    img.style.transition = 'opacity 0.5s ease';
+                    if (img.complete) {
+                        img.style.opacity = '1';
+                    } else {
+                        img.addEventListener('load', function() {
+                            img.style.opacity = '1';
+                        });
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

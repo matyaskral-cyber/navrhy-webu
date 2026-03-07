@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ELSTAV Strakonice v.o.s. - elektroinstalace, silnoproudé a slaboproudé rozvody, hromosvody, revize elektrických zařízení a prodejna elektromateriálu.">
+    <title>ELSTAV Strakonice | Elektroinstalace & Revize – Strakonice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS Custom Properties
+           ======================================== */
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3f51b5;
+            --primary-dark: #0d1257;
+            --accent: #ff6f00;
+            --accent-light: #ffa040;
+            --accent-dark: #e65100;
+            --white: #ffffff;
+            --off-white: #f8f9fc;
+            --gray-50: #fafbfd;
+            --gray-100: #f1f3f8;
+            --gray-200: #e3e6ef;
+            --gray-300: #c9cfe0;
+            --gray-400: #a0a8c0;
+            --gray-500: #6e7894;
+            --gray-600: #4e5672;
+            --gray-700: #363d56;
+            --gray-800: #262c42;
+            --gray-900: #161a2e;
+            --text: #1e2238;
+            --text-muted: #5b6382;
+            --yellow: #ffc107;
+            --shadow-xs: 0 1px 2px rgba(22,26,46,0.04);
+            --shadow-sm: 0 2px 4px rgba(22,26,46,0.06);
+            --shadow-md: 0 4px 12px rgba(22,26,46,0.08);
+            --shadow-lg: 0 8px 24px rgba(22,26,46,0.1);
+            --shadow-xl: 0 16px 48px rgba(22,26,46,0.12);
+            --radius: 10px;
+            --radius-lg: 18px;
+            --radius-xl: 28px;
+            --radius-full: 9999px;
+            --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+            --transition-slow: 0.6s cubic-bezier(0.4,0,0.2,1);
+            --max-width: 1200px;
+            --header-h: 76px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            background: var(--white);
+            overflow-x: hidden;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+        /* Animations */
+        .anim-fade { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .anim-fade.visible { opacity: 1; transform: translateY(0); }
+        .anim-slide-l { opacity: 0; transform: translateX(-45px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .anim-slide-l.visible { opacity: 1; transform: translateX(0); }
+        .anim-slide-r { opacity: 0; transform: translateX(45px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .anim-slide-r.visible { opacity: 1; transform: translateX(0); }
+        .anim-pop { opacity: 0; transform: scale(0.88); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .anim-pop.visible { opacity: 1; transform: scale(1); }
+
+        /* ========================================
+           Header — Clean Modern
+           ======================================== */
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%; height: var(--header-h);
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: var(--transition);
+        }
+        .header.scrolled { box-shadow: var(--shadow-sm); }
+        .header-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 24px;
+        }
+        .logo {
+            font-family: 'Exo 2', sans-serif; font-size: 1.5rem;
+            font-weight: 800; color: var(--primary);
+        }
+        .logo span { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 26px; align-items: center; }
+        .nav-links a {
+            font-family: 'Exo 2', sans-serif; font-size: 0.88rem;
+            font-weight: 600; color: var(--gray-600);
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a::after {
+            content: ''; display: block; width: 0; height: 2px;
+            background: var(--accent); margin-top: 2px;
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            background: var(--accent) !important; color: var(--white) !important;
+            padding: 8px 22px !important; border-radius: var(--radius) !important;
+        }
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover { background: var(--accent-dark) !important; }
+
+        .hamburger {
+            display: none; flex-direction: column; cursor: pointer; gap: 5px;
+            background: none; border: none; z-index: 1001; padding: 4px;
+        }
+        .hamburger span { width: 26px; height: 2.5px; background: var(--primary); border-radius: 3px; transition: var(--transition); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .mob-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.45); z-index: 998;
+            opacity: 0; visibility: hidden; transition: var(--transition);
+        }
+        .mob-overlay.active { opacity: 1; visibility: visible; }
+
+        .mob-nav {
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 350px;
+            height: 100vh; background: var(--white); z-index: 999;
+            transition: var(--transition-slow); padding: 100px 36px 40px; box-shadow: var(--shadow-xl);
+        }
+        .mob-nav.active { right: 0; }
+        .mob-nav a {
+            display: block; font-family: 'Exo 2', sans-serif; font-size: 1.15rem;
+            font-weight: 700; color: var(--gray-700); padding: 14px 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .mob-nav a:hover { color: var(--accent); padding-left: 8px; }
+
+        /* ========================================
+           Hero — Angled Split
+           ======================================== */
+        .hero {
+            position: relative; min-height: 100vh;
+            display: flex; align-items: center;
+            padding-top: var(--header-h);
+            background: var(--gray-900);
+            overflow: hidden;
+        }
+        .hero-bg-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('images/hero-electrical.jpg') center/cover no-repeat;
+            opacity: 0.18;
+        }
+        .hero-gradient {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(26,35,126,0.9) 0%, rgba(13,18,87,0.95) 50%, rgba(255,111,0,0.15) 100%);
+        }
+        .hero-angle {
+            position: absolute; bottom: -2px; left: 0; width: 100%; height: 100px;
+            background: var(--white);
+            clip-path: polygon(0 70%, 100% 0, 100% 100%, 0 100%);
+        }
+        .hero-content {
+            position: relative; z-index: 2; max-width: 680px; padding: 60px 0 80px;
+        }
+        .hero-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 18px; background: rgba(255,111,0,0.15);
+            border: 1px solid rgba(255,111,0,0.3);
+            border-radius: var(--radius-full);
+            color: var(--accent-light);
+            font-family: 'Exo 2', sans-serif; font-size: 0.82rem;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        .hero-tag-pulse {
+            width: 8px; height: 8px; background: var(--accent);
+            border-radius: 50%; animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.2rem);
+            color: var(--white); margin-bottom: 18px;
+            font-weight: 800; letter-spacing: -0.5px;
+        }
+        .hero h1 .orange { color: var(--accent); }
+        .hero-desc {
+            font-size: 1.15rem; color: rgba(255,255,255,0.7);
+            margin-bottom: 36px; max-width: 520px; line-height: 1.8;
+        }
+        .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 30px; border-radius: var(--radius);
+            font-family: 'Exo 2', sans-serif; font-size: 0.95rem;
+            font-weight: 700; cursor: pointer; border: none; transition: var(--transition);
+        }
+        .btn-accent {
+            background: var(--accent); color: var(--white);
+            box-shadow: 0 4px 16px rgba(255,111,0,0.35);
+        }
+        .btn-accent:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(255,111,0,0.45); }
+        .btn-ghost-light {
+            background: transparent; color: var(--white);
+            border: 2px solid rgba(255,255,255,0.25);
+        }
+        .btn-ghost-light:hover { border-color: var(--white); }
+
+        .hero-counters {
+            display: flex; gap: 40px; margin-top: 50px;
+            padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .counter-item { text-align: center; }
+        .counter-num {
+            font-family: 'Exo 2', sans-serif; font-size: 2.2rem;
+            font-weight: 900; color: var(--accent); line-height: 1;
+        }
+        .counter-label {
+            font-size: 0.78rem; color: rgba(255,255,255,0.5);
+            text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px;
+        }
+
+        /* ========================================
+           Section Base
+           ======================================== */
+        .section { padding: 100px 0; }
+        .section-header { text-align: center; margin-bottom: 56px; }
+        .section-badge {
+            display: inline-block; padding: 5px 16px;
+            background: rgba(26,35,126,0.06); color: var(--primary);
+            font-family: 'Exo 2', sans-serif; font-size: 0.78rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            border-radius: var(--radius-full); margin-bottom: 12px;
+        }
+        .section-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--gray-900); margin-bottom: 12px; }
+        .section-desc { font-size: 1.05rem; color: var(--gray-500); max-width: 560px; margin: 0 auto; }
+
+        /* ========================================
+           About — Offset Grid
+           ======================================== */
+        .about { background: var(--off-white); }
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 60px; align-items: center;
+        }
+        .about-visual { position: relative; }
+        .about-main-img {
+            border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .about-main-img img { width: 100%; height: 440px; object-fit: cover; }
+        .about-float-badge {
+            position: absolute; bottom: -16px; right: -16px;
+            background: var(--accent); color: var(--white);
+            padding: 18px 24px; border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            font-family: 'Exo 2', sans-serif; text-align: center;
+        }
+        .about-float-badge .big {
+            font-size: 2.4rem; font-weight: 900; line-height: 1;
+        }
+        .about-float-badge .small {
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem; color: var(--gray-900); margin-bottom: 16px;
+        }
+        .about-text h2 .orange { color: var(--accent); }
+        .about-text p { color: var(--gray-600); margin-bottom: 14px; font-size: 1rem; }
+
+        .about-checks {
+            display: flex; flex-direction: column; gap: 10px; margin-top: 24px;
+        }
+        .about-check-item {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 0.95rem; color: var(--gray-700);
+        }
+        .check-circle {
+            width: 26px; height: 26px; background: var(--primary);
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; color: var(--white); font-size: 0.7rem; flex-shrink: 0;
+        }
+
+        /* ========================================
+           Services — Icon Cards
+           ======================================== */
+        .services-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        }
+        .srv-card {
+            background: var(--white); border-radius: var(--radius-lg);
+            padding: 36px 28px; border: 1px solid var(--gray-200);
+            transition: var(--transition); position: relative; overflow: hidden;
+        }
+        .srv-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0); transform-origin: left;
+            transition: var(--transition);
+        }
+        .srv-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .srv-card:hover::before { transform: scaleX(1); }
+
+        .srv-icon {
+            width: 60px; height: 60px;
+            background: rgba(26,35,126,0.06);
+            border-radius: var(--radius);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; margin-bottom: 18px; transition: var(--transition);
+        }
+        .srv-card:hover .srv-icon { background: var(--primary); color: var(--white); }
+        .srv-card h3 { font-size: 1.15rem; color: var(--gray-900); margin-bottom: 8px; }
+        .srv-card p { font-size: 0.9rem; color: var(--gray-500); line-height: 1.6; }
+
+        /* ========================================
+           CTA Band
+           ======================================== */
+        .cta-band {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            padding: 70px 0; position: relative; overflow: hidden;
+        }
+        .cta-band::after {
+            content: ''; position: absolute; top: -50%; right: -10%;
+            width: 500px; height: 500px; border-radius: 50%;
+            background: rgba(255,111,0,0.06);
+        }
+        .cta-inner {
+            position: relative; z-index: 1; text-align: center; color: var(--white);
+        }
+        .cta-inner h2 { font-size: 2.4rem; margin-bottom: 12px; }
+        .cta-inner p { font-size: 1.1rem; color: rgba(255,255,255,0.7); margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        .btn-white-fill {
+            background: var(--white); color: var(--primary);
+            padding: 16px 40px; font-size: 1rem;
+        }
+        .btn-white-fill:hover { background: var(--gray-100); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+        /* ========================================
+           Shop / Products
+           ======================================== */
+        .shop { background: var(--off-white); }
+        .shop-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+        }
+        .shop-image {
+            border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg);
+        }
+        .shop-image img { width: 100%; height: 400px; object-fit: cover; }
+        .shop-content h2 { font-size: 2rem; color: var(--gray-900); margin-bottom: 16px; }
+        .shop-content p { color: var(--gray-600); margin-bottom: 20px; font-size: 1rem; }
+        .shop-items {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+        }
+        .shop-item {
+            padding: 14px; background: var(--white); border-radius: var(--radius);
+            box-shadow: var(--shadow-xs); display: flex; align-items: center; gap: 10px;
+            font-size: 0.9rem; color: var(--gray-700);
+        }
+        .shop-item-icon {
+            color: var(--accent); font-size: 1.1rem;
+        }
+
+        /* ========================================
+           Why Us
+           ======================================== */
+        .why-us-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+        }
+        .why-card {
+            text-align: center; padding: 36px 20px;
+            background: var(--white); border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+        .why-card:hover { box-shadow: var(--shadow-md); border-color: var(--accent); }
+        .why-icon {
+            width: 70px; height: 70px;
+            background: rgba(255,111,0,0.08); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; margin: 0 auto 16px; transition: var(--transition);
+        }
+        .why-card:hover .why-icon { background: var(--accent); color: var(--white); }
+        .why-card h3 { font-size: 1.1rem; color: var(--gray-900); margin-bottom: 6px; }
+        .why-card p { font-size: 0.85rem; color: var(--gray-500); }
+
+        /* ========================================
+           Testimonials
+           ======================================== */
+        .testimonials { background: var(--off-white); }
+        .reviews-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .rev-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-xs);
+            transition: var(--transition);
+        }
+        .rev-card:hover { box-shadow: var(--shadow-md); }
+        .rev-stars {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+        .rev-text {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            font-style: italic;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+        .rev-name {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--gray-800);
+        }
+        .rev-info {
+            font-size: 0.8rem;
+            color: var(--gray-400);
+        }
+
+        /* ========================================
+           Process Section
+           ======================================== */
+        .process-section { background: var(--white); }
+        .proc-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .proc-step {
+            text-align: center;
+            padding: 28px 20px;
+            flex: 1;
+            min-width: 180px;
+        }
+        .proc-num {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .proc-step h3 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.1rem;
+            color: var(--gray-900);
+            margin-bottom: 6px;
+        }
+        .proc-step p {
+            font-size: 0.88rem;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+        .proc-divider {
+            width: 50px;
+            height: 2px;
+            background: var(--gray-300);
+            flex-shrink: 0;
+        }
+
+        /* ========================================
+           FAQ Section
+           ======================================== */
+        .faq-sec { background: var(--off-white); }
+        .faq-wrapper {
+            max-width: 720px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .faq-block {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .faq-block:hover { border-color: var(--accent); }
+        .faq-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+        .faq-icon {
+            font-size: 1.4rem;
+            color: var(--accent);
+            transition: var(--transition);
+            font-weight: 300;
+        }
+        .faq-block.open .faq-icon { transform: rotate(45deg); }
+        .faq-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 24px;
+        }
+        .faq-block.open .faq-body {
+            max-height: 200px;
+            padding: 0 24px 18px;
+        }
+        .faq-body p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           Contact
+           ======================================== */
+        .contact { background: var(--off-white); }
+        .contact-layout {
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px;
+        }
+        .contact-cards { display: flex; flex-direction: column; gap: 18px; }
+        .ct-card {
+            background: var(--white); border-radius: var(--radius);
+            padding: 24px; display: flex; align-items: flex-start; gap: 16px;
+            border: 1px solid var(--gray-200); transition: var(--transition);
+        }
+        .ct-card:hover { border-color: var(--accent); box-shadow: var(--shadow-sm); }
+        .ct-icon {
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius); display: flex; align-items: center;
+            justify-content: center; color: var(--white); font-size: 1.3rem; flex-shrink: 0;
+        }
+        .ct-card h3 { font-size: 1rem; color: var(--gray-900); margin-bottom: 4px; font-family: 'Exo 2', sans-serif; }
+        .ct-card p { font-size: 0.9rem; color: var(--gray-600); }
+        .ct-card a { color: var(--primary); font-weight: 600; }
+        .ct-card a:hover { color: var(--accent); }
+
+        .map-frame {
+            border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: var(--shadow-md); height: 100%; min-height: 420px;
+        }
+        .map-frame iframe { width: 100%; height: 100%; border: none; min-height: 420px; }
+
+        /* ========================================
+           Stats Bar
+           ======================================== */
+        .stats-bar {
+            background: var(--primary);
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .stats-bar::after {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: rgba(255,111,0,0.06);
+        }
+        .stats-flex {
+            display: flex;
+            justify-content: space-between;
+            gap: 32px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        .stat-box {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+        .stat-val {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .stat-lbl {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 6px;
+        }
+
+        /* ========================================
+           Certifications
+           ======================================== */
+        .certs { background: var(--off-white); }
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .cert-card {
+            text-align: center;
+            padding: 32px 20px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+        .cert-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+        .cert-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(255,111,0,0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 16px;
+            transition: var(--transition);
+        }
+        .cert-card:hover .cert-icon {
+            background: var(--accent);
+            color: var(--white);
+        }
+        .cert-card h3 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.05rem;
+            color: var(--gray-900);
+            margin-bottom: 6px;
+        }
+        .cert-card p {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           Coverage Area
+           ======================================== */
+        .coverage-section { background: var(--white); }
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .coverage-text h2 {
+            font-size: 2rem;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+        .coverage-text h2 .orange { color: var(--accent); }
+        .coverage-text p {
+            color: var(--gray-600);
+            margin-bottom: 24px;
+            font-size: 1rem;
+        }
+        .coverage-areas {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .area-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--gray-700);
+        }
+        .area-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .coverage-img {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .coverage-img img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* ========================================
+           Footer
+           ======================================== */
+        .footer { background: var(--gray-900); color: var(--gray-400); }
+        .footer-inner {
+            padding: 56px 0;
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px;
+        }
+        .footer-brand .logo { color: var(--white); font-size: 1.6rem; margin-bottom: 14px; }
+        .footer-brand p { font-size: 0.9rem; line-height: 1.7; }
+        .footer-col h4 {
+            font-family: 'Exo 2', sans-serif; font-size: 0.9rem;
+            color: var(--white); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;
+        }
+        .footer-col ul li { margin-bottom: 8px; }
+        .footer-col ul li a { color: var(--gray-400); font-size: 0.88rem; }
+        .footer-col ul li a:hover { color: var(--accent); }
+        .footer-bottom {
+            padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 8px; font-size: 0.82rem;
+        }
+        .footer-bottom a { color: var(--accent); }
+        .footer-bottom a:hover { color: var(--accent-light); }
+
+        /* ========================================
+           Responsive
+           ======================================== */
+        @media (max-width: 1024px) {
+            .why-us-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-inner { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .about-grid, .shop-grid, .contact-layout { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .reviews-row { grid-template-columns: 1fr; }
+            .proc-flow { flex-direction: column; }
+            .proc-divider { width: 2px; height: 24px; }
+            .why-us-grid { grid-template-columns: 1fr; }
+            .footer-inner { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .section { padding: 64px 0; }
+            .hero-counters { gap: 24px; }
+            .shop-items { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .hero-btns { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+            .hero-counters { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#" class="logo">EL<span>STAV</span></a>
+            <nav class="nav-links">
+                <a href="#o-nas">O nás</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#prodejna">Prodejna</a>
+                <a href="#proc-my">Proč my</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mob-overlay" id="overlay"></div>
+    <nav class="mob-nav" id="mobileNav">
+        <a href="#o-nas">O nás</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#prodejna">Prodejna</a>
+        <a href="#proc-my">Proč my</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-image"></div>
+        <div class="hero-gradient"></div>
+        <div class="hero-angle"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tag">
+                    <span class="hero-tag-pulse"></span>
+                    Strakonice, Jihočeský kraj
+                </div>
+                <h1>Profesionální <span class="orange">elektroinstalace</span> a revize</h1>
+                <p class="hero-desc">ELSTAV Strakonice v.o.s. - zkušený tým pro silnoproudé a slaboproudé rozvody, hromosvody, revize a prodej elektromateriálu. Kvalita za přijatelné ceny.</p>
+                <div class="hero-btns">
+                    <a href="#kontakt" class="btn btn-accent">Kontaktujte nás</a>
+                    <a href="#sluzby" class="btn btn-ghost-light">Naše služby</a>
+                </div>
+                <div class="hero-counters">
+                    <div class="counter-item">
+                        <div class="counter-num">30+</div>
+                        <div class="counter-label">Let zkušeností</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-num">500+</div>
+                        <div class="counter-label">Realizací</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-num">100%</div>
+                        <div class="counter-label">Spokojenost</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section about" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-visual anim-slide-l">
+                    <div class="about-main-img">
+                        <img src="images/team-work.jpg" alt="Tým ELSTAV Strakonice" loading="lazy">
+                    </div>
+                    <div class="about-float-badge">
+                        <div class="big">30+</div>
+                        <div class="small">let na trhu</div>
+                    </div>
+                </div>
+                <div class="about-text anim-slide-r">
+                    <div class="section-badge">O společnosti</div>
+                    <h2>Vaši odborníci na <span class="orange">elektroinstalace</span></h2>
+                    <p>ELSTAV Strakonice v.o.s. je zavedená firma zaměřená na elektromontáže a elektroinstalace. Poskytujeme služby v nejvyšší kvalitě za přijatelné ceny a dbáme na spokojenost každého zákazníka.</p>
+                    <p>Disponujeme zkušeným týmem zaměstnanců, kteří zajistí kompletní služby od návrhu přes realizaci až po revizi. Naším cílem je dlouhodobý rozvoj a stabilní růst firmy i jejích zaměstnanců.</p>
+                    <div class="about-checks">
+                        <div class="about-check-item">
+                            <span class="check-circle">&#10003;</span>
+                            Silnoproudé elektromontáže
+                        </div>
+                        <div class="about-check-item">
+                            <span class="check-circle">&#10003;</span>
+                            Slaboproudé rozvody
+                        </div>
+                        <div class="about-check-item">
+                            <span class="check-circle">&#10003;</span>
+                            Hromosvody a ochrany
+                        </div>
+                        <div class="about-check-item">
+                            <span class="check-circle">&#10003;</span>
+                            Revize elektrických zařízení
+                        </div>
+                        <div class="about-check-item">
+                            <span class="check-circle">&#10003;</span>
+                            Prodejna elektromateriálu
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="sluzby">
+        <div class="container">
+            <div class="section-header anim-fade">
+                <div class="section-badge">Služby</div>
+                <h2 class="section-title">Co pro vás uděláme</h2>
+                <p class="section-desc">Komplexní elektroinstalační služby pro firmy i domácnosti</p>
+            </div>
+            <div class="services-grid">
+                <div class="srv-card anim-pop">
+                    <div class="srv-icon">&#9889;</div>
+                    <h3>Silnoproudé instalace</h3>
+                    <p>Kompletní silnoproudé elektromontáže pro novostavby, rekonstrukce i průmyslové objekty. Profesionální realizace dle platných norem.</p>
+                </div>
+                <div class="srv-card anim-pop">
+                    <div class="srv-icon">&#128268;</div>
+                    <h3>Slaboproudé rozvody</h3>
+                    <p>Instalace domácích telefonů, datových rozvodů, strukturované kabeláže a komunikačních systémů.</p>
+                </div>
+                <div class="srv-card anim-pop">
+                    <div class="srv-icon">&#9888;</div>
+                    <h3>Hromosvody</h3>
+                    <p>Návrh, instalace a údržba bleskosvody a systémů ochrany před bleskem dle aktuálních technických norem.</p>
+                </div>
+                <div class="srv-card anim-pop">
+                    <div class="srv-icon">&#128269;</div>
+                    <h3>Revize</h3>
+                    <p>Revize vyhrazených elektrických zařízení, periodické kontroly a vydávání revizních zpráv oprávněným revizním technikem.</p>
+                </div>
+                <div class="srv-card anim-pop">
+                    <div class="srv-icon">&#128161;</div>
+                    <h3>Veřejné osvětlení</h3>
+                    <p>Instalace, opravy a údržba veřejného osvětlení. Kompletní servis pro obce a města.</p>
+                </div>
+                <div class="srv-card anim-pop">
+                    <div class="srv-icon">&#127777;</div>
+                    <h3>Elektrické podlahové topení</h3>
+                    <p>Instalace elektrického podlahového vytápění pro rodinné domy, byty i komerční prostory.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-band">
+        <div class="container">
+            <div class="cta-inner anim-fade">
+                <h2>Potřebujete elektroinstalaci?</h2>
+                <p>Kontaktujte nás pro nezávaznou konzultaci a cenovou nabídku.</p>
+                <a href="#kontakt" class="btn btn-white-fill">Napište nám</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop / Prodejna -->
+    <section class="section shop" id="prodejna">
+        <div class="container">
+            <div class="shop-grid">
+                <div class="shop-image anim-slide-l">
+                    <img src="images/panel.jpg" alt="Prodejna ELSTAV" loading="lazy">
+                </div>
+                <div class="shop-content anim-slide-r">
+                    <div class="section-badge">Prodejna</div>
+                    <h2>Elektromateriál na jednom místě</h2>
+                    <p>Součástí naší firmy je prodejna nabízející široký výběr elektroinstalačního materiálu. Najdete u nás vše potřebné pro vaši elektroinstalaci.</p>
+                    <div class="shop-items">
+                        <div class="shop-item">
+                            <span class="shop-item-icon">&#9889;</span>
+                            Jističe a chrániče
+                        </div>
+                        <div class="shop-item">
+                            <span class="shop-item-icon">&#128268;</span>
+                            Kabely a vodiče
+                        </div>
+                        <div class="shop-item">
+                            <span class="shop-item-icon">&#128161;</span>
+                            Svítidla
+                        </div>
+                        <div class="shop-item">
+                            <span class="shop-item-icon">&#9881;</span>
+                            Zásuvky a spínače
+                        </div>
+                        <div class="shop-item">
+                            <span class="shop-item-icon">&#127777;</span>
+                            Topná tělesa a bojlery
+                        </div>
+                        <div class="shop-item">
+                            <span class="shop-item-icon">&#128230;</span>
+                            Rozvaděče
+                        </div>
+                        <div class="shop-item">
+                            <span class="shop-item-icon">&#128295;</span>
+                            Slaboproudý materiál
+                        </div>
+                        <div class="shop-item">
+                            <span class="shop-item-icon">&#128640;</span>
+                            A mnoho dalšího
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us -->
+    <section class="section" id="proc-my">
+        <div class="container">
+            <div class="section-header anim-fade">
+                <div class="section-badge">Proč ELSTAV</div>
+                <h2 class="section-title">Proč si vybrat právě nás</h2>
+                <p class="section-desc">Zkušenosti, kvalita a férový přístup</p>
+            </div>
+            <div class="why-us-grid">
+                <div class="why-card anim-pop">
+                    <div class="why-icon">&#9733;</div>
+                    <h3>Zkušený tým</h3>
+                    <p>Kvalifikovaní elektrikáři s dlouholetou praxí v oboru.</p>
+                </div>
+                <div class="why-card anim-pop">
+                    <div class="why-icon">&#128176;</div>
+                    <h3>Férové ceny</h3>
+                    <p>Kvalitní služby za přijatelné a transparentní ceny.</p>
+                </div>
+                <div class="why-card anim-pop">
+                    <div class="why-icon">&#128736;</div>
+                    <h3>Kompletní servis</h3>
+                    <p>Od návrhu přes realizaci až po revizi na jednom místě.</p>
+                </div>
+                <div class="why-card anim-pop">
+                    <div class="why-icon">&#129309;</div>
+                    <h3>Spokojenost</h3>
+                    <p>Dlouhodobé vztahy založené na kvalitě a důvěře.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials" id="reference">
+        <div class="container">
+            <div class="section-header anim-fade">
+                <div class="section-badge">Reference</div>
+                <h2 class="section-title">Co o nás říkají zákazníci</h2>
+                <p class="section-desc">Spokojení zákazníci jsou naší nejlepší vizitkou</p>
+            </div>
+            <div class="reviews-row">
+                <div class="rev-card anim-pop">
+                    <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="rev-text">Kompletní elektroinstalaci v novém domě nám udělali skvěle. Práce čistá, rychlá a za rozumnou cenu. Revize proběhla bez problémů.</p>
+                    <div class="rev-name">Jaroslav Procházka</div>
+                    <div class="rev-info">Rodinný dům, Strakonice</div>
+                </div>
+                <div class="rev-card anim-pop">
+                    <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="rev-text">Již několikrát jsme spolupracovali s firmou ELSTAV. Profesionální přístup, dodržení termínů a kvalitní materiál. Doporučujeme.</p>
+                    <div class="rev-name">Stavební firma STAKO</div>
+                    <div class="rev-info">Komerční projekt, Blatná</div>
+                </div>
+                <div class="rev-card anim-pop">
+                    <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="rev-text">Instalace hromosvodu a revize proběhla rychle a kvalitně. Cena odpovídala předběžné nabídce. S prací jsme velmi spokojeni.</p>
+                    <div class="rev-name">Marie Dvořáková</div>
+                    <div class="rev-info">Hromosvod, Volyně</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section process-section">
+        <div class="container">
+            <div class="section-header anim-fade">
+                <div class="section-badge">Postup</div>
+                <h2 class="section-title">Jak s námi spolupracovat</h2>
+                <p class="section-desc">Od poptávky po hotovou realizaci</p>
+            </div>
+            <div class="proc-flow">
+                <div class="proc-step anim-fade">
+                    <div class="proc-num">01</div>
+                    <h3>Poptávka</h3>
+                    <p>Kontaktujte nás s popisem vašeho projektu nebo požadavku.</p>
+                </div>
+                <div class="proc-divider"></div>
+                <div class="proc-step anim-fade">
+                    <div class="proc-num">02</div>
+                    <h3>Nabídka</h3>
+                    <p>Připravíme nezávaznou cenovou nabídku na základě vašich požadavků.</p>
+                </div>
+                <div class="proc-divider"></div>
+                <div class="proc-step anim-fade">
+                    <div class="proc-num">03</div>
+                    <h3>Realizace</h3>
+                    <p>Provedeme práce dle dohodnutého harmonogramu a standardů.</p>
+                </div>
+                <div class="proc-divider"></div>
+                <div class="proc-step anim-fade">
+                    <div class="proc-num">04</div>
+                    <h3>Revize a předání</h3>
+                    <p>Provedeme revizi a předáme kompletní dokumentaci.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq-sec" id="dotazy">
+        <div class="container">
+            <div class="section-header anim-fade">
+                <div class="section-badge">FAQ</div>
+                <h2 class="section-title">Časté dotazy</h2>
+                <p class="section-desc">Odpovědi na nejčastější otázky</p>
+            </div>
+            <div class="faq-wrapper">
+                <div class="faq-block anim-fade" onclick="this.classList.toggle('open')">
+                    <div class="faq-head">
+                        <span>Děláte elektroinstalace i pro domácnosti?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-body">
+                        <p>Ano, provádíme elektroinstalace jak pro firmy a průmyslové objekty, tak pro rodinné domy, byty a bytové domy.</p>
+                    </div>
+                </div>
+                <div class="faq-block anim-fade" onclick="this.classList.toggle('open')">
+                    <div class="faq-head">
+                        <span>Provádíte i revize cizích instalací?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-body">
+                        <p>Ano, náš oprávněný revizní technik provádí revize vyhrazených elektrických zařízení včetně periodických kontrol a vydávání revizních zpráv.</p>
+                    </div>
+                </div>
+                <div class="faq-block anim-fade" onclick="this.classList.toggle('open')">
+                    <div class="faq-head">
+                        <span>Nabízíte i materiál k prodeji?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-body">
+                        <p>Ano, provozujeme prodejnu s širokým sortimentem elektromateriálu - jističe, kabely, svítidla, zásuvky, topná tělesa a mnoho dalšího.</p>
+                    </div>
+                </div>
+                <div class="faq-block anim-fade" onclick="this.classList.toggle('open')">
+                    <div class="faq-head">
+                        <span>V jakém regionu působíte?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-body">
+                        <p>Sídlíme ve Strakonicích a působíme převážně v Jihočeském kraji, ale jsme schopni realizovat projekty po celé České republice.</p>
+                    </div>
+                </div>
+                <div class="faq-block anim-fade" onclick="this.classList.toggle('open')">
+                    <div class="faq-head">
+                        <span>Jak získám cenovou nabídku?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-body">
+                        <p>Kontaktujte nás telefonicky na 383 324 726 nebo e-mailem na elstav@raz-dva.cz s popisem projektu a my vám zašleme nezávaznou cenovou nabídku.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header anim-fade">
+                <div class="section-badge">Kontakt</div>
+                <h2 class="section-title">Spojte se s námi</h2>
+                <p class="section-desc">Sídlíme v centru Strakonic</p>
+            </div>
+            <div class="contact-layout">
+                <div class="contact-cards">
+                    <div class="ct-card anim-slide-l">
+                        <div class="ct-icon">&#128205;</div>
+                        <div>
+                            <h3>Adresa</h3>
+                            <p>Hradební 329<br>386 01 Strakonice</p>
+                        </div>
+                    </div>
+                    <div class="ct-card anim-slide-l">
+                        <div class="ct-icon">&#128222;</div>
+                        <div>
+                            <h3>Telefon</h3>
+                            <p><a href="tel:+420383324726">+420 383 324 726</a></p>
+                        </div>
+                    </div>
+                    <div class="ct-card anim-slide-l">
+                        <div class="ct-icon">&#9993;</div>
+                        <div>
+                            <h3>E-mail</h3>
+                            <p><a href="mailto:elstav@raz-dva.cz">elstav@raz-dva.cz</a></p>
+                        </div>
+                    </div>
+                    <div class="ct-card anim-slide-l">
+                        <div class="ct-icon">&#128337;</div>
+                        <div>
+                            <h3>Provozní doba</h3>
+                            <p>Po - Pá: 7:00 - 15:30<br>So - Ne: Zavřeno</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-frame anim-slide-r">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2610.5!2d13.9022!3d49.2614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b63a5d9fdd28d%3A0x400af0f66154090!2sHradeb%C5%A1%C3%AD%20329%2C%20386%2001%20Strakonice!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - ELSTAV Strakonice"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Banner -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-flex">
+                <div class="stat-box anim-fade">
+                    <div class="stat-val">30+</div>
+                    <div class="stat-lbl">Let zkušeností</div>
+                </div>
+                <div class="stat-box anim-fade">
+                    <div class="stat-val">500+</div>
+                    <div class="stat-lbl">Realizací</div>
+                </div>
+                <div class="stat-box anim-fade">
+                    <div class="stat-val">50+</div>
+                    <div class="stat-lbl">Partnerů</div>
+                </div>
+                <div class="stat-box anim-fade">
+                    <div class="stat-val">100%</div>
+                    <div class="stat-lbl">Spokojenost</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="section certs" id="certifikace">
+        <div class="container">
+            <div class="section-header anim-fade">
+                <div class="section-badge">Kvalifikace</div>
+                <h2 class="section-title">Certifikace a oprávnění</h2>
+                <p class="section-desc">Pracujeme s patřičnými oprávněními a dle platných norem</p>
+            </div>
+            <div class="certs-grid">
+                <div class="cert-card anim-pop">
+                    <div class="cert-icon">&#128220;</div>
+                    <h3>Oprávnění k revizím</h3>
+                    <p>Oprávněný revizní technik pro revize vyhrazených elektrických zařízení dle platné legislativy.</p>
+                </div>
+                <div class="cert-card anim-pop">
+                    <div class="cert-icon">&#9889;</div>
+                    <h3>Elektromontáže</h3>
+                    <p>Oprávnění k výrobě, instalaci, opravám a údržbě elektrických zařízení a rozvodů.</p>
+                </div>
+                <div class="cert-card anim-pop">
+                    <div class="cert-icon">&#9888;</div>
+                    <h3>Hromosvody</h3>
+                    <p>Certifikace pro návrh, montáž a revizi systémů ochrany před bleskem dle ČSN EN 62305.</p>
+                </div>
+                <div class="cert-card anim-pop">
+                    <div class="cert-icon">&#128161;</div>
+                    <h3>Veřejné osvětlení</h3>
+                    <p>Oprávnění pro instalaci, opravu a údržbu veřejného osvětlení pro obce a města.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coverage Area Section -->
+    <section class="section coverage-section">
+        <div class="container">
+            <div class="coverage-grid">
+                <div class="coverage-text anim-slide-l">
+                    <div class="section-badge">Oblast působnosti</div>
+                    <h2>Působíme po celém <span class="orange">Jihočeském kraji</span></h2>
+                    <p>Sídlíme ve Strakonicích, ale naše služby poskytujeme po celém Jihočeském kraji a na vyžádání i v dalších regionech České republiky.</p>
+                    <div class="coverage-areas">
+                        <div class="area-item">
+                            <span class="area-dot"></span>
+                            Strakonice a okolí
+                        </div>
+                        <div class="area-item">
+                            <span class="area-dot"></span>
+                            Písek a Prachatice
+                        </div>
+                        <div class="area-item">
+                            <span class="area-dot"></span>
+                            České Budějovice
+                        </div>
+                        <div class="area-item">
+                            <span class="area-dot"></span>
+                            Tábor a Jindřichův Hradec
+                        </div>
+                        <div class="area-item">
+                            <span class="area-dot"></span>
+                            Blatná, Volyně, Horažďovice
+                        </div>
+                        <div class="area-item">
+                            <span class="area-dot"></span>
+                            A další dle dohody
+                        </div>
+                    </div>
+                </div>
+                <div class="coverage-img anim-slide-r">
+                    <img src="images/wiring.jpg" alt="Elektroinstalace realizace" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <div class="logo">EL<span>STAV</span></div>
+                    <p>ELSTAV Strakonice v.o.s. - profesionální elektroinstalace, silnoproudé a slaboproudé rozvody, hromosvody a revize. Kvalita za přijatelné ceny.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Služby</h4>
+                    <ul>
+                        <li><a href="#sluzby">Silnoproudé instalace</a></li>
+                        <li><a href="#sluzby">Slaboproudé rozvody</a></li>
+                        <li><a href="#sluzby">Hromosvody</a></li>
+                        <li><a href="#sluzby">Revize</a></li>
+                        <li><a href="#sluzby">Veřejné osvětlení</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Prodejna</h4>
+                    <ul>
+                        <li><a href="#prodejna">Jističe a chrániče</a></li>
+                        <li><a href="#prodejna">Kabely</a></li>
+                        <li><a href="#prodejna">Svítidla</a></li>
+                        <li><a href="#prodejna">Zásuvky a spínače</a></li>
+                        <li><a href="#prodejna">Topná tělesa</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><a href="tel:+420383324726">+420 383 324 726</a></li>
+                        <li><a href="mailto:elstav@raz-dva.cz">elstav@raz-dva.cz</a></li>
+                        <li><a href="#kontakt">Hradební 329, Strakonice</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 ELSTAV Strakonice v.o.s. Všechna práva vyhrazena.</span>
+                <span>Vytvořil <a href="https://kshpartners.cz" target="_blank" rel="noopener">KSH Partners s.r.o.</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* Header scroll */
+        (function(){
+            var h = document.getElementById('header');
+            window.addEventListener('scroll', function(){ h.classList.toggle('scrolled', window.pageYOffset > 40); });
+        })();
+
+        /* Hamburger */
+        (function(){
+            var btn = document.getElementById('hamburger');
+            var nav = document.getElementById('mobileNav');
+            var ov = document.getElementById('overlay');
+            var links = nav.querySelectorAll('a');
+            function toggle(){ btn.classList.toggle('active'); nav.classList.toggle('active'); ov.classList.toggle('active'); document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : ''; }
+            function close(){ btn.classList.remove('active'); nav.classList.remove('active'); ov.classList.remove('active'); document.body.style.overflow = ''; }
+            btn.addEventListener('click', toggle);
+            ov.addEventListener('click', close);
+            links.forEach(function(l){ l.addEventListener('click', close); });
+        })();
+
+        /* IntersectionObserver */
+        (function(){
+            var els = document.querySelectorAll('.anim-fade, .anim-slide-l, .anim-slide-r, .anim-pop');
+            if ('IntersectionObserver' in window) {
+                var obs = new IntersectionObserver(function(entries){
+                    entries.forEach(function(e){
+                        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+                els.forEach(function(el){ obs.observe(el); });
+            } else { els.forEach(function(el){ el.classList.add('visible'); }); }
+        })();
+
+        /* Smooth scroll */
+        (function(){
+            document.querySelectorAll('a[href^="#"]').forEach(function(a){
+                a.addEventListener('click', function(e){
+                    var id = this.getAttribute('href'); if (id === '#') return;
+                    var t = document.querySelector(id);
+                    if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - document.getElementById('header').offsetHeight, behavior: 'smooth' }); }
+                });
+            });
+        })();
+
+        /* Counter animation */
+        (function(){
+            var counters = document.querySelectorAll('.counter-num');
+            var done = false;
+            function animate(){
+                if (done) return;
+                counters.forEach(function(el){
+                    var text = el.textContent;
+                    var num = parseInt(text);
+                    if (isNaN(num)) return;
+                    var suffix = text.replace(/[0-9]/g, '');
+                    var duration = 2000;
+                    var start = null;
+                    function step(ts){
+                        if (!start) start = ts;
+                        var p = Math.min((ts - start) / duration, 1);
+                        var eased = 1 - Math.pow(1 - p, 3);
+                        el.textContent = Math.floor(eased * num) + suffix;
+                        if (p < 1) requestAnimationFrame(step);
+                    }
+                    requestAnimationFrame(step);
+                });
+                done = true;
+            }
+            var c = document.querySelector('.hero-counters');
+            if (c && 'IntersectionObserver' in window) {
+                new IntersectionObserver(function(entries, obs){ if (entries[0].isIntersecting) { animate(); obs.unobserve(c); } }, { threshold: 0.5 }).observe(c);
+            }
+        })();
+
+        /* Lazy image fade */
+        (function(){
+            document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
+                img.style.opacity = '0'; img.style.transition = 'opacity 0.5s ease';
+                if (img.complete) { img.style.opacity = '1'; }
+                else { img.addEventListener('load', function(){ img.style.opacity = '1'; }); }
+            });
+        })();
+
+        /* Active nav highlight */
+        (function(){
+            var secs = document.querySelectorAll('section[id]');
+            var links = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+            window.addEventListener('scroll', function(){
+                var pos = window.pageYOffset + 100;
+                secs.forEach(function(sec){
+                    if (pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight) {
+                        var id = sec.getAttribute('id');
+                        links.forEach(function(l){
+                            l.style.color = l.getAttribute('href') === '#' + id ? 'var(--primary)' : '';
+                        });
+                    }
+                });
+            });
+        })();
+
+        /* Parallax hero */
+        (function(){
+            var bg = document.querySelector('.hero-bg-image');
+            window.addEventListener('scroll', function(){
+                if (window.pageYOffset < window.innerHeight) {
+                    bg.style.transform = 'translateY(' + (window.pageYOffset * 0.3) + 'px)';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

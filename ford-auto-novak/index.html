@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ford Auto Novák Písek - nezávislý prodejce a servis vozů Ford. Prodej nových i ojetých vozidel, pneuservis, geometrie kol, půjčovna vozidel.">
+    <title>Ford Auto Novák | Prodej & Servis Ford – Písek</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS Custom Properties
+           ======================================== */
+        :root {
+            --primary: #003478;
+            --primary-light: #1565c0;
+            --primary-dark: #001f4d;
+            --accent: #c0c0c0;
+            --accent-light: #e0e0e0;
+            --accent-dark: #808080;
+            --white: #ffffff;
+            --off-white: #f7f8fa;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --text: #1a1d24;
+            --text-muted: #5c6370;
+            --ford-blue: #003478;
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.03);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            --radius: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+            --max-width: 1200px;
+            --header-h: 76px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.65;
+            background: var(--white);
+            overflow-x: hidden;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Titillium Web', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(35px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal-left.visible { opacity: 1; transform: translateX(0); }
+        .reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal-right.visible { opacity: 1; transform: translateX(0); }
+        .reveal-zoom { opacity: 0; transform: scale(0.9); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal-zoom.visible { opacity: 1; transform: scale(1); }
+
+        /* ========================================
+           Header — Premium Blue
+           ======================================== */
+        .header {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: var(--header-h);
+            z-index: 1000;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid transparent;
+            transition: var(--transition);
+        }
+        .header.scrolled {
+            border-bottom: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+        .header-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 20px;
+        }
+        .logo {
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .logo .ford { color: var(--accent-dark); font-weight: 300; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-links a {
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-cta {
+            background: var(--primary) !important;
+            color: var(--white) !important;
+            padding: 8px 20px !important;
+            border-radius: var(--radius) !important;
+        }
+        .nav-cta:hover { background: var(--primary-light) !important; }
+
+        .hamburger {
+            display: none; flex-direction: column; cursor: pointer; gap: 5px;
+            background: none; border: none; z-index: 1001; padding: 4px;
+        }
+        .hamburger span { width: 26px; height: 2px; background: var(--primary); border-radius: 2px; transition: var(--transition); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .mobile-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 998;
+            opacity: 0; visibility: hidden; transition: var(--transition);
+        }
+        .mobile-overlay.active { opacity: 1; visibility: visible; }
+
+        .mobile-nav {
+            position: fixed; top: 0; right: -100%; width: 340px; height: 100vh;
+            background: var(--white); z-index: 999; transition: 0.5s ease;
+            padding: 100px 36px 40px; box-shadow: var(--shadow-xl);
+        }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav a {
+            display: block; font-family: 'Titillium Web', sans-serif; font-size: 1.15rem;
+            font-weight: 700; color: var(--gray-700); text-transform: uppercase;
+            padding: 14px 0; border-bottom: 1px solid var(--gray-200);
+        }
+        .mobile-nav a:hover { color: var(--primary); }
+
+        /* ========================================
+           Hero — Cinematic
+           ======================================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: var(--header-h);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, var(--primary-light) 100%);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('images/hero-ford.jpg') center/cover no-repeat;
+            opacity: 0.2;
+            mix-blend-mode: overlay;
+        }
+        .hero-decorative {
+            position: absolute;
+            bottom: -2px; left: 0; width: 100%; height: 80px;
+            background: var(--white);
+            clip-path: polygon(0 60%, 100% 0, 100% 100%, 0 100%);
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-text { padding: 40px 0; }
+        .hero-label {
+            display: inline-block;
+            padding: 6px 18px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: var(--radius-full);
+            color: var(--accent-light);
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: clamp(2.4rem, 5.5vw, 4rem);
+            color: var(--white);
+            margin-bottom: 18px;
+            line-height: 1.08;
+        }
+        .hero h1 .silver { color: var(--accent); }
+        .hero-desc {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 32px;
+            max-width: 480px;
+            line-height: 1.75;
+        }
+        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 32px; border-radius: var(--radius);
+            font-family: 'Titillium Web', sans-serif; font-size: 0.95rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            cursor: pointer; border: none; transition: var(--transition);
+        }
+        .btn-primary-ford {
+            background: var(--white);
+            color: var(--primary);
+        }
+        .btn-primary-ford:hover {
+            background: var(--gray-100);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-outline-light {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .btn-outline-light:hover { border-color: var(--white); }
+
+        .hero-image-container {
+            position: relative;
+        }
+        .hero-car-img {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+        .hero-car-img img {
+            width: 100%; height: 480px; object-fit: cover;
+        }
+
+        .hero-stats-row {
+            display: flex;
+            gap: 32px;
+            margin-top: 40px;
+        }
+        .hero-stat {
+            text-align: center;
+        }
+        .hero-stat-num {
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .hero-stat-text {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* ========================================
+           Sections
+           ======================================== */
+        .section { padding: 100px 0; }
+        .section-header { text-align: center; margin-bottom: 56px; }
+        .section-tag {
+            display: inline-block; padding: 4px 14px;
+            background: rgba(0,52,120,0.06); color: var(--primary);
+            font-family: 'Titillium Web', sans-serif; font-size: 0.78rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            border-radius: var(--radius-full); margin-bottom: 12px;
+        }
+        .section-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--gray-900); margin-bottom: 12px; }
+        .section-desc { font-size: 1.05rem; color: var(--gray-500); max-width: 560px; margin: 0 auto; }
+
+        /* ========================================
+           About
+           ======================================== */
+        .about { background: var(--off-white); }
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-img-wrap {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .about-img-wrap img { width: 100%; height: 440px; object-fit: cover; }
+        .about-overlay-badge {
+            position: absolute;
+            bottom: 20px; left: 20px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 14px 20px;
+            border-radius: var(--radius);
+            font-family: 'Titillium Web', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .about-content h2 {
+            font-size: 2.2rem; color: var(--gray-900); margin-bottom: 16px;
+        }
+        .about-content h2 .blue { color: var(--primary); }
+        .about-content p { color: var(--gray-600); margin-bottom: 14px; font-size: 1rem; }
+        .about-highlights {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px;
+        }
+        .highlight-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px; background: var(--white); border-radius: var(--radius);
+            box-shadow: var(--shadow-xs);
+        }
+        .highlight-icon {
+            width: 38px; height: 38px; background: rgba(0,52,120,0.07);
+            border-radius: var(--radius); display: flex; align-items: center;
+            justify-content: center; color: var(--primary); font-size: 1.1rem; flex-shrink: 0;
+        }
+        .highlight-item span {
+            font-family: 'Titillium Web', sans-serif; font-weight: 700; font-size: 0.88rem;
+            color: var(--gray-800); text-transform: uppercase;
+        }
+
+        /* ========================================
+           Services Grid
+           ======================================== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .svc-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+            text-align: center;
+        }
+        .svc-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
+        .svc-icon {
+            width: 64px; height: 64px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; color: var(--white); margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+        .svc-card:hover .svc-icon { transform: scale(1.1); }
+        .svc-card h3 { font-size: 1.2rem; color: var(--gray-900); margin-bottom: 8px; }
+        .svc-card p { font-size: 0.9rem; color: var(--gray-500); line-height: 1.6; }
+
+        /* ========================================
+           Features Banner
+           ======================================== */
+        .features-banner {
+            background: var(--primary);
+            padding: 70px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .features-banner::after {
+            content: ''; position: absolute; top: -100px; right: -100px;
+            width: 400px; height: 400px; border-radius: 50%;
+            background: rgba(255,255,255,0.03);
+        }
+        .features-flex {
+            display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap;
+            position: relative; z-index: 1;
+        }
+        .feat-item { text-align: center; flex: 1; min-width: 180px; }
+        .feat-num {
+            font-family: 'Titillium Web', sans-serif; font-size: 3rem;
+            font-weight: 900; color: var(--accent); line-height: 1;
+        }
+        .feat-label {
+            font-size: 0.85rem; color: rgba(255,255,255,0.6);
+            text-transform: uppercase; letter-spacing: 1.5px; margin-top: 6px;
+        }
+
+        /* ========================================
+           Gallery
+           ======================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .gallery-item {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+        .gallery-item img { width: 100%; height: 260px; object-fit: cover; transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.08); }
+        .gallery-caption {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 16px 20px; background: linear-gradient(to top, rgba(0,52,120,0.85) 0%, transparent 100%);
+            color: var(--white); font-family: 'Titillium Web', sans-serif;
+            font-size: 0.9rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0; transition: var(--transition);
+        }
+        .gallery-item:hover .gallery-caption { opacity: 1; }
+
+        /* ========================================
+           Pricing / Service Items
+           ======================================== */
+        .pricing { background: var(--off-white); }
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .price-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            border: 1px solid var(--gray-200);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .price-card:hover { box-shadow: var(--shadow-md); border-color: var(--primary); }
+        .price-card.featured {
+            border: 2px solid var(--primary);
+            position: relative;
+        }
+        .price-card.featured::before {
+            content: 'Populární';
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: var(--white); padding: 4px 16px;
+            border-radius: var(--radius-full); font-family: 'Titillium Web', sans-serif;
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .price-card h3 { font-size: 1.2rem; color: var(--gray-900); margin-bottom: 8px; }
+        .price-card .price {
+            font-family: 'Titillium Web', sans-serif; font-size: 2.5rem;
+            font-weight: 900; color: var(--primary); line-height: 1; margin-bottom: 4px;
+        }
+        .price-card .price small { font-size: 1rem; font-weight: 400; color: var(--gray-500); }
+        .price-card .price-desc { font-size: 0.88rem; color: var(--gray-500); margin-bottom: 20px; }
+        .price-card ul { margin-bottom: 24px; }
+        .price-card ul li {
+            padding: 8px 0; border-bottom: 1px solid var(--gray-100);
+            font-size: 0.9rem; color: var(--gray-600);
+        }
+        .price-card ul li:last-child { border-bottom: none; }
+        .btn-ford {
+            background: var(--primary); color: var(--white); width: 100%; justify-content: center;
+        }
+        .btn-ford:hover { background: var(--primary-light); transform: translateY(-2px); }
+
+        /* ========================================
+           Testimonials
+           ======================================== */
+        .testimonials-section { background: var(--off-white); }
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .review-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-xs);
+            transition: var(--transition);
+        }
+        .review-card:hover { box-shadow: var(--shadow-md); }
+        .review-stars {
+            color: #f59e0b;
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+        .review-text {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            font-style: italic;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+        .review-author {
+            font-family: 'Titillium Web', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--gray-800);
+        }
+        .review-car {
+            font-size: 0.8rem;
+            color: var(--gray-400);
+        }
+
+        /* ========================================
+           Process
+           ======================================== */
+        .process { background: var(--white); }
+        .process-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+        .proc-step {
+            text-align: center;
+            padding: 28px 20px;
+            flex: 1;
+            min-width: 180px;
+        }
+        .proc-num {
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .proc-step h3 {
+            font-size: 1.1rem;
+            color: var(--gray-900);
+            margin-bottom: 6px;
+        }
+        .proc-step p {
+            font-size: 0.88rem;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+        .proc-line {
+            width: 50px;
+            height: 2px;
+            background: var(--gray-300);
+            flex-shrink: 0;
+        }
+
+        /* ========================================
+           FAQ
+           ======================================== */
+        .faq { background: var(--off-white); }
+        .faq-container {
+            max-width: 720px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .faq-item {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .faq-item:hover { border-color: var(--primary); }
+        .faq-q {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+        .faq-toggle {
+            font-size: 1.4rem;
+            color: var(--primary);
+            transition: var(--transition);
+            font-weight: 300;
+        }
+        .faq-item.active .faq-toggle { transform: rotate(45deg); }
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 24px;
+        }
+        .faq-item.active .faq-a {
+            max-height: 200px;
+            padding: 0 24px 18px;
+        }
+        .faq-a p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           Contact
+           ======================================== */
+        .contact { background: var(--white); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+        }
+        .contact-info { display: flex; flex-direction: column; gap: 18px; }
+        .c-card {
+            background: var(--off-white); border-radius: var(--radius);
+            padding: 24px; display: flex; align-items: flex-start; gap: 16px;
+            transition: var(--transition); border: 1px solid var(--gray-200);
+        }
+        .c-card:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); }
+        .c-icon {
+            width: 48px; height: 48px; background: var(--primary);
+            border-radius: var(--radius); display: flex; align-items: center;
+            justify-content: center; color: var(--white); font-size: 1.2rem; flex-shrink: 0;
+        }
+        .c-card h3 { font-size: 1rem; color: var(--gray-900); margin-bottom: 4px; font-family: 'Titillium Web', sans-serif; }
+        .c-card p { font-size: 0.9rem; color: var(--gray-600); }
+        .c-card a { color: var(--primary); font-weight: 600; }
+        .c-card a:hover { color: var(--primary-light); }
+
+        .map-wrap {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            height: 100%;
+            min-height: 420px;
+        }
+        .map-wrap iframe {
+            width: 100%; height: 100%; border: none; min-height: 420px;
+        }
+
+        /* ========================================
+           Partners Banner
+           ======================================== */
+        .partners-banner {
+            padding: 48px 0;
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .partners-label {
+            text-align: center;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gray-400);
+            margin-bottom: 24px;
+        }
+        .partners-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        .partner-item {
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--gray-300);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+        .partner-item:hover { color: var(--primary); }
+
+        /* ========================================
+           Why Us
+           ======================================== */
+        .why-section { background: var(--off-white); }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .why-item {
+            text-align: center;
+            padding: 32px 24px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+        .why-item:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+        .why-icon-circle {
+            width: 64px;
+            height: 64px;
+            background: rgba(0,52,120,0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 16px;
+            transition: var(--transition);
+        }
+        .why-item:hover .why-icon-circle {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .why-item h3 {
+            font-size: 1.1rem;
+            color: var(--gray-900);
+            margin-bottom: 6px;
+        }
+        .why-item p {
+            font-size: 0.88rem;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           Footer
+           ======================================== */
+        .footer { background: var(--gray-900); color: var(--gray-400); }
+        .footer-grid {
+            padding: 56px 0;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+        .footer-brand .logo { color: var(--white); font-size: 1.5rem; margin-bottom: 14px; }
+        .footer-brand .logo .ford { color: var(--accent); }
+        .footer-brand p { font-size: 0.9rem; line-height: 1.7; }
+
+        .footer-col h4 {
+            font-family: 'Titillium Web', sans-serif; font-size: 0.9rem;
+            color: var(--white); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;
+        }
+        .footer-col ul li { margin-bottom: 8px; }
+        .footer-col ul li a { color: var(--gray-400); font-size: 0.88rem; }
+        .footer-col ul li a:hover { color: var(--accent-light); }
+
+        .footer-bottom {
+            padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 8px; font-size: 0.82rem;
+        }
+        .footer-bottom a { color: var(--accent-light); }
+        .footer-bottom a:hover { color: var(--white); }
+
+        /* ========================================
+           Responsive
+           ======================================== */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .pricing-cards { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+            .hero-car-img img { height: 300px; }
+            .about-layout { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .process-flow { flex-direction: column; }
+            .proc-line { width: 2px; height: 24px; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .section { padding: 64px 0; }
+            .features-flex { gap: 24px; }
+            .about-highlights { grid-template-columns: 1fr; }
+            .hero-stats-row { gap: 20px; }
+        }
+        @media (max-width: 480px) {
+            .hero-buttons { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+            .hero-stats-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#" class="logo"><span class="ford">Ford</span> Auto Novák</a>
+            <nav class="nav-links">
+                <a href="#o-nas">O nás</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#vozidla">Vozidla</a>
+                <a href="#cenik">Ceník</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-overlay" id="overlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#o-nas">O nás</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#vozidla">Vozidla</a>
+        <a href="#cenik">Ceník</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <div class="hero-label">Nezávislý dealer Ford, Písek</div>
+                    <h1>Prodej & servis<br>vozů <span class="silver">Ford</span></h1>
+                    <p class="hero-desc">Specializujeme se na prodej a kompletní servis vozidel Ford. Nabízíme nová i ojetá osobní a užitková vozidla, pneuservis, geometrii kol a půjčovnu vozidel.</p>
+                    <div class="hero-buttons">
+                        <a href="#kontakt" class="btn btn-primary-ford">Kontaktujte nás</a>
+                        <a href="#sluzby" class="btn btn-outline-light">Naše služby</a>
+                    </div>
+                    <div class="hero-stats-row">
+                        <div class="hero-stat">
+                            <div class="hero-stat-num">25+</div>
+                            <div class="hero-stat-text">Let zkušeností</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-num">100%</div>
+                            <div class="hero-stat-text">Ford specializace</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-num">290 Kč</div>
+                            <div class="hero-stat-text">Geometrie kol</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image-container reveal-right">
+                    <div class="hero-car-img">
+                        <img src="images/ford-car.jpg" alt="Ford vozidla" loading="eager">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-decorative"></div>
+    </section>
+
+    <!-- About -->
+    <section class="section about" id="o-nas">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-img-wrap reveal-left">
+                    <img src="images/showroom.jpg" alt="Ford Auto Novák Písek" loading="lazy">
+                    <div class="about-overlay-badge">Písek, Jihočeský kraj</div>
+                </div>
+                <div class="about-content reveal-right">
+                    <div class="section-tag">O firmě</div>
+                    <h2>Váš spolehlivý <span class="blue">Ford partner</span> na jihu Čech</h2>
+                    <p>Ford Auto Novák je nezávislý dealer specializující se na prodej a servis vozidel Ford. Sídlíme na Táborské ulici v Písku, v části Budějovické Předměstí.</p>
+                    <p>Nabízíme profesionální servis, záruční i pozáruční opravy, pneuservis a kompletní péči o váš Ford. Náš zkušený tým zajistí, že vaše vozidlo bude v nejlepší kondici.</p>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">&#128663;</div>
+                            <span>Prodej vozů Ford</span>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">&#128295;</div>
+                            <span>Kompletní servis</span>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">&#9881;</div>
+                            <span>Pneuservis</span>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">&#128666;</div>
+                            <span>Odtahová služba</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="sluzby">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag">Služby</div>
+                <h2 class="section-title">Co pro vás uděláme</h2>
+                <p class="section-desc">Kompletní péče o váš Ford na jednom místě</p>
+            </div>
+            <div class="services-grid">
+                <div class="svc-card reveal-zoom">
+                    <div class="svc-icon">&#128663;</div>
+                    <h3>Prodej vozidel</h3>
+                    <p>Nová i ojetá osobní a užitková vozidla Ford. Pomůžeme s výběrem a zajistíme financování na míru.</p>
+                </div>
+                <div class="svc-card reveal-zoom">
+                    <div class="svc-icon">&#128295;</div>
+                    <h3>Servis Ford</h3>
+                    <p>Záruční i pozáruční servis vozů Ford. Pravidelné prohlídky, výměny olejů a kompletní údržba.</p>
+                </div>
+                <div class="svc-card reveal-zoom">
+                    <div class="svc-icon">&#9881;</div>
+                    <h3>Pneuservis</h3>
+                    <p>Kompletní pneuservis - přezutí, vyvažování, uskladnění a prodej nových pneumatik všech značek.</p>
+                </div>
+                <div class="svc-card reveal-zoom">
+                    <div class="svc-icon">&#128208;</div>
+                    <h3>Geometrie kol</h3>
+                    <p>Přesné měření a seřízení geometrie kol za výhodnou cenu 290 Kč. Prodlužte životnost pneumatik.</p>
+                </div>
+                <div class="svc-card reveal-zoom">
+                    <div class="svc-icon">&#128666;</div>
+                    <h3>Odtahová služba</h3>
+                    <p>Poruchová služba a odtah vozidel. Jsme tu pro vás, když to potřebujete nejvíce.</p>
+                </div>
+                <div class="svc-card reveal-zoom">
+                    <div class="svc-icon">&#128187;</div>
+                    <h3>Půjčovna vozidel</h3>
+                    <p>Krátkodobý i dlouhodobý pronájem osobních vozidel Ford za výhodné ceny.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features / Stats Banner -->
+    <section class="features-banner">
+        <div class="container">
+            <div class="features-flex">
+                <div class="feat-item reveal">
+                    <div class="feat-num">25+</div>
+                    <div class="feat-label">Let na trhu</div>
+                </div>
+                <div class="feat-item reveal">
+                    <div class="feat-num">1000+</div>
+                    <div class="feat-label">Spokojených klientů</div>
+                </div>
+                <div class="feat-item reveal">
+                    <div class="feat-num">100%</div>
+                    <div class="feat-label">Ford specializace</div>
+                </div>
+                <div class="feat-item reveal">
+                    <div class="feat-num">6</div>
+                    <div class="feat-label">Nabízených služeb</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery / Vehicles -->
+    <section class="section" id="vozidla">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag">Vozidla</div>
+                <h2 class="section-title">Osobní a užitková vozidla Ford</h2>
+                <p class="section-desc">Nabízíme kompletní portfolio osobních a komerčních vozidel</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item reveal-zoom">
+                    <img src="images/ford-car.jpg" alt="Ford osobní vozy" loading="lazy">
+                    <div class="gallery-caption">Osobní vozidla</div>
+                </div>
+                <div class="gallery-item reveal-zoom">
+                    <img src="images/ford-service.jpg" alt="Ford užitková vozidla" loading="lazy">
+                    <div class="gallery-caption">Užitková vozidla</div>
+                </div>
+                <div class="gallery-item reveal-zoom">
+                    <img src="images/tire-service.jpg" alt="Pneuservis Ford" loading="lazy">
+                    <div class="gallery-caption">Pneuservis</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section pricing" id="cenik">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag">Ceník</div>
+                <h2 class="section-title">Vybrané služby a ceny</h2>
+                <p class="section-desc">Transparentní ceny bez skrytých poplatků</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="price-card reveal-zoom">
+                    <h3>Geometrie kol</h3>
+                    <div class="price">290 <small>Kč</small></div>
+                    <div class="price-desc">Měření + seřízení</div>
+                    <ul>
+                        <li>Přesné měření geometrie</li>
+                        <li>Seřízení sbíhavosti</li>
+                        <li>Kontrola podvozkových dílů</li>
+                        <li>Protokol s výsledky</li>
+                    </ul>
+                    <a href="#kontakt" class="btn btn-ford">Objednat</a>
+                </div>
+                <div class="price-card featured reveal-zoom">
+                    <h3>Kompletní servis Ford</h3>
+                    <div class="price">Dle <small>rozsahu</small></div>
+                    <div class="price-desc">Záruční i pozáruční</div>
+                    <ul>
+                        <li>Diagnostika závad</li>
+                        <li>Výměna olejů a filtrů</li>
+                        <li>Brzdový systém</li>
+                        <li>Originální díly Ford</li>
+                    </ul>
+                    <a href="#kontakt" class="btn btn-ford">Objednat</a>
+                </div>
+                <div class="price-card reveal-zoom">
+                    <h3>Pneuservis</h3>
+                    <div class="price">Dle <small>rozměru</small></div>
+                    <div class="price-desc">Osobní i užitková</div>
+                    <ul>
+                        <li>Přezutí pneumatik</li>
+                        <li>Vyvažování kol</li>
+                        <li>Uskladnění sezónních pneu</li>
+                        <li>Prodej nových pneumatik</li>
+                    </ul>
+                    <a href="#kontakt" class="btn btn-ford">Objednat</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials-section" id="reference">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag">Reference</div>
+                <h2 class="section-title">Naši spokojení zákazníci</h2>
+                <p class="section-desc">Přečtěte si, co o nás říkají naši klienti</p>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card reveal-zoom">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">Profesionální tým, férové jednání. S Fordem jezdím k Novákům už roky a nikdy jsem nebyl zklamán. Vždy perfektní práce a ochota.</p>
+                    <div class="review-author">Pavel Kříž</div>
+                    <div class="review-car">Ford Focus, Písek</div>
+                </div>
+                <div class="review-card reveal-zoom">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">Koupili jsme zde Ford Transit a servis je vždy skvělý. Ceny odpovídají kvalitě, personál je ochotný a termíny dodržují.</p>
+                    <div class="review-author">Lucie Šťastná</div>
+                    <div class="review-car">Ford Transit, Protivín</div>
+                </div>
+                <div class="review-card reveal-zoom">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">Geometrii kol za 290 Kč jsem nenašel nikde levněji. Navíc práce provedena rychle a přesně. Doporučuji každému majiteli Fordu.</p>
+                    <div class="review-author">Tomáš Hruška</div>
+                    <div class="review-car">Ford Mondeo, Strakonice</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section process" id="postup">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag">Jak to funguje</div>
+                <h2 class="section-title">Jednoduché objednání servisu</h2>
+                <p class="section-desc">Čtyři kroky k opravenému vozu</p>
+            </div>
+            <div class="process-flow">
+                <div class="proc-step reveal">
+                    <div class="proc-num">01</div>
+                    <h3>Kontaktujte nás</h3>
+                    <p>Zavolejte nebo přijeďte a popište problém či požadovanou službu.</p>
+                </div>
+                <div class="proc-line"></div>
+                <div class="proc-step reveal">
+                    <div class="proc-num">02</div>
+                    <h3>Domluvíme termín</h3>
+                    <p>Společně najdeme vhodný termín pro opravu vašeho vozu.</p>
+                </div>
+                <div class="proc-line"></div>
+                <div class="proc-step reveal">
+                    <div class="proc-num">03</div>
+                    <h3>Diagnostika a oprava</h3>
+                    <p>Provedeme diagnostiku a opravu s použitím kvalitních dílů.</p>
+                </div>
+                <div class="proc-line"></div>
+                <div class="proc-step reveal">
+                    <div class="proc-num">04</div>
+                    <h3>Předání vozu</h3>
+                    <p>Předáme vám opravený vůz a vysvětlíme provedené práce.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq" id="dotazy">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag">Dotazy</div>
+                <h2 class="section-title">Časté dotazy</h2>
+                <p class="section-desc">Odpovědi na nejčastější otázky našich zákazníků</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item reveal" onclick="this.classList.toggle('active')">
+                    <div class="faq-q">
+                        <span>Musí být můj vůz Ford, abyste ho opravili?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-a">
+                        <p>Specializujeme se na vozy Ford, ale jsme schopni provést servis i na jiných značkách. Kontaktujte nás a rádi poradíme.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal" onclick="this.classList.toggle('active')">
+                    <div class="faq-q">
+                        <span>Nabízíte záruční servis?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-a">
+                        <p>Ano, poskytujeme jak záruční, tak pozáruční servis vozidel Ford. Používáme originální i kvalitní alternativní díly.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal" onclick="this.classList.toggle('active')">
+                    <div class="faq-q">
+                        <span>Je možné si u vás zapůjčit náhradní vozidlo?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-a">
+                        <p>Ano, provozujeme půjčovnu vozidel Ford. Můžete si zapůjčit náhradní vůz po dobu opravy nebo na jakýkoli jiný účel.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal" onclick="this.classList.toggle('active')">
+                    <div class="faq-q">
+                        <span>Kolik stojí geometrie kol?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-a">
+                        <p>Měření a seřízení geometrie kol nabízíme za výhodnou cenu 290 Kč včetně protokolu s výsledky.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag">Kontakt</div>
+                <h2 class="section-title">Navštivte nás v Písku</h2>
+                <p class="section-desc">Táborská ulice, Budějovické Předměstí</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="c-card reveal-left">
+                        <div class="c-icon">&#128205;</div>
+                        <div>
+                            <h3>Adresa</h3>
+                            <p>Táborská 2300<br>397 01 Písek<br>Budějovické Předměstí</p>
+                        </div>
+                    </div>
+                    <div class="c-card reveal-left">
+                        <div class="c-icon">&#128222;</div>
+                        <div>
+                            <h3>Telefon</h3>
+                            <p><a href="tel:+420382211020">+420 382 211 020</a><br><a href="tel:+420777755030">+420 777 755 030</a></p>
+                        </div>
+                    </div>
+                    <div class="c-card reveal-left">
+                        <div class="c-icon">&#128337;</div>
+                        <div>
+                            <h3>Otevírací doba</h3>
+                            <p>Po - Út: 7:30 - 17:00<br>St: 7:30 - 18:00<br>Čt - Pá: 7:30 - 17:00<br>So - Ne: Zavřeno</p>
+                        </div>
+                    </div>
+                    <div class="c-card reveal-left">
+                        <div class="c-icon">&#127760;</div>
+                        <div>
+                            <h3>Web</h3>
+                            <p><a href="https://www.novakpisek.cz" target="_blank" rel="noopener">www.novakpisek.cz</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-wrap reveal-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2604.3!2d14.1508!3d49.3042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b4fc4a2d97a85%3A0x400af0f66154090!2sT%C3%A1borsk%C3%A1%202300%2C%20397%2001%20P%C3%ADsek!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - Ford Auto Novák Písek"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Banner -->
+    <section class="partners-banner">
+        <div class="container">
+            <div class="partners-label">Spolupracujeme s</div>
+            <div class="partners-row">
+                <div class="partner-item">Castrol</div>
+                <div class="partner-item">Continental</div>
+                <div class="partner-item">Bosch</div>
+                <div class="partner-item">Michelin</div>
+                <div class="partner-item">Mann-Filter</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="section why-section" id="proc-my">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag">Proč my</div>
+                <h2 class="section-title">Proč si vybrat Ford Auto Novák</h2>
+                <p class="section-desc">Důvody, proč nám svěřit svůj vůz</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-item reveal-zoom">
+                    <div class="why-icon-circle">&#9733;</div>
+                    <h3>Ford specialisté</h3>
+                    <p>Zaměřujeme se výhradně na vozidla Ford. Známe je do posledního šroubku.</p>
+                </div>
+                <div class="why-item reveal-zoom">
+                    <div class="why-icon-circle">&#128176;</div>
+                    <h3>Transparentní ceny</h3>
+                    <p>Žádné skryté poplatky. Cenu znáte předem a vždy ji dodržíme.</p>
+                </div>
+                <div class="why-item reveal-zoom">
+                    <div class="why-icon-circle">&#128295;</div>
+                    <h3>Originální díly</h3>
+                    <p>Používáme originální i kvalitní alternativní díly Ford pro vaše vozidlo.</p>
+                </div>
+                <div class="why-item reveal-zoom">
+                    <div class="why-icon-circle">&#128337;</div>
+                    <h3>Rychlý servis</h3>
+                    <p>Snažíme se opravit váš vůz co nejrychleji, aby vám co nejméně chyběl.</p>
+                </div>
+                <div class="why-item reveal-zoom">
+                    <div class="why-icon-circle">&#129309;</div>
+                    <h3>Osobní přístup</h3>
+                    <p>Každý zákazník je pro nás důležitý. Poradíme a vysvětlíme vše potřebné.</p>
+                </div>
+                <div class="why-item reveal-zoom">
+                    <div class="why-icon-circle">&#128663;</div>
+                    <h3>Odtahová služba</h3>
+                    <p>Když to potřebujete, odtáhneme vaše auto přímo k nám do servisu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo"><span class="ford">Ford</span> Auto Novák</div>
+                    <p>Nezávislý dealer a servis vozů Ford v Písku. Prodej nových i ojetých vozidel, kompletní servis, pneuservis a půjčovna.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Služby</h4>
+                    <ul>
+                        <li><a href="#sluzby">Prodej vozidel</a></li>
+                        <li><a href="#sluzby">Servis Ford</a></li>
+                        <li><a href="#sluzby">Pneuservis</a></li>
+                        <li><a href="#sluzby">Geometrie kol</a></li>
+                        <li><a href="#sluzby">Odtahová služba</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Firma</h4>
+                    <ul>
+                        <li><a href="#o-nas">O nás</a></li>
+                        <li><a href="#vozidla">Vozidla</a></li>
+                        <li><a href="#cenik">Ceník</a></li>
+                        <li><a href="#kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><a href="tel:+420382211020">+420 382 211 020</a></li>
+                        <li><a href="tel:+420777755030">+420 777 755 030</a></li>
+                        <li><a href="#kontakt">Najít na mapě</a></li>
+                        <li><a href="https://www.novakpisek.cz" target="_blank">www.novakpisek.cz</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Ford Auto Novák - Richard Novák. Všechna práva vyhrazena.</span>
+                <span>Vytvořil <a href="https://kshpartners.cz" target="_blank" rel="noopener">KSH Partners s.r.o.</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* Header */
+        (function(){
+            var h = document.getElementById('header');
+            window.addEventListener('scroll', function(){ h.classList.toggle('scrolled', window.pageYOffset > 40); });
+        })();
+
+        /* Hamburger */
+        (function(){
+            var btn = document.getElementById('hamburger');
+            var nav = document.getElementById('mobileNav');
+            var ov = document.getElementById('overlay');
+            var links = nav.querySelectorAll('a');
+            function toggle(){ btn.classList.toggle('active'); nav.classList.toggle('active'); ov.classList.toggle('active'); document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : ''; }
+            function close(){ btn.classList.remove('active'); nav.classList.remove('active'); ov.classList.remove('active'); document.body.style.overflow = ''; }
+            btn.addEventListener('click', toggle);
+            ov.addEventListener('click', close);
+            links.forEach(function(l){ l.addEventListener('click', close); });
+        })();
+
+        /* IntersectionObserver */
+        (function(){
+            var els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom');
+            if ('IntersectionObserver' in window) {
+                var obs = new IntersectionObserver(function(entries){
+                    entries.forEach(function(e){
+                        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+                    });
+                }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+                els.forEach(function(el){ obs.observe(el); });
+            } else { els.forEach(function(el){ el.classList.add('visible'); }); }
+        })();
+
+        /* Smooth scroll */
+        (function(){
+            document.querySelectorAll('a[href^="#"]').forEach(function(a){
+                a.addEventListener('click', function(e){
+                    var id = this.getAttribute('href'); if (id === '#') return;
+                    var t = document.querySelector(id);
+                    if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - document.getElementById('header').offsetHeight, behavior: 'smooth' }); }
+                });
+            });
+        })();
+
+        /* Counter animation */
+        (function(){
+            var stats = document.querySelectorAll('.feat-num, .hero-stat-num');
+            var done = false;
+            function animateStats(){
+                if (done) return;
+                stats.forEach(function(el){
+                    var text = el.textContent;
+                    var num = parseInt(text);
+                    if (isNaN(num)) return;
+                    var suffix = text.replace(/[0-9]/g, '');
+                    var duration = 1800;
+                    var start = null;
+                    function step(ts){
+                        if (!start) start = ts;
+                        var p = Math.min((ts - start) / duration, 1);
+                        var eased = 1 - Math.pow(1 - p, 3);
+                        el.textContent = Math.floor(eased * num) + suffix;
+                        if (p < 1) requestAnimationFrame(step);
+                    }
+                    requestAnimationFrame(step);
+                });
+                done = true;
+            }
+            var banner = document.querySelector('.features-banner');
+            if (banner && 'IntersectionObserver' in window) {
+                new IntersectionObserver(function(entries, obs){ if (entries[0].isIntersecting) { animateStats(); obs.unobserve(banner); } }, { threshold: 0.5 }).observe(banner);
+            }
+        })();
+
+        /* Lazy image fade */
+        (function(){
+            document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
+                img.style.opacity = '0'; img.style.transition = 'opacity 0.5s ease';
+                if (img.complete) { img.style.opacity = '1'; }
+                else { img.addEventListener('load', function(){ img.style.opacity = '1'; }); }
+            });
+        })();
+    </script>
+</body>
+</html>

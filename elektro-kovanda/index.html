@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Elektro a rybářské potřeby Kovanda - Sezimovo Ústí. Elektrospotřebiče, instalační materiál, nářadí, rybářské potřeby a servis.">
+    <title>Elektro Kovanda | Elektrospotřebiče & Rybářské potřeby – Sezimovo Ústí</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS Custom Properties
+           ======================================== */
+        :root {
+            --primary: #004d40;
+            --primary-light: #00796b;
+            --primary-dark: #00332c;
+            --accent: #ffd600;
+            --accent-light: #ffff52;
+            --accent-dark: #c7a500;
+            --white: #ffffff;
+            --off-white: #fafbfc;
+            --gray-50: #f7f8f9;
+            --gray-100: #f0f2f5;
+            --gray-200: #e4e7ec;
+            --gray-300: #d0d5dd;
+            --gray-400: #98a2b3;
+            --gray-500: #667085;
+            --gray-600: #475467;
+            --gray-700: #344054;
+            --gray-800: #1d2939;
+            --gray-900: #101828;
+            --text: #1a1a2e;
+            --text-light: #4a4a68;
+            --shadow-xs: 0 1px 2px rgba(16,24,40,0.05);
+            --shadow-sm: 0 1px 3px rgba(16,24,40,0.1), 0 1px 2px rgba(16,24,40,0.06);
+            --shadow-md: 0 4px 8px -2px rgba(16,24,40,0.1), 0 2px 4px -2px rgba(16,24,40,0.06);
+            --shadow-lg: 0 12px 16px -4px rgba(16,24,40,0.08), 0 4px 6px -2px rgba(16,24,40,0.03);
+            --shadow-xl: 0 20px 24px -4px rgba(16,24,40,0.08), 0 8px 8px -4px rgba(16,24,40,0.03);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 1200px;
+            --header-height: 72px;
+        }
+
+        /* ========================================
+           Reset & Base
+           ======================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul, ol { list-style: none; }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========================================
+           Scroll Animations
+           ======================================== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .fade-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .zoom-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ========================================
+           Header
+           ======================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            z-index: 1000;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            box-shadow: var(--shadow-sm);
+            background: rgba(255,255,255,0.97);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .logo span {
+            color: var(--accent-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            padding: 6px 0;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--accent-dark);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            background: var(--primary) !important;
+            color: var(--white) !important;
+            padding: 8px 20px !important;
+            border-radius: var(--radius-full) !important;
+        }
+        .nav-cta:hover {
+            background: var(--primary-light) !important;
+        }
+        .nav-cta::after { display: none !important; }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            padding: 4px;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: var(--transition);
+            transform-origin: center;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* Mobile nav */
+        .mobile-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); z-index: 998;
+            opacity: 0; visibility: hidden; transition: var(--transition);
+        }
+        .mobile-overlay.active { opacity: 1; visibility: visible; }
+
+        .mobile-nav {
+            position: fixed; top: 0; right: -100%; width: 320px; height: 100vh;
+            background: var(--white); z-index: 999;
+            transition: var(--transition-slow);
+            padding: 100px 32px 40px;
+            box-shadow: var(--shadow-xl);
+        }
+        .mobile-nav.active { right: 0; }
+
+        .mobile-nav a {
+            display: block;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            padding: 14px 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .mobile-nav a:hover { color: var(--primary); padding-left: 8px; }
+
+        /* ========================================
+           Hero Section — Split Layout
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: var(--header-height);
+            background: var(--gray-50);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(0,77,64,0.08);
+            border-radius: var(--radius-full);
+            color: var(--primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero-tag-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-dark);
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: var(--gray-900);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 .text-accent {
+            color: var(--primary);
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--gray-500);
+            margin-bottom: 32px;
+            max-width: 480px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: var(--radius-sm);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 1px 2px rgba(0,77,64,0.3);
+        }
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,77,64,0.3);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-300);
+        }
+        .btn-secondary:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-400);
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+        }
+
+        .hero-image {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+        }
+
+        .hero-float-card {
+            position: absolute;
+            bottom: -20px;
+            left: -30px;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .hero-float-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0,77,64,0.08);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .hero-float-text strong {
+            display: block;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.95rem;
+            color: var(--gray-800);
+        }
+
+        .hero-float-text span {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+
+        /* ========================================
+           Features Row
+           ======================================== */
+        .features-row {
+            padding: 60px 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .features-flex {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .feature-icon-circle {
+            width: 48px;
+            height: 48px;
+            background: rgba(0,77,64,0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .feature-item h4 {
+            font-size: 0.95rem;
+            color: var(--gray-800);
+            margin-bottom: 2px;
+        }
+
+        .feature-item p {
+            font-size: 0.82rem;
+            color: var(--gray-500);
+        }
+
+        /* ========================================
+           Section Base
+           ======================================== */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-label {
+            display: inline-block;
+            padding: 4px 14px;
+            background: rgba(0,77,64,0.06);
+            color: var(--primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: var(--radius-full);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            color: var(--gray-900);
+            margin-bottom: 12px;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--gray-500);
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* ========================================
+           About Section — Image + Text
+           ======================================== */
+        .about {
+            background: var(--off-white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-images {
+            position: relative;
+        }
+
+        .about-img-main {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-img-main img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .about-img-secondary {
+            position: absolute;
+            bottom: -30px;
+            right: -20px;
+            width: 200px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            border: 4px solid var(--white);
+        }
+
+        .about-img-secondary img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .about-content h2 {
+            font-size: 2.2rem;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+
+        .about-content h2 .accent { color: var(--primary); }
+
+        .about-content p {
+            color: var(--gray-600);
+            margin-bottom: 14px;
+            font-size: 1rem;
+        }
+
+        .about-list {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .about-list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--gray-700);
+        }
+
+        .about-check {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        /* ========================================
+           Products / Categories Grid
+           ======================================== */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .category-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent-dark));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .category-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(0,77,64,0.06);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+            transition: var(--transition);
+        }
+
+        .category-card:hover .category-icon {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .category-card h3 {
+            font-size: 1.15rem;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+        }
+
+        .category-card p {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           Gallery Section
+           ======================================== */
+        .gallery {
+            background: var(--primary-dark);
+            overflow: hidden;
+        }
+
+        .gallery .section-label {
+            background: rgba(255,214,0,0.15);
+            color: var(--accent);
+        }
+
+        .gallery .section-title { color: var(--white); }
+        .gallery .section-desc { color: rgba(255,255,255,0.6); }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,51,44,0.6) 0%, transparent 60%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* ========================================
+           Opening Hours + Info
+           ======================================== */
+        .info-section {
+            background: var(--off-white);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 36px 30px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-xs);
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .info-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .info-card-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .info-card-header h3 {
+            font-size: 1.1rem;
+            color: var(--gray-900);
+        }
+
+        .info-card p, .info-card a {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        .info-card a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .info-card a:hover {
+            color: var(--primary-light);
+        }
+
+        .hours-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--gray-200);
+            font-size: 0.9rem;
+        }
+
+        .hours-item:last-child { border-bottom: none; }
+
+        .hours-item .day {
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .hours-item .time {
+            color: var(--gray-500);
+        }
+
+        /* ========================================
+           Services Banner
+           ======================================== */
+        .services-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-banner::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,214,0,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .services-banner-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .services-banner-content h2 {
+            font-size: 2.4rem;
+            margin-bottom: 16px;
+        }
+
+        .services-banner-content p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 32px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .services-list {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 36px;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .service-item-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,214,0,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: var(--primary-dark);
+            font-weight: 700;
+            padding: 14px 36px;
+        }
+        .btn-accent:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(255,214,0,0.4);
+        }
+
+        /* ========================================
+           Delivery Info
+           ======================================== */
+        .delivery {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .delivery-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .delivery-text h2 {
+            font-size: 2rem;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+
+        .delivery-text p {
+            color: var(--gray-600);
+            font-size: 1rem;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .delivery-perks {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .perk {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 14px;
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+        }
+
+        .perk-icon {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        .perk strong {
+            display: block;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            color: var(--gray-800);
+            margin-bottom: 2px;
+        }
+
+        .perk span {
+            font-size: 0.82rem;
+            color: var(--gray-500);
+        }
+
+        .delivery-image {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .delivery-image img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+        }
+
+        /* ========================================
+           Contact Section
+           ======================================== */
+        .contact {
+            background: var(--off-white);
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            border: 1px solid var(--gray-200);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0,77,64,0.07);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .contact-item h3 {
+            font-size: 1rem;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .contact-item p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        .contact-item a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .contact-item a:hover { color: var(--primary-light); }
+
+        .map-wrapper {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            height: 100%;
+            min-height: 420px;
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 420px;
+        }
+
+        /* ========================================
+           Footer
+           ======================================== */
+        .footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+        }
+
+        .footer-main {
+            padding: 56px 0;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-brand .logo { color: var(--white); font-size: 1.6rem; margin-bottom: 14px; }
+        .footer-brand p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 16px; }
+
+        .footer-col h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul li { margin-bottom: 8px; }
+        .footer-col ul li a {
+            color: var(--gray-400);
+            font-size: 0.88rem;
+        }
+        .footer-col ul li a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.82rem;
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+        }
+        .footer-bottom a:hover { color: var(--accent-light); }
+
+        /* ========================================
+           Responsive
+           ======================================== */
+        @media (max-width: 1024px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-main { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero-image-wrapper { order: -1; }
+            .hero-image img { height: 320px; }
+            .hero-float-card { bottom: -10px; left: 10px; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-img-secondary { right: 10px; }
+
+            .categories-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .delivery-content { grid-template-columns: 1fr; }
+            .contact-layout { grid-template-columns: 1fr; }
+            .footer-main { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .features-flex { flex-direction: column; }
+
+            .section { padding: 64px 0; }
+            .services-list { gap: 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons { flex-direction: column; }
+            .btn { width: 100%; }
+            .delivery-perks { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#" class="logo">Elektro<span>Kovanda</span></a>
+            <nav class="nav-links">
+                <a href="#o-nas">O nás</a>
+                <a href="#sortiment">Sortiment</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#oteviraci-doba">Otevírací doba</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-overlay" id="overlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#o-nas">O nás</a>
+        <a href="#sortiment">Sortiment</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#oteviraci-doba">Otevírací doba</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-tag">
+                        <span class="hero-tag-dot"></span>
+                        Sezimovo Ústí, okres Tábor
+                    </div>
+                    <h1>Elektro, rybářské potřeby <span class="text-accent">a vše pro domácnost</span></h1>
+                    <p class="hero-desc">Široký sortiment elektrospotřebičů, instalačního materiálu, nářadí a rybářských potřeb za bezkonkurenční ceny. Osobní přístup a bezplatná doprava do 30 km.</p>
+                    <div class="hero-buttons">
+                        <a href="#sortiment" class="btn btn-primary">Prohlédnout sortiment</a>
+                        <a href="#kontakt" class="btn btn-secondary">Kontaktujte nás</a>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper fade-right">
+                    <div class="hero-image">
+                        <img src="images/hero-electronics.jpg" alt="Prodejna Elektro Kovanda" loading="eager">
+                    </div>
+                    <div class="hero-float-card">
+                        <div class="hero-float-icon">&#128666;</div>
+                        <div class="hero-float-text">
+                            <strong>Rozvoz zdarma</strong>
+                            <span>Do 30 km od prodejny</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Row -->
+    <div class="features-row">
+        <div class="container">
+            <div class="features-flex">
+                <div class="feature-item fade-up">
+                    <div class="feature-icon-circle">&#9889;</div>
+                    <div>
+                        <h4>Elektrospotřebiče</h4>
+                        <p>Široký výběr značek</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-up">
+                    <div class="feature-icon-circle">&#127907;</div>
+                    <div>
+                        <h4>Rybářské potřeby</h4>
+                        <p>Pruty, nástrahy, doplňky</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-up">
+                    <div class="feature-icon-circle">&#128295;</div>
+                    <div>
+                        <h4>Nářadí</h4>
+                        <p>Vrtačky, brusky, horkovzdušné pistole</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-up">
+                    <div class="feature-icon-circle">&#128273;</div>
+                    <div>
+                        <h4>Výroba klíčů</h4>
+                        <p>Na počkání v prodejně</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section about" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-images fade-left">
+                    <div class="about-img-main">
+                        <img src="images/shop-interior.jpg" alt="Interiér prodejny Kovanda" loading="lazy">
+                    </div>
+                    <div class="about-img-secondary">
+                        <img src="images/fishing.jpg" alt="Rybářské potřeby" loading="lazy">
+                    </div>
+                </div>
+                <div class="about-content fade-right">
+                    <div class="section-label">O naší prodejně</div>
+                    <h2>Vaše oblíbená prodejna <span class="accent">v Sezimově Ústí</span></h2>
+                    <p>Nabízíme obsáhlý sortiment produktů za bezkonkurenční ceny, dostupné přímo v prodejně nebo na objednávku z katalogu s dodáním do 2-3 dnů.</p>
+                    <p>Naším cílem je osobní přístup a pohodlný nákup v domácím prostředí. Zajistíme vám bezplatnou dopravu až do vašeho bytu v okruhu 30 km a na přání i instalaci spotřebičů.</p>
+                    <div class="about-list">
+                        <div class="about-list-item">
+                            <span class="about-check">&#10003;</span>
+                            Bezplatná doprava do 30 km
+                        </div>
+                        <div class="about-list-item">
+                            <span class="about-check">&#10003;</span>
+                            Instalace spotřebičů na přání
+                        </div>
+                        <div class="about-list-item">
+                            <span class="about-check">&#10003;</span>
+                            Objednávka z katalogu do 2-3 dnů
+                        </div>
+                        <div class="about-list-item">
+                            <span class="about-check">&#10003;</span>
+                            Osobní přístup a poradenství
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products / Categories -->
+    <section class="section" id="sortiment">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-label">Sortiment</div>
+                <h2 class="section-title">Co u nás najdete</h2>
+                <p class="section-desc">Pestrost nabídky pro domácnost, zahradu, rybaření i kutilství</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card zoom-in">
+                    <div class="category-icon">&#9889;</div>
+                    <h3>Elektrospotřebiče</h3>
+                    <p>Kuchyňské spotřebiče, pračky, ledničky, vysavače a další domácí technika od předních výrobců.</p>
+                </div>
+                <div class="category-card zoom-in">
+                    <div class="category-icon">&#128268;</div>
+                    <h3>Instalační materiál</h3>
+                    <p>Kabely, zásuvky, jističe, rozvodné skříně, spínače a kompletní elektromateriál pro vaši instalaci.</p>
+                </div>
+                <div class="category-card zoom-in">
+                    <div class="category-icon">&#128295;</div>
+                    <h3>Elektrické nářadí</h3>
+                    <p>Vrtačky, brusky, horkovzdušné pistole a profesionální nářadí pro každého kutila.</p>
+                </div>
+                <div class="category-card zoom-in">
+                    <div class="category-icon">&#127907;</div>
+                    <h3>Rybářské potřeby</h3>
+                    <p>Pruty, navijáky, nástrahy, žížaly, červi a kompletní výbava pro rybáře. Živé nástrahy na skladě.</p>
+                </div>
+                <div class="category-card zoom-in">
+                    <div class="category-icon">&#128230;</div>
+                    <h3>Železářství</h3>
+                    <p>Šrouby, matice, háčky a drobný spojovací materiál. Lepidla Ceys a pomocný materiál.</p>
+                </div>
+                <div class="category-card zoom-in">
+                    <div class="category-icon">&#128273;</div>
+                    <h3>Služby</h3>
+                    <p>Výroba klíčů na počkání, nabíjení Sodastream patron, šlehačkové bombičky a baterie.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section gallery">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-label">Galerie</div>
+                <h2 class="section-title">Nahlédněte do naší prodejny</h2>
+                <p class="section-desc">Přátelská atmosféra a široký výběr na jednom místě</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item zoom-in"><img src="images/hero-electronics.jpg" alt="Prodejna" loading="lazy"></div>
+                <div class="gallery-item zoom-in"><img src="images/tools.jpg" alt="Nářadí" loading="lazy"></div>
+                <div class="gallery-item zoom-in"><img src="images/fishing.jpg" alt="Rybářské potřeby" loading="lazy"></div>
+                <div class="gallery-item zoom-in"><img src="images/appliances.jpg" alt="Spotřebiče" loading="lazy"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Banner -->
+    <section class="services-banner" id="sluzby">
+        <div class="container">
+            <div class="services-banner-content fade-up">
+                <h2>Služby navíc</h2>
+                <p>Nejsme jen obchod. Nabízíme kompletní servis pro vaši domácnost a koníčky.</p>
+                <div class="services-list">
+                    <div class="service-item">
+                        <span class="service-item-icon">&#128666;</span>
+                        Rozvoz do 30 km
+                    </div>
+                    <div class="service-item">
+                        <span class="service-item-icon">&#128736;</span>
+                        Instalace spotřebičů
+                    </div>
+                    <div class="service-item">
+                        <span class="service-item-icon">&#128273;</span>
+                        Výroba klíčů
+                    </div>
+                    <div class="service-item">
+                        <span class="service-item-icon">&#128218;</span>
+                        Objednávky z katalogu
+                    </div>
+                </div>
+                <a href="#kontakt" class="btn btn-accent">Zavolejte nám</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery Info -->
+    <section class="delivery">
+        <div class="container">
+            <div class="delivery-content">
+                <div class="delivery-text fade-left">
+                    <div class="section-label">Doručení</div>
+                    <h2>Bezplatná doprava až k vám domů</h2>
+                    <p>Objednáte si zboží v prodejně nebo telefonicky a my vám ho dovezeme zdarma v okruhu 30 km. Nabízíme i instalaci spotřebičů na přání.</p>
+                    <div class="delivery-perks">
+                        <div class="perk">
+                            <span class="perk-icon">&#10003;</span>
+                            <div>
+                                <strong>Zdarma do 30 km</strong>
+                                <span>Bez poplatků za dopravu</span>
+                            </div>
+                        </div>
+                        <div class="perk">
+                            <span class="perk-icon">&#10003;</span>
+                            <div>
+                                <strong>Rychlé dodání</strong>
+                                <span>Z katalogu do 2-3 dnů</span>
+                            </div>
+                        </div>
+                        <div class="perk">
+                            <span class="perk-icon">&#10003;</span>
+                            <div>
+                                <strong>Instalace</strong>
+                                <span>Na přání zapojíme</span>
+                            </div>
+                        </div>
+                        <div class="perk">
+                            <span class="perk-icon">&#10003;</span>
+                            <div>
+                                <strong>Osobní přístup</strong>
+                                <span>Poradenství u vás doma</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="delivery-image fade-right">
+                    <img src="images/appliances.jpg" alt="Doručení spotřebičů" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opening Hours + Info -->
+    <section class="section info-section" id="oteviraci-doba">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-label">Informace</div>
+                <h2 class="section-title">Otevírací doba a kontakt</h2>
+                <p class="section-desc">Najdete nás v Sezimově Ústí, okres Tábor</p>
+            </div>
+            <div class="info-grid">
+                <div class="info-card fade-up">
+                    <div class="info-card-header">
+                        <div class="info-card-icon">&#128337;</div>
+                        <h3>Otevírací doba</h3>
+                    </div>
+                    <div class="hours-list">
+                        <div class="hours-item">
+                            <span class="day">Pondělí</span>
+                            <span class="time">09:00 - 12:00, 14:00 - 18:00</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="day">Úterý</span>
+                            <span class="time">09:00 - 12:00, 14:00 - 18:00</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="day">Středa</span>
+                            <span class="time">09:00 - 12:00, 14:00 - 18:00</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="day">Čtvrtek</span>
+                            <span class="time">09:00 - 12:00, 14:00 - 18:00</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="day">Pátek</span>
+                            <span class="time">09:00 - 12:00, 14:00 - 18:00</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="day">Sobota</span>
+                            <span class="time">08:00 - 11:00</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="day">Neděle</span>
+                            <span class="time">Zavřeno</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-card fade-up">
+                    <div class="info-card-header">
+                        <div class="info-card-icon">&#128205;</div>
+                        <h3>Adresa</h3>
+                    </div>
+                    <p><strong>Elektro a rybářské potřeby Kovanda</strong></p>
+                    <p>Kánišova 206<br>391 01 Sezimovo Ústí 1<br>Okres Tábor</p>
+                    <br>
+                    <p>Pohodlný přístup a parkování přímo u prodejny.</p>
+                </div>
+                <div class="info-card fade-up">
+                    <div class="info-card-header">
+                        <div class="info-card-icon">&#128222;</div>
+                        <h3>Kontakt</h3>
+                    </div>
+                    <p><strong>Telefon:</strong><br>
+                    <a href="tel:+420605259400">+420 605 259 400</a></p>
+                    <br>
+                    <p><strong>E-mail:</strong><br>
+                    <a href="mailto:kovanda.elektro@post.cz">kovanda.elektro@post.cz</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-label">Kde nás najdete</div>
+                <h2 class="section-title">Navštivte naši prodejnu</h2>
+                <p class="section-desc">Těšíme se na vaši návštěvu v Sezimově Ústí</p>
+            </div>
+            <div class="contact-layout">
+                <div class="contact-details">
+                    <div class="contact-item fade-left">
+                        <div class="contact-icon">&#128205;</div>
+                        <div>
+                            <h3>Adresa prodejny</h3>
+                            <p>Kánišova 206, 391 01 Sezimovo Ústí 1</p>
+                        </div>
+                    </div>
+                    <div class="contact-item fade-left">
+                        <div class="contact-icon">&#128222;</div>
+                        <div>
+                            <h3>Telefon</h3>
+                            <p><a href="tel:+420605259400">+420 605 259 400</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item fade-left">
+                        <div class="contact-icon">&#9993;</div>
+                        <div>
+                            <h3>E-mail</h3>
+                            <p><a href="mailto:kovanda.elektro@post.cz">kovanda.elektro@post.cz</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item fade-left">
+                        <div class="contact-icon">&#128337;</div>
+                        <div>
+                            <h3>Otevírací doba</h3>
+                            <p>Po-Pá: 09:00-12:00, 14:00-18:00<br>So: 08:00-11:00 | Ne: Zavřeno</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-wrapper fade-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2598.5!2d14.6834!3d49.3875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470d9dcb2e34f9e7%3A0x400af0f661540a0!2sK%C3%A1ni%C5%A1ova%20206%2C%20391%2001%20Sezimovo%20%C3%9Ast%C3%AD!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - Elektro Kovanda"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="logo">Elektro<span>Kovanda</span></div>
+                    <p>Vaše oblíbená prodejna elektrospotřebičů, rybářských potřeb a domácích potřeb v Sezimově Ústí. Osobní přístup a bezplatná doprava.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Sortiment</h4>
+                    <ul>
+                        <li><a href="#sortiment">Elektrospotřebiče</a></li>
+                        <li><a href="#sortiment">Instalační materiál</a></li>
+                        <li><a href="#sortiment">Nářadí</a></li>
+                        <li><a href="#sortiment">Rybářské potřeby</a></li>
+                        <li><a href="#sortiment">Železářství</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Služby</h4>
+                    <ul>
+                        <li><a href="#sluzby">Bezplatný rozvoz</a></li>
+                        <li><a href="#sluzby">Instalace</a></li>
+                        <li><a href="#sluzby">Výroba klíčů</a></li>
+                        <li><a href="#sluzby">Objednávky</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><a href="tel:+420605259400">+420 605 259 400</a></li>
+                        <li><a href="mailto:kovanda.elektro@post.cz">kovanda.elektro@post.cz</a></li>
+                        <li><a href="#kontakt">Jak se k nám dostat</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Elektro a rybářské potřeby Kovanda. Všechna práva vyhrazena.</span>
+                <span>Vytvořil <a href="https://kshpartners.cz" target="_blank" rel="noopener">KSH Partners s.r.o.</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* Header scroll */
+        (function(){
+            var header = document.getElementById('header');
+            window.addEventListener('scroll', function(){
+                header.classList.toggle('scrolled', window.pageYOffset > 40);
+            });
+        })();
+
+        /* Hamburger */
+        (function(){
+            var hamburger = document.getElementById('hamburger');
+            var mobileNav = document.getElementById('mobileNav');
+            var overlay = document.getElementById('overlay');
+            var links = mobileNav.querySelectorAll('a');
+
+            function toggle(){
+                hamburger.classList.toggle('active');
+                mobileNav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            }
+            function close(){
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            hamburger.addEventListener('click', toggle);
+            overlay.addEventListener('click', close);
+            links.forEach(function(l){ l.addEventListener('click', close); });
+        })();
+
+        /* IntersectionObserver scroll animations */
+        (function(){
+            var els = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .zoom-in');
+            if ('IntersectionObserver' in window) {
+                var observer = new IntersectionObserver(function(entries){
+                    entries.forEach(function(e){
+                        if (e.isIntersecting) {
+                            e.target.classList.add('visible');
+                            observer.unobserve(e.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+                els.forEach(function(el){ observer.observe(el); });
+            } else {
+                els.forEach(function(el){ el.classList.add('visible'); });
+            }
+        })();
+
+        /* Smooth scroll */
+        (function(){
+            document.querySelectorAll('a[href^="#"]').forEach(function(a){
+                a.addEventListener('click', function(e){
+                    var id = this.getAttribute('href');
+                    if (id === '#') return;
+                    var t = document.querySelector(id);
+                    if (t) {
+                        e.preventDefault();
+                        var h = document.getElementById('header').offsetHeight;
+                        window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - h, behavior: 'smooth' });
+                    }
+                });
+            });
+        })();
+
+        /* Image lazy load fade */
+        (function(){
+            document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.5s ease';
+                if (img.complete) { img.style.opacity = '1'; }
+                else { img.addEventListener('load', function(){ img.style.opacity = '1'; }); }
+            });
+        })();
+
+        /* Active nav highlight */
+        (function(){
+            var sections = document.querySelectorAll('section[id]');
+            var navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+            window.addEventListener('scroll', function(){
+                var pos = window.pageYOffset + 100;
+                sections.forEach(function(sec){
+                    if (pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight) {
+                        var id = sec.getAttribute('id');
+                        navLinks.forEach(function(l){
+                            l.style.color = l.getAttribute('href') === '#' + id ? 'var(--primary)' : '';
+                        });
+                    }
+                });
+            });
+        })();
+
+        /* Parallax for hero card */
+        (function(){
+            var card = document.querySelector('.hero-float-card');
+            if (!card) return;
+            window.addEventListener('scroll', function(){
+                var y = window.pageYOffset;
+                card.style.transform = 'translateY(' + (y * 0.08) + 'px)';
+            });
+        })();
+    </script>
+</body>
+</html>
