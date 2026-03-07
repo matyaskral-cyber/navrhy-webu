@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truhlářství Vladislav Kůra | Písek — Nábytek na míru</title>
+    <meta name="description" content="Truhlářství Vladislav Kůra — kuchyně na míru, vestavěné skříně, obývací pokoje, schodiště, dveře. Nábytek pro interiéry, kavárny a kanceláře. Písek - Semice.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --deep: #2c1810;
+            --deep-90: rgba(44, 24, 16, 0.95);
+            --deep-light: #3a2218;
+            --deep-card: #321c12;
+            --accent: #c49a6c;
+            --accent-light: #d4b08a;
+            --accent-dark: #a87e52;
+            --accent-glow: rgba(196, 154, 108, 0.3);
+            --cream: #f8f0e6;
+            --cream-dark: #ece0d0;
+            --white: #ffffff;
+            --gray-400: #9a8a7a;
+            --text: #ede4da;
+            --text-dim: rgba(255,255,255,0.6);
+            --text-dark: #3a2a1a;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --shadow: 0 4px 30px rgba(0,0,0,0.15);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.25);
+            --shadow-accent: 0 8px 30px rgba(196,154,108,0.3);
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            background: var(--deep);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.15;
+            font-weight: 600;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition);
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section--deep {
+            background: var(--deep);
+        }
+
+        .section--dark {
+            background: var(--deep-light);
+        }
+
+        .section--cream {
+            background: var(--cream);
+            color: var(--text-dark);
+        }
+
+
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            color: var(--white);
+            font-style: italic;
+        }
+
+        .section--cream .section-title {
+            color: var(--deep);
+        }
+
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-dim);
+            max-width: 640px;
+            line-height: 1.8;
+        }
+
+        .section--cream .section-desc {
+            color: var(--gray-400);
+        }
+
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header .section-desc {
+            margin: 0 auto;
+        }
+
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s ease;
+        }
+
+        .nav.scrolled {
+            background: var(--deep-90);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .nav__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        .nav__logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+
+        .nav__logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav__logo-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--deep);
+        }
+
+
+        .nav__logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--white);
+            font-style: italic;
+        }
+
+        .nav__logo-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            color: var(--accent);
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .nav__links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+
+        .nav__links a {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color var(--transition);
+            position: relative;
+        }
+
+        .nav__links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width var(--transition);
+        }
+
+        .nav__links a:hover {
+            color: var(--white);
+        }
+
+        .nav__links a:hover::after {
+            width: 100%;
+        }
+
+
+        .nav__cta {
+            background: var(--accent);
+            color: var(--deep) !important;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all var(--transition);
+        }
+
+        .nav__cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .nav__cta::after {
+            display: none !important;
+        }
+
+
+        .nav__burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .nav__burger span {
+            width: 26px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .nav__burger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav__burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav__burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: var(--deep-90);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+
+        .mobile-menu__links {
+            list-style: none;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .mobile-menu__links a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--white);
+            font-style: italic;
+        }
+
+        .mobile-menu__links a:hover {
+            color: var(--accent);
+        }
+
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--deep);
+            overflow: hidden;
+        }
+
+        .hero__bg {
+            position: absolute;
+            inset: 0;
+            background: url('images/slide1.jpg') center/cover no-repeat;
+        }
+
+        .hero__bg::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(44,24,16,0.88) 0%, rgba(44,24,16,0.6) 50%, rgba(44,24,16,0.85) 100%);
+        }
+
+        .hero__pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10 Q90 50 50 90 Q10 50 50 10Z' fill='none' stroke='%23c49a6c' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-size: 100px 100px;
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 2;
+            padding-top: 120px;
+        }
+
+
+        .hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(196,154,108,0.12);
+            border: 1px solid rgba(196,154,108,0.25);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 28px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .hero__badge svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--accent);
+        }
+
+
+        .hero__title {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            color: var(--white);
+            margin-bottom: 10px;
+            line-height: 1.05;
+            max-width: 750px;
+            font-style: italic;
+        }
+
+        .hero__title span {
+            display: block;
+            color: var(--accent);
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-top: 12px;
+            font-style: normal;
+        }
+
+        .hero__subtitle {
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            max-width: 540px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .hero__actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn--primary {
+            background: var(--accent);
+            color: var(--deep);
+        }
+
+        .btn--primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: var(--white);
+            border: 1.5px solid rgba(255,255,255,0.25);
+        }
+
+        .btn--outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            transition: transform var(--transition);
+        }
+
+        .btn:hover svg {
+            transform: translateX(3px);
+        }
+
+
+        .hero__features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.06);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            max-width: 820px;
+        }
+
+        .hero__feature {
+            padding: 28px 20px;
+            background: rgba(44,24,16,0.6);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: background var(--transition);
+        }
+
+        .hero__feature:hover {
+            background: rgba(196,154,108,0.1);
+        }
+
+
+        .hero__feature-icon {
+            margin-bottom: 10px;
+        }
+
+        .hero__feature-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--accent);
+        }
+
+
+        .hero__feature-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* ===== ABOUT ===== */
+        .about__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+
+        .about__visual {
+            position: relative;
+        }
+
+
+        .about__image-main {
+            width: 100%;
+            height: 500px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .about__image-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        .about__float-card {
+            position: absolute;
+            bottom: -24px;
+            right: -24px;
+            background: var(--accent);
+            color: var(--deep);
+            padding: 24px 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about__float-card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            opacity: 0.7;
+        }
+
+        .about__float-card-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .about__content {
+            padding-left: 20px;
+        }
+
+
+        .about__features {
+            display: grid;
+            gap: 24px;
+            margin-top: 36px;
+        }
+
+        .about__feature {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+
+        .about__feature-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: rgba(196,154,108,0.12);
+            border: 1px solid rgba(196,154,108,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about__feature-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--accent);
+        }
+
+
+        .about__feature-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--white);
+        }
+
+        .about__feature-desc {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+
+        /* ===== SERVICES ===== */
+        .services__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+
+        .service-card {
+            background: var(--deep-card);
+            border: 1px solid rgba(196,154,108,0.08);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform var(--transition);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(196,154,108,0.25);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+
+        .service-card__icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(196,154,108,0.12);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            transition: all var(--transition);
+        }
+
+        .service-card:hover .service-card__icon {
+            background: var(--accent);
+        }
+
+        .service-card__icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--accent);
+            transition: fill var(--transition);
+        }
+
+        .service-card:hover .service-card__icon svg {
+            fill: var(--deep);
+        }
+
+
+        .service-card__title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--white);
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .service-card__desc {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+        }
+
+
+        /* ===== GALLERY ===== */
+        .gallery__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .gallery__item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+            cursor: pointer;
+        }
+
+        .gallery__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery__item:hover img {
+            transform: scale(1.08);
+        }
+
+
+        .gallery__item::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(44,24,16,0.6) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
+
+        .gallery__item:hover::after {
+            opacity: 1;
+        }
+
+
+        .gallery__item-label {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            z-index: 2;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--white);
+            font-style: italic;
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
+
+        .gallery__item:hover .gallery__item-label {
+            opacity: 1;
+        }
+
+
+        /* ===== CONTACT ===== */
+        .kontakt__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .kontakt__info {
+            display: grid;
+            gap: 32px;
+        }
+
+
+        .kontakt__item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+
+        .kontakt__item-icon {
+            width: 56px;
+            height: 56px;
+            min-width: 56px;
+            background: rgba(196,154,108,0.12);
+            border: 1px solid rgba(196,154,108,0.15);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kontakt__item-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--accent);
+        }
+
+
+        .kontakt__item-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+
+        .kontakt__item-value {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        .kontakt__item-value a {
+            color: var(--accent);
+        }
+
+        .kontakt__item-value a:hover {
+            color: var(--accent-light);
+        }
+
+
+        .kontakt__map {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            height: 100%;
+            min-height: 400px;
+            border: 1px solid rgba(196,154,108,0.1);
+        }
+
+        .kontakt__map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: sepia(0.3) brightness(0.85) contrast(1.1);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #1e100a;
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(196,154,108,0.1);
+        }
+
+        .footer__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer__logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+
+        .footer__logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer__logo-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--deep);
+        }
+
+
+        .footer__logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--white);
+            font-style: italic;
+        }
+
+        .footer__copy {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+        }
+
+
+        .footer__links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .footer__links a {
+            color: var(--gray-400);
+            font-size: 0.85rem;
+        }
+
+        .footer__links a:hover {
+            color: var(--accent);
+        }
+
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .services__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 768px) {
+            .nav__links {
+                display: none;
+            }
+
+            .nav__burger {
+                display: flex;
+            }
+
+            .hero__features {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 400px;
+            }
+
+            .about__grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about__content {
+                padding-left: 0;
+            }
+
+            .about__float-card {
+                right: 16px;
+                bottom: -16px;
+            }
+
+            .services__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery__item {
+                height: 250px;
+            }
+
+            .kontakt__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kontakt__map {
+                min-height: 300px;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+
+            .footer__inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            .hero__features {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero__actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+        }
+    
+        /* ===== CTA BANNER ===== */
+        .cta-banner {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-banner__content {
+            max-width: 600px;
+        }
+
+        .cta-banner__title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .cta-banner__desc {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        .cta-banner__pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+        }
+
+        /* ===== PROCESS STEPS ===== */
+        .process {
+            padding: 80px 0;
+        }
+
+        .process__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            counter-reset: step;
+        }
+
+        .process__step {
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+        }
+
+        .process__step::before {
+            counter-increment: step;
+            content: counter(step, decimal-leading-zero);
+            display: block;
+            font-size: 3rem;
+            font-weight: 700;
+            opacity: 0.15;
+            margin-bottom: 16px;
+            line-height: 1;
+        }
+
+        .process__step-title {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--white);
+        }
+
+        .process__step-desc {
+            font-size: 0.88rem;
+            color: var(--text-dim, rgba(255,255,255,0.6));
+            line-height: 1.6;
+        }
+
+        .process__line {
+            position: absolute;
+            top: 50px;
+            right: -15px;
+            width: 30px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .process__step:last-child .process__line {
+            display: none;
+        }
+
+        /* ===== TESTIMONIAL ===== */
+        .testimonial {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .testimonial__quote {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            font-style: italic;
+            color: rgba(255,255,255,0.8);
+            max-width: 700px;
+            margin: 0 auto 24px;
+            line-height: 1.8;
+        }
+
+        .testimonial__quote::before {
+            content: '\201C';
+            display: block;
+            font-size: 4rem;
+            line-height: 1;
+            opacity: 0.2;
+            margin-bottom: 8px;
+        }
+
+        .testimonial__author {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 1px;
+        }
+
+        /* ===== FAQ / INFO ===== */
+        .faq {
+            padding: 80px 0;
+        }
+
+        .faq__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .faq__item {
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all var(--transition);
+        }
+
+        .faq__item:hover {
+            border-color: rgba(255,255,255,0.12);
+            transform: translateY(-4px);
+        }
+
+        .faq__item-title {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .faq__item-text {
+            font-size: 0.9rem;
+            color: var(--text-dim, rgba(255,255,255,0.6));
+            line-height: 1.7;
+        }
+
+        /* ===== ENHANCED FOOTER ===== */
+        .footer__top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .footer__about-text {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.7;
+            margin-top: 16px;
+        }
+
+        .footer__col-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+        }
+
+        .footer__col-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer__col-links a {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.4);
+            transition: color var(--transition);
+        }
+
+        .footer__col-links a:hover {
+            color: var(--white);
+        }
+
+        .footer__contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 12px;
+        }
+
+        .footer__contact-item svg {
+            width: 16px;
+            height: 16px;
+            fill: rgba(255,255,255,0.3);
+            min-width: 16px;
+        }
+
+        /* ===== ADDITIONAL RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .process__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer__top {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .faq__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cta-banner__inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .process__grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .process__line {
+                display: none;
+            }
+
+            .footer__top {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .process__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <div class="nav__inner">
+                <a href="#hero" class="nav__logo">
+                    <div class="nav__logo-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 2.84L19 12h-1.5v8H14v-6h-4v6H6.5v-8H5l7-6.16z"/></svg>
+                    </div>
+                    <div>
+                        <div class="nav__logo-text">Truhlářství Kůra</div>
+                        <div class="nav__logo-sub">Nábytek na míru</div>
+                    </div>
+                </a>
+                <ul class="nav__links">
+                    <li><a href="#o-nas">O nás</a></li>
+                    <li><a href="#sluzby">Služby</a></li>
+                    <li><a href="#galerie">Galerie</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                    <li><a href="tel:605419457" class="nav__cta">Zavolat</a></li>
+                </ul>
+                <button class="nav__burger" id="burger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu__links">
+            <li><a href="#o-nas" class="mobile-link">O nás</a></li>
+            <li><a href="#sluzby" class="mobile-link">Služby</a></li>
+            <li><a href="#galerie" class="mobile-link">Galerie</a></li>
+            <li><a href="#kontakt" class="mobile-link">Kontakt</a></li>
+            <li><a href="tel:605419457" class="mobile-link">605 419 457</a></li>
+        </ul>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero__bg"></div>
+        <div class="hero__pattern"></div>
+        <div class="container">
+            <div class="hero__content">
+                <div class="hero__badge">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Ruční řemeslná výroba
+                </div>
+                <h1 class="hero__title">
+                    Truhlářství Vladislav Kůra
+                    <span>Nábytek na míru v Písku a okolí</span>
+                </h1>
+                <p class="hero__subtitle">Vyrábíme kuchyně na míru, vestavěné skříně, schodiště a veškerý nábytek pro soukromé interiéry, kanceláře, kavárny i bary. Individuální přístup ke každému projektu.</p>
+                <div class="hero__actions">
+                    <a href="tel:605419457" class="btn btn--primary">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        605 419 457
+                    </a>
+                    <a href="#galerie" class="btn btn--outline">
+                        Naše realizace
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    </a>
+                </div>
+                <div class="hero__features">
+                    <div class="hero__feature">
+                        <div class="hero__feature-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+                        </div>
+                        <div class="hero__feature-text">Kuchyně<br>na míru</div>
+                    </div>
+                    <div class="hero__feature">
+                        <div class="hero__feature-icon">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
+                        </div>
+                        <div class="hero__feature-text">Vestavěné<br>skříně</div>
+                    </div>
+                    <div class="hero__feature">
+                        <div class="hero__feature-icon">
+                            <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+                        </div>
+                        <div class="hero__feature-text">Schodiště<br>a dveře</div>
+                    </div>
+                    <div class="hero__feature">
+                        <div class="hero__feature-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
+                        </div>
+                        <div class="hero__feature-text">Komerční<br>interiéry</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- O NAS -->
+    <section class="section section--deep" id="o-nas">
+        <div class="container">
+            <div class="about__grid">
+                <div class="about__visual reveal-left">
+                    <div class="about__image-main">
+                        <img src="images/kuchyne1.jpg" alt="Truhlářství Kůra - kuchyně na míru">
+                    </div>
+                    <div class="about__float-card">
+                        <div class="about__float-card-title">Sídlo</div>
+                        <div class="about__float-card-value">Písek - Semice</div>
+                    </div>
+                </div>
+                <div class="about__content reveal-right">
+                    <div class="section-label">O nás</div>
+                    <h2 class="section-title">Řemeslná tradice a precizní práce</h2>
+                    <p class="section-desc">Truhlářství Vladislav Kůra se specializuje na výrobu nábytku na míru. Každý kus vyrábíme individuálně podle přání a potřeb zákazníka — od kuchyňských linek přes vestavěné skříně až po kompletní interiéry kaváren a kanceláří.</p>
+                    <div class="about__features">
+                        <div class="about__feature">
+                            <div class="about__feature-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+                            </div>
+                            <div>
+                                <div class="about__feature-title">Nábytek pro domácnosti</div>
+                                <div class="about__feature-desc">Kuchyně, obývací pokoje, ložnice, dětské pokoje, koupelnový nábytek — vše přesně na míru vašeho interiéru.</div>
+                            </div>
+                        </div>
+                        <div class="about__feature">
+                            <div class="about__feature-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z"/></svg>
+                            </div>
+                            <div>
+                                <div class="about__feature-title">Komerční interiéry</div>
+                                <div class="about__feature-desc">Vybavení kanceláří, kaváren, barů a dalších komerčních prostor na klíč.</div>
+                            </div>
+                        </div>
+                        <div class="about__feature">
+                            <div class="about__feature-icon">
+                                <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+                            </div>
+                            <div>
+                                <div class="about__feature-title">Schodiště, dveře a doplňky</div>
+                                <div class="about__feature-desc">Dřevěná schodiště, interiérové dveře, parapety, ploty a vrata — precizní řemeslná práce.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLUZBY -->
+    <section class="section section--dark" id="sluzby">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Naše služby</div>
+                <h2 class="section-title">Co vyrábíme</h2>
+                <p class="section-desc">Široký sortiment truhlářských výrobků na míru — od kuchyní přes schodiště po kompletní interiéry.</p>
+            </div>
+            <div class="services__grid">
+                <div class="service-card reveal" style="transition-delay:0s">
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+                    </div>
+                    <h3 class="service-card__title">Kuchyně na míru</h3>
+                    <p class="service-card__desc">Kuchyňské linky na míru přesně do vašeho prostoru. Od návrhu přes výrobu po montáž — kompletní servis.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.1s">
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
+                    </div>
+                    <h3 class="service-card__title">Vestavěné skříně</h3>
+                    <p class="service-card__desc">Vestavěné skříně s posuvnými i klasickými dveřmi. Maximální využití prostoru ve vašem interiéru.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.2s">
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 18h2v-2H4v2zm0-4h2v-2H4v2zm0-4h2V8H4v2zm4 8h14v-2H8v2zm0-4h14v-2H8v2zm0-4h14V8H8v2z"/></svg>
+                    </div>
+                    <h3 class="service-card__title">Obývací pokoje</h3>
+                    <p class="service-card__desc">Obývací stěny, knihovny, TV stolky a další nábytek pro obývací prostory dle vašich představ.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.3s">
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24"><path d="M2 17h2v-2H2v2zm4 0h2v-2H6v2zm-4-4h2v-2H2v2zm4 0h2v-2H6v2zm-4-4h2V7H2v2zm4 0h2V7H6v2zm4 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2zm4 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2zm4 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z"/></svg>
+                    </div>
+                    <h3 class="service-card__title">Schodiště a dveře</h3>
+                    <p class="service-card__desc">Dřevěná schodiště a interiérové dveře. Precizní zpracování a individuální design.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.4s">
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24"><path d="M11 9c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zm-3 5c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm11-4V7h-2v3h-3v2h3v3h2v-3h3v-2h-3z"/></svg>
+                    </div>
+                    <h3 class="service-card__title">Dětské pokoje a ložnice</h3>
+                    <p class="service-card__desc">Bezpečný a praktický nábytek pro dětské pokoje. Postele, skříně a pracovní stoly pro ložnice.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.5s">
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z"/></svg>
+                    </div>
+                    <h3 class="service-card__title">Kancelářský nábytek</h3>
+                    <p class="service-card__desc">Vybavení kanceláří, kaváren a barů. Stoly, regály, recepce a další komerční nábytek na míru.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.6s">
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M7 14h10v2H7z"/></svg>
+                    </div>
+                    <h3 class="service-card__title">Koupelnový nábytek</h3>
+                    <p class="service-card__desc">Koupelnové skříňky, zrcadlové skříňky a police — odolné materiály pro vlhké prostředí.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay:0.7s">
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+                    </div>
+                    <h3 class="service-card__title">Parapety, ploty a vrata</h3>
+                    <p class="service-card__desc">Dřevěné parapety, exteriérové ploty a vrata. Doplňky pro interiér i exteriér vašeho domu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section class="section section--deep" id="galerie">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Galerie</div>
+                <h2 class="section-title">Naše realizace</h2>
+                <p class="section-desc">Ukázky kuchyní, skříní a dalšího nábytku, který jsme vyrobili na míru pro naše zákazníky.</p>
+            </div>
+            <div class="gallery__grid">
+                <div class="gallery__item reveal" style="transition-delay:0s">
+                    <img src="images/kuchyne1.jpg" alt="Kuchyně na míru" loading="lazy">
+                    <span class="gallery__item-label">Kuchyně</span>
+                </div>
+                <div class="gallery__item reveal" style="transition-delay:0.1s">
+                    <img src="images/kuchyne2.jpg" alt="Moderní kuchyně" loading="lazy">
+                    <span class="gallery__item-label">Kuchyně</span>
+                </div>
+                <div class="gallery__item reveal" style="transition-delay:0.2s">
+                    <img src="images/kuchyne3.jpg" alt="Kuchyňská linka" loading="lazy">
+                    <span class="gallery__item-label">Kuchyňská linka</span>
+                </div>
+                <div class="gallery__item reveal" style="transition-delay:0.3s">
+                    <img src="images/kuchyne4.jpg" alt="Kuchyně detail" loading="lazy">
+                    <span class="gallery__item-label">Detail provedení</span>
+                </div>
+                <div class="gallery__item reveal" style="transition-delay:0.4s">
+                    <img src="images/kuchyne5.jpg" alt="Interiér" loading="lazy">
+                    <span class="gallery__item-label">Interiér</span>
+                </div>
+                <div class="gallery__item reveal" style="transition-delay:0.5s">
+                    <img src="images/kuchyne6.jpg" alt="Realizace kuchyně" loading="lazy">
+                    <span class="gallery__item-label">Realizace</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section class="section section--dark" id="kontakt">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Kontakt</div>
+                <h2 class="section-title">Domluvte si konzultaci</h2>
+                <p class="section-desc">Rádi vám poradíme s výběrem materiálů a navrhneme řešení přesně na míru.</p>
+            </div>
+            <div class="kontakt__grid">
+                <div class="kontakt__info reveal-left">
+                    <div class="kontakt__item">
+                        <div class="kontakt__item-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        </div>
+                        <div>
+                            <div class="kontakt__item-label">Adresa</div>
+                            <div class="kontakt__item-value">Obecní 33<br>397 01 Písek - Semice</div>
+                        </div>
+                    </div>
+                    <div class="kontakt__item">
+                        <div class="kontakt__item-icon">
+                            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        </div>
+                        <div>
+                            <div class="kontakt__item-label">Telefon</div>
+                            <div class="kontakt__item-value"><a href="tel:605419457">605 419 457</a></div>
+                        </div>
+                    </div>
+                    <div class="kontakt__item">
+                        <div class="kontakt__item-icon">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        </div>
+                        <div>
+                            <div class="kontakt__item-label">E-mail</div>
+                            <div class="kontakt__item-value"><a href="mailto:vladislav.kura@seznam.cz">vladislav.kura@seznam.cz</a></div>
+                        </div>
+                    </div>
+                    <div class="kontakt__item">
+                        <div class="kontakt__item-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z"/></svg>
+                        </div>
+                        <div>
+                            <div class="kontakt__item-label">IČ</div>
+                            <div class="kontakt__item-value">868 98 582</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kontakt__map reveal-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2620!2d14.14!3d49.31!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4774444444444444%3A0x0!2sObecn%C3%AD+33%2C+397+01+P%C3%ADsek+-+Semice!5e0!3m2!1scs!2scz!4v1" loading="lazy" title="Mapa - Truhlářství Vladislav Kůra"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__logo">
+                    <div class="footer__logo-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+                    </div>
+                    <span class="footer__logo-text">Truhlářství Kůra</span>
+                </div>
+                <p class="footer__copy">&copy; 2026 Truhlářství Vladislav Kůra. Všechna práva vyhrazena.</p>
+                <ul class="footer__links">
+                    <li><a href="#o-nas">O nás</a></li>
+                    <li><a href="#sluzby">Služby</a></li>
+                    <li><a href="#galerie">Galerie</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* ===== NAVBAR SCROLL ===== */
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.pageYOffset > 60);
+        });
+
+        /* ===== HAMBURGER ===== */
+        const burger = document.getElementById('burger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                burger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        /* ===== INTERSECTION OBSERVER ===== */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+        /* ===== SMOOTH SCROLL ===== */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        /* ===== PARALLAX HERO ===== */
+        const heroBg = document.querySelector('.hero__bg');
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            if (heroBg && scrolled < window.innerHeight) {
+                heroBg.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
