@@ -1,0 +1,2312 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Studio Klára - Rekondiční a relaxační masáže v Českých Budějovicích. Profesionální masérské služby v příjemném prostředí salonu U Ilony.">
+    <meta name="keywords" content="masáže, České Budějovice, relaxační masáže, rekondiční masáže, baňkování, Breussova masáž, Studio Klára">
+    <title>Studio Klára | Masáže České Budějovice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES
+           ============================================ */
+        :root {
+            --primary: #6b4c8a;
+            --primary-light: #8b6caa;
+            --primary-dark: #4b2c6a;
+            --accent: #e8a4b8;
+            --accent-light: #f0c4d4;
+            --accent-dark: #d08498;
+            --light: #faf5ff;
+            --dark: #2d1b4e;
+            --white: #ffffff;
+            --gray-100: #f8f6fa;
+            --gray-200: #ede8f2;
+            --gray-300: #d5cce0;
+            --gray-400: #b0a3c0;
+            --gray-500: #8a7a9e;
+            --text-primary: #2d1b4e;
+            --text-secondary: #5a4570;
+            --text-light: #8a7a9e;
+            --shadow-sm: 0 2px 8px rgba(107, 76, 138, 0.08);
+            --shadow-md: 0 4px 20px rgba(107, 76, 138, 0.12);
+            --shadow-lg: 0 8px 40px rgba(107, 76, 138, 0.16);
+            --shadow-xl: 0 12px 60px rgba(107, 76, 138, 0.20);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+            --radius-xl: 48px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.4s ease;
+            --transition-slow: 0.6s ease;
+            --font-heading: 'Libre Baskerville', serif;
+            --font-body: 'Karla', sans-serif;
+            --container-max: 1200px;
+            --navbar-height: 80px;
+        }
+
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-primary);
+            background-color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition-fast);
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--dark);
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============================================
+           SCROLL REVEAL ANIMATIONS
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.85);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ============================================
+           FIXED NAVIGATION BAR
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--navbar-height);
+            background: rgba(250, 245, 255, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all var(--transition-normal);
+            border-bottom: 1px solid transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(250, 245, 255, 0.97);
+            border-bottom: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            height: 70px;
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1001;
+        }
+
+        .nav-logo img {
+            height: 48px;
+            width: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-fast);
+        }
+
+        .nav-logo:hover img {
+            transform: scale(1.08);
+        }
+
+        .nav-logo-text {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            padding: 10px 18px;
+            border-radius: var(--radius-xl);
+            transition: all var(--transition-fast);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(107, 76, 138, 0.08);
+        }
+
+        .nav-links a.nav-cta {
+            background: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+            padding: 10px 24px;
+            margin-left: 8px;
+        }
+
+        .nav-links a.nav-cta:hover {
+            background: var(--primary-dark);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ============================================
+           HAMBURGER MENU TOGGLE
+           ============================================ */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            gap: 6px;
+            padding: 8px;
+            border-radius: var(--radius-sm);
+            transition: background var(--transition-fast);
+            background: none;
+            border: none;
+        }
+
+        .hamburger:hover {
+            background: rgba(107, 76, 138, 0.08);
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 2.5px;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: all 0.35s ease;
+            transform-origin: center;
+            display: block;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ============================================
+           MOBILE FULLSCREEN MENU OVERLAY
+           ============================================ */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(250, 245, 255, 0.98);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-normal);
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu a {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            padding: 14px 36px;
+            border-radius: var(--radius-xl);
+            transition: all var(--transition-fast);
+        }
+
+        .mobile-menu a:hover {
+            color: var(--primary);
+            background: rgba(107, 76, 138, 0.08);
+        }
+
+        /* ============================================
+           HERO SECTION - SPA / RELAXATION FEEL
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: var(--navbar-height);
+            overflow: hidden;
+            background: var(--light);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -15%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(232, 164, 184, 0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: float-blob 12s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(107, 76, 138, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: float-blob 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes float-blob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.05); }
+            66% { transform: translate(-20px, 15px) scale(0.95); }
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            padding: 40px 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(107, 76, 138, 0.1);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: var(--radius-xl);
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hero h1 .highlight {
+            color: var(--primary);
+            position: relative;
+            display: inline;
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: var(--accent-light);
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .hero-description {
+            font-size: 1.12rem;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+            max-width: 480px;
+            line-height: 1.85;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 16px 32px;
+            border-radius: var(--radius-xl);
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(107, 76, 138, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(107, 76, 138, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-white:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .hero-image-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .hero-image-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(107, 76, 138, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-floating-card {
+            position: absolute;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            box-shadow: var(--shadow-lg);
+            z-index: 2;
+            animation: float-card 6s ease-in-out infinite;
+        }
+
+        .hero-floating-card.card-1 {
+            bottom: -20px;
+            left: -30px;
+            animation-delay: 0s;
+        }
+
+        .hero-floating-card.card-2 {
+            top: 20px;
+            right: -25px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float-card {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .floating-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .floating-card-title {
+            font-family: var(--font-heading);
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .floating-card-text {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .hero-stat-number {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           SHARED SECTION STYLING
+           ============================================ */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 64px;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 16px;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-label::before { right: 100%; }
+        .section-label::after { left: 100%; }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.08rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           ABOUT / O NAS SECTION
+           ============================================ */
+        .about {
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image-container {
+            position: relative;
+        }
+
+        .about-image {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 460px;
+            object-fit: cover;
+        }
+
+        .about-image-decoration {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 200px;
+            height: 200px;
+            border: 3px solid var(--accent);
+            border-radius: var(--radius-lg);
+            z-index: -1;
+        }
+
+        .about-content h2 {
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.9;
+            font-size: 1.02rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 32px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: var(--light);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .about-feature:hover {
+            background: rgba(107, 76, 138, 0.08);
+            transform: translateX(4px);
+        }
+
+        .about-feature-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .about-feature span {
+            font-weight: 500;
+            font-size: 0.92rem;
+            color: var(--text-primary);
+        }
+
+        /* ============================================
+           SERVICES / SLUZBY SECTION
+           ============================================ */
+        .services {
+            background: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+            transform-origin: left;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gray-200);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--light), rgba(107, 76, 138, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 1.6rem;
+            transition: all var(--transition-normal);
+        }
+
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.12rem;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            font-size: 0.93rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .service-price {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary);
+            padding: 8px 22px;
+            background: rgba(107, 76, 138, 0.08);
+            border-radius: var(--radius-xl);
+        }
+
+        .service-duration {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-top: 8px;
+        }
+
+        /* ============================================
+           PRICING / CENIK TABLE SECTION
+           ============================================ */
+        .pricing {
+            background: var(--white);
+            position: relative;
+        }
+
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .pricing-table {
+            max-width: 820px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+        }
+
+        .pricing-table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 20px 32px;
+            background: var(--primary);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-category {
+            padding: 14px 32px;
+            background: rgba(107, 76, 138, 0.06);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: var(--primary);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .pricing-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 16px 32px;
+            align-items: center;
+            border-bottom: 1px solid var(--gray-200);
+            transition: all var(--transition-fast);
+        }
+
+        .pricing-row:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-row:hover {
+            background: var(--light);
+        }
+
+        .pricing-row .name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .pricing-row .duration {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .pricing-row .price {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.05rem;
+        }
+
+        /* ============================================
+           PACKAGES / BALICKY SECTION
+           ============================================ */
+        .packages {
+            background: var(--light);
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .package-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 44px 32px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+            border: 2px solid transparent;
+        }
+
+        .package-card.featured {
+            border-color: var(--primary);
+        }
+
+        .package-card.featured::before {
+            content: 'Nejoblíbenější';
+            position: absolute;
+            top: 18px;
+            right: -30px;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 6px 40px;
+            transform: rotate(45deg);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .package-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .package-name {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            color: var(--dark);
+            margin-bottom: 14px;
+        }
+
+        .package-price {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .package-duration {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 28px;
+        }
+
+        .package-features {
+            text-align: left;
+            margin-bottom: 28px;
+        }
+
+        .package-features li {
+            padding: 8px 0;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+
+        .package-features li::before {
+            content: '\2713';
+            color: var(--primary);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           GALLERY / GALERIE SECTION
+           ============================================ */
+        .gallery {
+            background: var(--light);
+            padding: 100px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+            gap: 20px;
+        }
+
+        .gallery-item {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(45, 27, 78, 0.6) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+            display: flex;
+            align-items: flex-end;
+            padding: 24px;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item-overlay span {
+            color: var(--white);
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+        }
+
+        .gallery-item:first-child {
+            grid-row: span 2;
+        }
+
+        .gallery-item:first-child img {
+            height: 100%;
+        }
+
+        /* ============================================
+           TESTIMONIALS / RECENZE SECTION
+           ============================================ */
+        .testimonials {
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(232, 164, 184, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card {
+            background: var(--light);
+            border-radius: var(--radius-md);
+            padding: 36px 28px;
+            transition: all var(--transition-normal);
+            border: 1px solid transparent;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .testimonial-quote {
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-family: var(--font-heading);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-stars {
+            color: var(--accent-dark);
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            margin-top: 8px;
+        }
+
+        /* ============================================
+           OPENING HOURS SECTION
+           ============================================ */
+        .hours {
+            background: var(--dark);
+            color: var(--white);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hours::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(107, 76, 138, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hours .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hours .section-label {
+            color: var(--accent);
+        }
+
+        .hours .section-label::before,
+        .hours .section-label::after {
+            background: rgba(232, 164, 184, 0.4);
+        }
+
+        .hours .section-title {
+            color: var(--white);
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hours-block {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hours-block h3 {
+            color: var(--accent);
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+
+        .hours-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.93rem;
+        }
+
+        .hours-line:last-child {
+            border-bottom: none;
+        }
+
+        .hours-line .day {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .hours-line .time {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        /* ============================================
+           CTA BANNER SECTION
+           ============================================ */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 80px 0;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(232, 164, 184, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta-banner .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-banner h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .cta-banner p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto 32px;
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        .contact {
+            background: var(--light);
+            padding: 100px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .contact-info h2 {
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            margin-bottom: 4px;
+        }
+
+        .contact-info > p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .contact-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(4px);
+        }
+
+        .contact-item-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .contact-item-content h4 {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .contact-item-content p,
+        .contact-item-content a {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .contact-item-content a:hover {
+            color: var(--primary);
+        }
+
+        .contact-map {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            min-height: 420px;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 420px;
+            border: none;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.65);
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-heading);
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+        }
+
+        .footer-brand p {
+            font-size: 0.93rem;
+            line-height: 1.8;
+            max-width: 320px;
+        }
+
+        .footer h4 {
+            font-family: var(--font-heading);
+            color: var(--white);
+            font-size: 0.98rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.55);
+            transition: all var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 4px;
+        }
+
+        .footer-contact-line {
+            font-size: 0.88rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-contact-line .icon-label {
+            color: var(--accent);
+            font-weight: 600;
+            min-width: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 24px 0;
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+            font-weight: 600;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--accent-light);
+        }
+
+        /* ============================================
+           SCROLL TO TOP BUTTON
+           ============================================ */
+        .scroll-top {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-fast);
+            z-index: 997;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* ============================================
+           FLOATING CTA (MOBILE)
+           ============================================ */
+        .floating-cta {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--white);
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            z-index: 998;
+            font-size: 1.3rem;
+            transition: all var(--transition-fast);
+        }
+
+        .floating-cta:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        /* ============================================
+           RESPONSIVE - TABLET
+           ============================================ */
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            .hero-content { order: 1; }
+            .hero-image { order: 0; }
+            .hero-description { margin: 0 auto 36px; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero-image-wrapper img { height: 360px; }
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .about-image-decoration { display: none; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* ============================================
+           RESPONSIVE - MOBILE
+           ============================================ */
+        @media (max-width: 768px) {
+            :root { --navbar-height: 70px; }
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .mobile-menu { display: flex; }
+            .hero h1 { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+            .hero-image-wrapper img { height: 280px; }
+            .hero-floating-card { display: none; }
+            .hero-stats { gap: 24px; }
+            .hero-stat-number { font-size: 1.5rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-item:first-child { grid-row: auto; }
+            .gallery-item:first-child img { height: 280px; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .hours-grid { grid-template-columns: 1fr; }
+            .pricing-table-header, .pricing-row {
+                grid-template-columns: 1.5fr 1fr 1fr;
+                padding: 14px 20px;
+                font-size: 0.85rem;
+            }
+            .footer-grid { grid-template-columns: 1fr; }
+            .floating-cta { display: flex; }
+            .section { padding: 70px 0; }
+            .packages-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ============================================
+           RESPONSIVE - SMALL MOBILE
+           ============================================ */
+        @media (max-width: 480px) {
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .btn { width: 100%; justify-content: center; }
+            .about-features { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .hero-stats { flex-direction: column; align-items: center; gap: 16px; }
+            .pricing-table-header, .pricing-row {
+                grid-template-columns: 1fr;
+                gap: 4px;
+                text-align: center;
+            }
+            .pricing-table-header span:not(:first-child) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         NAVIGATION
+         ========================================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#hero" class="nav-logo">
+                <img src="images/logo.jpg" alt="Studio Klára logo">
+                <span class="nav-logo-text">Studio Klára</span>
+            </a>
+            <div class="nav-links">
+                <a href="#o-nas">O nás</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#cenik">Ceník</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#hodnoceni">Recenze</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#o-nas" class="mobile-link">O nás</a>
+        <a href="#sluzby" class="mobile-link">Služby</a>
+        <a href="#cenik" class="mobile-link">Ceník</a>
+        <a href="#galerie" class="mobile-link">Galerie</a>
+        <a href="#hodnoceni" class="mobile-link">Recenze</a>
+        <a href="#kontakt" class="mobile-link">Kontakt</a>
+    </div>
+
+    <!-- ==========================================
+         HERO SECTION
+         ========================================== -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">Masážní studio</div>
+                <h1>Relaxace a zdraví <span class="highlight">od profesionálů</span></h1>
+                <p class="hero-description">
+                    Dopřejte si chvíle klidu a odpočinku v Studiu Klára. Nabízíme rekondiční
+                    a relaxační masáže v příjemném prostředí s použitím 100% přírodních olejů.
+                </p>
+                <div class="hero-buttons">
+                    <a href="tel:+420777036365" class="btn btn-primary">Zavolejte nám</a>
+                    <a href="#cenik" class="btn btn-outline">Zobrazit ceník</a>
+                </div>
+                <div class="hero-stats">
+                    <div>
+                        <div class="hero-stat-number">10+</div>
+                        <div class="hero-stat-label">Let zkušeností</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-number">8</div>
+                        <div class="hero-stat-label">Druhů masáží</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-number">100%</div>
+                        <div class="hero-stat-label">Přírodní oleje</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-wrapper">
+                    <img src="images/foto1.jpg" alt="Studio Klára - masážní prostředí">
+                </div>
+                <div class="hero-floating-card card-1">
+                    <div class="floating-card-icon">&#9829;</div>
+                    <div class="floating-card-title">Přírodní oleje</div>
+                    <div class="floating-card-text">100% kvalitní materiály</div>
+                </div>
+                <div class="hero-floating-card card-2">
+                    <div class="floating-card-icon">&#9733;</div>
+                    <div class="floating-card-title">Profesionální péče</div>
+                    <div class="floating-card-text">Certifikovaná masérka</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         ABOUT / O NAS
+         ========================================== -->
+    <section class="section about" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-container reveal-left">
+                    <div class="about-image">
+                        <img src="images/foto2.jpg" alt="Studio Klára - interiér salonu">
+                    </div>
+                    <div class="about-image-decoration"></div>
+                </div>
+                <div class="about-content reveal-right">
+                    <div class="section-label">O nás</div>
+                    <h2>Vaše oáza klidu v centru Českých Budějovic</h2>
+                    <p>
+                        Studio Klára se nachází v samém srdci Českých Budějovic, v Salonu U Ilony
+                        na adrese U Černé věže 19. Nabízíme relaxační a zdravotní masáže
+                        od skutečných profesionálů.
+                    </p>
+                    <p>
+                        Používáme výhradně 100% přírodní oleje a dbáme na to, aby každá návštěva
+                        byla opravdovým potěšením pro všechny vaše smysly. Naším cílem je poskytnout
+                        vám maximální uvolnění a pomoci vašemu tělu i mysli. K dispozici máme také
+                        dárkové poukazy -- ideální dárek pro vaše blízké.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#10003;</div>
+                            <span>Přírodní oleje</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#10003;</div>
+                            <span>Příjemné prostředí</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#10003;</div>
+                            <span>Zkušený personál</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#10003;</div>
+                            <span>Dárkové poukazy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SERVICES / SLUZBY
+         ========================================== -->
+    <section class="section services" id="sluzby">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Naše služby</div>
+                <h2 class="section-title">Nabídka masáží</h2>
+                <p class="section-subtitle">
+                    Vyberte si z naší široké nabídky rekondičních a relaxačních masáží.
+                    Každou masáž přizpůsobíme vašim individuálním potřebám.
+                </p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal" style="transition-delay: 0.1s;">
+                    <div class="service-icon">&#9758;</div>
+                    <h3>Masáž zad a šíje</h3>
+                    <p>Klasická rekondiční masáž zaměřená na oblast zad a šíje. Uvolní svalové napětí a bolesti páteře.</p>
+                    <div class="service-price">od 450 Kč</div>
+                    <div class="service-duration">30 - 50 minut</div>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.2s;">
+                    <div class="service-icon">&#9775;</div>
+                    <h3>Celotělová masáž</h3>
+                    <p>Kompletní masáž celého těla zahrnující záda, šíji, horní i dolní končetiny. Totální relaxace.</p>
+                    <div class="service-price">od 800 Kč</div>
+                    <div class="service-duration">60 - 90 minut</div>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.3s;">
+                    <div class="service-icon">&#10047;</div>
+                    <h3>Breussova masáž</h3>
+                    <p>Jemná relaxační masáž páteře s použitím třezalkového oleje. Harmonizuje tělo i mysl.</p>
+                    <div class="service-price">700 Kč</div>
+                    <div class="service-duration">50 minut</div>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.4s;">
+                    <div class="service-icon">&#9862;</div>
+                    <h3>Baňkování s masáží</h3>
+                    <p>Kombinace klasické masáže a baňkování pro hloubkové uvolnění svalů a zlepšení prokrvení.</p>
+                    <div class="service-price">od 590 Kč</div>
+                    <div class="service-duration">40 - 60 minut</div>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.5s;">
+                    <div class="service-icon">&#9786;</div>
+                    <h3>Masáž obličeje</h3>
+                    <p>Relaxační masáž obličeje s liftingovým efektem. Obnovuje pružnost pleti a uvolňuje napětí.</p>
+                    <div class="service-price">400 Kč</div>
+                    <div class="service-duration">20 minut</div>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.6s;">
+                    <div class="service-icon">&#10024;</div>
+                    <h3>Masáž dolních končetin</h3>
+                    <p>Masáž zaměřená na unavené a těžké nohy. Zlepšuje krevní oběh a odstraňuje otoky.</p>
+                    <div class="service-price">600 Kč</div>
+                    <div class="service-duration">45 minut</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         PRICING / CENIK
+         ========================================== -->
+    <section class="section pricing" id="cenik">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Ceník</div>
+                <h2 class="section-title">Kompletní přehled cen</h2>
+                <p class="section-subtitle">
+                    Na masáž je nutné se předem telefonicky objednat.
+                </p>
+            </div>
+            <div class="pricing-table reveal">
+                <div class="pricing-table-header">
+                    <span>Služba</span>
+                    <span>Délka</span>
+                    <span>Cena</span>
+                </div>
+                <div class="pricing-category">Rekondiční masáže</div>
+                <div class="pricing-row">
+                    <span class="name">Masáž zad a šíje</span>
+                    <span class="duration">30 min</span>
+                    <span class="price">450 Kč</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="name">Masáž zad a šíje</span>
+                    <span class="duration">50 min</span>
+                    <span class="price">700 Kč</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="name">Celotělová masáž (záda, šíje, horní a dolní končetiny)</span>
+                    <span class="duration">60 min</span>
+                    <span class="price">800 Kč</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="name">Celotělová masáž (záda, šíje, končetiny zezadu)</span>
+                    <span class="duration">90 min</span>
+                    <span class="price">1 200 Kč</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="name">Masáž dolních končetin</span>
+                    <span class="duration">45 min</span>
+                    <span class="price">600 Kč</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="name">Masáž horních končetin</span>
+                    <span class="duration">30 min</span>
+                    <span class="price">450 Kč</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="name">Masáž šíje</span>
+                    <span class="duration">20 min</span>
+                    <span class="price">400 Kč</span>
+                </div>
+                <div class="pricing-category">Relaxační masáže</div>
+                <div class="pricing-row">
+                    <span class="name">Breussova masáž páteře</span>
+                    <span class="duration">50 min</span>
+                    <span class="price">700 Kč</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="name">Masáž obličeje</span>
+                    <span class="duration">20 min</span>
+                    <span class="price">400 Kč</span>
+                </div>
+                <div class="pricing-category">Baňkování s masáží</div>
+                <div class="pricing-row">
+                    <span class="name">Baňkování s masáží</span>
+                    <span class="duration">40 min</span>
+                    <span class="price">590 Kč</span>
+                </div>
+                <div class="pricing-row">
+                    <span class="name">Baňkování s masáží</span>
+                    <span class="duration">60 min</span>
+                    <span class="price">790 Kč</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         PACKAGES / BALICKY
+         ========================================== -->
+    <section class="section packages" id="balicky">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Zvýhodněné balíčky</div>
+                <h2 class="section-title">Balíčky masáží</h2>
+                <p class="section-subtitle">
+                    Vyberte si jeden z našich zvýhodněných balíčků pro kompletní péči o vaše tělo.
+                    Ideální také jako dárkový poukaz.
+                </p>
+            </div>
+            <div class="packages-grid">
+                <div class="package-card reveal" style="transition-delay: 0.1s;">
+                    <div class="package-name">Standard</div>
+                    <div class="package-price">1 300 Kč</div>
+                    <div class="package-duration">100 minut</div>
+                    <ul class="package-features">
+                        <li>Masáž zad a šíje</li>
+                        <li>Masáž dolních končetin</li>
+                        <li>Masáž horních končetin</li>
+                        <li>Masáž obličeje</li>
+                    </ul>
+                    <a href="tel:+420777036365" class="btn btn-outline">Objednat</a>
+                </div>
+                <div class="package-card featured reveal" style="transition-delay: 0.2s;">
+                    <div class="package-name">Deluxe</div>
+                    <div class="package-price">1 700 Kč</div>
+                    <div class="package-duration">120 minut</div>
+                    <ul class="package-features">
+                        <li>Záda s baňkováním</li>
+                        <li>Dolní končetiny oboustranně</li>
+                        <li>Masáž horních končetin</li>
+                        <li>Masáž obličeje</li>
+                    </ul>
+                    <a href="tel:+420777036365" class="btn btn-primary">Objednat</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         GALLERY / GALERIE
+         ========================================== -->
+    <section class="gallery" id="galerie">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Galerie</div>
+                <h2 class="section-title">Nahlédněte k nám</h2>
+                <p class="section-subtitle">
+                    Prohlédněte si prostředí našeho studia, kde vás čeká naprostá relaxace a profesionální péče.
+                </p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item reveal-scale" style="transition-delay: 0.1s;">
+                    <img src="images/foto3.jpg" alt="Studio Klára - interiér">
+                    <div class="gallery-item-overlay"><span>Interiér studia</span></div>
+                </div>
+                <div class="gallery-item reveal-scale" style="transition-delay: 0.2s;">
+                    <img src="images/foto4.jpg" alt="Studio Klára - masáž">
+                    <div class="gallery-item-overlay"><span>Masážní prostor</span></div>
+                </div>
+                <div class="gallery-item reveal-scale" style="transition-delay: 0.3s;">
+                    <img src="images/foto5.jpg" alt="Studio Klára - relaxace">
+                    <div class="gallery-item-overlay"><span>Relaxační zóna</span></div>
+                </div>
+                <div class="gallery-item reveal-scale" style="transition-delay: 0.4s;">
+                    <img src="images/foto6.jpg" alt="Studio Klára - přírodní oleje">
+                    <div class="gallery-item-overlay"><span>Přírodní oleje</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         TESTIMONIALS / RECENZE
+         ========================================== -->
+    <section class="section testimonials" id="hodnoceni">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Recenze</div>
+                <h2 class="section-title">Co říkají naši klienti</h2>
+                <p class="section-subtitle">
+                    Přečtěte si zkušenosti našich spokojených klientů.
+                </p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
+                    <div class="testimonial-quote">&ldquo;</div>
+                    <p class="testimonial-text">
+                        Skvělá masáž, příjemné prostředí a profesionální přístup.
+                        Po masáži zad a šíje jsem se cítila jako znovuzrozená. Určitě se sem vrátím!
+                    </p>
+                    <div class="testimonial-author">Petra K.</div>
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
+                    <div class="testimonial-quote">&ldquo;</div>
+                    <p class="testimonial-text">
+                        Breussova masáž páteře byla úžasný zážitek. Cítil jsem úlevu hned po prvním
+                        sezení. Vřele doporučuji všem s bolestmi zad.
+                    </p>
+                    <div class="testimonial-author">Martin S.</div>
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay: 0.3s;">
+                    <div class="testimonial-quote">&ldquo;</div>
+                    <p class="testimonial-text">
+                        Koupila jsem dárkový poukaz na balíček Deluxe a maminka byla nadšená.
+                        Celých 120 minut naprosté relaxace. Perfektní dárek!
+                    </p>
+                    <div class="testimonial-author">Jana M.</div>
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         OPENING HOURS
+         ========================================== -->
+    <section class="hours" id="oteviraci-doba">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Otevírací doba</div>
+                <h2 class="section-title">Kdy nás najdete</h2>
+            </div>
+            <div class="hours-grid">
+                <div class="hours-block reveal" style="transition-delay: 0.1s;">
+                    <h3>Pracovní dny</h3>
+                    <div class="hours-line"><span class="day">Pondělí</span><span class="time">9:00 - 20:00</span></div>
+                    <div class="hours-line"><span class="day">Úterý</span><span class="time">9:00 - 20:00</span></div>
+                    <div class="hours-line"><span class="day">Středa</span><span class="time">9:00 - 20:00</span></div>
+                    <div class="hours-line"><span class="day">Čtvrtek</span><span class="time">9:00 - 20:00</span></div>
+                    <div class="hours-line"><span class="day">Pátek</span><span class="time">9:00 - 20:00</span></div>
+                </div>
+                <div class="hours-block reveal" style="transition-delay: 0.2s;">
+                    <h3>Víkend</h3>
+                    <div class="hours-line"><span class="day">Sobota</span><span class="time">9:00 - 12:00</span></div>
+                    <div class="hours-line"><span class="day">Neděle</span><span class="time">9:00 - 12:00</span></div>
+                    <div class="hours-line" style="margin-top: 20px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
+                        <span class="day" style="color: var(--accent); font-weight: 600;">Pouze po objednání</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         CTA BANNER
+         ========================================== -->
+    <section class="cta-banner">
+        <div class="container reveal">
+            <h2>Dopřejte si zaslouženou relaxaci</h2>
+            <p>
+                Objednejte se ještě dnes a zažijte profesionální masáž
+                v příjemném prostředí Studia Klára v Českých Budějovicích.
+            </p>
+            <a href="tel:+420777036365" class="btn btn-white">Zavolejte: +420 777 036 365</a>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         CONTACT / KONTAKT
+         ========================================== -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Kontakt</div>
+                <h2 class="section-title">Kde nás najdete</h2>
+                <p class="section-subtitle">
+                    Neváhejte nás kontaktovat. Rádi vám odpovíme na vaše dotazy
+                    a pomůžeme s výběrem vhodné masáže.
+                </p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info reveal-left">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">&#9993;</div>
+                        <div class="contact-item-content">
+                            <h4>Adresa</h4>
+                            <p>Salon U Ilony, U Černé věže 19<br>370 01 České Budějovice</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">&#9742;</div>
+                        <div class="contact-item-content">
+                            <h4>Telefon</h4>
+                            <a href="tel:+420777036365">+420 777 036 365</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">@</div>
+                        <div class="contact-item-content">
+                            <h4>E-mail</h4>
+                            <a href="mailto:kocerova@seznam.cz">kocerova@seznam.cz</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">&#9201;</div>
+                        <div class="contact-item-content">
+                            <h4>Otevírací doba</h4>
+                            <p>Po-Pá: 9:00 - 20:00<br>So-Ne: 9:00 - 12:00 (po objednání)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map reveal-right">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2611.8!2d14.4742!3d48.9745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47734375e261046f%3A0x400af0f6614f790!2zVSDEjGVybsOpIHbEm8W-ZSAxOSwgMzcwIDAxIMSMZXNrw6kgQnVkxJtqb3ZpY2U!5e0!3m2!1scs!2scz!4v1709000000000!5m2!1scs!2scz"
+                        allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa - Studio Klára České Budějovice">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Studio Klára</h3>
+                    <p>
+                        Masážní studio v centru Českých Budějovic. Nabízíme rekondiční
+                        a relaxační masáže od profesionálů s použitím 100% přírodních olejů.
+                    </p>
+                </div>
+                <div>
+                    <h4>Navigace</h4>
+                    <div class="footer-links">
+                        <a href="#o-nas">O nás</a>
+                        <a href="#sluzby">Služby</a>
+                        <a href="#cenik">Ceník</a>
+                        <a href="#galerie">Galerie</a>
+                        <a href="#hodnoceni">Recenze</a>
+                        <a href="#kontakt">Kontakt</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Kontakt</h4>
+                    <div class="footer-contact-line">
+                        <span class="icon-label">&#9993;</span>
+                        <span>U Černé věže 19, České Budějovice</span>
+                    </div>
+                    <div class="footer-contact-line">
+                        <span class="icon-label">&#9742;</span>
+                        <a href="tel:+420777036365">+420 777 036 365</a>
+                    </div>
+                    <div class="footer-contact-line">
+                        <span class="icon-label">@</span>
+                        <a href="mailto:kocerova@seznam.cz">kocerova@seznam.cz</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 Studio Klára. Všechna práva vyhrazena. |
+                Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top" id="scrollTop" aria-label="Zpět nahoru">&#8593;</button>
+    <a href="tel:+420777036365" class="floating-cta" aria-label="Zavolat">&#9742;</a>
+
+    <!-- ==========================================
+         JAVASCRIPT
+         ========================================== -->
+    <script>
+        (function() {
+            'use strict';
+
+            /* Navbar scroll effect */
+            var navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }, { passive: true });
+
+            /* Hamburger menu */
+            var hamburger = document.getElementById('hamburger');
+            var mobileMenu = document.getElementById('mobileMenu');
+            var mobileLinks = document.querySelectorAll('.mobile-link');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+
+            mobileLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            /* IntersectionObserver for scroll animations */
+            var observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -80px 0px',
+                threshold: 0.15
+            };
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) {
+                observer.observe(el);
+            });
+
+            /* Scroll to top button */
+            var scrollTopBtn = document.getElementById('scrollTop');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 600) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            }, { passive: true });
+
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            /* Smooth scroll for anchor links */
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    var targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    var target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        var navH = document.getElementById('navbar').offsetHeight;
+                        var pos = target.getBoundingClientRect().top + window.pageYOffset - navH;
+                        window.scrollTo({ top: pos, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            /* Active nav highlight on scroll */
+            var sections = document.querySelectorAll('section[id]');
+            var navLinksAll = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+
+            window.addEventListener('scroll', function() {
+                var scrollPos = window.scrollY + 120;
+                sections.forEach(function(section) {
+                    var top = section.offsetTop;
+                    var height = section.offsetHeight;
+                    var id = section.getAttribute('id');
+                    if (scrollPos >= top && scrollPos < top + height) {
+                        navLinksAll.forEach(function(link) {
+                            link.style.color = '';
+                            link.style.background = '';
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.style.color = 'var(--primary)';
+                                link.style.background = 'rgba(107, 76, 138, 0.08)';
+                            }
+                        });
+                    }
+                });
+            }, { passive: true });
+
+            /* Image lazy load fade-in */
+            document.querySelectorAll('img[src]').forEach(function(img) {
+                if (img.complete) {
+                    img.style.opacity = '1';
+                } else {
+                    img.style.opacity = '0';
+                    img.style.transition = 'opacity 0.5s ease';
+                    img.addEventListener('load', function() { img.style.opacity = '1'; });
+                    img.addEventListener('error', function() { img.style.opacity = '1'; });
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

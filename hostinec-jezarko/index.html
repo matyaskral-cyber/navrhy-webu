@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostinec U Jezárka — Restaurace a Penzion | Suchdol nad Lužnicí</title>
+    <meta name="description" content="Rodinný hostinec v Suchdole nad Lužnicí. Klasická česká kuchyně z čerstvých surovin, česká piva známých značek a penzion s 5 pokoji.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #f5efe6;
+            --bg-light: #faf7f1;
+            --bg-card: #ffffff;
+            --bg-dark: #2a1a10;
+            --accent: #6b3a2a;
+            --accent-light: #8b5a4a;
+            --accent-dark: #4b2a1a;
+            --gold: #b8860b;
+            --gold-light: #d4a83a;
+            --text: #3a2a1a;
+            --text-muted: #7a6a5a;
+            --text-dim: #a09080;
+            --border: rgba(107, 58, 42, 0.15);
+            --border-light: rgba(107, 58, 42, 0.08);
+            --font-display: 'Lora', Georgia, serif;
+            --font-body: 'Nunito Sans', -apple-system, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg);
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        img { max-width: 100%; display: block; }
+        a { color: var(--accent); text-decoration: none; transition: color 0.3s; }
+        a:hover { color: var(--gold); }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.2; }
+
+        .section-label {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .section-label::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            color: var(--text);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            line-height: 1.8;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 7rem 0;
+            position: relative;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.2rem 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav.scrolled {
+            background: rgba(245, 239, 230, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 20px rgba(107, 58, 42, 0.06);
+        }
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .nav-logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+        }
+        .nav-logo-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+        .nav-logo-text {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            background: transparent;
+            border: 1px solid var(--accent) !important;
+            color: var(--accent) !important;
+            padding: 0.55rem 1.4rem;
+            border-radius: 2px;
+            font-size: 0.78rem !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.1em !important;
+            transition: all 0.3s !important;
+        }
+        .nav-cta:hover {
+            background: var(--accent) !important;
+            color: #fff !important;
+        }
+        .nav-cta::after { display: none !important; }
+
+        /* Mobile menu */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            background: none;
+            border: none;
+        }
+        .nav-toggle span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--text);
+            transition: all 0.3s;
+            display: block;
+        }
+        .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+        .nav-toggle.active span:nth-child(2) { opacity: 0; }
+        .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.5) saturate(0.8);
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(42, 26, 16, 0.85) 0%,
+                rgba(42, 26, 16, 0.4) 40%,
+                rgba(42, 26, 16, 0.3) 60%,
+                rgba(42, 26, 16, 0.8) 100%
+            );
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            padding: 0 2rem;
+            margin-left: 8%;
+        }
+        .hero-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .hero-badge::before {
+            content: '';
+            width: 50px;
+            height: 1px;
+            background: var(--gold-light);
+        }
+        .hero h1 {
+            font-size: clamp(3rem, 6.5vw, 5.5rem);
+            color: #fff;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.02em;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+        .hero-tagline {
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: rgba(255,255,255,0.7);
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 2.5rem;
+            line-height: 1.5;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 2.2rem;
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 2px;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(184, 134, 11, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .btn-outline:hover {
+            border-color: var(--gold-light);
+            color: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: float 3s ease-in-out infinite;
+        }
+        .hero-scroll .line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-8px); }
+        }
+
+        /* ===== INTRO STRIP ===== */
+        .intro-strip {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+        .intro-item {
+            padding: 2rem;
+        }
+        .intro-icon {
+            margin-bottom: 1.2rem;
+            color: var(--gold);
+            display: flex;
+            justify-content: center;
+        }
+        .intro-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+        .intro-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+            color: var(--text);
+        }
+        .intro-item p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ===== O NAS ===== */
+        .about {
+            background: var(--bg-light);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .about-image {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+        .about-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+        .about-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+            margin-top: 1.5rem;
+        }
+        .about-accent-box {
+            margin-top: 2rem;
+            padding: 1.5rem 2rem;
+            background: rgba(184, 134, 11, 0.08);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 4px 4px 0;
+        }
+        .about-accent-box p {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ===== SLUZBY ===== */
+        .sluzby {
+            background: var(--bg);
+        }
+        .sluzby-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .sluzby-header .section-label { justify-content: center; }
+        .sluzby-header .section-label::before { display: none; }
+        .sluzby-header .section-subtitle { margin: 0 auto; }
+
+        .sluzby-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .sluzba-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2.5rem 2rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .sluzba-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .sluzba-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(184, 134, 11, 0.25);
+            box-shadow: 0 12px 40px rgba(107, 58, 42, 0.1);
+        }
+        .sluzba-card:hover::before { opacity: 1; }
+        .sluzba-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            transition: all 0.3s;
+        }
+        .sluzba-card:hover .sluzba-icon {
+            background: var(--gold);
+            color: #fff;
+            border-color: var(--gold);
+        }
+        .sluzba-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+        .sluzba-card h3 {
+            font-size: 1.15rem;
+            color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+        .sluzba-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ===== PENZION ===== */
+        .penzion {
+            background: var(--bg-light);
+        }
+        .penzion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .penzion-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .penzion-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+        .penzion-feature svg {
+            width: 18px;
+            height: 18px;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+        .penzion-image {
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .penzion-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            padding: 5rem 0;
+            text-align: center;
+        }
+        .divider-line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto;
+            position: relative;
+        }
+        .divider-line::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            background: var(--bg);
+        }
+
+        /* ===== KONTAKT ===== */
+        .kontakt { background: var(--bg); }
+        .kontakt-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .kontakt-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+        .kontakt-item {
+            display: flex;
+            gap: 1.2rem;
+        }
+        .kontakt-icon {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--gold);
+            transition: all 0.3s;
+        }
+        .kontakt-item:hover .kontakt-icon {
+            background: rgba(184, 134, 11, 0.1);
+            border-color: var(--gold);
+        }
+        .kontakt-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+        .kontakt-text h4 {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 0.35rem;
+        }
+        .kontakt-text p, .kontakt-text a {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .kontakt-map {
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            height: 100%;
+            min-height: 400px;
+        }
+        .kontakt-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border: none;
+            filter: saturate(0.8) brightness(1.05);
+            transition: filter 0.4s;
+        }
+        .kontakt-map:hover iframe {
+            filter: saturate(1) brightness(1);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-dark);
+            padding: 3rem 0;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .footer-copy {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.4);
+        }
+        .footer-credit {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ===== REVEAL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ===== PARALLAX QUOTE ===== */
+        .parallax-quote {
+            background: var(--bg-dark);
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .parallax-quote::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(184, 134, 11, 0.08) 0%, transparent 70%);
+        }
+        .parallax-quote blockquote {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-style: italic;
+            color: rgba(255,255,255,0.85);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+        .parallax-quote blockquote::before {
+            content: '\201C';
+            font-size: 6rem;
+            color: var(--gold);
+            opacity: 0.3;
+            position: absolute;
+            top: -3rem;
+            left: -2rem;
+            font-family: var(--font-display);
+            line-height: 1;
+        }
+        .parallax-quote cite {
+            display: block;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            font-style: normal;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* ===== CTA BANNER ===== */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(184, 134, 11, 0.15) 0%, transparent 50%);
+            animation: ctaGlow 8s ease-in-out infinite;
+        }
+        @keyframes ctaGlow {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(5%, 3%); }
+        }
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        .cta-banner h2 {
+            color: #fff;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            margin-bottom: 1rem;
+        }
+        .cta-banner p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-banner .btn-primary {
+            background: var(--gold);
+            color: var(--bg-dark);
+        }
+        .cta-banner .btn-primary:hover {
+            background: var(--gold-light);
+            box-shadow: 0 8px 30px rgba(184, 134, 11, 0.4);
+        }
+
+        /* ===== LOCATION ===== */
+        .location {
+            background: var(--bg);
+        }
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .location-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .location-feature {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        .location-feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(184, 134, 11, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--gold);
+        }
+        .location-feature-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+        .location-feature h4 {
+            font-size: 1rem;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+        .location-feature p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .location-map {
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .location-map iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            filter: saturate(0.8) brightness(1.05);
+            transition: filter 0.4s;
+        }
+        .location-map:hover iframe {
+            filter: saturate(1) brightness(1);
+        }
+
+        /* ===== TESTIMONIAL ===== */
+        .testimonials {
+            background: var(--bg-light);
+        }
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .testimonials-header .section-label { justify-content: center; }
+        .testimonials-header .section-label::before { display: none; }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(107, 58, 42, 0.08);
+        }
+        .testimonial-stars {
+            display: flex;
+            gap: 0.2rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+        .testimonial-stars svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--gold);
+        }
+        .testimonial-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .testimonial-author {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.4s;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(107, 58, 42, 0.3);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            background: var(--gold);
+            transform: translateY(-3px);
+        }
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: flex; }
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(245, 239, 230, 0.98);
+                backdrop-filter: blur(20px);
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border);
+            }
+            .hero-content { margin-left: 0; }
+            .about-grid,
+            .kontakt-grid,
+            .penzion-grid { grid-template-columns: 1fr; }
+            .sluzby-grid { grid-template-columns: 1fr 1fr; }
+            .intro-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .location-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            section { padding: 4rem 0; }
+            .sluzby-grid { grid-template-columns: 1fr; }
+            .penzion-features { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .parallax-quote { padding: 5rem 0; }
+            .parallax-quote blockquote { font-size: 1.3rem; padding: 0 1rem; }
+            .cta-banner { padding: 3.5rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <a href="#hero" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                </div>
+                <span class="nav-logo-text">U Jezárka</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">O nás</a></li>
+                <li><a href="#sluzby">Restaurace</a></li>
+                <li><a href="#penzion">Penzion</a></li>
+                <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="images/foto1.jpg" alt="Hostinec U Jezárka">
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">Suchdol nad Lužnicí</div>
+            <h1>Hostinec <em>U Jezárka</em></h1>
+            <p class="hero-tagline">Rodinný podnik s klasickou českou kuchyní a útulným penzionem</p>
+            <div class="hero-actions">
+                <a href="tel:+420384781527" class="btn btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    Rezervace
+                </a>
+                <a href="#sluzby" class="btn btn-outline">Naše nabídka</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="line"></div>
+        </div>
+    </section>
+
+    <!-- INTRO STRIP -->
+    <div class="intro-strip">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-item reveal">
+                    <div class="intro-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"></path><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                    </div>
+                    <h3>Česká kuchyně</h3>
+                    <p>Typická česká jídla připravená z čerstvých surovin podle tradičních receptů</p>
+                </div>
+                <div class="intro-item reveal reveal-delay-1">
+                    <div class="intro-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path></svg>
+                    </div>
+                    <h3>Česká piva</h3>
+                    <p>Vychlazená česká piva známých značek přímo z tanku či z lahve</p>
+                </div>
+                <div class="intro-item reveal reveal-delay-2">
+                    <div class="intro-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    </div>
+                    <h3>Penzion</h3>
+                    <p>Útulné ubytování v 5 pokojích pro pohodový odpočinek v jižních Čechách</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- O NAS -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <img src="images/foto1.jpg" alt="Hostinec U Jezárka interiér">
+                </div>
+                <div class="reveal reveal-delay-1">
+                    <div class="section-label">O nás</div>
+                    <h2 class="section-title">Rodinný hostinec <em>s tradicí</em></h2>
+                    <p class="about-text">
+                        Hostinec U Jezárka je rodinný podnik v Suchdole nad Lužnicí, kde vás přivítáme v příjemném prostředí s domáckou atmosférou. Nabízíme klasickou českou kuchyni připravenou z čerstvých surovin.
+                    </p>
+                    <p class="about-text">
+                        K jídlu podáváme vychlazená česká piva známých značek. Pro hosty, kteří chtějí v našem kraji pobýt déle, nabízíme ubytování v penzionu s pěti útulnými pokoji.
+                    </p>
+                    <div class="about-accent-box">
+                        <p>U nás se cítíte jako doma. Vaříme s láskou a péčí, jako by to bylo pro naši vlastní rodinu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"><div class="divider-line"></div></div>
+
+    <!-- SLUZBY / RESTAURACE -->
+    <section class="sluzby" id="sluzby">
+        <div class="container">
+            <div class="sluzby-header">
+                <div class="section-label">Restaurace</div>
+                <h2 class="section-title">Co vám nabízíme</h2>
+                <p class="section-subtitle">Tradiční česká kuchyně v příjemném prostředí rodinného hostince</p>
+            </div>
+            <div class="sluzby-grid">
+                <div class="sluzba-card reveal">
+                    <div class="sluzba-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"></path><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                    </div>
+                    <h3>Denní menu</h3>
+                    <p>Každý pracovní den nabízíme polévku a výběr z hlavních jídel za výhodnou cenu</p>
+                </div>
+                <div class="sluzba-card reveal reveal-delay-1">
+                    <div class="sluzba-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    </div>
+                    <h3>Jídelní lístek</h3>
+                    <p>Stálá nabídka klasických českých pokrmů z čerstvých lokálních surovin</p>
+                </div>
+                <div class="sluzba-card reveal reveal-delay-2">
+                    <div class="sluzba-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"></path></svg>
+                    </div>
+                    <h3>Česká piva</h3>
+                    <p>Nabídka českých piv známých značek, vychlazených na správnou teplotu</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PENZION -->
+    <section class="penzion" id="penzion">
+        <div class="container">
+            <div class="penzion-grid">
+                <div class="reveal">
+                    <div class="section-label">Ubytování</div>
+                    <h2 class="section-title">Penzion <em>U Jezárka</em></h2>
+                    <p class="section-subtitle">Nabízíme útulné ubytování v pěti pokojích přímo nad hostincem. Ideální zázemí pro poznávání jižních Čech.</p>
+                    <div class="penzion-features">
+                        <div class="penzion-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            5 pokojů
+                        </div>
+                        <div class="penzion-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Klidné prostředí
+                        </div>
+                        <div class="penzion-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Rodinná atmosféra
+                        </div>
+                        <div class="penzion-feature">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Snídaně v restauraci
+                        </div>
+                    </div>
+                </div>
+                <div class="penzion-image reveal reveal-delay-1">
+                    <img src="images/foto1.jpg" alt="Penzion U Jezárka">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARALLAX QUOTE -->
+    <div class="parallax-quote reveal">
+        <div class="container">
+            <blockquote>
+                U nás vaříme tak, jak nás to naučily babičky. Z čerstvých surovin, s láskou a péčí.
+                <cite>Hostinec U Jezárka</cite>
+            </blockquote>
+        </div>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonials-header">
+                <div class="section-label">Hodnocení</div>
+                <h2 class="section-title">Co říkají naši hosté</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <p class="testimonial-text">Skvělá česká kuchyně, velké porce a příjemná obsluha. Svíčková byla vynikající!</p>
+                    <span class="testimonial-author">Host z Prahy</span>
+                </div>
+                <div class="testimonial-card reveal reveal-delay-1">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <p class="testimonial-text">Rodinná atmosféra, jako byste přišli k babičce na oběd. Pivo výborně vychlazené.</p>
+                    <span class="testimonial-author">Rodina z Brna</span>
+                </div>
+                <div class="testimonial-card reveal reveal-delay-2">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <p class="testimonial-text">Ubytování v penzionu příjemné, čisté pokoje. Ideální pro cyklovýlet po okolí.</p>
+                    <span class="testimonial-author">Cyklista z Tábora</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section class="location">
+        <div class="container">
+            <div class="location-grid">
+                <div class="reveal">
+                    <div class="section-label">Poloha</div>
+                    <h2 class="section-title">Kde nás najdete</h2>
+                    <p class="section-subtitle">Suchdol nad Lužnicí &mdash; malebné městečko v jižních Čechách</p>
+                    <div class="location-features">
+                        <div class="location-feature">
+                            <div class="location-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            </div>
+                            <div>
+                                <h4>Pražská 363</h4>
+                                <p>378 06 Suchdol nad Lužnicí</p>
+                            </div>
+                        </div>
+                        <div class="location-feature">
+                            <div class="location-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            </div>
+                            <div>
+                                <h4>Snadná dostupnost</h4>
+                                <p>Přímo na hlavní silnici s parkováním</p>
+                            </div>
+                        </div>
+                        <div class="location-feature">
+                            <div class="location-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>
+                            </div>
+                            <div>
+                                <h4>Kapacita restaurace</h4>
+                                <p>Příjemné prostředí pro rodiny i větší skupiny</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-map reveal reveal-delay-1">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2620!2d14.8788!3d48.8908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47735c1a1a1a1a1a%3A0x400af0f6614f970!2sPra%C5%BEsk%C3%A1%20363%2C%20378%2006%20Suchdol%20nad%20Lu%C5%BEnic%C3%AD!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <div class="cta-banner">
+        <div class="cta-content">
+            <h2>Přijďte ochutnat</h2>
+            <p>Rezervujte si stůl nebo pokoj a zažijte pravou českou pohostinnost</p>
+            <a href="tel:+420384781527" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Rezervovat
+            </a>
+        </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div></div>
+
+    <!-- KONTAKT -->
+    <section class="kontakt" id="kontakt">
+        <div class="container">
+            <div class="section-label">Kontakt</div>
+            <h2 class="section-title">Navštivte nás</h2>
+            <p class="section-subtitle" style="margin-bottom: 3rem;">Těšíme se na vaši návštěvu v Suchdole nad Lužnicí</p>
+            <div class="kontakt-grid">
+                <div class="kontakt-info reveal">
+                    <div class="kontakt-item">
+                        <div class="kontakt-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </div>
+                        <div class="kontakt-text">
+                            <h4>Adresa</h4>
+                            <p>Pražská 363<br>378 06 Suchdol nad Lužnicí</p>
+                        </div>
+                    </div>
+                    <div class="kontakt-item">
+                        <div class="kontakt-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg>
+                        </div>
+                        <div class="kontakt-text">
+                            <h4>Telefon</h4>
+                            <p><a href="tel:+420384781527">+420 384 781 527</a></p>
+                        </div>
+                    </div>
+                    <div class="kontakt-item">
+                        <div class="kontakt-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
+                        <div class="kontakt-text">
+                            <h4>Email</h4>
+                            <p><a href="mailto:jezarko@jezarko.cz">jezarko@jezarko.cz</a></p>
+                        </div>
+                    </div>
+                    <div class="kontakt-item">
+                        <div class="kontakt-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+                        </div>
+                        <div class="kontakt-text">
+                            <h4>Web</h4>
+                            <p><a href="https://hostinec-u-jezarka.webnode.cz/" target="_blank">hostinec-u-jezarka.webnode.cz</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="kontakt-map reveal reveal-delay-1">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2620!2d14.8788!3d48.8908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47735c1a1a1a1a1a%3A0x400af0f6614f970!2sPra%C5%BEsk%C3%A1%20363%2C%20378%2006%20Suchdol%20nad%20Lu%C5%BEnic%C3%AD!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <span class="footer-copy">Hostinec U Jezárka &mdash; Restaurace a Penzion &copy; 2026</span>
+                <div class="footer-credit">
+                    Vytvořeno s péčí
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+    <script>
+        /* ===== NAVIGATION ===== */
+        const nav = document.getElementById('nav');
+        const backToTop = document.getElementById('backToTop');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+
+            // Nav background
+            nav.classList.toggle('scrolled', currentScroll > 50);
+
+            // Back to top button
+            backToTop.classList.toggle('visible', currentScroll > 500);
+
+            lastScroll = currentScroll;
+        });
+
+        /* ===== MOBILE MENU ===== */
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav')) {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        /* ===== REVEAL ANIMATIONS ===== */
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        /* ===== ACTIVE NAV LINK HIGHLIGHT ===== */
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navItems.forEach(item => {
+                        item.style.color = '';
+                        if (item.getAttribute('href') === '#' + id) {
+                            item.style.color = 'var(--gold)';
+                        }
+                    });
+                }
+            });
+        }, {
+            threshold: 0.3,
+            rootMargin: '-80px 0px -50% 0px'
+        });
+
+        sections.forEach(section => sectionObserver.observe(section));
+
+        /* ===== SMOOTH PARALLAX ON HERO ===== */
+        const heroBg = document.querySelector('.hero-bg img');
+        if (heroBg) {
+            window.addEventListener('scroll', () => {
+                const scroll = window.scrollY;
+                if (scroll < window.innerHeight) {
+                    heroBg.style.transform = 'translateY(' + (scroll * 0.3) + 'px) scale(1.1)';
+                }
+            });
+        }
+
+        /* ===== PRELOADER SIMULATION ===== */
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.6s ease';
+            requestAnimationFrame(() => {
+                document.body.style.opacity = '1';
+            });
+        });
+    </script>
+</body>
+</html>
