@@ -3,518 +3,875 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELEKTRO Micka | Elektro, Klíče & Autoklíče — Sušice</title>
-    <meta name="description" content="ELEKTRO Micka — elektro obchod, výroba klíčů, čipování autoklíčů v Sušici. Prodej elektrospotřebičů, zámků a kování.">
+    <meta name="description" content="ELEKTRO Míčka - prodej a servis domácích elektrospotřebičů, výroba klíčů a autoklíčů, zámky. Sušice.">
+    <meta name="keywords" content="elektro, spotřebiče, klíče, autoklíče, zámky, Sušice, servis, Bosch, Electrolux, Whirlpool">
+    <title>ELEKTRO Míčka | Elektrospotřebiče a klíče Sušice</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
+        /* =============================================
+           CSS CUSTOM PROPERTIES
+        ============================================= */
         :root {
-            --color-bg: #0a1628;
-            --color-bg-light: #0e1d35;
-            --color-bg-card: #122240;
-            --color-accent: #3498db;
-            --color-accent-light: #5cb3e8;
-            --color-accent-dark: #2176ad;
-            --color-orange: #f39c12;
-            --color-orange-light: #f5b041;
-            --color-orange-dark: #d68910;
-            --color-text: #d4dde8;
-            --color-text-muted: #7a8ea6;
-            --color-text-light: #eef3f8;
-            --color-white: #ffffff;
-            --color-border: #1a3050;
+            --primary: #1565c0;
+            --primary-light: #42a5f5;
+            --primary-dark: #0d47a1;
+            --accent: #ffffff;
+            --light: #e8f4fd;
+            --dark: #0a2540;
+            --white: #ffffff;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --shadow-sm: 0 1px 4px rgba(10, 37, 64, 0.06);
+            --shadow-md: 0 6px 20px rgba(10, 37, 64, 0.1);
+            --shadow-lg: 0 12px 40px rgba(10, 37, 64, 0.14);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.35s ease;
             --font-heading: 'Exo 2', sans-serif;
-            --font-body: 'Roboto', sans-serif;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.25);
-            --shadow-md: 0 8px 30px rgba(0,0,0,0.35);
-            --shadow-lg: 0 20px 60px rgba(0,0,0,0.4);
-            --radius: 10px;
-            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --font-body: 'Source Sans 3', sans-serif;
+            --container-max: 1200px;
+            --section-padding: 96px 0;
         }
 
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-body); background-color: var(--color-bg); color: var(--color-text); line-height: 1.7; overflow-x: hidden; }
+        /* =============================================
+           RESET & BASE
+        ============================================= */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-body); color: var(--dark);
+            background: var(--white); line-height: 1.7;
+            overflow-x: hidden; -webkit-font-smoothing: antialiased;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+        ul, ol { list-style: none; }
+        h1,h2,h3,h4,h5,h6 {
+            font-family: var(--font-heading); font-weight: 700;
+            line-height: 1.2; color: var(--dark);
+        }
+        p { margin-bottom: 1em; }
+        .container { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; }
 
-        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); }
-        .reveal-left.visible { opacity: 1; transform: translateX(0); }
-        .reveal-right { opacity: 0; transform: translateX(60px); transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); }
-        .reveal-right.visible { opacity: 1; transform: translateX(0); }
-        .reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); }
-        .reveal-scale.visible { opacity: 1; transform: scale(1); }
+        /* =============================================
+           UTILITY
+        ============================================= */
+        .section-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px;
+            text-transform: uppercase; color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .section-tag::before {
+            content: ''; width: 8px; height: 8px;
+            background: var(--primary); border-radius: 2px; display: inline-block;
+        }
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 16px;
+        }
+        .section-desc {
+            font-size: 1.05rem; color: var(--gray-500);
+            max-width: 580px; font-weight: 400; line-height: 1.8;
+        }
 
-        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-        @keyframes scrollPulse { 0%, 100% { opacity: 1; transform: scaleY(1); } 50% { opacity: 0.3; transform: scaleY(0.6); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        /* =============================================
+           ANIMATIONS
+        ============================================= */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in-left.visible { opacity: 1; transform: translateX(0); }
+        .fade-in-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in-right.visible { opacity: 1; transform: translateX(0); }
+        .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .scale-in.visible { opacity: 1; transform: scale(1); }
+        .stagger-1 { transition-delay: 0.06s; }
+        .stagger-2 { transition-delay: 0.12s; }
+        .stagger-3 { transition-delay: 0.18s; }
+        .stagger-4 { transition-delay: 0.24s; }
+        .stagger-5 { transition-delay: 0.3s; }
+        .stagger-6 { transition-delay: 0.36s; }
 
-        /* NAV */
-        nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1.2rem 2rem; transition: all var(--transition); background: transparent; }
-        nav.scrolled { background: rgba(10, 22, 40, 0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 2px 30px rgba(0,0,0,0.5); padding: 0.7rem 2rem; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--color-white); text-decoration: none; letter-spacing: 0.04em; }
-        .nav-logo span { color: var(--color-orange); }
-        .nav-links { display: flex; list-style: none; gap: 2.5rem; }
-        .nav-links a { color: var(--color-text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s ease; position: relative; font-family: var(--font-heading); }
-        .nav-links a::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: var(--color-orange); transition: width 0.3s ease; }
-        .nav-links a:hover { color: var(--color-accent-light); }
-        .nav-links a:hover::after { width: 100%; }
-        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1001; }
-        .hamburger span { width: 28px; height: 2px; background: var(--color-white); transition: all 0.3s ease; border-radius: 2px; }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translateY(11px); }
+        /* =============================================
+           NAVIGATION
+        ============================================= */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 16px 0; transition: all var(--transition-normal); background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(255,255,255,0.97); backdrop-filter: blur(14px);
+            padding: 10px 0; box-shadow: 0 2px 16px rgba(10,37,64,0.06);
+        }
+        .navbar .container { display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { display: flex; align-items: center; gap: 10px; }
+        .nav-logo img { height: 36px; width: auto; border-radius: 4px; }
+        .nav-logo-text {
+            font-family: var(--font-heading); font-size: 1.3rem;
+            font-weight: 800; color: var(--white);
+            transition: color var(--transition-fast);
+        }
+        .nav-logo-text span { color: var(--primary-light); font-weight: 500; }
+        .navbar.scrolled .nav-logo-text { color: var(--dark); }
+        .navbar.scrolled .nav-logo-text span { color: var(--primary); }
+
+        .nav-links { display: flex; align-items: center; gap: 28px; }
+        .nav-links a {
+            font-size: 0.88rem; font-weight: 600; color: rgba(255,255,255,0.85);
+            position: relative; transition: color var(--transition-fast);
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--primary-light);
+            transition: width var(--transition-normal);
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .navbar.scrolled .nav-links a { color: var(--gray-500); }
+        .navbar.scrolled .nav-links a:hover { color: var(--dark); }
+
+        .nav-cta {
+            padding: 10px 24px; background: var(--primary);
+            color: var(--white) !important; border-radius: var(--radius-sm);
+            font-weight: 700; transition: all var(--transition-fast);
+        }
+        .nav-cta:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(21,101,192,0.3); }
+        .nav-cta::after { display: none !important; }
+
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; padding: 8px; background: none; border: none; z-index: 1001;
+        }
+        .hamburger span {
+            display: block; width: 26px; height: 2px; background: var(--white);
+            transition: all var(--transition-fast); border-radius: 2px;
+        }
+        .navbar.scrolled .hamburger span { background: var(--dark); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
         .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translateY(-11px); }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
-        /* HERO */
-        .hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-light) 50%, #0d2240 100%); }
-        .hero-grid {
-            position: absolute; inset: 0; z-index: 0;
-            background-image: linear-gradient(rgba(52, 152, 219, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(52, 152, 219, 0.06) 1px, transparent 1px);
-            background-size: 60px 60px;
+        .mobile-menu {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: var(--dark); z-index: 999;
+            flex-direction: column; align-items: center; justify-content: center; gap: 28px;
         }
-        .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(52, 152, 219, 0.08) 0%, transparent 70%); top: -200px; right: -200px; z-index: 0; }
-        .hero-glow-2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(243, 156, 18, 0.06) 0%, transparent 70%); bottom: -100px; left: -100px; z-index: 0; }
-        .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 2rem; max-width: 900px; }
-        .hero-badge { display: inline-block; padding: 0.5rem 1.8rem; border: 1px solid var(--color-accent); border-radius: 50px; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-accent-light); margin-bottom: 2rem; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s ease 0.3s forwards; font-family: var(--font-heading); }
-        .hero h1 { font-family: var(--font-heading); font-size: clamp(2.6rem, 6vw, 4.5rem); font-weight: 800; color: var(--color-white); line-height: 1.1; margin-bottom: 1.2rem; opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease 0.5s forwards; }
-        .hero h1 em { color: var(--color-orange); font-style: normal; }
-        .hero-sub { font-size: 1.15rem; color: var(--color-text-muted); margin-bottom: 2.5rem; font-weight: 300; opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease 0.7s forwards; }
-        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease 0.9s forwards; }
-        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 2.2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; font-family: var(--font-heading); }
-        .btn-primary { background: var(--color-orange); color: var(--color-bg); }
-        .btn-primary:hover { background: var(--color-orange-light); transform: translateY(-3px); box-shadow: 0 12px 35px rgba(243, 156, 18, 0.3); }
-        .btn-outline { background: transparent; color: var(--color-text-light); border: 1.5px solid var(--color-border); }
-        .btn-outline:hover { border-color: var(--color-accent); color: var(--color-accent-light); transform: translateY(-3px); }
-        .hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 2; opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards; }
-        .hero-scroll a { color: var(--color-text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: color 0.3s ease; }
-        .hero-scroll a:hover { color: var(--color-orange); }
-        .scroll-line { width: 1px; height: 40px; background: var(--color-accent); animation: scrollPulse 2s ease-in-out infinite; }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a { font-family: var(--font-heading); font-size: 1.5rem; color: var(--white); }
+        .mobile-menu a:hover { color: var(--primary-light); }
 
-        /* STATS */
-        .stats-bar { background: var(--color-bg-card); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding: 3rem 2rem; }
-        .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
-        .stat-item h3 { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: var(--color-orange); margin-bottom: 0.3rem; }
-        .stat-item p { font-size: 0.85rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+        /* =============================================
+           HERO
+        ============================================= */
+        .hero {
+            position: relative; min-height: 100vh; display: flex; align-items: center;
+            background: linear-gradient(145deg, var(--dark) 0%, #0e3460 40%, var(--primary) 100%);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('images/hero.png') center/cover no-repeat; opacity: 0.12;
+        }
+        .hero::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 140px;
+            background: linear-gradient(to top, var(--white), transparent); z-index: 2;
+        }
 
-        /* SECTIONS */
-        section { padding: 6rem 2rem; position: relative; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-tag { display: inline-block; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-orange); margin-bottom: 1rem; font-weight: 700; font-family: var(--font-heading); }
-        .section-title { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3rem); color: var(--color-text-light); font-weight: 700; margin-bottom: 1rem; }
-        .section-title em { color: var(--color-accent-light); font-style: normal; }
-        .section-desc { color: var(--color-text-muted); max-width: 620px; margin: 0 auto; font-size: 1.05rem; font-weight: 300; }
-        .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--color-accent), var(--color-orange)); margin: 1.5rem auto 0; border-radius: 2px; }
+        .hero-inner { position: relative; z-index: 3; width: 100%; }
+        .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center; }
 
-        /* O NAS */
-        #o-nas { background: var(--color-bg-light); }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-        .about-image { position: relative; border-radius: var(--radius); overflow: hidden; }
-        .about-image img { width: 100%; height: 420px; object-fit: cover; border-radius: var(--radius); transition: transform 0.6s ease; }
-        .about-image:hover img { transform: scale(1.03); }
-        .about-image::before { content: ''; position: absolute; top: -12px; right: -12px; width: 100%; height: 100%; border: 2px solid var(--color-accent); border-radius: var(--radius); z-index: -1; opacity: 0.2; }
-        .about-text h2 { font-family: var(--font-heading); font-size: 2.2rem; color: var(--color-text-light); margin-bottom: 1.5rem; line-height: 1.2; }
-        .about-text h2 em { color: var(--color-orange); font-style: normal; }
-        .about-text p { color: var(--color-text-muted); margin-bottom: 1.5rem; font-size: 1.02rem; font-weight: 300; line-height: 1.9; }
-        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
-        .about-feature { display: flex; align-items: flex-start; gap: 0.8rem; }
-        .about-feature-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; background: rgba(52, 152, 219, 0.12); display: flex; align-items: center; justify-content: center; color: var(--color-accent); }
-        .about-feature h4 { font-size: 0.88rem; color: var(--color-text-light); margin-bottom: 0.2rem; font-weight: 600; font-family: var(--font-heading); }
-        .about-feature p { font-size: 0.82rem; color: var(--color-text-muted); margin: 0; font-weight: 300; }
+        .hero-text h1 {
+            font-size: clamp(2.4rem, 5vw, 3.6rem); color: var(--white);
+            margin-bottom: 20px; font-weight: 800;
+        }
+        .hero-text h1 span { color: var(--primary-light); }
+        .hero-text p {
+            font-size: 1.1rem; color: rgba(255,255,255,0.65);
+            max-width: 500px; margin-bottom: 36px; line-height: 1.8;
+        }
+        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
 
-        /* HOURS */
-        .hours-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(243, 156, 18, 0.12); border: 1px solid rgba(243, 156, 18, 0.25); border-radius: 8px; padding: 0.8rem 1.2rem; margin-top: 1.5rem; color: var(--color-orange); font-size: 0.9rem; }
-        .hours-badge .dot { width: 8px; height: 8px; background: var(--color-orange); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+        .btn-hero {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 32px; background: var(--primary-light); color: var(--white);
+            border: none; border-radius: var(--radius-sm);
+            font-family: var(--font-heading); font-size: 0.95rem; font-weight: 700;
+            cursor: pointer; transition: all var(--transition-fast);
+        }
+        .btn-hero:hover { background: var(--primary); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(21,101,192,0.3); }
 
-        /* SERVICES */
-        #sluzby { background: var(--color-bg); }
-        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .service-card { background: var(--color-bg-card); border-radius: var(--radius); padding: 2.5rem 2rem; text-align: center; transition: all var(--transition); position: relative; overflow: hidden; border: 1px solid var(--color-border); }
-        .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--color-accent), var(--color-orange)); transform: scaleX(0); transition: transform var(--transition); }
-        .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--color-accent); }
-        .service-card:hover::before { transform: scaleX(1); }
-        .service-icon { width: 70px; height: 70px; border-radius: 50%; background: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--color-accent); transition: all var(--transition); }
-        .service-card:hover .service-icon { background: linear-gradient(135deg, var(--color-accent), var(--color-orange)); color: var(--color-white); transform: scale(1.1); }
-        .service-card h3 { font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-text-light); margin-bottom: 0.8rem; }
-        .service-card p { font-size: 0.9rem; color: var(--color-text-muted); font-weight: 300; line-height: 1.7; }
+        .btn-hero-outline {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 32px; background: transparent; color: var(--white);
+            border: 2px solid rgba(255,255,255,0.25); border-radius: var(--radius-sm);
+            font-family: var(--font-heading); font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; transition: all var(--transition-fast);
+        }
+        .btn-hero-outline:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); }
 
-        /* PARTNERS */
-        #partneri { background: var(--color-bg-light); }
-        .partners-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2rem; align-items: center; }
-        .partner-logo { background: var(--color-bg-card); border-radius: var(--radius); padding: 1.5rem; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-border); transition: all var(--transition); min-height: 90px; }
-        .partner-logo:hover { border-color: var(--color-accent); transform: translateY(-4px); box-shadow: var(--shadow-sm); }
-        .partner-logo img { max-width: 100%; max-height: 50px; object-fit: contain; filter: brightness(0.85) contrast(1.1); transition: filter 0.3s ease; }
-        .partner-logo:hover img { filter: brightness(1) contrast(1); }
-        .partner-logo span { font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+        .hero-badges {
+            display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap;
+        }
+        .hero-badge-item {
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 16px; background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-sm);
+        }
+        .hero-badge-item svg { width: 18px; height: 18px; stroke: var(--primary-light); fill: none; stroke-width: 2; }
+        .hero-badge-item span { font-size: 0.82rem; color: rgba(255,255,255,0.7); font-weight: 500; }
 
-        /* CTA */
-        .cta-strip { background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent) 50%, #1a6fb5 100%); padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; }
-        .cta-strip::before { content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px; border-radius: 50%; background: rgba(243, 156, 18, 0.08); }
-        .cta-strip h2 { font-family: var(--font-heading); font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--color-white); margin-bottom: 1rem; }
-        .cta-strip p { color: rgba(255,255,255,0.8); font-size: 1.1rem; font-weight: 300; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .cta-strip .btn { background: var(--color-orange); color: var(--color-bg); }
-        .cta-strip .btn:hover { background: var(--color-orange-light); transform: translateY(-3px); box-shadow: 0 12px 35px rgba(243, 156, 18, 0.35); }
+        .hero-image { text-align: center; }
+        .hero-image img {
+            max-height: 420px; width: auto; border-radius: var(--radius-lg);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
 
-        /* KONTAKT */
-        #kontakt { background: var(--color-bg); }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-        .contact-info h2 { font-family: var(--font-heading); font-size: 2.2rem; color: var(--color-text-light); margin-bottom: 1.5rem; }
-        .contact-info > p { color: var(--color-text-muted); font-weight: 300; margin-bottom: 2.5rem; font-size: 1.02rem; line-height: 1.8; }
-        .contact-item { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 1.8rem; }
-        .contact-icon { flex-shrink: 0; width: 48px; height: 48px; border-radius: 12px; background: rgba(52, 152, 219, 0.12); display: flex; align-items: center; justify-content: center; color: var(--color-accent); }
-        .contact-detail h4 { font-size: 0.85rem; color: var(--color-text-light); margin-bottom: 0.3rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--font-heading); }
-        .contact-detail p, .contact-detail a { font-size: 0.95rem; color: var(--color-text-muted); font-weight: 300; text-decoration: none; transition: color 0.3s ease; }
-        .contact-detail a:hover { color: var(--color-orange); }
-        .contact-map { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); height: 100%; min-height: 450px; }
-        .contact-map iframe { width: 100%; height: 100%; border: none; min-height: 450px; }
+        /* =============================================
+           PARTNER LOGOS BANNER
+        ============================================= */
+        .partners {
+            padding: 56px 0; background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .partners-label {
+            text-align: center; font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 2px; color: var(--gray-400);
+            margin-bottom: 28px;
+        }
+        .partners-grid {
+            display: flex; align-items: center; justify-content: center;
+            gap: 48px; flex-wrap: wrap;
+        }
+        .partner-logo {
+            height: 48px; width: auto; filter: grayscale(100%) opacity(0.5);
+            transition: all var(--transition-normal);
+        }
+        .partner-logo:hover {
+            filter: grayscale(0%) opacity(1); transform: scale(1.1);
+        }
 
-        /* FOOTER */
-        footer { background: #060e1a; color: rgba(255,255,255,0.55); padding: 4rem 2rem 2rem; }
-        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
-        .footer-brand h3 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-white); margin-bottom: 1rem; }
-        .footer-brand h3 span { color: var(--color-orange); }
-        .footer-brand p { font-size: 0.9rem; font-weight: 300; line-height: 1.8; }
-        .footer-links h4, .footer-hours h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent); margin-bottom: 1.2rem; font-family: var(--font-heading); }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 0.6rem; }
-        .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.9rem; font-weight: 300; transition: color 0.3s ease; }
-        .footer-links a:hover { color: var(--color-orange); }
-        .footer-hours p { font-size: 0.9rem; font-weight: 300; margin-bottom: 0.3rem; }
-        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-size: 0.82rem; font-weight: 300; }
+        /* =============================================
+           CATEGORIES
+        ============================================= */
+        .categories { padding: var(--section-padding); background: var(--white); }
+        .categories-header { text-align: center; margin-bottom: 56px; }
+        .categories-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+        }
+        .category-card {
+            background: var(--gray-50); border-radius: var(--radius-md);
+            padding: 36px 28px; border: 2px solid var(--gray-200);
+            transition: all var(--transition-normal); text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .category-card::before {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%;
+            height: 4px; background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transform: scaleX(0); transform-origin: left; transition: transform var(--transition-normal);
+        }
+        .category-card:hover { border-color: var(--primary); transform: translateY(-6px); box-shadow: var(--shadow-md); }
+        .category-card:hover::before { transform: scaleX(1); }
 
-        /* RESPONSIVE */
-        @media (max-width: 968px) {
-            .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .partners-grid { grid-template-columns: repeat(3, 1fr); }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-content { grid-template-columns: 1fr 1fr; }
+        .category-icon {
+            width: 64px; height: 64px; margin: 0 auto 20px;
+            background: var(--light); border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            transition: all var(--transition-normal);
+        }
+        .category-card:hover .category-icon { background: var(--primary); }
+        .category-icon svg { width: 28px; height: 28px; stroke: var(--primary); fill: none; stroke-width: 1.5; transition: stroke var(--transition-normal); }
+        .category-card:hover .category-icon svg { stroke: var(--white); }
+        .category-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+        .category-card p { font-size: 0.9rem; color: var(--gray-500); line-height: 1.7; margin-bottom: 0; }
+
+        /* =============================================
+           ABOUT / STORE
+        ============================================= */
+        .store { padding: var(--section-padding); background: var(--light); }
+        .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .store-content h2 { margin-bottom: 16px; }
+        .store-content p { color: var(--gray-500); line-height: 1.8; }
+        .store-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+        .store-feature {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 16px; background: var(--white); border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+        }
+        .store-feature:hover { box-shadow: var(--shadow-sm); transform: translateX(4px); }
+        .store-feature svg { width: 20px; height: 20px; stroke: var(--primary); fill: none; stroke-width: 2; flex-shrink: 0; }
+        .store-feature span { font-size: 0.88rem; font-weight: 600; }
+
+        .store-image { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); }
+        .store-image img { width: 100%; height: 440px; object-fit: cover; }
+
+        /* =============================================
+           KEY SERVICE
+        ============================================= */
+        .keys { padding: var(--section-padding); background: var(--white); }
+        .keys-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .keys-image { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); }
+        .keys-image img { width: 100%; height: 400px; object-fit: cover; }
+        .keys-content h2 { margin-bottom: 16px; }
+        .keys-content p { color: var(--gray-500); line-height: 1.8; }
+        .keys-list { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+        .keys-list-item {
+            display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+            background: var(--gray-50); border-radius: var(--radius-sm);
+            border-left: 3px solid var(--primary); transition: all var(--transition-fast);
+        }
+        .keys-list-item:hover { background: var(--light); transform: translateX(4px); }
+        .keys-list-item svg { width: 20px; height: 20px; stroke: var(--primary); fill: none; stroke-width: 2; flex-shrink: 0; }
+        .keys-list-item span { font-size: 0.92rem; font-weight: 500; }
+
+        /* =============================================
+           HOURS & INFO
+        ============================================= */
+        .info { padding: var(--section-padding); background: var(--light); }
+        .info-header { text-align: center; margin-bottom: 48px; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; max-width: 960px; margin: 0 auto; }
+        .info-card {
+            background: var(--white); border-radius: var(--radius-md);
+            padding: 32px 24px; box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+        .info-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .info-card-icon {
+            width: 48px; height: 48px; background: var(--primary);
+            border-radius: var(--radius-sm); display: flex;
+            align-items: center; justify-content: center; margin-bottom: 20px;
+        }
+        .info-card-icon svg { width: 22px; height: 22px; stroke: var(--white); fill: none; stroke-width: 2; }
+        .info-card h3 { font-size: 1rem; margin-bottom: 16px; }
+        .info-card ul { display: flex; flex-direction: column; gap: 10px; }
+        .info-card ul li {
+            display: flex; justify-content: space-between; font-size: 0.88rem;
+            padding-bottom: 10px; border-bottom: 1px solid var(--gray-200);
+        }
+        .info-card ul li span:first-child { color: var(--gray-400); }
+        .info-card ul li span:last-child { font-weight: 600; color: var(--dark); }
+        .info-card p { font-size: 0.9rem; color: var(--gray-500); margin-bottom: 0; line-height: 1.7; }
+
+        /* =============================================
+           CONTACT
+        ============================================= */
+        .contact { padding: var(--section-padding); background: var(--white); }
+        .contact-header { text-align: center; margin-bottom: 56px; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+        .contact-cards { display: flex; flex-direction: column; gap: 20px; }
+        .contact-card {
+            display: flex; align-items: center; gap: 16px; padding: 20px;
+            background: var(--gray-50); border-radius: var(--radius-md);
+            border: 1px solid var(--gray-200); transition: all var(--transition-normal);
+        }
+        .contact-card:hover { border-color: var(--primary); transform: translateX(6px); box-shadow: var(--shadow-sm); }
+        .contact-card-icon {
+            width: 48px; height: 48px; background: var(--primary);
+            border-radius: var(--radius-sm); display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .contact-card-icon svg { width: 20px; height: 20px; stroke: var(--white); fill: none; stroke-width: 2; }
+        .contact-card-text h4 {
+            font-family: var(--font-body); font-size: 0.72rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; color: var(--gray-400); margin-bottom: 2px;
+        }
+        .contact-card-text p { font-size: 0.95rem; font-weight: 500; margin-bottom: 0; }
+        .contact-card-text a { color: var(--primary); }
+        .contact-card-text a:hover { color: var(--primary-dark); }
+
+        .contact-map {
+            border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: var(--shadow-md); height: 100%; min-height: 440px;
+        }
+        .contact-map iframe { width: 100%; height: 100%; min-height: 440px; border: 0; }
+
+        /* =============================================
+           FOOTER
+        ============================================= */
+        .footer { background: var(--dark); color: rgba(255,255,255,0.55); padding: 72px 0 0; }
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+            padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .footer-brand h3 { font-size: 1.4rem; color: var(--white); margin-bottom: 12px; }
+        .footer-brand h3 span { color: var(--primary-light); }
+        .footer-brand p { font-size: 0.88rem; line-height: 1.7; max-width: 300px; }
+        .footer-column h4 {
+            font-family: var(--font-body); font-size: 0.78rem; font-weight: 600;
+            color: var(--white); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px;
+        }
+        .footer-column ul { display: flex; flex-direction: column; gap: 10px; }
+        .footer-column ul li a { font-size: 0.88rem; transition: all var(--transition-fast); }
+        .footer-column ul li a:hover { color: var(--primary-light); padding-left: 6px; }
+        .footer-bottom {
+            padding: 20px 0; display: flex; align-items: center;
+            justify-content: space-between; font-size: 0.82rem;
+        }
+        .footer-bottom a { color: var(--primary-light); }
+        .footer-bottom a:hover { color: var(--white); }
+
+        /* =============================================
+           BACK TO TOP
+        ============================================= */
+        .back-to-top {
+            position: fixed; bottom: 28px; right: 28px;
+            width: 44px; height: 44px; background: var(--primary);
+            color: var(--white); border: none; border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0; visibility: hidden;
+            transform: translateY(16px); transition: all var(--transition-normal);
+            z-index: 900; box-shadow: var(--shadow-md);
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--primary-dark); }
+        .back-to-top svg { width: 18px; height: 18px; stroke: var(--white); fill: none; stroke-width: 2; }
+
+        /* =============================================
+           RESPONSIVE
+        ============================================= */
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-text p { margin: 0 auto 36px; }
+            .hero-buttons { justify-content: center; }
+            .hero-badges { justify-content: center; }
+            .hero-image { display: none; }
+            .categories-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 768px) {
-            .nav-links { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: var(--color-bg); flex-direction: column; justify-content: center; align-items: center; gap: 2rem; transition: right 0.4s ease; box-shadow: -5px 0 30px rgba(0,0,0,0.5); }
-            .nav-links.active { right: 0; }
-            .nav-links a { font-size: 1rem; }
+            :root { --section-padding: 72px 0; }
             .hamburger { display: flex; }
-            .services-grid { grid-template-columns: 1fr; }
-            .partners-grid { grid-template-columns: repeat(2, 1fr); }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-            section { padding: 4rem 1.5rem; }
-            .about-features { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+            .nav-links { display: none; }
+            .store-grid { grid-template-columns: 1fr; gap: 40px; }
+            .keys-grid { grid-template-columns: 1fr; gap: 40px; }
+            .info-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .contact-map { min-height: 300px; }
+            .contact-map iframe { min-height: 300px; }
+            .categories-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+            .store-features { grid-template-columns: 1fr; }
+            .partners-grid { gap: 28px; }
+            .partner-logo { height: 36px; }
         }
         @media (max-width: 480px) {
-            .hero h1 { font-size: 2rem; }
-            .hero-buttons { flex-direction: column; align-items: center; }
-            .partners-grid { grid-template-columns: 1fr 1fr; }
+            .hero-text h1 { font-size: 2rem; }
+            .hero-badges { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAV -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="nav-logo">ELEKTRO <span>Micka</span></a>
-            <ul class="nav-links">
-                <li><a href="#o-nas">O nás</a></li>
-                <li><a href="#sluzby">Služby</a></li>
-                <li><a href="#partneri">Partneři</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
-            </ul>
-            <div class="hamburger"><span></span><span></span><span></span></div>
+    <!-- NAVIGATION -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#domov" class="nav-logo">
+                <img src="images/logo.gif" alt="ELEKTRO Míčka logo">
+                <span class="nav-logo-text">ELEKTRO <span>Míčka</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#domov">Domov</a>
+                <a href="#sortiment">Sortiment</a>
+                <a href="#prodejna">Prodejna</a>
+                <a href="#klice">Klíče</a>
+                <a href="#info">Informace</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#domov">Domov</a>
+        <a href="#sortiment">Sortiment</a>
+        <a href="#prodejna">Prodejna</a>
+        <a href="#klice">Klíče</a>
+        <a href="#info">Informace</a>
+        <a href="#kontakt">Kontakt</a>
+    </div>
+
     <!-- HERO -->
-    <section class="hero">
-        <div class="hero-grid"></div>
-        <div class="hero-glow"></div>
-        <div class="hero-glow-2"></div>
-        <div class="hero-content">
-            <div class="hero-badge">Elektro &bull; Klíče &bull; Autoklíče</div>
-            <h1>Váš partner pro <em>elektro</em> a klíčové služby</h1>
-            <p class="hero-sub">Prodej elektrospotřebičů, výroba klíčů a autoklíčů, čipování, zámky a kování. Vše pod jednou střechou v Sušici.</p>
-            <div class="hero-buttons">
-                <a href="#sluzby" class="btn btn-primary">Naše služby</a>
-                <a href="#kontakt" class="btn btn-outline">Kontakt</a>
-            </div>
-        </div>
-        <div class="hero-scroll">
-            <a href="#o-nas">Zjistit více<div class="scroll-line"></div></a>
-        </div>
-    </section>
-
-    <!-- STATS -->
-    <div class="stats-bar">
-        <div class="stats-grid">
-            <div class="stat-item reveal" style="transition-delay: 0.1s;"><h3>Po-Pá</h3><p>8:00 - 17:00</p></div>
-            <div class="stat-item reveal" style="transition-delay: 0.2s;"><h3>So</h3><p>8:00 - 12:00</p></div>
-            <div class="stat-item reveal" style="transition-delay: 0.3s;"><h3>12+</h3><p>Partnerských značek</p></div>
-            <div class="stat-item reveal" style="transition-delay: 0.4s;"><h3>100%</h3><p>Spolehlivost</p></div>
-        </div>
-    </div>
-
-    <!-- O NAS -->
-    <section id="o-nas">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-image reveal-left">
-                    <img src="images/header.jpg" alt="ELEKTRO Micka prodejna">
-                </div>
-                <div class="about-text reveal-right">
-                    <span class="section-tag">O nás</span>
-                    <h2>ELEKTRO Micka — váš <em>elektro</em> obchod v Sušici</h2>
-                    <p>Jsme zavedený elektro obchod a klíčová služba v centru Sušice. Nabízíme široký sortiment elektrospotřebičů od předních výrobců, výrobu klíčů a autoklíčů, čipování a kompletní služby v oblasti zámků a kování.</p>
-                    <p>Spolupracujeme s renomovanými značkami jako Bosch, Electrolux, Whirlpool, AEG, EVVA, FAB a dalšími. Najdete u nás vše od malých domácích spotřebičů až po profesionální zabezpečovací systémy.</p>
-                    <div class="about-features">
-                        <div class="about-feature">
-                            <div class="about-feature-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                            </div>
-                            <div><h4>Elektrospotřebiče</h4><p>Přední světové značky</p></div>
+    <section class="hero" id="domov">
+        <div class="hero-inner">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-text">
+                        <h1>Elektrospotřebiče a <span>výroba klíčů</span> v Sušici</h1>
+                        <p>Prodej a servis domácích elektrospotřebičů, výroba klíčů a autoklíčů včetně čipování. Profesionální služby od roku 2010.</p>
+                        <div class="hero-buttons">
+                            <a href="#sortiment" class="btn-hero">
+                                Náš sortiment
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                            </a>
+                            <a href="#kontakt" class="btn-hero-outline">Kontaktujte nás</a>
                         </div>
-                        <div class="about-feature">
-                            <div class="about-feature-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <div class="hero-badges">
+                            <div class="hero-badge-item">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                <span>Po-Pá 8:00-17:00</span>
                             </div>
-                            <div><h4>Klíče a autoklíče</h4><p>Výroba a čipování</p></div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-feature-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            <div class="hero-badge-item">
+                                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                <span>Záruční servis</span>
                             </div>
-                            <div><h4>Zámky a kování</h4><p>EVVA, FAB a další</p></div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-feature-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            <div class="hero-badge-item">
+                                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <span>Mostní 45, Sušice</span>
                             </div>
-                            <div><h4>Otevírací doba</h4><p>Po-Pá 8-17, So 8-12</p></div>
                         </div>
                     </div>
-                    <div class="hours-badge">
-                        <span class="dot"></span>
-                        Otevřeno: Po-Pá 8:00-17:00 | So 8:00-12:00
+                    <div class="hero-image">
+                        <img src="images/header.jpg" alt="Prodejna ELEKTRO Míčka" loading="lazy">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLUZBY -->
-    <section id="sluzby">
+    <!-- PARTNER LOGOS -->
+    <section class="partners">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Naše služby</span>
-                <h2 class="section-title">Elektro, klíče a <em>zabezpečení</em></h2>
-                <p class="section-desc">Kompletní nabídka elektrospotřebičů, klíčových služeb a zabezpečovacích systémů.</p>
-                <div class="divider"></div>
-            </div>
-            <div class="services-grid">
-                <div class="service-card reveal" style="transition-delay: 0.05s;">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                    </div>
-                    <h3>Výroba klíčů</h3>
-                    <p>Výroba klasických klíčů i autoklíčů na míru. Rychle a spolehlivě přímo na prodejně.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay: 0.1s;">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
-                    </div>
-                    <h3>Čipování autoklíčů</h3>
-                    <p>Profesionální čipování autoklíčů pro většinu automobilových značek.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay: 0.15s;">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                    </div>
-                    <h3>Elektrospotřebiče</h3>
-                    <p>Prodej elektrospotřebičů od značek Bosch, Electrolux, Candy, AEG, Mora, Gorenje, Whirlpool a dalších.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay: 0.2s;">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    </div>
-                    <h3>Zámky a kování</h3>
-                    <p>Prodej zámků a kování od předních výrobců EVVA a FAB. Přestavby vložek.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay: 0.25s;">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                    </div>
-                    <h3>Přestavby vložek</h3>
-                    <p>Profesionální přestavby cylindrických vložek pro zvýšení bezpečnosti.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay: 0.3s;">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    </div>
-                    <h3>Centrální vysávání</h3>
-                    <p>Prodej a montáž systémů centrálního vysávání pro rodinné domy a byty.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PARTNERS -->
-    <section id="partneri">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Naši partneři</span>
-                <h2 class="section-title">Spolupracujeme s <em>nejlepšími</em></h2>
-                <p class="section-desc">Nabízíme produkty předních světových značek.</p>
-                <div class="divider"></div>
-            </div>
+            <p class="partners-label">Prodáváme značky, kterým můžete důvěřovat</p>
             <div class="partners-grid">
-                <div class="partner-logo reveal" style="transition-delay: 0.05s;"><span>EMOS</span></div>
-                <div class="partner-logo reveal" style="transition-delay: 0.1s;"><img src="images/logo-bosch.jpg" alt="Bosch"></div>
-                <div class="partner-logo reveal" style="transition-delay: 0.15s;"><img src="images/logo-electrolux.jpg" alt="Electrolux"></div>
-                <div class="partner-logo reveal" style="transition-delay: 0.2s;"><span>Candy</span></div>
-                <div class="partner-logo reveal" style="transition-delay: 0.25s;"><span>AEG</span></div>
-                <div class="partner-logo reveal" style="transition-delay: 0.3s;"><span>Tatramat</span></div>
-                <div class="partner-logo reveal" style="transition-delay: 0.35s;"><span>Mora</span></div>
-                <div class="partner-logo reveal" style="transition-delay: 0.4s;"><span>Gorenje</span></div>
-                <div class="partner-logo reveal" style="transition-delay: 0.45s;"><img src="images/logo-whirlpool.jpg" alt="Whirlpool"></div>
-                <div class="partner-logo reveal" style="transition-delay: 0.5s;"><img src="images/logo-evva.jpg" alt="EVVA"></div>
-                <div class="partner-logo reveal" style="transition-delay: 0.55s;"><img src="images/logo-fab.jpg" alt="FAB"></div>
-                <div class="partner-logo reveal" style="transition-delay: 0.6s;"><span>Dražice</span></div>
+                <img src="images/logo-bosch.jpg" alt="Bosch" class="partner-logo" loading="lazy">
+                <img src="images/logo-electrolux.jpg" alt="Electrolux" class="partner-logo" loading="lazy">
+                <img src="images/logo-whirlpool.jpg" alt="Whirlpool" class="partner-logo" loading="lazy">
+                <img src="images/logo-evva.jpg" alt="EVVA" class="partner-logo" loading="lazy">
+                <img src="images/logo-fab.jpg" alt="FAB" class="partner-logo" loading="lazy">
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <div class="cta-strip">
-        <div class="container reveal">
-            <h2>Potřebujete klíče nebo elektro?</h2>
-            <p>Navštivte naši prodejnu v centru Sušice nebo nám zavolejte. Poradíme s výběrem a zajistíme vše potřebné.</p>
-            <a href="tel:+420376526551" class="btn">Zavolat: 376 526 551</a>
-        </div>
-    </div>
-
-    <!-- KONTAKT -->
-    <section id="kontakt">
+    <!-- CATEGORIES -->
+    <section class="categories" id="sortiment">
         <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info reveal-left">
-                    <span class="section-tag">Kontakt</span>
-                    <h2>ELEKTRO Micka</h2>
-                    <p>Najdete nás na Mostní ulici v centru Sušice. Přijďte se podívat na naši nabídku nebo nám zavolejte.</p>
+            <div class="categories-header fade-in">
+                <span class="section-tag">Sortiment</span>
+                <h2 class="section-title">Co u nás najdete</h2>
+                <p class="section-desc" style="margin: 0 auto;">Široký výběr domácích elektrospotřebičů předních značek, výroba klíčů a autoklíčů, zámky a centrální vysavače.</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card fade-in stagger-1">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 10h10M7 14h10"/></svg>
+                    </div>
+                    <h3>Pračky a sušičky</h3>
+                    <p>Automatické pračky a sušičky od předních výrobců Bosch, Electrolux, Whirlpool a dalších.</p>
+                </div>
+                <div class="category-card fade-in stagger-2">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="14" r="3"/><line x1="12" y1="6" x2="12" y2="6.01"/></svg>
+                    </div>
+                    <h3>Myčky nádobí</h3>
+                    <p>Vestavné i volně stojící myčky nádobí s energeticky úspornými programy.</p>
+                </div>
+                <div class="category-card fade-in stagger-3">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                    </div>
+                    <h3>Sporáky a trouby</h3>
+                    <p>Elektrické a plynové sporáky, vestavné trouby, varné desky a mikrovlnné trouby.</p>
+                </div>
+                <div class="category-card fade-in stagger-4">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+                    </div>
+                    <h3>LCD televize</h3>
+                    <p>LCD a LED televize, satelitní příjímače, DVD přehrávače a příslušenství.</p>
+                </div>
+                <div class="category-card fade-in stagger-5">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                    </div>
+                    <h3>Vysavače</h3>
+                    <p>Klasické, bezsáčkové a centrální vysavače. Prodej i montáž centrálních vysávacích systémů.</p>
+                </div>
+                <div class="category-card fade-in stagger-6">
+                    <div class="category-icon">
+                        <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                    </div>
+                    <h3>Vestavné spotřebiče</h3>
+                    <p>Kompletní řada vestavných spotřebičů do kuchyně. Odborná pomoc při výběru.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <!-- STORE -->
+    <section class="store" id="prodejna">
+        <div class="container">
+            <div class="store-grid">
+                <div class="store-content fade-in-left">
+                    <span class="section-tag">Naše prodejna</span>
+                    <h2 class="section-title">Prodejna v centru Sušice</h2>
+                    <p>Navštivte naši kamennou prodejnu na adrese Mostní 45 v centru Sušice. Nabízíme osobní poradenství, předvedení spotřebičů a profesionální servis. Vedoucí prodejny Jana Míčková vám ráda poradí s výběrem.</p>
+                    <p>Zajišťujeme záruční i pozáruční servis, splátkový prodej a dopravu zboží.</p>
+                    <div class="store-features">
+                        <div class="store-feature">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span>Záruční servis</span>
                         </div>
-                        <div class="contact-detail">
-                            <h4>Adresa</h4>
-                            <p>Mostní 45<br>342 01 Sušice I</p>
+                        <div class="store-feature">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span>Pozáruční servis</span>
+                        </div>
+                        <div class="store-feature">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span>Splátkový prodej</span>
+                        </div>
+                        <div class="store-feature">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span>Doprava zboží</span>
+                        </div>
+                        <div class="store-feature">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span>Odborné poradenství</span>
+                        </div>
+                        <div class="store-feature">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            <span>Centrální vysavače</span>
                         </div>
                     </div>
+                </div>
+                <div class="store-image fade-in-right">
+                    <img src="images/guard.jpg" alt="Prodejna ELEKTRO Míčka Sušice" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <!-- KEYS -->
+    <section class="keys" id="klice">
+        <div class="container">
+            <div class="keys-grid">
+                <div class="keys-image fade-in-left">
+                    <img src="images/klice.jpg" alt="Výroba klíčů ELEKTRO Míčka" loading="lazy">
+                </div>
+                <div class="keys-content fade-in-right">
+                    <span class="section-tag">Klíčové služby</span>
+                    <h2 class="section-title">Výroba klíčů a autoklíčů</h2>
+                    <p>Nabízíme kompletní služby v oblasti výroby klíčů, autoklíčů s čipováním a prodej zámků. Úpravy vložek a bezpečnostní systémy.</p>
+                    <div class="keys-list">
+                        <div class="keys-list-item">
+                            <svg viewBox="0 0 24 24"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                            <span>Výroba běžných klíčů</span>
                         </div>
-                        <div class="contact-detail">
+                        <div class="keys-list-item">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            <span>Autoklíče s čipováním</span>
+                        </div>
+                        <div class="keys-list-item">
+                            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            <span>Bezpečnostní zámky FAB a EVVA</span>
+                        </div>
+                        <div class="keys-list-item">
+                            <svg viewBox="0 0 24 24"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                            <span>Úpravy cylindrických vložek</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFO -->
+    <section class="info" id="info">
+        <div class="container">
+            <div class="info-header fade-in">
+                <span class="section-tag">Praktické informace</span>
+                <h2 class="section-title" style="text-align:center;">Otevírací doba a služby</h2>
+            </div>
+            <div class="info-grid">
+                <div class="info-card fade-in stagger-1">
+                    <div class="info-card-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3>Otevírací doba</h3>
+                    <ul>
+                        <li><span>Po - Pá</span><span>8:00 - 17:00</span></li>
+                        <li><span>Sobota</span><span>8:00 - 12:00</span></li>
+                        <li><span>Neděle</span><span>Zavřeno</span></li>
+                    </ul>
+                </div>
+                <div class="info-card fade-in stagger-2">
+                    <div class="info-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <h3>Vedení prodejny</h3>
+                    <p>Jana Míčková<br>Ředitelka společnosti<br><strong>Tel:</strong> 376 526 551</p>
+                </div>
+                <div class="info-card fade-in stagger-3">
+                    <div class="info-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Servis</h3>
+                    <p>Zajišťujeme záruční i pozáruční servis elektrospotřebičů. Spolupracujeme se servisními středisky hlavních výrobců.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="kontakt">
+        <div class="container">
+            <div class="contact-header fade-in">
+                <span class="section-tag">Kontakt</span>
+                <h2 class="section-title">Jak nás najdete</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-cards fade-in-left">
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div class="contact-card-text">
+                            <h4>Adresa</h4>
+                            <p>Mostní 45, 342 01 Sušice I</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                        <div class="contact-card-text">
                             <h4>Telefon</h4>
                             <p><a href="tel:+420376526551">376 526 551</a></p>
                         </div>
                     </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                         </div>
-                        <div class="contact-detail">
+                        <div class="contact-card-text">
                             <h4>E-mail</h4>
                             <p><a href="mailto:elektroservis.micka@seznam.cz">elektroservis.micka@seznam.cz</a></p>
                         </div>
                     </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                         </div>
-                        <div class="contact-detail">
+                        <div class="contact-card-text">
                             <h4>Otevírací doba</h4>
-                            <p>Po - Pá: 8:00 - 17:00</p>
-                            <p>So: 8:00 - 12:00</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                        </div>
-                        <div class="contact-detail">
-                            <h4>Web</h4>
-                            <p><a href="https://elektro-micka.webnode.cz/" target="_blank" rel="noopener">elektro-micka.webnode.cz</a></p>
+                            <p>Po-Pá: 8:00-17:00, So: 8:00-12:00</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="contact-map reveal-right">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2620!2d13.5180!3d49.2310!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b6e8e8e8e8e8e%3A0x400af0f6615f1e0!2sMostn%C3%AD%2045%2C%20342%2001%20Su%C5%A1ice!5e0!3m2!1scs!2scz!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - ELEKTRO Micka, Sušice"></iframe>
+                <div class="contact-map fade-in-right">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624!2d13.52!3d49.23!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMostn%C3%AD%2045%2C%20342%2001%20Su%C5%A1ice!5e0!3m2!1scs!2scz!4v1709740000000!5m2!1scs!2scz"
+                        allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa - ELEKTRO Míčka Sušice">
+                    </iframe>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <h3>ELEKTRO <span>Micka</span></h3>
-                <p>Elektro obchod, výroba klíčů, čipování autoklíčů, zámky a kování. Váš spolehlivý partner v Sušici.</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>ELEKTRO <span>Míčka</span></h3>
+                    <p>Prodej a servis domácích elektrospotřebičů, výroba klíčů a autoklíčů v Sušici. Vaše prodejna s tradicí.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Sortiment</h4>
+                    <ul>
+                        <li><a href="#sortiment">Pračky a sušičky</a></li>
+                        <li><a href="#sortiment">Myčky nádobí</a></li>
+                        <li><a href="#sortiment">Sporáky a trouby</a></li>
+                        <li><a href="#sortiment">Televize</a></li>
+                        <li><a href="#sortiment">Vysavače</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Služby</h4>
+                    <ul>
+                        <li><a href="#klice">Výroba klíčů</a></li>
+                        <li><a href="#klice">Autoklíče</a></li>
+                        <li><a href="#klice">Zámky</a></li>
+                        <li><a href="#prodejna">Servis</a></li>
+                        <li><a href="#prodejna">Centrální vysavače</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><a href="tel:+420376526551">376 526 551</a></li>
+                        <li><a href="mailto:elektroservis.micka@seznam.cz">E-mail</a></li>
+                        <li><a href="#kontakt">Mostní 45, Sušice</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-links">
-                <h4>Navigace</h4>
-                <ul>
-                    <li><a href="#o-nas">O nás</a></li>
-                    <li><a href="#sluzby">Služby</a></li>
-                    <li><a href="#partneri">Partneři</a></li>
-                    <li><a href="#kontakt">Kontakt</a></li>
-                </ul>
+            <div class="footer-bottom">
+                <span>&copy; 2025 ELEKTRO Míčka. Všechna práva vyhrazena.</span>
+                <span>Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></span>
             </div>
-            <div class="footer-hours">
-                <h4>Otevírací doba</h4>
-                <p>Pondělí - Pátek: 8:00 - 17:00</p>
-                <p>Sobota: 8:00 - 12:00</p>
-                <p>Neděle: zavřeno</p>
-                <p style="margin-top: 1rem; color: var(--color-orange);">Tel: 376 526 551</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 ELEKTRO Micka — Sušice. Všechna práva vyhrazena.</p>
         </div>
     </footer>
 
+    <button class="back-to-top" id="backToTop" aria-label="Zpět nahoru">
+        <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
     <!-- JAVASCRIPT -->
     <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); });
-        document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navLinks.classList.remove('active'); }); });
-
-        const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.pageYOffset > 60); });
-
-        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        const sections = document.querySelectorAll('section[id]');
-        const navLinkItems = document.querySelectorAll('.nav-links a');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => { if (pageYOffset >= section.offsetTop - 200) current = section.getAttribute('id'); });
-            navLinkItems.forEach(link => { link.style.color = ''; if (link.getAttribute('href') === '#' + current) link.style.color = 'var(--color-orange)'; });
-        });
+        /* Navbar */
+        (function(){
+            var n=document.getElementById('navbar');
+            window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.pageYOffset>60);},{passive:true});
+        })();
+        /* Hamburger */
+        (function(){
+            var h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');
+            h.addEventListener('click',function(){this.classList.toggle('active');m.classList.toggle('active');document.body.style.overflow=m.classList.contains('active')?'hidden':'';});
+            m.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){h.classList.remove('active');m.classList.remove('active');document.body.style.overflow='';});});
+        })();
+        /* Smooth scroll */
+        (function(){
+            document.querySelectorAll('a[href^="#"]').forEach(function(a){
+                a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t){window.scrollTo({top:t.offsetTop-document.getElementById('navbar').offsetHeight,behavior:'smooth'});}});
+            });
+        })();
+        /* IntersectionObserver */
+        (function(){
+            var els=document.querySelectorAll('.fade-in,.fade-in-left,.fade-in-right,.scale-in');
+            if('IntersectionObserver' in window){
+                var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+                els.forEach(function(el){obs.observe(el);});
+            }else{els.forEach(function(el){el.classList.add('visible');});}
+        })();
+        /* Back to top */
+        (function(){
+            var b=document.getElementById('backToTop');
+            window.addEventListener('scroll',function(){b.classList.toggle('visible',window.pageYOffset>400);},{passive:true});
+            b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+        })();
+        /* Active nav */
+        (function(){
+            var s=document.querySelectorAll('section[id]'),nl=document.querySelectorAll('.nav-links a:not(.nav-cta)');
+            window.addEventListener('scroll',function(){var p=window.pageYOffset+100;s.forEach(function(sec){if(p>=sec.offsetTop&&p<sec.offsetTop+sec.offsetHeight){nl.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+sec.id);});}});},{passive:true});
+        })();
+        /* Parallax */
+        (function(){
+            var ht=document.querySelector('.hero-text');
+            window.addEventListener('scroll',function(){var s=window.pageYOffset;if(s<window.innerHeight&&ht){ht.style.transform='translateY('+(s*0.1)+'px)';ht.style.opacity=1-(s/(window.innerHeight*0.7));}},{passive:true});
+        })();
     </script>
 </body>
 </html>

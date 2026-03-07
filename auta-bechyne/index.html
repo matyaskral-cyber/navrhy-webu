@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Auta Bechyně - Autovrakoviště, autoservis, prodej náhradních dílů a odtahová služba v Bechyni. Více než 15 let zkušeností.">
+    <title>Auta Bechyně | Autovrakoviště &bull; Autoservis &bull; Náhradní díly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES
+           ============================================ */
+        :root {
+            --primary: #1b2838;
+            --primary-light: #2c3e50;
+            --primary-dark: #0f1923;
+            --accent: #e74c3c;
+            --accent-dark: #c0392b;
+            --accent-light: #ff6b5a;
+            --white: #ffffff;
+            --off-white: #f8f9fa;
+            --gray-100: #f1f3f5;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #868e96;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 8px 30px rgba(0,0,0,0.2);
+            --shadow-xl: 0 15px 50px rgba(0,0,0,0.25);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --font-heading: 'Bebas Neue', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --container-max: 1200px;
+            --section-padding: 100px;
+            --header-height: 80px;
+        }
+
+        /* ============================================
+           CSS RESET & BASE
+           ============================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--gray-800);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition-fast);
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================
+           SCROLL ANIMATIONS
+           ============================================ */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.85);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ============================================
+           HEADER / NAVIGATION
+           ============================================ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background: rgba(27, 40, 56, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all var(--transition-normal);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .header.scrolled {
+            background: rgba(27, 40, 56, 0.98);
+            box-shadow: var(--shadow-lg);
+            height: 65px;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--white);
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width var(--transition-normal);
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: all var(--transition-normal);
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background: var(--primary-dark);
+            padding: 100px 40px 40px;
+            transition: right var(--transition-normal);
+            z-index: 999;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .mobile-nav.open {
+            right: 0;
+        }
+
+        .mobile-nav a {
+            display: block;
+            color: rgba(255,255,255,0.85);
+            font-size: 1.2rem;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-family: var(--font-heading);
+            letter-spacing: 2px;
+            font-size: 1.5rem;
+            transition: all var(--transition-fast);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent);
+            padding-left: 10px;
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--primary-dark);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/hero-car.jpg') center center / cover no-repeat;
+            filter: brightness(0.35);
+            transform: scale(1.1);
+            animation: heroZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroZoom {
+            0% { transform: scale(1.1); }
+            100% { transform: scale(1.2); }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(27, 40, 56, 0.85) 0%,
+                rgba(27, 40, 56, 0.4) 50%,
+                rgba(231, 76, 60, 0.15) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent-light);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            animation: fadeInDown 0.8s ease 0.3s both;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            color: var(--white);
+            letter-spacing: 6px;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease 0.5s both;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.75);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            animation: fadeInDown 0.8s ease 0.7s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInDown 0.8s ease 0.9s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition-normal);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(231, 76, 60, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--white);
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        .hero-scroll-icon {
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .hero-scroll-icon::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 2px;
+            animation: scrollDot 2s infinite;
+        }
+
+        @keyframes scrollDot {
+            0% { opacity: 1; top: 10px; }
+            100% { opacity: 0; top: 25px; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* ============================================
+           STATS BAR
+           ============================================ */
+        .stats-bar {
+            background: var(--primary);
+            padding: 40px 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            color: var(--accent);
+            letter-spacing: 2px;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ============================================
+           SECTION STYLES
+           ============================================ */
+        .section {
+            padding: var(--section-padding) 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 0 auto 20px;
+            border-radius: 2px;
+        }
+
+        .section-desc {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--gray-600);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        .about {
+            background: var(--off-white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-image-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-content h3 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .about-content p {
+            color: var(--gray-700);
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .about-feature:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-feature-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .about-feature span {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--gray-800);
+        }
+
+        /* ============================================
+           SERVICES SECTION
+           ============================================ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+            border: 1px solid var(--gray-200);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .service-card-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .service-card:hover .service-card-image img {
+            transform: scale(1.1);
+        }
+
+        .service-card-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 45px;
+            height: 45px;
+            background: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+
+        .service-card-body {
+            padding: 30px;
+        }
+
+        .service-card-body h3 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .service-card-body p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .service-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: gap var(--transition-fast);
+        }
+
+        .service-card-link:hover {
+            gap: 14px;
+        }
+
+        .service-card-link-arrow {
+            font-size: 1.2rem;
+            transition: transform var(--transition-fast);
+        }
+
+        /* ============================================
+           EQUIPMENT SECTION
+           ============================================ */
+        .equipment {
+            background: var(--primary);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .equipment::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(231,76,60,0.1), transparent 70%);
+            border-radius: 50%;
+        }
+
+        .equipment .section-title {
+            color: var(--white);
+        }
+
+        .equipment .section-desc {
+            color: rgba(255,255,255,0.65);
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .equipment-item {
+            display: flex;
+            gap: 20px;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all var(--transition-normal);
+        }
+
+        .equipment-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        .equipment-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(231, 76, 60, 0.2);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.8rem;
+        }
+
+        .equipment-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .equipment-info p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           BRANDS SECTION
+           ============================================ */
+        .brands {
+            background: var(--off-white);
+        }
+
+        .brands-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .brand-tag {
+            background: var(--white);
+            padding: 14px 28px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            color: var(--gray-700);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            transition: all var(--transition-normal);
+            cursor: default;
+        }
+
+        .brand-tag:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ============================================
+           GALLERY SECTION
+           ============================================ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            height: 280px;
+            cursor: pointer;
+        }
+
+        .gallery-item:first-child {
+            grid-column: span 2;
+            grid-row: span 2;
+            height: auto;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(27,40,56,0.8), transparent);
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+            display: flex;
+            align-items: flex-end;
+            padding: 25px;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item-overlay span {
+            color: var(--white);
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+        }
+
+        /* ============================================
+           WHY US SECTION
+           ============================================ */
+        .why-us {
+            background: var(--off-white);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .why-item {
+            text-align: center;
+            padding: 40px 25px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            transition: all var(--transition-normal);
+        }
+
+        .why-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .why-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(231,76,60,0.3);
+        }
+
+        .why-item h4 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .why-item p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        .contact {
+            background: var(--white);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            padding: 20px 0;
+        }
+
+        .contact-info h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .contact-info > p {
+            color: var(--gray-600);
+            margin-bottom: 35px;
+            line-height: 1.8;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 25px;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+
+        .contact-item-info h4 {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--gray-800);
+            margin-bottom: 4px;
+            letter-spacing: 0;
+        }
+
+        .contact-item-info p,
+        .contact-item-info a {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+
+        .contact-item-info a:hover {
+            color: var(--accent);
+        }
+
+        .contact-map {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            min-height: 400px;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border: none;
+        }
+
+        /* ============================================
+           CTA SECTION
+           ============================================ */
+        .cta {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/hero-car.jpg') center center / cover no-repeat;
+            opacity: 0.1;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta h2 {
+            font-size: 3.5rem;
+            color: var(--white);
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+        }
+
+        .cta p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.15rem;
+            margin-bottom: 35px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta .btn-primary {
+            font-size: 1.05rem;
+            padding: 18px 45px;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--gray-900);
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .footer h4 {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+
+        .footer-links a {
+            display: block;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            padding: 6px 0;
+            transition: all var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 8px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            align-items: flex-start;
+        }
+
+        .footer-contact-item strong {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .footer-bottom {
+            padding: 25px 0;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--accent-light);
+        }
+
+        /* ============================================
+           BACK TO TOP
+           ============================================ */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-normal);
+            z-index: 100;
+            box-shadow: var(--shadow-md);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--accent-dark);
+            transform: translateY(-3px);
+        }
+
+        /* ============================================
+           RESPONSIVE - TABLET
+           ============================================ */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item:first-child {
+                grid-column: span 2;
+                height: 350px;
+                grid-row: span 1;
+            }
+
+            .equipment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-item {
+                border-right: none;
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE - MOBILE
+           ============================================ */
+        @media (max-width: 768px) {
+            :root {
+                --section-padding: 70px;
+                --header-height: 70px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+                letter-spacing: 3px;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .gallery-item:first-child {
+                grid-column: span 1;
+                height: 250px;
+            }
+
+            .gallery-item {
+                height: 200px;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .stat-item {
+                border-right: none;
+                padding: 15px;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+
+            .about-content h3 {
+                font-size: 2rem;
+            }
+
+            .contact-info h3 {
+                font-size: 2rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 14px 28px;
+                font-size: 0.85rem;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         HEADER
+         ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <div class="logo-icon">A</div>
+                AUTA <span>BECHYNE</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#o-nas">O nas</a>
+                <a href="#sluzby">Sluzby</a>
+                <a href="#vybaveni">Vybaveni</a>
+                <a href="#znacky">Znacky</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#kontakt">Kontakt</a>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#o-nas">O nas</a>
+        <a href="#sluzby">Sluzby</a>
+        <a href="#vybaveni">Vybaveni</a>
+        <a href="#znacky">Znacky</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Od roku 2008 ve vasich sluzbach</div>
+            <h1>AUTA <span>BECHYNE</span></h1>
+            <p class="hero-subtitle">Autovrakoviste, autoservis a prodej nahradnich dilu. Vice nez 15 let zkusenosti s komplexni peci o vase vozidlo v jizni Cechach.</p>
+            <div class="hero-buttons">
+                <a href="#kontakt" class="btn btn-primary">Kontaktujte nas &rarr;</a>
+                <a href="#sluzby" class="btn btn-outline">Nase sluzby</a>
+            </div>
+        </div>
+        <a href="#stats" class="hero-scroll">
+            <div class="hero-scroll-icon"></div>
+        </a>
+    </section>
+
+    <!-- ============================================
+         STATS BAR
+         ============================================ -->
+    <section class="stats-bar" id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">Let zkusenosti</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-label">Vozidel na sklade</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-target="3000">0</div>
+                    <div class="stat-label">Spokojenych zakazniku</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-target="400">0</div>
+                    <div class="stat-label">Znacek vozidel</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ABOUT SECTION
+         ============================================ -->
+    <section class="section about" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-in-left">
+                    <img src="images/workshop.jpg" alt="Autoservis Bechyne - dilna">
+                    <div class="about-image-badge">15+ LET PRAXE</div>
+                </div>
+                <div class="about-content fade-in-right">
+                    <div class="section-label">O nas</div>
+                    <h3>PROFESIONALNI PECE O VASE VOZIDLO</h3>
+                    <p>Firma Auta Bechyne pusobi na trhu vice nez 15 let. Zacali jsme provozovanim autovrakoviste a prodejem nahradnich dilu. Postupne jsme nasi cinnost rozsirili o autoservis a odtahovou sluzbu.</p>
+                    <p>Nachazime se v jizni Cechach v obci Bechyne, priblizne 24 km od Tabora a 45 km od Ceskych Budejovic. Na nasem vrakovisti skladujeme dily z vice nez 500 vozidel ruznych znacek.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#9881;</div>
+                            <span>Moderni diagnostika Bosch</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#9733;</div>
+                            <span>3D geometrie Hunter</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#128663;</div>
+                            <span>Nahradni vozidlo</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#9854;</div>
+                            <span>Ekologicka likvidace</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICES SECTION
+         ============================================ -->
+    <section class="section" id="sluzby">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">Co nabizime</div>
+                <h2 class="section-title">NASE SLUZBY</h2>
+                <div class="section-divider"></div>
+                <p class="section-desc">Nabizime komplexni sluzby od prodeje nahradnich dilu pres autoservis az po ekologickou likvidaci vasich starych vozidel.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-card-image">
+                        <img src="images/parts.jpg" alt="Nahradni dily">
+                        <div class="service-card-number">01</div>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>NAHRADNI DILY</h3>
+                        <p>Skladujeme dily z vice nez 500 vozidel vsech beznych znacek. Nabizime jak pouzite, tak nove originalni nahradni dily od overenech dodavatelu.</p>
+                        <a href="#kontakt" class="service-card-link">Poptat dily <span class="service-card-link-arrow">&rarr;</span></a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-card-image">
+                        <img src="images/workshop.jpg" alt="Autoservis">
+                        <div class="service-card-number">02</div>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>AUTOSERVIS</h3>
+                        <p>Kompletni opravy vozidel, montaz dilu a priprava na STK. Disponujeme modernim diagnostickym vybavenim Bosch KTS 540 a 3D geometrii Hunter.</p>
+                        <a href="#kontakt" class="service-card-link">Objednat servis <span class="service-card-link-arrow">&rarr;</span></a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-card-image">
+                        <img src="images/towing.jpg" alt="Odtahova sluzba">
+                        <div class="service-card-number">03</div>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>ODTAHOVA SLUZBA</h3>
+                        <p>Zajistujeme odtah a prevoz vozidel po celem Jihoceskym kraji. V pripade nehody nebo poruchy jsme pripraveni vam pomoci rychle a spolehlive.</p>
+                        <a href="tel:+420602888446" class="service-card-link">Zavolat &rarr;</a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-card-image">
+                        <img src="images/diagnostics.jpg" alt="Diagnostika">
+                        <div class="service-card-number">04</div>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>DIAGNOSTIKA VOZIDEL</h3>
+                        <p>Diagnostika motoru pomoci Bosch KTS 540. Kompletni kontrola elektroniky, emisnich systemu a rizeni vasich vozidel s presnym vyhodnocenim.</p>
+                        <a href="#kontakt" class="service-card-link">Vice info <span class="service-card-link-arrow">&rarr;</span></a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-card-image">
+                        <img src="images/hero-car.jpg" alt="Pneuservis">
+                        <div class="service-card-number">05</div>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>PNEUSERVIS</h3>
+                        <p>Kompletni pneuservis vcetne prezuti, vyvazeni a uskladneni pneumatik. Prodej novych i pouzitych pneumatik vsech beznych rozmeru a znacek.</p>
+                        <a href="#kontakt" class="service-card-link">Vice info <span class="service-card-link-arrow">&rarr;</span></a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-card-image">
+                        <img src="images/workshop.jpg" alt="Likvidace vozidel">
+                        <div class="service-card-number">06</div>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>EKOLOGICKA LIKVIDACE</h3>
+                        <p>Zajistujeme bezplatnou ekologickou likvidaci starych a nepojezdnych vozidel. Vykup havarijnich vozidel za nejvyssi moznou cenu na trhu.</p>
+                        <a href="#kontakt" class="service-card-link">Vice info <span class="service-card-link-arrow">&rarr;</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         EQUIPMENT SECTION
+         ============================================ -->
+    <section class="section equipment" id="vybaveni">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">Nase technika</div>
+                <h2 class="section-title">PROFESIONALNI VYBAVENI</h2>
+                <div class="section-divider"></div>
+                <p class="section-desc">Pouzivame nejmodernejsi diagnosticke a servisni vybaveni od preodnich svetovych vyrobcu.</p>
+            </div>
+            <div class="equipment-grid">
+                <div class="equipment-item fade-in-left">
+                    <div class="equipment-icon">&#128295;</div>
+                    <div class="equipment-info">
+                        <h4>BOSCH KTS 540</h4>
+                        <p>Profesionalni diagnosticky system pro kompletni analyzu elektroniky a ridici jednotky vozidel vsech znacek. Presna diagnostika zavad.</p>
+                    </div>
+                </div>
+                <div class="equipment-item fade-in-right">
+                    <div class="equipment-icon">&#128736;</div>
+                    <div class="equipment-info">
+                        <h4>3D GEOMETRIE HUNTER</h4>
+                        <p>Americky system Hunter pro mereni a serizeni geometrie kol osobnich i uzitkovych vozidel. Presne nastaveni pro bezpecnou jizdu.</p>
+                    </div>
+                </div>
+                <div class="equipment-item fade-in-left">
+                    <div class="equipment-icon">&#10052;</div>
+                    <div class="equipment-info">
+                        <h4>PLNENI KLIMATIZACI</h4>
+                        <p>Automaticka plnicka klimatizaci pro servis a udrzbu klimatizacnich systemu. Doplneni chladiva a kontrola tesnosti.</p>
+                    </div>
+                </div>
+                <div class="equipment-item fade-in-right">
+                    <div class="equipment-icon">&#128681;</div>
+                    <div class="equipment-info">
+                        <h4>RAM TARPO</h4>
+                        <p>Rovnaci ram Tarpo pro profesionalni karosarske opravy. Presne rovnani karoserie po havarijnich skodach s milimetrovou presnosti.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         BRANDS SECTION
+         ============================================ -->
+    <section class="section brands" id="znacky">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">Zastoupeni znacek</div>
+                <h2 class="section-title">DILY PRO VSECHNY ZNACKY</h2>
+                <div class="section-divider"></div>
+                <p class="section-desc">Na nasem vrakovisti naleznete dily pro vice nez 400 znacek a modelu vozidel.</p>
+            </div>
+            <div class="brands-list fade-in">
+                <div class="brand-tag">Skoda</div>
+                <div class="brand-tag">Volkswagen</div>
+                <div class="brand-tag">Ford</div>
+                <div class="brand-tag">Renault</div>
+                <div class="brand-tag">Peugeot</div>
+                <div class="brand-tag">Citroen</div>
+                <div class="brand-tag">Opel</div>
+                <div class="brand-tag">Fiat</div>
+                <div class="brand-tag">BMW</div>
+                <div class="brand-tag">Mercedes-Benz</div>
+                <div class="brand-tag">Audi</div>
+                <div class="brand-tag">Toyota</div>
+                <div class="brand-tag">Hyundai</div>
+                <div class="brand-tag">Kia</div>
+                <div class="brand-tag">Seat</div>
+                <div class="brand-tag">Dacia</div>
+                <div class="brand-tag">Honda</div>
+                <div class="brand-tag">Mazda</div>
+                <div class="brand-tag">Suzuki</div>
+                <div class="brand-tag">Volvo</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         GALLERY SECTION
+         ============================================ -->
+    <section class="section" id="galerie">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">Fotogalerie</div>
+                <h2 class="section-title">Z NASEHO AREALU</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item scale-in">
+                    <img src="images/workshop.jpg" alt="Servisni dilna">
+                    <div class="gallery-item-overlay">
+                        <span>SERVISNI DILNA</span>
+                    </div>
+                </div>
+                <div class="gallery-item scale-in">
+                    <img src="images/diagnostics.jpg" alt="Diagnostika">
+                    <div class="gallery-item-overlay">
+                        <span>DIAGNOSTIKA</span>
+                    </div>
+                </div>
+                <div class="gallery-item scale-in">
+                    <img src="images/parts.jpg" alt="Sklad dilu">
+                    <div class="gallery-item-overlay">
+                        <span>SKLAD DILU</span>
+                    </div>
+                </div>
+                <div class="gallery-item scale-in">
+                    <img src="images/towing.jpg" alt="Odtahova sluzba">
+                    <div class="gallery-item-overlay">
+                        <span>ODTAHOVA SLUZBA</span>
+                    </div>
+                </div>
+                <div class="gallery-item scale-in">
+                    <img src="images/hero-car.jpg" alt="Areal vrakoviste">
+                    <div class="gallery-item-overlay">
+                        <span>AREAL VRAKOVISTE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         WHY US SECTION
+         ============================================ -->
+    <section class="section why-us">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">Proc my</div>
+                <h2 class="section-title">PROC ZVOLIT AUTA BECHYNE</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="why-grid">
+                <div class="why-item fade-in">
+                    <div class="why-icon">&#9733;</div>
+                    <h4>15+ LET PRAXE</h4>
+                    <p>Vice nez 15 let zkusenosti v oboru. Tisice spokojenych zakazniku z celeho Jihoceskeho kraje nam duveri.</p>
+                </div>
+                <div class="why-item fade-in">
+                    <div class="why-icon">&#128176;</div>
+                    <h4>FER CENY</h4>
+                    <p>Nabizime konkurencni ceny na vsechny nase sluzby. U nas zaplatite za kvalitu, ne za znacku.</p>
+                </div>
+                <div class="why-item fade-in">
+                    <div class="why-icon">&#128295;</div>
+                    <h4>MODERNI VYBAVENI</h4>
+                    <p>Pracujeme s nejmodernejsi technikou od znacek Bosch a Hunter. Zarukou kvality je nase profesionalni vybaveni.</p>
+                </div>
+                <div class="why-item fade-in">
+                    <div class="why-icon">&#128663;</div>
+                    <h4>NAHRADNI VUZ</h4>
+                    <p>Po dobu opravy vaseho vozidla vam zapujcime nahradni automobil zcela zdarma. Nemusite byt bez auta.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA SECTION
+         ============================================ -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content fade-in">
+                <h2>POTREBUJETE POMOC?</h2>
+                <p>Zavolejte nam nebo napiste email. Jsme pripraveni vam pomoci s jakymkoli problemem s vasim vozidlem.</p>
+                <a href="tel:+420602888446" class="btn btn-primary">Zavolejte: +420 602 888 446</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT SECTION
+         ============================================ -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">Kde nas najdete</div>
+                <h2 class="section-title">KONTAKT</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info fade-in-left">
+                    <h3>SPOJTE SE S NAMI</h3>
+                    <p>Nevahjete nas kontaktovat telefonicky, emailem nebo nas osobne navstivte v nasem arealu v Bezerovicich u Bechyne.</p>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">&#128205;</div>
+                        <div class="contact-item-info">
+                            <h4>Adresa</h4>
+                            <p>Bezerovice 52, 391 65 Bechyne</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">&#128222;</div>
+                        <div class="contact-item-info">
+                            <h4>Telefon</h4>
+                            <p><a href="tel:+420602888446">+420 602 888 446</a> (p. Vales)</p>
+                            <p><a href="tel:+420602837333">+420 602 837 333</a> (p. Dvorak)</p>
+                            <p><a href="tel:+420380426420">+420 380 426 420</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">&#9993;</div>
+                        <div class="contact-item-info">
+                            <h4>Email</h4>
+                            <p><a href="mailto:auta.bechyne@seznam.cz">auta.bechyne@seznam.cz</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">&#128337;</div>
+                        <div class="contact-item-info">
+                            <h4>Oteviraci doba</h4>
+                            <p>Po - Pa: 8:00 - 17:00</p>
+                            <p>So: 8:00 - 12:00</p>
+                            <p>Ne: Zavreno</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map fade-in-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2606.5!2d14.4674!3d49.2943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470ca2f1e1b3b8e7%3A0x400af0f66153fd0!2sBe%C5%BEerovice+52%2C+391+65+Bechyn%C4%9B!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">A</div>
+                        AUTA <span>BECHYNE</span>
+                    </div>
+                    <p>Autovrakoviste, autoservis a prodej nahradnich dilu v Bechyni. Vice nez 15 let zkusenosti a tisice spokojenych zakazniku.</p>
+                </div>
+                <div>
+                    <h4>NAVIGACE</h4>
+                    <div class="footer-links">
+                        <a href="#o-nas">O nas</a>
+                        <a href="#sluzby">Sluzby</a>
+                        <a href="#vybaveni">Vybaveni</a>
+                        <a href="#znacky">Znacky</a>
+                        <a href="#galerie">Galerie</a>
+                        <a href="#kontakt">Kontakt</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>SLUZBY</h4>
+                    <div class="footer-links">
+                        <a href="#sluzby">Nahradni dily</a>
+                        <a href="#sluzby">Autoservis</a>
+                        <a href="#sluzby">Odtahova sluzba</a>
+                        <a href="#sluzby">Diagnostika</a>
+                        <a href="#sluzby">Pneuservis</a>
+                        <a href="#sluzby">Likvidace vozidel</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>KONTAKT</h4>
+                    <div class="footer-contact-item">
+                        <strong>&#128205;</strong> Bezerovice 52, 391 65 Bechyne
+                    </div>
+                    <div class="footer-contact-item">
+                        <strong>&#128222;</strong> +420 602 888 446
+                    </div>
+                    <div class="footer-contact-item">
+                        <strong>&#9993;</strong> auta.bechyne@seznam.cz
+                    </div>
+                    <div class="footer-contact-item">
+                        <strong>&#128337;</strong> Po-Pa: 8:00 - 17:00
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Auta Bechyne. Vsechna prava vyhrazena. | Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Zpet nahoru">&#8593;</button>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        /* ============================================
+           HAMBURGER MENU
+           ============================================ */
+        (function() {
+            var hamburger = document.getElementById('hamburger');
+            var mobileNav = document.getElementById('mobileNav');
+            var mobileOverlay = document.getElementById('mobileOverlay');
+            var mobileLinks = mobileNav.querySelectorAll('a');
+
+            function toggleMenu() {
+                hamburger.classList.toggle('active');
+                mobileNav.classList.toggle('open');
+                mobileOverlay.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+            }
+
+            function closeMenu() {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('open');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            hamburger.addEventListener('click', toggleMenu);
+            mobileOverlay.addEventListener('click', closeMenu);
+
+            for (var i = 0; i < mobileLinks.length; i++) {
+                mobileLinks[i].addEventListener('click', closeMenu);
+            }
+        })();
+
+        /* ============================================
+           HEADER SCROLL EFFECT
+           ============================================ */
+        (function() {
+            var header = document.getElementById('header');
+            var lastScroll = 0;
+
+            window.addEventListener('scroll', function() {
+                var currentScroll = window.pageYOffset;
+
+                if (currentScroll > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+
+                lastScroll = currentScroll;
+            });
+        })();
+
+        /* ============================================
+           INTERSECTION OBSERVER - SCROLL ANIMATIONS
+           ============================================ */
+        (function() {
+            var observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -80px 0px',
+                threshold: 0.1
+            };
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            var animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in');
+            animatedElements.forEach(function(el, index) {
+                el.style.transitionDelay = (index % 4) * 0.1 + 's';
+                observer.observe(el);
+            });
+        })();
+
+        /* ============================================
+           COUNTER ANIMATION
+           ============================================ */
+        (function() {
+            var counters = document.querySelectorAll('.stat-number');
+            var counterObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        var target = parseInt(entry.target.getAttribute('data-target'));
+                        var duration = 2000;
+                        var start = 0;
+                        var startTime = null;
+
+                        function animateCounter(timestamp) {
+                            if (!startTime) startTime = timestamp;
+                            var progress = Math.min((timestamp - startTime) / duration, 1);
+                            var eased = 1 - Math.pow(1 - progress, 3);
+                            var current = Math.floor(eased * target);
+                            entry.target.textContent = current + (target >= 100 ? '+' : '+');
+                            if (progress < 1) {
+                                requestAnimationFrame(animateCounter);
+                            } else {
+                                entry.target.textContent = target + '+';
+                            }
+                        }
+
+                        requestAnimationFrame(animateCounter);
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(function(counter) {
+                counterObserver.observe(counter);
+            });
+        })();
+
+        /* ============================================
+           BACK TO TOP BUTTON
+           ============================================ */
+        (function() {
+            var backToTop = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 500) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        })();
+
+        /* ============================================
+           SMOOTH SCROLL FOR NAV LINKS
+           ============================================ */
+        (function() {
+            var links = document.querySelectorAll('a[href^="#"]');
+
+            links.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    var targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    var targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        e.preventDefault();
+                        var headerOffset = 80;
+                        var elementPosition = targetEl.getBoundingClientRect().top;
+                        var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        })();
+
+        /* ============================================
+           PARALLAX EFFECT ON HERO
+           ============================================ */
+        (function() {
+            var heroBg = document.querySelector('.hero-bg');
+
+            window.addEventListener('scroll', function() {
+                var scroll = window.pageYOffset;
+                if (scroll < window.innerHeight) {
+                    heroBg.style.transform = 'scale(1.1) translateY(' + (scroll * 0.3) + 'px)';
+                }
+            });
+        })();
+
+        /* ============================================
+           ACTIVE NAV LINK HIGHLIGHT
+           ============================================ */
+        (function() {
+            var sections = document.querySelectorAll('section[id]');
+            var navLinks = document.querySelectorAll('.nav-links a');
+
+            var sectionObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        var id = entry.target.getAttribute('id');
+                        navLinks.forEach(function(link) {
+                            link.style.color = '';
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.style.color = '#e74c3c';
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '-50% 0px -50% 0px',
+                threshold: 0
+            });
+
+            sections.forEach(function(section) {
+                sectionObserver.observe(section);
+            });
+        })();
+    </script>
+
+</body>
+</html>

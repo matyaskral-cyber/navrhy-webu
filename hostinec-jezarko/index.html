@@ -981,6 +981,216 @@
             .parallax-quote { padding: 5rem 0; }
             .parallax-quote blockquote { font-size: 1.3rem; padding: 0 1rem; }
             .cta-banner { padding: 3.5rem 0; }
+            .hours-grid { grid-template-columns: 1fr; }
+            .speciality-cards { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== OPENING HOURS ===== */
+        .hours {
+            background: var(--bg-dark);
+            padding: 6rem 0;
+        }
+        .hours-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .hours-content h2 {
+            color: rgba(255,255,255,0.9);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            margin-bottom: 0.5rem;
+        }
+        .hours-content .section-subtitle {
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 2rem;
+        }
+        .hours-table {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.3s;
+        }
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+        .hours-row:hover {
+            background: rgba(184, 134, 11, 0.05);
+        }
+        .hours-day {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.7);
+        }
+        .hours-time {
+            font-size: 0.88rem;
+            color: var(--gold);
+            font-weight: 500;
+        }
+        .hours-closed {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.3);
+        }
+        .hours-note {
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            border: 1px solid rgba(184, 134, 11, 0.15);
+            border-radius: 4px;
+            background: rgba(184, 134, 11, 0.05);
+        }
+        .hours-note p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.6;
+        }
+        .hours-note strong {
+            color: var(--gold);
+        }
+
+        /* ===== SPECIALITIES ===== */
+        .speciality {
+            background: var(--bg);
+        }
+        .speciality-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .speciality-header .section-label { justify-content: center; }
+        .speciality-header .section-label::before { display: none; }
+        .speciality-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .speciality-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s;
+        }
+        .speciality-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(107, 58, 42, 0.08);
+            border-color: var(--gold);
+        }
+        .speciality-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .speciality-card h3 {
+            font-size: 1.05rem;
+            color: var(--text);
+            margin-bottom: 0.6rem;
+        }
+        .speciality-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .preloader-inner {
+            text-align: center;
+        }
+        .preloader-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        .preloader-bar {
+            width: 120px;
+            height: 2px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .preloader-bar::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 100%;
+            background: var(--gold);
+            border-radius: 2px;
+            animation: preloaderSlide 1s ease-in-out infinite;
+        }
+        @keyframes preloaderSlide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(350%); }
+        }
+
+        /* ===== FOOTER ENHANCED ===== */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-brand h3 {
+            font-family: var(--font-display);
+            color: rgba(255,255,255,0.85);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+        .footer-brand p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.6;
+        }
+        .footer-col h4 {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+        .footer-col ul li a {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.4);
+            transition: color 0.3s;
+        }
+        .footer-col ul li a:hover {
+            color: var(--gold);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 968px) {
+            .hours-wrapper { grid-template-columns: 1fr; }
+            .speciality-cards { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1155,6 +1365,97 @@
         </div>
     </section>
 
+    <!-- OPENING HOURS -->
+    <div class="hours">
+        <div class="container">
+            <div class="hours-wrapper">
+                <div class="hours-content reveal">
+                    <div class="section-label" style="color: var(--gold);">Otevírací doba</div>
+                    <h2>Kdy nás navštívit</h2>
+                    <p class="section-subtitle">Těšíme se na vás každý den kromě pondělí</p>
+                    <div class="hours-table">
+                        <div class="hours-row">
+                            <span class="hours-day">Pondělí</span>
+                            <span class="hours-closed">Zavřeno</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Úterý</span>
+                            <span class="hours-time">10:00 &ndash; 21:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Středa</span>
+                            <span class="hours-time">10:00 &ndash; 21:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Čtvrtek</span>
+                            <span class="hours-time">10:00 &ndash; 21:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Pátek</span>
+                            <span class="hours-time">10:00 &ndash; 22:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Sobota</span>
+                            <span class="hours-time">10:00 &ndash; 22:00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="hours-day">Neděle</span>
+                            <span class="hours-time">10:00 &ndash; 20:00</span>
+                        </div>
+                    </div>
+                    <div class="hours-note">
+                        <p><strong>Denní menu:</strong> Polévka a výběr ze dvou hlavních jídel podáváme v pracovní dny od 11:00 do 14:00.</p>
+                    </div>
+                </div>
+                <div class="reveal reveal-delay-1">
+                    <div class="hours-note" style="margin-top: 0; margin-bottom: 1.5rem;">
+                        <p><strong>Rezervace:</strong> Pro skupiny nad 8 osob doporučujeme telefonickou rezervaci předem.</p>
+                    </div>
+                    <div class="hours-note">
+                        <p><strong>Penzion:</strong> Check-in od 14:00, check-out do 10:00. Pozdější příjezd po telefonické domluvě.</p>
+                    </div>
+                    <div class="hours-note" style="margin-top: 1.5rem;">
+                        <p><strong>Platba:</strong> Přijímáme hotovost i platbu kartou. Stravenky akceptujeme dle aktuální nabídky.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SPECIALITY -->
+    <section class="speciality">
+        <div class="container">
+            <div class="speciality-header">
+                <div class="section-label">Speciality</div>
+                <h2 class="section-title">Naše doporučení</h2>
+                <p class="section-subtitle">Nejoblíbenější jídla našich hostů</p>
+            </div>
+            <div class="speciality-cards">
+                <div class="speciality-card reveal">
+                    <div class="speciality-emoji" role="img" aria-label="Svíčková">
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"></path><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                    </div>
+                    <h3>Svíčková na smetaně</h3>
+                    <p>Klasická svíčková s domácími knedlíky, brusinkovou omáčkou a šlehačkou</p>
+                </div>
+                <div class="speciality-card reveal reveal-delay-1">
+                    <div class="speciality-emoji" role="img" aria-label="Vepřo-knedlo-zelo">
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+                    </div>
+                    <h3>Vepřo-knedlo-zelo</h3>
+                    <p>Pečené vepřové koleno s domácím zelím a houskovým knedlíkem</p>
+                </div>
+                <div class="speciality-card reveal reveal-delay-2">
+                    <div class="speciality-emoji" role="img" aria-label="Guláš">
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <h3>Hovězí guláš</h3>
+                    <p>Poctivý hovězí guláš s chlebovými knedlíky a cibulkou</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- PARALLAX QUOTE -->
     <div class="parallax-quote reveal">
         <div class="container">
@@ -1324,14 +1625,47 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <span class="footer-copy">Hostinec U Jezárka &mdash; Restaurace a Penzion &copy; 2026</span>
-                <div class="footer-credit">
-                    Vytvořeno s péčí
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Hostinec U Jezárka</h3>
+                    <p>Rodinný hostinec v Suchdole nad Lužnicí s tradiční českou kuchyní, výběrem českých piv a útulným penzionem s 5 pokoji.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><a href="tel:+420384781527">+420 384 781 527</a></li>
+                        <li><a href="mailto:jezarko@jezarko.cz">jezarko@jezarko.cz</a></li>
+                        <li><a href="https://hostinec-u-jezarka.webnode.cz/" target="_blank">hostinec-u-jezarka.webnode.cz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigace</h4>
+                    <ul>
+                        <li><a href="#about">O nás</a></li>
+                        <li><a href="#sluzby">Restaurace</a></li>
+                        <li><a href="#penzion">Penzion</a></li>
+                        <li><a href="#kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-content">
+                    <span class="footer-copy">Hostinec U Jezárka &mdash; Restaurace a Penzion &copy; 2026</span>
+                    <div class="footer-credit">
+                        Vytvořeno s péčí
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-logo">U Jezárka</div>
+            <div class="preloader-bar"></div>
+        </div>
+    </div>
 
     <!-- BACK TO TOP -->
     <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
@@ -1339,6 +1673,15 @@
     </button>
 
     <script>
+        /* ===== PRELOADER ===== */
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+                setTimeout(() => preloader.remove(), 600);
+            }, 400);
+        });
+
         /* ===== NAVIGATION ===== */
         const nav = document.getElementById('nav');
         const backToTop = document.getElementById('backToTop');
@@ -1430,13 +1773,49 @@
             });
         }
 
-        /* ===== PRELOADER SIMULATION ===== */
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.6s ease';
-            requestAnimationFrame(() => {
-                document.body.style.opacity = '1';
+        /* ===== SMOOTH ANCHOR SCROLL ===== */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
             });
+        });
+
+        /* ===== LAZY IMAGE LOADING ===== */
+        const lazyImages = document.querySelectorAll('img[src]');
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.style.opacity = '0';
+                    img.style.transition = 'opacity 0.6s ease';
+                    img.onload = () => {
+                        img.style.opacity = '1';
+                    };
+                    if (img.complete) {
+                        img.style.opacity = '1';
+                    }
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '100px'
+        });
+
+        lazyImages.forEach(img => imageObserver.observe(img));
+
+        /* ===== CURRENT YEAR ===== */
+        const yearElements = document.querySelectorAll('.footer-copy');
+        const currentYear = new Date().getFullYear();
+        yearElements.forEach(el => {
+            el.innerHTML = el.innerHTML.replace('2026', currentYear);
         });
     </script>
 </body>

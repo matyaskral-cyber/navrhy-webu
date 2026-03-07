@@ -3,1374 +3,782 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Řeznictví Wipplinger — Uzenářství | Suchdol nad Lužnicí</title>
-    <meta name="description" content="Řeznictví a uzenářství Radek Wipplinger v Suchdole nad Lužnicí. Poctivé uzeniny, čerstvé maso a vařené výrobky z vlastní výrobny.">
+    <meta name="description" content="Řeznictví a uzenářství Radek Wipplinger - Poctivé masné výrobky v Suchdole nad Lužnicí. Čerstvé maso, uzeniny a vařené výrobky z vlastní výrobny.">
+    <meta name="keywords" content="řeznictví, uzenářství, Suchdol nad Lužnicí, maso, uzeniny, Wipplinger, masné výrobky">
+    <title>Řeznictví Wipplinger | Suchdol nad Lužnicí</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Merriweather+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== RESET & BASE ===== */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
+        /* ============================================
+           CSS CUSTOM PROPERTIES
+           ============================================ */
         :root {
-            --bg: #1a0a0a;
-            --bg-light: #211010;
-            --bg-card: #281515;
-            --accent: #8b0000;
-            --accent-light: #a52a2a;
-            --accent-dark: #6b0000;
-            --gold: #d4a96a;
-            --gold-light: #e8c99a;
-            --text: #f0e6dc;
-            --text-muted: #b0a090;
-            --text-dim: #7a6e60;
-            --border: rgba(212, 169, 106, 0.15);
-            --border-light: rgba(212, 169, 106, 0.08);
-            --font-display: 'Playfair Display', Georgia, serif;
-            --font-body: 'Source Sans 3', -apple-system, sans-serif;
+            --primary: #8b1a1a;
+            --primary-light: #a83030;
+            --primary-dark: #6b0a0a;
+            --accent: #f5f0e0;
+            --accent-dark: #e5d9b8;
+            --light: #fdf8f2;
+            --dark: #2c0a0a;
+            --white: #ffffff;
+            --gray-100: #faf7f3;
+            --gray-200: #f0ebe3;
+            --gray-300: #ddd5c8;
+            --gray-400: #b5a896;
+            --gray-500: #8a7d6e;
+            --text-primary: #2c0a0a;
+            --text-secondary: #5a3a3a;
+            --text-light: #8a6e6e;
+            --gold: #c8a84e;
+            --gold-dark: #a88a30;
+            --shadow-sm: 0 2px 8px rgba(44, 10, 10, 0.06);
+            --shadow-md: 0 4px 20px rgba(44, 10, 10, 0.10);
+            --shadow-lg: 0 8px 40px rgba(44, 10, 10, 0.14);
+            --shadow-xl: 0 16px 60px rgba(44, 10, 10, 0.18);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.4s ease;
+            --transition-slow: 0.6s ease;
+            --font-heading: 'Oswald', sans-serif;
+            --font-body: 'Merriweather Sans', sans-serif;
+            --container-max: 1200px;
+            --navbar-height: 80px;
         }
 
-        html {
-            scroll-behavior: smooth;
-            scrollbar-width: thin;
-            scrollbar-color: var(--accent) var(--bg);
-        }
-
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
         body {
             font-family: var(--font-body);
-            background: var(--bg);
-            color: var(--text);
+            color: var(--text-primary);
+            background: var(--light);
             line-height: 1.7;
-            font-weight: 300;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
-
-        ::selection {
-            background: var(--accent);
-            color: #fff;
-        }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
-
-        img { max-width: 100%; display: block; }
-        a { color: var(--gold); text-decoration: none; transition: color 0.3s; }
-        a:hover { color: var(--gold-light); }
-
-        /* ===== TYPOGRAPHY ===== */
-        h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; line-height: 1.2; }
-
-        .section-label {
-            font-family: var(--font-body);
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.3em;
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+        ul, ol { list-style: none; }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark);
             text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+            letter-spacing: 1px;
         }
-        .section-label::before {
-            content: '';
-            width: 40px;
-            height: 1px;
-            background: var(--gold);
-        }
+        .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 24px; }
 
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            color: var(--text);
-            margin-bottom: 1.5rem;
+        /* ============================================
+           SCROLL ANIMATIONS
+           ============================================ */
+        .reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal-left.active { opacity: 1; transform: translateX(0); }
+        .reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal-right.active { opacity: 1; transform: translateX(0); }
+        .reveal-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal-scale.active { opacity: 1; transform: scale(1); }
 
-        .section-subtitle {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            max-width: 560px;
-            line-height: 1.8;
-        }
-
-        /* ===== LAYOUT ===== */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            padding: 7rem 0;
-            position: relative;
-        }
-
-        /* ===== NAVIGATION ===== */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: var(--navbar-height);
+            background: rgba(253, 248, 242, 0.92);
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
             z-index: 1000;
-            padding: 1.2rem 0;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all var(--transition-normal);
+            border-bottom: 3px solid transparent;
         }
-        .nav.scrolled {
-            background: rgba(26, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border);
+        .navbar.scrolled {
+            background: rgba(253, 248, 242, 0.98);
+            border-bottom: 3px solid var(--primary);
+            box-shadow: var(--shadow-sm);
         }
-        .nav .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        .nav-logo img {
-            height: 42px;
-            width: auto;
-        }
+        .navbar .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+        .nav-logo { display: flex; align-items: center; gap: 14px; z-index: 1001; }
+        .nav-logo img { height: 50px; width: auto; }
         .nav-logo-text {
-            font-family: var(--font-display);
-            font-size: 1.15rem;
-            font-weight: 500;
-            color: var(--text);
-            letter-spacing: 0.02em;
-        }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2.2rem;
-            list-style: none;
-        }
-        .nav-links a {
-            color: var(--text-muted);
-            font-size: 0.82rem;
-            font-weight: 400;
-            letter-spacing: 0.05em;
+            font-family: var(--font-heading);
+            font-size: 1.3rem; font-weight: 700;
+            color: var(--primary);
             text-transform: uppercase;
-            transition: color 0.3s;
-            position: relative;
+            letter-spacing: 2px;
         }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--gold);
-            transition: width 0.3s;
+        .nav-links { display: flex; align-items: center; gap: 4px; }
+        .nav-links a {
+            font-family: var(--font-heading);
+            font-size: 0.88rem; font-weight: 500;
+            color: var(--text-secondary); padding: 10px 16px;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            transition: all var(--transition-fast);
+            border-bottom: 2px solid transparent;
         }
-        .nav-links a:hover { color: var(--gold); }
-        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+        .nav-links a.nav-cta {
+            background: var(--primary); color: var(--white);
+            border-bottom: none; padding: 10px 22px;
+            margin-left: 12px; font-weight: 600;
+        }
+        .nav-links a.nav-cta:hover { background: var(--primary-dark); transform: translateY(-2px); }
 
-        .nav-cta {
-            background: transparent;
-            border: 1px solid var(--accent) !important;
-            color: var(--gold) !important;
-            padding: 0.55rem 1.4rem;
-            border-radius: 2px;
-            font-size: 0.78rem !important;
-            font-weight: 500 !important;
-            letter-spacing: 0.1em !important;
-            transition: all 0.3s !important;
+        .hamburger {
+            display: none; flex-direction: column; cursor: pointer;
+            z-index: 1001; gap: 7px; padding: 8px; background: none; border: none;
         }
-        .nav-cta:hover {
-            background: var(--accent) !important;
-            color: #fff !important;
+        .hamburger span {
+            width: 30px; height: 3px; background: var(--primary);
+            border-radius: 3px; transition: all 0.35s ease; display: block;
         }
-        .nav-cta::after { display: none !important; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
 
-        /* Mobile menu */
-        .nav-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 5px;
-            background: none;
-            border: none;
+        .mobile-menu {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(253, 248, 242, 0.98);
+            backdrop-filter: blur(30px); z-index: 999;
+            flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+            opacity: 0; visibility: hidden; transition: all var(--transition-normal);
         }
-        .nav-toggle span {
-            width: 24px;
-            height: 1.5px;
-            background: var(--text);
-            transition: all 0.3s;
-            display: block;
+        .mobile-menu.active { opacity: 1; visibility: visible; }
+        .mobile-menu a {
+            font-family: var(--font-heading); font-size: 1.6rem;
+            color: var(--dark); text-transform: uppercase; letter-spacing: 3px;
+            padding: 12px 32px; transition: color var(--transition-fast);
         }
-        .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
-        .nav-toggle.active span:nth-child(2) { opacity: 0; }
-        .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .mobile-menu a:hover { color: var(--primary); }
 
-        /* ===== HERO ===== */
+        /* ============================================
+           HERO - BOLD TRADITIONAL STYLE
+           ============================================ */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding: 0;
+            min-height: 100vh; display: flex; align-items: center;
+            position: relative; padding-top: var(--navbar-height);
+            background: var(--dark); color: var(--white); overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(44, 10, 10, 0.85) 0%, rgba(139, 26, 26, 0.6) 100%);
+            z-index: 1;
         }
         .hero-bg {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
+            position: absolute; inset: 0; z-index: 0;
         }
         .hero-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.3) saturate(0.8);
+            width: 100%; height: 100%; object-fit: cover;
         }
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                135deg,
-                rgba(26, 10, 10, 0.9) 0%,
-                rgba(26, 10, 10, 0.5) 40%,
-                rgba(26, 10, 10, 0.3) 60%,
-                rgba(26, 10, 10, 0.85) 100%
-            );
-        }
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 200px;
-            background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
-            z-index: 1;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 700px;
-            padding: 0 2rem;
-            margin-left: 8%;
-        }
-        .hero-badge {
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.35em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .hero-badge::before {
-            content: '';
-            width: 50px;
-            height: 1px;
-            background: var(--gold);
+        .hero .container { position: relative; z-index: 2; text-align: center; padding: 60px 24px; }
+        .hero-logo-big {
+            width: 120px; height: 120px; margin: 0 auto 32px;
+            object-fit: contain;
         }
         .hero h1 {
-            font-size: clamp(2.8rem, 6vw, 5rem);
-            color: var(--text);
-            margin-bottom: 0.3rem;
-            letter-spacing: -0.02em;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--white);
+            margin-bottom: 12px;
+            letter-spacing: 6px;
+            line-height: 1.1;
         }
-        .hero h1 em {
-            font-style: italic;
-            color: var(--gold);
+        .hero-divider {
+            width: 100px; height: 3px;
+            background: var(--gold);
+            margin: 24px auto;
+        }
+        .hero h2 {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            color: var(--accent);
             font-weight: 400;
-        }
-        .hero-tagline {
-            font-family: var(--font-display);
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
-            color: var(--text-muted);
-            font-weight: 400;
-            font-style: italic;
-            margin-bottom: 2.5rem;
-            line-height: 1.5;
-        }
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.9rem 2.2rem;
-            font-family: var(--font-body);
-            font-size: 0.78rem;
-            font-weight: 500;
-            letter-spacing: 0.12em;
+            letter-spacing: 4px;
+            margin-bottom: 16px;
             text-transform: uppercase;
-            border: none;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            border-radius: 2px;
+        }
+        .hero-description {
+            font-size: 1.1rem; color: rgba(255,255,255,0.8);
+            max-width: 560px; margin: 0 auto 40px; line-height: 1.8;
+        }
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            font-family: var(--font-heading); font-size: 0.92rem; font-weight: 600;
+            padding: 16px 36px; border: none; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 2px;
+            transition: all var(--transition-fast); white-space: nowrap;
         }
         .btn-primary {
-            background: var(--accent);
-            color: #fff;
+            background: var(--primary); color: var(--white);
+            box-shadow: 0 4px 20px rgba(139, 26, 26, 0.4);
         }
-        .btn-primary:hover {
-            background: var(--accent-light);
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 0, 0, 0.35);
-        }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-3px); }
         .btn-outline {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
+            background: transparent; color: var(--white);
+            border: 2px solid var(--gold);
         }
-        .btn-outline:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-            transform: translateY(-2px);
+        .btn-outline:hover { background: var(--gold); color: var(--dark); }
+        .btn-dark {
+            background: var(--dark); color: var(--white);
+            border: 2px solid var(--primary);
+        }
+        .btn-dark:hover { background: var(--primary); transform: translateY(-3px); }
+        .btn-white {
+            background: var(--white); color: var(--primary);
+        }
+        .btn-white:hover { background: var(--accent); transform: translateY(-3px); }
+
+        /* ============================================
+           SECTION STYLES
+           ============================================ */
+        .section { padding: 100px 0; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 64px; }
+        .section-label {
+            display: inline-block; font-family: var(--font-heading);
+            font-size: 0.78rem; font-weight: 600;
+            letter-spacing: 3px; text-transform: uppercase;
+            color: var(--primary); margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            margin-bottom: 16px;
+        }
+        .section-title::after {
+            content: ''; display: block;
+            width: 60px; height: 3px;
+            background: var(--gold); margin: 16px auto 0;
+        }
+        .section-subtitle {
+            font-size: 1.05rem; color: var(--text-secondary);
+            line-height: 1.8; margin-top: 16px;
         }
 
-        .hero-scroll {
-            position: absolute;
-            bottom: 3rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.6rem;
-            color: var(--text-dim);
-            font-size: 0.65rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            animation: float 3s ease-in-out infinite;
+        /* ============================================
+           ABOUT / O NAS
+           ============================================ */
+        .about { background: var(--white); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .about-image { border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-lg); position: relative; }
+        .about-image img { width: 100%; height: 480px; object-fit: cover; }
+        .about-image-badge {
+            position: absolute; bottom: 24px; left: 24px;
+            background: var(--primary); color: var(--white);
+            font-family: var(--font-heading); font-size: 0.85rem;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+            padding: 12px 24px;
         }
-        .hero-scroll .line {
-            width: 1px;
-            height: 40px;
-            background: linear-gradient(to bottom, var(--gold), transparent);
+        .about-content h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 20px; }
+        .about-content p { color: var(--text-secondary); margin-bottom: 16px; line-height: 1.9; }
+        .about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+        .about-highlight {
+            padding: 20px; background: var(--accent); border-left: 4px solid var(--primary);
+            transition: all var(--transition-fast);
         }
+        .about-highlight:hover { transform: translateX(4px); }
+        .about-highlight h4 {
+            font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 6px; color: var(--primary);
+        }
+        .about-highlight p { font-size: 0.88rem; color: var(--text-secondary); margin: 0; }
 
-        @keyframes float {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-8px); }
+        /* ============================================
+           PRODUCTS / NABIDKA
+           ============================================ */
+        .products { background: var(--light); }
+        .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+        .product-card {
+            background: var(--white); text-align: center;
+            padding: 48px 24px; box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+            position: relative; overflow: hidden;
+            border-bottom: 4px solid transparent;
         }
-
-        /* ===== INTRO STRIP ===== */
-        .intro-strip {
-            padding: 4rem 0;
-            border-bottom: 1px solid var(--border);
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-bottom-color: var(--primary);
         }
-        .intro-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-            text-align: center;
-        }
-        .intro-item {
-            padding: 2rem;
-        }
-        .intro-icon {
-            margin-bottom: 1.2rem;
-            color: var(--gold);
-            display: flex;
-            justify-content: center;
-        }
-        .intro-icon svg {
-            width: 40px;
-            height: 40px;
-        }
-        .intro-item h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.6rem;
-            color: var(--text);
-        }
-        .intro-item p {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        /* ===== O NAS ===== */
-        .about {
-            background: var(--bg-light);
-        }
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        .about-image {
-            position: relative;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .about-image img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .about-image:hover img {
-            transform: scale(1.03);
-        }
-        .about-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            pointer-events: none;
-        }
-        .about-text {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.9;
-            margin-top: 1.5rem;
-        }
-        .about-accent-box {
-            margin-top: 2rem;
-            padding: 1.5rem 2rem;
-            background: rgba(139, 0, 0, 0.1);
-            border-left: 3px solid var(--accent);
-            border-radius: 0 4px 4px 0;
-        }
-        .about-accent-box p {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-style: italic;
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        /* ===== PRODUKTY ===== */
-        .produkty {
-            background: var(--bg);
-        }
-        .produkty-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        .produkty-header .section-label { justify-content: center; }
-        .produkty-header .section-label::before { display: none; }
-        .produkty-header .section-subtitle { margin: 0 auto; }
-
-        .produkty-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-        }
-        .produkt-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 2.5rem 1.8rem;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-        .produkt-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--gold));
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        .produkt-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(212, 169, 106, 0.25);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-        }
-        .produkt-card:hover::before { opacity: 1; }
-        .produkt-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1.5rem;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold);
-            transition: all 0.3s;
-        }
-        .produkt-card:hover .produkt-icon {
+        .product-icon {
+            width: 80px; height: 80px; margin: 0 auto 24px;
             background: var(--accent);
-            border-color: var(--accent);
-            color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; color: var(--primary);
+            transition: all var(--transition-normal);
         }
-        .produkt-icon svg {
-            width: 24px;
-            height: 24px;
+        .product-card:hover .product-icon {
+            background: var(--primary);
+            color: var(--white);
+            transform: rotate(5deg) scale(1.1);
         }
-        .produkt-card h3 {
-            font-size: 1.15rem;
-            color: var(--text);
-            margin-bottom: 0.8rem;
+        .product-card h3 { font-size: 1.05rem; margin-bottom: 10px; letter-spacing: 1.5px; }
+        .product-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* ============================================
+           TRADITION STATS STRIP
+           ============================================ */
+        .tradition {
+            background: var(--dark); color: var(--white);
+            padding: 80px 0; position: relative; overflow: hidden;
         }
-        .produkt-card p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.7;
+        .tradition::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--gold), var(--primary));
+        }
+        .tradition .container { position: relative; z-index: 1; }
+        .tradition-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; text-align: center; }
+        .tradition-item { padding: 32px; }
+        .tradition-number {
+            font-family: var(--font-heading); font-size: 3.5rem; font-weight: 700;
+            color: var(--gold); margin-bottom: 12px; line-height: 1;
+        }
+        .tradition-label {
+            font-family: var(--font-heading); font-size: 0.9rem; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 2px;
+            color: rgba(255,255,255,0.7);
         }
 
-        /* ===== OTVIRACKA ===== */
-        .hours {
-            background: var(--bg-light);
+        /* ============================================
+           GALLERY
+           ============================================ */
+        .gallery { background: var(--white); padding: 100px 0; }
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .gallery-item {
+            overflow: hidden; position: relative;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal); cursor: pointer;
         }
-        .hours-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+        .gallery-item:hover { transform: scale(1.02); box-shadow: var(--shadow-xl); }
+        .gallery-item img { width: 100%; height: 360px; object-fit: cover; transition: transform var(--transition-slow); }
+        .gallery-item:hover img { transform: scale(1.08); }
+        .gallery-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(44, 10, 10, 0.7) 0%, transparent 50%);
+            opacity: 0; transition: opacity var(--transition-normal);
+            display: flex; align-items: flex-end; padding: 32px;
         }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay span {
+            color: var(--white); font-family: var(--font-heading);
+            font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px;
+        }
+
+        /* ============================================
+           OPENING HOURS
+           ============================================ */
+        .hours { background: var(--accent); padding: 100px 0; }
+        .hours .section-title::after { margin: 16px auto 0; }
         .hours-table {
-            margin-top: 2rem;
+            max-width: 600px; margin: 0 auto;
+            background: var(--white); box-shadow: var(--shadow-md);
+        }
+        .hours-table-header {
+            background: var(--primary); color: var(--white);
+            padding: 18px 32px;
+            font-family: var(--font-heading); font-size: 1rem;
+            text-transform: uppercase; letter-spacing: 2px; text-align: center;
         }
         .hours-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-light);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 16px 32px; border-bottom: 1px solid var(--gray-200);
+            transition: background var(--transition-fast);
         }
-        .hours-day {
-            font-size: 0.92rem;
-            color: var(--text);
-        }
-        .hours-time {
-            font-family: var(--font-display);
-            font-size: 1.05rem;
-            color: var(--gold);
-        }
-        .hours-closed {
-            color: var(--text-dim);
-            font-size: 0.88rem;
-        }
-        .hours-image {
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .hours-image img {
-            width: 100%;
-            height: 450px;
-            object-fit: cover;
+        .hours-row:last-child { border-bottom: none; }
+        .hours-row:hover { background: var(--light); }
+        .hours-row .day { font-weight: 600; color: var(--text-primary); }
+        .hours-row .time { color: var(--primary); font-weight: 600; }
+        .hours-row .time.closed {
+            color: var(--text-light); font-style: italic; font-weight: 400;
         }
 
-        /* ===== DIVIDER ===== */
-        .divider {
-            padding: 5rem 0;
-            text-align: center;
+        /* ============================================
+           ORDER CTA
+           ============================================ */
+        .order-cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 80px 0; text-align: center; color: var(--white);
+            position: relative; overflow: hidden;
         }
-        .divider-line {
-            width: 60px;
-            height: 1px;
+        .order-cta::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
             background: var(--gold);
-            margin: 0 auto;
-            position: relative;
         }
-        .divider-line::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            border: 1px solid var(--gold);
-            border-radius: 50%;
-            background: var(--bg);
+        .order-cta .container { position: relative; z-index: 1; }
+        .order-cta h2 {
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            color: var(--white); margin-bottom: 16px;
+        }
+        .order-cta p {
+            font-size: 1.05rem; opacity: 0.9; max-width: 500px;
+            margin: 0 auto 32px; line-height: 1.8;
         }
 
-        /* ===== GALERIE ===== */
-        .galerie {
-            background: var(--bg);
+        /* ============================================
+           CONTACT
+           ============================================ */
+        .contact { background: var(--light); padding: 100px 0; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+        .contact-info { display: flex; flex-direction: column; gap: 24px; }
+        .contact-info h2 { font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 8px; }
+        .contact-info > p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 8px; }
+        .contact-item {
+            display: flex; align-items: flex-start; gap: 16px;
+            padding: 20px; background: var(--white);
+            border-left: 4px solid var(--primary);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-fast);
         }
-        .galerie-header {
-            text-align: center;
-            margin-bottom: 3.5rem;
+        .contact-item:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
+        .contact-item-icon {
+            width: 48px; height: 48px;
+            background: var(--primary); color: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; font-size: 1.1rem; font-weight: 700;
         }
-        .galerie-header .section-label { justify-content: center; }
-        .galerie-header .section-label::before { display: none; }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+        .contact-item-content h4 {
+            font-family: var(--font-heading);
+            font-size: 0.78rem; letter-spacing: 2px;
+            color: var(--text-light); margin-bottom: 4px;
         }
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 4px;
-            cursor: pointer;
-            aspect-ratio: 4/3;
+        .contact-item-content p, .contact-item-content a {
+            font-size: 1rem; color: var(--text-primary); font-weight: 500;
         }
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s;
-            filter: brightness(0.8) saturate(0.9);
+        .contact-item-content a:hover { color: var(--primary); }
+        .contact-map {
+            overflow: hidden; box-shadow: var(--shadow-lg); min-height: 420px;
         }
-        .gallery-item:hover img {
-            transform: scale(1.05);
-            filter: brightness(1) saturate(1);
-        }
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(26, 10, 10, 0.5) 0%, transparent 50%);
-            opacity: 1;
-            transition: opacity 0.4s;
-        }
-        .gallery-item:hover::after { opacity: 0; }
+        .contact-map iframe { width: 100%; height: 100%; min-height: 420px; border: none; }
 
-        /* Lightbox */
-        .lightbox {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: rgba(10, 5, 5, 0.96);
-            backdrop-filter: blur(20px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s;
-        }
-        .lightbox.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .lightbox img {
-            max-width: 90vw;
-            max-height: 85vh;
-            object-fit: contain;
-            border-radius: 4px;
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .lightbox.active img {
-            transform: scale(1);
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            width: 44px;
-            height: 44px;
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 50%;
-            background: none;
-            color: var(--text);
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-        .lightbox-close:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 50%;
-            background: none;
-            color: var(--text);
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-        .lightbox-nav:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-        .lightbox-prev { left: 2rem; }
-        .lightbox-next { right: 2rem; }
-
-        /* ===== KONTAKT ===== */
-        .kontakt { background: var(--bg-light); }
-        .kontakt-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-        }
-        .kontakt-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-        .kontakt-item {
-            display: flex;
-            gap: 1.2rem;
-        }
-        .kontakt-icon {
-            width: 44px;
-            height: 44px;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: var(--gold);
-            transition: all 0.3s;
-        }
-        .kontakt-item:hover .kontakt-icon {
-            background: rgba(139, 0, 0, 0.2);
-            border-color: var(--accent);
-        }
-        .kontakt-icon svg {
-            width: 18px;
-            height: 18px;
-        }
-        .kontakt-text h4 {
-            font-size: 0.95rem;
-            color: var(--text);
-            margin-bottom: 0.35rem;
-        }
-        .kontakt-text p, .kontakt-text a {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-        .kontakt-map {
-            border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            height: 100%;
-            min-height: 400px;
-        }
-        .kontakt-map iframe {
-            width: 100%;
-            height: 100%;
-            min-height: 400px;
-            border: none;
-            filter: grayscale(0.6) brightness(0.7) contrast(1.1);
-            transition: filter 0.4s;
-        }
-        .kontakt-map:hover iframe {
-            filter: grayscale(0.2) brightness(0.85) contrast(1);
-        }
-
-        /* ===== FOOTER ===== */
+        /* ============================================
+           FOOTER
+           ============================================ */
         .footer {
-            background: var(--bg);
-            border-top: 1px solid var(--border);
-            padding: 3rem 0;
+            background: var(--dark); color: rgba(255,255,255,0.6);
+            padding: 60px 0 0;
         }
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px; padding-bottom: 48px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
-        .footer-left {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
+        .footer-brand h3 {
+            font-family: var(--font-heading); color: var(--white);
+            font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 14px;
         }
-        .footer-left img {
-            height: 30px;
+        .footer-brand p { font-size: 0.9rem; line-height: 1.8; max-width: 320px; }
+        .footer h4 {
+            font-family: var(--font-heading); color: var(--white);
+            font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 20px;
         }
-        .footer-copy {
-            font-size: 0.78rem;
-            color: var(--text-dim);
+        .footer-links { display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { font-size: 0.88rem; color: rgba(255,255,255,0.5); transition: all var(--transition-fast); }
+        .footer-links a:hover { color: var(--gold); padding-left: 4px; }
+        .footer-contact-line {
+            font-size: 0.88rem; margin-bottom: 12px;
+            display: flex; align-items: center; gap: 10px;
         }
-        .footer-credit {
-            font-size: 0.75rem;
-            color: var(--text-dim);
+        .footer-contact-line .icon-label { color: var(--gold); font-weight: 600; }
+        .footer-bottom {
+            text-align: center; padding: 24px 0;
+            font-size: 0.82rem; color: rgba(255,255,255,0.3);
         }
+        .footer-bottom a { color: var(--gold); font-weight: 600; }
+        .footer-bottom a:hover { color: var(--accent); }
 
-        /* ===== REVEAL ANIMATIONS ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Scroll top */
+        .scroll-top {
+            position: fixed; bottom: 24px; right: 24px;
+            width: 48px; height: 48px;
+            background: var(--primary); color: var(--white);
+            border: none; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0; visibility: hidden;
+            transition: all var(--transition-fast); z-index: 997;
+            font-size: 1.2rem; box-shadow: var(--shadow-md);
         }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover { background: var(--primary-dark); transform: translateY(-3px); }
 
-        /* ===== PARALLAX QUOTE ===== */
-        .parallax-quote {
-            background: var(--bg);
-            padding: 8rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .tradition-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
-        .parallax-quote::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at center, rgba(212, 169, 106, 0.06) 0%, transparent 70%);
-        }
-        .parallax-quote blockquote {
-            font-family: var(--font-display);
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
-            font-style: italic;
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            line-height: 1.6;
-        }
-        .parallax-quote blockquote::before {
-            content: '\201C';
-            font-size: 6rem;
-            color: var(--gold);
-            opacity: 0.3;
-            position: absolute;
-            top: -3rem;
-            left: -2rem;
-            font-family: var(--font-display);
-            line-height: 1;
-        }
-        .parallax-quote cite {
-            display: block;
-            margin-top: 2rem;
-            font-size: 0.85rem;
-            font-style: normal;
-            color: var(--gold);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-        /* ===== CTA BANNER ===== */
-        .cta-banner {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-            padding: 5rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .cta-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at 30% 50%, rgba(212, 169, 106, 0.12) 0%, transparent 50%);
-            animation: ctaGlow 8s ease-in-out infinite;
-        }
-        @keyframes ctaGlow {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(5%, 3%); }
-        }
-        .cta-content {
-            position: relative;
-            z-index: 1;
-        }
-        .cta-banner h2 {
-            color: #fff;
-            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-            margin-bottom: 1rem;
-        }
-        .cta-banner p {
-            color: rgba(255,255,255,0.8);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .cta-banner .btn-primary {
-            background: var(--gold);
-            color: var(--bg);
-        }
-        .cta-banner .btn-primary:hover {
-            background: var(--gold-light);
-            box-shadow: 0 8px 30px rgba(212, 169, 106, 0.4);
-        }
-
-        /* ===== TRADITION ===== */
-        .tradition {
-            background: var(--bg);
-        }
-        .tradition-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        .tradition-features {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        .tradition-feature {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-        .tradition-feature-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(212, 169, 106, 0.12);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: var(--gold);
-        }
-        .tradition-feature-icon svg {
-            width: 18px;
-            height: 18px;
-        }
-        .tradition-feature h4 {
-            font-size: 1rem;
-            color: var(--text);
-            margin-bottom: 0.3rem;
-        }
-        .tradition-feature p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-        .tradition-image {
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .tradition-image img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-        }
-
-        /* ===== BACK TO TOP ===== */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.4s;
-            z-index: 999;
-            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
-        }
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        .back-to-top:hover {
-            background: var(--gold);
-            transform: translateY(-3px);
-        }
-        .back-to-top svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 968px) {
+        @media (max-width: 768px) {
+            :root { --navbar-height: 70px; }
+            .hamburger { display: flex; }
             .nav-links { display: none; }
-            .nav-toggle { display: flex; }
-            .nav-links.active {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(26, 10, 10, 0.98);
-                backdrop-filter: blur(20px);
-                padding: 2rem;
-                gap: 1.5rem;
-                border-bottom: 1px solid var(--border);
-            }
-            .hero-content { margin-left: 0; }
-            .about-grid,
-            .kontakt-grid,
-            .hours-wrapper { grid-template-columns: 1fr; }
-            .produkty-grid { grid-template-columns: 1fr 1fr; }
-            .intro-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .tradition-grid { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 640px) {
-            section { padding: 4rem 0; }
-            .produkty-grid { grid-template-columns: 1fr; }
+            .mobile-menu { display: flex; }
+            .products-grid { grid-template-columns: 1fr; }
+            .tradition-grid { grid-template-columns: 1fr; gap: 16px; }
+            .tradition-number { font-size: 2.5rem; }
             .gallery-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.5rem; }
-            .footer-content { flex-direction: column; text-align: center; }
-            .parallax-quote { padding: 5rem 0; }
-            .parallax-quote blockquote { font-size: 1.3rem; padding: 0 1rem; }
-            .cta-banner { padding: 3.5rem 0; }
+            .gallery-item img { height: 280px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .section { padding: 70px 0; }
+            .about-highlights { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { letter-spacing: 3px; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .btn { width: 100%; justify-content: center; }
+            .hours-row { padding: 14px 20px; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 
     <!-- NAVIGATION -->
-    <nav class="nav" id="nav">
+    <nav class="navbar" id="navbar">
         <div class="container">
             <a href="#hero" class="nav-logo">
                 <img src="images/logo.png" alt="Řeznictví Wipplinger logo">
-                <span class="nav-logo-text">Řeznictví Wipplinger</span>
+                <span class="nav-logo-text">Wipplinger</span>
             </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#about">O nás</a></li>
-                <li><a href="#produkty">Produkty</a></li>
-                <li><a href="#hours">Otevírací doba</a></li>
-                <li><a href="#galerie">Galerie</a></li>
-                <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
-            </ul>
-            <button class="nav-toggle" id="navToggle" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="nav-links">
+                <a href="#o-nas">O nás</a>
+                <a href="#nabidka">Nabídka</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#oteviraci-doba">Otevírací doba</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#o-nas" class="mobile-link">O nás</a>
+        <a href="#nabidka" class="mobile-link">Nabídka</a>
+        <a href="#galerie" class="mobile-link">Galerie</a>
+        <a href="#oteviraci-doba" class="mobile-link">Otevírací doba</a>
+        <a href="#kontakt" class="mobile-link">Kontakt</a>
+    </div>
 
     <!-- HERO -->
     <section class="hero" id="hero">
-        <div class="hero-bg">
-            <img src="images/foto1.jpg" alt="Řeznictví Wipplinger">
-        </div>
-        <div class="hero-content">
-            <div class="hero-badge">Suchdol nad Lužnicí</div>
-            <h1>Řeznictví <em>Wipplinger</em></h1>
-            <p class="hero-tagline">Poctivé uzeniny a čerstvé maso z vlastní výrobny</p>
-            <div class="hero-actions">
-                <a href="tel:608609595" class="btn btn-primary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    Zavolejte nám
-                </a>
-                <a href="#produkty" class="btn btn-outline">Naše produkty</a>
+        <div class="hero-bg"><img src="images/foto1.jpg" alt="Řeznictví Wipplinger"></div>
+        <div class="container">
+            <img src="images/logo.png" alt="Wipplinger logo" class="hero-logo-big">
+            <h1>Řeznictví Wipplinger</h1>
+            <div class="hero-divider"></div>
+            <h2>Řeznictví a uzenářství</h2>
+            <p class="hero-description">
+                U nás nakoupíte výrobky z masa, poctivě vyrobené v naší vlastní výrobně
+                v Suchdole nad Lužnicí. Tradice, kvalita a čerstvost.
+            </p>
+            <div class="hero-buttons">
+                <a href="tel:+420608609595" class="btn btn-primary">Zavolejte nám</a>
+                <a href="#nabidka" class="btn btn-outline">Naše nabídka</a>
             </div>
-        </div>
-        <div class="hero-scroll">
-            <span>Scroll</span>
-            <div class="line"></div>
         </div>
     </section>
 
-    <!-- INTRO STRIP -->
-    <div class="intro-strip">
-        <div class="container">
-            <div class="intro-grid">
-                <div class="intro-item reveal">
-                    <div class="intro-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    </div>
-                    <h3>Vlastní výrobna</h3>
-                    <p>Vše vyrábíme poctivě ve vlastní výrobně bez zbytečných přísad</p>
-                </div>
-                <div class="intro-item reveal reveal-delay-1">
-                    <div class="intro-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                    </div>
-                    <h3>Tradiční recepty</h3>
-                    <p>Držíme se osvědčených receptur pro pravý chuťový zážitek</p>
-                </div>
-                <div class="intro-item reveal reveal-delay-2">
-                    <div class="intro-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                    </div>
-                    <h3>Čerstvé denně</h3>
-                    <p>Každý den pro vás připravujeme čerstvé masné výrobky</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- O NAS -->
-    <section class="about" id="about">
+    <!-- ABOUT -->
+    <section class="section about" id="o-nas">
         <div class="container">
             <div class="about-grid">
-                <div class="about-image reveal">
-                    <img src="images/foto2.jpg" alt="Řeznictví Wipplinger prodejna">
+                <div class="about-image reveal-left">
+                    <img src="images/foto2.jpg" alt="Řeznictví Wipplinger - výroba">
+                    <div class="about-image-badge">Vlastní výrobna</div>
                 </div>
-                <div class="reveal reveal-delay-1">
+                <div class="about-content reveal-right">
                     <div class="section-label">O nás</div>
-                    <h2 class="section-title">Řeznictví a uzenářství <em>Radek Wipplinger</em></h2>
-                    <p class="about-text">
-                        Jsme rodinné řeznictví a uzenářství v Suchdole nad Lužnicí. Všechny naše produkty vyrábíme poctivě ve vlastní výrobně z kvalitních surovin, bez zbytečných náhražek a přísad.
+                    <h2>Poctivé řemeslo a kvalitní suroviny</h2>
+                    <p>
+                        Řeznictví a uzenářství Radka Wipplingera v Suchdole nad Lužnicí
+                        nabízí masné výrobky poctivě vyrobené ve vlastní výrobně. Klademe důraz
+                        na kvalitu surovin, tradiční receptury a řemeslnou výrobu.
                     </p>
-                    <p class="about-text">
-                        Nabízíme široký sortiment uzenin, čerstvého masa a vařených výrobků. Každý kus je připraven s péčí a láskou k řemeslu, které předáváme z generace na generaci.
+                    <p>
+                        Naše prodejna se nachází na adrese Pražská 839 v Suchdole nad Lužnicí.
+                        Objednávky přijímáme také telefonicky, takže si můžete předem objednat
+                        přesně to, co potřebujete.
                     </p>
-                    <div class="about-accent-box">
-                        <p>Poctivost je základ. Vyrábíme tak, jak se má &mdash; z kvalitních surovin a s respektem k tradici.</p>
+                    <div class="about-highlights">
+                        <div class="about-highlight">
+                            <h4>Vlastní výroba</h4>
+                            <p>Vše vyrábíme přímo u nás</p>
+                        </div>
+                        <div class="about-highlight">
+                            <h4>Kvalitní suroviny</h4>
+                            <p>Pouze ověření dodavatelé</p>
+                        </div>
+                        <div class="about-highlight">
+                            <h4>Tradiční receptury</h4>
+                            <p>Osvědčené české postupy</p>
+                        </div>
+                        <div class="about-highlight">
+                            <h4>Objednávky</h4>
+                            <p>Přijímáme telefonicky</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="divider"><div class="divider-line"></div></div>
-
-    <!-- PRODUKTY -->
-    <section class="produkty" id="produkty">
+    <!-- PRODUCTS -->
+    <section class="section products" id="nabidka">
         <div class="container">
-            <div class="produkty-header">
-                <div class="section-label">Sortiment</div>
+            <div class="section-header reveal">
+                <div class="section-label">Nabídka</div>
                 <h2 class="section-title">Naše produkty</h2>
-                <p class="section-subtitle">Poctivě vyrobené ve vlastní výrobně</p>
+                <p class="section-subtitle">
+                    Vyberte si z naší široké nabídky čerstvého masa, uzenin a masných výrobků.
+                    Vše poctivě vyrobeno v naší výrobně.
+                </p>
             </div>
-            <div class="produkty-grid">
-                <div class="produkt-card reveal">
-                    <div class="produkt-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
-                    </div>
-                    <h3>Uzeniny</h3>
-                    <p>Tradiční klobásy, salámy, párek a další uzenářské speciality z naší výrobny</p>
-                </div>
-                <div class="produkt-card reveal reveal-delay-1">
-                    <div class="produkt-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"></path></svg>
-                    </div>
+            <div class="products-grid">
+                <div class="product-card reveal" style="transition-delay: 0.1s;">
+                    <div class="product-icon">&#9734;</div>
                     <h3>Čerstvé maso</h3>
-                    <p>Kvalitní čerstvé vepřové, hovězí a drůbeží maso z prověřených zdrojů</p>
+                    <p>Vepřové, hovězí i drůbeží maso od ověřených českých dodavatelů. Vždy čerstvé a kvalitní.</p>
                 </div>
-                <div class="produkt-card reveal reveal-delay-2">
-                    <div class="produkt-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"></path><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
-                    </div>
+                <div class="product-card reveal" style="transition-delay: 0.2s;">
+                    <div class="product-icon">&#9670;</div>
+                    <h3>Uzeniny</h3>
+                    <p>Široký výběr uzenin z naší vlastní výrobny. Klobásy, párky, salámy a další speciality.</p>
+                </div>
+                <div class="product-card reveal" style="transition-delay: 0.3s;">
+                    <div class="product-icon">&#9675;</div>
                     <h3>Vařené výrobky</h3>
-                    <p>Jitrnice, jelita, tlačenka a další vařené speciality dle tradičních receptur</p>
+                    <p>Tlačenka, jitrnice, jelita a další tradiční vařené výrobky podle osvědčených receptur.</p>
                 </div>
-                <div class="produkt-card reveal reveal-delay-3">
-                    <div class="produkt-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
-                    </div>
-                    <h3>Ostatní</h3>
-                    <p>Škvarky, sádlo, masové polotovary a další doplňkový sortiment</p>
+                <div class="product-card reveal" style="transition-delay: 0.4s;">
+                    <div class="product-icon">&#9733;</div>
+                    <h3>Speciality</h3>
+                    <p>Sezónní speciality a výrobky na objednávku. Neváhejte se zeptat na aktuální nabídku.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- OTVIRACKA -->
-    <section class="hours" id="hours">
-        <div class="container">
-            <div class="hours-wrapper">
-                <div class="reveal">
-                    <div class="section-label">Kdy nás navštívit</div>
-                    <h2 class="section-title">Otevírací doba</h2>
-                    <p class="section-subtitle">Těšíme se na vaši návštěvu v naší prodejně na Pražské ulici</p>
-                    <div class="hours-table">
-                        <div class="hours-row">
-                            <span class="hours-day">Pondělí</span>
-                            <span class="hours-closed">Zavřeno</span>
-                        </div>
-                        <div class="hours-row">
-                            <span class="hours-day">Úterý</span>
-                            <span class="hours-time">8:00 &ndash; 12:00, 14:00 &ndash; 17:00</span>
-                        </div>
-                        <div class="hours-row">
-                            <span class="hours-day">Středa</span>
-                            <span class="hours-time">8:00 &ndash; 12:00, 14:00 &ndash; 17:00</span>
-                        </div>
-                        <div class="hours-row">
-                            <span class="hours-day">Čtvrtek</span>
-                            <span class="hours-time">8:00 &ndash; 12:00, 14:00 &ndash; 17:00</span>
-                        </div>
-                        <div class="hours-row">
-                            <span class="hours-day">Pátek</span>
-                            <span class="hours-time">8:00 &ndash; 12:00, 14:00 &ndash; 17:00</span>
-                        </div>
-                        <div class="hours-row">
-                            <span class="hours-day">Sobota</span>
-                            <span class="hours-time">8:00 &ndash; 11:00</span>
-                        </div>
-                        <div class="hours-row">
-                            <span class="hours-day">Neděle</span>
-                            <span class="hours-closed">Zavřeno</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="hours-image reveal reveal-delay-1">
-                    <img src="images/foto1.jpg" alt="Řeznictví Wipplinger">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PARALLAX QUOTE -->
-    <div class="parallax-quote reveal">
-        <div class="container">
-            <blockquote>
-                Poctivost je základ. Vyrábíme tak, jak se má &mdash; z kvalitních surovin a s respektem k tradici řeznického řemesla.
-                <cite>Řeznictví Wipplinger</cite>
-            </blockquote>
-        </div>
-    </div>
-
-    <!-- TRADITION -->
+    <!-- TRADITION STATS -->
     <section class="tradition">
         <div class="container">
             <div class="tradition-grid">
-                <div class="reveal">
-                    <div class="section-label">Naše hodnoty</div>
-                    <h2 class="section-title">Tradice a kvalita</h2>
-                    <p class="section-subtitle">Věříme v poctivou práci a kvalitní suroviny. Každý náš výrobek je připraven s péčí.</p>
-                    <div class="tradition-features">
-                        <div class="tradition-feature">
-                            <div class="tradition-feature-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                            </div>
-                            <div>
-                                <h4>Bez zbytečných přísad</h4>
-                                <p>Vyrábíme bez náhražek a umělých konzervantů</p>
-                            </div>
-                        </div>
-                        <div class="tradition-feature">
-                            <div class="tradition-feature-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path></svg>
-                            </div>
-                            <div>
-                                <h4>Kvalitní suroviny</h4>
-                                <p>Pečlivě vybíráme dodavatele masa a koření</p>
-                            </div>
-                        </div>
-                        <div class="tradition-feature">
-                            <div class="tradition-feature-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                            </div>
-                            <div>
-                                <h4>Čerstvost každý den</h4>
-                                <p>Denně připravujeme čerstvé masné výrobky</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="tradition-item reveal" style="transition-delay: 0.1s;">
+                    <div class="tradition-number">100%</div>
+                    <div class="tradition-label">Vlastní výroba</div>
                 </div>
-                <div class="tradition-image reveal reveal-delay-1">
-                    <img src="images/foto2.jpg" alt="Řeznictví Wipplinger tradice">
+                <div class="tradition-item reveal" style="transition-delay: 0.2s;">
+                    <div class="tradition-number">6</div>
+                    <div class="tradition-label">Dní v týdnu otevřeno</div>
+                </div>
+                <div class="tradition-item reveal" style="transition-delay: 0.3s;">
+                    <div class="tradition-number">4+</div>
+                    <div class="tradition-label">Kategorie produktů</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA BANNER -->
-    <div class="cta-banner">
-        <div class="cta-content">
-            <h2>Přijďte ochutnat</h2>
-            <p>Navštivte nás na Pražské ulici v Suchdole nad Lužnicí</p>
-            <a href="tel:608609595" class="btn btn-primary">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                608 609 595
-            </a>
-        </div>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div></div>
-
-    <!-- GALERIE -->
-    <section class="galerie" id="galerie">
+    <!-- GALLERY -->
+    <section class="gallery" id="galerie">
         <div class="container">
-            <div class="galerie-header">
+            <div class="section-header reveal">
                 <div class="section-label">Galerie</div>
                 <h2 class="section-title">Z naší prodejny</h2>
+                <p class="section-subtitle">Nahlédněte do naší prodejny a výrobny.</p>
             </div>
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openLightbox(0)">
-                    <img src="images/foto1.jpg" alt="Produkty">
+                <div class="gallery-item reveal-scale" style="transition-delay: 0.1s;">
+                    <img src="images/foto1.jpg" alt="Prodejna">
+                    <div class="gallery-overlay"><span>Naše prodejna</span></div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(1)">
-                    <img src="images/foto2.jpg" alt="Prodejna">
+                <div class="gallery-item reveal-scale" style="transition-delay: 0.2s;">
+                    <img src="images/foto2.jpg" alt="Výrobky">
+                    <div class="gallery-overlay"><span>Naše výrobky</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- KONTAKT -->
-    <section class="kontakt" id="kontakt">
+    <!-- OPENING HOURS -->
+    <section class="section hours" id="oteviraci-doba">
         <div class="container">
-            <div class="section-label">Kontakt</div>
-            <h2 class="section-title">Navštivte nás</h2>
-            <p class="section-subtitle" style="margin-bottom: 3rem;">Najdete nás na Pražské ulici v Suchdole nad Lužnicí</p>
-            <div class="kontakt-grid">
-                <div class="kontakt-info reveal">
-                    <div class="kontakt-item">
-                        <div class="kontakt-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        </div>
-                        <div class="kontakt-text">
+            <div class="section-header reveal">
+                <div class="section-label">Otevírací doba</div>
+                <h2 class="section-title">Kdy nás navštívit</h2>
+            </div>
+            <div class="hours-table reveal">
+                <div class="hours-table-header">Otevírací doba</div>
+                <div class="hours-row"><span class="day">Pondělí</span><span class="time closed">Zavřeno</span></div>
+                <div class="hours-row"><span class="day">Úterý</span><span class="time">8:00 - 12:00, 14:00 - 17:00</span></div>
+                <div class="hours-row"><span class="day">Středa</span><span class="time">8:00 - 12:00, 14:00 - 17:00</span></div>
+                <div class="hours-row"><span class="day">Čtvrtek</span><span class="time">8:00 - 12:00, 14:00 - 17:00</span></div>
+                <div class="hours-row"><span class="day">Pátek</span><span class="time">8:00 - 12:00, 14:00 - 17:00</span></div>
+                <div class="hours-row"><span class="day">Sobota</span><span class="time">8:00 - 11:00</span></div>
+                <div class="hours-row"><span class="day">Neděle</span><span class="time closed">Zavřeno</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORDER CTA -->
+    <section class="order-cta">
+        <div class="container reveal">
+            <h2>Přijímáme objednávky telefonicky</h2>
+            <p>Zavolejte nám a objednejte si čerstvé maso a uzeniny přímo z naší výrobny.</p>
+            <a href="tel:+420608609595" class="btn btn-outline">Zavolat: 608 609 595</a>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Kontakt</div>
+                <h2 class="section-title">Kde nás najdete</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info reveal-left">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">&#9993;</div>
+                        <div class="contact-item-content">
                             <h4>Adresa</h4>
                             <p>Pražská 839<br>378 06 Suchdol nad Lužnicí</p>
                         </div>
                     </div>
-                    <div class="kontakt-item">
-                        <div class="kontakt-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg>
-                        </div>
-                        <div class="kontakt-text">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">&#9742;</div>
+                        <div class="contact-item-content">
                             <h4>Telefon</h4>
-                            <p><a href="tel:608609595">608 609 595</a></p>
+                            <a href="tel:+420608609595">608 609 595</a>
                         </div>
                     </div>
-                    <div class="kontakt-item">
-                        <div class="kontakt-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        </div>
-                        <div class="kontakt-text">
-                            <h4>Email</h4>
-                            <p><a href="mailto:radek.wipp@seznam.cz">radek.wipp@seznam.cz</a></p>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">@</div>
+                        <div class="contact-item-content">
+                            <h4>E-mail</h4>
+                            <a href="mailto:radek.wipp@seznam.cz">radek.wipp@seznam.cz</a>
                         </div>
                     </div>
-                    <div class="kontakt-item">
-                        <div class="kontakt-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
-                        </div>
-                        <div class="kontakt-text">
-                            <h4>Web</h4>
-                            <p><a href="https://reznictvi-wipplinger.webnode.cz/" target="_blank">reznictvi-wipplinger.webnode.cz</a></p>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">&#9817;</div>
+                        <div class="contact-item-content">
+                            <h4>Provozovatel</h4>
+                            <p>Radek Wipplinger</p>
                         </div>
                     </div>
                 </div>
-                <div class="kontakt-map reveal reveal-delay-1">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2620!2d14.8788!3d48.8908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47735c0a0a0a0a0a%3A0x400af0f6614f970!2sPra%C5%BEsk%C3%A1%20839%2C%20378%2006%20Suchdol%20nad%20Lu%C5%BEnic%C3%AD!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="contact-map reveal-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2620.5!2d14.8817!3d48.9046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47735b3e8e4d8d1f%3A0x400af0f6614b5d0!2zUHJhxb5za8OhIDgzOSwgMzc4IDA2IFN1Y2hkb2wgbmFkIEx1xb5uaWPDrQ!5e0!3m2!1scs!2scz!4v1709000000000!5m2!1scs!2scz"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa - Řeznictví Wipplinger"></iframe>
                 </div>
             </div>
         </div>
@@ -1379,150 +787,79 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <img src="images/logo.png" alt="Logo">
-                    <span class="footer-copy">Řeznictví a Uzenářství Radek Wipplinger &copy; 2026</span>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Řeznictví Wipplinger</h3>
+                    <p>Řeznictví a uzenářství v Suchdole nad Lužnicí. Poctivé masné výrobky z vlastní výrobny.</p>
                 </div>
-                <div class="footer-credit">
-                    Vytvořeno s péčí
+                <div>
+                    <h4>Navigace</h4>
+                    <div class="footer-links">
+                        <a href="#o-nas">O nás</a>
+                        <a href="#nabidka">Nabídka</a>
+                        <a href="#galerie">Galerie</a>
+                        <a href="#oteviraci-doba">Otevírací doba</a>
+                        <a href="#kontakt">Kontakt</a>
+                    </div>
                 </div>
+                <div>
+                    <h4>Kontakt</h4>
+                    <div class="footer-contact-line"><span class="icon-label">&#9993;</span><span>Pražská 839, Suchdol nad Lužnicí</span></div>
+                    <div class="footer-contact-line"><span class="icon-label">&#9742;</span><a href="tel:+420608609595">608 609 595</a></div>
+                    <div class="footer-contact-line"><span class="icon-label">@</span><a href="mailto:radek.wipp@seznam.cz">radek.wipp@seznam.cz</a></div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 Řeznictví Wipplinger. Všechna práva vyhrazena. |
+                Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a>
             </div>
         </div>
     </footer>
-
-    <!-- LIGHTBOX -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-        <button class="lightbox-nav lightbox-prev" onclick="prevLightbox()">&#8249;</button>
-        <img src="" alt="Galerie" id="lightboxImg">
-        <button class="lightbox-nav lightbox-next" onclick="nextLightbox()">&#8250;</button>
-    </div>
-
-    <!-- BACK TO TOP -->
-    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-    </button>
+    <button class="scroll-top" id="scrollTop" aria-label="Nahoru">&#8593;</button>
 
     <script>
-        /* ===== NAVIGATION ===== */
-        const nav = document.getElementById('nav');
-        const backToTop = document.getElementById('backToTop');
+        (function() {
+            'use strict';
+            var navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                navbar.classList.toggle('scrolled', window.scrollY > 50);
+            }, { passive: true });
 
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-            backToTop.classList.toggle('visible', window.scrollY > 500);
-        });
-
-        /* ===== MOBILE MENU ===== */
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-
-        navToggle.addEventListener('click', () => {
-            navToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navToggle.classList.remove('active');
-                navLinks.classList.remove('active');
+            var hamburger = document.getElementById('hamburger');
+            var mobileMenu = document.getElementById('mobileMenu');
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
             });
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.nav')) {
-                navToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-            }
-        });
-
-        /* ===== REVEAL ANIMATIONS ===== */
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+            document.querySelectorAll('.mobile-link').forEach(function(l) {
+                l.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        revealElements.forEach(el => revealObserver.observe(el));
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('active'); });
+            }, { rootMargin: '0px 0px -60px 0px', threshold: 0.15 });
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) { observer.observe(el); });
 
-        /* ===== ACTIVE NAV HIGHLIGHT ===== */
-        const sections = document.querySelectorAll('section[id]');
-        const navItems = document.querySelectorAll('.nav-links a');
+            var scrollTopBtn = document.getElementById('scrollTop');
+            window.addEventListener('scroll', function() {
+                scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+            }, { passive: true });
+            scrollTopBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    navItems.forEach(item => {
-                        item.style.color = '';
-                        if (item.getAttribute('href') === '#' + id) {
-                            item.style.color = 'var(--gold)';
-                        }
-                    });
-                }
+            document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+                a.addEventListener('click', function(e) {
+                    var id = this.getAttribute('href');
+                    if (id === '#') return;
+                    var t = document.querySelector(id);
+                    if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - navbar.offsetHeight, behavior: 'smooth' }); }
+                });
             });
-        }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
-
-        sections.forEach(section => sectionObserver.observe(section));
-
-        /* ===== HERO PARALLAX ===== */
-        const heroBg = document.querySelector('.hero-bg img');
-        if (heroBg) {
-            window.addEventListener('scroll', () => {
-                const scroll = window.scrollY;
-                if (scroll < window.innerHeight) {
-                    heroBg.style.transform = 'translateY(' + (scroll * 0.3) + 'px) scale(1.1)';
-                }
-            });
-        }
-
-        /* ===== PRELOADER ===== */
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.6s ease';
-            requestAnimationFrame(() => { document.body.style.opacity = '1'; });
-        });
-
-        // Lightbox
-        const galleryImages = ['images/foto1.jpg', 'images/foto2.jpg'];
-        let currentLightboxIndex = 0;
-
-        function openLightbox(index) {
-            currentLightboxIndex = index;
-            document.getElementById('lightboxImg').src = galleryImages[index];
-            document.getElementById('lightbox').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function nextLightbox() {
-            currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
-            document.getElementById('lightboxImg').src = galleryImages[currentLightboxIndex];
-        }
-
-        function prevLightbox() {
-            currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
-            document.getElementById('lightboxImg').src = galleryImages[currentLightboxIndex];
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (!document.getElementById('lightbox').classList.contains('active')) return;
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowRight') nextLightbox();
-            if (e.key === 'ArrowLeft') prevLightbox();
-        });
-
-        document.getElementById('lightbox').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('lightbox')) closeLightbox();
-        });
+        })();
     </script>
 </body>
 </html>

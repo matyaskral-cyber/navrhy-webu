@@ -3,570 +3,1290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUNA PT s.r.o. | Dveře, Podlahy & Dětská Hřiště — Prachatice</title>
-    <meta name="description" content="LUNA PT s.r.o. — výroba masivních dveří, podlah, teras a dětských hřišť v Prachaticích. Tradice a kvalita ze dřeva.">
+    <meta name="description" content="LUNA PT s.r.o. - výroba masivních dveří, podlahy, terasy, dětská hřiště a zakázkový nábytek. Prachatice.">
+    <meta name="keywords" content="dveře, podlahy, terasy, dětská hřiště, nábytek, Prachatice, LUNA PT, truhlářství">
+    <title>LUNA PT s.r.o. | Dveře, podlahy a nábytek Prachatice</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* =============================================
+           CSS CUSTOM PROPERTIES
+        ============================================= */
         :root {
-            --color-bg: #1c1008;
-            --color-bg-light: #261a0e;
-            --color-bg-card: #2e2014;
-            --color-accent: #a0522d;
-            --color-accent-light: #c06830;
-            --color-accent-dark: #7a3e22;
-            --color-wood: #deb887;
-            --color-wood-light: #ecd4b0;
-            --color-wood-dark: #b89660;
-            --color-text: #e8ddd0;
-            --color-text-muted: #9a8a78;
-            --color-text-light: #f5efe8;
-            --color-white: #ffffff;
-            --color-border: #3a2e20;
-            --font-serif: 'Merriweather', Georgia, serif;
-            --font-sans: 'Source Sans 3', 'Segoe UI', sans-serif;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.35);
-            --radius: 10px;
-            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --primary: #455a64;
+            --primary-light: #6d8693;
+            --primary-dark: #2c3e47;
+            --accent: #8d6e63;
+            --accent-light: #a98e84;
+            --accent-dark: #6d4c41;
+            --light: #f5f5f5;
+            --dark: #1c2833;
+            --white: #ffffff;
+            --gray-100: #f0f0f0;
+            --gray-200: #e0e0e0;
+            --gray-300: #bdbdbd;
+            --gray-400: #9e9e9e;
+            --gray-500: #757575;
+            --shadow-sm: 0 2px 8px rgba(28, 40, 51, 0.06);
+            --shadow-md: 0 8px 24px rgba(28, 40, 51, 0.1);
+            --shadow-lg: 0 16px 48px rgba(28, 40, 51, 0.14);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.35s ease;
+            --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-heading: 'Rubik', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --container-max: 1200px;
+            --section-padding: 100px 0;
         }
 
-        html { scroll-behavior: smooth; }
+        /* =============================================
+           RESET & BASE
+        ============================================= */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
 
         body {
-            font-family: var(--font-sans);
-            background-color: var(--color-bg);
-            color: var(--color-text);
+            font-family: var(--font-body);
+            color: var(--dark);
+            background: var(--white);
             line-height: 1.7;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ========= ANIMATIONS ========= */
-        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); }
-        .reveal-left.visible { opacity: 1; transform: translateX(0); }
-        .reveal-right { opacity: 0; transform: translateX(60px); transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); }
-        .reveal-right.visible { opacity: 1; transform: translateX(0); }
-        .reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); }
-        .reveal-scale.visible { opacity: 1; transform: scale(1); }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+        ul, ol { list-style: none; }
 
-        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-        @keyframes scrollPulse { 0%, 100% { opacity: 1; transform: scaleY(1); } 50% { opacity: 0.3; transform: scaleY(0.6); } }
-        @keyframes grain { 0%, 100% { transform: translate(0, 0); } 10% { transform: translate(-2%, -2%); } 30% { transform: translate(3%, 2%); } 50% { transform: translate(-1%, 3%); } 70% { transform: translate(2%, -1%); } 90% { transform: translate(-3%, 1%); } }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--dark);
+        }
 
-        /* ========= NAVIGATION ========= */
-        nav {
+        p { margin-bottom: 1em; }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* =============================================
+           UTILITY
+        ============================================= */
+        .section-label {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+            background: rgba(141, 110, 99, 0.1);
+            padding: 6px 16px;
+            border-radius: 4px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--gray-500);
+            max-width: 600px;
+            font-weight: 400;
+            line-height: 1.8;
+        }
+
+        /* =============================================
+           SCROLL ANIMATIONS
+        ============================================= */
+        .fade-in {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .fade-in-left {
+            opacity: 0; transform: translateX(-40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-in-left.visible { opacity: 1; transform: translateX(0); }
+
+        .fade-in-right {
+            opacity: 0; transform: translateX(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-in-right.visible { opacity: 1; transform: translateX(0); }
+
+        .scale-in {
+            opacity: 0; transform: scale(0.92);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .scale-in.visible { opacity: 1; transform: scale(1); }
+
+        .stagger-1 { transition-delay: 0.08s; }
+        .stagger-2 { transition-delay: 0.16s; }
+        .stagger-3 { transition-delay: 0.24s; }
+        .stagger-4 { transition-delay: 0.32s; }
+        .stagger-5 { transition-delay: 0.4s; }
+        .stagger-6 { transition-delay: 0.48s; }
+
+        /* =============================================
+           NAVIGATION
+        ============================================= */
+        .navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            padding: 1.2rem 2rem; transition: all var(--transition); background: transparent;
+            padding: 18px 0; transition: all var(--transition-normal);
+            background: transparent;
         }
-        nav.scrolled {
-            background: rgba(28, 16, 8, 0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 2px 30px rgba(0,0,0,0.4); padding: 0.7rem 2rem;
-        }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: var(--color-wood-light); text-decoration: none; letter-spacing: 0.04em; }
-        .nav-logo span { color: var(--color-accent); }
-        .nav-links { display: flex; list-style: none; gap: 2.5rem; }
-        .nav-links a { color: var(--color-text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s ease; position: relative; }
-        .nav-links a::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: var(--color-accent); transition: width 0.3s ease; }
-        .nav-links a:hover { color: var(--color-wood); }
-        .nav-links a:hover::after { width: 100%; }
 
-        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1001; }
-        .hamburger span { width: 28px; height: 2px; background: var(--color-wood-light); transition: all 0.3s ease; border-radius: 2px; }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translateY(11px); }
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(12px);
+            padding: 10px 0;
+            box-shadow: 0 2px 20px rgba(28, 40, 51, 0.06);
+        }
+
+        .navbar .container {
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex; align-items: center; gap: 12px;
+        }
+
+        .nav-logo img {
+            height: 40px; width: auto;
+        }
+
+        .nav-logo-text {
+            font-family: var(--font-heading);
+            font-size: 1.4rem; font-weight: 700;
+            color: var(--white);
+            transition: color var(--transition-fast);
+        }
+
+        .nav-logo-text span { color: var(--accent-light); font-weight: 400; font-size: 0.8rem; display: block; line-height: 1; margin-top: 2px; }
+
+        .navbar.scrolled .nav-logo-text { color: var(--dark); }
+
+        .nav-links {
+            display: flex; align-items: center; gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 0.88rem; font-weight: 500;
+            color: rgba(255,255,255,0.85);
+            letter-spacing: 0.3px;
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: var(--accent);
+            transition: width var(--transition-normal);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover { color: var(--white); }
+
+        .navbar.scrolled .nav-links a { color: var(--gray-500); }
+        .navbar.scrolled .nav-links a:hover { color: var(--dark); }
+
+        .nav-cta {
+            padding: 10px 24px;
+            background: var(--accent);
+            color: var(--white) !important;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            transition: all var(--transition-fast);
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(141, 110, 99, 0.3);
+        }
+
+        .nav-cta::after { display: none !important; }
+
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; padding: 8px; background: none; border: none; z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block; width: 26px; height: 2px;
+            background: var(--white); transition: all var(--transition-fast); border-radius: 2px;
+        }
+
+        .navbar.scrolled .hamburger span { background: var(--dark); }
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
         .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translateY(-11px); }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-        /* ========= HERO ========= */
+        .mobile-menu {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: var(--dark); z-index: 999;
+            flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+            opacity: 0; transition: opacity var(--transition-normal);
+        }
+
+        .mobile-menu.active { display: flex; opacity: 1; }
+
+        .mobile-menu a {
+            font-family: var(--font-heading); font-size: 1.6rem;
+            color: var(--white); opacity: 0.8;
+        }
+
+        .mobile-menu a:hover { opacity: 1; color: var(--accent-light); }
+
+        /* =============================================
+           HERO SECTION
+        ============================================= */
         .hero {
-            position: relative; height: 100vh; min-height: 700px;
-            display: flex; align-items: center; justify-content: center; overflow: hidden;
-        }
-        .hero-bg { position: absolute; inset: 0; z-index: 0; }
-        .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-        .hero-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to bottom, rgba(28, 16, 8, 0.5) 0%, rgba(28, 16, 8, 0.6) 40%, rgba(28, 16, 8, 0.92) 100%);
-            z-index: 1;
-        }
-        .hero-texture {
-            position: absolute; inset: 0; z-index: 1;
-            background: url('data:image/svg+xml,<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="256" height="256" filter="url(%23noise)" opacity="0.03"/></svg>');
-            opacity: 0.5; pointer-events: none;
-        }
-        .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 2rem; max-width: 900px; }
-        .hero-badge {
-            display: inline-block; padding: 0.5rem 1.8rem; border: 1px solid var(--color-accent);
-            border-radius: 50px; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-            color: var(--color-wood); margin-bottom: 2rem; opacity: 0; transform: translateY(20px);
-            animation: fadeUp 0.8s ease 0.3s forwards;
-        }
-        .hero h1 {
-            font-family: var(--font-serif); font-size: clamp(2.6rem, 6vw, 4.5rem); font-weight: 900;
-            color: var(--color-wood-light); line-height: 1.15; margin-bottom: 1.2rem;
-            opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease 0.5s forwards;
-        }
-        .hero h1 em { color: var(--color-accent-light); font-style: italic; }
-        .hero-sub {
-            font-size: 1.15rem; color: var(--color-text-muted); margin-bottom: 2.5rem; font-weight: 300;
-            letter-spacing: 0.03em; opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease 0.7s forwards;
-        }
-        .hero-buttons {
-            display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
-            opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease 0.9s forwards;
+            position: relative; min-height: 100vh;
+            display: flex; align-items: center;
+            background: linear-gradient(160deg, var(--dark) 0%, var(--primary-dark) 50%, var(--primary) 100%);
+            overflow: hidden;
         }
 
-        .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 2.2rem;
-            border-radius: 50px; font-size: 0.85rem; font-weight: 600; text-decoration: none;
-            transition: all 0.3s ease; letter-spacing: 0.08em; text-transform: uppercase;
-            cursor: pointer; border: none; font-family: var(--font-sans);
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('images/hero.png') center/cover no-repeat;
+            opacity: 0.15;
         }
-        .btn-primary { background: var(--color-accent); color: var(--color-white); }
-        .btn-primary:hover { background: var(--color-accent-light); transform: translateY(-3px); box-shadow: 0 12px 35px rgba(160, 82, 45, 0.35); }
-        .btn-outline { background: transparent; color: var(--color-wood-light); border: 1.5px solid var(--color-border); }
-        .btn-outline:hover { border-color: var(--color-accent); color: var(--color-accent-light); transform: translateY(-3px); }
 
-        .hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 2; opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards; }
-        .hero-scroll a { color: var(--color-text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: color 0.3s ease; }
-        .hero-scroll a:hover { color: var(--color-accent); }
-        .scroll-line { width: 1px; height: 40px; background: var(--color-accent); animation: scrollPulse 2s ease-in-out infinite; }
-
-        /* ========= SECTIONS ========= */
-        section { padding: 6rem 2rem; position: relative; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-tag { display: inline-block; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 1rem; font-weight: 700; }
-        .section-title { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); color: var(--color-wood-light); font-weight: 700; margin-bottom: 1rem; }
-        .section-title em { color: var(--color-accent-light); font-style: italic; }
-        .section-desc { color: var(--color-text-muted); max-width: 620px; margin: 0 auto; font-size: 1.05rem; font-weight: 300; }
-        .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--color-accent), var(--color-wood)); margin: 1.5rem auto 0; border-radius: 2px; }
-
-        /* ========= O NAS ========= */
-        #o-nas { background: var(--color-bg-light); }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-        .about-image { position: relative; border-radius: var(--radius); overflow: hidden; }
-        .about-image img { width: 100%; height: 450px; object-fit: cover; border-radius: var(--radius); transition: transform 0.6s ease; }
-        .about-image:hover img { transform: scale(1.03); }
-        .about-image::before { content: ''; position: absolute; top: -12px; left: -12px; width: 100%; height: 100%; border: 2px solid var(--color-accent); border-radius: var(--radius); z-index: -1; opacity: 0.3; }
-        .about-text h2 { font-family: var(--font-serif); font-size: 2.2rem; color: var(--color-wood-light); margin-bottom: 1.5rem; line-height: 1.25; }
-        .about-text h2 em { color: var(--color-accent-light); font-style: italic; }
-        .about-text p { color: var(--color-text-muted); margin-bottom: 1.5rem; font-size: 1.02rem; font-weight: 300; line-height: 1.9; }
-        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
-        .about-feature { display: flex; align-items: flex-start; gap: 0.8rem; }
-        .about-feature-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; background: rgba(160, 82, 45, 0.15); display: flex; align-items: center; justify-content: center; color: var(--color-accent); }
-        .about-feature h4 { font-size: 0.88rem; color: var(--color-wood-light); margin-bottom: 0.2rem; font-weight: 600; }
-        .about-feature p { font-size: 0.82rem; color: var(--color-text-muted); margin: 0; font-weight: 300; }
-
-        /* ========= SERVICES ========= */
-        #sluzby { background: var(--color-bg); }
-        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .service-card {
-            background: var(--color-bg-card); border-radius: var(--radius); padding: 2.5rem 2rem;
-            text-align: center; transition: all var(--transition); position: relative; overflow: hidden;
-            border: 1px solid var(--color-border);
+        .hero::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 150px;
+            background: linear-gradient(to top, var(--white), transparent); z-index: 2;
         }
-        .service-card::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background: linear-gradient(90deg, var(--color-accent), var(--color-wood)); transition: width var(--transition); }
-        .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--color-accent); }
-        .service-card:hover::after { width: 60%; }
-        .service-icon {
-            width: 70px; height: 70px; border-radius: 50%;
-            background: rgba(160, 82, 45, 0.12); display: flex; align-items: center;
-            justify-content: center; margin: 0 auto 1.5rem; color: var(--color-accent);
-            transition: all var(--transition);
+
+        .hero-inner {
+            position: relative; z-index: 3; width: 100%;
         }
-        .service-card:hover .service-icon { background: var(--color-accent); color: var(--color-white); transform: scale(1.1); }
-        .service-card h3 { font-family: var(--font-serif); font-size: 1.15rem; color: var(--color-wood-light); margin-bottom: 0.8rem; }
-        .service-card p { font-size: 0.9rem; color: var(--color-text-muted); font-weight: 300; line-height: 1.7; }
 
-        /* ========= PRODUCTS SHOWCASE ========= */
-        #produkty { background: var(--color-bg-light); }
-        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .product-card { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 3/4; cursor: pointer; }
-        .product-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-        .product-card:hover img { transform: scale(1.08); }
-        .product-overlay {
-            position: absolute; inset: 0; background: linear-gradient(to top, rgba(28, 16, 8, 0.85) 0%, transparent 60%);
-            display: flex; align-items: flex-end; padding: 2rem; transition: all 0.3s ease;
+        .hero-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
         }
-        .product-card:hover .product-overlay { background: linear-gradient(to top, rgba(28, 16, 8, 0.9) 0%, rgba(160, 82, 45, 0.15) 60%); }
-        .product-overlay h3 { font-family: var(--font-serif); font-size: 1.3rem; color: var(--color-wood-light); }
-        .product-overlay p { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.3rem; }
 
-        /* ========= CTA ========= */
-        .cta-strip {
-            background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent) 50%, var(--color-wood-dark) 100%);
-            padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden;
+        .hero-text h1 {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            color: var(--white); margin-bottom: 20px; font-weight: 700;
         }
-        .cta-strip::before { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,255,255,0.05); }
-        .cta-strip h2 { font-family: var(--font-serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--color-white); margin-bottom: 1rem; }
-        .cta-strip p { color: rgba(255,255,255,0.8); font-size: 1.1rem; font-weight: 300; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .cta-strip .btn { background: var(--color-white); color: var(--color-accent-dark); }
-        .cta-strip .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,0,0,0.3); }
 
-        /* ========= KONTAKT ========= */
-        #kontakt { background: var(--color-bg); }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-        .contact-info h2 { font-family: var(--font-serif); font-size: 2.2rem; color: var(--color-wood-light); margin-bottom: 1.5rem; }
-        .contact-info > p { color: var(--color-text-muted); font-weight: 300; margin-bottom: 2.5rem; font-size: 1.02rem; line-height: 1.8; }
-        .contact-item { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 1.8rem; }
-        .contact-icon { flex-shrink: 0; width: 48px; height: 48px; border-radius: 12px; background: rgba(160, 82, 45, 0.15); display: flex; align-items: center; justify-content: center; color: var(--color-accent); }
-        .contact-detail h4 { font-size: 0.85rem; color: var(--color-wood-light); margin-bottom: 0.3rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
-        .contact-detail p, .contact-detail a { font-size: 0.95rem; color: var(--color-text-muted); font-weight: 300; text-decoration: none; transition: color 0.3s ease; }
-        .contact-detail a:hover { color: var(--color-accent); }
-        .contact-map { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); height: 100%; min-height: 450px; }
-        .contact-map iframe { width: 100%; height: 100%; border: none; min-height: 450px; }
+        .hero-text h1 span { color: var(--accent-light); }
 
-        /* ========= FOOTER ========= */
-        footer { background: #110a04; color: rgba(255,255,255,0.6); padding: 4rem 2rem 2rem; }
-        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
-        .footer-brand h3 { font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-wood-light); margin-bottom: 1rem; }
-        .footer-brand h3 span { color: var(--color-accent); }
-        .footer-brand p { font-size: 0.9rem; font-weight: 300; line-height: 1.8; }
-        .footer-links h4, .footer-contact h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent); margin-bottom: 1.2rem; }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 0.6rem; }
-        .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.9rem; font-weight: 300; transition: color 0.3s ease; }
-        .footer-links a:hover { color: var(--color-accent); }
-        .footer-contact p { font-size: 0.9rem; font-weight: 300; margin-bottom: 0.4rem; }
-        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; font-size: 0.82rem; font-weight: 300; }
-
-        /* ========= RESPONSIVE ========= */
-        @media (max-width: 968px) {
-            .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .services-grid, .products-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-content { grid-template-columns: 1fr 1fr; }
+        .hero-text p {
+            font-size: 1.1rem; color: rgba(255,255,255,0.7);
+            max-width: 480px; font-weight: 300; margin-bottom: 36px; line-height: 1.8;
         }
+
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 32px; background: var(--accent); color: var(--white);
+            border: none; border-radius: var(--radius-sm);
+            font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; transition: all var(--transition-fast);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark); transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(141, 110, 99, 0.3);
+        }
+
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 32px; background: transparent;
+            color: var(--white); border: 2px solid rgba(255,255,255,0.3);
+            border-radius: var(--radius-sm); font-family: var(--font-body);
+            font-size: 0.95rem; font-weight: 500; cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-outline:hover {
+            border-color: rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .hero-stats {
+            display: flex; gap: 40px; margin-top: 48px;
+        }
+
+        .hero-stat { text-align: center; }
+
+        .hero-stat-number {
+            font-family: var(--font-heading); font-size: 2rem;
+            font-weight: 700; color: var(--accent-light); display: block;
+        }
+
+        .hero-stat-label {
+            font-size: 0.75rem; color: rgba(255,255,255,0.5);
+            text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px;
+        }
+
+        .hero-image {
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        .hero-image img {
+            max-height: 500px; width: auto;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+        }
+
+        /* =============================================
+           PRODUCTS SECTION - Catalog Style
+        ============================================= */
+        .products {
+            padding: var(--section-padding); background: var(--white);
+        }
+
+        .products-header {
+            text-align: center; margin-bottom: 56px;
+        }
+
+        .product-filter {
+            display: flex; justify-content: center; gap: 12px;
+            margin-bottom: 48px; flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 24px; background: var(--gray-100);
+            border: 2px solid transparent; border-radius: var(--radius-sm);
+            font-family: var(--font-body); font-size: 0.85rem;
+            font-weight: 500; color: var(--gray-500);
+            cursor: pointer; transition: all var(--transition-fast);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary); color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .products-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+        }
+
+        .product-card {
+            background: var(--white); border-radius: var(--radius-md);
+            overflow: hidden; border: 1px solid var(--gray-200);
+            transition: all var(--transition-normal); position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px); box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .product-card-image {
+            height: 240px; overflow: hidden; position: relative;
+            background: var(--gray-100);
+        }
+
+        .product-card-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .product-card:hover .product-card-image img {
+            transform: scale(1.06);
+        }
+
+        .product-card-badge {
+            position: absolute; top: 16px; left: 16px;
+            padding: 4px 12px; background: var(--accent);
+            color: var(--white); border-radius: 4px;
+            font-size: 0.7rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .product-card-body {
+            padding: 24px;
+        }
+
+        .product-card-body h3 {
+            font-size: 1.15rem; margin-bottom: 8px;
+        }
+
+        .product-card-body p {
+            font-size: 0.9rem; color: var(--gray-500);
+            line-height: 1.6; margin-bottom: 16px;
+        }
+
+        .product-card-link {
+            font-size: 0.85rem; font-weight: 600;
+            color: var(--primary); display: inline-flex;
+            align-items: center; gap: 6px;
+            transition: all var(--transition-fast);
+        }
+
+        .product-card-link:hover { color: var(--accent); gap: 10px; }
+
+        .product-card-link svg {
+            width: 16px; height: 16px; stroke: currentColor;
+            fill: none; stroke-width: 2;
+        }
+
+        /* =============================================
+           ABOUT SECTION
+        ============================================= */
+        .about {
+            padding: var(--section-padding);
+            background: var(--light);
+        }
+
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+        }
+
+        .about-content h2 { margin-bottom: 20px; }
+
+        .about-content p {
+            color: var(--gray-500); line-height: 1.8;
+        }
+
+        .about-list {
+            margin-top: 32px; display: flex; flex-direction: column; gap: 16px;
+        }
+
+        .about-list-item {
+            display: flex; align-items: flex-start; gap: 14px;
+            padding: 16px; background: var(--white);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .about-list-item:hover {
+            box-shadow: var(--shadow-sm); transform: translateX(4px);
+        }
+
+        .about-list-icon {
+            width: 40px; height: 40px; background: var(--primary);
+            border-radius: var(--radius-sm); display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0;
+        }
+
+        .about-list-icon svg {
+            width: 18px; height: 18px; stroke: var(--white);
+            fill: none; stroke-width: 2;
+        }
+
+        .about-list-item h4 {
+            font-size: 0.95rem; margin-bottom: 2px;
+        }
+
+        .about-list-item p {
+            font-size: 0.85rem; color: var(--gray-400);
+            margin-bottom: 0;
+        }
+
+        .about-image {
+            border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-image img {
+            width: 100%; height: 500px; object-fit: cover;
+        }
+
+        /* =============================================
+           SERVICES GRID
+        ============================================= */
+        .services {
+            padding: var(--section-padding); background: var(--white);
+        }
+
+        .services-header {
+            text-align: center; margin-bottom: 56px;
+        }
+
+        .services-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+        }
+
+        .service-tile {
+            padding: 36px 28px; border-radius: var(--radius-md);
+            background: var(--light); border: 1px solid var(--gray-200);
+            transition: all var(--transition-normal); position: relative; overflow: hidden;
+        }
+
+        .service-tile::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 4px; height: 0; background: var(--accent);
+            transition: height var(--transition-normal);
+        }
+
+        .service-tile:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .service-tile:hover::before { height: 100%; }
+
+        .service-tile-icon {
+            width: 52px; height: 52px; background: var(--primary);
+            border-radius: var(--radius-sm); display: flex;
+            align-items: center; justify-content: center; margin-bottom: 20px;
+        }
+
+        .service-tile-icon svg {
+            width: 24px; height: 24px; stroke: var(--white);
+            fill: none; stroke-width: 2;
+        }
+
+        .service-tile h3 {
+            font-size: 1.1rem; margin-bottom: 10px;
+        }
+
+        .service-tile p {
+            font-size: 0.88rem; color: var(--gray-500); line-height: 1.7; margin-bottom: 0;
+        }
+
+        /* =============================================
+           PLAYGROUND SECTION
+        ============================================= */
+        .playground {
+            padding: var(--section-padding);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+        }
+
+        .playground-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+        }
+
+        .playground-content h2 {
+            color: var(--white); margin-bottom: 16px;
+        }
+
+        .playground-content p {
+            color: rgba(255,255,255,0.7); line-height: 1.8;
+        }
+
+        .playground-features {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px;
+        }
+
+        .playground-feature {
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .playground-feature-check {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: rgba(255,255,255,0.15); display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0;
+        }
+
+        .playground-feature-check svg {
+            width: 14px; height: 14px; stroke: var(--accent-light);
+            fill: none; stroke-width: 2.5;
+        }
+
+        .playground-feature span {
+            font-size: 0.9rem; font-weight: 500;
+        }
+
+        .playground-image {
+            border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: var(--shadow-lg); background: var(--white);
+            padding: 32px; display: flex; align-items: center; justify-content: center;
+        }
+
+        .playground-image img {
+            max-height: 320px; width: auto;
+        }
+
+        /* =============================================
+           CONTACT SECTION
+        ============================================= */
+        .contact {
+            padding: var(--section-padding); background: var(--light);
+        }
+
+        .contact-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
+        }
+
+        .contact-info h2 { margin-bottom: 16px; }
+
+        .contact-info > p {
+            color: var(--gray-500); margin-bottom: 36px;
+        }
+
+        .contact-details {
+            display: flex; flex-direction: column; gap: 20px;
+        }
+
+        .contact-item {
+            display: flex; align-items: center; gap: 16px;
+            padding: 20px; background: var(--white);
+            border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .contact-item:hover {
+            transform: translateX(6px); box-shadow: var(--shadow-md);
+        }
+
+        .contact-item-icon {
+            width: 48px; height: 48px; background: var(--primary);
+            border-radius: var(--radius-sm); display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0;
+        }
+
+        .contact-item-icon svg {
+            width: 20px; height: 20px; stroke: var(--white);
+            fill: none; stroke-width: 2;
+        }
+
+        .contact-item-text h4 {
+            font-family: var(--font-body); font-size: 0.75rem;
+            font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--gray-400); margin-bottom: 2px;
+        }
+
+        .contact-item-text p {
+            font-size: 0.95rem; color: var(--dark); font-weight: 500; margin-bottom: 0;
+        }
+
+        .contact-item-text a { color: var(--primary); }
+        .contact-item-text a:hover { color: var(--accent); }
+
+        .contact-map {
+            border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: var(--shadow-md); height: 100%; min-height: 440px;
+        }
+
+        .contact-map iframe {
+            width: 100%; height: 100%; min-height: 440px; border: 0;
+        }
+
+        /* =============================================
+           FOOTER
+        ============================================= */
+        .footer {
+            background: var(--dark); color: rgba(255,255,255,0.55);
+            padding: 72px 0 0;
+        }
+
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+            padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-brand h3 {
+            font-size: 1.4rem; color: var(--white); margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            font-size: 0.88rem; line-height: 1.7; max-width: 300px;
+        }
+
+        .footer-column h4 {
+            font-family: var(--font-body); font-size: 0.8rem;
+            font-weight: 600; color: var(--white);
+            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px;
+        }
+
+        .footer-column ul { display: flex; flex-direction: column; gap: 10px; }
+
+        .footer-column ul li a {
+            font-size: 0.88rem; transition: all var(--transition-fast);
+        }
+
+        .footer-column ul li a:hover { color: var(--accent-light); padding-left: 6px; }
+
+        .footer-bottom {
+            padding: 20px 0; display: flex; align-items: center;
+            justify-content: space-between; font-size: 0.82rem;
+        }
+
+        .footer-bottom a { color: var(--accent-light); }
+        .footer-bottom a:hover { color: var(--white); }
+
+        /* =============================================
+           BACK TO TOP
+        ============================================= */
+        .back-to-top {
+            position: fixed; bottom: 28px; right: 28px;
+            width: 44px; height: 44px; background: var(--primary);
+            color: var(--white); border: none; border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0; visibility: hidden;
+            transform: translateY(16px); transition: all var(--transition-normal);
+            z-index: 900; box-shadow: var(--shadow-md);
+        }
+
+        .back-to-top.visible {
+            opacity: 1; visibility: visible; transform: translateY(0);
+        }
+
+        .back-to-top:hover { background: var(--accent); }
+
+        .back-to-top svg {
+            width: 18px; height: 18px; stroke: var(--white);
+            fill: none; stroke-width: 2;
+        }
+
+        /* =============================================
+           RESPONSIVE
+        ============================================= */
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-text p { margin: 0 auto 36px; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero-image { display: none; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
         @media (max-width: 768px) {
-            .nav-links { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: var(--color-bg); flex-direction: column; justify-content: center; align-items: center; gap: 2rem; transition: right 0.4s ease; box-shadow: -5px 0 30px rgba(0,0,0,0.3); }
-            .nav-links.active { right: 0; }
-            .nav-links a { color: var(--color-text) !important; font-size: 1rem; }
+            :root { --section-padding: 72px 0; }
             .hamburger { display: flex; }
-            .services-grid, .products-grid { grid-template-columns: 1fr; }
-            section { padding: 4rem 1.5rem; }
-            .about-features { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+            .nav-links { display: none; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .playground-grid { grid-template-columns: 1fr; gap: 40px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .products-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+
+            .contact-map { min-height: 300px; }
+            .contact-map iframe { min-height: 300px; }
+
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+
+            .playground-features { grid-template-columns: 1fr; }
         }
+
         @media (max-width: 480px) {
-            .hero h1 { font-size: 2rem; }
-            .hero-sub { font-size: 1rem; }
-            .hero-buttons { flex-direction: column; align-items: center; }
+            .hero-text h1 { font-size: 2rem; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .product-filter { gap: 8px; }
+            .filter-btn { padding: 8px 16px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
     <!-- NAVIGATION -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="nav-logo">LUNA <span>PT</span></a>
-            <ul class="nav-links">
-                <li><a href="#o-nas">O nás</a></li>
-                <li><a href="#sluzby">Služby</a></li>
-                <li><a href="#produkty">Produkty</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
-            </ul>
-            <div class="hamburger"><span></span><span></span><span></span></div>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#domov" class="nav-logo">
+                <img src="images/logo.png" alt="LUNA PT logo">
+                <div class="nav-logo-text">
+                    LUNA PT
+                    <span>s.r.o.</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="#domov">Domov</a>
+                <a href="#produkty">Produkty</a>
+                <a href="#o-nas">O nás</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#hriste">Hřiště</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-bg">
-            <img src="images/hero.png" alt="LUNA PT truhlářství">
-        </div>
-        <div class="hero-overlay"></div>
-        <div class="hero-texture"></div>
-        <div class="hero-content">
-            <div class="hero-badge">Truhlářství &bull; Dveře &bull; Podlahy &bull; Hřiště</div>
-            <h1>Řemeslo ze dřeva s duší <em>tradice</em></h1>
-            <p class="hero-sub">Výroba masivních dveří, podlah, teras a dětských hřišť. Precizní práce s přírodním materiálem od roku v Prachaticích.</p>
-            <div class="hero-buttons">
-                <a href="#sluzby" class="btn btn-primary">Naše služby</a>
-                <a href="#kontakt" class="btn btn-outline">Kontaktujte nás</a>
-            </div>
-        </div>
-        <div class="hero-scroll">
-            <a href="#o-nas">Prozkoumat<div class="scroll-line"></div></a>
-        </div>
-    </section>
-
-    <!-- O NAS -->
-    <section id="o-nas">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-image reveal-left">
-                    <img src="images/logo.png" alt="LUNA PT logo">
-                </div>
-                <div class="about-text reveal-right">
-                    <span class="section-tag">O firmě</span>
-                    <h2>LUNA PT s.r.o. — <em>tradice</em> ve dřevě</h2>
-                    <p>Jsme truhlářská firma z Prachatic specializující se na výrobu masivních dveří, zárubní, podlah a dětských hřišť. Naším posláním je tvořit ze dřeva produkty, které spojují funkčnost, krásu a dlouhou životnost.</p>
-                    <p>Nabízíme kompletní servis od návrhu přes výrobu až po montáž. Pracujeme s masivním dřevem i exotickými dřevinami a každý projekt řešíme individuálně.</p>
-                    <div class="about-features">
-                        <div class="about-feature">
-                            <div class="about-feature-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                            </div>
-                            <div><h4>Kvalitní materiály</h4><p>Masivní i exotické dřeviny</p></div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-feature-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                            </div>
-                            <div><h4>Vlastní výroba</h4><p>Kompletní zakázková výroba</p></div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-feature-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            </div>
-                            <div><h4>Prachatice</h4><p>Žernovická 221</p></div>
-                        </div>
-                        <div class="about-feature">
-                            <div class="about-feature-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                            </div>
-                            <div><h4>Montáž & Servis</h4><p>Profesionální instalace</p></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLUZBY -->
-    <section id="sluzby">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Naše služby</span>
-                <h2 class="section-title">Co pro vás <em>vytvoříme</em></h2>
-                <p class="section-desc">Od masivních dveří přes podlahy až po dětská hřiště. Každý projekt je originální dílo.</p>
-                <div class="divider"></div>
-            </div>
-            <div class="services-grid">
-                <div class="service-card reveal" style="transition-delay: 0.05s;">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-                    </div>
-                    <h3>Masivní dveře a zárubně</h3>
-                    <p>Výroba masivních interiérových a vchodových dveří a zárubní na míru z nejkvalitnějších dřevin.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay: 0.1s;">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="22" height="12" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-                    </div>
-                    <h3>Podlahy a renovace</h3>
-                    <p>Výroba, pokládka a renovace podlah. Sportovní, průmyslové i domácí podlahy na míru.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay: 0.15s;">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    </div>
-                    <h3>Terasy a obklady</h3>
-                    <p>Terasy a obklady z exotických dřevin. Odolné a krásné řešení pro exteriér.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay: 0.2s;">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                    </div>
-                    <h3>Zakázkový nábytek</h3>
-                    <p>Zakázková výroba nábytku, schodišť a oken. Vše přesně podle vašich představ.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay: 0.25s;">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    </div>
-                    <h3>Sportovní podlahy</h3>
-                    <p>Speciální sportovní a průmyslové podlahy pro sportovní haly a provozy.</p>
-                </div>
-                <div class="service-card reveal" style="transition-delay: 0.3s;">
-                    <div class="service-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-                    </div>
-                    <h3>Dětská hřiště</h3>
-                    <p>Výroba a montáž dětských hřišť z přírodního dřeva. Bezpečná zábava pro děti.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRODUCTS SHOWCASE -->
-    <section id="produkty">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Naše produkty</span>
-                <h2 class="section-title">Typy <em>dveří</em></h2>
-                <p class="section-desc">Vybírejte z našich řad masivních dveří — moderní, celoplošné i klasické.</p>
-                <div class="divider"></div>
-            </div>
-            <div class="products-grid">
-                <div class="product-card reveal-scale" style="transition-delay: 0.1s;">
-                    <img src="images/dvere-modern.jpg" alt="Moderní dveře LUNA PT">
-                    <div class="product-overlay">
-                        <div>
-                            <h3>Moderní dveře</h3>
-                            <p>Čistý design a funkčnost</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card reveal-scale" style="transition-delay: 0.2s;">
-                    <img src="images/dvere-celoplosne.jpg" alt="Celoplošné dveře LUNA PT">
-                    <div class="product-overlay">
-                        <div>
-                            <h3>Celoplošné dveře</h3>
-                            <p>Masivní celoplošné provedení</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card reveal-scale" style="transition-delay: 0.3s;">
-                    <img src="images/dvere-klasik.jpg" alt="Klasické dveře LUNA PT">
-                    <div class="product-overlay">
-                        <div>
-                            <h3>Klasické dveře</h3>
-                            <p>Tradiční řemeslné zpracování</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <div class="cta-strip">
-        <div class="container reveal">
-            <h2>Máte projekt na srdci?</h2>
-            <p>Kontaktujte nás a probereme vaše představy. Rádi vám připravíme nezávaznou nabídku.</p>
-            <a href="tel:+420777140291" class="btn">Zavolejte: 777 140 291</a>
-        </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#domov">Domov</a>
+        <a href="#produkty">Produkty</a>
+        <a href="#o-nas">O nás</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#hriste">Hřiště</a>
+        <a href="#kontakt">Kontakt</a>
     </div>
 
-    <!-- KONTAKT -->
-    <section id="kontakt">
+    <!-- HERO -->
+    <section class="hero" id="domov">
+        <div class="hero-inner">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-text">
+                        <h1>Dveře, podlahy a nábytek <span>na míru</span></h1>
+                        <p>Výroba masivních dveří v klasickém i rustikálním stylu, pokládka podlah, realizace teras a kompletní truhlářské služby. Sídlíme v Prachaticích.</p>
+                        <div class="hero-buttons">
+                            <a href="#produkty" class="btn-primary">
+                                Naše produkty
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                            </a>
+                            <a href="#kontakt" class="btn-outline">Kontaktujte nás</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <span class="hero-stat-number">6+</span>
+                                <span class="hero-stat-label">Kategorií</span>
+                            </div>
+                            <div class="hero-stat">
+                                <span class="hero-stat-number">100%</span>
+                                <span class="hero-stat-label">Na míru</span>
+                            </div>
+                            <div class="hero-stat">
+                                <span class="hero-stat-number">CZ</span>
+                                <span class="hero-stat-label">Česká výroba</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="images/hero.png" alt="LUNA PT produkty" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS - Catalog Grid -->
+    <section class="products" id="produkty">
         <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info reveal-left">
-                    <span class="section-tag">Kontakt</span>
-                    <h2>LUNA PT s.r.o.</h2>
-                    <p>Sídlíme v Prachaticích a naše dílny jsou připraveny realizovat váš projekt. Neváhejte se na nás obrátit.</p>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        </div>
-                        <div class="contact-detail">
-                            <h4>Adresa</h4>
-                            <p>Žernovická 221<br>383 01 Prachatice</p>
-                        </div>
+            <div class="products-header fade-in">
+                <span class="section-label">Katalog produktů</span>
+                <h2 class="section-title">Nabízíme široký sortiment</h2>
+                <p class="section-subtitle" style="margin: 0 auto;">Od masivních dveří přes exotické podlahy až po dětská hřiště. Vše vyrábíme a dodáváme na míru vašim potřebám.</p>
+            </div>
+            <div class="product-filter fade-in">
+                <button class="filter-btn active" data-filter="all">Vše</button>
+                <button class="filter-btn" data-filter="dvere">Dveře</button>
+                <button class="filter-btn" data-filter="podlahy">Podlahy</button>
+                <button class="filter-btn" data-filter="nabytek">Nábytek</button>
+            </div>
+            <div class="products-grid">
+                <div class="product-card fade-in stagger-1" data-category="dvere">
+                    <div class="product-card-image">
+                        <img src="images/dvere-klasik.jpg" alt="Klasické masivní dveře" loading="lazy">
+                        <span class="product-card-badge">Klasické</span>
                     </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        </div>
-                        <div class="contact-detail">
-                            <h4>Telefon</h4>
-                            <p><a href="tel:+420381005016">381 005 016</a></p>
-                            <p><a href="tel:+420777140291">777 140 291</a></p>
-                        </div>
+                    <div class="product-card-body">
+                        <h3>Dveře klasické</h3>
+                        <p>Masivní dveře v klasickém stylu s tradičním zpracováním. Vyráběny na míru ve standardních i nestandardních rozměrech.</p>
+                        <a href="#kontakt" class="product-card-link">
+                            Poptat
+                            <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+                        </a>
                     </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                        </div>
-                        <div class="contact-detail">
-                            <h4>E-mail</h4>
-                            <p><a href="mailto:lunaprachatice@lunapt.cz">lunaprachatice@lunapt.cz</a></p>
-                        </div>
+                </div>
+                <div class="product-card fade-in stagger-2" data-category="dvere">
+                    <div class="product-card-image">
+                        <img src="images/dvere-modern.jpg" alt="Moderní dveře" loading="lazy">
+                        <span class="product-card-badge">Moderní</span>
                     </div>
+                    <div class="product-card-body">
+                        <h3>Dveře moderní</h3>
+                        <p>Dveře s moderním designem pro současné interiéry. Čisté linie a kvalitní materiály pro elegantní vzhled.</p>
+                        <a href="#kontakt" class="product-card-link">
+                            Poptat
+                            <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card fade-in stagger-3" data-category="dvere">
+                    <div class="product-card-image">
+                        <img src="images/dvere-celoplosne.jpg" alt="Celoplošné dveře" loading="lazy">
+                        <span class="product-card-badge">Celoplošné</span>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Dveře celoplošné</h3>
+                        <p>Celoplošné masivní dveře a zárubně ve stylu klasickém i rustikálním. Výroba v nestandardních rozměrech.</p>
+                        <a href="#kontakt" class="product-card-link">
+                            Poptat
+                            <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <!-- ABOUT -->
+    <section class="about" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content fade-in-left">
+                    <span class="section-label">O společnosti</span>
+                    <h2 class="section-title">LUNA PT s.r.o. - tradice a kvalita</h2>
+                    <p>
+                        Jsme výrobce a distributor zakázkového nábytku, dveří, oken a dalších dřevěných produktů se sídlem v Prachaticích. Specializujeme se na výrobu masivních dveří a zárubní v klasickém i rustikálním stylu.
+                    </p>
+                    <p>
+                        Naše služby zahrnují kompletní sortiment od návrhu přes výrobu až po montáž. Vyrábíme kuchyně, obývací stěny, dětské pokoje, postele, skříně, předsíňové stěny a mnoho dalšího.
+                    </p>
+                    <div class="about-list">
+                        <div class="about-list-item">
+                            <div class="about-list-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Kvalitní materiály</h4>
+                                <p>Používáme pouze ověřené a trvanlivé materiály</p>
+                            </div>
                         </div>
-                        <div class="contact-detail">
-                            <h4>Web</h4>
-                            <p><a href="https://lunapt.webnode.cz/" target="_blank" rel="noopener">lunapt.webnode.cz</a></p>
+                        <div class="about-list-item">
+                            <div class="about-list-icon">
+                                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                            </div>
+                            <div>
+                                <h4>Zakázková výroba</h4>
+                                <p>Vše vyrábíme na míru dle požadavků zákazníka</p>
+                            </div>
+                        </div>
+                        <div class="about-list-item">
+                            <div class="about-list-icon">
+                                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            </div>
+                            <div>
+                                <h4>Kompletní servis</h4>
+                                <p>Návrh, výroba, dodávka a montáž</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="about-image fade-in-right">
+                    <img src="images/dvere-klasik.jpg" alt="Masivní dveře LUNA PT" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="contact-map reveal-right">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2630!2d13.9975!3d49.0125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4773f3a8e5e5e5e5%3A0x400af0f6615f1e0!2s%C5%BDernovick%C3%A1%20221%2C%20383%2001%20Prachatice!5e0!3m2!1scs!2scz!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - LUNA PT, Prachatice"></iframe>
+    <!-- SERVICES -->
+    <section class="services" id="sluzby">
+        <div class="container">
+            <div class="services-header fade-in">
+                <span class="section-label">Naše služby</span>
+                <h2 class="section-title">Kompletní truhlářské služby</h2>
+                <p class="section-subtitle" style="margin: 0 auto;">Od návrhu až po finální montáž. Poskytujeme kompletní servis pro vaše projekty.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-tile fade-in stagger-1">
+                    <div class="service-tile-icon">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+                    </div>
+                    <h3>Dveře a zárubně</h3>
+                    <p>Výroba masivních dveří a zárubní v klasickém, rustikálním i moderním stylu. Standardní i nestandardní rozměry.</p>
+                </div>
+                <div class="service-tile fade-in stagger-2">
+                    <div class="service-tile-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/></svg>
+                    </div>
+                    <h3>Podlahy a parkety</h3>
+                    <p>Prodej a pokládka parket z exotických dřevin, laminátových podlah. Renovace a sportovní podlahy.</p>
+                </div>
+                <div class="service-tile fade-in stagger-3">
+                    <div class="service-tile-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
+                    </div>
+                    <h3>Terasy</h3>
+                    <p>Prodej a montáž dřevěných teras z prémiových materiálů. Realizace venkovních dřevěných ploch.</p>
+                </div>
+                <div class="service-tile fade-in stagger-4">
+                    <div class="service-tile-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                    </div>
+                    <h3>Zakázkový nábytek</h3>
+                    <p>Kuchyně, obývací stěny, dětské pokoje, postele, skříně a předsíňové stěny na míru.</p>
+                </div>
+                <div class="service-tile fade-in stagger-5">
+                    <div class="service-tile-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M17 8l-5-5-5 5"/><path d="m3 18 3-3 4 4 4-4 4 4 3-3"/></svg>
+                    </div>
+                    <h3>Obklady z exotických dřevin</h3>
+                    <p>Obklady do koupelen, na schodiště a interiérové i exteriérové aplikace z exotických dřevin.</p>
+                </div>
+                <div class="service-tile fade-in stagger-6">
+                    <div class="service-tile-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    </div>
+                    <h3>Zahradní realizace</h3>
+                    <p>Návrh a realizace zahradních projektů, dřevěné prvky do zahrady a venkovní prostor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLAYGROUND -->
+    <section class="playground" id="hriste">
+        <div class="container">
+            <div class="playground-grid">
+                <div class="playground-content fade-in-left">
+                    <span class="section-label" style="background: rgba(255,255,255,0.1); color: var(--accent-light);">Dětská hřiště</span>
+                    <h2 class="section-title">Certifikovaná dětská hřiště</h2>
+                    <p>Výroba a montáž certifikovaných dětských hřišť. Bezpečné herní prvky pro školy, školky, obce a soukromé zahrady. Kompletní realizace od návrhu po instalaci.</p>
+                    <div class="playground-features">
+                        <div class="playground-feature">
+                            <div class="playground-feature-check">
+                                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <span>Certifikované prvky</span>
+                        </div>
+                        <div class="playground-feature">
+                            <div class="playground-feature-check">
+                                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <span>Bezpečné materiály</span>
+                        </div>
+                        <div class="playground-feature">
+                            <div class="playground-feature-check">
+                                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <span>Kompletní montáž</span>
+                        </div>
+                        <div class="playground-feature">
+                            <div class="playground-feature-check">
+                                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <span>Návrh na míru</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="playground-image fade-in-right">
+                    <img src="images/hriste-logo.png" alt="Dětská hřiště Luna Progress" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="kontakt">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info fade-in-left">
+                    <span class="section-label">Kontakt</span>
+                    <h2 class="section-title">Ozvěte se nám</h2>
+                    <p>Rádi vám poradíme s výběrem produktů a zodpovíme vaše dotazy. Kontaktujte nás telefonicky nebo e-mailem.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>Adresa</h4>
+                                <p>Žernovická 221<br>383 01 Prachatice</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>Telefon</h4>
+                                <p>
+                                    <a href="tel:+420381005016">381 005 016</a><br>
+                                    <a href="tel:+420777140291">777 140 291</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>E-mail</h4>
+                                <p><a href="mailto:lunaprachatice@lunapt.cz">lunaprachatice@lunapt.cz</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>IČO</h4>
+                                <p>26071991</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map fade-in-right">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2630!2d14.0!3d49.01!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4774a2e8c1234567%3A0x1234567890abcdef!2s%C5%BDernovick%C3%A1%20221%2C%20383%2001%20Prachatice!5e0!3m2!1scs!2scz!4v1709740000000!5m2!1scs!2scz"
+                        allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa - LUNA PT Prachatice">
+                    </iframe>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <h3>LUNA <span>PT</span> s.r.o.</h3>
-                <p>Truhlářství z Prachatic. Výroba masivních dveří, podlah, teras a dětských hřišť z přírodního dřeva.</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>LUNA PT s.r.o.</h3>
+                    <p>Výroba a distribuce dveří, nábytku, podlah a dětských hřišť. Kvalitní řemeslná práce z Prachatic.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Produkty</h4>
+                    <ul>
+                        <li><a href="#produkty">Dveře klasické</a></li>
+                        <li><a href="#produkty">Dveře moderní</a></li>
+                        <li><a href="#produkty">Dveře celoplošné</a></li>
+                        <li><a href="#sluzby">Podlahy</a></li>
+                        <li><a href="#sluzby">Terasy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Služby</h4>
+                    <ul>
+                        <li><a href="#sluzby">Zakázkový nábytek</a></li>
+                        <li><a href="#sluzby">Obklady</a></li>
+                        <li><a href="#hriste">Dětská hřiště</a></li>
+                        <li><a href="#sluzby">Zahradní realizace</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><a href="tel:+420381005016">381 005 016</a></li>
+                        <li><a href="tel:+420777140291">777 140 291</a></li>
+                        <li><a href="mailto:lunaprachatice@lunapt.cz">E-mail</a></li>
+                        <li><a href="#kontakt">Prachatice</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-links">
-                <h4>Navigace</h4>
-                <ul>
-                    <li><a href="#o-nas">O nás</a></li>
-                    <li><a href="#sluzby">Služby</a></li>
-                    <li><a href="#produkty">Produkty</a></li>
-                    <li><a href="#kontakt">Kontakt</a></li>
-                </ul>
+            <div class="footer-bottom">
+                <span>&copy; 2025 LUNA PT s.r.o. Všechna práva vyhrazena.</span>
+                <span>Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></span>
             </div>
-            <div class="footer-contact">
-                <h4>Kontakt</h4>
-                <p>Žernovická 221</p>
-                <p>383 01 Prachatice</p>
-                <p style="margin-top: 0.8rem;">Tel: 381 005 016</p>
-                <p>Mob: 777 140 291</p>
-                <p style="margin-top: 0.8rem;">lunaprachatice@lunapt.cz</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 LUNA PT s.r.o. — Prachatice. Všechna práva vyhrazena.</p>
         </div>
     </footer>
 
+    <button class="back-to-top" id="backToTop" aria-label="Zpět nahoru">
+        <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
     <!-- JAVASCRIPT -->
     <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); });
-        document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navLinks.classList.remove('active'); }); });
+        /* Navbar scroll */
+        (function() {
+            var navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                navbar.classList.toggle('scrolled', window.pageYOffset > 60);
+            }, { passive: true });
+        })();
 
-        const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.pageYOffset > 60); });
+        /* Hamburger */
+        (function() {
+            var hamburger = document.getElementById('hamburger');
+            var mobileMenu = document.getElementById('mobileMenu');
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+            mobileMenu.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        })();
 
-        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-        revealElements.forEach(el => revealObserver.observe(el));
+        /* Smooth scroll */
+        (function() {
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        var offset = document.getElementById('navbar').offsetHeight;
+                        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+                    }
+                });
+            });
+        })();
 
-        const sections = document.querySelectorAll('section[id]');
-        const navLinkItems = document.querySelectorAll('.nav-links a');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => { if (pageYOffset >= section.offsetTop - 200) current = section.getAttribute('id'); });
-            navLinkItems.forEach(link => { link.style.color = ''; if (link.getAttribute('href') === '#' + current) link.style.color = 'var(--color-accent-light)'; });
-        });
+        /* IntersectionObserver */
+        (function() {
+            var els = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in');
+            if ('IntersectionObserver' in window) {
+                var obs = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(e) {
+                        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+                els.forEach(function(el) { obs.observe(el); });
+            } else {
+                els.forEach(function(el) { el.classList.add('visible'); });
+            }
+        })();
 
-        window.addEventListener('scroll', () => {
-            const hero = document.querySelector('.hero-bg img');
-            const scrolled = window.pageYOffset;
-            if (hero && scrolled < window.innerHeight) hero.style.transform = `translateY(${scrolled * 0.3}px)`;
-        });
+        /* Back to top */
+        (function() {
+            var btn = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                btn.classList.toggle('visible', window.pageYOffset > 400);
+            }, { passive: true });
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+
+        /* Active nav highlight */
+        (function() {
+            var sections = document.querySelectorAll('section[id]');
+            var navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+            window.addEventListener('scroll', function() {
+                var pos = window.pageYOffset + 100;
+                sections.forEach(function(s) {
+                    if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) {
+                        navLinks.forEach(function(l) {
+                            l.classList.toggle('active', l.getAttribute('href') === '#' + s.id);
+                        });
+                    }
+                });
+            }, { passive: true });
+        })();
+
+        /* Filter buttons (visual only) */
+        (function() {
+            var buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    buttons.forEach(function(b) { b.classList.remove('active'); });
+                    this.classList.add('active');
+                    var filter = this.getAttribute('data-filter');
+                    var cards = document.querySelectorAll('.product-card');
+                    cards.forEach(function(card) {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = '';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        })();
+
+        /* Parallax hero */
+        (function() {
+            var heroText = document.querySelector('.hero-text');
+            window.addEventListener('scroll', function() {
+                var s = window.pageYOffset;
+                if (s < window.innerHeight && heroText) {
+                    heroText.style.transform = 'translateY(' + (s * 0.1) + 'px)';
+                    heroText.style.opacity = 1 - (s / (window.innerHeight * 0.7));
+                }
+            }, { passive: true });
+        })();
     </script>
 </body>
 </html>

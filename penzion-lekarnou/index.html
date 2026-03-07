@@ -1034,6 +1034,219 @@
             .gallery-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 2.5rem; }
             .footer-content { flex-direction: column; text-align: center; }
+            .surroundings-grid { grid-template-columns: 1fr; }
+            .parallax-quote { padding: 5rem 0; }
+            .parallax-quote blockquote { font-size: 1.3rem; padding: 0 1rem; }
+            .cta-banner { padding: 3.5rem 0; }
+            .tips-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== TIPS NA VYLET ===== */
+        .tips {
+            background: var(--bg);
+        }
+        .tips-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .tips-header .section-label { justify-content: center; }
+        .tips-header .section-label::before { display: none; }
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .tip-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 2rem;
+            transition: all 0.4s;
+        }
+        .tip-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(44, 95, 124, 0.1);
+            border-color: var(--accent);
+        }
+        .tip-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(44, 95, 124, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+        }
+        .tip-card-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+        .tip-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
+            color: var(--text);
+        }
+        .tip-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .tip-card .tip-distance {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.8rem;
+            background: rgba(44, 95, 124, 0.06);
+            border-radius: 20px;
+        }
+
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .preloader-inner {
+            text-align: center;
+        }
+        .preloader-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        .preloader-bar {
+            width: 120px;
+            height: 2px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .preloader-bar::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 100%;
+            background: var(--accent);
+            border-radius: 2px;
+            animation: preloaderSlide 1s ease-in-out infinite;
+        }
+        @keyframes preloaderSlide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(350%); }
+        }
+
+        /* ===== WEATHER WIDGET ===== */
+        .weather-info {
+            background: var(--bg-dark);
+            padding: 5rem 0;
+        }
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            text-align: center;
+        }
+        .weather-item {
+            padding: 2rem 1rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        .weather-item:hover {
+            border-color: rgba(44, 95, 124, 0.3);
+            background: rgba(44, 95, 124, 0.05);
+        }
+        .weather-icon {
+            width: 44px;
+            height: 44px;
+            margin: 0 auto 1rem;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .weather-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+        .weather-item h4 {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 0.4rem;
+            font-family: var(--font-display);
+        }
+        .weather-item p {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
+        }
+
+        /* ===== FOOTER ENHANCED ===== */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-brand h3 {
+            font-family: var(--font-display);
+            color: rgba(255,255,255,0.85);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+        .footer-brand p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.6;
+        }
+        .footer-col h4 {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+        .footer-col ul li a {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.4);
+            transition: color 0.3s;
+        }
+        .footer-col ul li a:hover {
+            color: var(--gold);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 968px) {
+            .surroundings-grid { grid-template-columns: 1fr 1fr; }
+            .tips-grid { grid-template-columns: 1fr 1fr; }
+            .weather-grid { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1232,6 +1445,134 @@
         </div>
     </section>
 
+    <!-- PARALLAX QUOTE -->
+    <div class="parallax-quote reveal">
+        <div class="container">
+            <blockquote>
+                Klidné ubytování v srdci města, kde se řeka Lužnice stává vaším sousedem a jižní Čechy vaším hřištěm.
+                <cite>Penzion nad lékárnou</cite>
+            </blockquote>
+        </div>
+    </div>
+
+    <!-- SURROUNDINGS -->
+    <section class="surroundings">
+        <div class="container">
+            <div class="surroundings-header">
+                <div class="section-label">Okolí</div>
+                <h2 class="section-title">Co najdete v okolí</h2>
+            </div>
+            <div class="surroundings-grid">
+                <div class="surrounding-card reveal">
+                    <div class="surrounding-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                    </div>
+                    <h3>Autobusová zastávka</h3>
+                    <p>Do 50 metrů od penzionu se nachází autobusová zastávka pro snadné spojení</p>
+                </div>
+                <div class="surrounding-card reveal reveal-delay-1">
+                    <div class="surrounding-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"></path><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                    </div>
+                    <h3>Restaurace</h3>
+                    <p>Restaurace a další stravovací zařízení v bezprostřední blízkosti</p>
+                </div>
+                <div class="surrounding-card reveal reveal-delay-2">
+                    <div class="surrounding-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
+                    </div>
+                    <h3>Obchod s potravinami</h3>
+                    <p>Nákupy potravin vyřídíte pěšky, obchod je do 50 metrů</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIPS NA VYLET -->
+    <section class="tips">
+        <div class="container">
+            <div class="tips-header">
+                <div class="section-label">Tipy na výlet</div>
+                <h2 class="section-title">Poznejte okolí</h2>
+                <p class="section-subtitle">Veselí nad Lužnicí je ideální základnou pro poznávání jižních Čech</p>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card reveal">
+                    <div class="tip-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    </div>
+                    <h3>Zámek Bechyně</h3>
+                    <p>Renesanční zámek na skalním ostrohu s krásným výhledem na údolí řeky Lužnice a historickým centrem města</p>
+                    <span class="tip-distance">15 km</span>
+                </div>
+                <div class="tip-card reveal reveal-delay-1">
+                    <div class="tip-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                    </div>
+                    <h3>Třeboňsko</h3>
+                    <p>Biosférická rezervace UNESCO se systémem historických rybníků, ideální pro cykloturistiku a poznávání přírody</p>
+                    <span class="tip-distance">20 km</span>
+                </div>
+                <div class="tip-card reveal reveal-delay-2">
+                    <div class="tip-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </div>
+                    <h3>Tábor</h3>
+                    <p>Historické město husitů se středověkým centrem, podzemními chodbami a muzeem husitského hnutí</p>
+                    <span class="tip-distance">28 km</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <div class="cta-banner">
+        <div class="cta-content">
+            <h2>Zarezervujte si pobyt</h2>
+            <p>Zavolejte nám a domluvte se na termínu vašeho pobytu v jižních Čechách</p>
+            <a href="tel:+420607601726" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                +420 607 601 726
+            </a>
+        </div>
+    </div>
+
+    <!-- WEATHER INFO -->
+    <div class="weather-info">
+        <div class="container">
+            <div class="weather-grid">
+                <div class="weather-item reveal">
+                    <div class="weather-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    </div>
+                    <h4>Jaro</h4>
+                    <p>Rozkvetlá příroda, cykloturistika a výlety po okolí</p>
+                </div>
+                <div class="weather-item reveal reveal-delay-1">
+                    <div class="weather-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line></svg>
+                    </div>
+                    <h4>Léto</h4>
+                    <p>Koupání v řece, rybníky a letní kulturní akce v regionu</p>
+                </div>
+                <div class="weather-item reveal reveal-delay-2">
+                    <div class="weather-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 00-10 0"></path><line x1="12" y1="9" x2="12" y2="2"></line><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line><line x1="1" y1="18" x2="3" y2="18"></line><line x1="21" y1="18" x2="23" y2="18"></line><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line></svg>
+                    </div>
+                    <h4>Podzim</h4>
+                    <p>Barevná krajina, houbaření a sklizeň na tradičních trzích</p>
+                </div>
+                <div class="weather-item reveal reveal-delay-3">
+                    <div class="weather-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.58A5 5 0 0018 8h-1.26A8 8 0 104 16.25"></path><line x1="8" y1="16" x2="8.01" y2="16"></line><line x1="8" y1="20" x2="8.01" y2="20"></line><line x1="12" y1="18" x2="12.01" y2="18"></line><line x1="12" y1="22" x2="12.01" y2="22"></line><line x1="16" y1="16" x2="16.01" y2="16"></line><line x1="16" y1="20" x2="16.01" y2="20"></line></svg>
+                    </div>
+                    <h4>Zima</h4>
+                    <p>Klid a pohoda, adventní trhy a zimní procházky podél řeky</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="divider"><div class="divider-line"></div></div>
 
     <!-- GALERIE -->
@@ -1308,14 +1649,53 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <span class="footer-copy">Penzion nad lékárnou &mdash; Veselí nad Lužnicí &copy; 2026</span>
-                <div class="footer-credit">
-                    Vytvořeno s péčí
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Penzion nad lékárnou</h3>
+                    <p>Celoroční ubytování v centru Veselí nad Lužnicí na břehu řeky Lužnice. Pokoje pro 2&ndash;5 osob s kompletním vybavením.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><a href="tel:+420381581082">+420 381 581 082</a></li>
+                        <li><a href="tel:+420607601726">+420 607 601 726</a></li>
+                        <li><a href="https://psalvia.webnode.cz/" target="_blank">psalvia.webnode.cz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigace</h4>
+                    <ul>
+                        <li><a href="#about">O nás</a></li>
+                        <li><a href="#pokoje">Pokoje</a></li>
+                        <li><a href="#vybaveni">Vybavení</a></li>
+                        <li><a href="#galerie">Galerie</a></li>
+                        <li><a href="#kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-content">
+                    <span class="footer-copy">Penzion nad lékárnou &mdash; Veselí nad Lužnicí &copy; 2026</span>
+                    <div class="footer-credit">
+                        Vytvořeno s péčí
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-logo">Penzion nad lékárnou</div>
+            <div class="preloader-bar"></div>
+        </div>
+    </div>
 
     <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox">
@@ -1326,20 +1706,42 @@
     </div>
 
     <script>
-        // Navigation scroll effect
-        const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 50);
+        /* ===== PRELOADER ===== */
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+                setTimeout(() => preloader.remove(), 600);
+            }, 400);
         });
 
-        // Mobile menu toggle
+        /* ===== NAVIGATION ===== */
+        const nav = document.getElementById('nav');
+        const backToTop = document.getElementById('backToTop');
+        let lastScrollY = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+
+            // Nav background on scroll
+            nav.classList.toggle('scrolled', currentScroll > 50);
+
+            // Back to top button visibility
+            backToTop.classList.toggle('visible', currentScroll > 500);
+
+            lastScrollY = currentScroll;
+        });
+
+        /* ===== MOBILE MENU ===== */
         const navToggle = document.getElementById('navToggle');
         const navLinks = document.getElementById('navLinks');
+
         navToggle.addEventListener('click', () => {
             navToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
 
+        // Close menu on link click
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navToggle.classList.remove('active');
@@ -1347,7 +1749,15 @@
             });
         });
 
-        // Reveal animations
+        // Close menu on outside click
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav')) {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        /* ===== REVEAL ANIMATIONS ===== */
         const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1355,17 +1765,55 @@
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
 
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // Lightbox
+        /* ===== ACTIVE NAV LINK HIGHLIGHT ===== */
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navItems.forEach(item => {
+                        item.style.color = '';
+                        if (item.getAttribute('href') === '#' + id) {
+                            item.style.color = 'var(--gold)';
+                        }
+                    });
+                }
+            });
+        }, {
+            threshold: 0.3,
+            rootMargin: '-80px 0px -50% 0px'
+        });
+
+        sections.forEach(section => sectionObserver.observe(section));
+
+        /* ===== HERO PARALLAX ===== */
+        const heroBg = document.querySelector('.hero-bg img');
+        if (heroBg) {
+            window.addEventListener('scroll', () => {
+                const scroll = window.scrollY;
+                if (scroll < window.innerHeight) {
+                    heroBg.style.transform = 'translateY(' + (scroll * 0.3) + 'px) scale(1.1)';
+                }
+            });
+        }
+
+        /* ===== LIGHTBOX ===== */
         const galleryImages = ['images/foto1.jpg', 'images/foto2.jpg'];
         let currentLightboxIndex = 0;
 
         function openLightbox(index) {
             currentLightboxIndex = index;
-            document.getElementById('lightboxImg').src = galleryImages[index];
+            const lightboxImg = document.getElementById('lightboxImg');
+            lightboxImg.src = galleryImages[index];
             document.getElementById('lightbox').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1385,6 +1833,7 @@
             document.getElementById('lightboxImg').src = galleryImages[currentLightboxIndex];
         }
 
+        // Lightbox keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (!document.getElementById('lightbox').classList.contains('active')) return;
             if (e.key === 'Escape') closeLightbox();
@@ -1392,8 +1841,54 @@
             if (e.key === 'ArrowLeft') prevLightbox();
         });
 
+        // Lightbox close on backdrop click
         document.getElementById('lightbox').addEventListener('click', (e) => {
             if (e.target === document.getElementById('lightbox')) closeLightbox();
+        });
+
+        /* ===== SMOOTH ANCHOR SCROLL ===== */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        /* ===== LAZY IMAGE LOADING ===== */
+        const lazyImages = document.querySelectorAll('img[src]');
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.style.opacity = '0';
+                    img.style.transition = 'opacity 0.6s ease';
+                    img.onload = () => {
+                        img.style.opacity = '1';
+                    };
+                    if (img.complete) {
+                        img.style.opacity = '1';
+                    }
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '100px'
+        });
+
+        lazyImages.forEach(img => imageObserver.observe(img));
+
+        /* ===== CURRENT YEAR ===== */
+        const yearElements = document.querySelectorAll('.footer-copy');
+        const currentYear = new Date().getFullYear();
+        yearElements.forEach(el => {
+            el.innerHTML = el.innerHTML.replace('2026', currentYear);
         });
     </script>
 </body>
