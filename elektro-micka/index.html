@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEKTRO Micka | Elektro, Klíče & Autoklíče — Sušice</title>
+    <meta name="description" content="ELEKTRO Micka — elektro obchod, výroba klíčů, čipování autoklíčů v Sušici. Prodej elektrospotřebičů, zámků a kování.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #0a1628;
+            --color-bg-light: #0e1d35;
+            --color-bg-card: #122240;
+            --color-accent: #3498db;
+            --color-accent-light: #5cb3e8;
+            --color-accent-dark: #2176ad;
+            --color-orange: #f39c12;
+            --color-orange-light: #f5b041;
+            --color-orange-dark: #d68910;
+            --color-text: #d4dde8;
+            --color-text-muted: #7a8ea6;
+            --color-text-light: #eef3f8;
+            --color-white: #ffffff;
+            --color-border: #1a3050;
+            --font-heading: 'Exo 2', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.25);
+            --shadow-md: 0 8px 30px rgba(0,0,0,0.35);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.4);
+            --radius: 10px;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background-color: var(--color-bg); color: var(--color-text); line-height: 1.7; overflow-x: hidden; }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); }
+        .reveal-left.visible { opacity: 1; transform: translateX(0); }
+        .reveal-right { opacity: 0; transform: translateX(60px); transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); }
+        .reveal-right.visible { opacity: 1; transform: translateX(0); }
+        .reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 0.8s var(--transition), transform 0.8s var(--transition); }
+        .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes scrollPulse { 0%, 100% { opacity: 1; transform: scaleY(1); } 50% { opacity: 0.3; transform: scaleY(0.6); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+        /* NAV */
+        nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1.2rem 2rem; transition: all var(--transition); background: transparent; }
+        nav.scrolled { background: rgba(10, 22, 40, 0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 2px 30px rgba(0,0,0,0.5); padding: 0.7rem 2rem; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--color-white); text-decoration: none; letter-spacing: 0.04em; }
+        .nav-logo span { color: var(--color-orange); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; }
+        .nav-links a { color: var(--color-text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s ease; position: relative; font-family: var(--font-heading); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: var(--color-orange); transition: width 0.3s ease; }
+        .nav-links a:hover { color: var(--color-accent-light); }
+        .nav-links a:hover::after { width: 100%; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 6px; z-index: 1001; }
+        .hamburger span { width: 28px; height: 2px; background: var(--color-white); transition: all 0.3s ease; border-radius: 2px; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translateY(11px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translateY(-11px); }
+
+        /* HERO */
+        .hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-light) 50%, #0d2240 100%); }
+        .hero-grid {
+            position: absolute; inset: 0; z-index: 0;
+            background-image: linear-gradient(rgba(52, 152, 219, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(52, 152, 219, 0.06) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(52, 152, 219, 0.08) 0%, transparent 70%); top: -200px; right: -200px; z-index: 0; }
+        .hero-glow-2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(243, 156, 18, 0.06) 0%, transparent 70%); bottom: -100px; left: -100px; z-index: 0; }
+        .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 2rem; max-width: 900px; }
+        .hero-badge { display: inline-block; padding: 0.5rem 1.8rem; border: 1px solid var(--color-accent); border-radius: 50px; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-accent-light); margin-bottom: 2rem; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s ease 0.3s forwards; font-family: var(--font-heading); }
+        .hero h1 { font-family: var(--font-heading); font-size: clamp(2.6rem, 6vw, 4.5rem); font-weight: 800; color: var(--color-white); line-height: 1.1; margin-bottom: 1.2rem; opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease 0.5s forwards; }
+        .hero h1 em { color: var(--color-orange); font-style: normal; }
+        .hero-sub { font-size: 1.15rem; color: var(--color-text-muted); margin-bottom: 2.5rem; font-weight: 300; opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease 0.7s forwards; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease 0.9s forwards; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 2.2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; font-family: var(--font-heading); }
+        .btn-primary { background: var(--color-orange); color: var(--color-bg); }
+        .btn-primary:hover { background: var(--color-orange-light); transform: translateY(-3px); box-shadow: 0 12px 35px rgba(243, 156, 18, 0.3); }
+        .btn-outline { background: transparent; color: var(--color-text-light); border: 1.5px solid var(--color-border); }
+        .btn-outline:hover { border-color: var(--color-accent); color: var(--color-accent-light); transform: translateY(-3px); }
+        .hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 2; opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards; }
+        .hero-scroll a { color: var(--color-text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: color 0.3s ease; }
+        .hero-scroll a:hover { color: var(--color-orange); }
+        .scroll-line { width: 1px; height: 40px; background: var(--color-accent); animation: scrollPulse 2s ease-in-out infinite; }
+
+        /* STATS */
+        .stats-bar { background: var(--color-bg-card); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding: 3rem 2rem; }
+        .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+        .stat-item h3 { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: var(--color-orange); margin-bottom: 0.3rem; }
+        .stat-item p { font-size: 0.85rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+
+        /* SECTIONS */
+        section { padding: 6rem 2rem; position: relative; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-tag { display: inline-block; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-orange); margin-bottom: 1rem; font-weight: 700; font-family: var(--font-heading); }
+        .section-title { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3rem); color: var(--color-text-light); font-weight: 700; margin-bottom: 1rem; }
+        .section-title em { color: var(--color-accent-light); font-style: normal; }
+        .section-desc { color: var(--color-text-muted); max-width: 620px; margin: 0 auto; font-size: 1.05rem; font-weight: 300; }
+        .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--color-accent), var(--color-orange)); margin: 1.5rem auto 0; border-radius: 2px; }
+
+        /* O NAS */
+        #o-nas { background: var(--color-bg-light); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+        .about-image { position: relative; border-radius: var(--radius); overflow: hidden; }
+        .about-image img { width: 100%; height: 420px; object-fit: cover; border-radius: var(--radius); transition: transform 0.6s ease; }
+        .about-image:hover img { transform: scale(1.03); }
+        .about-image::before { content: ''; position: absolute; top: -12px; right: -12px; width: 100%; height: 100%; border: 2px solid var(--color-accent); border-radius: var(--radius); z-index: -1; opacity: 0.2; }
+        .about-text h2 { font-family: var(--font-heading); font-size: 2.2rem; color: var(--color-text-light); margin-bottom: 1.5rem; line-height: 1.2; }
+        .about-text h2 em { color: var(--color-orange); font-style: normal; }
+        .about-text p { color: var(--color-text-muted); margin-bottom: 1.5rem; font-size: 1.02rem; font-weight: 300; line-height: 1.9; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+        .about-feature { display: flex; align-items: flex-start; gap: 0.8rem; }
+        .about-feature-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; background: rgba(52, 152, 219, 0.12); display: flex; align-items: center; justify-content: center; color: var(--color-accent); }
+        .about-feature h4 { font-size: 0.88rem; color: var(--color-text-light); margin-bottom: 0.2rem; font-weight: 600; font-family: var(--font-heading); }
+        .about-feature p { font-size: 0.82rem; color: var(--color-text-muted); margin: 0; font-weight: 300; }
+
+        /* HOURS */
+        .hours-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(243, 156, 18, 0.12); border: 1px solid rgba(243, 156, 18, 0.25); border-radius: 8px; padding: 0.8rem 1.2rem; margin-top: 1.5rem; color: var(--color-orange); font-size: 0.9rem; }
+        .hours-badge .dot { width: 8px; height: 8px; background: var(--color-orange); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+
+        /* SERVICES */
+        #sluzby { background: var(--color-bg); }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .service-card { background: var(--color-bg-card); border-radius: var(--radius); padding: 2.5rem 2rem; text-align: center; transition: all var(--transition); position: relative; overflow: hidden; border: 1px solid var(--color-border); }
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--color-accent), var(--color-orange)); transform: scaleX(0); transition: transform var(--transition); }
+        .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--color-accent); }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-icon { width: 70px; height: 70px; border-radius: 50%; background: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--color-accent); transition: all var(--transition); }
+        .service-card:hover .service-icon { background: linear-gradient(135deg, var(--color-accent), var(--color-orange)); color: var(--color-white); transform: scale(1.1); }
+        .service-card h3 { font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-text-light); margin-bottom: 0.8rem; }
+        .service-card p { font-size: 0.9rem; color: var(--color-text-muted); font-weight: 300; line-height: 1.7; }
+
+        /* PARTNERS */
+        #partneri { background: var(--color-bg-light); }
+        .partners-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2rem; align-items: center; }
+        .partner-logo { background: var(--color-bg-card); border-radius: var(--radius); padding: 1.5rem; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-border); transition: all var(--transition); min-height: 90px; }
+        .partner-logo:hover { border-color: var(--color-accent); transform: translateY(-4px); box-shadow: var(--shadow-sm); }
+        .partner-logo img { max-width: 100%; max-height: 50px; object-fit: contain; filter: brightness(0.85) contrast(1.1); transition: filter 0.3s ease; }
+        .partner-logo:hover img { filter: brightness(1) contrast(1); }
+        .partner-logo span { font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* CTA */
+        .cta-strip { background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent) 50%, #1a6fb5 100%); padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; }
+        .cta-strip::before { content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px; border-radius: 50%; background: rgba(243, 156, 18, 0.08); }
+        .cta-strip h2 { font-family: var(--font-heading); font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--color-white); margin-bottom: 1rem; }
+        .cta-strip p { color: rgba(255,255,255,0.8); font-size: 1.1rem; font-weight: 300; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .cta-strip .btn { background: var(--color-orange); color: var(--color-bg); }
+        .cta-strip .btn:hover { background: var(--color-orange-light); transform: translateY(-3px); box-shadow: 0 12px 35px rgba(243, 156, 18, 0.35); }
+
+        /* KONTAKT */
+        #kontakt { background: var(--color-bg); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .contact-info h2 { font-family: var(--font-heading); font-size: 2.2rem; color: var(--color-text-light); margin-bottom: 1.5rem; }
+        .contact-info > p { color: var(--color-text-muted); font-weight: 300; margin-bottom: 2.5rem; font-size: 1.02rem; line-height: 1.8; }
+        .contact-item { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 1.8rem; }
+        .contact-icon { flex-shrink: 0; width: 48px; height: 48px; border-radius: 12px; background: rgba(52, 152, 219, 0.12); display: flex; align-items: center; justify-content: center; color: var(--color-accent); }
+        .contact-detail h4 { font-size: 0.85rem; color: var(--color-text-light); margin-bottom: 0.3rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--font-heading); }
+        .contact-detail p, .contact-detail a { font-size: 0.95rem; color: var(--color-text-muted); font-weight: 300; text-decoration: none; transition: color 0.3s ease; }
+        .contact-detail a:hover { color: var(--color-orange); }
+        .contact-map { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); height: 100%; min-height: 450px; }
+        .contact-map iframe { width: 100%; height: 100%; border: none; min-height: 450px; }
+
+        /* FOOTER */
+        footer { background: #060e1a; color: rgba(255,255,255,0.55); padding: 4rem 2rem 2rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand h3 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-white); margin-bottom: 1rem; }
+        .footer-brand h3 span { color: var(--color-orange); }
+        .footer-brand p { font-size: 0.9rem; font-weight: 300; line-height: 1.8; }
+        .footer-links h4, .footer-hours h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent); margin-bottom: 1.2rem; font-family: var(--font-heading); }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.6rem; }
+        .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.9rem; font-weight: 300; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--color-orange); }
+        .footer-hours p { font-size: 0.9rem; font-weight: 300; margin-bottom: 0.3rem; }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-size: 0.82rem; font-weight: 300; }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .partners-grid { grid-template-columns: repeat(3, 1fr); }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: var(--color-bg); flex-direction: column; justify-content: center; align-items: center; gap: 2rem; transition: right 0.4s ease; box-shadow: -5px 0 30px rgba(0,0,0,0.5); }
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 1rem; }
+            .hamburger { display: flex; }
+            .services-grid { grid-template-columns: 1fr; }
+            .partners-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            section { padding: 4rem 1.5rem; }
+            .about-features { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .partners-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">ELEKTRO <span>Micka</span></a>
+            <ul class="nav-links">
+                <li><a href="#o-nas">O nás</a></li>
+                <li><a href="#sluzby">Služby</a></li>
+                <li><a href="#partneri">Partneři</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-glow-2"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Elektro &bull; Klíče &bull; Autoklíče</div>
+            <h1>Váš partner pro <em>elektro</em> a klíčové služby</h1>
+            <p class="hero-sub">Prodej elektrospotřebičů, výroba klíčů a autoklíčů, čipování, zámky a kování. Vše pod jednou střechou v Sušici.</p>
+            <div class="hero-buttons">
+                <a href="#sluzby" class="btn btn-primary">Naše služby</a>
+                <a href="#kontakt" class="btn btn-outline">Kontakt</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <a href="#o-nas">Zjistit více<div class="scroll-line"></div></a>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats-bar">
+        <div class="stats-grid">
+            <div class="stat-item reveal" style="transition-delay: 0.1s;"><h3>Po-Pá</h3><p>8:00 - 17:00</p></div>
+            <div class="stat-item reveal" style="transition-delay: 0.2s;"><h3>So</h3><p>8:00 - 12:00</p></div>
+            <div class="stat-item reveal" style="transition-delay: 0.3s;"><h3>12+</h3><p>Partnerských značek</p></div>
+            <div class="stat-item reveal" style="transition-delay: 0.4s;"><h3>100%</h3><p>Spolehlivost</p></div>
+        </div>
+    </div>
+
+    <!-- O NAS -->
+    <section id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal-left">
+                    <img src="images/header.jpg" alt="ELEKTRO Micka prodejna">
+                </div>
+                <div class="about-text reveal-right">
+                    <span class="section-tag">O nás</span>
+                    <h2>ELEKTRO Micka — váš <em>elektro</em> obchod v Sušici</h2>
+                    <p>Jsme zavedený elektro obchod a klíčová služba v centru Sušice. Nabízíme široký sortiment elektrospotřebičů od předních výrobců, výrobu klíčů a autoklíčů, čipování a kompletní služby v oblasti zámků a kování.</p>
+                    <p>Spolupracujeme s renomovanými značkami jako Bosch, Electrolux, Whirlpool, AEG, EVVA, FAB a dalšími. Najdete u nás vše od malých domácích spotřebičů až po profesionální zabezpečovací systémy.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            </div>
+                            <div><h4>Elektrospotřebiče</h4><p>Přední světové značky</p></div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            </div>
+                            <div><h4>Klíče a autoklíče</h4><p>Výroba a čipování</p></div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div><h4>Zámky a kování</h4><p>EVVA, FAB a další</p></div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            </div>
+                            <div><h4>Otevírací doba</h4><p>Po-Pá 8-17, So 8-12</p></div>
+                        </div>
+                    </div>
+                    <div class="hours-badge">
+                        <span class="dot"></span>
+                        Otevřeno: Po-Pá 8:00-17:00 | So 8:00-12:00
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLUZBY -->
+    <section id="sluzby">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Naše služby</span>
+                <h2 class="section-title">Elektro, klíče a <em>zabezpečení</em></h2>
+                <p class="section-desc">Kompletní nabídka elektrospotřebičů, klíčových služeb a zabezpečovacích systémů.</p>
+                <div class="divider"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal" style="transition-delay: 0.05s;">
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h3>Výroba klíčů</h3>
+                    <p>Výroba klasických klíčů i autoklíčů na míru. Rychle a spolehlivě přímo na prodejně.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.1s;">
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+                    </div>
+                    <h3>Čipování autoklíčů</h3>
+                    <p>Profesionální čipování autoklíčů pro většinu automobilových značek.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.15s;">
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <h3>Elektrospotřebiče</h3>
+                    <p>Prodej elektrospotřebičů od značek Bosch, Electrolux, Candy, AEG, Mora, Gorenje, Whirlpool a dalších.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.2s;">
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Zámky a kování</h3>
+                    <p>Prodej zámků a kování od předních výrobců EVVA a FAB. Přestavby vložek.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.25s;">
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    </div>
+                    <h3>Přestavby vložek</h3>
+                    <p>Profesionální přestavby cylindrických vložek pro zvýšení bezpečnosti.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.3s;">
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <h3>Centrální vysávání</h3>
+                    <p>Prodej a montáž systémů centrálního vysávání pro rodinné domy a byty.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section id="partneri">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Naši partneři</span>
+                <h2 class="section-title">Spolupracujeme s <em>nejlepšími</em></h2>
+                <p class="section-desc">Nabízíme produkty předních světových značek.</p>
+                <div class="divider"></div>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-logo reveal" style="transition-delay: 0.05s;"><span>EMOS</span></div>
+                <div class="partner-logo reveal" style="transition-delay: 0.1s;"><img src="images/logo-bosch.jpg" alt="Bosch"></div>
+                <div class="partner-logo reveal" style="transition-delay: 0.15s;"><img src="images/logo-electrolux.jpg" alt="Electrolux"></div>
+                <div class="partner-logo reveal" style="transition-delay: 0.2s;"><span>Candy</span></div>
+                <div class="partner-logo reveal" style="transition-delay: 0.25s;"><span>AEG</span></div>
+                <div class="partner-logo reveal" style="transition-delay: 0.3s;"><span>Tatramat</span></div>
+                <div class="partner-logo reveal" style="transition-delay: 0.35s;"><span>Mora</span></div>
+                <div class="partner-logo reveal" style="transition-delay: 0.4s;"><span>Gorenje</span></div>
+                <div class="partner-logo reveal" style="transition-delay: 0.45s;"><img src="images/logo-whirlpool.jpg" alt="Whirlpool"></div>
+                <div class="partner-logo reveal" style="transition-delay: 0.5s;"><img src="images/logo-evva.jpg" alt="EVVA"></div>
+                <div class="partner-logo reveal" style="transition-delay: 0.55s;"><img src="images/logo-fab.jpg" alt="FAB"></div>
+                <div class="partner-logo reveal" style="transition-delay: 0.6s;"><span>Dražice</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-strip">
+        <div class="container reveal">
+            <h2>Potřebujete klíče nebo elektro?</h2>
+            <p>Navštivte naši prodejnu v centru Sušice nebo nám zavolejte. Poradíme s výběrem a zajistíme vše potřebné.</p>
+            <a href="tel:+420376526551" class="btn">Zavolat: 376 526 551</a>
+        </div>
+    </div>
+
+    <!-- KONTAKT -->
+    <section id="kontakt">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info reveal-left">
+                    <span class="section-tag">Kontakt</span>
+                    <h2>ELEKTRO Micka</h2>
+                    <p>Najdete nás na Mostní ulici v centru Sušice. Přijďte se podívat na naši nabídku nebo nám zavolejte.</p>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Adresa</h4>
+                            <p>Mostní 45<br>342 01 Sušice I</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Telefon</h4>
+                            <p><a href="tel:+420376526551">376 526 551</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>E-mail</h4>
+                            <p><a href="mailto:elektroservis.micka@seznam.cz">elektroservis.micka@seznam.cz</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Otevírací doba</h4>
+                            <p>Po - Pá: 8:00 - 17:00</p>
+                            <p>So: 8:00 - 12:00</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Web</h4>
+                            <p><a href="https://elektro-micka.webnode.cz/" target="_blank" rel="noopener">elektro-micka.webnode.cz</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-map reveal-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2620!2d13.5180!3d49.2310!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b6e8e8e8e8e8e%3A0x400af0f6615f1e0!2sMostn%C3%AD%2045%2C%20342%2001%20Su%C5%A1ice!5e0!3m2!1scs!2scz!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - ELEKTRO Micka, Sušice"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>ELEKTRO <span>Micka</span></h3>
+                <p>Elektro obchod, výroba klíčů, čipování autoklíčů, zámky a kování. Váš spolehlivý partner v Sušici.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigace</h4>
+                <ul>
+                    <li><a href="#o-nas">O nás</a></li>
+                    <li><a href="#sluzby">Služby</a></li>
+                    <li><a href="#partneri">Partneři</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+            <div class="footer-hours">
+                <h4>Otevírací doba</h4>
+                <p>Pondělí - Pátek: 8:00 - 17:00</p>
+                <p>Sobota: 8:00 - 12:00</p>
+                <p>Neděle: zavřeno</p>
+                <p style="margin-top: 1rem; color: var(--color-orange);">Tel: 376 526 551</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ELEKTRO Micka — Sušice. Všechna práva vyhrazena.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); });
+        document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navLinks.classList.remove('active'); }); });
+
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.pageYOffset > 60); });
+
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        const sections = document.querySelectorAll('section[id]');
+        const navLinkItems = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => { if (pageYOffset >= section.offsetTop - 200) current = section.getAttribute('id'); });
+            navLinkItems.forEach(link => { link.style.color = ''; if (link.getAttribute('href') === '#' + current) link.style.color = 'var(--color-orange)'; });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Beauty Sensual - moderní kosmetický a kadeřnický salon v Kaplici. Kadeřnictví, kosmetika, manikúra, pedikúra, permanentní řasy.">
+    <meta name="keywords" content="kadeřnictví, kosmetika, manikúra, pedikúra, Kaplice, Beauty Sensual, salon krásy">
+    <title>Beauty Sensual | Salon krásy Kaplice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* =============================================
+           CSS CUSTOM PROPERTIES
+        ============================================= */
+        :root {
+            --primary: #b76e79;
+            --primary-light: #d4959e;
+            --primary-dark: #8f4f58;
+            --accent: #2d2d2d;
+            --light: #fdf5f6;
+            --dark: #1a1015;
+            --white: #ffffff;
+            --gray-100: #f8f0f1;
+            --gray-200: #ede3e5;
+            --gray-300: #d4c5c8;
+            --gray-400: #a89095;
+            --gray-500: #7c6269;
+            --shadow-sm: 0 2px 8px rgba(183, 110, 121, 0.08);
+            --shadow-md: 0 8px 32px rgba(183, 110, 121, 0.12);
+            --shadow-lg: 0 16px 48px rgba(183, 110, 121, 0.18);
+            --shadow-xl: 0 24px 64px rgba(26, 16, 21, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.4s ease;
+            --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Jost', sans-serif;
+            --container-max: 1200px;
+            --section-padding: 100px 0;
+        }
+
+        /* =============================================
+           RESET & BASE
+        ============================================= */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--accent);
+            background-color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition-fast);
+        }
+
+        ul, ol { list-style: none; }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--dark);
+        }
+
+        p { margin-bottom: 1em; }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* =============================================
+           UTILITY CLASSES
+        ============================================= */
+        .section-label {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 16px;
+            position: relative;
+            padding-left: 48px;
+        }
+
+        .section-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 36px;
+            height: 1px;
+            background: var(--primary);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-500);
+            max-width: 560px;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .text-center { text-align: center; }
+
+        .text-center .section-subtitle { margin: 0 auto; }
+
+        .text-center .section-label { padding-left: 0; }
+
+        .text-center .section-label::before { display: none; }
+
+        /* =============================================
+           SCROLL ANIMATIONS
+        ============================================= */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* =============================================
+           NAVIGATION
+        ============================================= */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all var(--transition-normal);
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 0;
+            box-shadow: 0 4px 30px rgba(183, 110, 121, 0.08);
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--white);
+            transition: color var(--transition-fast);
+        }
+
+        .nav-logo span {
+            color: var(--primary-light);
+        }
+
+        .navbar.scrolled .nav-logo {
+            color: var(--dark);
+        }
+
+        .navbar.scrolled .nav-logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width var(--transition-normal);
+            border-radius: 1px;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: var(--gray-500);
+        }
+
+        .navbar.scrolled .nav-links a:hover {
+            color: var(--dark);
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 28px;
+            background: var(--primary);
+            color: var(--white) !important;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all var(--transition-fast);
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(183, 110, 121, 0.3);
+        }
+
+        .nav-cta::after { display: none !important; }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: all var(--transition-fast);
+            border-radius: 2px;
+        }
+
+        .navbar.scrolled .hamburger span {
+            background: var(--dark);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--dark) 0%, #2a1520 100%);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .mobile-menu a {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--white);
+            opacity: 0.8;
+            transition: opacity var(--transition-fast);
+        }
+
+        .mobile-menu a:hover {
+            opacity: 1;
+            color: var(--primary-light);
+        }
+
+        /* =============================================
+           HERO SECTION
+        ============================================= */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--dark) 0%, #2a1520 40%, var(--primary-dark) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/salon1.jpg') center/cover no-repeat;
+            opacity: 0.2;
+            filter: blur(2px);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to top, var(--white), transparent);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 680px;
+            padding: 0 24px;
+            margin-left: 8%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(183, 110, 121, 0.2);
+            border: 1px solid rgba(183, 110, 121, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--primary-light);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--primary-light);
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            font-weight: 300;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(183, 110, 121, 0.35);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* Hero floating card */
+        .hero-float-card {
+            position: absolute;
+            right: 8%;
+            bottom: 22%;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            max-width: 300px;
+            color: var(--white);
+        }
+
+        .hero-float-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .hero-float-card p {
+            font-size: 0.9rem;
+            opacity: 0.75;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            font-weight: 300;
+        }
+
+        .hero-hours {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.85rem;
+        }
+
+        .hero-hours div {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-hours div span:first-child {
+            opacity: 0.65;
+        }
+
+        .hero-decor {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 1;
+        }
+
+        .hero-decor-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(183, 110, 121, 0.15);
+            top: -100px;
+            right: -100px;
+        }
+
+        .hero-decor-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(212, 149, 158, 0.1);
+            bottom: 10%;
+            left: 20%;
+        }
+
+        /* =============================================
+           ABOUT SECTION
+        ============================================= */
+        .about {
+            padding: var(--section-padding);
+            background: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-image-accent {
+            position: absolute;
+            bottom: -24px;
+            right: -24px;
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            border-radius: var(--radius-lg);
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .about-stats {
+            position: absolute;
+            bottom: 32px;
+            left: -32px;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 24px 32px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            gap: 32px;
+        }
+
+        .about-stat {
+            text-align: center;
+        }
+
+        .about-stat-number {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            line-height: 1;
+        }
+
+        .about-stat-label {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .about-text h2 { margin-bottom: 24px; }
+
+        .about-text p {
+            color: var(--gray-500);
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 36px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .about-feature-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .about-feature-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .about-feature span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        /* =============================================
+           SERVICES SECTION
+        ============================================= */
+        .services {
+            padding: var(--section-padding);
+            background: var(--light);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(183, 110, 121, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-normal);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(183, 110, 121, 0.1);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--gray-100), var(--light));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            transition: all var(--transition-normal);
+        }
+
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 1.5;
+            transition: stroke var(--transition-normal);
+        }
+
+        .service-card:hover .service-icon svg {
+            stroke: var(--white);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+            font-weight: 300;
+            margin-bottom: 0;
+        }
+
+        .service-card .service-list {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .service-card .service-list li {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .service-card .service-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 6px;
+            height: 6px;
+            background: var(--primary-light);
+            border-radius: 50%;
+        }
+
+        /* =============================================
+           GALLERY SECTION
+        ============================================= */
+        .gallery {
+            padding: var(--section-padding);
+            background: var(--white);
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .gallery-item {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px 32px 32px;
+            background: linear-gradient(to top, rgba(26, 16, 21, 0.8), transparent);
+            color: var(--white);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all var(--transition-normal);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.75;
+            margin-bottom: 0;
+        }
+
+        /* =============================================
+           TEAM SECTION
+        ============================================= */
+        .team {
+            padding: var(--section-padding);
+            background: linear-gradient(135deg, var(--light) 0%, var(--gray-100) 100%);
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            text-align: center;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 48px 32px 40px;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+            position: relative;
+        }
+
+        .team-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+            opacity: 0;
+            transition: all var(--transition-normal);
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .team-card:hover::after {
+            opacity: 1;
+            bottom: -3px;
+        }
+
+        .team-avatar {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .team-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 4px;
+        }
+
+        .team-card .team-role {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .team-card .team-phone {
+            font-size: 0.95rem;
+            color: var(--gray-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .team-card .team-phone svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* =============================================
+           INFO CARDS
+        ============================================= */
+        .info-cards {
+            padding: var(--section-padding);
+            background: var(--white);
+        }
+
+        .info-cards-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            background: var(--light);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at top right, rgba(183, 110, 121, 0.08) 0%, transparent 70%);
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-card h3 svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .info-card ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-card ul li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .info-card ul li span:first-child {
+            color: var(--gray-500);
+        }
+
+        .info-card ul li span:last-child {
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        /* =============================================
+           ACCESSIBILITY BANNER
+        ============================================= */
+        .accessibility {
+            padding: 60px 0;
+            background: var(--white);
+        }
+
+        .accessibility-card {
+            max-width: 700px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accessibility-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+        }
+
+        .accessibility-card h3 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .accessibility-card p {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-bottom: 0;
+            font-weight: 300;
+        }
+
+        .accessibility-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .accessibility-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--white);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* =============================================
+           CONTACT SECTION
+        ============================================= */
+        .contact {
+            padding: var(--section-padding);
+            background: var(--light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: start;
+        }
+
+        .contact-info { padding-right: 40px; }
+
+        .contact-info h2 { margin-bottom: 16px; }
+
+        .contact-info > p {
+            color: var(--gray-500);
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .contact-item:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-item-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-item-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--white);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .contact-item-text h4 {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray-400);
+            margin-bottom: 4px;
+        }
+
+        .contact-item-text p {
+            font-size: 1rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        .contact-item-text a {
+            color: var(--primary);
+        }
+
+        .contact-item-text a:hover {
+            color: var(--primary-dark);
+        }
+
+        .contact-map {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            height: 100%;
+            min-height: 480px;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 480px;
+            border: 0;
+            display: block;
+        }
+
+        /* =============================================
+           FOOTER
+        ============================================= */
+        .footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 80px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .footer-brand h3 span {
+            color: var(--primary-light);
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            max-width: 320px;
+        }
+
+        .footer-column h4 {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 24px;
+        }
+
+        .footer-column ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-column ul li a {
+            font-size: 0.9rem;
+            transition: all var(--transition-fast);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-light);
+            padding-left: 8px;
+        }
+
+        .footer-bottom {
+            padding: 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom a {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--white);
+        }
+
+        /* =============================================
+           BACK TO TOP
+        ============================================= */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition-normal);
+            z-index: 900;
+            box-shadow: 0 4px 16px rgba(183, 110, 121, 0.35);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-4px);
+        }
+
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--white);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* =============================================
+           RESPONSIVE
+        ============================================= */
+        @media (max-width: 1024px) {
+            .hero-float-card { display: none; }
+            .about-grid { gap: 48px; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            :root { --section-padding: 72px 0; }
+
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+
+            .hero-content { margin-left: 0; text-align: center; }
+            .hero-description { margin: 0 auto 40px; }
+            .hero-buttons { justify-content: center; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-stats { position: relative; left: 0; bottom: 0; margin-top: 24px; justify-content: center; }
+            .about-image-accent { display: none; }
+
+            .services-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item img { height: 280px; }
+
+            .team-grid { grid-template-columns: 1fr; max-width: 400px; }
+            .info-grid { grid-template-columns: 1fr; }
+
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .contact-info { padding-right: 0; }
+            .contact-map { min-height: 320px; }
+            .contact-map iframe { min-height: 320px; }
+
+            .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+
+            .accessibility-card { padding: 36px 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.4rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .about-features { grid-template-columns: 1fr; }
+            .about-stats { flex-direction: column; align-items: center; }
+            .about-image img { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#domov" class="nav-logo">Beauty <span>Sensual</span></a>
+            <div class="nav-links">
+                <a href="#domov">Domov</a>
+                <a href="#o-nas">O nás</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#tym">Náš tým</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#domov">Domov</a>
+        <a href="#o-nas">O nás</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#tym">Náš tým</a>
+        <a href="#kontakt">Kontakt</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="domov">
+        <div class="hero-decor hero-decor-1"></div>
+        <div class="hero-decor hero-decor-2"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Salon krásy v Kaplici
+            </div>
+            <h1>Dopřejte si <em>péči,</em> kterou si zasloužíte</h1>
+            <p class="hero-description">
+                Moderní kadeřnický a kosmetický salon v srdci Kaplice. Nabízíme profesionální péči o vaše vlasy, pleť, nehty i nohy v příjemném prostředí.
+            </p>
+            <div class="hero-buttons">
+                <a href="#sluzby" class="btn-primary">
+                    Naše služby
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+                <a href="#kontakt" class="btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Zavolejte nám
+                </a>
+            </div>
+        </div>
+        <div class="hero-float-card">
+            <h3>Otevírací doba</h3>
+            <p>Přijďte si k nám odpočinout a nabrat novou energii.</p>
+            <div class="hero-hours">
+                <div><span>Pondělí</span><span>Zavřeno</span></div>
+                <div><span>Út - Pá</span><span>8:30 - 18:00</span></div>
+                <div><span>Sobota</span><span>Dle objednání</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-wrapper fade-in-left">
+                    <div class="about-image">
+                        <img src="images/salon2.jpg" alt="Interiér salonu Beauty Sensual v Kaplici" loading="lazy">
+                    </div>
+                    <div class="about-image-accent"></div>
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <span class="about-stat-number">4</span>
+                            <span class="about-stat-label">Služby</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-number">3</span>
+                            <span class="about-stat-label">Specialistky</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-number">100%</span>
+                            <span class="about-stat-label">Spokojenost</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text fade-in-right">
+                    <span class="section-label">O nás</span>
+                    <h2 class="section-title">Salon, kde se budete cítit výjimečně</h2>
+                    <p>
+                        Vítejte v Beauty Sensual, moderním salonu krásy v Kaplici. Nabízíme komplexní služby kadeřnictví, kosmetiky, modeláže nehtů a pedikúry. Náš tým profesionálek se postará o to, abyste od nás odcházeli s úsměvem.
+                    </p>
+                    <p>
+                        Salon se nachází na adrese Linecká 23, U Světlých, ve 2. patře budovy s bezbariérovým přístupem a výtahem. Používáme kvalitní přípravky a sledujeme nejnovější trendy v oboru krásy a péče.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            </div>
+                            <span>Zkušený tým</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <span>Kvalitní přípravky</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            </div>
+                            <span>Bezbariérový přístup</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            </div>
+                            <span>Individuální přístup</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="sluzby">
+        <div class="container">
+            <div class="services-header fade-in">
+                <span class="section-label" style="padding-left:0;">Naše služby</span>
+                <h2 class="section-title">Kompletní péče o vaši krásu</h2>
+                <p class="section-subtitle" style="margin: 0 auto;">Od střihu a barvení vlasů přes kosmetické ošetření až po modeláž nehtů a pedikúru. U nás najdete vše pod jednou střechou.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in stagger-1">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>
+                    </div>
+                    <h3>Kadeřnictví</h3>
+                    <p>Profesionální kadeřnické služby pro dámy i pány. Kreativní střihy, barvení, melírování a trvalá ondulace.</p>
+                    <ul class="service-list">
+                        <li>Dámské a pánské střihy</li>
+                        <li>Barvení a melírování</li>
+                        <li>Trvalá ondulace</li>
+                        <li>Společenské a svatební účesy</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in stagger-2">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                    </div>
+                    <h3>Kosmetika</h3>
+                    <p>Kompletní kosmetická péče o vaši pleť. Ošetření, čištění, masky a speciální procedury pro zářivý vzhled.</p>
+                    <ul class="service-list">
+                        <li>Ošetření pleti</li>
+                        <li>Permanentní řasy</li>
+                        <li>Společenský make-up</li>
+                        <li>Svatební líčení</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in stagger-3">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg>
+                    </div>
+                    <h3>Nehtové studio</h3>
+                    <p>Modeláž nehtů, gelové nehty, nová generace laku, P-shine a profesionální manikúra pro dokonalé ruce.</p>
+                    <ul class="service-list">
+                        <li>Modeláž nehtů</li>
+                        <li>Gelové nehty</li>
+                        <li>Lak nové generace</li>
+                        <li>P-shine a manikúra</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in stagger-4">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    </div>
+                    <h3>Pedikúra</h3>
+                    <p>Profesionální pedikúra pro zdravé a krásné nohy. Odborná péče o chodidla, nehty a pokožku nohou.</p>
+                    <ul class="service-list">
+                        <li>Klasická pedikúra</li>
+                        <li>Medicinální pedikúra</li>
+                        <li>Lakování nehtů</li>
+                        <li>Péče o chodidla</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in stagger-5">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </div>
+                    <h3>Svatební balíčky</h3>
+                    <p>Kompletní příprava nevěsty na její velký den. Účes, líčení, manikúra a další služby dle přání.</p>
+                    <ul class="service-list">
+                        <li>Svatební účes</li>
+                        <li>Svatební make-up</li>
+                        <li>Manikúra nevěsty</li>
+                        <li>Zkouška účesu a líčení</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in stagger-6">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    </div>
+                    <h3>Prodej produktů</h3>
+                    <p>Kvalitní vlasová kosmetika a přípravky pro péči o pleť a nehty. Odborné poradenství při výběru produktů.</p>
+                    <ul class="service-list">
+                        <li>Vlasová kosmetika</li>
+                        <li>Přípravky pro pleť</li>
+                        <li>Péče o nehty</li>
+                        <li>Odborné poradenství</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery" id="galerie">
+        <div class="container">
+            <div class="gallery-header fade-in">
+                <span class="section-label" style="padding-left:0;">Galerie</span>
+                <h2 class="section-title">Nahlédněte do našeho salonu</h2>
+                <p class="section-subtitle" style="margin: 0 auto;">Příjemné prostředí, kde se budete cítit jako doma. Moderní vybavení a útulná atmosféra.</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in-left">
+                    <img src="images/salon1.jpg" alt="Interiér salonu Beauty Sensual - hlavní prostor" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Kadeřnický salon</h3>
+                        <p>Moderně vybavený prostor pro kadeřnické služby</p>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in-right">
+                    <img src="images/salon2.jpg" alt="Interiér salonu Beauty Sensual - kosmetická místnost" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Kosmetický salon</h3>
+                        <p>Útulné prostory pro kosmetické procedury a relaxaci</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="team" id="tym">
+        <div class="container">
+            <div class="team-header fade-in">
+                <span class="section-label" style="padding-left:0;">Náš tým</span>
+                <h2 class="section-title">Profesionální péče v dobrých rukou</h2>
+                <p class="section-subtitle" style="margin: 0 auto;">Tři zkušené specialistky se postarají o vaši krásu a pohodu. Každá je expertka ve svém oboru.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card fade-in stagger-1">
+                    <div class="team-avatar">JM</div>
+                    <h3>Jana Marková</h3>
+                    <p class="team-role">Kadeřnice</p>
+                    <div class="team-phone">
+                        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <a href="tel:+420720552898">+420 720 552 898</a>
+                    </div>
+                </div>
+                <div class="team-card fade-in stagger-2">
+                    <div class="team-avatar">PN</div>
+                    <h3>Pavlína Nová</h3>
+                    <p class="team-role">Kadeřnice</p>
+                    <div class="team-phone">
+                        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <a href="tel:+420721865382">+420 721 865 382</a>
+                    </div>
+                </div>
+                <div class="team-card fade-in stagger-3">
+                    <div class="team-avatar">MP</div>
+                    <h3>Marie Přibylová</h3>
+                    <p class="team-role">Kosmetička</p>
+                    <div class="team-phone">
+                        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <a href="tel:+420723037029">+420 723 037 029</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFO CARDS -->
+    <section class="info-cards">
+        <div class="container">
+            <div class="info-cards-header fade-in">
+                <span class="section-label" style="padding-left:0;">Praktické informace</span>
+                <h2 class="section-title" style="text-align:center;">Otevírací doba a přístupnost</h2>
+            </div>
+            <div class="info-grid">
+                <div class="info-card fade-in stagger-1">
+                    <h3>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        Otevírací doba
+                    </h3>
+                    <ul>
+                        <li><span>Pondělí</span><span>Zavřeno</span></li>
+                        <li><span>Úterý</span><span>8:30 - 18:00</span></li>
+                        <li><span>Středa</span><span>8:30 - 18:00</span></li>
+                        <li><span>Čtvrtek</span><span>8:30 - 18:00</span></li>
+                        <li><span>Pátek</span><span>8:30 - 18:00</span></li>
+                        <li><span>Sobota</span><span>Dle objednání</span></li>
+                        <li><span>Neděle</span><span>Zavřeno</span></li>
+                    </ul>
+                </div>
+                <div class="info-card fade-in stagger-2">
+                    <h3>
+                        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        Bezbariérový přístup
+                    </h3>
+                    <ul>
+                        <li><span>Adresa</span><span>Linecká 23, Kaplice</span></li>
+                        <li><span>Patro</span><span>2. patro</span></li>
+                        <li><span>Výtah</span><span>Ano</span></li>
+                        <li><span>Budova</span><span>U Světlých</span></li>
+                        <li><span>PSČ</span><span>382 41</span></li>
+                        <li><span>Parkování</span><span>U budovy</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACCESSIBILITY BANNER -->
+    <section class="accessibility">
+        <div class="container">
+            <div class="accessibility-card fade-in scale-in">
+                <div class="accessibility-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2.5"/><path d="m9 9 3 1.5L15 9"/><path d="M12 10.5V16"/><path d="m8 20 4-4 4 4"/></svg>
+                </div>
+                <h3>Bezbariérový salon s výtahem</h3>
+                <p>Náš salon je přístupný i pro osoby se sníženou pohyblivostí. Budova disponuje výtahem do 2. patra, kde se salon nachází. Pohodlí všech našich klientů je pro nás prioritou.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="kontakt">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info fade-in-left">
+                    <span class="section-label">Kontakt</span>
+                    <h2 class="section-title">Těšíme se na vás</h2>
+                    <p>Přijďte si k nám odpočinout a nabrat novou energii. Objednat se můžete telefonicky u jednotlivých specialistek nebo nám napište e-mail.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>Adresa</h4>
+                                <p>Linecká 23, U Světlých, 2. patro<br>382 41 Kaplice</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>Telefon</h4>
+                                <p>
+                                    Kadeřnictví: <a href="tel:+420720552898">+420 720 552 898</a><br>
+                                    Kadeřnictví: <a href="tel:+420721865382">+420 721 865 382</a><br>
+                                    Kosmetika: <a href="tel:+420723037029">+420 723 037 029</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>E-mail</h4>
+                                <p>
+                                    <a href="mailto:jana.markova13@gmail.com">jana.markova13@gmail.com</a><br>
+                                    <a href="mailto:paulina.nova@seznam.cz">paulina.nova@seznam.cz</a><br>
+                                    <a href="mailto:pribylovamaru@seznam.cz">pribylovamaru@seznam.cz</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <h4>Otevírací doba</h4>
+                                <p>Út - Pá: 8:30 - 18:00<br>So: dle objednání<br>Po, Ne: zavřeno</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map fade-in-right">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2620.5!2d14.497!3d48.739!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4773e3e1a1d97c45%3A0x400af0f6614e0b0!2sLineck%C3%A1%2023%2C%20382%2041%20Kaplice!5e0!3m2!1scs!2scz!4v1709740000000!5m2!1scs!2scz"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa - Beauty Sensual Kaplice">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Beauty <span>Sensual</span></h3>
+                    <p>Moderní salon krásy v Kaplici nabízející komplexní kadeřnické a kosmetické služby. Váš krásný vzhled je naší prioritou.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Služby</h4>
+                    <ul>
+                        <li><a href="#sluzby">Kadeřnictví</a></li>
+                        <li><a href="#sluzby">Kosmetika</a></li>
+                        <li><a href="#sluzby">Nehtové studio</a></li>
+                        <li><a href="#sluzby">Pedikúra</a></li>
+                        <li><a href="#sluzby">Svatební balíčky</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Navigace</h4>
+                    <ul>
+                        <li><a href="#domov">Domov</a></li>
+                        <li><a href="#o-nas">O nás</a></li>
+                        <li><a href="#galerie">Galerie</a></li>
+                        <li><a href="#tym">Náš tým</a></li>
+                        <li><a href="#kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><a href="tel:+420720552898">+420 720 552 898</a></li>
+                        <li><a href="tel:+420721865382">+420 721 865 382</a></li>
+                        <li><a href="tel:+420723037029">+420 723 037 029</a></li>
+                        <li><a href="mailto:jana.markova13@gmail.com">E-mail</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2025 Beauty Sensual. Všechna práva vyhrazena.</span>
+                <span>Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Zpět nahoru">
+        <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        /* Navbar scroll */
+        (function() {
+            var navbar = document.getElementById('navbar');
+            function handleScroll() {
+                if (window.pageYOffset > 80) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            handleScroll();
+        })();
+
+        /* Hamburger */
+        (function() {
+            var hamburger = document.getElementById('hamburger');
+            var mobileMenu = document.getElementById('mobileMenu');
+            var mobileLinks = mobileMenu.querySelectorAll('a');
+
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+
+            mobileLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        })();
+
+        /* Smooth scroll */
+        (function() {
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        var navHeight = document.getElementById('navbar').offsetHeight;
+                        var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                    }
+                });
+            });
+        })();
+
+        /* IntersectionObserver animations */
+        (function() {
+            var elements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in');
+            if ('IntersectionObserver' in window) {
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+                elements.forEach(function(el) { observer.observe(el); });
+            } else {
+                elements.forEach(function(el) { el.classList.add('visible'); });
+            }
+        })();
+
+        /* Back to top */
+        (function() {
+            var btn = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 500) {
+                    btn.classList.add('visible');
+                } else {
+                    btn.classList.remove('visible');
+                }
+            }, { passive: true });
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+
+        /* Active nav highlight */
+        (function() {
+            var sections = document.querySelectorAll('section[id]');
+            var navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+            function highlightNav() {
+                var scrollPos = window.pageYOffset + 120;
+                sections.forEach(function(section) {
+                    var top = section.offsetTop;
+                    var height = section.offsetHeight;
+                    var id = section.getAttribute('id');
+                    if (scrollPos >= top && scrollPos < top + height) {
+                        navLinks.forEach(function(link) {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+            window.addEventListener('scroll', highlightNav, { passive: true });
+            highlightNav();
+        })();
+
+        /* Parallax hero */
+        (function() {
+            var heroContent = document.querySelector('.hero-content');
+            window.addEventListener('scroll', function() {
+                var scrolled = window.pageYOffset;
+                if (scrolled < window.innerHeight && heroContent) {
+                    heroContent.style.transform = 'translateY(' + (scrolled * 0.15) + 'px)';
+                    heroContent.style.opacity = 1 - (scrolled / (window.innerHeight * 0.8));
+                }
+            }, { passive: true });
+        })();
+
+        /* Counter animation */
+        (function() {
+            function animateCounter(el, target, suffix) {
+                var current = 0;
+                var increment = target / 40;
+                var timer = setInterval(function() {
+                    current += increment;
+                    if (current >= target) { current = target; clearInterval(timer); }
+                    el.textContent = Math.floor(current) + (suffix || '');
+                }, 30);
+            }
+            var statNumbers = document.querySelectorAll('.about-stat-number');
+            if (statNumbers.length > 0 && 'IntersectionObserver' in window) {
+                var statsObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            statNumbers.forEach(function(stat) {
+                                var text = stat.textContent.trim();
+                                if (text.indexOf('%') !== -1) {
+                                    animateCounter(stat, parseInt(text), '%');
+                                } else {
+                                    animateCounter(stat, parseInt(text), '');
+                                }
+                            });
+                            statsObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                var statsSection = document.querySelector('.about-stats');
+                if (statsSection) statsObserver.observe(statsSection);
+            }
+        })();
+    </script>
+</body>
+</html>
