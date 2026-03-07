@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truhlářství Kána | Zakázková výroba nábytku - Chotoviny u Tábora</title>
+    <meta name="description" content="Truhlářství Kána - zakázková výroba nábytku, interiérové dveře, schodiště, kuchyňské linky. Kvalitní řemeslná práce od roku 1996. Chotoviny u Tábora.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Work+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES
+           ============================================ */
+        :root {
+            --primary: #3e2723;
+            --primary-light: #5d4037;
+            --primary-dark: #1b0f0a;
+            --accent: #8bc34a;
+            --accent-light: #aed581;
+            --accent-dark: #689f38;
+            --bg: #fafafa;
+            --bg-alt: #f5f0eb;
+            --text: #3e2723;
+            --text-light: #6d4c41;
+            --text-muted: #a1887f;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(62, 39, 35, 0.06);
+            --shadow-md: 0 4px 24px rgba(62, 39, 35, 0.10);
+            --shadow-lg: 0 8px 40px rgba(62, 39, 35, 0.14);
+            --shadow-xl: 0 16px 60px rgba(62, 39, 35, 0.18);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-heading: 'Josefin Sans', sans-serif;
+            --font-body: 'Work Sans', 'Segoe UI', sans-serif;
+            --max-width: 1200px;
+            --header-height: 80px;
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        a:hover { color: var(--accent-dark); }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--primary);
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); }
+        h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
+
+        p { margin-bottom: 1em; color: var(--text-light); }
+
+        ul, ol { list-style: none; }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================
+           SCROLL ANIMATIONS
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+        .delay-6 { transition-delay: 0.6s; }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            height: var(--header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid rgba(62, 39, 35, 0.08);
+            box-shadow: var(--shadow-sm);
+            height: 68px;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1001;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .logo-text {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.68rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0;
+            width: 0; height: 2px;
+            background: var(--accent);
+            transition: width var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px; height: 40px;
+            cursor: pointer;
+            z-index: 1001;
+            background: none; border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px; height: 2px;
+            background: var(--primary);
+            margin: 3px 0;
+            transition: all var(--transition);
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-20px); }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            opacity: 0; visibility: hidden;
+            transition: all var(--transition);
+        }
+
+        .mobile-menu.active { opacity: 1; visibility: visible; }
+
+        .mobile-menu a {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            padding: 12px 24px;
+        }
+
+        .mobile-menu a:hover { color: var(--accent-dark); }
+
+        /* ============================================
+           HERO
+           ============================================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding-top: var(--header-height);
+        }
+
+        .hero-bg {
+            position: absolute; inset: 0;
+        }
+
+        .hero-bg img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(62, 39, 35, 0.82) 0%, rgba(62, 39, 35, 0.55) 50%, rgba(139, 195, 74, 0.2) 100%);
+        }
+
+        .hero-content {
+            position: relative; z-index: 2;
+            max-width: 750px;
+            padding: 40px 20px 40px 60px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(139, 195, 74, 0.2);
+            border: 1px solid rgba(139, 195, 74, 0.4);
+            color: var(--accent-light);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            margin-bottom: 20px;
+            line-height: 1.15;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent-light);
+        }
+
+        .hero-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            max-width: 550px;
+            margin-bottom: 36px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 30px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: var(--primary-dark);
+            border-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background: var(--accent-light);
+            border-color: var(--accent-light);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(139,195,74,0.4);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            color: var(--white);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .btn-outline-light:hover {
+            background: var(--white);
+            color: var(--primary);
+            border-color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .btn-dark {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: var(--primary-light);
+            border-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: bounce 2s infinite;
+        }
+
+        .hero-scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent); }
+
+        @keyframes bounce {
+            0%,100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ============================================
+           SECTIONS
+           ============================================ */
+        .section { padding: 100px 0; }
+        .section-alt { background: var(--bg-alt); }
+        .section-dark { background: var(--primary); color: var(--white); }
+        .section-dark h2, .section-dark h3, .section-dark h4 { color: var(--white); }
+        .section-dark p { color: rgba(255,255,255,0.8); }
+
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-label {
+            display: inline-block;
+            color: var(--accent-dark);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .section-desc { max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+        .section-divider { width: 60px; height: 3px; background: var(--accent); margin: 20px auto 0; border-radius: 2px; }
+
+        /* ============================================
+           ABOUT
+           ============================================ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-image img {
+            width: 100%; height: 450px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .about-image:hover img { transform: scale(1.05); }
+
+        .about-badge {
+            position: absolute;
+            bottom: 20px; right: 20px;
+            background: var(--accent);
+            color: var(--primary-dark);
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .about-text h2 { margin-bottom: 20px; }
+        .about-text p { font-size: 1.05rem; margin-bottom: 14px; }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--bg-alt);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .about-feature-icon {
+            width: 34px; height: 34px;
+            background: var(--primary);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           SERVICES
+           ============================================ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-card-image {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .service-card-image img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .service-card:hover .service-card-image img { transform: scale(1.08); }
+
+        .service-card-body {
+            padding: 28px;
+        }
+
+        .service-card-body h3 { margin-bottom: 12px; }
+        .service-card-body p { font-size: 0.95rem; line-height: 1.7; }
+
+        .service-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary-dark);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        /* ============================================
+           PROCESS SECTION
+           ============================================ */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            position: relative;
+        }
+
+        .process-grid::before {
+            content: '';
+            position: absolute;
+            top: 45px;
+            left: 12.5%;
+            right: 12.5%;
+            height: 2px;
+            background: linear-gradient(to right, var(--accent), var(--primary-light));
+            z-index: 0;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-number {
+            width: 70px; height: 70px;
+            background: var(--primary);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            border: 4px solid var(--bg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .process-step h4 {
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .process-step p { font-size: 0.9rem; }
+
+        /* ============================================
+           GALLERY
+           ============================================ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+
+        .gallery-item:first-child {
+            grid-column: span 2;
+            grid-row: span 2;
+            aspect-ratio: auto;
+        }
+
+        .gallery-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .gallery-item:hover img { transform: scale(1.08); }
+
+        .gallery-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(62,39,35,0.7), transparent);
+            opacity: 0;
+            transition: opacity var(--transition);
+            display: flex; align-items: flex-end;
+            padding: 20px;
+        }
+
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        .gallery-overlay span { color: var(--white); font-weight: 600; font-size: 0.9rem; }
+
+        /* ============================================
+           MATERIALS
+           ============================================ */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .material-card {
+            text-align: center;
+            padding: 40px 28px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(10px);
+            transition: all var(--transition);
+        }
+
+        .material-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-4px);
+        }
+
+        .material-icon {
+            width: 70px; height: 70px;
+            margin: 0 auto 20px;
+            background: rgba(139,195,74,0.2);
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            color: var(--accent-light);
+        }
+
+        .material-card h4 { margin-bottom: 10px; }
+
+        /* ============================================
+           STATS
+           ============================================ */
+        .stats-bar {
+            padding: 50px 0;
+            background: var(--primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ============================================
+           PARTNERS
+           ============================================ */
+        .partners-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .partner-item {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 28px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .partner-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .partner-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .partner-item h4 { margin-bottom: 8px; font-size: 1rem; }
+        .partner-item p { font-size: 0.85rem; margin: 0; }
+
+        /* ============================================
+           CONTACT
+           ============================================ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info h3 { margin-bottom: 20px; font-size: 1.5rem; }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .contact-icon {
+            width: 48px; height: 48px;
+            background: var(--primary);
+            color: var(--accent);
+            border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-label {
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .contact-value { font-size: 1.02rem; color: var(--text); font-weight: 600; margin: 0; }
+        .contact-value a { font-weight: 600; }
+
+        .contact-map {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            min-height: 400px;
+        }
+
+        .contact-map iframe {
+            width: 100%; height: 100%; min-height: 400px; border: none;
+        }
+
+        /* ============================================
+           CTA
+           ============================================ */
+        .cta-section {
+            position: relative;
+            padding: 100px 0;
+            overflow: hidden;
+        }
+
+        .cta-bg { position: absolute; inset: 0; }
+        .cta-bg img { width: 100%; height: 100%; object-fit: cover; }
+        .cta-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(62,39,35,0.88), rgba(27,15,10,0.92)); }
+
+        .cta-content {
+            position: relative; z-index: 2;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 { color: var(--white); margin-bottom: 16px; }
+        .cta-content p { color: rgba(255,255,255,0.85); font-size: 1.15rem; margin-bottom: 32px; }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--primary-dark);
+            color: rgba(255,255,255,0.7);
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand { max-width: 300px; }
+        .footer-brand .logo-text { color: var(--white); font-size: 1.3rem; margin-bottom: 14px; }
+        .footer-brand .logo-text span { color: var(--accent); }
+        .footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.88rem; }
+
+        .footer h4 {
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        .footer-links a {
+            display: block;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.88rem;
+            padding: 5px 0;
+            transition: all var(--transition);
+        }
+
+        .footer-links a:hover { color: var(--accent); transform: translateX(4px); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom p { font-size: 0.84rem; color: rgba(255,255,255,0.5); margin: 0; }
+        .footer-bottom a { color: var(--accent); }
+        .footer-bottom a:hover { color: var(--accent-light); }
+
+        /* ============================================
+           BACK TO TOP
+           ============================================ */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            width: 48px; height: 48px;
+            background: var(--primary);
+            color: var(--accent);
+            border: none; border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 990;
+            opacity: 0; visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--primary-light); transform: translateY(-4px); }
+
+        /* ============================================
+           LIGHTBOX
+           ============================================ */
+        .lightbox {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 10000;
+            display: none;
+            align-items: center; justify-content: center;
+            padding: 40px;
+            cursor: pointer;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 90%; max-height: 90vh;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+        }
+
+        .lightbox-close {
+            position: absolute; top: 20px; right: 30px;
+            color: white; font-size: 2rem;
+            cursor: pointer; background: none; border: none;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+            .process-grid::before { display: none; }
+            .materials-grid { grid-template-columns: repeat(2, 1fr); }
+            .partners-list { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .mobile-menu { display: flex; }
+            .hero-content { padding: 40px 20px; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-image { order: -1; }
+            .services-grid { grid-template-columns: 1fr; }
+            .process-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-item:first-child { grid-column: span 2; }
+            .materials-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .partners-list { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .section { padding: 60px 0; }
+            .about-features { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item:first-child { grid-column: span 1; grid-row: span 1; }
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#hero" class="logo">
+                <div class="logo-icon">TK</div>
+                <div class="logo-text">
+                    Truhlářství Kána
+                    <span>Chotoviny u Tábora</span>
+                </div>
+            </a>
+            <nav class="nav-links">
+                <a href="#o-nas">O nás</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#postup">Jak pracujeme</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#kontakt">Kontakt</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="#o-nas">O nás</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#postup">Jak pracujeme</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"><img src="images/hero.jpg" alt="Truhlářství Kána"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Od roku 1996</div>
+            <h1>Truhlářství <em>Kána</em></h1>
+            <p class="hero-subtitle">Zakázková výroba nábytku, interiérové dveře, schodiště, kuchyňské linky a kompletní interiéry. Řemeslná kvalita z Chotovin u Tábora.</p>
+            <div class="hero-buttons">
+                <a href="#sluzby" class="btn btn-accent">Naše služby</a>
+                <a href="#kontakt" class="btn btn-outline-light">Nezávazná poptávka</a>
+            </div>
+        </div>
+        <div class="hero-scroll"><span>Scroll</span><div class="hero-scroll-line"></div></div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="28">0</div>
+                    <div class="stat-label">Let zkušeností</div>
+                </div>
+                <div class="stat-item reveal delay-1">
+                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-label">Dokončených zakázek</div>
+                </div>
+                <div class="stat-item reveal delay-2">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">Spokojených klientů</div>
+                </div>
+                <div class="stat-item reveal delay-3">
+                    <div class="stat-number" data-target="6">0</div>
+                    <div class="stat-label">Typů služeb</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- O NÁS -->
+    <section class="section" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal-left">
+                    <img src="images/workshop.jpg" alt="Truhlářská dílna">
+                    <div class="about-badge">Est. 1996</div>
+                </div>
+                <div class="about-text reveal-right">
+                    <span class="section-label">O firmě</span>
+                    <h2>Malá truhlářská firma s velkým srdcem</h2>
+                    <p>Jsme malá truhlářská firma, zabývající se především zakázkovou výrobou nábytku a kompletním řešením interiérů. Historie firmy se píše od roku 1996, kdy jsme zahájili činnost 22. října.</p>
+                    <p>Sídlíme v Chotovinách, pouhých 10 km od Tábora směrem na Prahu. Spolupracujeme s architekty, designovými studii, zámečníky, čalouníky, kameníky a restaurátorskými dílnami.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#9874;</div>
+                            <span>Zakázková výroba</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#127968;</div>
+                            <span>Kompletní interiéry</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#128736;</div>
+                            <span>Atypické produkty</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#129309;</div>
+                            <span>Osobní přístup</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLUŽBY -->
+    <section class="section section-alt" id="sluzby">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Naše služby</span>
+                <h2>Co pro vás vyrobíme</h2>
+                <p class="section-desc">Od interiérových dveří přes schodiště až po kompletní vybavení bytů, domů a restaurací.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card reveal delay-1">
+                    <div class="service-card-image">
+                        <img src="images/kitchen.jpg" alt="Kuchyňské linky">
+                    </div>
+                    <div class="service-card-body">
+                        <div class="service-tag">Kuchyně</div>
+                        <h3>Kuchyňské linky</h3>
+                        <p>Kuchyně na míru z kvalitních materiálů. Dodáváme i kuchyňské spotřebiče od renomovaných značek. Každá kuchyň je originál.</p>
+                    </div>
+                </div>
+                <div class="service-card reveal delay-2">
+                    <div class="service-card-image">
+                        <img src="images/doors.jpg" alt="Interiérové dveře">
+                    </div>
+                    <div class="service-card-body">
+                        <div class="service-tag">Dveře</div>
+                        <h3>Interiérové dveře</h3>
+                        <p>Dveře na míru z masivního dřeva i dýhovaných materiálů. Klasické i moderní designy pro každý interiér.</p>
+                    </div>
+                </div>
+                <div class="service-card reveal delay-3">
+                    <div class="service-card-image">
+                        <img src="images/stairs.jpg" alt="Schodiště">
+                    </div>
+                    <div class="service-card-body">
+                        <div class="service-tag">Schodiště</div>
+                        <h3>Dřevěná schodiště</h3>
+                        <p>Schodiště jako dominanta interiéru. Přímočará, točitá i kombinovaná řešení z masivního dřeva.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="services-grid" style="margin-top: 30px;">
+                <div class="service-card reveal delay-1">
+                    <div class="service-card-image">
+                        <img src="images/floor.jpg" alt="Podlahy">
+                    </div>
+                    <div class="service-card-body">
+                        <div class="service-tag">Podlahy</div>
+                        <h3>Dřevěné a plovoucí podlahy</h3>
+                        <p>Pokládka dřevěných i plovoucích podlah. Profesionální instalace s precizním dokončením.</p>
+                    </div>
+                </div>
+                <div class="service-card reveal delay-2">
+                    <div class="service-card-image">
+                        <img src="images/interior.jpg" alt="Kompletní interiéry">
+                    </div>
+                    <div class="service-card-body">
+                        <div class="service-tag">Interiéry</div>
+                        <h3>Kompletní interiéry</h3>
+                        <p>Komplexní vybavení bytů, domů i restaurací. Ložnice, obývací pokoje a veškerý nábytek na míru.</p>
+                    </div>
+                </div>
+                <div class="service-card reveal delay-3">
+                    <div class="service-card-image">
+                        <img src="images/workshop.jpg" alt="Atypická výroba">
+                    </div>
+                    <div class="service-card-body">
+                        <div class="service-tag">Atypické</div>
+                        <h3>Atypické výrobky</h3>
+                        <p>Speciální zakázky a nestandardní výrobky dle individuálních požadavků. Realizujeme i ty nejnáročnější projekty.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JAK PRACUJEME -->
+    <section class="section" id="postup">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Postup práce</span>
+                <h2>Jak pracujeme</h2>
+                <p class="section-desc">Od prvního kontaktu po finální montáž se staráme o každý detail.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-step reveal delay-1">
+                    <div class="process-number">01</div>
+                    <h4>Konzultace</h4>
+                    <p>Osobní setkání, probereme vaše představy, zaměříme prostor a navrhneme řešení.</p>
+                </div>
+                <div class="process-step reveal delay-2">
+                    <div class="process-number">02</div>
+                    <h4>Návrh</h4>
+                    <p>Vytvoříme detailní návrh včetně vizualizace, výběru materiálů a cenové kalkulace.</p>
+                </div>
+                <div class="process-step reveal delay-3">
+                    <div class="process-number">03</div>
+                    <h4>Výroba</h4>
+                    <p>V naší dílně pečlivě vyrobíme každý kus nábytku z vybraných materiálů.</p>
+                </div>
+                <div class="process-step reveal delay-4">
+                    <div class="process-number">04</div>
+                    <h4>Montáž</h4>
+                    <p>Profesionální montáž přímo u vás. Vše dotáhneme do posledního detailu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section class="section section-alt" id="galerie">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Realizace</span>
+                <h2>Galerie prací</h2>
+                <p class="section-desc">Ukázky z našich realizací - kuchyně, schodiště, dveře a další.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item reveal-scale delay-1" data-src="images/kitchen.jpg">
+                    <img src="images/kitchen.jpg" alt="Kuchyňská linka">
+                    <div class="gallery-overlay"><span>Kuchyňská linka na míru</span></div>
+                </div>
+                <div class="gallery-item reveal-scale delay-2" data-src="images/stairs.jpg">
+                    <img src="images/stairs.jpg" alt="Schodiště">
+                    <div class="gallery-overlay"><span>Dřevěné schodiště</span></div>
+                </div>
+                <div class="gallery-item reveal-scale delay-3" data-src="images/doors.jpg">
+                    <img src="images/doors.jpg" alt="Dveře">
+                    <div class="gallery-overlay"><span>Interiérové dveře</span></div>
+                </div>
+                <div class="gallery-item reveal-scale delay-4" data-src="images/interior.jpg">
+                    <img src="images/interior.jpg" alt="Interiér">
+                    <div class="gallery-overlay"><span>Kompletní interiér</span></div>
+                </div>
+                <div class="gallery-item reveal-scale delay-5" data-src="images/floor.jpg">
+                    <img src="images/floor.jpg" alt="Podlaha">
+                    <div class="gallery-overlay"><span>Dřevěná podlaha</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MATERIÁLY -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label" style="color: var(--accent);">Materiály</span>
+                <h2>S čím pracujeme</h2>
+                <p class="section-desc" style="color: rgba(255,255,255,0.7);">Používáme pouze kvalitní materiály od prověřených dodavatelů.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="materials-grid">
+                <div class="material-card reveal delay-1">
+                    <div class="material-icon">&#127795;</div>
+                    <h4>Masivní dřevo</h4>
+                    <p>Domácí i dovážené masivní dřevo nejvyšší kvality pro náročné projekty.</p>
+                </div>
+                <div class="material-card reveal delay-2">
+                    <div class="material-icon">&#128196;</div>
+                    <h4>Dýhované materiály</h4>
+                    <p>Kvalitní dýhy v široké škále dekorů pro elegantní povrchovou úpravu.</p>
+                </div>
+                <div class="material-card reveal delay-3">
+                    <div class="material-icon">&#9632;</div>
+                    <h4>Laminátové desky</h4>
+                    <p>Odolné laminátové desky vhodné pro kuchyňské linky a pracovní plochy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARTNEŘI -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Spolupráce</span>
+                <h2>S kým spolupracujeme</h2>
+                <p class="section-desc">Pro dosažení nejlepších výsledků spolupracujeme s řadou odborníků.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="partners-list">
+                <div class="partner-item reveal delay-1">
+                    <div class="partner-icon">&#128208;</div>
+                    <h4>Architekti</h4>
+                    <p>Spolupráce s architektonickými ateliéry na komplexních projektech.</p>
+                </div>
+                <div class="partner-item reveal delay-2">
+                    <div class="partner-icon">&#127912;</div>
+                    <h4>Designová studia</h4>
+                    <p>Společné návrhy interiérů s profesionálními designéry.</p>
+                </div>
+                <div class="partner-item reveal delay-3">
+                    <div class="partner-icon">&#128295;</div>
+                    <h4>Zámečníci</h4>
+                    <p>Kovové prvky a konstrukce od spolehlivých partnerů.</p>
+                </div>
+                <div class="partner-item reveal delay-4">
+                    <div class="partner-icon">&#128090;</div>
+                    <h4>Čalouníci</h4>
+                    <p>Profesionální čalounění sedacího nábytku a doplňků.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-bg"><img src="images/workshop.jpg" alt="Dílna"></div>
+        <div class="cta-overlay"></div>
+        <div class="cta-content container">
+            <h2>Máte projekt na srdci?</h2>
+            <p>Kontaktujte nás pro nezávaznou konzultaci. Rádi vám pomůžeme s realizací vašich představ.</p>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="tel:+420602229095" class="btn btn-accent">Zavolat 602 229 095</a>
+                <a href="mailto:TruhlarstviKana@gmail.com" class="btn btn-outline-light">Napsat email</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section class="section" id="kontakt">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Kontakt</span>
+                <h2>Kde nás najdete</h2>
+                <p class="section-desc">Sídlíme v Chotovinách, 10 km od Tábora směrem na Prahu.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info reveal-left">
+                    <h3>Kontaktní údaje</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">&#128205;</div>
+                        <div>
+                            <div class="contact-label">Adresa</div>
+                            <p class="contact-value">K Václavu 165<br>391 37 Chotoviny</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">&#128222;</div>
+                        <div>
+                            <div class="contact-label">Telefon</div>
+                            <p class="contact-value"><a href="tel:+420602229095">+420 602 229 095</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">&#9993;</div>
+                        <div>
+                            <div class="contact-label">Email</div>
+                            <p class="contact-value"><a href="mailto:TruhlarstviKana@gmail.com">TruhlarstviKana@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">&#128179;</div>
+                        <div>
+                            <div class="contact-label">IČO / DIČ</div>
+                            <p class="contact-value">650 22 815 / CZ7203141726</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">&#127974;</div>
+                        <div>
+                            <div class="contact-label">Bankovní účet</div>
+                            <p class="contact-value">1019887806/6100</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map reveal-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2584.5!2d14.5089!3d49.3889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470ca2a2a2a2a2a2%3A0x400af0f66164090!2sK%20V%C3%A1clavu%20165%2C%20391%2037%20Chotoviny!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo-text">Truhlářství Kána<span>Chotoviny u Tábora</span></div>
+                    <p>Zakázková výroba nábytku od roku 1996. Interiérové dveře, schodiště, kuchyňské linky a kompletní interiéry z kvalitních materiálů.</p>
+                </div>
+                <div>
+                    <h4>Navigace</h4>
+                    <div class="footer-links">
+                        <a href="#o-nas">O nás</a>
+                        <a href="#sluzby">Služby</a>
+                        <a href="#postup">Jak pracujeme</a>
+                        <a href="#galerie">Galerie</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Služby</h4>
+                    <div class="footer-links">
+                        <a href="#sluzby">Kuchyňské linky</a>
+                        <a href="#sluzby">Interiérové dveře</a>
+                        <a href="#sluzby">Schodiště</a>
+                        <a href="#sluzby">Podlahy</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Kontakt</h4>
+                    <div class="footer-links">
+                        <a href="tel:+420602229095">602 229 095</a>
+                        <a href="mailto:TruhlarstviKana@gmail.com">TruhlarstviKana@gmail.com</a>
+                        <a>K Václavu 165, Chotoviny</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Truhlářství Kána. Všechna práva vyhrazena.</p>
+                <p>Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Nahoru">&#9650;</button>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <img src="" alt="">
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            var header = document.getElementById('header');
+            var hamburger = document.getElementById('hamburger');
+            var mobileMenu = document.getElementById('mobileMenu');
+            var backToTop = document.getElementById('backToTop');
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImg = lightbox.querySelector('img');
+            var lightboxClose = lightbox.querySelector('.lightbox-close');
+
+            /* Header scroll */
+            function handleScroll() {
+                var s = window.pageYOffset;
+                header.classList.toggle('scrolled', s > 50);
+                backToTop.classList.toggle('visible', s > 400);
+            }
+            window.addEventListener('scroll', handleScroll, { passive: true });
+
+            /* Hamburger */
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+
+            var mobileLinks = mobileMenu.querySelectorAll('a');
+            for (var i = 0; i < mobileLinks.length; i++) {
+                mobileLinks[i].addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            /* Smooth scroll */
+            var anchors = document.querySelectorAll('a[href^="#"]');
+            for (var j = 0; j < anchors.length; j++) {
+                anchors[j].addEventListener('click', function(e) {
+                    var id = this.getAttribute('href');
+                    if (id === '#') return;
+                    var el = document.querySelector(id);
+                    if (el) {
+                        e.preventDefault();
+                        window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+                    }
+                });
+            }
+
+            /* Back to top */
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            /* IntersectionObserver */
+            var reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+            if ('IntersectionObserver' in window) {
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+                reveals.forEach(function(el) { observer.observe(el); });
+            } else {
+                reveals.forEach(function(el) { el.classList.add('visible'); });
+            }
+
+            /* Counter animation */
+            function animateCounter(el) {
+                var target = parseInt(el.getAttribute('data-target'));
+                var current = 0;
+                var increment = target / 60;
+                function update() {
+                    current += increment;
+                    if (current >= target) { el.textContent = target + '+'; return; }
+                    el.textContent = Math.floor(current) + '+';
+                    setTimeout(update, 33);
+                }
+                update();
+            }
+
+            if ('IntersectionObserver' in window) {
+                var counterObs = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.querySelectorAll('.stat-number').forEach(animateCounter);
+                            counterObs.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                var statsBar = document.querySelector('.stats-bar');
+                if (statsBar) counterObs.observe(statsBar);
+            }
+
+            /* Lightbox */
+            var galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    lightboxImg.src = this.getAttribute('data-src') || this.querySelector('img').src;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox || e.target === lightboxClose) closeLightbox();
+            });
+            lightboxClose.addEventListener('click', closeLightbox);
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeLightbox();
+            });
+
+            /* Active nav */
+            var sections = document.querySelectorAll('section[id]');
+            function updateNav() {
+                var pos = window.pageYOffset + 100;
+                sections.forEach(function(sec) {
+                    var top = sec.offsetTop, h = sec.offsetHeight, id = sec.id;
+                    if (pos >= top && pos < top + h) {
+                        document.querySelectorAll('.nav-links a').forEach(function(a) {
+                            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+                        });
+                    }
+                });
+            }
+            window.addEventListener('scroll', updateNav, { passive: true });
+
+            /* Parallax */
+            var heroBgImg = document.querySelector('.hero-bg img');
+            if (heroBgImg) {
+                window.addEventListener('scroll', function() {
+                    var s = window.pageYOffset;
+                    if (s < window.innerHeight) {
+                        heroBgImg.style.transform = 'translateY(' + (s * 0.3) + 'px) scale(1.1)';
+                    }
+                }, { passive: true });
+            }
+
+            handleScroll();
+            updateNav();
+        })();
+    </script>
+</body>
+</html>

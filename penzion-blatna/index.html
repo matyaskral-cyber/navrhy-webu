@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penzion Slunce | Ubytování Blatná - Jižní Čechy</title>
+    <meta name="description" content="Penzion Slunce v Blatné nabízí komfortní ubytování v centru města. Jednolůžkové, dvoulůžkové pokoje i apartmány. Více než 10 let zkušeností.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CUSTOM PROPERTIES
+           ============================================ */
+        :root {
+            --primary: #1b4332;
+            --primary-light: #2d6a4f;
+            --primary-dark: #0b2118;
+            --accent: #ffd54f;
+            --accent-light: #ffe082;
+            --accent-dark: #ffc107;
+            --bg: #faf9f7;
+            --bg-alt: #f0efe8;
+            --text: #2c3e2d;
+            --text-light: #5a6b5c;
+            --text-muted: #8e998f;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(27,67,50,0.06);
+            --shadow-md: 0 4px 24px rgba(27,67,50,0.10);
+            --shadow-lg: 0 8px 40px rgba(27,67,50,0.14);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+            --transition-slow: 0.6s cubic-bezier(0.4,0,0.2,1);
+            --font-heading: 'Crimson Text', Georgia, serif;
+            --font-body: 'Quicksand', sans-serif;
+            --max-width: 1200px;
+            --header-height: 78px;
+        }
+
+        *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; font-size:16px; }
+        body { font-family:var(--font-body); color:var(--text); background:var(--bg); line-height:1.7; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+        img { max-width:100%; height:auto; display:block; }
+        a { color:var(--primary); text-decoration:none; transition:color var(--transition); }
+        a:hover { color:var(--accent-dark); }
+        h1,h2,h3,h4 { font-family:var(--font-heading); font-weight:700; line-height:1.25; color:var(--primary-dark); }
+        h1 { font-size:clamp(2rem,5vw,3.5rem); }
+        h2 { font-size:clamp(1.6rem,3.5vw,2.5rem); }
+        h3 { font-size:clamp(1.2rem,2.5vw,1.5rem); }
+        p { margin-bottom:1em; color:var(--text-light); }
+        ul,ol { list-style:none; }
+        .container { width:100%; max-width:var(--max-width); margin:0 auto; padding:0 20px; }
+
+        /* ANIMATIONS */
+        .reveal { opacity:0; transform:translateY(40px); transition:opacity 0.8s ease,transform 0.8s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+        .reveal-left { opacity:0; transform:translateX(-60px); transition:opacity 0.8s ease,transform 0.8s ease; }
+        .reveal-left.visible { opacity:1; transform:translateX(0); }
+        .reveal-right { opacity:0; transform:translateX(60px); transition:opacity 0.8s ease,transform 0.8s ease; }
+        .reveal-right.visible { opacity:1; transform:translateX(0); }
+        .reveal-scale { opacity:0; transform:scale(0.9); transition:opacity 0.8s ease,transform 0.8s ease; }
+        .reveal-scale.visible { opacity:1; transform:scale(1); }
+        .delay-1{transition-delay:.1s} .delay-2{transition-delay:.2s} .delay-3{transition-delay:.3s} .delay-4{transition-delay:.4s} .delay-5{transition-delay:.5s}
+
+        /* HEADER */
+        .header { position:fixed; top:0; left:0; right:0; z-index:1000; height:var(--header-height); background:rgba(250,249,247,0.95); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); transition:all var(--transition); border-bottom:1px solid transparent; }
+        .header.scrolled { background:rgba(250,249,247,0.98); border-bottom-color:rgba(27,67,50,0.08); box-shadow:var(--shadow-sm); height:66px; }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; height:100%; max-width:var(--max-width); margin:0 auto; padding:0 20px; }
+        .logo { display:flex; align-items:center; gap:12px; z-index:1001; }
+        .logo-icon { width:44px; height:44px; background:var(--primary); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--accent); font-family:var(--font-heading); font-size:1.3rem; font-weight:700; }
+        .logo-text { font-family:var(--font-heading); font-size:1.2rem; font-weight:700; color:var(--primary); line-height:1.2; }
+        .logo-text span { display:block; font-family:var(--font-body); font-size:0.68rem; font-weight:500; color:var(--text-muted); letter-spacing:2px; text-transform:uppercase; }
+
+        .nav-links { display:flex; align-items:center; gap:28px; }
+        .nav-links a { font-size:0.88rem; font-weight:600; color:var(--text); text-transform:uppercase; letter-spacing:1px; position:relative; padding:4px 0; }
+        .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:var(--accent-dark); transition:width var(--transition); }
+        .nav-links a:hover::after,.nav-links a.active::after { width:100%; }
+
+        .hamburger { display:none; flex-direction:column; justify-content:center; align-items:center; width:40px; height:40px; cursor:pointer; z-index:1001; background:none; border:none; }
+        .hamburger span { display:block; width:24px; height:2px; background:var(--primary); margin:3px 0; transition:all var(--transition); border-radius:2px; }
+        .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)} .hamburger.active span:nth-child(2){opacity:0} .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(7px,-6px)}
+
+        .mobile-menu { display:none; position:fixed; inset:0; background:rgba(250,249,247,0.98); backdrop-filter:blur(20px); z-index:999; flex-direction:column; align-items:center; justify-content:center; gap:24px; opacity:0; visibility:hidden; transition:all var(--transition); }
+        .mobile-menu.active { opacity:1; visibility:visible; }
+        .mobile-menu a { font-family:var(--font-heading); font-size:1.5rem; font-weight:700; color:var(--primary); padding:12px 24px; }
+
+        /* HERO */
+        .hero { position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; padding-top:var(--header-height); }
+        .hero-bg { position:absolute; inset:0; }
+        .hero-bg img { width:100%; height:100%; object-fit:cover; }
+        .hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(27,67,50,0.78) 0%,rgba(27,67,50,0.5) 50%,rgba(255,213,79,0.2) 100%); }
+        .hero-content { position:relative; z-index:2; text-align:center; padding:40px 20px; max-width:850px; margin:0 auto; }
+        .hero-badge { display:inline-block; background:rgba(255,213,79,0.2); border:1px solid rgba(255,213,79,0.4); color:var(--accent-light); padding:8px 20px; border-radius:50px; font-size:0.82rem; font-weight:600; letter-spacing:3px; text-transform:uppercase; margin-bottom:24px; }
+        .hero h1 { color:var(--white); margin-bottom:20px; }
+        .hero h1 em { font-style:italic; color:var(--accent); }
+        .hero-subtitle { color:rgba(255,255,255,0.9); font-size:clamp(1rem,2vw,1.2rem); max-width:600px; margin:0 auto 36px; line-height:1.8; }
+        .hero-buttons { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+        .btn { display:inline-flex; align-items:center; gap:8px; padding:14px 30px; border-radius:var(--radius-sm); font-family:var(--font-body); font-size:0.92rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; cursor:pointer; transition:all var(--transition); border:2px solid transparent; }
+        .btn-accent { background:var(--accent); color:var(--primary-dark); border-color:var(--accent); }
+        .btn-accent:hover { background:var(--accent-dark); border-color:var(--accent-dark); transform:translateY(-3px); box-shadow:0 8px 30px rgba(255,213,79,0.4); }
+        .btn-outline-light { background:transparent; color:var(--white); border-color:rgba(255,255,255,0.5); }
+        .btn-outline-light:hover { background:var(--white); color:var(--primary); border-color:var(--white); transform:translateY(-3px); }
+        .btn-dark { background:var(--primary); color:var(--white); border-color:var(--primary); }
+        .btn-dark:hover { background:var(--primary-light); border-color:var(--primary-light); transform:translateY(-3px); box-shadow:var(--shadow-md); }
+
+        .hero-scroll { position:absolute; bottom:40px; left:50%; transform:translateX(-50%); z-index:2; color:rgba(255,255,255,0.5); font-size:0.78rem; letter-spacing:2px; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:8px; animation:hScroll 2s infinite; }
+        .hero-scroll-line { width:1px; height:40px; background:linear-gradient(to bottom,rgba(255,255,255,0.5),transparent); }
+        @keyframes hScroll{0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)}}
+
+        /* SECTIONS */
+        .section{padding:100px 0} .section-alt{background:var(--bg-alt)} .section-dark{background:var(--primary);color:var(--white)}
+        .section-dark h2,.section-dark h3,.section-dark h4{color:var(--white)} .section-dark p{color:rgba(255,255,255,0.8)}
+        .section-header{text-align:center;margin-bottom:60px}
+        .section-label{display:inline-block;color:var(--accent-dark);font-size:0.85rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+        .section-desc{max-width:600px;margin:0 auto;font-size:1.05rem}
+        .section-divider{width:60px;height:3px;background:var(--accent-dark);margin:20px auto 0;border-radius:2px}
+
+        /* ABOUT */
+        .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+        .about-image{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg)}
+        .about-image img{width:100%;height:450px;object-fit:cover;transition:transform var(--transition-slow)}
+        .about-image:hover img{transform:scale(1.05)}
+        .about-badge{position:absolute;bottom:20px;right:20px;background:var(--accent);color:var(--primary-dark);padding:12px 24px;border-radius:var(--radius-sm);font-weight:700}
+        .about-text h2{margin-bottom:20px} .about-text p{font-size:1.05rem}
+        .about-features{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+        .about-feature{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--bg-alt);border-radius:var(--radius-sm);font-weight:600;font-size:0.9rem;color:var(--primary)}
+        .about-feature-icon{width:34px;height:34px;background:var(--primary);color:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0}
+
+        /* ROOMS */
+        .rooms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+        .room-card{background:var(--white);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);transition:all var(--transition)}
+        .room-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+        .room-card-image{position:relative;height:220px;overflow:hidden}
+        .room-card-image img{width:100%;height:100%;object-fit:cover;transition:transform var(--transition-slow)}
+        .room-card:hover .room-card-image img{transform:scale(1.1)}
+        .room-card-tag{position:absolute;top:16px;left:16px;background:var(--accent);color:var(--primary-dark);padding:6px 14px;border-radius:50px;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+        .room-card-body{padding:28px}
+        .room-card-body h3{margin-bottom:10px}
+        .room-card-body p{font-size:0.95rem;margin-bottom:20px}
+        .room-amenities{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+        .room-amenity{background:var(--bg-alt);color:var(--text-light);padding:5px 12px;border-radius:50px;font-size:0.78rem;font-weight:600}
+        .room-card-footer{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid var(--bg-alt)}
+        .room-price{font-family:var(--font-heading);font-size:1.4rem;font-weight:700;color:var(--primary)}
+        .room-price small{font-size:0.8rem;font-weight:400;color:var(--text-muted)}
+
+        /* PRICING */
+        .pricing-table{width:100%;border-collapse:collapse;background:var(--white);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);margin-top:30px}
+        .pricing-table thead{background:var(--primary);color:var(--white)}
+        .pricing-table th{padding:16px 24px;text-align:left;font-weight:700;font-size:0.9rem;text-transform:uppercase;letter-spacing:1px}
+        .pricing-table td{padding:16px 24px;border-bottom:1px solid var(--bg-alt);font-size:0.95rem;color:var(--text-light)}
+        .pricing-table tr:last-child td{border-bottom:none}
+        .pricing-table tr:hover td{background:var(--bg-alt)}
+        .price-cell{font-weight:700;color:var(--primary);font-size:1.05rem}
+
+        /* SERVICES */
+        .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+        .service-card{text-align:center;padding:36px 20px;background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);transition:all var(--transition);position:relative;overflow:hidden}
+        .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent);transform:scaleX(0);transition:transform var(--transition)}
+        .service-card:hover::before{transform:scaleX(1)}
+        .service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+        .service-icon{width:64px;height:64px;background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.6rem;color:var(--accent)}
+        .service-card h4{margin-bottom:8px;color:var(--primary)} .service-card p{font-size:0.88rem}
+
+        /* GALLERY */
+        .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .gallery-item{position:relative;border-radius:var(--radius-md);overflow:hidden;cursor:pointer;aspect-ratio:4/3}
+        .gallery-item:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+        .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform var(--transition-slow)}
+        .gallery-item:hover img{transform:scale(1.08)}
+        .gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(27,67,50,0.7),transparent);opacity:0;transition:opacity var(--transition);display:flex;align-items:flex-end;padding:20px}
+        .gallery-item:hover .gallery-overlay{opacity:1}
+        .gallery-overlay span{color:var(--white);font-weight:600}
+
+        /* SURROUNDINGS */
+        .surr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+        .surr-card{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-md);padding:36px;backdrop-filter:blur(10px);transition:all var(--transition)}
+        .surr-card:hover{background:rgba(255,255,255,0.15);transform:translateY(-4px)}
+        .surr-card h4{margin-bottom:12px;display:flex;align-items:center;gap:10px}
+        .surr-card p{font-size:0.95rem} .surr-card .dist{display:inline-block;margin-top:12px;color:var(--accent);font-weight:700;font-size:0.85rem}
+
+        /* CTA */
+        .cta-section{position:relative;padding:100px 0;overflow:hidden}
+        .cta-bg{position:absolute;inset:0} .cta-bg img{width:100%;height:100%;object-fit:cover}
+        .cta-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,67,50,0.88),rgba(11,33,24,0.92))}
+        .cta-content{position:relative;z-index:2;text-align:center;max-width:700px;margin:0 auto}
+        .cta-content h2{color:var(--white);margin-bottom:16px}
+        .cta-content p{color:rgba(255,255,255,0.85);font-size:1.15rem;margin-bottom:32px}
+
+        /* CONTACT */
+        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+        .contact-info h3{margin-bottom:20px;font-size:1.5rem}
+        .contact-item{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px}
+        .contact-icon{width:48px;height:48px;background:var(--primary);color:var(--accent);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+        .contact-label{font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:2px}
+        .contact-value{font-size:1.02rem;color:var(--text);font-weight:600;margin:0}
+        .contact-value a{font-weight:600;color:var(--primary)}
+        .contact-map{border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-md);min-height:400px}
+        .contact-map iframe{width:100%;height:100%;min-height:400px;border:none}
+
+        /* STATS */
+        .stats-bar{padding:60px 0;background:var(--primary)}
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center}
+        .stat-number{font-family:var(--font-heading);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--accent);line-height:1;margin-bottom:8px}
+        .stat-label{color:rgba(255,255,255,0.7);font-size:0.88rem;font-weight:600;text-transform:uppercase;letter-spacing:1px}
+
+        /* CANCELLATION */
+        .cancel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+        .cancel-card{background:var(--white);border-radius:var(--radius-md);padding:28px;text-align:center;box-shadow:var(--shadow-sm)}
+        .cancel-card h4{margin-bottom:8px;color:var(--primary)} .cancel-card p{margin:0;font-size:0.9rem}
+        .cancel-pct{font-family:var(--font-heading);font-size:2rem;font-weight:700;color:var(--accent-dark);margin-bottom:8px}
+
+        /* FOOTER */
+        .footer{background:var(--primary-dark);color:rgba(255,255,255,0.7);padding:60px 0 0}
+        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+        .footer-brand{max-width:300px} .footer-brand .logo-text{color:var(--white);font-size:1.3rem;margin-bottom:14px} .footer-brand .logo-text span{color:var(--accent)}
+        .footer-brand p{color:rgba(255,255,255,0.5);font-size:0.88rem}
+        .footer h4{color:var(--white);font-family:var(--font-body);font-size:0.88rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:18px}
+        .footer-links a{display:block;color:rgba(255,255,255,0.6);font-size:0.88rem;padding:5px 0;transition:all var(--transition)}
+        .footer-links a:hover{color:var(--accent);transform:translateX(4px)}
+        .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding:24px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+        .footer-bottom p{font-size:0.84rem;color:rgba(255,255,255,0.5);margin:0} .footer-bottom a{color:var(--accent)}
+
+        .back-to-top{position:fixed;bottom:30px;right:30px;width:48px;height:48px;background:var(--primary);color:var(--accent);border:none;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;z-index:990;opacity:0;visibility:hidden;transform:translateY(20px);transition:all var(--transition);box-shadow:var(--shadow-md)}
+        .back-to-top.visible{opacity:1;visibility:visible;transform:translateY(0)} .back-to-top:hover{background:var(--primary-light);transform:translateY(-4px)}
+
+        .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:10000;display:none;align-items:center;justify-content:center;padding:40px;cursor:pointer}
+        .lightbox.active{display:flex} .lightbox img{max-width:90%;max-height:90vh;object-fit:contain;border-radius:var(--radius-sm)}
+        .lightbox-close{position:absolute;top:20px;right:30px;color:white;font-size:2rem;cursor:pointer;background:none;border:none}
+
+        @media(max-width:1024px){.rooms-grid{grid-template-columns:repeat(2,1fr)} .services-grid{grid-template-columns:repeat(2,1fr)} .surr-grid{grid-template-columns:repeat(2,1fr)} .gallery-grid{grid-template-columns:repeat(2,1fr)} .cancel-grid{grid-template-columns:1fr} .footer-grid{grid-template-columns:1fr 1fr}}
+        @media(max-width:768px){.hamburger{display:flex} .nav-links{display:none} .mobile-menu{display:flex} .about-grid{grid-template-columns:1fr;gap:40px} .about-image{order:-1} .rooms-grid{grid-template-columns:1fr} .services-grid{grid-template-columns:1fr} .gallery-grid{grid-template-columns:1fr 1fr} .gallery-item:first-child{grid-column:span 2} .surr-grid{grid-template-columns:1fr} .contact-grid{grid-template-columns:1fr} .stats-grid{grid-template-columns:repeat(2,1fr)} .footer-grid{grid-template-columns:1fr} .section{padding:60px 0} .about-features{grid-template-columns:1fr} .footer-bottom{flex-direction:column;text-align:center} .hero-buttons{flex-direction:column;align-items:center}}
+        @media(max-width:480px){.gallery-grid{grid-template-columns:1fr} .gallery-item:first-child{grid-column:span 1;grid-row:span 1} .stats-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#hero" class="logo">
+                <div class="logo-icon">S</div>
+                <div class="logo-text">Penzion Slunce<span>Blatná &mdash; Jižní Čechy</span></div>
+            </a>
+            <nav class="nav-links">
+                <a href="#o-nas">O nás</a>
+                <a href="#pokoje">Pokoje</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#okoli">Okolí</a>
+                <a href="#kontakt">Kontakt</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="#o-nas">O nás</a>
+        <a href="#pokoje">Pokoje</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#okoli">Okolí</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"><img src="images/hero.jpg" alt="Penzion Slunce Blatná"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Centrum Blatné</div>
+            <h1>Penzion <em>Slunce</em></h1>
+            <p class="hero-subtitle">Komfortní ubytování v centru Blatné s více než 10 lety zkušeností. Jednolůžkové a dvoulůžkové pokoje, trojlůžkové pokoje i apartmány. Mgr. Jitka Faměrová.</p>
+            <div class="hero-buttons">
+                <a href="#pokoje" class="btn btn-accent">Prohlédnout pokoje</a>
+                <a href="#kontakt" class="btn btn-outline-light">Rezervovat</a>
+            </div>
+        </div>
+        <div class="hero-scroll"><span>Scroll</span><div class="hero-scroll-line"></div></div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal"><div class="stat-number" data-target="10">0</div><div class="stat-label">Let zkušeností</div></div>
+                <div class="stat-item reveal delay-1"><div class="stat-number" data-target="5">0</div><div class="stat-label">Typů pokojů</div></div>
+                <div class="stat-item reveal delay-2"><div class="stat-number" data-target="365">0</div><div class="stat-label">Dní v provozu</div></div>
+                <div class="stat-item reveal delay-3"><div class="stat-number" data-target="1000">0</div><div class="stat-label">Spokojených hostů</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- O NÁS -->
+    <section class="section" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal-left">
+                    <img src="images/pergola.jpg" alt="Penzion Slunce">
+                    <div class="about-badge">10+ let</div>
+                </div>
+                <div class="about-text reveal-right">
+                    <span class="section-label">O penzionu</span>
+                    <h2>Váš domov v Blatné</h2>
+                    <p>Penzion Slunce sídlí na třídě J. P. Koubka 222 v centru Blatné. Více než 10 let poskytujeme kvalitní ubytovací služby pro turisty, obchodní cestující i rodiny.</p>
+                    <p>Všechny pokoje jsou vybaveny kuchyňským koutem se sporákem a lednicí, televizí se satelitem a bezplatným Wi-Fi. K dispozici je bezplatné parkování na uzavřeném dvoře a venkovní posezení s pergolou.</p>
+                    <div class="about-features">
+                        <div class="about-feature"><div class="about-feature-icon">&#128246;</div><span>Wi-Fi zdarma</span></div>
+                        <div class="about-feature"><div class="about-feature-icon">&#128663;</div><span>Parkování zdarma</span></div>
+                        <div class="about-feature"><div class="about-feature-icon">&#127859;</div><span>Kuchyňka v pokoji</span></div>
+                        <div class="about-feature"><div class="about-feature-icon">&#128692;</div><span>Úschovna kol</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POKOJE -->
+    <section class="section section-alt" id="pokoje">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Ubytování</span>
+                <h2>Naše pokoje a ceny</h2>
+                <p class="section-desc">Nabízíme 5 kategorií ubytování pro jednotlivce, páry, rodiny i skupiny. Ceny jsou včetně 12% DPH.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="rooms-grid">
+                <div class="room-card reveal delay-1">
+                    <div class="room-card-image"><img src="images/room1.jpg" alt="Jednolůžkový pokoj"></div>
+                    <div class="room-card-body">
+                        <h3>Jednolůžkový pokoj</h3>
+                        <p>Útulný pokoj pro jednoho hosta. Kuchyňka, TV, Wi-Fi a vlastní koupelna.</p>
+                        <div class="room-amenities"><span class="room-amenity">Wi-Fi</span><span class="room-amenity">TV SAT</span><span class="room-amenity">Kuchyňka</span></div>
+                        <div class="room-card-footer">
+                            <div class="room-price">1 000 Kč <small>/ noc</small></div>
+                            <a href="#kontakt" class="btn btn-dark" style="padding:10px 18px;font-size:0.8rem;">Rezervovat</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="room-card reveal delay-2">
+                    <div class="room-card-image"><img src="images/room2.jpg" alt="Dvoulůžkový pokoj"><div class="room-card-tag">Oblíbený</div></div>
+                    <div class="room-card-body">
+                        <h3>Dvoulůžkový pokoj</h3>
+                        <p>Pokoj pro dva s kompletním vybavením. Ideální pro páry cestující po Jižních Čechách.</p>
+                        <div class="room-amenities"><span class="room-amenity">Wi-Fi</span><span class="room-amenity">TV SAT</span><span class="room-amenity">Kuchyňka</span><span class="room-amenity">Lednice</span></div>
+                        <div class="room-card-footer">
+                            <div class="room-price">1 400 Kč <small>/ noc</small></div>
+                            <a href="#kontakt" class="btn btn-dark" style="padding:10px 18px;font-size:0.8rem;">Rezervovat</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="room-card reveal delay-3">
+                    <div class="room-card-image"><img src="images/apartment.jpg" alt="Apartmán"><div class="room-card-tag">Premium</div></div>
+                    <div class="room-card-body">
+                        <h3>Apartmán</h3>
+                        <p>Prostorný apartmán pro rodiny nebo náročnější hosty. Maximální komfort a soukromí.</p>
+                        <div class="room-amenities"><span class="room-amenity">Wi-Fi</span><span class="room-amenity">TV SAT</span><span class="room-amenity">Kuchyňka</span><span class="room-amenity">Lednice</span><span class="room-amenity">Sporák</span></div>
+                        <div class="room-card-footer">
+                            <div class="room-price">od 3 000 Kč <small>/ noc</small></div>
+                            <a href="#kontakt" class="btn btn-dark" style="padding:10px 18px;font-size:0.8rem;">Rezervovat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal" style="margin-top:50px">
+                <table class="pricing-table">
+                    <thead><tr><th>Typ pokoje</th><th>Kapacita</th><th>Cena / noc</th></tr></thead>
+                    <tbody>
+                        <tr><td>Jednolůžkový</td><td>1 osoba</td><td class="price-cell">1 000 Kč</td></tr>
+                        <tr><td>Dvoulůžkový</td><td>2 osoby</td><td class="price-cell">1 400 Kč</td></tr>
+                        <tr><td>Třílůžkový</td><td>3 osoby</td><td class="price-cell">1 950 Kč</td></tr>
+                        <tr><td>Čtyřlůžkový</td><td>4 osoby</td><td class="price-cell">2 250 Kč</td></tr>
+                        <tr><td>Apartmán</td><td>4+ osob</td><td class="price-cell">od 3 000 Kč</td></tr>
+                    </tbody>
+                </table>
+                <p style="text-align:center;margin-top:16px;font-size:0.88rem;color:var(--text-muted)">Ceny jsou včetně 12% DPH. Příplatek za jednodenní pobyt: 100 Kč/osoba.</p>
+            </div>
+
+            <!-- Storno podmínky -->
+            <div class="reveal" style="margin-top:40px">
+                <h3 style="text-align:center;margin-bottom:20px">Storno podmínky</h3>
+                <div class="cancel-grid">
+                    <div class="cancel-card reveal delay-1">
+                        <div class="cancel-pct">50%</div>
+                        <h4>13&ndash;7 dní předem</h4>
+                        <p>Vrácení 50% z celkové ceny pobytu</p>
+                    </div>
+                    <div class="cancel-card reveal delay-2">
+                        <div class="cancel-pct">25%</div>
+                        <h4>6&ndash;2 dny předem</h4>
+                        <p>Vrácení 25% z celkové ceny pobytu</p>
+                    </div>
+                    <div class="cancel-card reveal delay-3">
+                        <div class="cancel-pct">0%</div>
+                        <h4>1 den / no-show</h4>
+                        <p>Bez nároku na vrácení</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLUŽBY -->
+    <section class="section" id="sluzby">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Služby</span>
+                <h2>Co nabízíme</h2>
+                <p class="section-desc">Vše pro váš komfortní pobyt v Blatné a okolí.</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal delay-1"><div class="service-icon">&#128246;</div><h4>Wi-Fi zdarma</h4><p>Bezdrátový internet ve všech pokojích a společných prostorách.</p></div>
+                <div class="service-card reveal delay-2"><div class="service-icon">&#128663;</div><h4>Parkování</h4><p>Bezplatné parkování na uzavřeném dvoře penzionu.</p></div>
+                <div class="service-card reveal delay-3"><div class="service-icon">&#127859;</div><h4>Kuchyňka</h4><p>Každý pokoj vybaven kuchyňským koutem se sporákem a lednicí.</p></div>
+                <div class="service-card reveal delay-4"><div class="service-icon">&#128250;</div><h4>TV se satelitem</h4><p>Televizor s satelitním příjmem v každém pokoji.</p></div>
+            </div>
+            <div class="services-grid" style="margin-top:24px">
+                <div class="service-card reveal delay-1"><div class="service-icon">&#128692;</div><h4>Úschovna kol</h4><p>Zabezpečená úschovna pro kola a sportovní vybavení.</p></div>
+                <div class="service-card reveal delay-2"><div class="service-icon">&#9728;</div><h4>Pergola</h4><p>Venkovní posezení s pergolou pro odpočinek a relaxaci.</p></div>
+                <div class="service-card reveal delay-3"><div class="service-icon">&#128179;</div><h4>Firemní pobyty</h4><p>Ubytování pro obchodní cestující a firemní skupiny.</p></div>
+                <div class="service-card reveal delay-4"><div class="service-icon">&#128100;</div><h4>Osobní přístup</h4><p>Individuální péče od majitelky Mgr. Jitky Faměrové.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section class="section section-alt" id="galerie">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Fotogalerie</span>
+                <h2>Nahlédněte k nám</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item reveal-scale delay-1" data-src="images/hero.jpg"><img src="images/hero.jpg" alt="Penzion Slunce"><div class="gallery-overlay"><span>Penzion Slunce</span></div></div>
+                <div class="gallery-item reveal-scale delay-2" data-src="images/room1.jpg"><img src="images/room1.jpg" alt="Pokoj"><div class="gallery-overlay"><span>Jednolůžkový pokoj</span></div></div>
+                <div class="gallery-item reveal-scale delay-3" data-src="images/room2.jpg"><img src="images/room2.jpg" alt="Pokoj"><div class="gallery-overlay"><span>Dvoulůžkový pokoj</span></div></div>
+                <div class="gallery-item reveal-scale delay-4" data-src="images/apartment.jpg"><img src="images/apartment.jpg" alt="Apartmán"><div class="gallery-overlay"><span>Apartmán</span></div></div>
+                <div class="gallery-item reveal-scale delay-5" data-src="images/pergola.jpg"><img src="images/pergola.jpg" alt="Pergola"><div class="gallery-overlay"><span>Venkovní pergola</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OKOLÍ -->
+    <section class="section section-dark" id="okoli">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label" style="color:var(--accent)">Okolí</span>
+                <h2>Co navštívit v okolí</h2>
+                <p class="section-desc" style="color:rgba(255,255,255,0.7)">Blatná a okolí nabízí řadu zajímavých cílů pro výlety.</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="surr-grid">
+                <div class="surr-card reveal delay-1"><h4>&#127984; Zámek Blatná</h4><p>Vodní zámek s krásným parkem a daňčí oborou. Jedna z nejkrásnějších památek Jižních Čech.</p><span class="dist">5 min pěšky</span></div>
+                <div class="surr-card reveal delay-2"><h4>&#127946; Koupaliště</h4><p>Letní koupaliště v Blatné s bazénem a atrakcemi pro celou rodinu.</p><span class="dist">10 min pěšky</span></div>
+                <div class="surr-card reveal delay-3"><h4>&#127984; Hrad Zvíkov</h4><p>Královský hrad na soutoku Vltavy a Otavy. Perla gotické architektury.</p><span class="dist">35 km</span></div>
+                <div class="surr-card reveal delay-4"><h4>&#127984; Zámek Orlík</h4><p>Majestátní zámek nad Orlickou přehradou s bohatou historií rodu Schwarzenbergů.</p><span class="dist">40 km</span></div>
+                <div class="surr-card reveal delay-5"><h4>&#127961; Město Písek</h4><p>Královské město s nejstarším kamenným mostem v Čechách a bohatou kulturní scénou.</p><span class="dist">25 km</span></div>
+                <div class="surr-card reveal delay-5"><h4>&#128692; Cyklotrasy</h4><p>Okolí Blatné nabízí desítky kilometrů cyklostezek a turistických tras v krásné jihočeské přírodě.</p><span class="dist">Od penzionu</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-bg"><img src="images/castle.jpg" alt="Blatná"></div>
+        <div class="cta-overlay"></div>
+        <div class="cta-content container">
+            <h2>Plánujete pobyt v Blatné?</h2>
+            <p>Kontaktujte nás telefonicky nebo emailem a rezervujte si pokoj v Penzionu Slunce.</p>
+            <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+                <a href="tel:+420775560217" class="btn btn-accent">Zavolat 775 560 217</a>
+                <a href="mailto:penzion.blatna@seznam.cz" class="btn btn-outline-light">Napsat email</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section class="section" id="kontakt">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Kontakt</span>
+                <h2>Kde nás najdete</h2>
+                <p class="section-desc">Penzion Slunce v centru Blatné. Rezervace telefonicky nebo emailem.</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info reveal-left">
+                    <h3>Kontaktní údaje</h3>
+                    <div class="contact-item"><div class="contact-icon">&#128205;</div><div><div class="contact-label">Adresa</div><p class="contact-value">tř. J. P. Koubka 222<br>388 01 Blatná</p></div></div>
+                    <div class="contact-item"><div class="contact-icon">&#128222;</div><div><div class="contact-label">Telefon</div><p class="contact-value"><a href="tel:+420775560217">+420 775 560 217</a><br><a href="tel:+420777120134">+420 777 120 134</a></p></div></div>
+                    <div class="contact-item"><div class="contact-icon">&#9993;</div><div><div class="contact-label">Email</div><p class="contact-value"><a href="mailto:penzion.blatna@seznam.cz">penzion.blatna@seznam.cz</a></p></div></div>
+                    <div class="contact-item"><div class="contact-icon">&#128100;</div><div><div class="contact-label">Kontaktní osoba</div><p class="contact-value">Mgr. Jitka Faměrová</p></div></div>
+                    <div class="contact-item"><div class="contact-icon">&#128197;</div><div><div class="contact-label">Rezervace</div><p class="contact-value">Telefonicky nebo emailem</p></div></div>
+                </div>
+                <div class="contact-map reveal-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2606.5!2d13.8811!3d49.4255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4774c5c5c5c5c5c5%3A0x400af0f66164090!2zt%C5%99.%20J.%20P.%20Koubka%20222%2C%20388%2001%20Blatn%C3%A1!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><div class="logo-text">Penzion Slunce<span>Blatná &mdash; Jižní Čechy</span></div><p>Komfortní ubytování v centru Blatné s více než 10 lety zkušeností. Jednolůžkové, dvoulůžkové pokoje i apartmány.</p></div>
+                <div><h4>Navigace</h4><div class="footer-links"><a href="#o-nas">O nás</a><a href="#pokoje">Pokoje</a><a href="#sluzby">Služby</a><a href="#galerie">Galerie</a></div></div>
+                <div><h4>Další</h4><div class="footer-links"><a href="#okoli">Okolí</a><a href="#kontakt">Kontakt</a><a href="tel:+420775560217">Rezervace</a></div></div>
+                <div><h4>Kontakt</h4><div class="footer-links"><a href="tel:+420775560217">775 560 217</a><a href="mailto:penzion.blatna@seznam.cz">penzion.blatna@seznam.cz</a><a>tř. J.P. Koubka 222, Blatná</a></div></div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Penzion Slunce. Všechna práva vyhrazena.</p>
+                <p>Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Nahoru">&#9650;</button>
+    <div class="lightbox" id="lightbox"><button class="lightbox-close">&times;</button><img src="" alt=""></div>
+
+    <script>
+        (function(){
+            'use strict';
+            var header=document.getElementById('header'),hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),backToTop=document.getElementById('backToTop'),lightbox=document.getElementById('lightbox'),lightboxImg=lightbox.querySelector('img'),lightboxClose=lightbox.querySelector('.lightbox-close');
+
+            function handleScroll(){var s=window.pageYOffset;header.classList.toggle('scrolled',s>50);backToTop.classList.toggle('visible',s>400);}
+            window.addEventListener('scroll',handleScroll,{passive:true});
+
+            hamburger.addEventListener('click',function(){hamburger.classList.toggle('active');mobileMenu.classList.toggle('active');document.body.style.overflow=mobileMenu.classList.contains('active')?'hidden':'';});
+            var ml=mobileMenu.querySelectorAll('a');for(var i=0;i<ml.length;i++){ml[i].addEventListener('click',function(){hamburger.classList.remove('active');mobileMenu.classList.remove('active');document.body.style.overflow='';});}
+
+            var anchors=document.querySelectorAll('a[href^="#"]');for(var j=0;j<anchors.length;j++){anchors[j].addEventListener('click',function(e){var id=this.getAttribute('href');if(id==='#')return;var el=document.querySelector(id);if(el){e.preventDefault();window.scrollTo({top:el.offsetTop-80,behavior:'smooth'});}});}
+
+            backToTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+            var reveals=document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
+            if('IntersectionObserver' in window){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});reveals.forEach(function(el){obs.observe(el);});}
+            else{reveals.forEach(function(el){el.classList.add('visible');});}
+
+            function animateCounter(el){var target=parseInt(el.getAttribute('data-target')),current=0,inc=target/60;function upd(){current+=inc;if(current>=target){el.textContent=target+'+';return;}el.textContent=Math.floor(current)+'+';setTimeout(upd,33);}upd();}
+            if('IntersectionObserver' in window){var cObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('.stat-number').forEach(animateCounter);cObs.unobserve(e.target);}});},{threshold:0.3});var sb=document.querySelector('.stats-bar');if(sb)cObs.observe(sb);}
+
+            document.querySelectorAll('.gallery-item').forEach(function(item){item.addEventListener('click',function(){lightboxImg.src=this.getAttribute('data-src')||this.querySelector('img').src;lightbox.classList.add('active');document.body.style.overflow='hidden';});});
+            function closeLB(){lightbox.classList.remove('active');document.body.style.overflow='';}
+            lightbox.addEventListener('click',function(e){if(e.target===lightbox||e.target===lightboxClose)closeLB();});
+            lightboxClose.addEventListener('click',closeLB);
+            document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+
+            var sections=document.querySelectorAll('section[id]');
+            function updateNav(){var pos=window.pageYOffset+100;sections.forEach(function(s){var top=s.offsetTop,h=s.offsetHeight,id=s.id;if(pos>=top&&pos<top+h){document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+id);});}});}
+            window.addEventListener('scroll',updateNav,{passive:true});
+
+            var heroBgImg=document.querySelector('.hero-bg img');
+            if(heroBgImg){window.addEventListener('scroll',function(){var s=window.pageYOffset;if(s<window.innerHeight){heroBgImg.style.transform='translateY('+(s*0.3)+'px) scale(1.1)';}},{passive:true});}
+
+            handleScroll();updateNav();
+        })();
+    </script>
+</body>
+</html>

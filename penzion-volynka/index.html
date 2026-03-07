@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penzion Volyňka*** | Ubytování Vimperk - Brána Šumavy</title>
+    <meta name="description" content="Penzion Volyňka ve Vimperku - komfortní ubytování v historické budově bývalých vimperských tiskáren. Brána do Národního parku Šumava.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES
+           ============================================ */
+        :root {
+            --primary: #2e4600;
+            --primary-light: #4a6f20;
+            --primary-dark: #1a2b00;
+            --accent: #d4a96a;
+            --accent-light: #e8c99b;
+            --accent-dark: #b8864a;
+            --bg: #faf9f6;
+            --bg-alt: #f0ede6;
+            --text: #2d2a26;
+            --text-light: #6b6560;
+            --text-muted: #9a9490;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(46, 70, 0, 0.08);
+            --shadow-md: 0 4px 20px rgba(46, 70, 0, 0.12);
+            --shadow-lg: 0 8px 40px rgba(46, 70, 0, 0.16);
+            --shadow-xl: 0 16px 60px rgba(46, 70, 0, 0.20);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 32px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-heading: 'Merriweather', Georgia, serif;
+            --font-body: 'Nunito', 'Segoe UI', sans-serif;
+            --max-width: 1200px;
+            --header-height: 80px;
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text);
+            background-color: var(--bg);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--primary-dark);
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); }
+        h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
+        h4 { font-size: clamp(1rem, 2vw, 1.25rem); }
+
+        p {
+            margin-bottom: 1em;
+            color: var(--text-light);
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================
+           SCROLL ANIMATIONS
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Staggered delays */
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+
+        /* ============================================
+           HEADER & NAVIGATION
+           ============================================ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: var(--header-height);
+            background: rgba(250, 249, 246, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        .header.scrolled {
+            background: rgba(250, 249, 246, 0.98);
+            border-bottom: 1px solid rgba(46, 70, 0, 0.1);
+            box-shadow: var(--shadow-sm);
+            height: 70px;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1001;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 900;
+        }
+
+        .logo-text {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            z-index: 1001;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: var(--primary);
+            margin: 3px 0;
+            transition: all var(--transition);
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(250, 249, 246, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition);
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu a {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            padding: 12px 24px;
+            transition: all var(--transition);
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent);
+            transform: translateX(8px);
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-top: var(--header-height);
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(46, 70, 0, 0.75) 0%,
+                rgba(46, 70, 0, 0.5) 50%,
+                rgba(212, 169, 106, 0.3) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 169, 106, 0.2);
+            border: 1px solid rgba(212, 169, 106, 0.4);
+            color: var(--accent-light);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            line-height: 1.15;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent-light);
+        }
+
+        .hero-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            max-width: 600px;
+            margin: 0 auto 36px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all var(--transition);
+            border: 2px solid transparent;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary-dark);
+            border-color: var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            border-color: var(--accent-light);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 169, 106, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary);
+            border-color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .btn-dark {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .btn-dark:hover {
+            background: var(--primary-light);
+            border-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: scrollBounce 2s infinite;
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ============================================
+           SECTION STYLES
+           ============================================ */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-alt {
+            background: var(--bg-alt);
+        }
+
+        .section-dark {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .section-dark h2,
+        .section-dark h3,
+        .section-dark h4 {
+            color: var(--white);
+        }
+
+        .section-dark p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .section-header h2 {
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-image-badge {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--primary-dark);
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .about-text h2 {
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 30px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--bg-alt);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .about-feature-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           ROOMS SECTION
+           ============================================ */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .room-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition);
+            position: relative;
+        }
+
+        .room-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .room-card-image {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .room-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .room-card:hover .room-card-image img {
+            transform: scale(1.1);
+        }
+
+        .room-card-tag {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: var(--accent);
+            color: var(--primary-dark);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .room-card-body {
+            padding: 28px;
+        }
+
+        .room-card-body h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .room-card-body p {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .room-amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .room-amenity {
+            background: var(--bg-alt);
+            color: var(--text-light);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .room-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--bg-alt);
+        }
+
+        .room-price {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .room-price span {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        /* ============================================
+           SERVICES / FEATURES
+           ============================================ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            text-align: center;
+            padding: 40px 24px;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform var(--transition);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+            color: var(--accent);
+            transition: transform var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-card h4 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           GALLERY
+           ============================================ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(46, 70, 0, 0.7), transparent);
+            opacity: 0;
+            transition: opacity var(--transition);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item-overlay span {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           SURROUNDINGS
+           ============================================ */
+        .surroundings-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .surrounding-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 36px;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition);
+            border-left: 4px solid transparent;
+        }
+
+        .surrounding-card:hover {
+            border-left-color: var(--accent);
+            transform: translateX(6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .surrounding-card h4 {
+            margin-bottom: 12px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .surrounding-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .surrounding-card .distance {
+            display: inline-block;
+            margin-top: 12px;
+            color: var(--accent-dark);
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+           TESTIMONIALS
+           ============================================ */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            padding: 36px;
+            backdrop-filter: blur(10px);
+            transition: all var(--transition);
+        }
+
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .testimonial-stars {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            letter-spacing: 3px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .testimonial-name {
+            font-weight: 700;
+            color: var(--white);
+            font-size: 0.95rem;
+        }
+
+        .testimonial-from {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+        }
+
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info {
+            padding: 20px 0;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .contact-item-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: var(--accent);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-item-text h4 {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .contact-item-text p {
+            font-size: 1.05rem;
+            color: var(--text);
+            margin-bottom: 0;
+            font-weight: 600;
+        }
+
+        .contact-item-text a {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .contact-map {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            min-height: 400px;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border: none;
+        }
+
+        /* ============================================
+           CTA SECTION
+           ============================================ */
+        .cta-section {
+            position: relative;
+            padding: 100px 0;
+            overflow: hidden;
+        }
+
+        .cta-bg {
+            position: absolute;
+            inset: 0;
+        }
+
+        .cta-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cta-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(46, 70, 0, 0.85), rgba(26, 43, 0, 0.9));
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .cta-content p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.15rem;
+            margin-bottom: 32px;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--primary-dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-brand .logo-text {
+            color: var(--white);
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand .logo-text span {
+            color: var(--accent);
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .footer h4 {
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            display: block;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            padding: 6px 0;
+            transition: all var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0;
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--accent-light);
+        }
+
+        /* ============================================
+           BACK TO TOP
+           ============================================ */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: var(--accent);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 990;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-light);
+            transform: translateY(-4px);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .rooms-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+            }
+
+            .surroundings-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+            }
+
+            .surroundings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-badge {
+                font-size: 0.75rem;
+                padding: 6px 16px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ============================================
+           LIGHTBOX
+           ============================================ */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ============================================
+           STATS COUNTER
+           ============================================ */
+        .stats-section {
+            padding: 60px 0;
+            background: var(--primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================
+           PRICING TABLE
+           ============================================ */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-top: 30px;
+        }
+
+        .pricing-table thead {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .pricing-table th {
+            padding: 16px 24px;
+            text-align: left;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-table td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--bg-alt);
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pricing-table tr:hover td {
+            background: var(--bg-alt);
+        }
+
+        .pricing-table .price-cell {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.05rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#hero" class="logo">
+                <div class="logo-icon">V</div>
+                <div class="logo-text">
+                    Penzion Volyňka
+                    <span>Vimperk &mdash; Šumava</span>
+                </div>
+            </a>
+            <nav class="nav-links">
+                <a href="#o-nas">O nás</a>
+                <a href="#pokoje">Pokoje</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#okoli">Okolí</a>
+                <a href="#kontakt">Kontakt</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="#o-nas">O nás</a>
+        <a href="#pokoje">Pokoje</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#okoli">Okolí</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="images/hero.jpg" alt="Penzion Volyňka ve Vimperku">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Brána do Šumavy</div>
+            <h1>Penzion <em>Volyňka</em>***</h1>
+            <p class="hero-subtitle">Komfortní ubytování v historické budově bývalých vimperských tiskáren se staletou tradicí. Vimperk &mdash; brána do Národního parku Šumava.</p>
+            <div class="hero-buttons">
+                <a href="#pokoje" class="btn btn-primary">Prohlédnout pokoje</a>
+                <a href="#kontakt" class="btn btn-outline">Rezervovat pobyt</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="25">0</div>
+                    <div class="stat-label">Lůžek celkem</div>
+                </div>
+                <div class="stat-item reveal delay-1">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">Let tradice budovy</div>
+                </div>
+                <div class="stat-item reveal delay-2">
+                    <div class="stat-number" data-target="365">0</div>
+                    <div class="stat-label">Dní v roce otevřeno</div>
+                </div>
+                <div class="stat-item reveal delay-3">
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-label">Typů pokojů</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- O NÁS -->
+    <section class="section" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal-left">
+                    <img src="images/vimperk.jpg" alt="Penzion Volyňka - budova">
+                    <div class="about-image-badge">Od roku 1920</div>
+                </div>
+                <div class="about-text reveal-right">
+                    <span class="section-label">O penzionu</span>
+                    <h2>Historie a pohostinnost v srdci Šumavy</h2>
+                    <p>Penzion Volyňka*** se nachází v historické budově bývalých vimperských tiskáren se staletou tradicí. Naše ubytování nabízí ideální zázemí jak pro individuální turisty, tak pro větší skupiny až 25 osob.</p>
+                    <p>Vimperk, město na křižovatce cest Praha&ndash;Pasov a Prachatice&ndash;Klatovy, je považován za bránu do Národního parku Šumava. Z penzionu máte skvělý přístup k nespočtu turistických tras, cyklostezek a přírodních krás.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#9733;</div>
+                            <span>3 hvězdičky</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#9751;</div>
+                            <span>Restaurace</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#8962;</div>
+                            <span>Skupiny 25+</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">&#9728;</div>
+                            <span>Celoroční provoz</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POKOJE -->
+    <section class="section section-alt" id="pokoje">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Ubytování</span>
+                <h2>Naše pokoje</h2>
+                <p class="section-desc">Nabízíme několik kategorií pokojů pro páry, rodiny i větší skupiny. Všechny pokoje jsou vybaveny pro maximální komfort vašeho pobytu.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="rooms-grid">
+                <div class="room-card reveal delay-1">
+                    <div class="room-card-image">
+                        <img src="images/room1.jpg" alt="Dvoulůžkový pokoj">
+                        <div class="room-card-tag">Oblíbený</div>
+                    </div>
+                    <div class="room-card-body">
+                        <h3>Dvoulůžkový pokoj</h3>
+                        <p>Útulný pokoj pro dva s výhledem do klidného okolí penzionu. Ideální pro páry a romantické pobyty v Šumavě.</p>
+                        <div class="room-amenities">
+                            <span class="room-amenity">Wi-Fi</span>
+                            <span class="room-amenity">TV</span>
+                            <span class="room-amenity">Koupelna</span>
+                            <span class="room-amenity">Ručníky</span>
+                        </div>
+                        <div class="room-card-footer">
+                            <div class="room-price">1 200 Kč <span>/ noc</span></div>
+                            <a href="#kontakt" class="btn btn-dark" style="padding: 10px 20px; font-size: 0.8rem;">Rezervovat</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="room-card reveal delay-2">
+                    <div class="room-card-image">
+                        <img src="images/room2.jpg" alt="Třílůžkový pokoj">
+                    </div>
+                    <div class="room-card-body">
+                        <h3>Třílůžkový pokoj</h3>
+                        <p>Prostorný pokoj pro tři osoby vhodný pro menší rodiny nebo přátele na společném výletě po Šumavě.</p>
+                        <div class="room-amenities">
+                            <span class="room-amenity">Wi-Fi</span>
+                            <span class="room-amenity">TV</span>
+                            <span class="room-amenity">Koupelna</span>
+                            <span class="room-amenity">Lednice</span>
+                        </div>
+                        <div class="room-card-footer">
+                            <div class="room-price">1 600 Kč <span>/ noc</span></div>
+                            <a href="#kontakt" class="btn btn-dark" style="padding: 10px 20px; font-size: 0.8rem;">Rezervovat</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="room-card reveal delay-3">
+                    <div class="room-card-image">
+                        <img src="images/room3.jpg" alt="Rodinný pokoj">
+                        <div class="room-card-tag">Pro rodiny</div>
+                    </div>
+                    <div class="room-card-body">
+                        <h3>Čtyř&ndash;pětilůžkový pokoj</h3>
+                        <p>Velký rodinný pokoj s kapacitou až 5 osob. Perfektní volba pro rodiny s dětmi nebo skupiny přátel.</p>
+                        <div class="room-amenities">
+                            <span class="room-amenity">Wi-Fi</span>
+                            <span class="room-amenity">TV</span>
+                            <span class="room-amenity">Koupelna</span>
+                            <span class="room-amenity">Přistýlka</span>
+                        </div>
+                        <div class="room-card-footer">
+                            <div class="room-price">2 200 Kč <span>/ noc</span></div>
+                            <a href="#kontakt" class="btn btn-dark" style="padding: 10px 20px; font-size: 0.8rem;">Rezervovat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRICING TABLE -->
+            <div class="reveal" style="margin-top: 50px;">
+                <h3 style="text-align: center; margin-bottom: 10px;">Ceník ubytování</h3>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Skupiny nad 25 osob &mdash; individuální cena po dohodě</p>
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Typ pokoje</th>
+                            <th>Kapacita</th>
+                            <th>Cena / noc</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dvoulůžkový pokoj</td>
+                            <td>2 osoby</td>
+                            <td class="price-cell">1 200 Kč</td>
+                        </tr>
+                        <tr>
+                            <td>Třílůžkový pokoj</td>
+                            <td>3 osoby</td>
+                            <td class="price-cell">1 600 Kč</td>
+                        </tr>
+                        <tr>
+                            <td>Čtyřlůžkový pokoj</td>
+                            <td>4 osoby</td>
+                            <td class="price-cell">2 000 Kč</td>
+                        </tr>
+                        <tr>
+                            <td>Pětilůžkový pokoj</td>
+                            <td>5 osob</td>
+                            <td class="price-cell">2 200 Kč</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLUŽBY -->
+    <section class="section" id="sluzby">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Co nabízíme</span>
+                <h2>Služby a vybavení</h2>
+                <p class="section-desc">V Penzionu Volyňka vám poskytneme vše pro příjemný a bezstarostný pobyt v Šumavě.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card reveal delay-1">
+                    <div class="service-icon">&#127860;</div>
+                    <h4>Restaurace</h4>
+                    <p>Vlastní restaurace s nabídkou tradičních šumavských i českých jídel. Polopenzi i plnou penzi zajistíme.</p>
+                </div>
+                <div class="service-card reveal delay-2">
+                    <div class="service-icon">&#128663;</div>
+                    <h4>Parkování</h4>
+                    <p>Bezplatné parkování přímo u penzionu. Bezpečné a pohodlné pro všechny naše hosty.</p>
+                </div>
+                <div class="service-card reveal delay-3">
+                    <div class="service-icon">&#128246;</div>
+                    <h4>Wi-Fi zdarma</h4>
+                    <p>Vysokorychlostní bezdrátové připojení k internetu ve všech pokojích i společných prostorách.</p>
+                </div>
+                <div class="service-card reveal delay-4">
+                    <div class="service-icon">&#128692;</div>
+                    <h4>Cykloturistika</h4>
+                    <p>Úschovna kol a informace o nejlepších cyklotrasách v okolí Šumavy. Penzion byl uveden v pořadu Cyklotoulky na ČT.</p>
+                </div>
+            </div>
+
+            <div class="services-grid" style="margin-top: 30px;">
+                <div class="service-card reveal delay-1">
+                    <div class="service-icon">&#127968;</div>
+                    <h4>Skupinové pobyty</h4>
+                    <p>Zajistíme ubytování pro skupiny nad 25 osob. Ideální pro firemní akce, školní výlety a sportovní soustředění.</p>
+                </div>
+                <div class="service-card reveal delay-2">
+                    <div class="service-icon">&#9968;</div>
+                    <h4>Turistika</h4>
+                    <p>Stovky kilometrů značených turistických tras v NP Šumava. Boubín, Kašperské Hory a další jsou na dosah.</p>
+                </div>
+                <div class="service-card reveal delay-3">
+                    <div class="service-icon">&#127935;</div>
+                    <h4>Sport a relax</h4>
+                    <p>V okolí tenis, volejbal, fotbal, zimní stadion, jezdectví, fitness centrum a koupaliště Vodník.</p>
+                </div>
+                <div class="service-card reveal delay-4">
+                    <div class="service-icon">&#128716;</div>
+                    <h4>Komfort pokojů</h4>
+                    <p>Každý pokoj vybaven vlastní koupelnou, TV se satelitem a pohodlnými lůžky pro klidný spánek.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section class="section section-alt" id="galerie">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Fotogalerie</span>
+                <h2>Nahlédněte k nám</h2>
+                <p class="section-desc">Prohlédněte si fotografie penzionu, pokojů, restaurace a krásného okolí Vimperku.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item reveal-scale delay-1" data-src="images/hero.jpg">
+                    <img src="images/hero.jpg" alt="Penzion Volyňka">
+                    <div class="gallery-item-overlay"><span>Penzion Volyňka</span></div>
+                </div>
+                <div class="gallery-item reveal-scale delay-2" data-src="images/room1.jpg">
+                    <img src="images/room1.jpg" alt="Dvoulůžkový pokoj">
+                    <div class="gallery-item-overlay"><span>Dvoulůžkový pokoj</span></div>
+                </div>
+                <div class="gallery-item reveal-scale delay-3" data-src="images/room2.jpg">
+                    <img src="images/room2.jpg" alt="Třílůžkový pokoj">
+                    <div class="gallery-item-overlay"><span>Třílůžkový pokoj</span></div>
+                </div>
+                <div class="gallery-item reveal-scale delay-4" data-src="images/restaurant.jpg">
+                    <img src="images/restaurant.jpg" alt="Restaurace">
+                    <div class="gallery-item-overlay"><span>Restaurace</span></div>
+                </div>
+                <div class="gallery-item reveal-scale delay-5" data-src="images/sumava.jpg">
+                    <img src="images/sumava.jpg" alt="Šumava">
+                    <div class="gallery-item-overlay"><span>Okolní příroda</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OKOLÍ -->
+    <section class="section" id="okoli">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Tipy na výlety</span>
+                <h2>Okolí Vimperku</h2>
+                <p class="section-desc">Vimperk leží na křižovatce cest Praha&ndash;Pasov a Prachatice&ndash;Klatovy, přímo u brány do NP Šumava.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="surroundings-grid">
+                <div class="surrounding-card reveal delay-1">
+                    <h4>&#127795; NP Šumava</h4>
+                    <p>Národní park Šumava s nedotčenou přírodou, rašeliništi, ledovcovými jezery a stovkami kilometrů turistických tras.</p>
+                    <span class="distance">Přímo z Vimperku</span>
+                </div>
+                <div class="surrounding-card reveal delay-2">
+                    <h4>&#127984; Hrad Vimperk</h4>
+                    <p>Dominanta města s muzeem a expozicí o historii knihtisku. Nádherné výhledy na město a okolní krajinu.</p>
+                    <span class="distance">5 min pěšky</span>
+                </div>
+                <div class="surrounding-card reveal delay-3">
+                    <h4>&#127956; Boubínský prales</h4>
+                    <p>Jeden z nejstarších chráněných pralesů v Evropě. Unikátní ekosystém s obřími jedlemi a buky.</p>
+                    <span class="distance">15 km</span>
+                </div>
+                <div class="surrounding-card reveal delay-4">
+                    <h4>&#127946; Koupaliště Vodník</h4>
+                    <p>Oblíbené letní koupaliště s atrakcemi pro děti i dospělé. Ideální pro horké letní dny.</p>
+                    <span class="distance">10 min pěšky</span>
+                </div>
+                <div class="surrounding-card reveal delay-5">
+                    <h4>&#128692; Cyklotrasy</h4>
+                    <p>Desítky kilometrů cykloturistických tras všech obtížností. Od rodinných okruhů po náročné horské stezky.</p>
+                    <span class="distance">Od penzionu</span>
+                </div>
+                <div class="surrounding-card reveal delay-5">
+                    <h4>&#9976; Kašperské Hory</h4>
+                    <p>Historické městečko s hradem Kašperk, nejvýše položeným královským hradem v Čechách.</p>
+                    <span class="distance">25 km</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECENZE -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label" style="color: var(--accent);">Recenze</span>
+                <h2>Co říkají naši hosté</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal delay-1">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-text">&bdquo;Nádherný penzion v historické budově. Poloha přímo u Šumavy je skvělá. Restaurace vaří výborně a personál je velmi přátelský.&ldquo;</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JN</div>
+                        <div>
+                            <div class="testimonial-name">Jana Nováková</div>
+                            <div class="testimonial-from">Praha</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal delay-2">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-text">&bdquo;Byli jsme tu se skupinou 20 lidí na teambuilding. Vše perfektně zorganizované, jídlo vynikající, okolí krásné. Určitě se vrátíme!&ldquo;</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">PK</div>
+                        <div>
+                            <div class="testimonial-name">Petr Králík</div>
+                            <div class="testimonial-from">Plzeň</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal delay-3">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-text">&bdquo;Ideální výchozí bod pro výlety na Šumavu. Pokoje čisté a útulné, parkoviště přímo u penzionu. Cyklisté vítáni!&ldquo;</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MH</div>
+                        <div>
+                            <div class="testimonial-name">Martin Holý</div>
+                            <div class="testimonial-from">České Budějovice</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-bg">
+            <img src="images/sumava.jpg" alt="Šumava">
+        </div>
+        <div class="cta-overlay"></div>
+        <div class="cta-content container">
+            <h2>Rezervujte si pobyt v Šumavě</h2>
+            <p>Zavolejte nám nebo napište a my vám rádi pomůžeme s plánováním vašeho pobytu v Penzionu Volyňka.</p>
+            <a href="tel:+420728666609" class="btn btn-primary">Zavolat +420 728 666 609</a>
+        </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section class="section" id="kontakt">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Kontakt</span>
+                <h2>Kde nás najdete</h2>
+                <p class="section-desc">Rádi vás přivítáme v Penzionu Volyňka ve Vimperku. Rezervace telefonicky.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info reveal-left">
+                    <h3>Kontaktní údaje</h3>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">&#128205;</div>
+                        <div class="contact-item-text">
+                            <h4>Adresa</h4>
+                            <p>Pasovská 114/7<br>385 01 Vimperk II</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">&#128222;</div>
+                        <div class="contact-item-text">
+                            <h4>Telefon</h4>
+                            <a href="tel:+420728666609">+420 728 666 609</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">&#128337;</div>
+                        <div class="contact-item-text">
+                            <h4>Provoz</h4>
+                            <p>Celoročně, denně</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">&#128652;</div>
+                        <div class="contact-item-text">
+                            <h4>Doprava</h4>
+                            <p>Vlak i autobus &mdash; zastávka Vimperk<br>Parkování u penzionu zdarma</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map reveal-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2615.5!2d13.7803!3d49.0585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4774a5d5c2f9a5f3%3A0x400af0f66164090!2sPasovsk%C3%A1%20114%2F7%2C%20385%2001%20Vimperk!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo-text">
+                        Penzion Volyňka***
+                        <span>Vimperk &mdash; Šumava</span>
+                    </div>
+                    <p>Komfortní ubytování v historické budově bývalých vimperských tiskáren. Ideální výchozí bod pro výlety do Národního parku Šumava.</p>
+                </div>
+                <div>
+                    <h4>Navigace</h4>
+                    <div class="footer-links">
+                        <a href="#o-nas">O nás</a>
+                        <a href="#pokoje">Pokoje</a>
+                        <a href="#sluzby">Služby</a>
+                        <a href="#galerie">Galerie</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Další</h4>
+                    <div class="footer-links">
+                        <a href="#okoli">Okolí</a>
+                        <a href="#kontakt">Kontakt</a>
+                        <a href="tel:+420728666609">Rezervace</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Kontakt</h4>
+                    <div class="footer-links">
+                        <a href="tel:+420728666609">+420 728 666 609</a>
+                        <a>Pasovská 114/7</a>
+                        <a>385 01 Vimperk II</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Penzion Volyňka***. Všechna práva vyhrazena.</p>
+                <p>Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" aria-label="Zpět nahoru">&#9650;</button>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <img src="" alt="Zvětšený obrázek">
+    </div>
+
+    <script>
+        /* ============================================
+           JAVASCRIPT - NO EXTERNAL LIBRARIES
+           ============================================ */
+
+        (function() {
+            'use strict';
+
+            /* ---- DOM ELEMENTS ---- */
+            var header = document.getElementById('header');
+            var hamburger = document.getElementById('hamburger');
+            var mobileMenu = document.getElementById('mobileMenu');
+            var backToTop = document.getElementById('backToTop');
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImg = lightbox.querySelector('img');
+            var lightboxClose = lightbox.querySelector('.lightbox-close');
+
+            /* ---- HEADER SCROLL ---- */
+            var lastScroll = 0;
+            function handleScroll() {
+                var currentScroll = window.pageYOffset;
+                if (currentScroll > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+
+                if (currentScroll > 400) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+
+                lastScroll = currentScroll;
+            }
+
+            window.addEventListener('scroll', handleScroll, { passive: true });
+
+            /* ---- HAMBURGER MENU ---- */
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+
+            /* Close mobile menu on link click */
+            var mobileLinks = mobileMenu.querySelectorAll('a');
+            for (var i = 0; i < mobileLinks.length; i++) {
+                mobileLinks[i].addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            /* ---- SMOOTH SCROLL ---- */
+            var allLinks = document.querySelectorAll('a[href^="#"]');
+            for (var j = 0; j < allLinks.length; j++) {
+                allLinks[j].addEventListener('click', function(e) {
+                    var targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    var target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        var headerOffset = 80;
+                        var elementPosition = target.getBoundingClientRect().top;
+                        var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+
+            /* ---- BACK TO TOP ---- */
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            /* ---- INTERSECTION OBSERVER - SCROLL ANIMATIONS ---- */
+            var revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+            if ('IntersectionObserver' in window) {
+                var revealObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            revealObserver.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+
+                revealElements.forEach(function(el) {
+                    revealObserver.observe(el);
+                });
+            } else {
+                /* Fallback for older browsers */
+                revealElements.forEach(function(el) {
+                    el.classList.add('visible');
+                });
+            }
+
+            /* ---- COUNTER ANIMATION ---- */
+            var statNumbers = document.querySelectorAll('.stat-number');
+
+            function animateCounter(element) {
+                var target = parseInt(element.getAttribute('data-target'));
+                var current = 0;
+                var increment = target / 60;
+                var duration = 2000;
+                var stepTime = duration / 60;
+
+                function updateCounter() {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = target + '+';
+                        return;
+                    }
+                    element.textContent = Math.floor(current) + '+';
+                    setTimeout(updateCounter, stepTime);
+                }
+
+                updateCounter();
+            }
+
+            if ('IntersectionObserver' in window) {
+                var counterObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            var numbers = entry.target.querySelectorAll('.stat-number');
+                            numbers.forEach(function(num) {
+                                animateCounter(num);
+                            });
+                            counterObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+
+                var statsSection = document.querySelector('.stats-section');
+                if (statsSection) {
+                    counterObserver.observe(statsSection);
+                }
+            }
+
+            /* ---- LIGHTBOX ---- */
+            var galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    var src = this.getAttribute('data-src') || this.querySelector('img').src;
+                    lightboxImg.src = src;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox || e.target === lightboxClose) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            lightboxClose.addEventListener('click', function() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            /* ---- ACTIVE NAV LINK ---- */
+            var sections = document.querySelectorAll('section[id]');
+            function updateActiveNav() {
+                var scrollPos = window.pageYOffset + 100;
+                sections.forEach(function(section) {
+                    var top = section.offsetTop;
+                    var height = section.offsetHeight;
+                    var id = section.getAttribute('id');
+                    if (scrollPos >= top && scrollPos < top + height) {
+                        document.querySelectorAll('.nav-links a').forEach(function(link) {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+            /* ---- PARALLAX HERO ---- */
+            var heroBg = document.querySelector('.hero-bg img');
+            if (heroBg) {
+                window.addEventListener('scroll', function() {
+                    var scroll = window.pageYOffset;
+                    if (scroll < window.innerHeight) {
+                        heroBg.style.transform = 'translateY(' + (scroll * 0.3) + 'px) scale(1.1)';
+                    }
+                }, { passive: true });
+            }
+
+            /* ---- INITIAL CALL ---- */
+            handleScroll();
+            updateActiveNav();
+
+        })();
+    </script>
+</body>
+</html>
