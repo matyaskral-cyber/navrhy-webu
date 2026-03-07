@@ -612,7 +612,7 @@
         .galerie-header .section-label::before { display: none; }
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
         }
         .gallery-item {
@@ -1439,7 +1439,7 @@
                     </div>
                 </div>
                 <div class="vybaveni-image reveal reveal-delay-1">
-                    <img src="images/foto2.jpg" alt="Interiér pokoje">
+                    <img src="images/foto3.jpg" alt="Pokoj penzionu nad lékárnou">
                 </div>
             </div>
         </div>
@@ -1584,10 +1584,22 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item" onclick="openLightbox(0)">
-                    <img src="images/foto1.jpg" alt="Penzion exteriér">
+                    <img src="images/foto1.jpg" alt="Penzion nad lékárnou - budova">
                 </div>
                 <div class="gallery-item" onclick="openLightbox(1)">
-                    <img src="images/foto2.jpg" alt="Pokoj">
+                    <img src="images/foto2.jpg" alt="Penzion nad lékárnou - interiér">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(2)">
+                    <img src="images/foto3.jpg" alt="Penzion nad lékárnou - pokoj">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(3)">
+                    <img src="images/foto4.jpg" alt="Penzion nad lékárnou - vybavení">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(4)">
+                    <img src="images/foto5.jpg" alt="Penzion nad lékárnou - terasa">
+                </div>
+                <div class="gallery-item" onclick="openLightbox(5)">
+                    <img src="images/foto6.jpg" alt="Penzion nad lékárnou - okolí">
                 </div>
             </div>
         </div>
@@ -1807,7 +1819,7 @@
         }
 
         /* ===== LIGHTBOX ===== */
-        const galleryImages = ['images/foto1.jpg', 'images/foto2.jpg'];
+        const galleryImages = ['images/foto1.jpg', 'images/foto2.jpg', 'images/foto3.jpg', 'images/foto4.jpg', 'images/foto5.jpg', 'images/foto6.jpg'];
         let currentLightboxIndex = 0;
 
         function openLightbox(index) {

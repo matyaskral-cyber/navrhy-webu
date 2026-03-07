@@ -647,6 +647,59 @@
         }
 
         /* ========================================
+           CTA Banner Ford
+           ======================================== */
+        .cta-banner-ford {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-banner-ford::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -15%;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(192,192,192,0.04);
+        }
+        .cta-ford-inner {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            color: var(--white);
+        }
+        .cta-ford-inner h2 {
+            font-size: 2.4rem;
+            margin-bottom: 14px;
+        }
+        .cta-ford-inner p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 30px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-ford-buttons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-outline-dark {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .btn-outline-dark:hover {
+            border-color: var(--white);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* ========================================
            Partners Banner
            ======================================== */
         .partners-banner {
@@ -1195,6 +1248,20 @@
                 </div>
                 <div class="map-wrap reveal-right">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2604.3!2d14.1508!3d49.3042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b4fc4a2d97a85%3A0x400af0f66154090!2sT%C3%A1borsk%C3%A1%202300%2C%20397%2001%20P%C3%ADsek!5e0!3m2!1scs!2scz!4v1700000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - Ford Auto Novák Písek"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner-ford">
+        <div class="container">
+            <div class="cta-ford-inner reveal">
+                <h2>Hledáte spolehlivý servis pro svůj Ford?</h2>
+                <p>Zavolejte nám ještě dnes a domluvte si termín servisu. Profesionální péče o váš vůz za férovou cenu.</p>
+                <div class="cta-ford-buttons">
+                    <a href="tel:+420382211020" class="btn btn-primary-ford">+420 382 211 020</a>
+                    <a href="#kontakt" class="btn btn-outline-dark">Napište nám</a>
                 </div>
             </div>
         </div>

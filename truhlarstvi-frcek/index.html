@@ -515,16 +515,15 @@
         .about-visual-main {
             background: linear-gradient(135deg, var(--cream), var(--gray-100));
             border-radius: var(--radius-xl);
-            padding: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden;
             min-height: 420px;
         }
 
         .about-visual-main img {
-            max-width: 240px;
-            height: auto;
+            width: 100%;
+            height: 100%;
+            min-height: 420px;
+            object-fit: cover;
         }
 
         .about-craft-badge {
@@ -1178,6 +1177,7 @@
             <div class="nav-links">
                 <a href="#o-nas">O nás</a>
                 <a href="#produkty">Produkty</a>
+                <a href="#galerie">Galerie</a>
                 <a href="#proces">Jak pracujeme</a>
                 <a href="#kontakt" class="nav-cta-link">Kontakt</a>
             </div>
@@ -1193,6 +1193,7 @@
     <div class="mobile-menu" id="mobileMenu">
         <a href="#o-nas" class="mobile-link">O nás</a>
         <a href="#produkty" class="mobile-link">Produkty</a>
+        <a href="#galerie" class="mobile-link">Galerie</a>
         <a href="#proces" class="mobile-link">Jak pracujeme</a>
         <a href="#kontakt" class="mobile-link">Kontakt</a>
     </div>
@@ -1229,9 +1230,9 @@
                     </div>
                 </div>
                 <div class="hero-logo-col">
-                    <div class="hero-logo-wrap">
-                        <img src="images/logo.png" alt="Logo Truhlářství Pavel Frček">
-                        <div class="hero-logo-caption">Boubská 15, Vimperk</div>
+                    <div class="hero-logo-wrap" style="padding:0;overflow:hidden;border-radius:var(--radius-xl);">
+                        <img src="images/hero.jpg" alt="Truhlářství Pavel Frček - ukázka práce" style="max-width:100%;width:400px;height:320px;object-fit:cover;border-radius:var(--radius-xl);filter:none;">
+                        <div class="hero-logo-caption" style="padding:12px 0;">Boubská 15, Vimperk</div>
                     </div>
                 </div>
             </div>
@@ -1244,7 +1245,7 @@
             <div class="about-layout">
                 <div class="about-visual fade-in-left">
                     <div class="about-visual-main">
-                        <img src="images/logo.png" alt="Truhlářství Pavel Frček - logo">
+                        <img src="images/kuchyn1.jpg" alt="Truhlářství Pavel Frček - kuchyně z masivu">
                     </div>
                     <div class="about-craft-badge">
                         <span class="acb-title">Řemeslo</span>
@@ -1335,6 +1336,38 @@
         </div>
     </section>
 
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="galerie" style="padding:80px 0;background:var(--cream);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Galerie</span>
+                <div class="section-bar"></div>
+                <h2 class="section-title">Ukázky naší práce</h2>
+                <p class="section-subtitle">Podívejte se na výběr z našich realizací — kuchyně, postele, schody a další výrobky z masivu.</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:40px;">
+                <div class="fade-in" style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;">
+                    <img src="images/kuchyn1.jpg" alt="Kuchyně z masivu" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                </div>
+                <div class="fade-in" style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;">
+                    <img src="images/kuchyn2.jpg" alt="Kuchyňská linka na míru" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                </div>
+                <div class="fade-in" style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;">
+                    <img src="images/postel1.jpg" alt="Masivní postel" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                </div>
+                <div class="fade-in" style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;">
+                    <img src="images/postel2.jpg" alt="Postel z masivu" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                </div>
+                <div class="fade-in" style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;">
+                    <img src="images/schody1.jpg" alt="Dřevěné schodiště" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                </div>
+                <div class="fade-in" style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;">
+                    <img src="images/postel3.jpg" alt="Postel s úložným prostorem" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Process Section -->
     <section class="process" id="proces">
         <div class="container">
@@ -1387,7 +1420,7 @@
                     </div>
                 </div>
                 <div class="brands-visual fade-in-right">
-                    <img src="images/logo.png" alt="Truhlářství Frček">
+                    <img src="images/postel1.jpg" alt="Truhlářství Frček - masivní postele" style="width:100%;max-width:400px;border-radius:16px;object-fit:cover;">
                     <h3>Svět Postelí</h3>
                     <p>Náš e-shop s matracemi, rošty a postelemi</p>
                     <a href="https://www.svetposteli.com" target="_blank" rel="noopener" class="btn btn-primary-solid">Navštívit e-shop</a>

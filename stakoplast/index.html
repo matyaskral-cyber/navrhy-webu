@@ -74,16 +74,19 @@
         .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translateY(-11px); }
 
         /* HERO */
-        .hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(135deg, var(--color-navy-dark) 0%, var(--color-navy) 40%, var(--color-navy-light) 100%); }
+        .hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--color-navy-dark); }
+        .hero-bg-image { position: absolute; inset: 0; z-index: 0; }
+        .hero-bg-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(135deg, rgba(20, 42, 69, 0.85) 0%, rgba(30, 58, 95, 0.75) 40%, rgba(42, 79, 127, 0.7) 100%); }
         .hero-pattern {
-            position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+            position: absolute; inset: 0; z-index: 2; opacity: 0.04;
             background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0);
             background-size: 40px 40px;
         }
-        .hero-shape-1 { position: absolute; top: 10%; right: 5%; width: 300px; height: 300px; border: 2px solid rgba(74, 144, 217, 0.15); border-radius: 50%; z-index: 0; animation: float 8s ease-in-out infinite; }
-        .hero-shape-2 { position: absolute; bottom: 15%; left: 8%; width: 200px; height: 200px; border: 2px solid rgba(74, 144, 217, 0.1); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; z-index: 0; animation: float 6s ease-in-out infinite reverse; }
-        .hero-shape-3 { position: absolute; top: 40%; left: 50%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(74, 144, 217, 0.06) 0%, transparent 70%); border-radius: 50%; z-index: 0; }
-        .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 2rem; max-width: 900px; }
+        .hero-shape-1 { position: absolute; top: 10%; right: 5%; width: 300px; height: 300px; border: 2px solid rgba(74, 144, 217, 0.15); border-radius: 50%; z-index: 2; animation: float 8s ease-in-out infinite; }
+        .hero-shape-2 { position: absolute; bottom: 15%; left: 8%; width: 200px; height: 200px; border: 2px solid rgba(74, 144, 217, 0.1); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; z-index: 2; animation: float 6s ease-in-out infinite reverse; }
+        .hero-shape-3 { position: absolute; top: 40%; left: 50%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(74, 144, 217, 0.06) 0%, transparent 70%); border-radius: 50%; z-index: 2; }
+        .hero-content { position: relative; z-index: 3; text-align: center; padding: 0 2rem; max-width: 900px; }
         .hero-badge { display: inline-block; padding: 0.5rem 1.8rem; border: 1px solid rgba(74, 144, 217, 0.4); border-radius: 50px; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-accent-light); margin-bottom: 2rem; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s ease 0.3s forwards; font-family: var(--font-heading); background: rgba(74, 144, 217, 0.08); }
         .hero h1 { font-family: var(--font-heading); font-size: clamp(2.6rem, 6vw, 4.5rem); font-weight: 800; color: var(--color-white); line-height: 1.1; margin-bottom: 1.2rem; opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease 0.5s forwards; }
         .hero h1 em { color: var(--color-accent-light); font-style: normal; }
@@ -96,7 +99,7 @@
         .btn-outline:hover { border-color: var(--color-accent); color: var(--color-accent-light); transform: translateY(-3px); }
         .btn-navy { background: var(--color-navy); color: var(--color-white); }
         .btn-navy:hover { background: var(--color-navy-light); transform: translateY(-3px); box-shadow: 0 12px 35px rgba(30, 58, 95, 0.3); }
-        .hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 2; opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards; }
+        .hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 3; opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards; }
         .hero-scroll a { color: rgba(255,255,255,0.5); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: color 0.3s ease; font-family: var(--font-heading); }
         .hero-scroll a:hover { color: var(--color-accent); }
         .scroll-line { width: 1px; height: 40px; background: var(--color-accent); animation: scrollPulse 2s ease-in-out infinite; }
@@ -227,6 +230,10 @@
 
     <!-- HERO -->
     <section class="hero">
+        <div class="hero-bg-image">
+            <img src="images/hero-windows.jpg" alt="STAKOPLAST - plastová okna a dveře">
+        </div>
+        <div class="hero-overlay"></div>
         <div class="hero-pattern"></div>
         <div class="hero-shape-1"></div>
         <div class="hero-shape-2"></div>
@@ -284,7 +291,7 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-image reveal-left">
-                    <img src="images/prodejna.jpg" alt="STAKOPLAST prodejna Strakonice">
+                    <img src="images/prodejna-new.jpg" alt="STAKOPLAST prodejna Strakonice">
                 </div>
                 <div class="about-text reveal-right">
                     <span class="section-tag">O firmě</span>
@@ -373,6 +380,38 @@
                     </div>
                     <h3>Tepelná čerpadla</h3>
                     <p>Moderní tepelná čerpadla pro úsporné a ekologické vytápění vašeho domu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section id="galerie" style="background:var(--color-bg-alt);padding:6rem 2rem;">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Naše realizace</span>
+                <h2 class="section-title">Galerie <em>realizací</em></h2>
+                <p class="section-desc">Ukázky oken, dveří a dalších realizací z naší dílny.</p>
+                <div class="divider"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-top:2rem;">
+                <div class="reveal-scale" style="border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;">
+                    <img src="images/okna1.jpg" alt="Plastová okna" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                </div>
+                <div class="reveal-scale" style="border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;">
+                    <img src="images/gallery1.jpg" alt="Realizace oken" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                </div>
+                <div class="reveal-scale" style="border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;">
+                    <img src="images/gallery2.jpg" alt="Montáž oken" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                </div>
+                <div class="reveal-scale" style="border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;">
+                    <img src="images/okna2.jpg" alt="Okna a dveře" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                </div>
+                <div class="reveal-scale" style="border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;">
+                    <img src="images/gallery3.jpg" alt="Realizace" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
+                </div>
+                <div class="reveal-scale" style="border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;">
+                    <img src="images/okna3.jpg" alt="Plastová okna detail" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
                 </div>
             </div>
         </div>
