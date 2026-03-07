@@ -2,7 +2,7 @@
 
 **Projekt:** KSH Partners s.r.o.
 **Datum:** 2026-03-07
-**Stav:** V průběhu (50/100)
+**Stav:** Hotovo (47 nových návrhů)
 
 ## Přehled hotových návrhů
 
@@ -56,9 +56,47 @@
 | 24 | Truhlářství Pavel Frček | Jihočeský kraj | Truhlářství, matrace | `truhlarstvi-frcek/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/truhlarstvi-frcek/) | 1351 |
 | 25 | KALICH Strakonice | Strakonice | Restaurace, eventy | `kalich-strakonice/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/kalich-strakonice/) | 1320 |
 
-### Dávky 6-10 — V přípravě
+### Dávka 6 — Velkoobchod, elektro, autoservisy, elektroinstalace
 
-Další firmy ve zpracování agenty...
+| # | Firma | Město | Obor | Složka | Náhled | Řádky |
+|---|-------|-------|------|--------|--------|-------|
+| 26 | Auta Bechyně | Bechyně | Autoservis, autobazar | `auta-bechyne/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/auta-bechyne/) | 2138 |
+| 27 | Autoservis Kadlec | Písek | Autoservis, karosárna | `autoservis-kadlec/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/autoservis-kadlec/) | 2331 |
+| 28 | BOBY-H Velkoobchod | Tábor | Velkoobchod nápojů | `boby-velkoobchod/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/boby-velkoobchod/) | 1994 |
+| 29 | Elektro Kovanda | Sezimovo Ústí | Elektro, rybářské potřeby | `elektro-kovanda/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/elektro-kovanda/) | 1681 |
+| 30 | Autoservis Lemberka | Tábor | Autoservis, pneuservis | `autoservis-lemberka/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/autoservis-lemberka/) | 1542 |
+
+### Dávka 7 — Ford, stavby, pneu, veterina
+
+| # | Firma | Město | Obor | Složka | Náhled | Řádky |
+|---|-------|-------|------|--------|--------|-------|
+| 31 | Ford Auto Novák | Písek | Ford dealer, autoservis | `ford-auto-novak/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/ford-auto-novak/) | 1455 |
+| 32 | Elstav Strakonice | Strakonice | Elektroinstalace | `elstav-strakonice/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/elstav-strakonice/) | 1450 |
+| 33 | Veterina MVDr. Richter | Jihočeský kraj | Veterinární ordinace | `veterina-richter/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/veterina-richter/) | 2403 |
+| 34 | Stavby Strnad | Jihočeský kraj | Stavební firma | `stavby-strnad/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/stavby-strnad/) | 884 |
+| 35 | Pneuland Soběslav | Soběslav | Pneuservis | `pneuland-sobeslav/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/pneuland-sobeslav/) | 639 |
+
+### Dávka 8 — Fitness, penzion, stavby, kadeřnictví, auto
+
+| # | Firma | Město | Obor | Složka | Náhled | Řádky |
+|---|-------|-------|------|--------|--------|-------|
+| 36 | ISUZU Tábor | Tábor | ISUZU dealer | `isuzu-tabor/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/isuzu-tabor/) | 565 |
+| 37 | Auto Šíma | Jihočeský kraj | Autoservis | `auto-sima/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/auto-sima/) | 652 |
+| 38 | Fitness Pouzar | České Budějovice | Fitness centrum | `fitness-pouzar/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/fitness-pouzar/) | 2200 |
+| 39 | Penzion Sport | Písek | Penzion s restaurací | `penzion-sport/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/penzion-sport/) | 1792 |
+| 40 | Stavby Scholtz | Písek | Stavební firma | `stavby-scholtz/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/stavby-scholtz/) | 1407 |
+
+### Dávka 9 — Kadeřnictví, auto, penziony, truhlářství, kuchyně
+
+| # | Firma | Město | Obor | Složka | Náhled | Řádky |
+|---|-------|-------|------|--------|--------|-------|
+| 41 | Kadeřnictví Lucie | Milevsko | Kadeřnictví | `kadernictvi-lucie/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/kadernictvi-lucie/) | 1397 |
+| 42 | AutoHoudek | Protivín | Autobazar, autoservis | `autohoudek/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/autohoudek/) | 1467 |
+| 43 | Penzion Volynka | Vimperk | Penzion | `penzion-volynka/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/penzion-volynka/) | 2269 |
+| 44 | Truhlářství Kana | Chotoviny | Truhlářství | `truhlarstvi-kana/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/truhlarstvi-kana/) | 1588 |
+| 45 | Kuchyňské Studio | Týn nad Vltavou | Kuchyňský nábytek | `kuchynske-studio/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/kuchynske-studio/) | 731 |
+| 46 | Penzion Blatná | Blatná | Penzion | `penzion-blatna/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/penzion-blatna/) | 564 |
+| 47 | Ubytování u Temelína | Temelín | Ubytování | `ubytovani-temelin/` | [Otevřít](https://matyaskral-cyber.github.io/navrhy-webu/ubytovani-temelin/) | 583 |
 
 ---
 
