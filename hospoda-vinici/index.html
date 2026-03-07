@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hospoda Na Vinici - tradiční česká hospoda v Blatné. Čepované pivo, sál pro oslavy a firemní akce. Přijďte posedět!">
+    <meta name="keywords" content="hospoda, Blatná, Na Vinici, pivo, restaurace, oslavy, sál, jihočeský kraj">
+    <title>Hospoda Na Vinici | Blatná</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* =============================================
+           ROOT VARIABLES
+        ============================================= */
+        :root {
+            --primary: #5d4037;
+            --primary-dark: #3e2723;
+            --primary-light: #795548;
+            --accent: #f5e6c8;
+            --accent-dark: #e8d5a8;
+            --light: #fdf8f0;
+            --dark: #2e1f15;
+            --gray: #8d6e63;
+            --gray-light: #d7ccc8;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(46,31,21,0.08);
+            --shadow: 0 4px 20px rgba(46,31,21,0.1);
+            --shadow-lg: 0 10px 40px rgba(46,31,21,0.15);
+            --transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+            --radius: 8px;
+            --radius-lg: 16px;
+            --font-heading: 'Archivo', sans-serif;
+            --font-body: 'PT Sans', sans-serif;
+            --nav-height: 80px;
+        }
+
+        /* =============================================
+           RESET
+        ============================================= */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--dark);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul, ol { list-style: none; }
+        h1,h2,h3,h4,h5,h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* =============================================
+           ANIMATIONS
+        ============================================= */
+        .anim-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .anim-up.visible { opacity: 1; transform: translateY(0); }
+        .anim-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .anim-left.visible { opacity: 1; transform: translateX(0); }
+        .anim-right { opacity: 0; transform: translateX(50px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .anim-right.visible { opacity: 1; transform: translateX(0); }
+        .anim-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .anim-scale.visible { opacity: 1; transform: scale(1); }
+
+        /* =============================================
+           WOOD TEXTURE BG (CSS pattern)
+        ============================================= */
+        .wood-bg {
+            background-color: var(--primary-dark);
+            background-image:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(255,255,255,0.02) 40px,
+                    rgba(255,255,255,0.02) 41px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 8px,
+                    rgba(0,0,0,0.08) 8px,
+                    rgba(0,0,0,0.08) 9px
+                );
+        }
+
+        .wood-light-bg {
+            background-color: var(--accent);
+            background-image:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(93,64,55,0.04) 50px,
+                    rgba(93,64,55,0.04) 51px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(93,64,55,0.03) 10px,
+                    rgba(93,64,55,0.03) 11px
+                );
+        }
+
+        /* =============================================
+           NAVBAR
+        ============================================= */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            z-index: 1000;
+            background: transparent;
+            transition: var(--transition);
+        }
+        .navbar.scrolled {
+            background: rgba(46,31,21,0.96);
+            box-shadow: 0 2px 20px rgba(46,31,21,0.3);
+            height: 65px;
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1001;
+        }
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+            border-radius: 50%;
+        }
+        .nav-logo-text {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+        .nav-logo-text em {
+            color: var(--white);
+            font-style: normal;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .nav-links a {
+            font-family: var(--font-heading);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            padding: 5px 0;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover { color: var(--accent); }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+        .hamburger span {
+            display: block;
+            width: 26px; height: 3px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-6px); }
+        .mob-overlay {
+            display: none; position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .mob-overlay.active { display: block; }
+
+        /* =============================================
+           HERO
+        ============================================= */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('images/vchod1.jpg');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(46,31,21,0.7) 0%, rgba(46,31,21,0.5) 50%, rgba(46,31,21,0.85) 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+        }
+        .hero-icon {
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 25px;
+            border: 3px solid var(--accent);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .hero-icon img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .hero-pre {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--accent);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 18px;
+            line-height: 1.1;
+        }
+        .hero h1 em {
+            color: var(--accent);
+            font-style: normal;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 35px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 14px 32px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border-radius: var(--radius);
+        }
+        .btn-warm {
+            background: var(--primary);
+            color: var(--accent);
+        }
+        .btn-warm:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(93,64,55,0.4);
+        }
+        .btn-outline-cream {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+        .btn-outline-cream:hover {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 35px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            color: var(--accent);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: var(--font-heading);
+            text-align: center;
+        }
+        .hero-scroll-dot {
+            width: 8px; height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin: 10px auto 0;
+            animation: bounceDot 2s infinite;
+        }
+        @keyframes bounceDot {
+            0%,100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(12px); opacity: 1; }
+        }
+
+        /* =============================================
+           SECTION COMMON
+        ============================================= */
+        .section { padding: 100px 0; position: relative; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-tag {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+        .section-title {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 14px;
+        }
+        .section-title em { color: var(--primary); font-style: normal; }
+        .section-divider {
+            width: 70px; height: 4px;
+            background: var(--primary);
+            margin: 0 auto 18px;
+            border-radius: 2px;
+        }
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =============================================
+           ABOUT
+        ============================================= */
+        .about { background: var(--white); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-imgs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .about-imgs .img-card {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .about-imgs .img-card:first-child {
+            grid-column: 1 / -1;
+        }
+        .about-imgs .img-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .about-imgs .img-card:first-child img { height: 250px; }
+        .about-imgs .img-card:not(:first-child) img { height: 180px; }
+        .about-imgs .img-card:hover img { transform: scale(1.05); }
+
+        .about-text h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 18px;
+        }
+        .about-text h3 em { color: var(--primary); font-style: normal; }
+        .about-text p {
+            color: #5a4a3e;
+            margin-bottom: 14px;
+            font-size: 1.02rem;
+        }
+        .about-features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .about-feat {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: var(--light);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+        .about-feat-icon {
+            width: 28px; height: 28px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .about-feat-icon svg { width: 14px; height: 14px; fill: var(--accent); }
+
+        /* =============================================
+           VENUE / SPACES
+        ============================================= */
+        .venue { z-index: 3; }
+        .venue-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        .venue-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .venue-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .venue-card-img {
+            height: 220px;
+            overflow: hidden;
+        }
+        .venue-card-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .venue-card:hover .venue-card-img img { transform: scale(1.08); }
+        .venue-card-body {
+            padding: 25px 22px;
+        }
+        .venue-card-body h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        .venue-card-body p {
+            color: var(--gray);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        /* =============================================
+           BEER / DRINK SECTION (wood bg)
+        ============================================= */
+        .beer-section {
+            padding: 110px 0;
+            position: relative;
+            z-index: 3;
+        }
+        .beer-section .section-title { color: var(--accent); }
+        .beer-section .section-tag { color: var(--accent-dark); }
+        .beer-section .section-desc { color: rgba(245,230,200,0.7); }
+        .beer-section .section-divider { background: var(--accent); }
+
+        .beer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .beer-img {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .beer-img img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        .beer-content h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+        .beer-content p {
+            color: rgba(245,230,200,0.75);
+            font-size: 1.02rem;
+            margin-bottom: 14px;
+            line-height: 1.7;
+        }
+        .beer-list {
+            margin-top: 24px;
+        }
+        .beer-list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(245,230,200,0.12);
+            color: var(--accent);
+            font-size: 0.95rem;
+        }
+        .beer-list-item svg {
+            width: 18px; height: 18px;
+            fill: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* =============================================
+           GALLERY
+        ============================================= */
+        .gal-section { background: var(--white); }
+        .gal-masonry {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 200px;
+            gap: 12px;
+        }
+        .gal-masonry .gal-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .gal-masonry .gal-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        .gal-masonry .gal-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gal-masonry .gal-item:hover img { transform: scale(1.08); }
+        .gal-masonry .gal-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(93,64,55,0.5), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .gal-masonry .gal-item:hover::after { opacity: 1; }
+
+        /* =============================================
+           OPENING HOURS
+        ============================================= */
+        .hours-section { }
+        .hours-box {
+            max-width: 650px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+        .hours-header {
+            background: var(--primary);
+            color: var(--accent);
+            padding: 25px 35px;
+            text-align: center;
+        }
+        .hours-header h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+        .hours-body {
+            padding: 30px 35px;
+        }
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--gray-light);
+            font-size: 1rem;
+        }
+        .hours-row:last-child { border-bottom: none; }
+        .hours-day { font-weight: 700; color: var(--dark); }
+        .hours-time { color: var(--gray); }
+        .hours-closed { color: var(--primary); font-weight: 600; }
+
+        /* =============================================
+           EVENTS / CTA
+        ============================================= */
+        .events-cta {
+            padding: 90px 0;
+            text-align: center;
+            position: relative;
+            z-index: 3;
+        }
+        .events-cta .section-title { color: var(--accent); }
+        .events-cta .section-divider { background: var(--accent); }
+        .events-cta p {
+            color: rgba(245,230,200,0.8);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        .btn-accent {
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: var(--radius);
+        }
+        .btn-accent:hover {
+            background: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* =============================================
+           CONTACT
+        ============================================= */
+        .contact { background: var(--white); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        .contact-info h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        .contact-info h3 em { color: var(--primary); font-style: normal; }
+        .contact-info > p {
+            color: #5a4a3e;
+            margin-bottom: 28px;
+            font-size: 1.02rem;
+        }
+        .ci {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: var(--light);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary);
+            margin-bottom: 14px;
+            transition: var(--transition);
+        }
+        .ci:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow);
+        }
+        .ci-icon {
+            width: 46px; height: 46px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .ci-icon svg { width: 20px; height: 20px; fill: var(--accent); }
+        .ci-text h4 {
+            font-family: var(--font-heading);
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+        .ci-text p, .ci-text a { color: #5a4a3e; font-size: 0.92rem; }
+        .ci-text a:hover { color: var(--primary); }
+        .contact-map {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            height: 100%;
+            min-height: 450px;
+        }
+        .contact-map iframe { width: 100%; height: 100%; border: none; }
+
+        /* =============================================
+           FOOTER
+        ============================================= */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 60px 0 0;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-brand h3 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+        .footer-brand p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+        .footer h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 30px; height: 3px;
+            background: var(--primary-light);
+        }
+        .footer-links a {
+            display: block;
+            color: rgba(255,255,255,0.5);
+            padding: 4px 0;
+            font-size: 0.9rem;
+        }
+        .footer-links a:hover { color: var(--accent); padding-left: 6px; }
+        .footer-ci {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.5);
+            padding: 4px 0;
+            font-size: 0.85rem;
+        }
+        .footer-ci svg { width: 14px; height: 14px; fill: var(--primary-light); flex-shrink: 0; }
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 0;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.4);
+        }
+        .footer-bottom a { color: var(--accent); }
+        .footer-bottom a:hover { text-decoration: underline; }
+
+        /* =============================================
+           BACK TO TOP
+        ============================================= */
+        .btt {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            width: 48px; height: 48px;
+            background: var(--primary);
+            color: var(--accent);
+            border: none; border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; visibility: hidden;
+            transition: var(--transition);
+            z-index: 998;
+            box-shadow: var(--shadow);
+        }
+        .btt.show { opacity: 1; visibility: visible; }
+        .btt:hover { background: var(--primary-dark); transform: translateY(-4px); }
+        .btt svg { width: 20px; height: 20px; fill: var(--accent); }
+
+        /* =============================================
+           RESPONSIVE
+        ============================================= */
+        @media (max-width: 1024px) {
+            .venue-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .gal-masonry { grid-template-columns: repeat(3, 1fr); }
+            .hero h1 { font-size: 2.8rem; }
+        }
+        @media (max-width: 768px) {
+            :root { --nav-height: 68px; }
+            .hamburger { display: flex; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                width: 78%; max-width: 320px;
+                height: 100vh;
+                background: rgba(46,31,21,0.98);
+                flex-direction: column;
+                justify-content: center;
+                gap: 22px;
+                transition: right 0.4s ease;
+                padding: 40px;
+            }
+            .nav-links.open { right: 0; }
+            .nav-links a { font-size: 1.1rem; }
+
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 35px; }
+            .venue-grid { grid-template-columns: 1fr; }
+            .beer-grid { grid-template-columns: 1fr; }
+            .gal-masonry { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
+            .gal-masonry .gal-item:nth-child(1) { grid-column: span 2; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .contact-map { min-height: 300px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+            .section { padding: 75px 0; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.8rem; }
+            .gal-masonry { grid-template-columns: 1fr; }
+            .gal-masonry .gal-item:nth-child(1) { grid-column: span 1; grid-row: span 1; }
+            .hours-body { padding: 20px; }
+            .hours-header { padding: 18px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="mob-overlay" id="overlay"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#hero" class="nav-logo">
+                <img src="images/logo.jpg" alt="Hospoda Na Vinici Logo">
+                <span class="nav-logo-text"><em>Hospoda</em> Na Vinici</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#hero" class="active">Domov</a>
+                <a href="#o-nas">O nás</a>
+                <a href="#prostory">Prostory</a>
+                <a href="#nabidka">Nabídka</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#hodiny">Otevírací doba</a>
+                <a href="#kontakt">Kontakt</a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-icon">
+                <img src="images/logo.jpg" alt="Logo">
+            </div>
+            <div class="hero-pre">Tradiční česká hospoda</div>
+            <h1>Hospoda <em>Na Vinici</em></h1>
+            <p>Přijďte posedět do tradiční české hospody v Blatné. Čerstvě čepované pivo, příjemná atmosféra a sál pro vaše oslavy i firemní akce.</p>
+            <div class="hero-btns">
+                <a href="#kontakt" class="btn btn-warm">Kontaktujte nás</a>
+                <a href="#o-nas" class="btn btn-outline-cream">Více o nás</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-dot"></div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section about" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-imgs anim-left">
+                    <div class="img-card">
+                        <img src="images/vchod2.jpg" alt="Hospoda Na Vinici - vstup">
+                    </div>
+                    <div class="img-card">
+                        <img src="images/vycep1.jpg" alt="Výčep">
+                    </div>
+                    <div class="img-card">
+                        <img src="images/vycep2.jpg" alt="Bar">
+                    </div>
+                </div>
+                <div class="about-text anim-right">
+                    <div class="section-tag">O nás</div>
+                    <h3>Vaše oblíbená <em>hospoda</em> v Blatné</h3>
+                    <p>Hospoda Na Vinici je tradiční česká hospoda v srdci Blatné, jihočeského města s bohatou historií. Provozujeme hospodu, kde se cítí každý vítán - ať už přijdete na jedno pivo po práci nebo plánujete větší oslavu.</p>
+                    <p>Nabízíme široký výběr alkoholických i nealkoholických nápojů a k dispozici máme sál pro menší i větší rodinné nebo firemní oslavy.</p>
+                    <div class="about-features">
+                        <div class="about-feat">
+                            <div class="about-feat-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                            <span>Čerstvě čepované pivo</span>
+                        </div>
+                        <div class="about-feat">
+                            <div class="about-feat-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                            <span>Sál pro oslavy a akce</span>
+                        </div>
+                        <div class="about-feat">
+                            <div class="about-feat-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                            <span>Příjemná atmosféra</span>
+                        </div>
+                        <div class="about-feat">
+                            <div class="about-feat-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                            <span>Rodinný a firemní eventy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VENUE / PROSTORY -->
+    <section class="section venue wood-light-bg" id="prostory">
+        <div class="container">
+            <div class="section-header anim-up">
+                <div class="section-tag">Naše prostory</div>
+                <h2 class="section-title">Kde se u nás <em>posadíte</em></h2>
+                <div class="section-divider"></div>
+                <p class="section-desc">Nabízíme útulný výčep pro posezení u piva i prostorný sál pro vaše oslavy a firemní eventy.</p>
+            </div>
+            <div class="venue-grid">
+                <div class="venue-card anim-scale" style="transition-delay:0.05s">
+                    <div class="venue-card-img">
+                        <img src="images/vycep3.jpg" alt="Výčep">
+                    </div>
+                    <div class="venue-card-body">
+                        <h3>Výčep</h3>
+                        <p>Útulný prostor s barem, kde si vychutnáte čerstvě čepované pivo v přátelské atmosféře. Ideální místo pro posezení s kamarády.</p>
+                    </div>
+                </div>
+                <div class="venue-card anim-scale" style="transition-delay:0.1s">
+                    <div class="venue-card-img">
+                        <img src="images/sal1.jpg" alt="Sál">
+                    </div>
+                    <div class="venue-card-body">
+                        <h3>Sál pro oslavy</h3>
+                        <p>Prostorný sál pro menší i větší rodinné oslavy, narozeniny, svatby, firemní akce a další společenské události.</p>
+                    </div>
+                </div>
+                <div class="venue-card anim-scale" style="transition-delay:0.15s">
+                    <div class="venue-card-img">
+                        <img src="images/sal2.jpg" alt="Sál detail">
+                    </div>
+                    <div class="venue-card-body">
+                        <h3>Firemní akce</h3>
+                        <p>Hledáte prostor pro firemní teambuilding nebo vánoční večírek? Náš sál je připraven pojmout vaši akci v příjemném prostředí.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEER / DRINKS -->
+    <section class="beer-section wood-bg" id="nabidka">
+        <div class="container">
+            <div class="beer-grid">
+                <div class="beer-img anim-left">
+                    <img src="images/bernard.jpg" alt="Bernard pivo">
+                </div>
+                <div class="beer-content anim-right">
+                    <div class="section-tag" style="color:var(--accent-dark)">Naše nabídka</div>
+                    <h3>Čerstvě čepované pivo</h3>
+                    <p>U nás si pochutnáte na pečlivě ošetřeném čepovaném pivu. Dbáme na správnou teplotu, čistotu výčepního zařízení a perfektní pěnu na každém pivu.</p>
+                    <p>K tomu nabízíme široký výběr dalších alkoholických i nealkoholických nápojů pro každého.</p>
+                    <div class="beer-list">
+                        <div class="beer-list-item">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            <span>Čepované pivo Bernard</span>
+                        </div>
+                        <div class="beer-list-item">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            <span>Nealkoholické pivo a nápoje</span>
+                        </div>
+                        <div class="beer-list-item">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            <span>Destiláty a koktejly</span>
+                        </div>
+                        <div class="beer-list-item">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            <span>Víno a limonády</span>
+                        </div>
+                        <div class="beer-list-item">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            <span>Teplé nápoje - káva, čaj</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section gal-section" id="galerie">
+        <div class="container">
+            <div class="section-header anim-up">
+                <div class="section-tag">Fotogalerie</div>
+                <h2 class="section-title">Nahlédněte <em>dovnitř</em></h2>
+                <div class="section-divider"></div>
+                <p class="section-desc">Podívejte se, jak to u nás vypadá. Přijďte se přesvědčit osobně!</p>
+            </div>
+            <div class="gal-masonry">
+                <div class="gal-item anim-scale" style="transition-delay:0.05s">
+                    <img src="images/sal3.jpg" alt="Sál hospody">
+                </div>
+                <div class="gal-item anim-scale" style="transition-delay:0.1s">
+                    <img src="images/vycep4.jpg" alt="Výčep detail">
+                </div>
+                <div class="gal-item anim-scale" style="transition-delay:0.15s">
+                    <img src="images/vchod1.jpg" alt="Vstup">
+                </div>
+                <div class="gal-item anim-scale" style="transition-delay:0.2s">
+                    <img src="images/sal4.jpg" alt="Sál">
+                </div>
+                <div class="gal-item anim-scale" style="transition-delay:0.25s">
+                    <img src="images/cedule.jpg" alt="Cedule">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OPENING HOURS -->
+    <section class="section hours-section" id="hodiny">
+        <div class="container">
+            <div class="section-header anim-up">
+                <div class="section-tag">Otevírací doba</div>
+                <h2 class="section-title">Kdy nás <em>navštívit</em></h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="hours-box anim-up">
+                <div class="hours-header">
+                    <h3>Otevírací doba</h3>
+                </div>
+                <div class="hours-body">
+                    <div class="hours-row">
+                        <span class="hours-day">Pondělí</span>
+                        <span class="hours-closed">Zavřeno</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="hours-day">Úterý</span>
+                        <span class="hours-time">15:00 - 22:00</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="hours-day">Středa</span>
+                        <span class="hours-time">15:00 - 22:00</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="hours-day">Čtvrtek</span>
+                        <span class="hours-time">15:00 - 22:00</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="hours-day">Pátek</span>
+                        <span class="hours-time">15:00 - 23:00</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="hours-day">Sobota</span>
+                        <span class="hours-time">16:00 - 23:00</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="hours-day">Neděle</span>
+                        <span class="hours-time">16:00 - 22:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTS CTA -->
+    <section class="events-cta wood-bg" id="akce">
+        <div class="container anim-up">
+            <h2 class="section-title">Plánujete <em style="color:var(--accent);font-style:normal">oslavu?</em></h2>
+            <div class="section-divider"></div>
+            <p>Nabízíme sál pro menší i větší rodinné nebo firemní oslavy. Kontaktujte nás a společně naplánujeme vaši akci přesně podle vašich představ.</p>
+            <a href="tel:+420775602094" class="btn btn-accent">Zavolejte nám: +420 775 602 094</a>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="kontakt">
+        <div class="container">
+            <div class="section-header anim-up">
+                <div class="section-tag">Kontakt</div>
+                <h2 class="section-title">Kde nás <em>najdete</em></h2>
+                <div class="section-divider"></div>
+                <p class="section-desc">Těšíme se na vaši návštěvu. Přijďte osobně nebo nám napište.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info anim-left">
+                    <h3>Hospoda <em>Na Vinici</em></h3>
+                    <p>Tradiční česká hospoda v Blatné. Čepované pivo, široký výběr nápojů a sál pro vaše akce.</p>
+                    <div class="ci">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+                        <div class="ci-text">
+                            <h4>Adresa</h4>
+                            <p>Nad Vdovečkem 1097<br>388 01 Blatná</p>
+                        </div>
+                    </div>
+                    <div class="ci">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+                        <div class="ci-text">
+                            <h4>Telefon</h4>
+                            <p><a href="tel:+420775602094">+420 775 602 094</a></p>
+                        </div>
+                    </div>
+                    <div class="ci">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+                        <div class="ci-text">
+                            <h4>E-mail</h4>
+                            <p><a href="mailto:hospodanavinici@seznam.cz">hospodanavinici@seznam.cz</a></p>
+                        </div>
+                    </div>
+                    <div class="ci">
+                        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg></div>
+                        <div class="ci-text">
+                            <h4>Provozovatel</h4>
+                            <p>IČ: 29144400</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map anim-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2600!2d13.881!3d49.423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b9f2e2e2e2e2e%3A0x400af0f6614e1e0!2sNad+Vdove%C4%8Dkem+1097%2C+388+01+Blatn%C3%A1!5e0!3m2!1scs!2scz!4v1709000000000!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa - Hospoda Na Vinici"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Hospoda Na Vinici</h3>
+                    <p>Tradiční česká hospoda v Blatné. Čerstvě čepované pivo, příjemná atmosféra a sál pro vaše rodinné i firemní akce. Těšíme se na vaši návštěvu!</p>
+                </div>
+                <div>
+                    <h4>Navigace</h4>
+                    <div class="footer-links">
+                        <a href="#hero">Domov</a>
+                        <a href="#o-nas">O nás</a>
+                        <a href="#prostory">Prostory</a>
+                        <a href="#nabidka">Nabídka</a>
+                        <a href="#galerie">Galerie</a>
+                        <a href="#hodiny">Otevírací doba</a>
+                        <a href="#kontakt">Kontakt</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Otevírací doba</h4>
+                    <div class="footer-links">
+                        <a>Po: zavřeno</a>
+                        <a>Út - Čt: 15:00 - 22:00</a>
+                        <a>Pá: 15:00 - 23:00</a>
+                        <a>So: 16:00 - 23:00</a>
+                        <a>Ne: 16:00 - 22:00</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Kontakt</h4>
+                    <div class="footer-ci">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                        <span>Nad Vdovečkem 1097, Blatná</span>
+                    </div>
+                    <div class="footer-ci">
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <span>+420 775 602 094</span>
+                    </div>
+                    <div class="footer-ci">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <span>hospodanavinici@seznam.cz</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Hospoda Na Vinici, Blatná. Všechna práva vyhrazena.</p>
+                <p>Vytvořil <a href="https://kshpartners.cz" target="_blank">KSH Partners s.r.o.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="btt" id="btt" aria-label="Zpět nahoru">
+        <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+    </button>
+
+    <script>
+    (function(){
+        var navbar = document.getElementById('navbar');
+        var navLinks = document.querySelectorAll('.nav-links a');
+        var sections = document.querySelectorAll('section[id]');
+
+        window.addEventListener('scroll', function(){
+            navbar.classList.toggle('scrolled', window.scrollY > 80);
+            var sp = window.scrollY + 150;
+            sections.forEach(function(s){
+                var t = s.offsetTop, h = s.offsetHeight, id = s.getAttribute('id');
+                if(sp >= t && sp < t + h){
+                    navLinks.forEach(function(l){
+                        l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        });
+
+        var ham = document.getElementById('hamburger');
+        var nl = document.getElementById('navLinks');
+        var ov = document.getElementById('overlay');
+        function toggle(){ ham.classList.toggle('active'); nl.classList.toggle('open'); ov.classList.toggle('active'); document.body.style.overflow = nl.classList.contains('open') ? 'hidden' : ''; }
+        function close(){ ham.classList.remove('active'); nl.classList.remove('open'); ov.classList.remove('active'); document.body.style.overflow = ''; }
+        ham.addEventListener('click', toggle);
+        ov.addEventListener('click', close);
+        nl.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+
+        var obs = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){
+                if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+            });
+        }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+        document.querySelectorAll('.anim-up,.anim-left,.anim-right,.anim-scale').forEach(function(el){ obs.observe(el); });
+
+        var btt = document.getElementById('btt');
+        window.addEventListener('scroll', function(){ btt.classList.toggle('show', window.scrollY > 500); });
+        btt.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+        document.querySelectorAll('a[href^="#"]').forEach(function(a){
+            a.addEventListener('click', function(e){
+                e.preventDefault();
+                var tgt = document.querySelector(this.getAttribute('href'));
+                if(tgt) window.scrollTo({ top: tgt.getBoundingClientRect().top + window.pageYOffset - navbar.offsetHeight, behavior: 'smooth' });
+            });
+        });
+    })();
+    </script>
+</body>
+</html>

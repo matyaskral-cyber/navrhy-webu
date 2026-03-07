@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pension7 | Ubytovani v historickem Tabore</title>
+    <meta name="description" content="Pension7 — soukromy penzion v historickem jihocskem meste Tabor. Relaxace, odpocinek a pamatihodnosti v okoli.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════
+           RESET & CSS VARIABLES
+           ═══════════════════════════════════════ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-cream: #f5f0e8;
+            --bg-card: #ede7db;
+            --bg-card-hover: #e5ddd0;
+            --bg-surface: #f0e9de;
+            --accent: #2c4a3e;
+            --accent-light: #3d6252;
+            --accent-dark: #1e3429;
+            --warm: #c49a6c;
+            --warm-light: #d4ad82;
+            --text: #2c2c2c;
+            --text-muted: #6b6357;
+            --text-dim: #9a9085;
+            --border: rgba(44, 74, 62, 0.12);
+            --border-accent: rgba(44, 74, 62, 0.25);
+            --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg-cream);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: var(--grain);
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.5;
+        }
+
+        /* ═══════════════════════════════════════
+           TYPOGRAPHY
+           ═══════════════════════════════════════ */
+        h1, h2, h3, h4 {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--warm);
+            margin-bottom: 20px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--warm);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4.5vw, 3.4rem);
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        /* ═══════════════════════════════════════
+           LAYOUT
+           ═══════════════════════════════════════ */
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        /* ═══════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav.scrolled {
+            background: rgba(245, 240, 232, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.05);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: var(--accent);
+        }
+
+        .nav-logo-icon {
+            width: 44px;
+            height: 44px;
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-logo-icon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(44,74,62,0.08), transparent);
+        }
+
+        .nav-logo-text {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+        }
+
+        .nav-logo-text span {
+            color: var(--warm);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: var(--bg-cream) !important;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+        }
+
+        .nav-cta::after { display: none !important; }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: none;
+            border: none;
+            z-index: 1002;
+        }
+
+        .nav-hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--accent);
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+        .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ═══════════════════════════════════════
+           HERO
+           ═══════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+            background: var(--accent);
+            color: var(--bg-cream);
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(44,74,62,0.88) 0%, rgba(44,74,62,0.65) 50%, rgba(44,74,62,0.92) 100%),
+                url('images/illustration.jpg') center/cover no-repeat;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            opacity: 0.04;
+        }
+
+        .hero-pattern span {
+            position: absolute;
+            width: 1px;
+            background: var(--bg-cream);
+            animation: pattern-fade 10s ease-in-out infinite;
+        }
+
+        .hero-pattern span:nth-child(1) { left: 10%; height: 40%; top: 20%; animation-delay: 0s; }
+        .hero-pattern span:nth-child(2) { left: 30%; height: 60%; top: 10%; animation-delay: 2s; }
+        .hero-pattern span:nth-child(3) { left: 50%; height: 30%; top: 40%; animation-delay: 4s; }
+        .hero-pattern span:nth-child(4) { left: 70%; height: 50%; top: 15%; animation-delay: 1s; }
+        .hero-pattern span:nth-child(5) { left: 90%; height: 35%; top: 35%; animation-delay: 3s; }
+
+        @keyframes pattern-fade {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 18px;
+            background: rgba(245,240,232,0.08);
+            border: 1px solid rgba(245,240,232,0.2);
+            border-radius: 100px;
+            font-size: 0.82rem;
+            color: var(--warm-light);
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+
+        .hero-badge svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--warm);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 28px;
+            max-width: 650px;
+            color: var(--bg-cream);
+        }
+
+        .hero h1 .accent {
+            color: var(--warm-light);
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: rgba(245,240,232,0.7);
+            max-width: 520px;
+            margin-bottom: 44px;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: var(--warm);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-primary:hover {
+            background: var(--warm-light);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(196, 154, 108, 0.3);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: transparent;
+            color: var(--bg-cream);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: 12px;
+            border: 1px solid rgba(245,240,232,0.25);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(245,240,232,0.08);
+            border-color: rgba(245,240,232,0.5);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 72px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(245,240,232,0.12);
+        }
+
+        .hero-stat-number {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            color: var(--warm-light);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: rgba(245,240,232,0.5);
+            margin-top: 6px;
+        }
+
+        /* ═══════════════════════════════════════
+           ABOUT
+           ═══════════════════════════════════════ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+            margin-top: 24px;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 36px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .about-feature:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+        }
+
+        .about-feature svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 1.5;
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════
+           ROOMS (SERVICES)
+           ═══════════════════════════════════════ */
+        .rooms {
+            background: var(--bg-surface);
+        }
+
+        .rooms-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .rooms-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .room-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .room-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--warm));
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 2;
+        }
+
+        .room-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(44, 74, 62, 0.1);
+        }
+
+        .room-card:hover::before { opacity: 1; }
+
+        .room-card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s;
+        }
+
+        .room-card:hover .room-card-img {
+            transform: scale(1.05);
+        }
+
+        .room-card-body {
+            padding: 28px;
+        }
+
+        .room-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .room-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════════
+           ATTRACTIONS
+           ═══════════════════════════════════════ */
+        .attractions-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .attractions-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .attraction-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px 28px;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .attraction-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(44, 74, 62, 0.08);
+        }
+
+        .attraction-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(44,74,62,0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .attraction-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .attraction-card h3 {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .attraction-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════
+           GALLERY
+           ═══════════════════════════════════════ */
+        .gallery {
+            background: var(--bg-surface);
+            overflow: hidden;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+            aspect-ratio: auto;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(44,74,62,0.2) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* ═══════════════════════════════════════
+           CONTACT
+           ═══════════════════════════════════════ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 28px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--border-accent);
+            box-shadow: 0 8px 30px rgba(44, 74, 62, 0.06);
+        }
+
+        .contact-card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(44,74,62,0.06);
+            border: 1px solid var(--border-accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-card-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .contact-card h4 {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .contact-card p {
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .contact-card a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-card a:hover { color: var(--warm); }
+
+        .contact-map {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: sepia(0.15) brightness(0.98);
+        }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════ */
+        .footer {
+            background: var(--accent);
+            color: var(--bg-cream);
+            padding: 48px 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-copy {
+            font-size: 0.88rem;
+            color: rgba(245,240,232,0.6);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.88rem;
+            color: rgba(245,240,232,0.6);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover { color: var(--warm-light); }
+
+        /* ═══════════════════════════════════════
+           ANIMATIONS & DIVIDER
+           ═══════════════════════════════════════ */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        .fade-in-delay-4 { transition-delay: 0.4s; }
+
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-accent), transparent);
+        }
+
+        /* ═══════════════════════════════════════
+           LIGHTBOX
+           ═══════════════════════════════════════ */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-close:hover { background: var(--accent); }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════ */
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .nav-hamburger { display: flex; }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                inset: 0;
+                background: rgba(245, 240, 232, 0.98);
+                justify-content: center;
+                align-items: center;
+                gap: 32px;
+                z-index: 1001;
+            }
+
+            .nav-links.active a { font-size: 1.4rem; color: var(--accent); }
+
+            .hero-stats { gap: 24px; flex-wrap: wrap; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .rooms-grid { grid-template-columns: 1fr; }
+            .attractions-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-item:nth-child(1) { grid-column: span 2; }
+            .about-features { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            section { padding: 80px 0; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .hero-actions { flex-direction: column; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+            .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item:nth-child(1) { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ═══════════ NAVIGATION ═══════════ -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="#hero" class="nav-logo">
+                    <div class="nav-logo-icon">7</div>
+                    <span class="nav-logo-text">Pension<span>7</span></span>
+                </a>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#hero">Domov</a></li>
+                    <li><a href="#onas">O penzionu</a></li>
+                    <li><a href="#pokoje">Pokoje</a></li>
+                    <li><a href="#okoli">Okoli</a></li>
+                    <li><a href="#galerie">Galerie</a></li>
+                    <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
+                </ul>
+
+                <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-pattern">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24"><path d="M3 21h18M3 7v1a3 3 0 006 0V7m0 1a3 3 0 006 0V7m0 1a3 3 0 006 0V7H3l2-4h14l2 4M5 21V10.87M19 21V10.87"/></svg>
+                    Soukromy penzion v Tabore
+                </div>
+                <h1>Vas klid v srdci <span class="accent">historickeho Tabora</span></h1>
+                <p class="hero-desc">Ubytovani v soukromem penzionu v historickem jihocesem meste Tabor. Relaxace a odpocinek na dosah ruky od pamatihodnosti.</p>
+                <div class="hero-actions">
+                    <a href="#kontakt" class="btn-primary">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                        Rezervace
+                    </a>
+                    <a href="#pokoje" class="btn-secondary">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        Prohlédnout pokoje
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div>
+                        <div class="hero-stat-number">5</div>
+                        <div class="hero-stat-label">Pokoju / apartmanu</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-number">Tabor</div>
+                        <div class="hero-stat-label">Historicke mesto</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-number">Klid</div>
+                        <div class="hero-stat-label">Relaxace & odpocinek</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ═══════════ O NAS ═══════════ -->
+    <section id="onas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-in">
+                    <img src="images/exterior.jpg" alt="Pension7 - exteriér" loading="lazy">
+                </div>
+                <div class="fade-in fade-in-delay-1">
+                    <span class="section-label">O penzionu</span>
+                    <h2 class="section-title">Soukromy penzion v <span style="color:var(--warm)">Tabore</span></h2>
+                    <p class="about-text">Pension7 nabizi ubytovani v soukromem penzionu v historickem jihocesem meste Tabor. Nastavte se na volbu relaxace a odpocinek v klidnem prostredi. V okoli najdete radou pamatihodnosti — Kozi Hradek, zamek Cervena Lhota ci zamek Hluboka nad Vltavou.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            Klidne prostredi
+                        </div>
+                        <div class="about-feature">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Historicke centrum
+                        </div>
+                        <div class="about-feature">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            Relaxace
+                        </div>
+                        <div class="about-feature">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                            Osobni pristup
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ═══════════ POKOJE ═══════════ -->
+    <section class="rooms" id="pokoje">
+        <div class="container">
+            <div class="rooms-header fade-in">
+                <span class="section-label">Pokoje</span>
+                <h2 class="section-title">Nase <span style="color:var(--warm)">ubytovani</span></h2>
+                <p class="section-subtitle">Vyberte si z nasich pohodlnych pokoju a apartmanu pro vas idealni pobyt v Tabore.</p>
+            </div>
+            <div class="rooms-grid">
+                <div class="room-card fade-in fade-in-delay-1">
+                    <div style="overflow:hidden;">
+                        <img class="room-card-img" src="images/pokoj1a.jpg" alt="Pokoj 1" loading="lazy">
+                    </div>
+                    <div class="room-card-body">
+                        <h3>Pokoj 1</h3>
+                        <p>Utulny dvouluzkovy pokoj s komfortnim vybavenim a klidnym vyhledem.</p>
+                    </div>
+                </div>
+                <div class="room-card fade-in fade-in-delay-2">
+                    <div style="overflow:hidden;">
+                        <img class="room-card-img" src="images/pokoj2a.jpg" alt="Pokoj 2" loading="lazy">
+                    </div>
+                    <div class="room-card-body">
+                        <h3>Pokoj 2</h3>
+                        <p>Prostorny pokoj idealni pro dvojici ci rodinu. Prijemna atmosfera.</p>
+                    </div>
+                </div>
+                <div class="room-card fade-in fade-in-delay-3">
+                    <div style="overflow:hidden;">
+                        <img class="room-card-img" src="images/pokoj3a.jpg" alt="Apartman 3" loading="lazy">
+                    </div>
+                    <div class="room-card-body">
+                        <h3>Apartman 3</h3>
+                        <p>Apartman s loznici a kuchynkou. Idealni pro delsi pobyty.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ═══════════ OKOLI ═══════════ -->
+    <section id="okoli">
+        <div class="container">
+            <div class="attractions-header fade-in">
+                <span class="section-label">Okoli</span>
+                <h2 class="section-title">Pamatihodnosti v <span style="color:var(--warm)">okoli</span></h2>
+                <p class="section-subtitle">Objevte krasy jihoceskeho kraje. Historicke hrady, zamky a prirodni skvosty na dosah.</p>
+            </div>
+            <div class="attractions-grid">
+                <div class="attraction-card fade-in fade-in-delay-1">
+                    <div class="attraction-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 21h18M4 21V6l8-4 8 4v15M9 21v-6h6v6M9 9h.01M15 9h.01M9 13h.01M15 13h.01"/></svg>
+                    </div>
+                    <h3>Kozi Hradek</h3>
+                    <p>Historicka zricenina hradu spojeneho s Janem Husem, obklopena lesem.</p>
+                </div>
+                <div class="attraction-card fade-in fade-in-delay-2">
+                    <div class="attraction-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4M10 9h4M10 13h4"/></svg>
+                    </div>
+                    <h3>Cervena Lhota</h3>
+                    <p>Pohadkovy zamek na skalnmim ostruvku uprostred rybnika.</p>
+                </div>
+                <div class="attraction-card fade-in fade-in-delay-3">
+                    <div class="attraction-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 21h18M4 21V10l8-7 8 7v11M9 21v-5h6v5M10 10h4"/></svg>
+                    </div>
+                    <h3>Hluboka nad Vltavou</h3>
+                    <p>Novogoticky zamek, jeden z nejkrasnejsich zamku v Ceske republice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ═══════════ GALERIE ═══════════ -->
+    <section class="gallery" id="galerie">
+        <div class="container">
+            <div class="gallery-header fade-in">
+                <span class="section-label">Galerie</span>
+                <h2 class="section-title">Nahlednete k <span style="color:var(--warm)">nam</span></h2>
+                <p class="section-subtitle">Podivejte se na nase pokoje, spolecne prostory a okolni prostredi.</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in fade-in-delay-1">
+                    <img src="images/exterior.jpg" alt="Pension7 - exterior" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in fade-in-delay-2">
+                    <img src="images/jidelna.jpg" alt="Jidelna" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in fade-in-delay-3">
+                    <img src="images/pokoj1a.jpg" alt="Pokoj 1" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in fade-in-delay-1">
+                    <img src="images/pokoj1b.jpg" alt="Pokoj 1 detail" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in fade-in-delay-2">
+                    <img src="images/pokoj2a.jpg" alt="Pokoj 2" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in fade-in-delay-3">
+                    <img src="images/pokoj2b.jpg" alt="Pokoj 2 detail" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in fade-in-delay-1">
+                    <img src="images/pokoj3a.jpg" alt="Apartman 3" loading="lazy">
+                </div>
+                <div class="gallery-item fade-in fade-in-delay-2">
+                    <img src="images/pokoj5.jpg" alt="Pokoj 5" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ═══════════ KONTAKT ═══════════ -->
+    <section id="kontakt">
+        <div class="container">
+            <div class="fade-in" style="text-align:center; margin-bottom:60px;">
+                <span class="section-label">Kontakt</span>
+                <h2 class="section-title">Rezervujte si <span style="color:var(--warm)">pobyt</span></h2>
+                <p class="section-subtitle" style="margin:0 auto;">Ozvete se nam — radi vam pomuzeme s vyberem pokoje a planovnim vaseho pobytu v Tabore.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info-cards">
+                    <div class="contact-card fade-in fade-in-delay-1">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                        <div>
+                            <h4>Telefon</h4>
+                            <p><a href="tel:+420603327867">+420 603 327 867</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-card fade-in fade-in-delay-2">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:mariesittlerova@iol.cz">mariesittlerova@iol.cz</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-card fade-in fade-in-delay-3">
+                        <div class="contact-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div>
+                            <h4>Adresa</h4>
+                            <p>Bilkova 783<br>390 02 Tabor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map fade-in fade-in-delay-2">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2593.0!2d14.657!3d49.414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470cea0b0a2d8e5d%3A0x400af0f6614e100!2sB%C3%ADlkova+783%2C+390+02+T%C3%A1bor!5e0!3m2!1scs!2scz!4v1709000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Pension7 - mapa"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <p class="footer-copy">&copy; 2025 Pension7 — Tabor. Vsechna prava vyhrazena.</p>
+                <ul class="footer-links">
+                    <li><a href="#hero">Domov</a></li>
+                    <li><a href="#pokoje">Pokoje</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════ LIGHTBOX ═══════════ -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <img src="" alt="Zvetseny obrazek" id="lightboxImg">
+    </div>
+
+    <!-- ═══════════ JAVASCRIPT ═══════════ -->
+    <script>
+        /* ── Navigation scroll effect ── */
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        /* ── Hamburger menu ── */
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        /* ── Scroll animations (IntersectionObserver) ── */
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        /* ── Lightbox ── */
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        document.querySelectorAll('.gallery-item img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.classList.add('active');
+            });
+        });
+
+        lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.classList.remove('active');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') lightbox.classList.remove('active');
+        });
+
+        /* ── Smooth scroll for anchors ── */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
