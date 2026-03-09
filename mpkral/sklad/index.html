@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sklad M+P Král</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 :root {
@@ -16,6 +17,7 @@
   --accent: #3b82f6;
   --accent2: #2563eb;
   --gold: #d4a96a;
+  --green: #22c55e;
 }
 body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
@@ -85,7 +87,8 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 .header-logo { font-size: 18px; font-weight: 700; color: var(--gold); }
 .header-logo span { color: var(--text2); font-size: 12px; font-weight: 400; margin-left: 8px; }
 .sync-info { font-size: 11px; color: var(--text2); }
-.btn-logout {
+.header-right { display: flex; align-items: center; gap: 8px; }
+.btn-small {
   padding: 6px 14px;
   background: transparent;
   border: 1px solid var(--border);
@@ -95,7 +98,19 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
   cursor: pointer;
   font-family: 'Inter', sans-serif;
 }
-.btn-logout:hover { border-color: var(--text2); color: var(--text); }
+.btn-small:hover { border-color: var(--text2); color: var(--text); }
+.btn-upload {
+  padding: 6px 14px;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+.btn-upload:hover { background: var(--accent2); }
 
 .toolbar {
   padding: 16px 24px;
@@ -147,8 +162,55 @@ tr:hover td { background: rgba(59,130,246,.03); }
 .empty { text-align: center; padding: 60px; color: var(--text2); }
 .loading { text-align: center; padding: 60px; color: var(--text2); }
 
+/* Upload overlay */
+.upload-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+.upload-overlay.active { display: flex; }
+.upload-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px;
+  width: 480px;
+  max-width: 90vw;
+  text-align: center;
+}
+.upload-box h3 { color: var(--gold); margin-bottom: 8px; font-size: 18px; }
+.upload-box p { color: var(--text2); font-size: 13px; margin-bottom: 20px; }
+.drop-zone {
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 40px 20px;
+  cursor: pointer;
+  transition: border-color .2s;
+  margin-bottom: 16px;
+}
+.drop-zone:hover, .drop-zone.drag { border-color: var(--accent); }
+.drop-zone p { margin: 0; }
+.upload-status { font-size: 13px; min-height: 20px; margin-top: 12px; }
+.upload-status.ok { color: var(--green); }
+.upload-status.err { color: #ef4444; }
+.btn-close-upload {
+  margin-top: 16px;
+  padding: 8px 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text2);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
 @media (max-width: 600px) {
-  .header { padding: 10px 14px; }
+  .header { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
   .toolbar { padding: 12px 14px; }
   .table-wrap { padding: 0 6px 20px; }
   td, th { padding: 8px 10px; }
@@ -174,7 +236,10 @@ tr:hover td { background: rgba(59,130,246,.03); }
       <div class="header-logo">M+P Král <span>Sklad</span></div>
       <div class="sync-info" id="syncInfo">Načítám...</div>
     </div>
-    <button class="btn-logout" onclick="doLogout()">Odhlásit</button>
+    <div class="header-right">
+      <button class="btn-upload" id="btnUpload" style="display:none" onclick="openUpload()">Nahrát Excel</button>
+      <button class="btn-small" onclick="doLogout()">Odhlásit</button>
+    </div>
   </div>
 
   <div class="toolbar">
@@ -198,6 +263,20 @@ tr:hover td { background: rgba(59,130,246,.03); }
   </div>
 </div>
 
+<!-- Upload modal (admin only) -->
+<div class="upload-overlay" id="uploadOverlay">
+  <div class="upload-box">
+    <h3>Aktualizace skladu</h3>
+    <p>Nahraj soubor <strong>Zásoby.xlsx</strong> exportovaný z Pohody<br>(Soubor → Datová komunikace → Export agendy → Excel 2007)</p>
+    <div class="drop-zone" id="dropZone">
+      <p>Přetáhni sem soubor nebo klikni pro výběr</p>
+    </div>
+    <input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none">
+    <div class="upload-status" id="uploadStatus"></div>
+    <button class="btn-close-upload" onclick="closeUpload()">Zavřít</button>
+  </div>
+</div>
+
 <script>
 const SB_URL = 'https://yqklnqmcjloxwdtifkjb.supabase.co';
 const SB_KEY = 'sb_publishable_gZI-26x3NF4Dc5h-BuOpjg_3Y0n2Um-';
@@ -207,7 +286,7 @@ const USERS = {
   'odberatel': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',
 };
 
-let data = [], sort = { key: 'nazev', dir: 'asc' }, timer;
+let data = [], sort = { key: 'nazev', dir: 'asc' }, timer, currentUser = '';
 
 async function sha256(s) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
@@ -217,12 +296,13 @@ async function sha256(s) {
 async function doLogin() {
   const u = document.getElementById('loginUser').value.trim().toLowerCase();
   const h = await sha256(document.getElementById('loginPass').value);
-  if (USERS[u] === h) { sessionStorage.setItem('sk', u); showApp(); }
+  if (USERS[u] === h) { sessionStorage.setItem('sk', u); currentUser = u; showApp(); }
   else { document.getElementById('loginError').style.display = 'block'; }
 }
 
 function doLogout() {
   sessionStorage.removeItem('sk');
+  currentUser = '';
   document.getElementById('mainApp').classList.remove('active');
   document.getElementById('loginScreen').style.display = 'flex';
   clearInterval(timer);
@@ -231,6 +311,9 @@ function doLogout() {
 function showApp() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('mainApp').classList.add('active');
+  // Show upload button only for admin
+  currentUser = sessionStorage.getItem('sk');
+  document.getElementById('btnUpload').style.display = currentUser === 'admin' ? '' : 'none';
   load();
   timer = setInterval(load, 60000);
 }
@@ -284,6 +367,104 @@ function render() {
 }
 
 function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ==========================================
+// UPLOAD EXCEL (admin only)
+// ==========================================
+function openUpload() {
+  document.getElementById('uploadOverlay').classList.add('active');
+  document.getElementById('uploadStatus').textContent = '';
+  document.getElementById('uploadStatus').className = 'upload-status';
+}
+
+function closeUpload() {
+  document.getElementById('uploadOverlay').classList.remove('active');
+}
+
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('drag');
+  if (e.dataTransfer.files.length) processFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', () => { if (fileInput.files.length) processFile(fileInput.files[0]); });
+
+// Close overlay on background click
+document.getElementById('uploadOverlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeUpload();
+});
+
+async function processFile(file) {
+  const status = document.getElementById('uploadStatus');
+  status.className = 'upload-status';
+  status.textContent = 'Zpracovávám soubor...';
+
+  try {
+    const arrayBuf = await file.arrayBuffer();
+    const wb = XLSX.read(arrayBuf, { type: 'array' });
+    const ws = wb.Sheets[wb.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(ws);
+
+    if (!rows.length) { status.textContent = 'Soubor je prázdný!'; status.className = 'upload-status err'; return; }
+
+    // Find column names (Pohoda uses: Kód, Čárkód, Název, Stav zásoby)
+    const keys = Object.keys(rows[0]);
+    const colKod = keys.find(k => /^k[oó]d$/i.test(k));
+    const colNazev = keys.find(k => /^n[aá]zev$/i.test(k));
+    const colBarcode = keys.find(k => /[čc][aá]rk[oó]d|ean/i.test(k));
+    const colQty = keys.find(k => /stav z[aá]sob|mno[zž]stv/i.test(k));
+
+    if (!colKod || !colNazev) {
+      status.textContent = `Nenalezeny sloupce Kód/Název. Nalezeno: ${keys.join(', ')}`;
+      status.className = 'upload-status err';
+      return;
+    }
+
+    const items = rows.filter(r => r[colKod]).map(r => ({
+      kod: String(r[colKod]).trim(),
+      nazev: String(r[colNazev] || '').trim(),
+      carovy_kod: r[colBarcode] ? String(r[colBarcode]).trim() : null,
+      mnozstvi: colQty ? parseInt(r[colQty]) || 0 : 0,
+    }));
+
+    status.textContent = `Nalezeno ${items.length} položek, nahrávám...`;
+
+    // Delete old data
+    await fetch(`${SB_URL}/rest/v1/sklad?id=gt.0`, {
+      method: 'DELETE',
+      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}`, 'Prefer': 'return=minimal' }
+    });
+
+    // Insert new data
+    const resp = await fetch(`${SB_URL}/rest/v1/sklad`, {
+      method: 'POST',
+      headers: {
+        'apikey': SB_KEY,
+        'Authorization': `Bearer ${SB_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(items)
+    });
+
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
+    status.textContent = `Hotovo! Nahráno ${items.length} položek.`;
+    status.className = 'upload-status ok';
+
+    // Reload table
+    await load();
+
+  } catch(e) {
+    status.textContent = `Chyba: ${e.message}`;
+    status.className = 'upload-status err';
+  }
+}
 </script>
 </body>
 </html>
