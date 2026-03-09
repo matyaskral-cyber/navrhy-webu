@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KSH Partners — Cenová kalkulačka</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root {
+  --bg: #0f1117;
+  --bg2: #181b24;
+  --bg3: #1f2230;
+  --gold: #d4a96a;
+  --gold-dim: #b8935a;
+  --gold-light: rgba(212,169,106,0.1);
+  --text: #e8e4dc;
+  --text-muted: #8a8690;
+  --white: #f5f2ed;
+  --red: #e85d5d;
+  --green: #5dba7a;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --transition: 0.3s ease;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+h1,h2,h3 { font-family: 'Playfair Display', serif; font-weight: 600; }
+
+/* HEADER */
+.header {
+  background: var(--bg2);
+  border-bottom: 1px solid rgba(212,169,106,0.2);
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+}
+.header .logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.header .logo-icon {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--bg);
+}
+.header .logo-text h1 {
+  font-size: 1.2rem;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+.header .logo-text span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: var(--bg);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(212,169,106,0.3); }
+.btn-secondary {
+  background: var(--bg3);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+.btn-danger {
+  background: rgba(232,93,93,0.1);
+  color: var(--red);
+  border: 1px solid rgba(232,93,93,0.2);
+}
+.btn-danger:hover { background: rgba(232,93,93,0.2); }
+.btn-sm { padding: 6px 14px; font-size: 0.8rem; }
+.btn-icon {
+  width: 36px; height: 36px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg3); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm); cursor: pointer; color: var(--text-muted);
+  transition: var(--transition);
+}
+.btn-icon:hover { color: var(--red); border-color: var(--red); }
+
+/* MAIN LAYOUT */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 20px 80px;
+}
+
+/* SECTIONS */
+.section {
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-size: 1.1rem;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title svg { width: 20px; height: 20px; fill: var(--gold); }
+
+/* FORM */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+.form-input, .form-select, .form-textarea {
+  background: var(--bg);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  outline: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212,169,106,0.1);
+}
+.form-textarea { resize: vertical; min-height: 80px; }
+.form-select { cursor: pointer; }
+
+/* CATEGORIES */
+.categories {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.cat-btn {
+  padding: 8px 18px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.cat-btn:hover { border-color: var(--gold); color: var(--gold); }
+.cat-btn.active {
+  background: var(--gold-light);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ITEMS TABLE */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.items-table th {
+  text-align: left;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-weight: 500;
+}
+.items-table th:last-child { text-align: center; width: 50px; }
+.items-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: middle;
+}
+.items-table tr:hover { background: rgba(255,255,255,0.02); }
+.item-name { font-weight: 500; color: var(--white); font-size: 0.9rem; }
+.item-desc { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+.item-input {
+  background: var(--bg);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  width: 100px;
+  text-align: right;
+  outline: none;
+  transition: var(--transition);
+}
+.item-input:focus { border-color: var(--gold); }
+.item-input.qty { width: 60px; text-align: center; }
+.item-total { font-weight: 600; color: var(--gold); text-align: right; white-space: nowrap; }
+
+/* CUSTOM ITEM ROW */
+.add-item-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  align-items: center;
+}
+.add-item-row .form-input { flex: 1; }
+
+/* SUMMARY */
+.summary-box {
+  background: var(--bg);
+  border: 1px solid rgba(212,169,106,0.2);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 400px;
+  margin-left: auto;
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 0.9rem;
+}
+.summary-row.muted { color: var(--text-muted); }
+.summary-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  margin: 8px 0;
+}
+.summary-row.total {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gold);
+  padding-top: 12px;
+}
+.summary-row.total span:last-child { font-family: 'Playfair Display', serif; }
+
+/* DISCOUNT */
+.discount-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.discount-row .form-input { width: 100px; }
+.discount-toggle {
+  display: flex;
+  background: var(--bg);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.discount-toggle button {
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.discount-toggle button.active {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+/* ACTIONS BAR */
+.actions-bar {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+/* SAVED DRAFTS */
+.drafts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.draft-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--bg);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.draft-item:hover { border-color: var(--gold); }
+.draft-item .draft-info h4 { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--white); font-weight: 500; }
+.draft-item .draft-info span { font-size: 0.78rem; color: var(--text-muted); }
+.draft-item .draft-price { font-weight: 600; color: var(--gold); }
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+}
+.empty-state svg { width: 48px; height: 48px; fill: var(--text-muted); opacity: 0.3; margin-bottom: 12px; }
+.empty-state p { font-size: 0.9rem; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .header { padding: 16px 20px; }
+  .main { padding: 20px 14px 60px; }
+  .section { padding: 20px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .summary-box { max-width: 100%; }
+  .actions-bar { justify-content: stretch; }
+  .actions-bar .btn { flex: 1; justify-content: center; }
+  .categories { gap: 6px; }
+  .items-table { font-size: 0.82rem; }
+  .item-input { width: 80px; }
+  .item-input.qty { width: 50px; }
+  .add-item-row { flex-wrap: wrap; }
+}
+@media (max-width: 480px) {
+  .header .logo-text h1 { font-size: 1rem; }
+  .header-actions { gap: 6px; }
+  .btn { padding: 8px 14px; font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">K</div>
+    <div class="logo-text">
+      <h1>KSH Partners</h1>
+      <span>Cenová kalkulačka</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-secondary" onclick="newQuote()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Nová nabídka
+    </button>
+    <button class="btn btn-primary" onclick="generatePDF()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Stáhnout PDF
+    </button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ULOŽENÉ KONCEPTY -->
+  <div class="section" id="draftsSection">
+    <div class="section-title">
+      <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21" fill="none" stroke="var(--gold)" stroke-width="2"/><polyline points="7 3 7 8 15 8" fill="none" stroke="var(--gold)" stroke-width="2"/></svg>
+      Uložené koncepty
+    </div>
+    <div class="drafts-list" id="draftsList"></div>
+  </div>
+
+  <!-- KLIENT -->
+  <div class="section">
+    <div class="section-title">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" fill="none" stroke="var(--gold)" stroke-width="2"/><circle cx="12" cy="7" r="4" fill="none" stroke="var(--gold)" stroke-width="2"/></svg>
+      Klient
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Název firmy</label>
+        <input type="text" class="form-input" id="clientCompany" placeholder="např. Penzion Kasper" oninput="recalculate()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Kontaktní osoba</label>
+        <input type="text" class="form-input" id="clientName" placeholder="Jan Novák">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" id="clientEmail" placeholder="jan@firma.cz">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Telefon</label>
+        <input type="tel" class="form-input" id="clientPhone" placeholder="+420 123 456 789">
+      </div>
+    </div>
+  </div>
+
+  <!-- POLOŽKY -->
+  <div class="section">
+    <div class="section-title">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" fill="none" stroke="var(--gold)" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" fill="none" stroke="var(--gold)" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" fill="none" stroke="var(--gold)" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" fill="none" stroke="var(--gold)" stroke-width="2"/></svg>
+      Služby & položky
+    </div>
+
+    <div class="categories" id="categories"></div>
+
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th>Položka</th>
+          <th style="width:120px">Cena (Kč)</th>
+          <th style="width:70px">Ks</th>
+          <th style="width:120px;text-align:right">Celkem</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="itemsBody"></tbody>
+    </table>
+
+    <div class="add-item-row">
+      <input type="text" class="form-input" id="customName" placeholder="Vlastní položka — název">
+      <input type="text" class="form-input" id="customDesc" placeholder="Popis" style="flex:0.7">
+      <input type="number" class="item-input" id="customPrice" placeholder="Cena" style="width:100px">
+      <button class="btn btn-secondary btn-sm" onclick="addCustomItem()">+ Přidat</button>
+    </div>
+  </div>
+
+  <!-- SOUHRN -->
+  <div class="section">
+    <div class="section-title">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23" stroke="var(--gold)" stroke-width="2"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" fill="none" stroke="var(--gold)" stroke-width="2"/></svg>
+      Souhrn
+    </div>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start">
+      <div style="flex:1;min-width:250px">
+        <div class="discount-row">
+          <label class="form-label" style="white-space:nowrap">Sleva:</label>
+          <input type="number" class="form-input" id="discountValue" value="0" min="0" oninput="recalculate()" style="width:100px">
+          <div class="discount-toggle">
+            <button id="discPct" class="active" onclick="setDiscountType('pct')">%</button>
+            <button id="discCzk" onclick="setDiscountType('czk')">Kč</button>
+          </div>
+        </div>
+        <div class="discount-row" style="margin-top:10px">
+          <label class="form-label" style="white-space:nowrap">Marže:</label>
+          <input type="number" class="form-input" id="markupValue" value="0" min="0" oninput="recalculate()" style="width:100px">
+          <div class="discount-toggle">
+            <button id="markPct" class="active" onclick="setMarkupType('pct')">%</button>
+            <button id="markCzk" onclick="setMarkupType('czk')">Kč</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Poznámky k nabídce</label>
+          <textarea class="form-textarea" id="notes" placeholder="Platnost nabídky, platební podmínky, speciální požadavky..."></textarea>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <div class="summary-row muted">
+          <span>Mezisoučet</span>
+          <span id="subtotal">0 Kč</span>
+        </div>
+        <div class="summary-row muted" id="discountRow" style="display:none">
+          <span>Sleva</span>
+          <span id="discountDisplay">- 0 Kč</span>
+        </div>
+        <div class="summary-row muted" id="markupRow" style="display:none">
+          <span>Marže</span>
+          <span id="markupDisplay" style="color:var(--green)">+ 0 Kč</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-row">
+          <span>Celkem bez DPH</span>
+          <span id="totalNoDph">0 Kč</span>
+        </div>
+        <div class="summary-row muted">
+          <span>DPH 21 %</span>
+          <span id="dphAmount">0 Kč</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-row total">
+          <span>Celkem s DPH</span>
+          <span id="totalDph">0 Kč</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AKCE -->
+  <div class="actions-bar">
+    <button class="btn btn-secondary" onclick="saveDraft()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      Uložit koncept
+    </button>
+    <button class="btn btn-primary" onclick="generatePDF()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Stáhnout PDF
+    </button>
+  </div>
+
+</div>
+
+<script>
+// ============================================
+// CENÍK SLUŽEB
+// ============================================
+const catalog = {
+  "Tvorba webů": [
+    { name: "Jednoduchý web (one-page)", desc: "Responzivní web, 1 stránka, kontaktní formulář", price: 8000 },
+    { name: "Firemní web (multi-page)", desc: "3–7 stránek, galerie, mapa, SEO základ", price: 15000 },
+    { name: "Redesign stávajícího webu", desc: "Kompletní modernizace designu a kódu", price: 12000 },
+    { name: "Landing page", desc: "Kampaňová stránka, CTA, A/B testování", price: 6000 },
+    { name: "E-shop (WooCommerce)", desc: "Produktový katalog, platební brána, doprava", price: 25000 },
+    { name: "E-shop (vlastní řešení)", desc: "Na míru, bez WP, plná kontrola", price: 40000 },
+    { name: "Blog / magazín", desc: "CMS, kategorie, vyhledávání", price: 10000 },
+    { name: "Webová aplikace", desc: "Funkční app (kalkulačka, dashboard, CRM...)", price: 20000 },
+    { name: "Grafický návrh", desc: "Mockup webu v designu, 2 revize", price: 5000 },
+  ],
+  "Správa & hosting": [
+    { name: "Registrace domény (.cz)", desc: "Na 1 rok", price: 250 },
+    { name: "Registrace domény (.com)", desc: "Na 1 rok", price: 350 },
+    { name: "Webhosting (roční)", desc: "SSD, SSL, email, zálohy", price: 2000 },
+    { name: "VPS server (roční)", desc: "2 GB RAM, 40 GB SSD, root přístup", price: 4000 },
+    { name: "SSL certifikát", desc: "Let's Encrypt nastavení", price: 500 },
+    { name: "Firemní email", desc: "Nastavení info@firma.cz, SPF, DKIM, DMARC", price: 1500 },
+    { name: "Údržba webu (měsíční)", desc: "Aktualizace, zálohy, monitoring, drobné úpravy", price: 1500 },
+    { name: "Migrace webu", desc: "Přenos na nový hosting/server", price: 3000 },
+    { name: "DNS správa", desc: "Nastavení záznamů, přesměrování", price: 500 },
+  ],
+  "Marketing": [
+    { name: "SEO audit", desc: "Analýza webu, klíčová slova, doporučení", price: 5000 },
+    { name: "SEO optimalizace", desc: "On-page SEO, meta tagy, rychlost, strukturovaná data", price: 8000 },
+    { name: "Google Ads kampaň", desc: "Nastavení, klíčová slova, 1 měsíc správy", price: 5000 },
+    { name: "Správa sociálních sítí (měsíční)", desc: "FB + IG, 12 příspěvků/měsíc, engagement", price: 6000 },
+    { name: "Copywriting", desc: "Texty pro web, 5 stránek", price: 4000 },
+    { name: "Logo & vizuální identita", desc: "Logo, barvy, typografie, brand guide", price: 8000 },
+    { name: "Firemní fotky", desc: "Focení produktů/interiéru, základní retuš", price: 4000 },
+    { name: "Video spot (krátký)", desc: "30–60s promo video", price: 10000 },
+  ],
+  "IT konzultace": [
+    { name: "IT audit", desc: "Analýza infrastruktury, bezpečnost, doporučení", price: 5000 },
+    { name: "Správa serveru (měsíční)", desc: "Monitoring, aktualizace, zálohy, bezpečnost", price: 3000 },
+    { name: "Nastavení firemní sítě", desc: "Router, Wi-Fi, kabeláž, firewall", price: 8000 },
+    { name: "Bezpečnostní audit webu", desc: "Penetrační test, OWASP kontrola", price: 6000 },
+    { name: "Konzultace (hodina)", desc: "IT poradenství, architektura, řešení problémů", price: 1200 },
+    { name: "Vzdálená podpora (hodina)", desc: "Řešení akutních problémů přes TeamViewer/SSH", price: 800 },
+    { name: "Školení (hodina)", desc: "WordPress, email, bezpečnost, základy IT", price: 1000 },
+  ],
+  "Vybavování poboček": [
+    { name: "Síťová infrastruktura", desc: "Kabeláž, switch, access pointy, patch panel", price: 15000 },
+    { name: "Kamerový systém (4 kamery)", desc: "IP kamery, NVR, instalace, nastavení", price: 25000 },
+    { name: "Kamerový systém (8 kamer)", desc: "IP kamery, NVR, instalace, nastavení", price: 40000 },
+    { name: "Pracovní stanice (PC)", desc: "Sestava, monitor, klávesnice, myš", price: 18000 },
+    { name: "Notebook", desc: "Business notebook, nastavení, přenos dat", price: 15000 },
+    { name: "Tiskárna / multifunkce", desc: "Instalace, síťové nastavení, testovací tisk", price: 6000 },
+    { name: "Pokladní systém (POS)", desc: "Pokladna, čtečka, software, nastavení", price: 20000 },
+    { name: "Telefonní ústředna (VoIP)", desc: "Nastavení, konfigurace, IP telefony", price: 12000 },
+    { name: "WiFi pokrytí pobočky", desc: "Měření, access pointy, mesh, optimalizace", price: 8000 },
+    { name: "Zabezpečovací systém", desc: "Alarm, čidla, klávesnice, GSM modul", price: 18000 },
+    { name: "Nábytek — kancelář", desc: "Stůl, židle, skříň, police — na míru", price: 15000 },
+    { name: "Rekonstrukce / malování", desc: "Příprava prostoru, malba, drobné úpravy", price: 10000 },
+    { name: "Dřevěné rošty", desc: "Prodejní rošty, vystavování zboží", price: 4000 },
+    { name: "Háky na rošt", desc: "Závěsný systém na rošty", price: 4040 },
+    { name: "Police", desc: "Regálové police do prodejny", price: 2000 },
+    { name: "Stůl", desc: "Prodejní/prezentační stůl", price: 2700 },
+    { name: "Gauč", desc: "Sedačka do prodejny/čekárny", price: 2000 },
+    { name: "Květina", desc: "Dekorativní květina do interiéru", price: 650 },
+    { name: "Logo na stůl", desc: "Firemní logo, stolní provedení", price: 1500 },
+    { name: "Logo před obchod", desc: "Venkovní logo/branding", price: 2025 },
+    { name: "Roll up", desc: "Reklamní roll up banner", price: 1600 },
+    { name: "Cedule na obchod", desc: "Informační/reklamní cedule", price: 790 },
+    { name: "Plakáty 2x", desc: "Tiskové plakáty do výlohy", price: 313 },
+    { name: "Fólie na sklo výlohy", desc: "Polep výlohy reklamní fólií", price: 600 },
+  ],
+};
+
+let selectedItems = [];
+let discountType = 'pct';
+let markupType = 'pct';
+let activeCategory = null;
+let quoteId = null;
+
+// ============================================
+// INIT
+// ============================================
+function init() {
+  renderCategories();
+  renderDrafts();
+  selectCategory(Object.keys(catalog)[0]);
+}
+
+// ============================================
+// CATEGORIES
+// ============================================
+function renderCategories() {
+  const cont = document.getElementById('categories');
+  cont.innerHTML = '';
+  Object.keys(catalog).forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.textContent = cat;
+    btn.onclick = () => selectCategory(cat);
+    cont.appendChild(btn);
+  });
+}
+
+function selectCategory(cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.textContent === cat));
+  renderItems();
+}
+
+// ============================================
+// ITEMS
+// ============================================
+function renderItems() {
+  const tbody = document.getElementById('itemsBody');
+  tbody.innerHTML = '';
+
+  // Category items
+  if (activeCategory && catalog[activeCategory]) {
+    catalog[activeCategory].forEach((item, i) => {
+      const sel = selectedItems.find(s => s.name === item.name && s.cat === activeCategory);
+      const qty = sel ? sel.qty : 0;
+      const price = sel ? sel.price : item.price;
+      const tr = document.createElement('tr');
+      tr.style.opacity = qty > 0 ? '1' : '0.5';
+      tr.innerHTML = `
+        <td>
+          <div class="item-name">${item.name}</div>
+          <div class="item-desc">${item.desc}</div>
+        </td>
+        <td><input type="number" class="item-input" value="${price}" min="0" step="100" onchange="updateItem('${activeCategory}','${item.name}',this.value,null)"></td>
+        <td><input type="number" class="item-input qty" value="${qty}" min="0" max="99" onchange="updateItem('${activeCategory}','${item.name}',null,this.value)"></td>
+        <td class="item-total">${qty > 0 ? formatPrice(price * qty) : '—'}</td>
+        <td style="text-align:center">${qty > 0 ? '<button class="btn-icon" onclick="removeItem(\''+activeCategory+'\',\''+item.name+'\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>' : ''}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Custom items
+  selectedItems.filter(s => s.custom).forEach(item => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>
+        <div class="item-name">${item.name}</div>
+        <div class="item-desc">${item.desc || 'Vlastní položka'}</div>
+      </td>
+      <td><input type="number" class="item-input" value="${item.price}" min="0" step="100" onchange="updateCustom('${item.id}',this.value,null)"></td>
+      <td><input type="number" class="item-input qty" value="${item.qty}" min="1" max="99" onchange="updateCustom('${item.id}',null,this.value)"></td>
+      <td class="item-total">${formatPrice(item.price * item.qty)}</td>
+      <td style="text-align:center"><button class="btn-icon" onclick="removeCustom('${item.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  recalculate();
+}
+
+function updateItem(cat, name, price, qty) {
+  let sel = selectedItems.find(s => s.name === name && s.cat === cat);
+  if (qty !== null) {
+    qty = parseInt(qty) || 0;
+    if (qty > 0 && !sel) {
+      const orig = catalog[cat].find(i => i.name === name);
+      selectedItems.push({ name, cat, desc: orig.desc, price: price !== null ? parseFloat(price) : orig.price, qty });
+    } else if (qty > 0 && sel) {
+      sel.qty = qty;
+      if (price !== null) sel.price = parseFloat(price);
+    } else if (qty === 0 && sel) {
+      selectedItems = selectedItems.filter(s => !(s.name === name && s.cat === cat));
+    }
+  } else if (price !== null && sel) {
+    sel.price = parseFloat(price);
+  }
+  renderItems();
+}
+
+function removeItem(cat, name) {
+  selectedItems = selectedItems.filter(s => !(s.name === name && s.cat === cat));
+  renderItems();
+}
+
+function addCustomItem() {
+  const name = document.getElementById('customName').value.trim();
+  const desc = document.getElementById('customDesc').value.trim();
+  const price = parseFloat(document.getElementById('customPrice').value) || 0;
+  if (!name) return;
+  selectedItems.push({ name, desc, price, qty: 1, custom: true, id: 'c_' + Date.now() });
+  document.getElementById('customName').value = '';
+  document.getElementById('customDesc').value = '';
+  document.getElementById('customPrice').value = '';
+  renderItems();
+}
+
+function updateCustom(id, price, qty) {
+  const item = selectedItems.find(s => s.id === id);
+  if (!item) return;
+  if (price !== null) item.price = parseFloat(price);
+  if (qty !== null) item.qty = parseInt(qty) || 1;
+  renderItems();
+}
+
+function removeCustom(id) {
+  selectedItems = selectedItems.filter(s => s.id !== id);
+  renderItems();
+}
+
+// ============================================
+// DISCOUNT & MARKUP
+// ============================================
+function setDiscountType(type) {
+  discountType = type;
+  document.getElementById('discPct').classList.toggle('active', type === 'pct');
+  document.getElementById('discCzk').classList.toggle('active', type === 'czk');
+  recalculate();
+}
+
+function setMarkupType(type) {
+  markupType = type;
+  document.getElementById('markPct').classList.toggle('active', type === 'pct');
+  document.getElementById('markCzk').classList.toggle('active', type === 'czk');
+  recalculate();
+}
+
+// ============================================
+// RECALCULATE
+// ============================================
+function recalculate() {
+  const active = selectedItems.filter(s => s.qty > 0);
+  let subtotal = 0;
+  active.forEach(i => subtotal += i.price * i.qty);
+
+  const discVal = parseFloat(document.getElementById('discountValue').value) || 0;
+  let discount = 0;
+  if (discountType === 'pct') {
+    discount = subtotal * (discVal / 100);
+  } else {
+    discount = discVal;
+  }
+  discount = Math.min(discount, subtotal);
+
+  const markVal = parseFloat(document.getElementById('markupValue').value) || 0;
+  let markup = 0;
+  if (markupType === 'pct') {
+    markup = subtotal * (markVal / 100);
+  } else {
+    markup = markVal;
+  }
+
+  const totalNoDph = subtotal - discount + markup;
+  const dph = totalNoDph * 0.21;
+  const totalDph = totalNoDph + dph;
+
+  document.getElementById('subtotal').textContent = formatPrice(subtotal);
+  document.getElementById('discountRow').style.display = discount > 0 ? 'flex' : 'none';
+  document.getElementById('discountDisplay').textContent = '- ' + formatPrice(discount);
+  document.getElementById('markupRow').style.display = markup > 0 ? 'flex' : 'none';
+  document.getElementById('markupDisplay').textContent = '+ ' + formatPrice(markup);
+  document.getElementById('totalNoDph').textContent = formatPrice(totalNoDph);
+  document.getElementById('dphAmount').textContent = formatPrice(dph);
+  document.getElementById('totalDph').textContent = formatPrice(totalDph);
+}
+
+// ============================================
+// FORMAT
+// ============================================
+function formatPrice(n) {
+  return Math.round(n).toLocaleString('cs-CZ') + ' Kč';
+}
+
+// ============================================
+// SAVE / LOAD DRAFTS
+// ============================================
+function saveDraft() {
+  const company = document.getElementById('clientCompany').value.trim() || 'Bez názvu';
+  const drafts = JSON.parse(localStorage.getItem('ksh_drafts') || '[]');
+  const data = {
+    id: quoteId || 'd_' + Date.now(),
+    company,
+    clientName: document.getElementById('clientName').value,
+    clientEmail: document.getElementById('clientEmail').value,
+    clientPhone: document.getElementById('clientPhone').value,
+    items: selectedItems,
+    discountType,
+    discountValue: document.getElementById('discountValue').value,
+    markupType,
+    markupValue: document.getElementById('markupValue').value,
+    notes: document.getElementById('notes').value,
+    date: new Date().toLocaleDateString('cs-CZ'),
+    total: document.getElementById('totalDph').textContent,
+  };
+  const idx = drafts.findIndex(d => d.id === data.id);
+  if (idx >= 0) drafts[idx] = data; else drafts.unshift(data);
+  localStorage.setItem('ksh_drafts', JSON.stringify(drafts));
+  quoteId = data.id;
+  renderDrafts();
+  showToast('Koncept uložen');
+}
+
+function loadDraft(id) {
+  const drafts = JSON.parse(localStorage.getItem('ksh_drafts') || '[]');
+  const d = drafts.find(x => x.id === id);
+  if (!d) return;
+  quoteId = d.id;
+  document.getElementById('clientCompany').value = d.company || '';
+  document.getElementById('clientName').value = d.clientName || '';
+  document.getElementById('clientEmail').value = d.clientEmail || '';
+  document.getElementById('clientPhone').value = d.clientPhone || '';
+  document.getElementById('discountValue').value = d.discountValue || 0;
+  document.getElementById('markupValue').value = d.markupValue || 0;
+  document.getElementById('notes').value = d.notes || '';
+  selectedItems = d.items || [];
+  discountType = d.discountType || 'pct';
+  markupType = d.markupType || 'pct';
+  setDiscountType(discountType);
+  setMarkupType(markupType);
+  renderItems();
+  showToast('Načteno: ' + d.company);
+}
+
+function deleteDraft(id, e) {
+  e.stopPropagation();
+  let drafts = JSON.parse(localStorage.getItem('ksh_drafts') || '[]');
+  drafts = drafts.filter(d => d.id !== id);
+  localStorage.setItem('ksh_drafts', JSON.stringify(drafts));
+  renderDrafts();
+}
+
+function renderDrafts() {
+  const drafts = JSON.parse(localStorage.getItem('ksh_drafts') || '[]');
+  const cont = document.getElementById('draftsList');
+  const section = document.getElementById('draftsSection');
+  if (drafts.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = 'block';
+  cont.innerHTML = drafts.map(d => `
+    <div class="draft-item" onclick="loadDraft('${d.id}')">
+      <div class="draft-info">
+        <h4>${d.company}</h4>
+        <span>${d.date}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span class="draft-price">${d.total}</span>
+        <button class="btn-icon" onclick="deleteDraft('${d.id}',event)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function newQuote() {
+  quoteId = null;
+  document.getElementById('clientCompany').value = '';
+  document.getElementById('clientName').value = '';
+  document.getElementById('clientEmail').value = '';
+  document.getElementById('clientPhone').value = '';
+  document.getElementById('discountValue').value = '0';
+  document.getElementById('markupValue').value = '0';
+  document.getElementById('notes').value = '';
+  selectedItems = [];
+  renderItems();
+  showToast('Nová nabídka');
+}
+
+// ============================================
+// TOAST
+// ============================================
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  Object.assign(t.style, {
+    position: 'fixed', bottom: '30px', left: '50%', transform: 'translateX(-50%)',
+    background: 'var(--gold)', color: 'var(--bg)', padding: '10px 24px',
+    borderRadius: '8px', fontWeight: '600', fontSize: '0.85rem',
+    zIndex: '9999', animation: 'fadeIn 0.3s ease'
+  });
+  document.body.appendChild(t);
+  setTimeout(() => { t.style.opacity = '0'; t.style.transition = '0.3s'; setTimeout(() => t.remove(), 300); }, 2000);
+}
+
+// ============================================
+// PDF GENERATION (html2canvas)
+// ============================================
+function generatePDF() {
+  const active = selectedItems.filter(s => s.qty > 0);
+  if (active.length === 0) { showToast('Přidej alespoň jednu položku'); return; }
+
+  const company = document.getElementById('clientCompany').value || 'Klient';
+  const clientName = document.getElementById('clientName').value;
+  const clientEmail = document.getElementById('clientEmail').value;
+  const clientPhone = document.getElementById('clientPhone').value;
+  const notes = document.getElementById('notes').value;
+  const discVal = parseFloat(document.getElementById('discountValue').value) || 0;
+
+  let subtotal = 0;
+  active.forEach(i => subtotal += i.price * i.qty);
+  let discount = discountType === 'pct' ? subtotal * (discVal / 100) : discVal;
+  discount = Math.min(discount, subtotal);
+  const markVal = parseFloat(document.getElementById('markupValue').value) || 0;
+  let markup = markupType === 'pct' ? subtotal * (markVal / 100) : markVal;
+  const totalNoDph = subtotal - discount + markup;
+  const dph = totalNoDph * 0.21;
+  const totalDph = totalNoDph + dph;
+  const today = new Date().toLocaleDateString('cs-CZ');
+  const fp = n => Math.round(n).toLocaleString('cs-CZ') + ' Kč';
+
+  // Build rows
+  let rowsHtml = active.map((item, i) => `
+    <tr style="background:${i%2===0?'#f9f9f9':'#fff'}">
+      <td style="padding:8px 10px;font-size:13px;border-bottom:1px solid #eee">${item.name}<br><span style="font-size:11px;color:#999">${item.desc||''}</span></td>
+      <td style="padding:8px 10px;font-size:13px;border-bottom:1px solid #eee;text-align:right;color:#888">${fp(item.price)}</td>
+      <td style="padding:8px 10px;font-size:13px;border-bottom:1px solid #eee;text-align:center">${item.qty}</td>
+      <td style="padding:8px 10px;font-size:13px;border-bottom:1px solid #eee;text-align:right;font-weight:600">${fp(item.price*item.qty)}</td>
+    </tr>
+  `).join('');
+
+  let clientInfo = `<strong>${company}</strong>`;
+  if (clientName) clientInfo += `<br>Kontakt: ${clientName}`;
+  if (clientEmail) clientInfo += `<br>Email: ${clientEmail}`;
+  if (clientPhone) clientInfo += `<br>Tel: ${clientPhone}`;
+
+  let discountHtml = '';
+  if (discount > 0) {
+    discountHtml = `<tr><td style="text-align:right;padding:4px 0;color:#888">Sleva</td><td style="text-align:right;padding:4px 0;color:#e85d5d;font-weight:600">- ${fp(discount)}</td></tr>`;
+  }
+
+  let notesHtml = '';
+  if (notes) {
+    notesHtml = `<div style="margin-top:24px;padding-top:16px;border-top:1px solid #eee"><div style="font-size:12px;font-weight:600;color:#333;margin-bottom:6px">Poznámky:</div><div style="font-size:12px;color:#888;white-space:pre-wrap">${notes}</div></div>`;
+  }
+
+  const html = `
+    <div id="pdfContent" style="width:794px;padding:0;font-family:'Inter',Arial,sans-serif;background:#fff;color:#333">
+      <!-- Header -->
+      <div style="background:#0f1117;padding:24px 40px;display:flex;align-items:center;gap:16px">
+        <div style="width:44px;height:44px;background:linear-gradient(135deg,#d4a96a,#b8935a);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:#0f1117;flex-shrink:0">K</div>
+        <div>
+          <div style="font-size:20px;font-weight:700;color:#fff;font-family:'Playfair Display',Georgia,serif">KSH Partners s.r.o.</div>
+          <div style="font-size:11px;color:#d4a96a;margin-top:2px">info@ksh-partners.cz &nbsp;|&nbsp; 774 982 675 &nbsp;|&nbsp; ksh-partners.cz</div>
+        </div>
+      </div>
+      <div style="height:3px;background:linear-gradient(90deg,#d4a96a,#b8935a)"></div>
+
+      <!-- Body -->
+      <div style="padding:32px 40px">
+        <!-- Title -->
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px">
+          <div style="font-size:26px;font-weight:700;font-family:'Playfair Display',Georgia,serif;color:#222">Cenová nabídka</div>
+          <div style="font-size:12px;color:#888">Datum: ${today} &nbsp;|&nbsp; Platnost: 30 dní</div>
+        </div>
+
+        <!-- Client -->
+        <div style="background:#f8f6f2;border-radius:8px;padding:16px 20px;margin-bottom:28px;font-size:13px;line-height:1.7">
+          ${clientInfo}
+        </div>
+
+        <!-- Table -->
+        <table style="width:100%;border-collapse:collapse;margin-bottom:24px">
+          <thead>
+            <tr style="background:#d4a96a">
+              <th style="padding:10px;text-align:left;font-size:11px;font-weight:600;color:#0f1117;text-transform:uppercase;letter-spacing:0.5px;border-radius:6px 0 0 0">Položka</th>
+              <th style="padding:10px;text-align:right;font-size:11px;font-weight:600;color:#0f1117;text-transform:uppercase;letter-spacing:0.5px">Cena/ks</th>
+              <th style="padding:10px;text-align:center;font-size:11px;font-weight:600;color:#0f1117;text-transform:uppercase;letter-spacing:0.5px">Ks</th>
+              <th style="padding:10px;text-align:right;font-size:11px;font-weight:600;color:#0f1117;text-transform:uppercase;letter-spacing:0.5px;border-radius:0 6px 0 0">Celkem</th>
+            </tr>
+          </thead>
+          <tbody>${rowsHtml}</tbody>
+        </table>
+
+        <!-- Summary -->
+        <div style="display:flex;justify-content:flex-end">
+          <table style="width:280px;border-collapse:collapse">
+            <tr><td style="text-align:right;padding:4px 0;color:#888;font-size:13px">Mezisoučet</td><td style="text-align:right;padding:4px 0;font-size:13px;padding-left:20px">${fp(subtotal + markup)}</td></tr>
+            ${discountHtml}
+            <tr><td colspan="2" style="border-bottom:1px solid #eee;padding:4px 0"></td></tr>
+            <tr><td style="text-align:right;padding:4px 0;font-size:13px">Celkem bez DPH</td><td style="text-align:right;padding:4px 0;font-size:13px;padding-left:20px">${fp(totalNoDph)}</td></tr>
+            <tr><td style="text-align:right;padding:4px 0;color:#888;font-size:13px">DPH 21 %</td><td style="text-align:right;padding:4px 0;font-size:13px;color:#888;padding-left:20px">${fp(dph)}</td></tr>
+            <tr><td colspan="2" style="border-bottom:2px solid #d4a96a;padding:4px 0"></td></tr>
+            <tr>
+              <td style="text-align:right;padding:10px 0;font-size:16px;font-weight:700;color:#0f1117">Celkem s DPH</td>
+              <td style="text-align:right;padding:10px 0;font-size:16px;font-weight:700;color:#d4a96a;padding-left:20px;font-family:'Playfair Display',Georgia,serif">${fp(totalDph)}</td>
+            </tr>
+          </table>
+        </div>
+
+        ${notesHtml}
+      </div>
+
+      <!-- Footer -->
+      <div style="border-top:1px solid #eee;padding:16px 40px;text-align:center;font-size:10px;color:#bbb">
+        KSH Partners s.r.o. &nbsp;|&nbsp; info@ksh-partners.cz &nbsp;|&nbsp; 774 982 675
+      </div>
+    </div>
+  `;
+
+  // Create offscreen container
+  const container = document.createElement('div');
+  container.style.cssText = 'position:fixed;left:-9999px;top:0;z-index:-1';
+  container.innerHTML = html;
+  document.body.appendChild(container);
+
+  showToast('Generuji PDF...');
+
+  // Wait for fonts to render, then capture
+  setTimeout(() => {
+    const el = document.getElementById('pdfContent');
+    html2canvas(el, { scale: 2, useCORS: true, backgroundColor: '#ffffff' }).then(canvas => {
+      const { jsPDF } = window.jspdf;
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+      const pdfW = 210;
+      const pdfH = (canvas.height * pdfW) / canvas.width;
+
+      // Handle multi-page if content is too tall
+      if (pdfH <= 297) {
+        const doc = new jsPDF('p', 'mm', 'a4');
+        doc.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH);
+        const filename = 'nabidka-' + company.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-') + '.pdf';
+        doc.save(filename);
+      } else {
+        const doc = new jsPDF('p', 'mm', [pdfW, pdfH]);
+        doc.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH);
+        const filename = 'nabidka-' + company.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-') + '.pdf';
+        doc.save(filename);
+      }
+
+      container.remove();
+      showToast('PDF staženo');
+    }).catch(err => {
+      console.error(err);
+      container.remove();
+      showToast('Chyba při generování PDF');
+    });
+  }, 300);
+}
+
+// ============================================
+// INIT
+// ============================================
+init();
+</script>
+</body>
+</html>

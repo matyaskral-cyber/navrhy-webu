@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faktury → Pohoda | KSH Partners</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface2: #1a1a25;
+  --border: #2a2a3a;
+  --text: #e8e8f0;
+  --text2: #8888a0;
+  --accent: #6c8cff;
+  --accent2: #4a6aee;
+  --green: #4ade80;
+  --red: #f87171;
+  --orange: #fbbf24;
+  --gold: #d4a96a;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a30 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: var(--gold);
+}
+.header h1 span { color: var(--text2); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 400; margin-left: 12px; }
+.header-actions { display: flex; gap: 10px; }
+.btn {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+.btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover { background: var(--border); }
+.btn-success { background: var(--green); color: #000; }
+.btn-success:hover { background: #22c55e; }
+.btn-danger { background: rgba(248,113,113,.15); color: var(--red); border: 1px solid rgba(248,113,113,.3); }
+.btn-danger:hover { background: rgba(248,113,113,.25); }
+.btn-gold { background: linear-gradient(135deg, #d4a96a, #c49355); color: #000; font-weight: 600; }
+.btn-gold:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(212,169,106,.3); }
+
+/* LAYOUT */
+.main { display: flex; height: calc(100vh - 69px); }
+.left-panel {
+  width: 420px;
+  min-width: 420px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+.right-panel { flex: 1; overflow-y: auto; padding: 24px; }
+
+/* UPLOAD ZONE */
+.upload-zone {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.drop-area {
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .3s;
+  position: relative;
+}
+.drop-area:hover, .drop-area.dragover {
+  border-color: var(--accent);
+  background: rgba(108,140,255,.05);
+}
+.drop-area svg { margin-bottom: 12px; }
+.drop-area h3 { font-size: 15px; margin-bottom: 4px; }
+.drop-area p { font-size: 12px; color: var(--text2); }
+.drop-area input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+/* PROCESSING STATUS */
+.status-bar {
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border);
+  display: none;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.status-bar.active { display: flex; }
+.spinner {
+  width: 18px; height: 18px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* EXTRACTED TEXT */
+.extracted-text {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 24px;
+}
+.extracted-text pre {
+  font-size: 11px;
+  color: var(--text2);
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.6;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.text-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text2);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* FORM */
+.form-section {
+  margin-bottom: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.form-section-header {
+  padding: 14px 20px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.form-section-body { padding: 16px 20px; }
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.form-group { display: flex; flex-direction: column; gap: 4px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label {
+  font-size: 11px;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-weight: 500;
+}
+.form-group input, .form-group textarea, .form-group select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color .2s;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  border-color: var(--accent);
+}
+.form-group textarea { resize: vertical; min-height: 60px; }
+
+/* ITEMS TABLE */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.items-table th {
+  text-align: left;
+  padding: 8px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text2);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+}
+.items-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(42,42,58,.5);
+  vertical-align: middle;
+}
+.items-table input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 8px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  width: 100%;
+  outline: none;
+}
+.items-table input:focus { border-color: var(--accent); }
+.items-table .col-text { width: 40%; }
+.items-table .col-qty { width: 10%; }
+.items-table .col-unit { width: 10%; }
+.items-table .col-price { width: 15%; }
+.items-table .col-vat { width: 12%; }
+.items-table .col-del { width: 5%; text-align: center; }
+.btn-icon {
+  background: none;
+  border: none;
+  color: var(--text2);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all .2s;
+}
+.btn-icon:hover { color: var(--red); background: rgba(248,113,113,.1); }
+
+/* SUMMARY */
+.summary-box {
+  background: var(--surface2);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-top: 16px;
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 13px;
+}
+.summary-row.total {
+  border-top: 2px solid var(--border);
+  margin-top: 8px;
+  padding-top: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+/* HISTORY */
+.history-list {
+  list-style: none;
+  padding: 0;
+}
+.history-item {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background .2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.history-item:hover { background: var(--surface2); }
+.history-item .name { font-size: 13px; font-weight: 500; }
+.history-item .meta { font-size: 11px; color: var(--text2); }
+
+/* SETTINGS MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 24px;
+}
+.modal h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+}
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+
+/* TABS */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+.tab {
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all .2s;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* CONFIDENCE */
+.confidence-high { border-left: 3px solid var(--green) !important; }
+.confidence-medium { border-left: 3px solid var(--orange) !important; }
+.confidence-low { border-left: 3px solid var(--red) !important; }
+
+/* EMPTY STATE */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text2);
+  text-align: center;
+  padding: 40px;
+}
+.empty-state svg { margin-bottom: 16px; opacity: .3; }
+.empty-state h3 { font-size: 16px; margin-bottom: 8px; color: var(--text); }
+.empty-state p { font-size: 13px; }
+
+@media (max-width: 900px) {
+  .main { flex-direction: column; }
+  .left-panel { width: 100%; min-width: unset; max-height: 40vh; }
+  .right-panel { padding: 16px; }
+  .form-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>Faktury → Pohoda <span>KSH Partners</span></h1>
+  <div class="header-actions">
+    <button class="btn btn-secondary" onclick="showSettings()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.73 12.73l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      Nastavení
+    </button>
+    <button class="btn btn-secondary" onclick="showHistory()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Historie
+    </button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <div class="upload-zone">
+      <div class="drop-area" id="dropArea">
+        <input type="file" accept=".pdf,image/*" multiple id="fileInput">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <h3>Nahraj fakturu</h3>
+        <p>PDF nebo fotka (JPG, PNG) — přetáhni sem nebo klikni</p>
+      </div>
+    </div>
+
+    <div class="status-bar" id="statusBar">
+      <div class="spinner"></div>
+      <span id="statusText">Zpracovávám...</span>
+    </div>
+
+    <div class="tabs" id="leftTabs" style="display:none;">
+      <div class="tab active" data-tab="text">Extrahovaný text</div>
+      <div class="tab" data-tab="preview">Náhled</div>
+    </div>
+
+    <div class="extracted-text" id="extractedPanel">
+      <div class="empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/>
+        </svg>
+        <h3>Žádná faktura</h3>
+        <p>Nahraj PDF nebo fotku faktury pro zpracování</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel" id="rightPanel">
+    <div class="empty-state" id="emptyRight">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/>
+      </svg>
+      <h3>Nahraj fakturu a začni</h3>
+      <p>Data se automaticky vytáhnou z dokumentu.<br>Zkontroluj je a vygeneruj XML pro Pohodu.</p>
+    </div>
+
+    <!-- FORM (hidden initially) -->
+    <div id="invoiceForm" style="display:none;">
+
+      <!-- DODAVATEL -->
+      <div class="form-section">
+        <div class="form-section-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Dodavatel
+        </div>
+        <div class="form-section-body">
+          <div class="form-grid">
+            <div class="form-group full"><label>Název firmy</label><input type="text" id="f_company"></div>
+            <div class="form-group"><label>IČO</label><input type="text" id="f_ico"></div>
+            <div class="form-group"><label>DIČ</label><input type="text" id="f_dic"></div>
+            <div class="form-group full"><label>Ulice</label><input type="text" id="f_street"></div>
+            <div class="form-group"><label>Město</label><input type="text" id="f_city"></div>
+            <div class="form-group"><label>PSČ</label><input type="text" id="f_zip"></div>
+            <div class="form-group"><label>Telefon</label><input type="text" id="f_phone"></div>
+            <div class="form-group"><label>Email</label><input type="text" id="f_email"></div>
+            <div class="form-group"><label>Číslo účtu</label><input type="text" id="f_bankAccount"></div>
+            <div class="form-group"><label>Kód banky</label><input type="text" id="f_bankCode"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAKTURA -->
+      <div class="form-section">
+        <div class="form-section-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Údaje faktury
+        </div>
+        <div class="form-section-body">
+          <div class="form-grid">
+            <div class="form-group"><label>Číslo faktury</label><input type="text" id="f_invoiceNum"></div>
+            <div class="form-group"><label>Variabilní symbol</label><input type="text" id="f_vs"></div>
+            <div class="form-group"><label>Konstantní symbol</label><input type="text" id="f_ks"></div>
+            <div class="form-group"><label>Způsob úhrady</label>
+              <select id="f_payment">
+                <option value="Prikazem">Příkazem</option>
+                <option value="Hotove">Hotově</option>
+                <option value="Kartou">Kartou</option>
+                <option value="Dobirkou">Dobírkou</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Datum vystavení</label><input type="date" id="f_dateIssue"></div>
+            <div class="form-group"><label>Datum splatnosti</label><input type="date" id="f_dateDue"></div>
+            <div class="form-group"><label>DUZP</label><input type="date" id="f_dateTax"></div>
+            <div class="form-group full"><label>Popis</label><input type="text" id="f_text"></div>
+            <div class="form-group full"><label>Poznámka</label><textarea id="f_note"></textarea></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POLOŽKY -->
+      <div class="form-section">
+        <div class="form-section-header" style="justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Položky
+          </div>
+          <button class="btn btn-secondary" onclick="addItem()" style="padding:4px 12px;font-size:12px;">+ Přidat</button>
+        </div>
+        <div class="form-section-body" style="padding:0;">
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th class="col-text">Název</th>
+                <th class="col-qty">Množství</th>
+                <th class="col-unit">Jednotka</th>
+                <th class="col-price">Cena/ks bez DPH</th>
+                <th class="col-vat">DPH</th>
+                <th class="col-del"></th>
+              </tr>
+            </thead>
+            <tbody id="itemsBody"></tbody>
+          </table>
+        </div>
+        <div class="summary-box" id="summaryBox">
+          <div class="summary-row"><span>Základ (bez DPH)</span><span id="sumBase">0 Kč</span></div>
+          <div class="summary-row"><span>DPH 21%</span><span id="sumVatHigh">0 Kč</span></div>
+          <div class="summary-row"><span>DPH 12%</span><span id="sumVatLow">0 Kč</span></div>
+          <div class="summary-row total"><span>Celkem</span><span id="sumTotal">0 Kč</span></div>
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div style="display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;">
+        <button class="btn btn-gold" onclick="generateXML()" style="font-size:15px;padding:12px 28px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Stáhnout XML pro Pohodu
+        </button>
+        <button class="btn btn-success" onclick="saveToHistory()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Uložit
+        </button>
+        <button class="btn btn-danger" onclick="clearForm()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+          Vyčistit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <h2>Nastavení firmy</h2>
+    <p style="color:var(--text2);font-size:13px;margin-bottom:16px;">Údaje vaší firmy pro XML export (příjemce faktur)</p>
+    <div class="form-grid">
+      <div class="form-group full"><label>Název firmy</label><input type="text" id="s_company" value="KSH Partners s.r.o."></div>
+      <div class="form-group"><label>IČO</label><input type="text" id="s_ico"></div>
+      <div class="form-group"><label>DIČ</label><input type="text" id="s_dic"></div>
+      <div class="form-group full"><label>Ulice</label><input type="text" id="s_street"></div>
+      <div class="form-group"><label>Město</label><input type="text" id="s_city"></div>
+      <div class="form-group"><label>PSČ</label><input type="text" id="s_zip"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeSettings()">Zrušit</button>
+      <button class="btn btn-primary" onclick="saveSettings()">Uložit</button>
+    </div>
+  </div>
+</div>
+
+<!-- HISTORY MODAL -->
+<div class="modal-overlay" id="historyModal">
+  <div class="modal">
+    <h2>Historie faktur</h2>
+    <ul class="history-list" id="historyList"></ul>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeHistory()">Zavřít</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==========================================
+// STATE
+// ==========================================
+let extractedText = '';
+let items = [];
+let itemIdCounter = 0;
+
+// ==========================================
+// SETTINGS (LocalStorage)
+// ==========================================
+function loadSettings() {
+  const s = JSON.parse(localStorage.getItem('faktury_settings') || '{}');
+  document.getElementById('s_company').value = s.company || 'KSH Partners s.r.o.';
+  document.getElementById('s_ico').value = s.ico || '';
+  document.getElementById('s_dic').value = s.dic || '';
+  document.getElementById('s_street').value = s.street || '';
+  document.getElementById('s_city').value = s.city || '';
+  document.getElementById('s_zip').value = s.zip || '';
+}
+function saveSettings() {
+  const s = {
+    company: document.getElementById('s_company').value,
+    ico: document.getElementById('s_ico').value,
+    dic: document.getElementById('s_dic').value,
+    street: document.getElementById('s_street').value,
+    city: document.getElementById('s_city').value,
+    zip: document.getElementById('s_zip').value,
+  };
+  localStorage.setItem('faktury_settings', JSON.stringify(s));
+  closeSettings();
+}
+function getSettings() {
+  return JSON.parse(localStorage.getItem('faktury_settings') || '{}');
+}
+function showSettings() { document.getElementById('settingsModal').classList.add('active'); loadSettings(); }
+function closeSettings() { document.getElementById('settingsModal').classList.remove('active'); }
+
+// ==========================================
+// HISTORY
+// ==========================================
+function showHistory() {
+  const list = document.getElementById('historyList');
+  const history = JSON.parse(localStorage.getItem('faktury_history') || '[]');
+  if (!history.length) {
+    list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text2);">Žádné uložené faktury</div>';
+  } else {
+    list.innerHTML = history.map((h, i) => `
+      <li class="history-item" onclick="loadFromHistory(${i})">
+        <div>
+          <div class="name">${h.company || 'Neznámý dodavatel'}</div>
+          <div class="meta">${h.invoiceNum || ''} | ${h.dateIssue || ''} | ${h.total || '0'} Kč</div>
+        </div>
+        <button class="btn-icon" onclick="event.stopPropagation();deleteHistory(${i})">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        </button>
+      </li>
+    `).join('');
+  }
+  document.getElementById('historyModal').classList.add('active');
+}
+function closeHistory() { document.getElementById('historyModal').classList.remove('active'); }
+function saveToHistory() {
+  const data = gatherFormData();
+  data.items = items;
+  data.total = document.getElementById('sumTotal').textContent;
+  const history = JSON.parse(localStorage.getItem('faktury_history') || '[]');
+  history.unshift(data);
+  if (history.length > 50) history.pop();
+  localStorage.setItem('faktury_history', JSON.stringify(history));
+  showNotification('Faktura uložena do historie');
+}
+function loadFromHistory(idx) {
+  const history = JSON.parse(localStorage.getItem('faktury_history') || '[]');
+  const d = history[idx];
+  if (!d) return;
+  fillForm(d);
+  if (d.items) { items = d.items; renderItems(); }
+  closeHistory();
+  showForm();
+}
+function deleteHistory(idx) {
+  const history = JSON.parse(localStorage.getItem('faktury_history') || '[]');
+  history.splice(idx, 1);
+  localStorage.setItem('faktury_history', JSON.stringify(history));
+  showHistory();
+}
+
+// ==========================================
+// FILE UPLOAD & PROCESSING
+// ==========================================
+const dropArea = document.getElementById('dropArea');
+const fileInput = document.getElementById('fileInput');
+
+['dragenter','dragover'].forEach(e => dropArea.addEventListener(e, ev => { ev.preventDefault(); dropArea.classList.add('dragover'); }));
+['dragleave','drop'].forEach(e => dropArea.addEventListener(e, ev => { ev.preventDefault(); dropArea.classList.remove('dragover'); }));
+dropArea.addEventListener('drop', ev => { if (ev.dataTransfer.files.length) processFile(ev.dataTransfer.files[0]); });
+fileInput.addEventListener('change', ev => { if (ev.target.files.length) processFile(ev.target.files[0]); });
+
+async function processFile(file) {
+  setStatus(true, `Zpracovávám: ${file.name}...`);
+
+  try {
+    if (file.type === 'application/pdf') {
+      await processPDF(file);
+    } else if (file.type.startsWith('image/')) {
+      await processImage(file);
+    } else {
+      throw new Error('Nepodporovaný formát. Použij PDF nebo obrázek.');
+    }
+  } catch (err) {
+    setStatus(false);
+    showNotification('Chyba: ' + err.message, true);
+  }
+}
+
+async function processPDF(file) {
+  setStatus(true, 'Načítám PDF...');
+  const arrayBuffer = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+  let text = '';
+
+  for (let i = 1; i <= pdf.numPages; i++) {
+    setStatus(true, `Čtu stránku ${i}/${pdf.numPages}...`);
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+
+    // Group text items by Y position to reconstruct lines
+    const lineMap = {};
+    content.items.forEach(item => {
+      const y = Math.round(item.transform[5]);
+      if (!lineMap[y]) lineMap[y] = [];
+      lineMap[y].push({ x: item.transform[4], str: item.str });
+    });
+
+    // Sort by Y descending (top to bottom), then X ascending
+    const sortedYs = Object.keys(lineMap).map(Number).sort((a,b) => b - a);
+    for (const y of sortedYs) {
+      const line = lineMap[y].sort((a,b) => a.x - b.x).map(i => i.str).join(' ');
+      text += line.trim() + '\n';
+    }
+    text += '\n';
+  }
+
+  extractedText = text;
+  showExtractedText(text);
+  parseInvoice(text);
+  setStatus(false);
+  showForm();
+}
+
+async function processImage(file) {
+  setStatus(true, 'Spouštím OCR rozpoznávání...');
+
+  const worker = await Tesseract.createWorker('ces', 1, {
+    logger: m => {
+      if (m.status === 'recognizing text') {
+        setStatus(true, `OCR: ${Math.round(m.progress * 100)}%`);
+      }
+    }
+  });
+
+  const result = await worker.recognize(file);
+  await worker.terminate();
+
+  extractedText = result.data.text;
+  showExtractedText(extractedText);
+  parseInvoice(extractedText);
+  setStatus(false);
+  showForm();
+}
+
+function setStatus(active, text) {
+  const bar = document.getElementById('statusBar');
+  if (active) {
+    bar.classList.add('active');
+    document.getElementById('statusText').textContent = text || 'Zpracovávám...';
+  } else {
+    bar.classList.remove('active');
+  }
+}
+
+function showExtractedText(text) {
+  document.getElementById('leftTabs').style.display = 'flex';
+  document.getElementById('extractedPanel').innerHTML = `
+    <div class="text-label">Rozpoznaný text</div>
+    <pre>${escapeHtml(text)}</pre>
+  `;
+}
+
+function showForm() {
+  document.getElementById('emptyRight').style.display = 'none';
+  document.getElementById('invoiceForm').style.display = 'block';
+}
+
+// ==========================================
+// INVOICE PARSER
+// ==========================================
+function parseInvoice(text) {
+  const data = {};
+  const t = text.replace(/\r/g, '');
+
+  // IČO
+  let m = t.match(/I[ČC]O?[\s:]*(\d{6,8})/i);
+  if (m) data.ico = m[1].padStart(8, '0');
+
+  // DIČ
+  m = t.match(/DI[ČC][\s:]*([A-Z]{2}\d{6,10})/i);
+  if (m) data.dic = m[1].toUpperCase();
+
+  // Číslo faktury
+  m = t.match(/(?:faktur[ay]|doklad|č[íi]slo)\s*(?:č[íi]slo|č\.?)?\s*[:#]?\s*([A-Z0-9][\w\-\/]{2,20})/i);
+  if (m) data.invoiceNum = m[1];
+
+  // Variabilní symbol
+  m = t.match(/[Vv]ari(?:abiln[íi])?\s*(?:symbol)?\s*[:#]?\s*(\d{4,20})/);
+  if (m) data.vs = m[1];
+
+  // Konstantní symbol
+  m = t.match(/[Kk]onst(?:antn[íi])?\s*(?:symbol)?\s*[:#]?\s*(\d{2,10})/);
+  if (m) data.ks = m[1];
+
+  // Datum vystavení
+  m = t.match(/(?:datum\s+vystaven[íi]|vystaveno|dne)[\s:]*(\d{1,2})\s*[.\/-]\s*(\d{1,2})\s*[.\/-]\s*(\d{2,4})/i);
+  if (m) data.dateIssue = toISODate(m[1], m[2], m[3]);
+
+  // Datum splatnosti
+  m = t.match(/(?:splatnost|splatn[ée])[\s:]*(\d{1,2})\s*[.\/-]\s*(\d{1,2})\s*[.\/-]\s*(\d{2,4})/i);
+  if (m) data.dateDue = toISODate(m[1], m[2], m[3]);
+
+  // DUZP
+  m = t.match(/(?:DUZP|DU[ŽZ]P|zda[ňn]\.?\s*pln[ěe]n[ií])[\s:]*(\d{1,2})\s*[.\/-]\s*(\d{1,2})\s*[.\/-]\s*(\d{2,4})/i);
+  if (m) data.dateTax = toISODate(m[1], m[2], m[3]);
+
+  // Číslo účtu
+  m = t.match(/(?:[ÚU][čc]et|[čc]\.\s*[úu][čc]\.)[\s:]*(\d{1,6}[\-]?\d{2,10})\s*\/\s*(\d{4})/i);
+  if (m) { data.bankAccount = m[1]; data.bankCode = m[2]; }
+
+  // IBAN
+  if (!data.bankAccount) {
+    m = t.match(/IBAN[\s:]*([A-Z]{2}\d{2}\s*\d{4}\s*\d{4}\s*\d{4}\s*\d{4}\s*\d{0,4})/i);
+    if (m) data.bankAccount = m[1].replace(/\s/g, '');
+  }
+
+  // Celkem / K úhradě
+  m = t.match(/(?:celkem|k [úu]hrad[ěe]|celkov[áa]\s*[čc][áa]stka)[\s:]*([0-9\s,.]+)\s*(?:K[čc]|CZK)?/i);
+  if (m) data.totalAmount = parseAmount(m[1]);
+
+  // Firma - hledej první výrazný text (obvykle název firmy nahoře)
+  // Zkusíme najít řádek před IČO
+  if (data.ico) {
+    const icoIdx = t.indexOf(data.ico);
+    const before = t.substring(Math.max(0, icoIdx - 200), icoIdx);
+    const lines = before.split('\n').map(l => l.trim()).filter(l => l.length > 3 && l.length < 80);
+    if (lines.length) {
+      // Vezmi poslední neprázdný řádek před IČO (obvykle název firmy)
+      for (let i = lines.length - 1; i >= 0; i--) {
+        if (!lines[i].match(/^(adresa|dodavatel|odb[ěe]ratel|faktura|sídlo|I[ČC]|DI[ČC]|da[ňn])/i) && lines[i].length > 3) {
+          data.company = lines[i].replace(/\s+/g, ' ');
+          break;
+        }
+      }
+    }
+  }
+
+  // Adresa - hledej PSČ pattern
+  m = t.match(/(\d{3})\s*(\d{2})\s+([A-ZÁ-Ž][a-zá-ž]+(?:\s+[a-zá-žA-ZÁ-Ž]+)*)/);
+  if (m) { data.zip = m[1] + ' ' + m[2]; data.city = m[3]; }
+
+  // Ulice
+  m = t.match(/([A-ZÁ-Ž][a-zá-ž]+(?:\s+[a-zá-ž]+)*)\s+(\d+(?:\/\d+)?)\s*[,\n]/);
+  if (m) data.street = m[1] + ' ' + m[2];
+
+  // Telefon
+  m = t.match(/(?:tel(?:efon)?|mobil)[\s.:]*([+\d][\d\s\-]{7,15})/i);
+  if (m) data.phone = m[1].trim();
+
+  // Email
+  m = t.match(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/);
+  if (m) data.email = m[1];
+
+  // Popis
+  m = t.match(/(?:popis|text|p[řr]edm[ěe]t)[\s:]*(.{5,80})/i);
+  if (m) data.text = m[1].trim();
+
+  // Parse items - hledej tabulkové řádky
+  parseItems(t);
+
+  fillForm(data);
+}
+
+function parseItems(text) {
+  items = [];
+  itemIdCounter = 0;
+
+  // Hledej řádky co vypadají jako položky faktury
+  // Pattern: text ... množství ... cena
+  const lines = text.split('\n');
+  for (const line of lines) {
+    // Zkus najít řádek s cenou na konci
+    const m = line.match(/^(.{5,60}?)\s+(\d+(?:[.,]\d+)?)\s*(ks|hod|m2|m|bm|km|kg|l|bal|kpl|sada|den|měs)?\s+(\d[\d\s]*(?:[.,]\d{1,2})?)\s*(?:K[čc])?/i);
+    if (m) {
+      const itemText = m[1].trim();
+      // Filtruj hlavičky tabulky a součtové řádky
+      if (itemText.match(/^(název|popis|položka|celkem|základ|mezisoučet|DPH|dph|součet|text|množství|cena|suma|sazba)/i)) continue;
+      if (itemText.match(/^\d{1,2}[.\/-]\d{1,2}/)) continue; // Datumový řádek
+
+      items.push({
+        id: itemIdCounter++,
+        text: itemText,
+        qty: parseFloat((m[2] || '1').replace(',', '.')),
+        unit: m[3] || 'ks',
+        price: parseAmount(m[4]),
+        vat: 'high'
+      });
+    }
+  }
+
+  // Pokud nic nenašel, přidej prázdnou položku
+  if (!items.length) {
+    items.push({ id: itemIdCounter++, text: '', qty: 1, unit: 'ks', price: 0, vat: 'high' });
+  }
+
+  renderItems();
+}
+
+function parseAmount(str) {
+  if (!str) return 0;
+  return parseFloat(str.replace(/\s/g, '').replace(',', '.')) || 0;
+}
+
+function toISODate(d, m, y) {
+  d = d.padStart(2, '0');
+  m = m.padStart(2, '0');
+  if (y.length === 2) y = '20' + y;
+  return `${y}-${m}-${d}`;
+}
+
+// ==========================================
+// FORM
+// ==========================================
+function fillForm(data) {
+  const fields = ['company','ico','dic','street','city','zip','phone','email','bankAccount','bankCode',
+                  'invoiceNum','vs','ks','dateIssue','dateDue','dateTax','text','note'];
+  fields.forEach(f => {
+    const el = document.getElementById('f_' + f);
+    if (el && data[f]) el.value = data[f];
+  });
+  if (data.payment) document.getElementById('f_payment').value = data.payment;
+}
+
+function gatherFormData() {
+  const fields = ['company','ico','dic','street','city','zip','phone','email','bankAccount','bankCode',
+                  'invoiceNum','vs','ks','dateIssue','dateDue','dateTax','text','note'];
+  const data = {};
+  fields.forEach(f => {
+    const el = document.getElementById('f_' + f);
+    if (el) data[f] = el.value;
+  });
+  data.payment = document.getElementById('f_payment').value;
+  return data;
+}
+
+function clearForm() {
+  document.querySelectorAll('#invoiceForm input, #invoiceForm textarea').forEach(el => el.value = '');
+  items = [{ id: itemIdCounter++, text: '', qty: 1, unit: 'ks', price: 0, vat: 'high' }];
+  renderItems();
+}
+
+// ==========================================
+// ITEMS
+// ==========================================
+function renderItems() {
+  const body = document.getElementById('itemsBody');
+  body.innerHTML = items.map(item => `
+    <tr>
+      <td><input type="text" value="${escapeAttr(item.text)}" onchange="updateItem(${item.id},'text',this.value)"></td>
+      <td><input type="number" value="${item.qty}" step="0.01" min="0" style="width:70px" onchange="updateItem(${item.id},'qty',this.value)"></td>
+      <td><input type="text" value="${escapeAttr(item.unit)}" style="width:50px" onchange="updateItem(${item.id},'unit',this.value)"></td>
+      <td><input type="number" value="${item.price}" step="0.01" min="0" onchange="updateItem(${item.id},'price',this.value)"></td>
+      <td>
+        <select onchange="updateItem(${item.id},'vat',this.value)" style="background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;padding:5px;font-size:12px;">
+          <option value="high" ${item.vat==='high'?'selected':''}>21%</option>
+          <option value="low" ${item.vat==='low'?'selected':''}>12%</option>
+          <option value="none" ${item.vat==='none'?'selected':''}>0%</option>
+        </select>
+      </td>
+      <td style="text-align:center">
+        <button class="btn-icon" onclick="removeItem(${item.id})">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </td>
+    </tr>
+  `).join('');
+  updateSummary();
+}
+
+function addItem() {
+  items.push({ id: itemIdCounter++, text: '', qty: 1, unit: 'ks', price: 0, vat: 'high' });
+  renderItems();
+}
+
+function removeItem(id) {
+  items = items.filter(i => i.id !== id);
+  if (!items.length) addItem();
+  else renderItems();
+}
+
+function updateItem(id, field, value) {
+  const item = items.find(i => i.id === id);
+  if (!item) return;
+  if (field === 'qty' || field === 'price') value = parseFloat(value) || 0;
+  item[field] = value;
+  updateSummary();
+}
+
+function updateSummary() {
+  let baseHigh = 0, baseLow = 0, baseNone = 0;
+  items.forEach(item => {
+    const total = item.qty * item.price;
+    if (item.vat === 'high') baseHigh += total;
+    else if (item.vat === 'low') baseLow += total;
+    else baseNone += total;
+  });
+  const vatHigh = baseHigh * 0.21;
+  const vatLow = baseLow * 0.12;
+  const total = baseHigh + vatHigh + baseLow + vatLow + baseNone;
+
+  document.getElementById('sumBase').textContent = formatCZK(baseHigh + baseLow + baseNone);
+  document.getElementById('sumVatHigh').textContent = formatCZK(vatHigh);
+  document.getElementById('sumVatLow').textContent = formatCZK(vatLow);
+  document.getElementById('sumTotal').textContent = formatCZK(total);
+}
+
+function formatCZK(n) {
+  return n.toLocaleString('cs-CZ', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kč';
+}
+
+// ==========================================
+// XML GENERATION
+// ==========================================
+function generateXML() {
+  const d = gatherFormData();
+  const s = getSettings();
+  const today = new Date().toISOString().split('T')[0];
+  const batchId = 'FP' + Date.now();
+  const itemId = 'FP' + (d.invoiceNum || Date.now()).toString().replace(/[^a-zA-Z0-9]/g, '');
+
+  // Build items XML
+  let itemsXml = '';
+  items.forEach(item => {
+    if (!item.text && !item.price) return;
+    itemsXml += `
+        <inv:invoiceItem>
+          <inv:text>${xmlEscape(item.text)}</inv:text>
+          <inv:quantity>${item.qty}</inv:quantity>
+          <inv:unit>${xmlEscape(item.unit)}</inv:unit>
+          <inv:payVAT>false</inv:payVAT>
+          <inv:rateVAT>${item.vat}</inv:rateVAT>
+          <inv:homeCurrency>
+            <typ:unitPrice>${item.price.toFixed(2)}</typ:unitPrice>
+          </inv:homeCurrency>
+        </inv:invoiceItem>`;
+  });
+
+  // Calculate summary
+  let priceHigh = 0, priceLow = 0, priceNone = 0;
+  items.forEach(item => {
+    const total = item.qty * item.price;
+    if (item.vat === 'high') priceHigh += total;
+    else if (item.vat === 'low') priceLow += total;
+    else priceNone += total;
+  });
+  const vatHigh = priceHigh * 0.21;
+  const vatLow = priceLow * 0.12;
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<dat:dataPack
+    version="2.0"
+    id="${batchId}"
+    ico="${xmlEscape(s.ico || '')}"
+    application="KSH-Faktury"
+    note="Import prijatych faktur - KSH Partners"
+    xmlns:dat="http://www.stormware.cz/schema/version_2/data.xsd"
+    xmlns:inv="http://www.stormware.cz/schema/version_2/invoice.xsd"
+    xmlns:typ="http://www.stormware.cz/schema/version_2/type.xsd">
+
+  <dat:dataPackItem id="${itemId}" version="2.0">
+    <inv:invoice version="2.0">
+
+      <inv:invoiceHeader>
+        <inv:invoiceType>receivedInvoice</inv:invoiceType>
+${d.invoiceNum ? `        <inv:number>
+          <typ:numberRequested>${xmlEscape(d.invoiceNum)}</typ:numberRequested>
+        </inv:number>` : ''}
+${d.vs ? `        <inv:symVar>${xmlEscape(d.vs)}</inv:symVar>` : ''}
+${d.ks ? `        <inv:symConst>${xmlEscape(d.ks)}</inv:symConst>` : ''}
+${d.dateIssue ? `        <inv:date>${d.dateIssue}</inv:date>` : ''}
+${d.dateTax ? `        <inv:dateTax>${d.dateTax}</inv:dateTax>` : ''}
+${d.dateIssue ? `        <inv:dateAccounting>${d.dateIssue}</inv:dateAccounting>` : ''}
+${d.dateDue ? `        <inv:dateDue>${d.dateDue}</inv:dateDue>` : ''}
+${d.text ? `        <inv:text>${xmlEscape(d.text)}</inv:text>` : ''}
+
+        <inv:partnerIdentity>
+          <typ:address>
+${d.company ? `            <typ:company>${xmlEscape(d.company)}</typ:company>` : ''}
+${d.street ? `            <typ:street>${xmlEscape(d.street)}</typ:street>` : ''}
+${d.city ? `            <typ:city>${xmlEscape(d.city)}</typ:city>` : ''}
+${d.zip ? `            <typ:zip>${xmlEscape(d.zip)}</typ:zip>` : ''}
+${d.ico ? `            <typ:ico>${xmlEscape(d.ico)}</typ:ico>` : ''}
+${d.dic ? `            <typ:dic>${xmlEscape(d.dic)}</typ:dic>` : ''}
+${d.phone ? `            <typ:phone>${xmlEscape(d.phone)}</typ:phone>` : ''}
+${d.email ? `            <typ:email>${xmlEscape(d.email)}</typ:email>` : ''}
+          </typ:address>
+        </inv:partnerIdentity>
+
+${s.ico ? `        <inv:myIdentity>
+          <typ:address>
+            <typ:company>${xmlEscape(s.company || '')}</typ:company>
+${s.street ? `            <typ:street>${xmlEscape(s.street)}</typ:street>` : ''}
+${s.city ? `            <typ:city>${xmlEscape(s.city)}</typ:city>` : ''}
+${s.zip ? `            <typ:zip>${xmlEscape(s.zip)}</typ:zip>` : ''}
+            <typ:ico>${xmlEscape(s.ico)}</typ:ico>
+${s.dic ? `            <typ:dic>${xmlEscape(s.dic)}</typ:dic>` : ''}
+          </typ:address>
+        </inv:myIdentity>` : ''}
+
+        <inv:paymentType>
+          <typ:ids>${xmlEscape(d.payment || 'Prikazem')}</typ:ids>
+        </inv:paymentType>
+
+${d.bankAccount ? `        <inv:account>
+          <typ:accountNo>${xmlEscape(d.bankAccount)}</typ:accountNo>
+${d.bankCode ? `          <typ:bankCode>${xmlEscape(d.bankCode)}</typ:bankCode>` : ''}
+        </inv:account>` : ''}
+
+${d.note ? `        <inv:note>${xmlEscape(d.note)}</inv:note>` : ''}
+      </inv:invoiceHeader>
+
+      <inv:invoiceDetail>${itemsXml}
+      </inv:invoiceDetail>
+
+      <inv:invoiceSummary>
+        <inv:roundingDocument>math2one</inv:roundingDocument>
+        <inv:roundingVAT>none</inv:roundingVAT>
+        <inv:homeCurrency>
+          <typ:priceNone>${priceNone.toFixed(2)}</typ:priceNone>
+          <typ:priceLow>${priceLow.toFixed(2)}</typ:priceLow>
+          <typ:priceLowVAT>${vatLow.toFixed(2)}</typ:priceLowVAT>
+          <typ:priceLowSum>${(priceLow + vatLow).toFixed(2)}</typ:priceLowSum>
+          <typ:priceHigh>${priceHigh.toFixed(2)}</typ:priceHigh>
+          <typ:priceHighVAT>${vatHigh.toFixed(2)}</typ:priceHighVAT>
+          <typ:priceHighSum>${(priceHigh + vatHigh).toFixed(2)}</typ:priceHighSum>
+          <typ:round>
+            <typ:priceRound>0.00</typ:priceRound>
+          </typ:round>
+        </inv:homeCurrency>
+      </inv:invoiceSummary>
+
+    </inv:invoice>
+  </dat:dataPackItem>
+</dat:dataPack>`;
+
+  // Download
+  const blob = new Blob([xml], { type: 'application/xml; charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const filename = `FP_${(d.company || 'faktura').replace(/[^a-zA-Z0-9á-žÁ-Ž]/g, '_').substring(0, 30)}_${d.dateIssue || today}.xml`;
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  showNotification(`XML staženo: ${filename}`);
+}
+
+// ==========================================
+// UTILS
+// ==========================================
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function escapeAttr(str) {
+  return (str||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function xmlEscape(str) {
+  return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+}
+
+function showNotification(msg, isError) {
+  const el = document.createElement('div');
+  el.style.cssText = `position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:10px;font-size:13px;font-family:Inter,sans-serif;z-index:999;
+    background:${isError ? 'rgba(248,113,113,.15)' : 'rgba(74,222,128,.15)'};
+    color:${isError ? 'var(--red)' : 'var(--green)'};
+    border:1px solid ${isError ? 'rgba(248,113,113,.3)' : 'rgba(74,222,128,.3)'};
+    backdrop-filter:blur(10px);transition:opacity .3s;`;
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.remove(), 300); }, 3000);
+}
+
+// Tab switching
+document.querySelectorAll('#leftTabs .tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('#leftTabs .tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+// Init
+loadSettings();
+
+// PDF.js worker
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+</script>
+</body>
+</html>
