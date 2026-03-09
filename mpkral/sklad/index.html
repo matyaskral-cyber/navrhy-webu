@@ -3,30 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sklad M+P Král | Stav zásob</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<title>Sklad M+P Král</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 :root {
   --bg: #0a0b10;
   --surface: #11131a;
-  --surface2: #1a1d28;
   --border: #252838;
   --text: #e8eaf0;
   --text2: #7a7f96;
   --accent: #3b82f6;
   --accent2: #2563eb;
-  --green: #22c55e;
-  --red: #ef4444;
-  --orange: #f59e0b;
   --gold: #d4a96a;
 }
-body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-}
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
 /* LOGIN */
 .login-wrap {
@@ -34,594 +25,265 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse at 30% 20%, rgba(59,130,246,.08), transparent 60%),
-              radial-gradient(ellipse at 70% 80%, rgba(212,169,106,.06), transparent 60%);
 }
 .login-box {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 48px 40px;
-  width: 400px;
+  border-radius: 16px;
+  padding: 40px;
+  width: 360px;
   max-width: 90vw;
   text-align: center;
 }
-.login-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  color: var(--gold);
-  margin-bottom: 4px;
-}
-.login-sub { color: var(--text2); font-size: 13px; margin-bottom: 32px; }
+.login-logo { font-size: 22px; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+.login-sub { color: var(--text2); font-size: 13px; margin-bottom: 28px; }
 .login-input {
   width: 100%;
-  padding: 14px 18px;
+  padding: 12px 16px;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   color: var(--text);
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   outline: none;
-  margin-bottom: 12px;
-  transition: border-color .2s;
+  margin-bottom: 10px;
 }
 .login-input:focus { border-color: var(--accent); }
 .login-btn {
   width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  padding: 12px;
+  background: var(--accent);
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   color: #fff;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform .15s, box-shadow .2s;
-  margin-top: 8px;
+  margin-top: 6px;
 }
-.login-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(59,130,246,.3); }
-.login-error { color: var(--red); font-size: 12px; margin-top: 12px; display: none; }
+.login-btn:hover { background: var(--accent2); }
+.login-error { color: #ef4444; font-size: 12px; margin-top: 10px; display: none; }
 
-/* MAIN APP */
+/* APP */
 .app { display: none; }
 .app.active { display: block; }
 
-/* HEADER */
 .header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 16px 28px;
+  padding: 14px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 50;
-  backdrop-filter: blur(20px);
 }
 .header-left { display: flex; align-items: center; gap: 16px; }
-.header-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  color: var(--gold);
-}
-.header-logo span { font-family: 'Inter', sans-serif; color: var(--text2); font-size: 12px; font-weight: 400; margin-left: 8px; }
-.sync-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  color: var(--text2);
-}
-.sync-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-  animation: pulse 2s infinite;
-}
-.sync-dot.offline { background: var(--red); animation: none; }
-@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
-.header-right { display: flex; align-items: center; gap: 12px; }
+.header-logo { font-size: 18px; font-weight: 700; color: var(--gold); }
+.header-logo span { color: var(--text2); font-size: 12px; font-weight: 400; margin-left: 8px; }
+.sync-info { font-size: 11px; color: var(--text2); }
 .btn-logout {
-  padding: 8px 16px;
-  background: rgba(239,68,68,.1);
-  border: 1px solid rgba(239,68,68,.2);
-  border-radius: 8px;
-  color: var(--red);
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text2);
   font-size: 12px;
   cursor: pointer;
   font-family: 'Inter', sans-serif;
-  transition: all .2s;
 }
-.btn-logout:hover { background: rgba(239,68,68,.2); }
+.btn-logout:hover { border-color: var(--text2); color: var(--text); }
 
-/* STATS */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  padding: 24px 28px;
-}
-.stat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 20px;
-}
-.stat-label { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
-.stat-value { font-size: 28px; font-weight: 700; margin-top: 4px; }
-.stat-value.green { color: var(--green); }
-.stat-value.orange { color: var(--orange); }
-.stat-value.red { color: var(--red); }
-
-/* TOOLBAR */
 .toolbar {
-  padding: 0 28px 16px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.search-box {
-  flex: 1;
-  min-width: 250px;
-  position: relative;
-}
-.search-box svg {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text2);
+  padding: 16px 24px;
 }
 .search-input {
   width: 100%;
-  padding: 12px 14px 12px 42px;
+  max-width: 400px;
+  padding: 10px 14px 10px 38px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   color: var(--text);
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   outline: none;
-  transition: border-color .2s;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237a7f96' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 12px center;
 }
 .search-input:focus { border-color: var(--accent); }
-.filter-btn {
-  padding: 10px 18px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: var(--text2);
-  font-size: 13px;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-  transition: all .2s;
-}
-.filter-btn:hover, .filter-btn.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
 
-/* TABLE */
-.table-wrap {
-  padding: 0 28px 40px;
-  overflow-x: auto;
-}
-.stock-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-}
-.stock-table th {
+.table-wrap { padding: 0 24px 40px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th {
   text-align: left;
-  padding: 12px 16px;
+  padding: 10px 16px;
   background: var(--surface);
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: .8px;
   color: var(--text2);
   font-weight: 600;
   cursor: pointer;
-  user-select: none;
-  white-space: nowrap;
   position: sticky;
-  top: 61px;
+  top: 53px;
   z-index: 10;
 }
-.stock-table th:hover { color: var(--text); }
-.stock-table th .sort-arrow { margin-left: 4px; opacity: .3; }
-.stock-table th.sorted .sort-arrow { opacity: 1; color: var(--accent); }
-.stock-table td {
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(37,40,56,.6);
-  vertical-align: middle;
+th:hover { color: var(--text); }
+td {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(37,40,56,.5);
 }
-.stock-table tr:hover td { background: rgba(59,130,246,.03); }
-.stock-table tr.out-of-stock td { opacity: .5; }
+tr:hover td { background: rgba(59,130,246,.03); }
+.code { color: var(--text2); font-size: 12px; font-family: 'SF Mono', 'Courier New', monospace; }
+.qty { font-weight: 600; font-variant-numeric: tabular-nums; }
+.qty-zero { color: #ef4444; }
 
-/* BADGES */
-.badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
+.empty { text-align: center; padding: 60px; color: var(--text2); }
+.loading { text-align: center; padding: 60px; color: var(--text2); }
+
+@media (max-width: 600px) {
+  .header { padding: 10px 14px; }
+  .toolbar { padding: 12px 14px; }
+  .table-wrap { padding: 0 6px 20px; }
+  td, th { padding: 8px 10px; }
 }
-.badge-green { background: rgba(34,197,94,.12); color: var(--green); }
-.badge-orange { background: rgba(245,158,11,.12); color: var(--orange); }
-.badge-red { background: rgba(239,68,68,.12); color: var(--red); }
-
-.qty-bar {
-  width: 80px;
-  height: 6px;
-  background: var(--surface2);
-  border-radius: 3px;
-  overflow: hidden;
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 8px;
-}
-.qty-bar-fill { height: 100%; border-radius: 3px; transition: width .3s; }
-
-.product-name { font-weight: 500; }
-.product-code { color: var(--text2); font-size: 11px; font-family: 'SF Mono', monospace; }
-.product-cat { color: var(--text2); font-size: 12px; }
-
-/* EMPTY */
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--text2);
-}
-.empty-state h3 { font-size: 16px; color: var(--text); margin-bottom: 8px; }
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .header { padding: 12px 16px; flex-wrap: wrap; gap: 8px; }
-  .stats { padding: 16px; grid-template-columns: 1fr 1fr; }
-  .toolbar { padding: 0 16px 12px; }
-  .table-wrap { padding: 0 8px 40px; }
-  .stock-table td, .stock-table th { padding: 10px 8px; }
-  .qty-bar { display: none; }
-}
-
-/* LOADING */
-.loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 60px;
-  gap: 12px;
-  color: var(--text2);
-}
-.spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
 <div class="login-wrap" id="loginScreen">
   <div class="login-box">
     <div class="login-logo">M+P Král</div>
-    <div class="login-sub">Přehled skladových zásob</div>
-    <input type="text" class="login-input" id="loginUser" placeholder="Uživatelské jméno" autocomplete="username">
+    <div class="login-sub">Skladové zásoby</div>
+    <input type="text" class="login-input" id="loginUser" placeholder="Uživatel" autocomplete="username">
     <input type="password" class="login-input" id="loginPass" placeholder="Heslo" autocomplete="current-password">
-    <button class="login-btn" onclick="doLogin()">Přihlásit se</button>
-    <div class="login-error" id="loginError">Nesprávné přihlašovací údaje</div>
+    <button class="login-btn" onclick="doLogin()">Přihlásit</button>
+    <div class="login-error" id="loginError">Nesprávné údaje</div>
   </div>
 </div>
 
-<!-- MAIN APP -->
 <div class="app" id="mainApp">
-  <!-- HEADER -->
   <div class="header">
     <div class="header-left">
-      <div class="header-logo">M+P Král <span>Skladové zásoby</span></div>
-      <div class="sync-info">
-        <div class="sync-dot" id="syncDot"></div>
-        <span id="syncTime">Načítám...</span>
-      </div>
+      <div class="header-logo">M+P Král <span>Sklad</span></div>
+      <div class="sync-info" id="syncInfo">Načítám...</div>
     </div>
-    <div class="header-right">
-      <button class="btn-logout" onclick="doLogout()">Odhlásit</button>
-    </div>
+    <button class="btn-logout" onclick="doLogout()">Odhlásit</button>
   </div>
 
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stat-card">
-      <div class="stat-label">Celkem položek</div>
-      <div class="stat-value" id="statTotal">-</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Skladem</div>
-      <div class="stat-value green" id="statInStock">-</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Nízký stav</div>
-      <div class="stat-value orange" id="statLow">-</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Vyprodáno</div>
-      <div class="stat-value red" id="statOut">-</div>
-    </div>
-  </div>
-
-  <!-- TOOLBAR -->
   <div class="toolbar">
-    <div class="search-box">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" class="search-input" id="searchInput" placeholder="Hledat podle názvu, kódu nebo kategorie...">
-    </div>
-    <button class="filter-btn active" onclick="setFilter('all')">Vše</button>
-    <button class="filter-btn" onclick="setFilter('instock')">Skladem</button>
-    <button class="filter-btn" onclick="setFilter('low')">Nízký stav</button>
-    <button class="filter-btn" onclick="setFilter('out')">Vyprodáno</button>
+    <input type="text" class="search-input" id="searchInput" placeholder="Hledat...">
   </div>
 
-  <!-- TABLE -->
   <div class="table-wrap">
-    <table class="stock-table" id="stockTable">
+    <table>
       <thead>
         <tr>
-          <th onclick="sortBy('kod')">Kód <span class="sort-arrow">↕</span></th>
-          <th onclick="sortBy('nazev')">Název <span class="sort-arrow">↕</span></th>
-          <th onclick="sortBy('kategorie')">Kategorie <span class="sort-arrow">↕</span></th>
-          <th onclick="sortBy('mnozstvi')">Skladem <span class="sort-arrow">↕</span></th>
-          <th>Jednotka</th>
-          <th onclick="sortBy('cena')">Cena bez DPH <span class="sort-arrow">↕</span></th>
-          <th>Stav</th>
+          <th onclick="sortBy('kod')">Kód</th>
+          <th onclick="sortBy('carovy_kod')">Čárový kód</th>
+          <th onclick="sortBy('nazev')">Název</th>
+          <th onclick="sortBy('mnozstvi')">Skladem</th>
         </tr>
       </thead>
-      <tbody id="stockBody">
-        <tr><td colspan="7"><div class="loading"><div class="spinner"></div>Načítám data ze skladu...</div></td></tr>
+      <tbody id="tbody">
+        <tr><td colspan="4"><div class="loading">Načítám...</div></td></tr>
       </tbody>
     </table>
   </div>
 </div>
 
 <script>
-// ==========================================
-// CONFIG
-// ==========================================
-const SUPABASE_URL = 'https://yqklnqmcjloxwdtifkjb.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_gZI-26x3NF4Dc5h-BuOpjg_3Y0n2Um-';
-const REFRESH_INTERVAL = 60000; // refresh every 60s
+const SB_URL = 'https://yqklnqmcjloxwdtifkjb.supabase.co';
+const SB_KEY = 'sb_publishable_gZI-26x3NF4Dc5h-BuOpjg_3Y0n2Um-';
 
-// User accounts (hash-based auth — passwords stored as SHA-256)
-// To add a user: hash the password with SHA-256 and add here
 const USERS = {
-  // Default accounts — change passwords in production!
-  'admin': '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', // admin123
-  'odberatel': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', // 123
+  'admin': '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9',
+  'odberatel': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',
 };
 
-// ==========================================
-// STATE
-// ==========================================
-let stockData = [];
-let filteredData = [];
-let currentFilter = 'all';
-let currentSort = { key: 'nazev', dir: 'asc' };
-let refreshTimer = null;
+let data = [], sort = { key: 'nazev', dir: 'asc' }, timer;
 
-// ==========================================
-// AUTH
-// ==========================================
-async function sha256(message) {
-  const msgBuffer = new TextEncoder().encode(message);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+async function sha256(s) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
 
 async function doLogin() {
-  const user = document.getElementById('loginUser').value.trim().toLowerCase();
-  const pass = document.getElementById('loginPass').value;
-  const hash = await sha256(pass);
-
-  if (USERS[user] && USERS[user] === hash) {
-    sessionStorage.setItem('sklad_auth', user);
-    showApp();
-  } else {
-    document.getElementById('loginError').style.display = 'block';
-    document.getElementById('loginPass').value = '';
-  }
+  const u = document.getElementById('loginUser').value.trim().toLowerCase();
+  const h = await sha256(document.getElementById('loginPass').value);
+  if (USERS[u] === h) { sessionStorage.setItem('sk', u); showApp(); }
+  else { document.getElementById('loginError').style.display = 'block'; }
 }
 
 function doLogout() {
-  sessionStorage.removeItem('sklad_auth');
+  sessionStorage.removeItem('sk');
   document.getElementById('mainApp').classList.remove('active');
   document.getElementById('loginScreen').style.display = 'flex';
-  if (refreshTimer) clearInterval(refreshTimer);
+  clearInterval(timer);
 }
 
 function showApp() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('mainApp').classList.add('active');
-  loadStock();
-  refreshTimer = setInterval(loadStock, REFRESH_INTERVAL);
+  load();
+  timer = setInterval(load, 60000);
 }
 
-// Enter key on login
 document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
+if (sessionStorage.getItem('sk')) showApp();
 
-// Auto-login if session exists
-if (sessionStorage.getItem('sklad_auth')) showApp();
-
-// ==========================================
-// DATA
-// ==========================================
-async function loadStock() {
+async function load() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/sklad?select=*&order=nazev.asc`, {
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`
-      }
+    const r = await fetch(`${SB_URL}/rest/v1/sklad?select=kod,carovy_kod,nazev,mnozstvi&order=nazev.asc`, {
+      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
     });
-
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-    stockData = await res.json();
-    updateStats();
-    applyFilters();
-    updateSyncStatus(true);
-  } catch (err) {
-    console.error('Chyba načítání:', err);
-    updateSyncStatus(false);
-
-    // If table doesn't exist, show helpful message
-    if (stockData.length === 0) {
-      document.getElementById('stockBody').innerHTML = `
-        <tr><td colspan="7">
-          <div class="empty-state">
-            <h3>Sklad zatím nemá data</h3>
-            <p>Spusť sync skript na PC s Pohodou pro nahrání skladových zásob.</p>
-          </div>
-        </td></tr>`;
-    }
+    if (!r.ok) throw new Error(r.status);
+    data = await r.json();
+    render();
+    document.getElementById('syncInfo').textContent = `${data.length} položek`;
+  } catch(e) {
+    document.getElementById('syncInfo').textContent = 'Chyba načítání';
+    if (!data.length) document.getElementById('tbody').innerHTML = '<tr><td colspan="4"><div class="empty">Žádná data</div></td></tr>';
   }
 }
 
-function updateSyncStatus(online) {
-  const dot = document.getElementById('syncDot');
-  const time = document.getElementById('syncTime');
-  if (online) {
-    dot.classList.remove('offline');
-    // Find latest updated_at in data
-    if (stockData.length > 0 && stockData[0].updated_at) {
-      const latest = stockData.reduce((a, b) => new Date(a.updated_at) > new Date(b.updated_at) ? a : b);
-      const d = new Date(latest.updated_at);
-      time.textContent = `Sync: ${d.toLocaleDateString('cs-CZ')} ${d.toLocaleTimeString('cs-CZ', {hour:'2-digit',minute:'2-digit'})}`;
-    } else {
-      time.textContent = `${stockData.length} položek`;
-    }
-  } else {
-    dot.classList.add('offline');
-    time.textContent = 'Offline — zkontroluj připojení';
-  }
-}
-
-function updateStats() {
-  const total = stockData.length;
-  const inStock = stockData.filter(i => i.mnozstvi > 10).length;
-  const low = stockData.filter(i => i.mnozstvi > 0 && i.mnozstvi <= 10).length;
-  const out = stockData.filter(i => i.mnozstvi <= 0).length;
-
-  document.getElementById('statTotal').textContent = total;
-  document.getElementById('statInStock').textContent = inStock;
-  document.getElementById('statLow').textContent = low;
-  document.getElementById('statOut').textContent = out;
-}
-
-// ==========================================
-// FILTERS & SEARCH
-// ==========================================
-document.getElementById('searchInput').addEventListener('input', applyFilters);
-
-function setFilter(filter) {
-  currentFilter = filter;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  applyFilters();
-}
-
-function applyFilters() {
-  const query = document.getElementById('searchInput').value.toLowerCase().trim();
-  let data = [...stockData];
-
-  // Search
-  if (query) {
-    data = data.filter(item =>
-      (item.nazev || '').toLowerCase().includes(query) ||
-      (item.kod || '').toLowerCase().includes(query) ||
-      (item.kategorie || '').toLowerCase().includes(query)
-    );
-  }
-
-  // Filter
-  if (currentFilter === 'instock') data = data.filter(i => i.mnozstvi > 10);
-  else if (currentFilter === 'low') data = data.filter(i => i.mnozstvi > 0 && i.mnozstvi <= 10);
-  else if (currentFilter === 'out') data = data.filter(i => i.mnozstvi <= 0);
-
-  // Sort
-  data.sort((a, b) => {
-    let va = a[currentSort.key] ?? '';
-    let vb = b[currentSort.key] ?? '';
-    if (typeof va === 'string') va = va.toLowerCase();
-    if (typeof vb === 'string') vb = vb.toLowerCase();
-    if (va < vb) return currentSort.dir === 'asc' ? -1 : 1;
-    if (va > vb) return currentSort.dir === 'asc' ? 1 : -1;
-    return 0;
-  });
-
-  filteredData = data;
-  renderTable();
-}
+document.getElementById('searchInput').addEventListener('input', render);
 
 function sortBy(key) {
-  if (currentSort.key === key) {
-    currentSort.dir = currentSort.dir === 'asc' ? 'desc' : 'asc';
-  } else {
-    currentSort.key = key;
-    currentSort.dir = 'asc';
-  }
-
-  // Update header styles
-  document.querySelectorAll('.stock-table th').forEach(th => th.classList.remove('sorted'));
-  event.target.closest('th').classList.add('sorted');
-
-  applyFilters();
+  sort = sort.key === key ? { key, dir: sort.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'asc' };
+  render();
 }
 
-// ==========================================
-// RENDER
-// ==========================================
-function renderTable() {
-  const body = document.getElementById('stockBody');
-
-  if (!filteredData.length) {
-    body.innerHTML = `<tr><td colspan="7"><div class="empty-state"><h3>Žádné položky</h3><p>Zkus změnit vyhledávání nebo filtr.</p></div></td></tr>`;
-    return;
-  }
-
-  // Find max qty for bar scaling
-  const maxQty = Math.max(...stockData.map(i => i.mnozstvi || 0), 1);
-
-  body.innerHTML = filteredData.map(item => {
-    const qty = item.mnozstvi || 0;
-    const status = qty <= 0 ? 'out' : qty <= 10 ? 'low' : 'ok';
-    const badgeClass = status === 'out' ? 'badge-red' : status === 'low' ? 'badge-orange' : 'badge-green';
-    const badgeText = status === 'out' ? 'Vyprodáno' : status === 'low' ? 'Nízký stav' : 'Skladem';
-    const barColor = status === 'out' ? 'var(--red)' : status === 'low' ? 'var(--orange)' : 'var(--green)';
-    const barWidth = Math.max(2, (qty / maxQty) * 100);
-    const price = (item.cena || 0).toLocaleString('cs-CZ', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-    return `<tr class="${status === 'out' ? 'out-of-stock' : ''}">
-      <td><span class="product-code">${esc(item.kod || '-')}</span></td>
-      <td><span class="product-name">${esc(item.nazev || '-')}</span></td>
-      <td><span class="product-cat">${esc(item.kategorie || '-')}</span></td>
-      <td>
-        <strong>${qty}</strong>
-        <div class="qty-bar"><div class="qty-bar-fill" style="width:${barWidth}%;background:${barColor}"></div></div>
-      </td>
-      <td>${esc(item.jednotka || 'ks')}</td>
-      <td>${price} Kč</td>
-      <td><span class="badge ${badgeClass}">${badgeText}</span></td>
+function render() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  let d = [...data];
+  if (q) d = d.filter(i => (i.nazev||'').toLowerCase().includes(q) || (i.kod||'').toLowerCase().includes(q) || (i.carovy_kod||'').toLowerCase().includes(q));
+  d.sort((a,b) => {
+    let va = a[sort.key] ?? '', vb = b[sort.key] ?? '';
+    if (typeof va === 'string') { va = va.toLowerCase(); vb = (vb||'').toLowerCase(); }
+    return va < vb ? (sort.dir==='asc'?-1:1) : va > vb ? (sort.dir==='asc'?1:-1) : 0;
+  });
+  const body = document.getElementById('tbody');
+  if (!d.length) { body.innerHTML = '<tr><td colspan="4"><div class="empty">Nic nenalezeno</div></td></tr>'; return; }
+  body.innerHTML = d.map(i => {
+    const qty = i.mnozstvi || 0;
+    return `<tr>
+      <td><span class="code">${esc(i.kod||'-')}</span></td>
+      <td><span class="code">${esc(i.carovy_kod||'-')}</span></td>
+      <td>${esc(i.nazev||'-')}</td>
+      <td><span class="qty ${qty<=0?'qty-zero':''}">${qty}</span></td>
     </tr>`;
   }).join('');
 }
 
-function esc(s) {
-  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 </script>
 </body>
 </html>
