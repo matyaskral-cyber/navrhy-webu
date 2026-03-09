@@ -39,8 +39,8 @@ except ImportError:
 # ============================================
 
 # Supabase (kam se nahrávají data)
-SUPABASE_URL = "https://mpydvkooqlgeyjlmylkv.supabase.co"
-SUPABASE_KEY = "sb_publishable_vznr30ToMNhAS84CKLIllw_7GBjzP8J"
+SUPABASE_URL = "https://yqklnqmcjloxwdtifkjb.supabase.co"
+SUPABASE_KEY = "sb_publishable_gZI-26x3NF4Dc5h-BuOpjg_3Y0n2Um-"
 
 # Metoda čtení z Pohody: "sql", "mserver", nebo "xml"
 METODA = "sql"
