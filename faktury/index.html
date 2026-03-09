@@ -679,33 +679,66 @@ async function processPDF(file) {
   setStatus(true, 'Načítám PDF...');
   const arrayBuffer = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-  let text = '';
+  let allText = '';
+  let allItems = []; // raw text items with coordinates across all pages
 
   for (let i = 1; i <= pdf.numPages; i++) {
     setStatus(true, `Čtu stránku ${i}/${pdf.numPages}...`);
     const page = await pdf.getPage(i);
     const content = await page.getTextContent();
+    const pageYOffset = (i - 1) * 10000; // offset pages so they don't merge
 
-    // Group text items by Y position to reconstruct lines
-    const lineMap = {};
+    // Collect raw items with coordinates
     content.items.forEach(item => {
-      const y = Math.round(item.transform[5]);
-      if (!lineMap[y]) lineMap[y] = [];
-      lineMap[y].push({ x: item.transform[4], str: item.str });
+      if (!item.str.trim()) return;
+      allItems.push({
+        x: Math.round(item.transform[4]),
+        y: Math.round(item.transform[5]) - pageYOffset,
+        str: item.str,
+        page: i
+      });
     });
 
-    // Sort by Y descending (top to bottom), then X ascending
+    // Build text with column-aware line reconstruction
+    const lineMap = {};
+    const Y_TOLERANCE = 4;
+    content.items.forEach(item => {
+      if (!item.str.trim()) return;
+      const rawY = Math.round(item.transform[5]);
+      // Find existing Y bucket within tolerance
+      let bucketY = rawY;
+      for (const existingY of Object.keys(lineMap).map(Number)) {
+        if (Math.abs(existingY - rawY) <= Y_TOLERANCE) {
+          bucketY = existingY;
+          break;
+        }
+      }
+      if (!lineMap[bucketY]) lineMap[bucketY] = [];
+      lineMap[bucketY].push({ x: Math.round(item.transform[4]), str: item.str });
+    });
+
     const sortedYs = Object.keys(lineMap).map(Number).sort((a,b) => b - a);
+    allText += `--- Strana ${i} ---\n`;
     for (const y of sortedYs) {
-      const line = lineMap[y].sort((a,b) => a.x - b.x).map(i => i.str).join(' ');
-      text += line.trim() + '\n';
+      const parts = lineMap[y].sort((a,b) => a.x - b.x);
+      // Insert tab separator when X gap is large (column boundary)
+      let line = '';
+      for (let j = 0; j < parts.length; j++) {
+        if (j > 0 && parts[j].x - (parts[j-1].x + parts[j-1].str.length * 4) > 30) {
+          line += '\t';
+        } else if (j > 0) {
+          line += ' ';
+        }
+        line += parts[j].str;
+      }
+      allText += line.trim() + '\n';
     }
-    text += '\n';
+    allText += '\n';
   }
 
-  extractedText = text;
-  showExtractedText(text);
-  parseInvoice(text);
+  extractedText = allText;
+  showExtractedText(allText);
+  parseInvoice(allText);
   setStatus(false);
   showForm();
 }
@@ -755,135 +788,8 @@ function showForm() {
 }
 
 // ==========================================
-// INVOICE PARSER
+// INVOICE PARSER — v2 (structure-aware)
 // ==========================================
-function parseInvoice(text) {
-  const data = {};
-  const t = text.replace(/\r/g, '');
-
-  // IČO
-  let m = t.match(/I[ČC]O?[\s:]*(\d{6,8})/i);
-  if (m) data.ico = m[1].padStart(8, '0');
-
-  // DIČ
-  m = t.match(/DI[ČC][\s:]*([A-Z]{2}\d{6,10})/i);
-  if (m) data.dic = m[1].toUpperCase();
-
-  // Číslo faktury
-  m = t.match(/(?:faktur[ay]|doklad|č[íi]slo)\s*(?:č[íi]slo|č\.?)?\s*[:#]?\s*([A-Z0-9][\w\-\/]{2,20})/i);
-  if (m) data.invoiceNum = m[1];
-
-  // Variabilní symbol
-  m = t.match(/[Vv]ari(?:abiln[íi])?\s*(?:symbol)?\s*[:#]?\s*(\d{4,20})/);
-  if (m) data.vs = m[1];
-
-  // Konstantní symbol
-  m = t.match(/[Kk]onst(?:antn[íi])?\s*(?:symbol)?\s*[:#]?\s*(\d{2,10})/);
-  if (m) data.ks = m[1];
-
-  // Datum vystavení
-  m = t.match(/(?:datum\s+vystaven[íi]|vystaveno|dne)[\s:]*(\d{1,2})\s*[.\/-]\s*(\d{1,2})\s*[.\/-]\s*(\d{2,4})/i);
-  if (m) data.dateIssue = toISODate(m[1], m[2], m[3]);
-
-  // Datum splatnosti
-  m = t.match(/(?:splatnost|splatn[ée])[\s:]*(\d{1,2})\s*[.\/-]\s*(\d{1,2})\s*[.\/-]\s*(\d{2,4})/i);
-  if (m) data.dateDue = toISODate(m[1], m[2], m[3]);
-
-  // DUZP
-  m = t.match(/(?:DUZP|DU[ŽZ]P|zda[ňn]\.?\s*pln[ěe]n[ií])[\s:]*(\d{1,2})\s*[.\/-]\s*(\d{1,2})\s*[.\/-]\s*(\d{2,4})/i);
-  if (m) data.dateTax = toISODate(m[1], m[2], m[3]);
-
-  // Číslo účtu
-  m = t.match(/(?:[ÚU][čc]et|[čc]\.\s*[úu][čc]\.)[\s:]*(\d{1,6}[\-]?\d{2,10})\s*\/\s*(\d{4})/i);
-  if (m) { data.bankAccount = m[1]; data.bankCode = m[2]; }
-
-  // IBAN
-  if (!data.bankAccount) {
-    m = t.match(/IBAN[\s:]*([A-Z]{2}\d{2}\s*\d{4}\s*\d{4}\s*\d{4}\s*\d{4}\s*\d{0,4})/i);
-    if (m) data.bankAccount = m[1].replace(/\s/g, '');
-  }
-
-  // Celkem / K úhradě
-  m = t.match(/(?:celkem|k [úu]hrad[ěe]|celkov[áa]\s*[čc][áa]stka)[\s:]*([0-9\s,.]+)\s*(?:K[čc]|CZK)?/i);
-  if (m) data.totalAmount = parseAmount(m[1]);
-
-  // Firma - hledej první výrazný text (obvykle název firmy nahoře)
-  // Zkusíme najít řádek před IČO
-  if (data.ico) {
-    const icoIdx = t.indexOf(data.ico);
-    const before = t.substring(Math.max(0, icoIdx - 200), icoIdx);
-    const lines = before.split('\n').map(l => l.trim()).filter(l => l.length > 3 && l.length < 80);
-    if (lines.length) {
-      // Vezmi poslední neprázdný řádek před IČO (obvykle název firmy)
-      for (let i = lines.length - 1; i >= 0; i--) {
-        if (!lines[i].match(/^(adresa|dodavatel|odb[ěe]ratel|faktura|sídlo|I[ČC]|DI[ČC]|da[ňn])/i) && lines[i].length > 3) {
-          data.company = lines[i].replace(/\s+/g, ' ');
-          break;
-        }
-      }
-    }
-  }
-
-  // Adresa - hledej PSČ pattern
-  m = t.match(/(\d{3})\s*(\d{2})\s+([A-ZÁ-Ž][a-zá-ž]+(?:\s+[a-zá-žA-ZÁ-Ž]+)*)/);
-  if (m) { data.zip = m[1] + ' ' + m[2]; data.city = m[3]; }
-
-  // Ulice
-  m = t.match(/([A-ZÁ-Ž][a-zá-ž]+(?:\s+[a-zá-ž]+)*)\s+(\d+(?:\/\d+)?)\s*[,\n]/);
-  if (m) data.street = m[1] + ' ' + m[2];
-
-  // Telefon
-  m = t.match(/(?:tel(?:efon)?|mobil)[\s.:]*([+\d][\d\s\-]{7,15})/i);
-  if (m) data.phone = m[1].trim();
-
-  // Email
-  m = t.match(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/);
-  if (m) data.email = m[1];
-
-  // Popis
-  m = t.match(/(?:popis|text|p[řr]edm[ěe]t)[\s:]*(.{5,80})/i);
-  if (m) data.text = m[1].trim();
-
-  // Parse items - hledej tabulkové řádky
-  parseItems(t);
-
-  fillForm(data);
-}
-
-function parseItems(text) {
-  items = [];
-  itemIdCounter = 0;
-
-  // Hledej řádky co vypadají jako položky faktury
-  // Pattern: text ... množství ... cena
-  const lines = text.split('\n');
-  for (const line of lines) {
-    // Zkus najít řádek s cenou na konci
-    const m = line.match(/^(.{5,60}?)\s+(\d+(?:[.,]\d+)?)\s*(ks|hod|m2|m|bm|km|kg|l|bal|kpl|sada|den|měs)?\s+(\d[\d\s]*(?:[.,]\d{1,2})?)\s*(?:K[čc])?/i);
-    if (m) {
-      const itemText = m[1].trim();
-      // Filtruj hlavičky tabulky a součtové řádky
-      if (itemText.match(/^(název|popis|položka|celkem|základ|mezisoučet|DPH|dph|součet|text|množství|cena|suma|sazba)/i)) continue;
-      if (itemText.match(/^\d{1,2}[.\/-]\d{1,2}/)) continue; // Datumový řádek
-
-      items.push({
-        id: itemIdCounter++,
-        text: itemText,
-        qty: parseFloat((m[2] || '1').replace(',', '.')),
-        unit: m[3] || 'ks',
-        price: parseAmount(m[4]),
-        vat: 'high'
-      });
-    }
-  }
-
-  // Pokud nic nenašel, přidej prázdnou položku
-  if (!items.length) {
-    items.push({ id: itemIdCounter++, text: '', qty: 1, unit: 'ks', price: 0, vat: 'high' });
-  }
-
-  renderItems();
-}
 
 function parseAmount(str) {
   if (!str) return 0;
@@ -891,10 +797,378 @@ function parseAmount(str) {
 }
 
 function toISODate(d, m, y) {
-  d = d.padStart(2, '0');
-  m = m.padStart(2, '0');
+  d = String(d).replace(/\D/g, '').padStart(2, '0');
+  m = String(m).replace(/\D/g, '').padStart(2, '0');
+  y = String(y).replace(/\D/g, '');
   if (y.length === 2) y = '20' + y;
   return `${y}-${m}-${d}`;
+}
+
+// Find a date pattern in text: handles "25. 02. 2026", "25.02.2026", "25/02/2026"
+function findDate(text) {
+  const m = text.match(/(\d{1,2})\s*[.\/-]\s*(\d{1,2})\s*[.\/-]\s*(\d{2,4})/);
+  if (m) return toISODate(m[1], m[2], m[3]);
+  return '';
+}
+
+function parseInvoice(text) {
+  const data = {};
+  const t = text.replace(/\r/g, '');
+  const lines = t.split('\n');
+
+  // ========== 1. FAKTURA NUMBER ==========
+  let m = t.match(/FAKTURA\s+(\d[\d\-\/]+\d)/i);
+  if (!m) m = t.match(/faktur[ay]\s+(?:č[íi]slo\s*)?[:#]?\s*([A-Z0-9][\w\-\/]{2,20})/i);
+  if (m) data.invoiceNum = m[1];
+
+  // ========== 2. VS, KS ==========
+  m = t.match(/[Vv]ari(?:abiln[íi])?\s*(?:symbol)?\s*[:\t]?\s*(\d{4,20})/);
+  if (m) data.vs = m[1];
+  m = t.match(/[Kk]onst(?:antn[íi])?\s*(?:symbol)?\s*[:\t]?\s*(\d{2,10})/);
+  if (m) data.ks = m[1];
+
+  // ========== 3. BANK ACCOUNT ==========
+  m = t.match(/(\d{1,6}[\-]?\d{2,10})\s*\/\s*(\d{4})/);
+  if (m) { data.bankAccount = m[1]; data.bankCode = m[2]; }
+  if (!data.bankAccount) {
+    m = t.match(/IBAN[\s:]*([A-Z]{2}\d{2}\s*[\d\s]{10,30})/i);
+    if (m) data.bankAccount = m[1].replace(/\s/g, '');
+  }
+
+  // ========== 4. DATES (handle "25. 02. 2026" with spaces) ==========
+  // Datum vystavení
+  for (const line of lines) {
+    if (line.match(/vystaven[íi]/i)) {
+      // Date might be on this line or the next
+      const d = findDate(line);
+      if (d) { data.dateIssue = d; break; }
+      // Check next line
+      const idx = lines.indexOf(line);
+      if (idx >= 0 && idx < lines.length - 1) {
+        const d2 = findDate(lines[idx + 1]);
+        if (d2) { data.dateIssue = d2; break; }
+      }
+    }
+  }
+  // Datum splatnosti
+  for (const line of lines) {
+    if (line.match(/splatnost/i)) {
+      const d = findDate(line);
+      if (d) { data.dateDue = d; break; }
+      const idx = lines.indexOf(line);
+      if (idx >= 0 && idx < lines.length - 1) {
+        const d2 = findDate(lines[idx + 1]);
+        if (d2) { data.dateDue = d2; break; }
+      }
+    }
+  }
+  // DUZP
+  for (const line of lines) {
+    if (line.match(/zda[nň]\.?\s*pln[eěé]n[ií]/i) || line.match(/DUZP|DUŽP/i)) {
+      const d = findDate(line);
+      if (d) { data.dateTax = d; break; }
+      const idx = lines.indexOf(line);
+      if (idx >= 0 && idx < lines.length - 1) {
+        const d2 = findDate(lines[idx + 1]);
+        if (d2) { data.dateTax = d2; break; }
+      }
+    }
+  }
+
+  // ========== 5. FIND ALL IČO/DIČ OCCURRENCES WITH CONTEXT ==========
+  const icoMatches = [];
+  const icoRegex = /I[ČC]O\s*[:\t]?\s*(\d{6,8})/gi;
+  let icoM;
+  while ((icoM = icoRegex.exec(t)) !== null) {
+    icoMatches.push({ ico: icoM[1].padStart(8, '0'), pos: icoM.index });
+  }
+  const dicMatches = [];
+  const dicRegex = /DI[ČC]\s*[:\t]?\s*([A-Z]{2}\d{6,10})/gi;
+  let dicM;
+  while ((dicM = dicRegex.exec(t)) !== null) {
+    dicMatches.push({ dic: dicM[1].toUpperCase(), pos: dicM.index });
+  }
+
+  // ========== 6. DETECT DODAVATEL vs ODBĚRATEL SECTIONS ==========
+  // Strategy: Look for "Dodavatel"/"Doda" and "Odběratel"/"Odb" labels
+  // The dodavatel (supplier/issuer) is who we need for partnerIdentity
+  let dodavatelSection = '';
+  let odberatelSection = '';
+  let dodavatelStart = -1;
+  let odberatelStart = -1;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (line.match(/^Dod(?:avatel)?$/i) || line.match(/Dodavatel/i)) {
+      dodavatelStart = i;
+    }
+    if (line.match(/^Odb[ěe]ratel$/i) || line.match(/Odb[ěe]ratel/i)) {
+      odberatelStart = i;
+    }
+  }
+
+  // Extract section text (next ~10 lines after label)
+  function extractSection(startIdx) {
+    if (startIdx < 0) return '';
+    let section = '';
+    for (let i = startIdx; i < Math.min(startIdx + 12, lines.length); i++) {
+      section += lines[i] + '\n';
+    }
+    return section;
+  }
+
+  if (dodavatelStart >= 0) dodavatelSection = extractSection(dodavatelStart);
+  if (odberatelStart >= 0) odberatelSection = extractSection(odberatelStart);
+
+  // If no explicit "Dodavatel" label, check last page for supplier info
+  // (common pattern: supplier info at bottom/page 2 with "Děkujeme")
+  if (!dodavatelSection) {
+    const dekujemeIdx = lines.findIndex(l => l.match(/D[ěe]kujeme/i));
+    if (dekujemeIdx >= 0) {
+      dodavatelSection = extractSection(dekujemeIdx);
+    }
+  }
+
+  // If still no dodavatel, check for page 2 content
+  if (!dodavatelSection) {
+    const page2Idx = lines.findIndex(l => l.includes('Strana 2'));
+    if (page2Idx >= 0) {
+      dodavatelSection = extractSection(page2Idx);
+    }
+  }
+
+  // ========== 7. PARSE DODAVATEL (supplier - who issued the invoice) ==========
+  function parseEntity(section) {
+    const entity = {};
+    if (!section) return entity;
+
+    // IČO in this section
+    const icoM = section.match(/I[ČC]O\s*[:\t]?\s*(\d{6,8})/i);
+    if (icoM) entity.ico = icoM[1].padStart(8, '0');
+
+    // DIČ in this section
+    const dicM = section.match(/DI[ČC]\s*[:\t]?\s*([A-Z]{2}\d{6,10})/i);
+    if (dicM) entity.dic = dicM[1].toUpperCase();
+
+    // Company name — look for s.r.o., a.s., spol., or first line after label
+    const sLines = section.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    for (const sl of sLines) {
+      if (sl.match(/(?:s\.r\.o|a\.s\.|spol\.\s*s|k\.s\.|v\.o\.s|z\.s\.|z\.ú\.)/i)) {
+        // Extract just the company name (remove IČO/DIČ parts if on same line)
+        let name = sl.replace(/I[ČC]O\s*[:\t]?\s*\d+/gi, '').replace(/DI[ČC]\s*[:\t]?\s*[A-Z]{2}\d+/gi, '').trim();
+        if (name.length > 2) { entity.company = name; break; }
+      }
+    }
+
+    // PSČ + Město
+    const pscM = section.match(/(\d{3})\s*(\d{2})\s+([A-ZÁ-Ž][a-zá-ž]+(?:[\s\-]+[a-zá-žA-ZÁ-Ž]+)*)/);
+    if (pscM) { entity.zip = pscM[1] + ' ' + pscM[2]; entity.city = pscM[3].trim(); }
+
+    // Ulice — line with number/slash before PSČ line
+    for (const sl of sLines) {
+      const streetM = sl.match(/^([A-ZÁ-Ža-zá-ž][a-zá-ž.]+(?:\s+[a-zá-ž.]+)*)\s+(\d+(?:\/\d+)?)$/);
+      if (streetM && !sl.match(/I[ČC]O|DI[ČC]|Dodavatel|Odb/i)) {
+        entity.street = streetM[1] + ' ' + streetM[2];
+        break;
+      }
+      // Also try: "Freyova 82/27" pattern anywhere in line
+      const streetM2 = sl.match(/([A-ZÁ-Ž][a-zá-ž]+(?:\s+[a-zá-ž]+)*\s+\d+(?:\/\d+)?)/);
+      if (streetM2 && !sl.match(/I[ČC]O|DI[ČC]|Dodavatel|Odb|symbol|[úu][čc]et|splatnost/i)) {
+        const candidate = streetM2[1];
+        // Make sure it looks like a street (not a product name)
+        if (candidate.match(/\d+\/\d+/) || candidate.match(/\d+$/)) {
+          if (!entity.street) entity.street = candidate;
+        }
+      }
+    }
+
+    // Email
+    const emailM = section.match(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/);
+    if (emailM) entity.email = emailM[1];
+
+    // Phone
+    const phoneM = section.match(/(?:tel|mobil|telefon)[.:\s]*([+\d][\d\s\-]{7,15})/i);
+    if (phoneM) entity.phone = phoneM[1].trim();
+
+    return entity;
+  }
+
+  const dodavatel = parseEntity(dodavatelSection);
+  const odberatel = parseEntity(odberatelSection);
+
+  // ========== 8. SMART FALLBACK — if no clear sections found ==========
+  // If we found 2+ IČOs, the one NOT matching odběratel is dodavatel
+  if (!dodavatel.ico && icoMatches.length >= 2 && odberatel.ico) {
+    const otherIco = icoMatches.find(i => i.ico !== odberatel.ico);
+    if (otherIco) {
+      // Parse context around this IČO as dodavatel
+      const ctx = t.substring(Math.max(0, otherIco.pos - 300), otherIco.pos + 200);
+      const fallback = parseEntity(ctx);
+      Object.keys(fallback).forEach(k => { if (!dodavatel[k]) dodavatel[k] = fallback[k]; });
+    }
+  }
+
+  // If only one IČO found (no clear sections), use it
+  if (!dodavatel.ico && icoMatches.length === 1) {
+    dodavatel.ico = icoMatches[0].ico;
+  }
+
+  // DIČ matching
+  if (!dodavatel.dic && dicMatches.length > 0) {
+    // Match DIČ that contains the dodavatel IČO
+    if (dodavatel.ico) {
+      const matchingDic = dicMatches.find(d => d.dic.includes(dodavatel.ico));
+      if (matchingDic) dodavatel.dic = matchingDic.dic;
+    }
+    // Or take the one closest to dodavatel IČO position
+    if (!dodavatel.dic && dodavatelStart >= 0) {
+      const sectionPos = t.indexOf(lines[dodavatelStart]);
+      let closest = dicMatches.reduce((a, b) => Math.abs(a.pos - sectionPos) < Math.abs(b.pos - sectionPos) ? a : b);
+      dodavatel.dic = closest.dic;
+    }
+  }
+
+  // ========== 9. FILL DATA FROM DODAVATEL ==========
+  data.company = dodavatel.company || '';
+  data.ico = dodavatel.ico || '';
+  data.dic = dodavatel.dic || '';
+  data.street = dodavatel.street || '';
+  data.city = dodavatel.city || '';
+  data.zip = dodavatel.zip || '';
+  data.phone = dodavatel.phone || '';
+  data.email = dodavatel.email || '';
+
+  // ========== 10. PAYMENT METHOD ==========
+  if (t.match(/p[řr]evodem/i)) data.payment = 'Prikazem';
+  else if (t.match(/hotov[ěe]/i)) data.payment = 'Hotove';
+  else if (t.match(/kartou/i)) data.payment = 'Kartou';
+  else if (t.match(/dob[ií]rkou/i)) data.payment = 'Dobirkou';
+
+  // ========== 11. TOTAL AMOUNT ==========
+  m = t.match(/[čc][áa]stka\s*k\s*[úu]hrad[ěe][\s\t]*([0-9\s]+[.,]\d{2})\s*K[čc]/i);
+  if (!m) m = t.match(/celkem[\s\t:]*([0-9\s]+[.,]\d{2})\s*K[čc]/i);
+  if (m) data.totalAmount = parseAmount(m[1]);
+
+  // ========== 12. PARSE ITEMS ==========
+  parseItems(t);
+
+  // ========== 13. FILL FORM ==========
+  fillForm(data);
+
+  // Log for debugging
+  console.log('Parsed dodavatel:', dodavatel);
+  console.log('Parsed odberatel:', odberatel);
+  console.log('Parsed data:', data);
+  console.log('Parsed items:', items);
+}
+
+// ==========================================
+// ITEM PARSER — v2
+// ==========================================
+function parseItems(text) {
+  items = [];
+  itemIdCounter = 0;
+  const lines = text.split('\n');
+
+  // Strategy 1: Look for lines matching pattern: QTY UNIT NAME DPH% PRICE TOTAL
+  // Common formats:
+  //   "50  ks  Gold Maeng Da 25g  21 %  29,00 Kč  1 450,00 Kč"
+  //   "50\tks\tGold Maeng Da 25g\t21 %\t29,00 Kč\t1 450,00 Kč"
+  for (const line of lines) {
+    // Skip header/summary/label lines
+    if (line.match(/^(---|SAZBA|ZÁKLAD|DPH\b|CENA|CELKEM|název|popis|polo[žz]ka|suma|mezisou|sou[čc]et)/i)) continue;
+    if (line.match(/Strana \d/)) continue;
+    if (line.match(/^\s*$/)) continue;
+
+    // Pattern: starts with number (qty), then unit, then name, then has % and Kč
+    // "50  ks  Gold Maeng Da 25g  21 %  29,00 Kč  1 450,00 Kč"
+    let m = line.match(/^\s*(\d+(?:[.,]\d+)?)\s+(ks|hod|m2|m|bm|km|kg|l|bal|kpl|sada|den|m[ěe]s|kus)\s+(.+?)\s+(\d+)\s*%\s+([\d\s]+[.,]\d{2})\s*K[čc]/i);
+    if (m) {
+      const itemName = m[3].trim();
+      const qty = parseFloat(m[1].replace(',', '.'));
+      const vatPct = parseInt(m[4]);
+      const unitPrice = parseAmount(m[5]);
+
+      // Skip if it looks like a summary row
+      if (itemName.match(/^(celkem|základ|mezisoučet|součet|sazba)/i)) continue;
+
+      items.push({
+        id: itemIdCounter++,
+        text: itemName,
+        qty: qty,
+        unit: m[2],
+        price: unitPrice,
+        vat: vatPct >= 20 ? 'high' : vatPct >= 10 ? 'low' : 'none'
+      });
+      continue;
+    }
+
+    // Pattern 2: "1  ks  Doprava  0 %  500,00 Kč  500,00 Kč" (single qty)
+    // Already handled by pattern above
+
+    // Pattern 3: Tab-separated (from our improved PDF extraction)
+    // "50\tks\tGold Maeng Da 25g\t21 %\t29,00 Kč\t1 450,00 Kč"
+    if (line.includes('\t')) {
+      const parts = line.split('\t').map(p => p.trim());
+      if (parts.length >= 4) {
+        const qtyM = parts[0].match(/^(\d+(?:[.,]\d+)?)$/);
+        const unitM = parts.length > 1 ? parts[1].match(/^(ks|hod|m2|m|bm|km|kg|l|bal|kpl|sada|den|m[ěe]s|kus)$/i) : null;
+        if (qtyM && unitM) {
+          const name = parts[2] || '';
+          if (name.match(/^(celkem|základ|sazba|mezisoučet|DPH\b)/i)) continue;
+          let vatPct = 21;
+          let price = 0;
+          // Find % and price in remaining parts
+          for (let pi = 3; pi < parts.length; pi++) {
+            const pctM = parts[pi].match(/(\d+)\s*%/);
+            if (pctM) vatPct = parseInt(pctM[1]);
+            const priceM = parts[pi].match(/([\d\s]+[.,]\d{2})\s*K[čc]/);
+            if (priceM && !price) price = parseAmount(priceM[1]);
+          }
+          if (name) {
+            items.push({
+              id: itemIdCounter++,
+              text: name,
+              qty: parseFloat(qtyM[1].replace(',', '.')),
+              unit: unitM[1],
+              price: price,
+              vat: vatPct >= 20 ? 'high' : vatPct >= 10 ? 'low' : 'none'
+            });
+          }
+          continue;
+        }
+      }
+    }
+  }
+
+  // Strategy 2: If nothing found, try more relaxed parsing
+  if (!items.length) {
+    for (const line of lines) {
+      if (line.match(/^\s*$/)) continue;
+      // Any line with Kč that has a number before it
+      const m = line.match(/(.+?)\s+([\d\s]+[.,]\d{2})\s*K[čc]\s*$/);
+      if (m) {
+        const beforePrice = m[1].trim();
+        if (beforePrice.match(/^(sazba|základ|celkem|DPH|částka|součet|mezisou|strana|datum|bankov)/i)) continue;
+        if (beforePrice.length < 3) continue;
+        items.push({
+          id: itemIdCounter++,
+          text: beforePrice,
+          qty: 1,
+          unit: 'ks',
+          price: parseAmount(m[2]),
+          vat: 'high'
+        });
+      }
+    }
+  }
+
+  // If still nothing, add empty item
+  if (!items.length) {
+    items.push({ id: itemIdCounter++, text: '', qty: 1, unit: 'ks', price: 0, vat: 'high' });
+  }
+
+  renderItems();
 }
 
 // ==========================================
