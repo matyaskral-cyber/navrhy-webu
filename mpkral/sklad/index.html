@@ -344,7 +344,7 @@ body {
       <div class="stat-value green" id="statInStock">-</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Málo skladem</div>
+      <div class="stat-label">Nízký stav</div>
       <div class="stat-value orange" id="statLow">-</div>
     </div>
     <div class="stat-card">
@@ -361,7 +361,7 @@ body {
     </div>
     <button class="filter-btn active" onclick="setFilter('all')">Vše</button>
     <button class="filter-btn" onclick="setFilter('instock')">Skladem</button>
-    <button class="filter-btn" onclick="setFilter('low')">Málo</button>
+    <button class="filter-btn" onclick="setFilter('low')">Nízký stav</button>
     <button class="filter-btn" onclick="setFilter('out')">Vyprodáno</button>
   </div>
 
@@ -599,7 +599,7 @@ function renderTable() {
     const qty = item.mnozstvi || 0;
     const status = qty <= 0 ? 'out' : qty <= 10 ? 'low' : 'ok';
     const badgeClass = status === 'out' ? 'badge-red' : status === 'low' ? 'badge-orange' : 'badge-green';
-    const badgeText = status === 'out' ? 'Vyprodáno' : status === 'low' ? 'Málo' : 'Skladem';
+    const badgeText = status === 'out' ? 'Vyprodáno' : status === 'low' ? 'Nízký stav' : 'Skladem';
     const barColor = status === 'out' ? 'var(--red)' : status === 'low' ? 'var(--orange)' : 'var(--green)';
     const barWidth = Math.max(2, (qty / maxQty) * 100);
     const price = (item.cena || 0).toLocaleString('cs-CZ', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
