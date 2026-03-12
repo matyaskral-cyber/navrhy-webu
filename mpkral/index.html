@@ -3,1416 +3,967 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>M+P výroba pracovních oděvů | mpkral.cz</title>
-  <meta name="description" content="M+P výroba pracovních oděvů – navrhujeme a šijeme pro Vás pracovní oděvy již více než 25 let. Kunžak, Jihočeský kraj." />
+  <title>M+P Král — Výroba pracovních oděvů od roku 1993</title>
+  <meta name="description" content="M+P Král — navrhujeme a šijeme pracovní oděvy na míru. Přes 30 let zkušeností, 45 zaměstnanců, 1300+ fazón. Kunžak, Jihočeský kraj." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
-    /* ─── Reset & Base ─── */
+    /* ─── Reset ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --blue-dark:   #1a3a5c;
-      --blue:        #1e5090;
-      --blue-mid:    #2c6fad;
-      --blue-light:  #e8f1fa;
-      --accent:      #e8960d;
-      --accent-dark: #c27a00;
-      --gray-1:      #1c2533;
-      --gray-2:      #364457;
-      --gray-3:      #6b7a8f;
-      --gray-4:      #b0bbc8;
-      --gray-5:      #dde4ec;
-      --gray-6:      #f4f6f9;
-      --white:       #ffffff;
-      --text:        #1c2533;
-      --text-muted:  #4a5568;
-      --radius:      12px;
-      --shadow-sm:   0 2px 8px rgba(26,58,92,.09);
-      --shadow-md:   0 6px 24px rgba(26,58,92,.13);
-      --shadow-lg:   0 16px 48px rgba(26,58,92,.17);
-      --transition:  .35s cubic-bezier(.4,0,.2,1);
+      --bg-primary: #0a0f1a;
+      --bg-secondary: #0f1525;
+      --bg-card: #141b2d;
+      --bg-card-hover: #1a2340;
+      --text-primary: #e8ecf4;
+      --text-secondary: #8892a8;
+      --text-muted: #5a6478;
+      --accent: #d4a96a;
+      --accent-dark: #b8904f;
+      --accent-light: #e8c99b;
+      --blue: #3b82f6;
+      --blue-dark: #2563eb;
+      --border: rgba(255,255,255,0.06);
+      --glass: rgba(10,15,26,0.75);
+      --glass-border: rgba(255,255,255,0.08);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.4);
+      --shadow-lg: 0 16px 64px rgba(0,0,0,0.6);
     }
 
     html { scroll-behavior: smooth; }
-
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: var(--white);
-      color: var(--text);
-      line-height: 1.65;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
       overflow-x: hidden;
+      cursor: none;
     }
 
-    img { display: block; max-width: 100%; }
-
-    a { color: inherit; text-decoration: none; }
-
-    /* ─── Utility ─── */
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin-inline: auto;
-      padding-inline: 24px;
+    /* ─── Custom Cursor ─── */
+    .cursor {
+      position: fixed;
+      width: 20px; height: 20px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+    }
+    .cursor.hover {
+      width: 50px; height: 50px;
+      background: rgba(212,169,106,0.15);
+      border-color: var(--accent-light);
     }
 
-    .section {
-      padding-block: 80px;
+    @media (pointer: coarse) {
+      body { cursor: auto; }
+      .cursor { display: none; }
     }
+
+    /* ─── Typography ─── */
+    h1, h2, h3, h4 { font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
+    h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); }
+    h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
+
+    a { color: var(--blue); text-decoration: none; transition: color 0.3s; }
+    a:hover { color: var(--accent); }
 
     .section-label {
       display: inline-block;
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .14em;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--blue-mid);
-      background: var(--blue-light);
-      padding: 4px 14px;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding: 6px 16px;
+      border: 1px solid rgba(212,169,106,0.3);
       border-radius: 100px;
-      margin-bottom: 14px;
     }
 
-    .section-heading {
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 800;
-      color: var(--blue-dark);
-      line-height: 1.25;
-      margin-bottom: 16px;
+    /* ─── Layout ─── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    section {
+      padding: 120px 0;
+      position: relative;
     }
 
-    .section-sub {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 600px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 30px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: .95rem;
-      transition: var(--transition);
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: var(--white);
-    }
-    .btn-primary:hover {
-      background: var(--accent-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(232,150,13,.35);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--white);
-      border: 2px solid rgba(255,255,255,.5);
-    }
-    .btn-outline:hover {
-      background: rgba(255,255,255,.12);
-      border-color: var(--white);
-    }
-
-    /* ─── Reveal animation ─── */
+    /* ─── Reveal Animation ─── */
     .reveal {
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity .65s ease, transform .65s ease;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.visible {
       opacity: 1;
-      transform: none;
+      transform: translateY(0);
     }
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-32px);
-      transition: opacity .65s ease, transform .65s ease;
-    }
-    .reveal-left.visible {
-      opacity: 1;
-      transform: none;
-    }
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(32px);
-      transition: opacity .65s ease, transform .65s ease;
-    }
-    .reveal-right.visible {
-      opacity: 1;
-      transform: none;
-    }
-    .delay-1 { transition-delay: .1s; }
-    .delay-2 { transition-delay: .2s; }
-    .delay-3 { transition-delay: .3s; }
-    .delay-4 { transition-delay: .4s; }
-    .delay-5 { transition-delay: .5s; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
 
-    /* ─── NAVBAR ─── */
+    /* ─── Navbar ─── */
     .navbar {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(255,255,255,.97);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--gray-5);
-      transition: box-shadow var(--transition);
+      padding: 20px 0;
+      transition: all 0.4s ease;
     }
     .navbar.scrolled {
-      box-shadow: var(--shadow-md);
+      padding: 12px 0;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
     }
-    .navbar-inner {
+    .navbar .container {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 68px;
     }
-    .navbar-brand {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.2;
-    }
-    .navbar-brand .brand-main {
-      font-size: 1.15rem;
+    .nav-logo {
+      font-size: 1.3rem;
       font-weight: 800;
-      color: var(--blue-dark);
-      letter-spacing: .01em;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
     }
-    .navbar-brand .brand-sub {
-      font-size: .68rem;
-      font-weight: 500;
-      color: var(--gray-3);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-
-    .navbar-nav {
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
       display: flex;
-      align-items: center;
-      gap: 6px;
+      gap: 32px;
       list-style: none;
     }
-    .navbar-nav a {
-      font-size: .88rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: var(--transition);
+    .nav-links a {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
     }
-    .navbar-nav a:hover {
-      color: var(--blue);
-      background: var(--blue-light);
-    }
-    .navbar-nav .nav-cta a {
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
       background: var(--accent);
-      color: var(--white);
-      padding: 9px 20px;
+      transition: width 0.3s;
     }
-    .navbar-nav .nav-cta a:hover {
-      background: var(--accent-dark);
-      color: var(--white);
-    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 100%; }
 
-    .navbar-toggle {
+    .nav-toggle {
       display: none;
       flex-direction: column;
       gap: 5px;
       background: none;
       border: none;
-      cursor: pointer;
-      padding: 8px;
+      cursor: none;
+      padding: 4px;
     }
-    .navbar-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--blue-dark);
-      border-radius: 2px;
-      transition: var(--transition);
+    .nav-toggle span {
+      width: 24px; height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s;
     }
 
-    /* Mobile nav */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 68px 0 0 0;
-      background: var(--white);
-      z-index: 999;
-      padding: 24px;
-      flex-direction: column;
-      gap: 4px;
-      border-top: 1px solid var(--gray-5);
-      overflow-y: auto;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-      padding: 14px 16px;
-      border-radius: 10px;
-      transition: var(--transition);
-    }
-    .mobile-menu a:hover {
-      background: var(--blue-light);
-      color: var(--blue);
-    }
-    .mobile-menu .mobile-cta {
-      margin-top: 12px;
-      background: var(--accent);
-      color: var(--white) !important;
-      text-align: center;
-      border-radius: 10px;
-    }
-    .mobile-menu .mobile-cta:hover {
-      background: var(--accent-dark) !important;
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: fixed;
+        top: 0; right: -100%;
+        width: 280px; height: 100vh;
+        flex-direction: column;
+        background: var(--bg-secondary);
+        padding: 80px 40px 40px;
+        gap: 24px;
+        transition: right 0.4s ease;
+        border-left: 1px solid var(--border);
+      }
+      .nav-links.open { right: 0; }
+      .nav-links a { font-size: 1.1rem; }
     }
 
-    /* ─── HERO ─── */
+    /* ─── Hero ─── */
     .hero {
       position: relative;
       min-height: 100vh;
       display: flex;
       align-items: center;
       overflow: hidden;
-      background: linear-gradient(135deg, var(--blue-dark) 0%, #0e2a46 40%, #162d4a 100%);
+      padding: 0;
     }
-
-    .hero-bg-pattern {
+    .hero-bg {
       position: absolute;
       inset: 0;
-      background-image:
-        radial-gradient(circle at 70% 30%, rgba(44,111,173,.25) 0%, transparent 60%),
-        radial-gradient(circle at 20% 80%, rgba(30,80,144,.2) 0%, transparent 50%);
-      pointer-events: none;
+      background: url('images/mpgal-00.jpg') center/cover no-repeat;
+      will-change: transform;
     }
-
-    .hero-grid-overlay {
+    .hero-overlay {
       position: absolute;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
+      background: linear-gradient(135deg, rgba(10,15,26,0.92) 0%, rgba(10,15,26,0.75) 50%, rgba(10,15,26,0.88) 100%);
     }
-
     .hero-content {
       position: relative;
       z-index: 2;
-      padding-top: 100px;
-      padding-bottom: 80px;
+      max-width: 750px;
+      padding: 0 24px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero h1 {
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
-    .hero-badge {
+    /* ─── Buttons ─── */
+    .btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.18);
-      color: rgba(255,255,255,.9);
-      font-size: .8rem;
+      padding: 14px 32px;
+      font-family: inherit;
+      font-size: 0.95rem;
       font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      padding: 7px 16px;
       border-radius: 100px;
-      margin-bottom: 28px;
+      border: none;
+      cursor: none;
+      transition: all 0.3s ease;
+      text-decoration: none;
     }
-    .hero-badge::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
+    .btn-primary {
       background: var(--accent);
-      flex-shrink: 0;
+      color: var(--bg-primary);
     }
-
-    .hero-title {
-      font-size: clamp(2.2rem, 6vw, 4rem);
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1.12;
-      margin-bottom: 12px;
-      letter-spacing: -.02em;
+    .btn-primary:hover {
+      background: var(--accent-light);
+      color: var(--bg-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(212,169,106,0.3);
     }
-    .hero-title .accent-line {
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--glass-border);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
       color: var(--accent);
+      transform: translateY(-2px);
     }
 
-    .hero-slogan {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      color: rgba(255,255,255,.75);
-      max-width: 560px;
-      margin-bottom: 40px;
-      line-height: 1.6;
+    /* ─── Stats ─── */
+    .stats {
+      padding: 80px 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
-
-    .hero-cta-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 60px;
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      text-align: center;
     }
-
-    .hero-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-    }
-    .stat-item {}
-    .stat-value {
-      font-size: 2rem;
+    .stat-number {
+      font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 900;
-      color: var(--white);
+      color: var(--accent);
       line-height: 1;
+      margin-bottom: 8px;
     }
     .stat-label {
-      font-size: .8rem;
-      color: rgba(255,255,255,.55);
-      margin-top: 4px;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-    }
-    .stat-divider {
-      width: 1px;
-      height: 48px;
-      background: rgba(255,255,255,.18);
-      align-self: center;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-weight: 500;
     }
 
-    /* ─── CATEGORIES ─── */
-    .categories-section {
-      background: var(--gray-6);
+    @media (max-width: 600px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
     }
 
-    .categories-header {
-      text-align: center;
-      margin-bottom: 56px;
+    /* ─── About ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
     }
-    .categories-header .section-sub {
-      margin-inline: auto;
+    .about-text h2 { margin-bottom: 24px; }
+    .about-text p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+    .about-image {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: var(--radius);
+    }
+    .about-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      pointer-events: none;
     }
 
-    .categories-grid {
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    /* ─── Sortiment ─── */
+    .sortiment { text-align: center; }
+    .sortiment h2 { margin-bottom: 16px; }
+    .sortiment > .container > p {
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 56px;
+    }
+    .sortiment-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
-
-    .category-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 36px 28px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--gray-5);
-      transition: var(--transition);
-      cursor: pointer;
+    .sort-card {
       position: relative;
+      border-radius: var(--radius);
       overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: none;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     }
-    .category-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--blue-mid), var(--blue-dark));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform var(--transition);
-    }
-    .category-card:hover {
-      transform: translateY(-6px);
+    .sort-card:hover {
+      transform: scale(1.03);
       box-shadow: var(--shadow-lg);
-      border-color: var(--blue-light);
     }
-    .category-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .cat-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      background: var(--blue-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      font-size: 1.6rem;
-      transition: var(--transition);
-    }
-    .category-card:hover .cat-icon {
-      background: var(--blue);
-    }
-
-    .cat-name {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--blue-dark);
-      margin-bottom: 10px;
-    }
-
-    .cat-desc {
-      font-size: .88rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .cat-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: .85rem;
-      font-weight: 700;
-      color: var(--blue-mid);
-      margin-top: 18px;
-      transition: gap var(--transition);
-    }
-    .category-card:hover .cat-link {
-      gap: 10px;
-    }
-
-    /* Category card product image */
-    .cat-img {
-      width: 100%;
-      height: 180px;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 18px;
-      background: var(--gray-5);
-    }
-    .cat-img img {
-      width: 100%;
-      height: 100%;
+    .sort-card img {
+      width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center 30%;
-      transition: transform .5s ease;
+      display: block;
+      transition: transform 0.6s ease;
     }
-    .category-card:hover .cat-img img {
-      transform: scale(1.08);
-    }
-    /* Specific positioning per category to show product, not face */
-    .cat-img-pracovni img { object-position: center 25%; }
-    .cat-img-reflexni img { object-position: 30% 30%; }
-    .cat-img-rousky img { object-position: center 35%; }
-    .cat-img-zdravotnicke img { object-position: 30% 40%; }
-    .cat-img-detske img { object-position: 70% 25%; }
-    .cat-img-volnycas img { object-position: center 20%; }
-
-    /* ─── GALLERY ─── */
-    .gallery-section {
-      background: var(--white);
-    }
-
-    .gallery-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .gallery-header .section-sub {
-      margin-inline: auto;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: auto auto auto;
-      gap: 14px;
-    }
-
-    .gallery-grid .g-item {
-      overflow: hidden;
-      border-radius: var(--radius);
-      position: relative;
-      background: var(--gray-5);
-    }
-
-    .gallery-grid .g-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .6s ease;
-    }
-
-    .gallery-grid .g-item:hover img {
-      transform: scale(1.06);
-    }
-
-    .gallery-grid .g-item::after {
-      content: '';
+    .sort-card:hover img { transform: scale(1.08); }
+    .sort-card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(26,58,92,.4), transparent 60%);
-      opacity: 0;
-      transition: opacity var(--transition);
-    }
-    .gallery-grid .g-item:hover::after {
-      opacity: 1;
-    }
-
-    /* Specific grid placements for nice layout */
-    .g-item:nth-child(1) { grid-column: 1 / 3; aspect-ratio: 16/7; }
-    .g-item:nth-child(2) { grid-column: 3 / 4; aspect-ratio: 4/3; }
-    .g-item:nth-child(3) { aspect-ratio: 4/3; }
-    .g-item:nth-child(4) { aspect-ratio: 4/3; }
-    .g-item:nth-child(5) { aspect-ratio: 4/3; }
-    .g-item:nth-child(6) { grid-column: 1 / 2; aspect-ratio: 4/3; }
-    .g-item:nth-child(7) { grid-column: 2 / 4; aspect-ratio: 16/7; }
-    .g-item:nth-child(8) { grid-column: 1 / 3; aspect-ratio: 16/7; }
-    .g-item:nth-child(9) { aspect-ratio: 4/3; }
-
-    /* ─── VALUES ─── */
-    .values-section {
-      background: var(--blue-dark);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .values-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 15% 50%, rgba(44,111,173,.3) 0%, transparent 55%),
-        radial-gradient(circle at 85% 30%, rgba(30,80,144,.25) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .values-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .values-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-    .values-header .section-label {
-      background: rgba(255,255,255,.12);
-      color: rgba(255,255,255,.8);
-    }
-    .values-header .section-heading {
-      color: var(--white);
-    }
-    .values-header .section-sub {
-      color: rgba(255,255,255,.6);
-      margin-inline: auto;
-    }
-
-    .values-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    .value-card {
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: var(--radius);
-      padding: 40px 32px;
-      text-align: center;
-      transition: var(--transition);
-    }
-    .value-card:hover {
-      background: rgba(255,255,255,.12);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,.25);
-    }
-
-    .value-icon {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: rgba(232,150,13,.18);
-      border: 2px solid rgba(232,150,13,.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin: 0 auto 24px;
-      transition: var(--transition);
-    }
-    .value-card:hover .value-icon {
-      background: rgba(232,150,13,.3);
-      border-color: var(--accent);
-    }
-
-    .value-title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--white);
-      margin-bottom: 12px;
-    }
-
-    .value-desc {
-      font-size: .9rem;
-      color: rgba(255,255,255,.6);
-      line-height: 1.7;
-    }
-
-    /* ─── ABOUT ─── */
-    .about-section {
-      background: var(--gray-6);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 72px;
-      align-items: center;
-    }
-
-    .about-text .section-sub {
-      margin-bottom: 28px;
-    }
-
-    .about-fact-list {
+      background: linear-gradient(to top, rgba(10,15,26,0.9) 0%, rgba(10,15,26,0.2) 50%, transparent 100%);
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      margin-top: 32px;
+      justify-content: flex-end;
+      padding: 24px;
+      transition: background 0.4s;
+    }
+    .sort-card:hover .sort-card-overlay {
+      background: linear-gradient(to top, rgba(10,15,26,0.95) 0%, rgba(10,15,26,0.4) 60%, rgba(10,15,26,0.1) 100%);
+    }
+    .sort-card h3 {
+      color: #fff;
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+    .sort-card p {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
     }
 
-    .about-fact {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
+    @media (max-width: 900px) {
+      .sortiment-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+      .sortiment-grid { grid-template-columns: 1fr; }
     }
 
-    .fact-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      margin-top: 7px;
-      flex-shrink: 0;
+    /* ─── Gallery ─── */
+    .gallery { background: var(--bg-secondary); }
+    .gallery h2 { text-align: center; margin-bottom: 16px; }
+    .gallery > .container > p {
+      text-align: center;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto 48px;
     }
-
-    .fact-text {
-      font-size: .93rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .fact-text strong {
-      color: var(--blue-dark);
-    }
-
-    .about-cards {
+    .gallery-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .gallery-item {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: none;
+      aspect-ratio: 4/3;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10,15,26,0);
+      transition: background 0.3s;
+      pointer-events: none;
+    }
+    .gallery-item:hover::after {
+      background: rgba(212,169,106,0.1);
     }
 
-    .about-stat-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--gray-5);
-      text-align: center;
-      transition: var(--transition);
+    @media (max-width: 900px) {
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
     }
-    .about-stat-card:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-3px);
+    @media (max-width: 600px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    .about-stat-num {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: var(--blue);
-      line-height: 1;
-      margin-bottom: 6px;
+    /* ─── Lightbox ─── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: none;
+      backdrop-filter: blur(8px);
     }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-size: 2rem;
+      color: var(--text-secondary);
+      background: none;
+      border: none;
+      cursor: none;
+      transition: color 0.3s;
+      z-index: 2;
+    }
+    .lightbox-close:hover { color: var(--accent); }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      color: var(--text-secondary);
+      background: none;
+      border: none;
+      cursor: none;
+      transition: color 0.3s;
+      padding: 16px;
+      z-index: 2;
+    }
+    .lightbox-nav:hover { color: var(--accent); }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
 
-    .about-stat-label {
-      font-size: .8rem;
-      color: var(--gray-3);
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      font-weight: 600;
+    /* ─── Contact ─── */
+    .contact {
+      background: var(--bg-primary);
     }
-
-    /* ─── CONTACT ─── */
-    .contact-section {
-      background: var(--white);
-    }
-
-    .contact-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-    .contact-header .section-sub {
-      margin-inline: auto;
-    }
-
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 28px;
+      gap: 64px;
+      align-items: start;
     }
-
-    .contact-card {
-      background: var(--gray-6);
-      border: 1px solid var(--gray-5);
-      border-radius: var(--radius);
-      padding: 36px 32px;
-      transition: var(--transition);
+    .contact-info h2 { margin-bottom: 24px; }
+    .contact-info p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      font-size: 1.05rem;
     }
-    .contact-card:hover {
-      box-shadow: var(--shadow-md);
-      background: var(--white);
-    }
-
-    .contact-card-title {
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--blue-dark);
-      margin-bottom: 20px;
-      padding-bottom: 14px;
-      border-bottom: 2px solid var(--blue-light);
-    }
-
-    .contact-item {
+    .contact-detail {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
-      margin-bottom: 16px;
+      gap: 16px;
+      margin-bottom: 24px;
     }
-
-    .contact-item:last-child { margin-bottom: 0; }
-
-    .ci-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: var(--blue-light);
+    .contact-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
       flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .ci-text {
-      font-size: .9rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-    .ci-text a {
-      color: var(--blue-mid);
-      font-weight: 600;
-      transition: color var(--transition);
-    }
-    .ci-text a:hover { color: var(--blue-dark); }
-    .ci-label {
-      font-size: .72rem;
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      color: var(--gray-3);
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .contact-legal {
-      background: var(--blue-light);
-      border-radius: 10px;
-      padding: 20px 24px;
-      margin-top: 28px;
-      font-size: .85rem;
-      color: var(--text-muted);
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-    .contact-legal span strong {
-      color: var(--blue-dark);
-    }
-
-    /* ─── FOOTER ─── */
-    .footer {
-      background: var(--gray-1);
-      color: rgba(255,255,255,.5);
-      padding-block: 40px;
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .footer-brand {
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--white);
-    }
-    .footer-brand span {
-      display: block;
-      font-size: .75rem;
-      font-weight: 400;
-      color: rgba(255,255,255,.4);
-      margin-top: 2px;
-    }
-
-    .footer-copy {
-      font-size: .8rem;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 20px;
-    }
-    .footer-links a {
-      font-size: .82rem;
-      color: rgba(255,255,255,.45);
-      transition: color var(--transition);
-    }
-    .footer-links a:hover { color: var(--white); }
-
-    /* ─── SCROLL-TO-TOP ─── */
-    .scroll-top {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      width: 46px;
-      height: 46px;
-      background: var(--blue);
-      color: var(--white);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
       font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: var(--shadow-md);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--transition), transform var(--transition);
-      z-index: 999;
     }
-    .scroll-top.visible {
-      opacity: 1;
-      pointer-events: all;
+    .contact-detail-text h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 4px;
     }
-    .scroll-top:hover {
-      background: var(--blue-dark);
-      transform: translateY(-3px);
+    .contact-detail-text p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
     }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 1024px) {
-      .categories-grid { grid-template-columns: repeat(2, 1fr); }
-      .values-grid { grid-template-columns: repeat(2, 1fr); }
-
-      .g-item:nth-child(1) { grid-column: 1 / -1; aspect-ratio: 16/6; }
-      .g-item:nth-child(7) { grid-column: 1 / 3; }
-      .g-item:nth-child(8) { grid-column: 1 / 3; }
+    .contact-map {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      height: 400px;
+    }
+    .contact-map iframe {
+      width: 100%; height: 100%;
+      border: 0;
+      filter: grayscale(0.6) brightness(0.7) contrast(1.1);
+      transition: filter 0.4s;
+    }
+    .contact-map:hover iframe {
+      filter: grayscale(0.2) brightness(0.85) contrast(1.05);
     }
 
     @media (max-width: 768px) {
-      .section { padding-block: 56px; }
-
-      .navbar-nav { display: none; }
-      .navbar-toggle { display: flex; }
-
-      .hero-stats { gap: 20px; }
-      .stat-divider { display: none; }
-
-      .categories-grid { grid-template-columns: 1fr; }
-      .values-grid { grid-template-columns: 1fr; }
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .contact-grid { grid-template-columns: 1fr; }
-
-      .gallery-grid {
-        grid-template-columns: 1fr 1fr;
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
       }
-      .g-item:nth-child(1),
-      .g-item:nth-child(7),
-      .g-item:nth-child(8) { grid-column: 1 / -1; aspect-ratio: 16/7; }
-      .g-item { aspect-ratio: 1; }
+      .contact-map { height: 300px; }
     }
 
-    @media (max-width: 480px) {
-      .container { padding-inline: 16px; }
-      .hero-title { font-size: 2rem; }
-      .hero-cta-group { flex-direction: column; }
-      .hero-cta-group .btn { width: 100%; justify-content: center; }
-      .about-cards { grid-template-columns: 1fr; }
-      .gallery-grid { grid-template-columns: 1fr; }
-      .g-item { grid-column: 1 / -1 !important; aspect-ratio: 4/3 !important; }
-      .footer-inner { flex-direction: column; text-align: center; }
-      .footer-links { justify-content: center; }
+    /* ─── Footer ─── */
+    .footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .footer-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ─── Sklad link ─── */
+    .sklad-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+      padding: 10px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    .sklad-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ─── Scroll progress ─── */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--blue));
+      z-index: 10001;
+      width: 0%;
+      transition: width 0.1s;
     }
   </style>
 </head>
-
 <body>
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress"></div>
 
-  <!-- ─────── NAVBAR ─────── -->
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Zavřít">&times;</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Předchozí">&#8249;</button>
+    <button class="lightbox-nav lightbox-next" aria-label="Další">&#8250;</button>
+    <img src="" alt="Galerie fotka" />
+  </div>
+
+  <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <div class="container">
-      <div class="navbar-inner">
-        <a href="#" class="navbar-brand">
-          <span class="brand-main">M+P výroba oděvů</span>
-          <span class="brand-sub">mpkral.cz &mdash; Kunžak</span>
-        </a>
-
-        <ul class="navbar-nav">
-          <li><a href="#produkty">Produkty</a></li>
-          <li><a href="#galerie">Galerie</a></li>
-          <li><a href="#hodnoty">O nás</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
-          <li class="nav-cta"><a href="https://mpkral.cz" target="_blank" rel="noopener">E-SHOP ↗</a></li>
-        </ul>
-
-        <button class="navbar-toggle" id="menuToggle" aria-label="Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+      <a href="#" class="nav-logo">M+P <span>Král</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">O nás</a></li>
+        <li><a href="#sortiment">Sortiment</a></li>
+        <li><a href="#gallery">Galerie</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <!-- Mobile menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#produkty" onclick="closeMobileMenu()">Produkty</a>
-    <a href="#galerie" onclick="closeMobileMenu()">Galerie</a>
-    <a href="#hodnoty" onclick="closeMobileMenu()">O nás</a>
-    <a href="#kontakt" onclick="closeMobileMenu()">Kontakt</a>
-    <a href="https://mpkral.cz" target="_blank" rel="noopener" class="mobile-cta">E-SHOP ↗</a>
-  </div>
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="section-label reveal">Od roku 1993</div>
+      <h1 class="reveal reveal-delay-1">Navrhujeme a šijeme pracovní oděvy</h1>
+      <p class="reveal reveal-delay-2">Český výrobce pracovních a ochranných oděvů s vlastní šicí dílnou v Kunžaku. Více než 30 let zkušeností, přes 1 300 fazón a individuální přístup ke každé zakázce.</p>
+      <div class="hero-buttons reveal reveal-delay-3">
+        <a href="#sortiment" class="btn btn-primary">Prohlédnout sortiment</a>
+        <a href="#contact" class="btn btn-outline">Kontaktujte nás</a>
+      </div>
+    </div>
+  </section>
 
-
-  <!-- ─────── HERO ─────── -->
-  <section class="hero" id="home">
-    <div class="hero-bg-pattern"></div>
-    <div class="hero-grid-overlay"></div>
-
+  <!-- Stats -->
+  <section class="stats">
     <div class="container">
-      <div class="hero-content">
-
-        <div class="hero-badge reveal">Od roku 1993 &mdash; více než 25 let zkušeností</div>
-
-        <h1 class="hero-title reveal delay-1">
-          M+P výroba<br>
-          <span class="accent-line">pracovních oděvů</span>
-        </h1>
-
-        <p class="hero-slogan reveal delay-2">
-          Navrhujeme a šijeme pro Vás pracovní oděvy již více než 25 let.
-          Kvalita, férová cena a spolehlivost — to jsou naše základní hodnoty.
-        </p>
-
-        <div class="hero-cta-group reveal delay-3">
-          <a href="https://mpkral.cz" target="_blank" rel="noopener" class="btn btn-primary">
-            Přejít do E-SHOPu &nbsp;↗
-          </a>
-          <a href="#produkty" class="btn btn-outline">
-            Prohlédnout kategorie
-          </a>
+      <div class="stats-grid">
+        <div class="reveal">
+          <div class="stat-number" data-target="30">0</div>
+          <div class="stat-label">let na trhu</div>
         </div>
-
-        <div class="hero-stats reveal delay-4">
-          <div class="stat-item">
-            <div class="stat-value">25+</div>
-            <div class="stat-label">let na trhu</div>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <div class="stat-value">45</div>
-            <div class="stat-label">pracovníků</div>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <div class="stat-value">1300</div>
-            <div class="stat-label">modelů</div>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <div class="stat-value">1993</div>
-            <div class="stat-label">rok vzniku</div>
-          </div>
+        <div class="reveal reveal-delay-1">
+          <div class="stat-number" data-target="45">0</div>
+          <div class="stat-label">zaměstnanců</div>
         </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ─────── CATEGORIES ─────── -->
-  <section class="section categories-section" id="produkty">
-    <div class="container">
-      <div class="categories-header reveal">
-        <div class="section-label">Naše produkty</div>
-        <h2 class="section-heading">Kategorie pracovních oděvů</h2>
-        <p class="section-sub">
-          Nabízíme široký sortiment pracovního oblečení pro různé odvětví —
-          od průmyslu přes zdravotnictví až po volný čas.
-        </p>
-      </div>
-
-      <div class="categories-grid">
-
-        <div class="category-card reveal delay-1">
-          <div class="cat-img cat-img-pracovni"><img src="images/sortiment/bu-king.jpg" alt="Pracovní bunda King" loading="lazy" /></div>
-          <div class="cat-icon">🦺</div>
-          <div class="cat-name">Pracovní oděvy</div>
-          <p class="cat-desc">Montérky, pracovní kalhoty, bundy a komplety pro průmysl, řemesla a technické profese. Šité na míru i ze standardních modelů.</p>
-          <a href="https://mpkral.cz/pracovni-odevy.html" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
-        </div>
-
-        <div class="category-card reveal delay-2">
-          <div class="cat-img cat-img-reflexni"><img src="images/sortiment/br-ab002.jpg" alt="Reflexní bunda AB002" loading="lazy" /></div>
-          <div class="cat-icon">🔆</div>
-          <div class="cat-name">Reflexní oděvy</div>
-          <p class="cat-desc">Bezpečnostní oděvy s reflexními prvky pro práci v silničním provozu, stavebnictví a dalších rizikových prostředích.</p>
-          <a href="https://mpkral.cz/reflexni-odevy.html" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
-        </div>
-
-        <div class="category-card reveal delay-3">
-          <div class="cat-img cat-img-rousky"><img src="images/sortiment/jrp-senti.jpg" alt="Jednorázový plášť Senti" loading="lazy" /></div>
-          <div class="cat-icon">😷</div>
-          <div class="cat-name">Roušky a jednorázové oděvy</div>
-          <p class="cat-desc">Ochranné prostředky a jednorázové oděvy pro zdravotní, farmaceutické a čisté provozy vyžadující vysokou hygienu.</p>
-          <a href="https://mpkral.cz/jednorazove-rousky.html" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
-        </div>
-
-        <div class="category-card reveal delay-1">
-          <div class="cat-img cat-img-zdravotnicke"><img src="images/sortiment/hal-hela.jpg" alt="Zdravotnická halena Hela" loading="lazy" /></div>
-          <div class="cat-icon">🩺</div>
-          <div class="cat-name">Zdravotnické a potravinářské oděvy</div>
-          <p class="cat-desc">Zdravotnické uniformy, pláště a oděvy pro potravinářský průmysl splňující přísné hygienické a bezpečnostní normy.</p>
-          <a href="https://mpkral.cz/zdravotnicke-potravinarske.html" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
-        </div>
-
-        <div class="category-card reveal delay-2">
-          <div class="cat-img cat-img-detske"><img src="images/sortiment/db-soft.jpg" alt="Dětská bunda Softshell" loading="lazy" /></div>
-          <div class="cat-icon">🧒</div>
-          <div class="cat-name">Dětské oděvy</div>
-          <p class="cat-desc">Funkční a odolné oděvy pro nejmenší — od mateřských škol přes základní školy až po dětské pracovní a sportovní oblečení.</p>
-          <a href="https://mpkral.cz/detske-odevy.html" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
-        </div>
-
-        <div class="category-card reveal delay-3">
-          <div class="cat-img cat-img-volnycas"><img src="images/sortiment/kp-mat.jpg" alt="Kalhoty pro volný čas Mat" loading="lazy" /></div>
-          <div class="cat-icon">🏃</div>
-          <div class="cat-name">Pro volný čas</div>
-          <p class="cat-desc">Pohodlné a stylové oblečení pro aktivní trávení volného času, turistiku, sport a rekreaci s důrazem na odolnost materiálu.</p>
-          <a href="https://mpkral.cz/volny-cas.html" target="_blank" rel="noopener" class="cat-link">Zobrazit kolekci →</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ─────── GALLERY ─────── -->
-  <section class="section gallery-section" id="galerie">
-    <div class="container">
-      <div class="gallery-header reveal">
-        <div class="section-label">Galerie realizací</div>
-        <h2 class="section-heading">Ukázky naší práce</h2>
-        <p class="section-sub">
-          Prohlédněte si příklady pracovních oděvů, které jsme vyrobili pro naše zákazníky.
-        </p>
-      </div>
-
-      <div class="gallery-grid">
-        <div class="g-item reveal delay-1">
-          <img src="images/mpgal-00.jpg" alt="Provozovna M+P Kunžak" loading="lazy" />
-        </div>
-        <div class="g-item reveal delay-2">
-          <img src="images/mpgal-01.jpg" alt="Pracovní oděvy realizace" loading="lazy" />
-        </div>
-        <div class="g-item reveal delay-1">
-          <img src="images/mpgal-02.jpg" alt="Výrobní dílna M+P" loading="lazy" />
-        </div>
-        <div class="g-item reveal delay-2">
-          <img src="images/mpgal-05.jpg" alt="Zakázkové šití oděvů" loading="lazy" />
-        </div>
-        <div class="g-item reveal delay-3">
-          <img src="images/mpgal-06.jpg" alt="M+P kolekce oděvů" loading="lazy" />
-        </div>
-        <div class="g-item reveal delay-1">
-          <img src="images/mpgal-07.jpg" alt="Pracovní uniformy" loading="lazy" />
-        </div>
-        <div class="g-item reveal delay-2">
-          <img src="images/mpgal-08.jpg" alt="Reflexní pracovní oděvy" loading="lazy" />
-        </div>
-        <div class="g-item reveal delay-3">
-          <img src="images/mpgal-09.jpg" alt="Zdravotnické oděvy" loading="lazy" />
-        </div>
-        <div class="g-item reveal delay-1">
-          <img src="images/mpgal-10.jpg" alt="Šití na zakázku Kunžak" loading="lazy" />
+        <div class="reveal reveal-delay-2">
+          <div class="stat-number" data-target="1300">0</div>
+          <div class="stat-label">vyrobených fazón</div>
         </div>
       </div>
     </div>
   </section>
 
-
-  <!-- ─────── VALUES ─────── -->
-  <section class="section values-section" id="hodnoty">
-    <div class="container values-inner">
-      <div class="values-header reveal">
-        <div class="section-label">Naše hodnoty</div>
-        <h2 class="section-heading">Proč si vybrat M+P?</h2>
-        <p class="section-sub">
-          Tři pilíře, na kterých stavíme každou zakázku — bez kompromisů.
-        </p>
-      </div>
-
-      <div class="values-grid">
-
-        <div class="value-card reveal delay-1">
-          <div class="value-icon">✔</div>
-          <div class="value-title">Kvalita</div>
-          <p class="value-desc">Za svojí odvedenou prací si stojíme. Spokojený zákazník je náš cíl a každý kus opouští naše švadleny s plnou odpovědností za výsledek.</p>
-        </div>
-
-        <div class="value-card reveal delay-2">
-          <div class="value-icon">₍₌₎</div>
-          <div class="value-title">Férová cena</div>
-          <p class="value-desc">Přesnou kalkulaci ceny zakázky dostanete vždy předem. Žádná překvapení na faktuře — transparentnost je pro nás samozřejmost.</p>
-        </div>
-
-        <div class="value-card reveal delay-3">
-          <div class="value-icon">🕐</div>
-          <div class="value-title">Spolehlivost</div>
-          <p class="value-desc">Nejenže držíme slovo a férové ceny, ale také termíny. Vaše plánování se o nás může spolehlivě opřít.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ─────── ABOUT ─────── -->
-  <section class="section about-section" id="o-firme">
+  <!-- About -->
+  <section id="about">
     <div class="container">
       <div class="about-grid">
-
-        <div class="about-text reveal-left">
-          <div class="section-label">O firmě</div>
-          <h2 class="section-heading">Přes 25 let šijeme kvalitu</h2>
-          <p class="section-sub">
-            Firma M+P výroba pracovních oděvů vznikla v roce 1993 v Kunžaku v Jihočeském kraji.
-            Za tuto dobu jsme vybudovali zkušený tým a moderní zázemí.
-          </p>
-          <div class="about-fact-list">
-            <div class="about-fact">
-              <div class="fact-dot"></div>
-              <div class="fact-text"><strong>Vlastní návrhářské zázemí</strong> — používáme profesionální software ClassiCAD pro přesné střihy a modelování oděvů.</div>
-            </div>
-            <div class="about-fact">
-              <div class="fact-dot"></div>
-              <div class="fact-text"><strong>Zakázková i sériová výroba</strong> — šijeme jak na míru jednotlivcům, tak větší série pro firmy a organizace.</div>
-            </div>
-            <div class="about-fact">
-              <div class="fact-dot"></div>
-              <div class="fact-text"><strong>Stabilní jihočeská firma</strong> — sídlíme v Kunžaku od samého počátku, místní zázemí a dlouholetá tradice.</div>
-            </div>
-            <div class="about-fact">
-              <div class="fact-dot"></div>
-              <div class="fact-text"><strong>Přes 1300 modelů</strong> v sortimentu — od základních pracovních oděvů po specializované uniformy.</div>
-            </div>
-          </div>
+        <div class="about-text">
+          <div class="section-label reveal">O nás</div>
+          <h2 class="reveal reveal-delay-1">Tradice a kvalita z&nbsp;jižních Čech</h2>
+          <p class="reveal reveal-delay-2">Firma M+P Král se již od roku 1993 specializuje na návrh a výrobu pracovních oděvů. Sídlíme v Kunžaku v Jihočeském kraji, kde máme vlastní šicí dílnu s moderním strojovým vybavením.</p>
+          <p class="reveal reveal-delay-3">Vyrábíme kompletní sortiment pracovních a ochranných oděvů — od klasických montérek a plášťů přes reflexní vesty a zdravotnické textilie až po dětské oděvy a volnočasové oblečení. Každý výrobek vzniká s důrazem na kvalitu materiálů, funkčnost a pohodlí.</p>
+          <p class="reveal reveal-delay-4">Nabízíme i zakázkovou výrobu na míru — rádi vám navrhneme a ušijeme oděvy přesně podle vašich potřeb, včetně firemního brandingu a potisků.</p>
         </div>
-
-        <div class="about-cards reveal-right">
-          <div class="about-stat-card">
-            <div class="about-stat-num">1993</div>
-            <div class="about-stat-label">Rok vzniku firmy</div>
-          </div>
-          <div class="about-stat-card">
-            <div class="about-stat-num">45</div>
-            <div class="about-stat-label">Pracovníků</div>
-          </div>
-          <div class="about-stat-card">
-            <div class="about-stat-num">1300+</div>
-            <div class="about-stat-label">Modelů v nabídce</div>
-          </div>
-          <div class="about-stat-card">
-            <div class="about-stat-num">25+</div>
-            <div class="about-stat-label">Let zkušeností</div>
-          </div>
+        <div class="about-image reveal reveal-delay-2">
+          <img src="images/mpgal-02.jpg" alt="Šicí dílna M+P Král" loading="lazy" />
         </div>
-
       </div>
     </div>
   </section>
 
-
-  <!-- ─────── CONTACT ─────── -->
-  <section class="section contact-section" id="kontakt">
+  <!-- Sortiment -->
+  <section class="sortiment" id="sortiment">
     <div class="container">
-      <div class="contact-header reveal">
-        <div class="section-label">Kontakt</div>
-        <h2 class="section-heading">Spojte se s námi</h2>
-        <p class="section-sub">
-          Máte zájem o zakázku nebo potřebujete více informací?
-          Rádi Vám poradíme a připravíme kalkulaci.
-        </p>
-      </div>
+      <div class="section-label reveal">Sortiment</div>
+      <h2 class="reveal reveal-delay-1">Kompletní nabídka pracovních oděvů</h2>
+      <p class="reveal reveal-delay-2">Od klasických montérek po speciální ochranné oděvy — vše z naší vlastní dílny.</p>
 
-      <div class="contact-grid">
-
-        <div class="contact-card reveal delay-1">
-          <div class="contact-card-title">Telefon &amp; E-mail</div>
-
-          <div class="contact-item">
-            <div class="ci-icon">📞</div>
-            <div class="ci-text">
-              <div class="ci-label">Mobil</div>
-              <a href="tel:+420608982675">+420 608 982 675</a>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="ci-icon">☎</div>
-            <div class="ci-text">
-              <div class="ci-label">Pevná linka</div>
-              <a href="tel:+420384399306">+420 384 399 306</a>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="ci-icon">✉</div>
-            <div class="ci-text">
-              <div class="ci-label">E-mail</div>
-              <a href="mailto:info@mpkral.cz">info@mpkral.cz</a>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="ci-icon">🌐</div>
-            <div class="ci-text">
-              <div class="ci-label">Web &amp; E-shop</div>
-              <a href="https://mpkral.cz" target="_blank" rel="noopener">mpkral.cz</a>
-            </div>
-          </div>
-
-          <div class="contact-legal">
-            <span><strong>IČ:</strong> 43861431</span>
-            <span><strong>DIČ:</strong> CZ7203242046</span>
+      <div class="sortiment-grid">
+        <div class="sort-card reveal reveal-delay-1">
+          <img src="images/sortiment/crop-kp-mat.jpg" alt="Pracovní oděvy" loading="lazy" />
+          <div class="sort-card-overlay">
+            <h3>Pracovní oděvy</h3>
+            <p>Montérky, kalhoty, blůzy, pláště</p>
           </div>
         </div>
-
-        <div class="contact-card reveal delay-2">
-          <div class="contact-card-title">Adresy provozoven</div>
-
-          <div class="contact-item">
-            <div class="ci-icon">📍</div>
-            <div class="ci-text">
-              <div class="ci-label">Provozovna 1</div>
-              Nová ul. 401<br>378 62 Kunžak
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="ci-icon">📍</div>
-            <div class="ci-text">
-              <div class="ci-label">Provozovna 2</div>
-              Střížovická 419<br>378 62 Kunžak
-            </div>
-          </div>
-
-          <div class="contact-item" style="margin-top: 8px;">
-            <div class="ci-icon">🗺</div>
-            <div class="ci-text">
-              <div class="ci-label">Kraj</div>
-              Jihočeský kraj, Česká republika
-            </div>
-          </div>
-
-          <div style="margin-top: 28px;">
-            <a href="https://mpkral.cz" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%; justify-content: center;">
-              Navštívit E-SHOP &nbsp;↗
-            </a>
+        <div class="sort-card reveal reveal-delay-2">
+          <img src="images/sortiment/crop-ros-anat.jpg" alt="Reflexní oděvy" loading="lazy" />
+          <div class="sort-card-overlay">
+            <h3>Reflexní oděvy</h3>
+            <p>Hi-Vis vesty, bundy, kalhoty</p>
           </div>
         </div>
-
+        <div class="sort-card reveal reveal-delay-3">
+          <img src="images/sortiment/crop-hal-hela.jpg" alt="Roušky a jednorázové" loading="lazy" />
+          <div class="sort-card-overlay">
+            <h3>Roušky a jednorázové</h3>
+            <p>Ochranné roušky, jednorázové oděvy</p>
+          </div>
+        </div>
+        <div class="sort-card reveal reveal-delay-4">
+          <img src="images/sortiment/crop-db-soft.jpg" alt="Zdravotnické textilie" loading="lazy" />
+          <div class="sort-card-overlay">
+            <h3>Zdravotnické textilie</h3>
+            <p>Operační pláště, empíry, sestry</p>
+          </div>
+        </div>
+        <div class="sort-card reveal reveal-delay-5">
+          <img src="images/sortiment/crop-jrp-senti.jpg" alt="Dětské oděvy" loading="lazy" />
+          <div class="sort-card-overlay">
+            <h3>Dětské oděvy</h3>
+            <p>Dětské montérky, zástěry, pláštěnky</p>
+          </div>
+        </div>
+        <div class="sort-card reveal reveal-delay-5">
+          <img src="images/sortiment/crop-bu-king.jpg" alt="Volný čas" loading="lazy" />
+          <div class="sort-card-overlay">
+            <h3>Volný čas</h3>
+            <p>Mikiny, trička, sportovní oblečení</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- Gallery -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="section-label reveal">Galerie</div>
+      <h2 class="reveal reveal-delay-1">Nahlédněte do naší dílny</h2>
+      <p class="reveal reveal-delay-2">Kde vznikají naše výrobky — šicí stroje, střihárna, expedice.</p>
 
-  <!-- ─────── FOOTER ─────── -->
+      <div class="gallery-grid">
+        <div class="gallery-item reveal" data-full="images/mpgal-00.jpg"><img src="images/mpgal-00s.jpg" alt="Dílna 1" loading="lazy" /></div>
+        <div class="gallery-item reveal reveal-delay-1" data-full="images/mpgal-01.jpg"><img src="images/mpgal-01s.jpg" alt="Dílna 2" loading="lazy" /></div>
+        <div class="gallery-item reveal reveal-delay-2" data-full="images/mpgal-02.jpg"><img src="images/mpgal-02s.jpg" alt="Dílna 3" loading="lazy" /></div>
+        <div class="gallery-item reveal reveal-delay-3" data-full="images/mpgal-03.jpg"><img src="images/mpgal-03s.jpg" alt="Dílna 4" loading="lazy" /></div>
+        <div class="gallery-item reveal" data-full="images/mpgal-04.jpg"><img src="images/mpgal-04s.jpg" alt="Dílna 5" loading="lazy" /></div>
+        <div class="gallery-item reveal reveal-delay-1" data-full="images/mpgal-05.jpg"><img src="images/mpgal-05s.jpg" alt="Dílna 6" loading="lazy" /></div>
+        <div class="gallery-item reveal reveal-delay-2" data-full="images/mpgal-06.jpg"><img src="images/mpgal-06s.jpg" alt="Dílna 7" loading="lazy" /></div>
+        <div class="gallery-item reveal reveal-delay-3" data-full="images/mpgal-07.jpg"><img src="images/mpgal-07s.jpg" alt="Dílna 8" loading="lazy" /></div>
+        <div class="gallery-item reveal" data-full="images/mpgal-08.jpg"><img src="images/mpgal-08s.jpg" alt="Dílna 9" loading="lazy" /></div>
+        <div class="gallery-item reveal reveal-delay-1" data-full="images/mpgal-09.jpg"><img src="images/mpgal-09s.jpg" alt="Dílna 10" loading="lazy" /></div>
+        <div class="gallery-item reveal reveal-delay-2" data-full="images/mpgal-10.jpg"><img src="images/mpgal-10s.jpg" alt="Dílna 11" loading="lazy" /></div>
+        <div class="gallery-item reveal reveal-delay-3" data-full="images/mpgal-11.jpg"><img src="images/mpgal-11s.jpg" alt="Dílna 12" loading="lazy" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="section-label reveal">Kontakt</div>
+          <h2 class="reveal reveal-delay-1">Ozvěte se nám</h2>
+          <p class="reveal reveal-delay-2">Rádi vám připravíme nabídku na míru. Kontaktujte nás telefonicky, e-mailem nebo nás navštivte osobně v Kunžaku.</p>
+
+          <div class="contact-detail reveal reveal-delay-3">
+            <div class="contact-icon">&#9993;</div>
+            <div class="contact-detail-text">
+              <h4>E-mail</h4>
+              <p><a href="mailto:kral@mpkral.cz">kral@mpkral.cz</a></p>
+            </div>
+          </div>
+
+          <div class="contact-detail reveal reveal-delay-4">
+            <div class="contact-icon">&#9742;</div>
+            <div class="contact-detail-text">
+              <h4>Telefon</h4>
+              <p><a href="tel:+420384498108">+420 384 498 108</a></p>
+            </div>
+          </div>
+
+          <div class="contact-detail reveal reveal-delay-5">
+            <div class="contact-icon">&#9873;</div>
+            <div class="contact-detail-text">
+              <h4>Adresa</h4>
+              <p>M+P Král<br>Kunžak 291<br>378 62 Kunžak</p>
+            </div>
+          </div>
+
+          <a href="sklad/" class="sklad-link reveal reveal-delay-5">&#128230; Sklad aplikace &rarr;</a>
+        </div>
+        <div class="contact-map reveal reveal-delay-2">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2617.7!2d15.1903!3d49.1178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4772e3b0a9c7e5f1%3A0x400af0f6614f910!2sKun%C5%BEak%20291%2C%20378%2062%20Kun%C5%BEak!5e0!3m2!1scs!2scz!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          M+P výroba pracovních oděvů
-          <span>IČ: 43861431 &nbsp;|&nbsp; Kunžak, Jihočeský kraj</span>
-        </div>
-        <div class="footer-copy">
-          &copy; 1993–2025 M+P výroba pracovních oděvů
-        </div>
-        <div class="footer-links">
-          <a href="https://mpkral.cz" target="_blank" rel="noopener">mpkral.cz</a>
-          <a href="mailto:info@mpkral.cz">info@mpkral.cz</a>
-          <a href="tel:+420608982675">+420 608 982 675</a>
-        </div>
-      </div>
+      <div class="footer-logo">M+P <span>Král</span></div>
+      <p>&copy; 2025 M+P Král — Výroba pracovních oděvů. Všechna práva vyhrazena.</p>
     </div>
   </footer>
 
-  <!-- Scroll to top -->
-  <button class="scroll-top" id="scrollTop" aria-label="Zpět nahoru" onclick="scrollToTop()">↑</button>
-
-
   <script>
-    /* ── Navbar scroll shadow ── */
+    /* ─── Custom Cursor ─── */
+    const cursor = document.getElementById('cursor');
+    let mouseX = 0, mouseY = 0;
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    });
+
+    document.querySelectorAll('a, button, .sort-card, .gallery-item, .btn').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    /* ─── Navbar Scroll ─── */
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 20);
-      document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
-    }, { passive: true });
-
-    /* ── Mobile menu ── */
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
     });
-    function closeMobileMenu() {
-      mobileMenu.classList.remove('open');
-    }
 
-    /* ── Scroll-to-top ── */
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    /* ─── Mobile Nav Toggle ─── */
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
 
-    /* ── Intersection Observer – reveal animations ── */
-    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    const observer = new IntersectionObserver((entries) => {
+    /* ─── Parallax Hero ─── */
+    const heroBg = document.getElementById('heroBg');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        heroBg.style.transform = `translateY(${y * 0.35}px)`;
+      }
+    });
+
+    /* ─── Scroll Progress ─── */
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = (window.scrollY / h * 100) + '%';
+    });
+
+    /* ─── Reveal on Scroll ─── */
+    const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    revealEls.forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ─── Count-Up Animation ─── */
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          const suffix = target === 30 ? '+' : target === 1300 ? '+' : '';
+          let current = 0;
+          const step = target / 60;
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            el.textContent = Math.floor(current).toLocaleString('cs-CZ') + suffix;
+          }, 25);
+          countObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-number').forEach(el => countObserver.observe(el));
+
+    /* ─── Lightbox ─── */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const galleryItems = [...document.querySelectorAll('.gallery-item')];
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = galleryItems[index].dataset.full;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function navigate(dir) {
+      currentIndex = (currentIndex + dir + galleryItems.length) % galleryItems.length;
+      lightboxImg.src = galleryItems[currentIndex].dataset.full;
+    }
+
+    galleryItems.forEach((item, i) => {
+      item.addEventListener('click', () => openLightbox(i));
+    });
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', () => navigate(-1));
+    lightbox.querySelector('.lightbox-next').addEventListener('click', () => navigate(1));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
   </script>
-
 </body>
 </html>
