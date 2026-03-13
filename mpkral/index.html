@@ -288,6 +288,85 @@
       }
     }
 
+    /* ─── Process ─── */
+    .process { background: var(--bg-primary); }
+    .process-header { text-align: center; margin-bottom: 64px; }
+    .process-header h2 { margin-bottom: 12px; }
+    .process-header p { color: var(--text-secondary); max-width: 560px; margin: 0 auto; font-size: 1.05rem; }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 220px;
+      left: calc(16.67% + 24px);
+      right: calc(16.67% + 24px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--blue), var(--accent));
+      opacity: 0.3;
+      z-index: 0;
+    }
+    .process-step {
+      position: relative;
+      z-index: 1;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .process-photo {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 3/2;
+      margin-bottom: 32px;
+      border: 1px solid var(--glass-border);
+    }
+    .process-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .process-step:hover .process-photo img { transform: scale(1.04); }
+    .process-photo-placeholder {
+      width: 100%; height: 100%;
+      background: var(--bg-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--text-muted);
+    }
+    .process-photo-placeholder span { font-size: 2.5rem; opacity: 0.4; }
+    .process-photo-placeholder p { font-size: 0.85rem; }
+    .process-num {
+      position: absolute;
+      top: 16px; left: 16px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--bg-primary);
+      font-size: 0.85rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .process-step h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .process-step p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .process-steps { grid-template-columns: 1fr; gap: 48px; }
+      .process-steps::before { display: none; }
+      .process-step { padding: 0; }
+    }
+
     /* ─── About ─── */
     .about-grid {
       display: grid;
@@ -807,6 +886,51 @@
           <div class="stat-number" data-target="1300">0</div>
           <div class="stat-label">vyrobených fazón</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="process-header">
+        <div class="section-label reveal">Jak to děláme</div>
+        <h2 class="reveal reveal-delay-1">Od návrhu až po hotový výrobek</h2>
+        <hr class="section-divider reveal reveal-delay-1" />
+        <p class="reveal reveal-delay-2">Každá montérka vzniká v naší dílně v Kunžaku — navrhujeme, střiháme i šijeme sami.</p>
+      </div>
+      <div class="process-steps">
+
+        <div class="process-step reveal">
+          <div class="process-photo">
+            <div class="process-num">1</div>
+            <img src="images/process-navrh.png" alt="Návrh střihu na počítači" loading="lazy" />
+          </div>
+          <h3>Návrh</h3>
+          <p>Každý model nejprve navrhneme digitálně — přesné střihy, kapsy, švy i materiálové varianty. Zákazník vidí výsledek ještě před zahájením výroby.</p>
+        </div>
+
+        <div class="process-step reveal reveal-delay-2">
+          <div class="process-photo">
+            <div class="process-num">2</div>
+            <img src="images/process-rezani.png" alt="Řezání vrstev látky elektrickým nožem" loading="lazy" />
+          </div>
+          <h3>Řezání</h3>
+          <p>Látky klademe na sebe ve vrstvách a střiháme najednou elektrickým nožem podle šablony. Přesnost na milimetry, žádný odpad navíc.</p>
+        </div>
+
+        <div class="process-step reveal reveal-delay-4">
+          <div class="process-photo">
+            <div class="process-num">3</div>
+            <div class="process-photo-placeholder">
+              <span>🧵</span>
+              <p>Fotka přibude</p>
+            </div>
+          </div>
+          <h3>Šití</h3>
+          <p>Vyškolené švadleny v naší dílně každý kus ručně sešívají a kontrolují. Výsledkem je odolný oděv, který vydrží i náročné pracovní podmínky.</p>
+        </div>
+
       </div>
     </div>
   </section>
