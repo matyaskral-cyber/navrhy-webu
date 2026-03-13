@@ -470,6 +470,44 @@
       .sortiment-grid { grid-template-columns: 1fr; }
     }
 
+    /* ─── Branding ─── */
+    .branding { background: var(--bg-secondary); }
+    .branding-header { text-align: center; margin-bottom: 64px; }
+    .branding-header h2 { margin-bottom: 12px; }
+    .branding-header p { color: var(--text-secondary); max-width: 560px; margin: 0 auto; font-size: 1.05rem; }
+
+    .branding-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .branding-card {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+    }
+    .branding-card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .branding-card:hover img { transform: scale(1.04); }
+    .branding-card-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px 28px 28px;
+      background: linear-gradient(to top, rgba(10,15,26,0.95) 0%, rgba(10,15,26,0.6) 60%, transparent 100%);
+    }
+    .branding-card-label h3 { font-size: 1.4rem; margin-bottom: 8px; color: #fff; }
+    .branding-card-label p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+
+    @media (max-width: 640px) {
+      .branding-grid { grid-template-columns: 1fr; }
+    }
+
     /* ─── Gallery ─── */
     .gallery { background: var(--bg-secondary); }
     .gallery h2 { text-align: center; margin-bottom: 16px; }
@@ -842,6 +880,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">O nás</a></li>
         <li><a href="#sortiment">Sortiment</a></li>
+        <li><a href="#branding">Branding</a></li>
         <li><a href="#gallery">Galerie</a></li>
         <li><a href="#contact">Kontakt</a></li>
       </ul>
@@ -1002,6 +1041,34 @@
           <div class="sort-card-overlay">
             <h3>Volný čas</h3>
             <p>Mikiny, trička, sportovní oblečení</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Branding -->
+  <section class="branding" id="branding">
+    <div class="container">
+      <div class="branding-header">
+        <div class="section-label reveal">Firemní branding</div>
+        <h2 class="reveal reveal-delay-1">Váš brand přímo na oděvu</h2>
+        <hr class="section-divider reveal reveal-delay-1" />
+        <p class="reveal reveal-delay-2">Přidáme logo, název firmy nebo libovolný motiv — vyšíváme i tiskneme přímo v naší dílně.</p>
+      </div>
+      <div class="branding-grid">
+        <div class="branding-card reveal">
+          <img src="images/branding-vysivani.png" alt="Vyšívací stroj — logo M+P na textilii" loading="lazy" />
+          <div class="branding-card-label">
+            <h3>Vyšívání</h3>
+            <p>Strojová výšivka přímo na hotový oděv — precizní, trvalé a reprezentativní. Ideální pro loga a firemní označení.</p>
+          </div>
+        </div>
+        <div class="branding-card reveal reveal-delay-2">
+          <img src="images/branding-potisk.png" alt="Sítotisk — logo M+P na tmavém tričku" loading="lazy" />
+          <div class="branding-card-label">
+            <h3>Potisk</h3>
+            <p>Sítotisk pro větší plochy a barevné motivy. Barva drží i po mnoha pracích cyklech.</p>
           </div>
         </div>
       </div>
