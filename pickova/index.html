@@ -204,21 +204,20 @@
 
     .hero-logo {
       position: absolute;
-      top: 50%;
-      left: 18%;
-      transform: translate(-50%, -55%);
-      width: 220px;
-      opacity: 0;
-      animation: fadeIn 1.2s ease 0.1s forwards;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(350px, 50%, 550px);
       z-index: 0;
       pointer-events: none;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.2s forwards;
     }
 
     .hero-logo img {
       width: 100%;
       height: auto;
       display: block;
-      opacity: 0.045;
     }
 
     .hero-sub {
@@ -283,6 +282,7 @@
       cursor: pointer;
       transition: transform 0.4s, box-shadow 0.4s;
       box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      z-index: 2;
     }
 
     .bubble:hover {
@@ -1208,7 +1208,7 @@
        ═══════════════════════════════════════ */
     @media (max-width: 1024px) {
       .hero { grid-template-columns: 1fr; padding: 120px 48px 60px; text-align: center; }
-      .hero-logo { top: 110px; left: 50%; transform: translateX(-50%); width: 180px; }
+      .hero-logo { top: -15%; width: 250px; }
       .hero-sub { margin: 0 auto 40px; }
       .hero-bubbles { margin-top: 40px; min-height: 320px; }
       .hero-scroll { left: 48px; }
@@ -1255,8 +1255,7 @@
 
       .main { margin-left: 0; padding-bottom: 0; }
       .hero { padding: 80px 24px 60px; padding-top: 70px; }
-      .hero-logo { top: 75px; left: 50%; transform: translateX(-50%); width: 150px; }
-      .hero-logo img { opacity: 0.06; }
+      .hero-logo { top: -20%; width: 180px; }
       .hero-bubbles { min-height: 200px; transform: scale(0.45); transform-origin: center center; }
       .hero-bubbles .bubble:hover { transform: translate(var(--x), var(--y)) scale(1.05); }
       .hero-scroll { left: 24px; }
@@ -1319,13 +1318,13 @@
     <!-- HERO -->
     <section class="hero" id="hero">
       <div class="hero-text">
-        <div class="hero-logo"><img src="images/mag-logo.png" alt="MAG" /></div>
         <div class="hero-eyebrow">Ruční práce · Český design</div>
         <h1 class="hero-title">Tvůj originál<br>pro <em>každý den</em></h1>
         <p class="hero-sub">Sluchátka, notebook nebo drobnosti, které chceš mít v bezpečí a po ruce. Dopřej svým věcem originální kabátek z poctivé bavlny, který s tebou bude žít tvůj každodenní příběh.</p>
         <a class="hero-cta" onclick="navTo('products-section')">Prohlédnout kolekci <span></span></a>
       </div>
       <div class="hero-bubbles">
+        <div class="hero-logo"><img src="images/mag-logo.png" alt="MAG" /></div>
         <div class="bubble" style="--size:300px;--bg-color:#DAEAF8;--x:-100px;--y:-30px;--d:0s" onclick="openDetail('royal-blue')"><img src="images/royal-blue-1.png" /></div>
         <div class="bubble" style="--size:255px;--bg-color:#E8E0F2;--x:130px;--y:-90px;--d:0.1s" onclick="openDetail('lavender')"><img src="images/lavender-1.png" /></div>
         <div class="bubble" style="--size:230px;--bg-color:#F4DDE0;--x:20px;--y:130px;--d:0.2s" onclick="openDetail('ruby')"><img src="images/ruby-1.png" /></div>
