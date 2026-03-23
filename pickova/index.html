@@ -992,14 +992,8 @@
 
       .main { margin-left: 0; padding-bottom: 0; }
       .hero { padding: 80px 24px 60px; padding-top: 70px; }
-      .hero-bubbles { min-height: 350px; }
-      .hero-bubbles .bubble { animation-name: bubblePopMobile; }
-      .hero-bubbles .bubble:hover { transform: translate(var(--x), var(--y)) scale(0.35); }
-      @keyframes bubblePopMobile {
-        0% { opacity: 0; transform: translate(var(--x), var(--y)) scale(0.15); }
-        70% { transform: translate(var(--x), var(--y)) scale(0.33); }
-        100% { opacity: 1; transform: translate(var(--x), var(--y)) scale(0.3); }
-      }
+      .hero-bubbles { min-height: 200px; transform: scale(0.45); transform-origin: center center; }
+      .hero-bubbles .bubble:hover { transform: translate(var(--x), var(--y)) scale(1.05); }
       .hero-scroll { left: 24px; }
       .products-section { height: 700vh; }
       .product-panel { min-width: 100vw; padding: 40px 24px; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
