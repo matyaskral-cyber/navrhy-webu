@@ -239,7 +239,7 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      min-height: 550px;
+      min-height: 650px;
       opacity: 0;
       animation: fadeIn 1s ease 0.5s forwards;
     }
@@ -367,6 +367,7 @@
       display: flex;
       height: 100%;
       will-change: transform;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .product-panel {
@@ -1049,13 +1050,13 @@
         <a class="hero-cta" onclick="navTo('products-section')">Prohlédnout kolekci <span></span></a>
       </div>
       <div class="hero-bubbles">
-        <div class="bubble" style="--size:280px;--bg-color:#DAEAF8;--x:-100px;--y:-30px;--d:0s" onclick="openDetail('royal-blue')"><img src="images/royal-blue-1.png" /></div>
-        <div class="bubble" style="--size:240px;--bg-color:#E8E0F2;--x:120px;--y:-80px;--d:0.1s" onclick="openDetail('lavender')"><img src="images/lavender-1.png" /></div>
-        <div class="bubble" style="--size:220px;--bg-color:#F4DDE0;--x:20px;--y:110px;--d:0.2s" onclick="openDetail('ruby')"><img src="images/ruby-1.png" /></div>
-        <div class="bubble" style="--size:190px;--bg-color:#DCE8E0;--x:-220px;--y:100px;--d:0.3s" onclick="openDetail('sage')"><img class="life" src="images/sage-detail.jpg" /></div>
-        <div class="bubble" style="--size:175px;--bg-color:#F0EAE0;--x:240px;--y:60px;--d:0.4s" onclick="openDetail('beige')"><img class="life" src="images/beige-model.jpg" /></div>
-        <div class="bubble" style="--size:160px;--bg-color:#E2DDD6;--x:-260px;--y:-100px;--d:0.5s" onclick="openDetail('bicolor')"><img class="life" src="images/bicolor-mag.jpg" /></div>
-        <div class="bubble" style="--size:145px;--bg-color:#EDD9DB;--x:210px;--y:-140px;--d:0.6s" onclick="openDetail('rosewood')"><img class="life" src="images/pink-bordeaux.jpg" /></div>
+        <div class="bubble" style="--size:340px;--bg-color:#DAEAF8;--x:-120px;--y:-30px;--d:0s" onclick="openDetail('royal-blue')"><img src="images/royal-blue-1.png" /></div>
+        <div class="bubble" style="--size:290px;--bg-color:#E8E0F2;--x:150px;--y:-100px;--d:0.1s" onclick="openDetail('lavender')"><img src="images/lavender-1.png" /></div>
+        <div class="bubble" style="--size:260px;--bg-color:#F4DDE0;--x:30px;--y:140px;--d:0.2s" onclick="openDetail('ruby')"><img src="images/ruby-1.png" /></div>
+        <div class="bubble" style="--size:230px;--bg-color:#DCE8E0;--x:-280px;--y:120px;--d:0.3s" onclick="openDetail('sage')"><img class="life" src="images/sage-detail.jpg" /></div>
+        <div class="bubble" style="--size:210px;--bg-color:#F0EAE0;--x:300px;--y:70px;--d:0.4s" onclick="openDetail('beige')"><img class="life" src="images/beige-model.jpg" /></div>
+        <div class="bubble" style="--size:195px;--bg-color:#E2DDD6;--x:-320px;--y:-120px;--d:0.5s" onclick="openDetail('bicolor')"><img class="life" src="images/bicolor-mag.jpg" /></div>
+        <div class="bubble" style="--size:175px;--bg-color:#EDD9DB;--x:260px;--y:-170px;--d:0.6s" onclick="openDetail('rosewood')"><img class="life" src="images/pink-bordeaux.jpg" /></div>
       </div>
       <div class="hero-scroll">
         <div class="hero-scroll-line"></div>
@@ -1280,6 +1281,7 @@
     const dots = document.querySelectorAll('.progress-dot');
     const isMobile = () => window.innerWidth <= 768;
 
+    let currentPanel = 0;
     function updateHScroll() {
       if (isMobile() || !psec || !track) return;
       const rect = psec.getBoundingClientRect();
@@ -1288,18 +1290,14 @@
       const panels = track.children.length;
       const panelW = window.innerWidth - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar'));
 
-      /* snap: zaokrouhlíme na nejbližší panel */
-      const rawPanel = progress * (panels - 1);
-      const snappedPanel = Math.round(rawPanel);
-      const snapProgress = snappedPanel / (panels - 1);
+      /* snap na nejbližší panel */
+      const snapped = Math.round(progress * (panels - 1));
+      if (snapped !== currentPanel) {
+        currentPanel = snapped;
+        track.style.transform = `translateX(${-currentPanel * panelW}px)`;
+      }
 
-      /* plynulý ease do snapu */
-      const diff = snapProgress - progress;
-      const eased = progress + diff * 0.35;
-
-      track.style.transform = `translateX(${-eased * (panels - 1) * panelW}px)`;
-
-      dots.forEach((d, i) => d.classList.toggle('active', i === snappedPanel));
+      dots.forEach((d, i) => d.classList.toggle('active', i === currentPanel));
     }
 
     /* ─── SIDEBAR NAV ────────────────────── */
