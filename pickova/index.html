@@ -992,10 +992,8 @@
       .main { margin-left: 0; padding-bottom: 60px; }
       .hero { padding: 80px 24px 60px; }
       .hero-scroll { left: 24px; }
-      .products-section { height: auto; }
-      .products-sticky { position: static; height: auto; }
-      .products-track { flex-direction: column; }
-      .product-panel { min-width: 100%; min-height: 80vh; }
+      .products-section { height: 700vh; }
+      .product-panel { min-width: 100vw; padding: 40px 24px; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
       .about { padding: 60px 24px; }
       .footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
       .detail-content { padding: 80px 24px 60px; margin-left: 0; }
@@ -1281,12 +1279,13 @@
     const isMobile = () => window.innerWidth <= 768;
 
     function updateHScroll() {
-      if (isMobile() || !psec || !track) return;
+      if (!psec || !track) return;
       const rect = psec.getBoundingClientRect();
       const h = psec.offsetHeight - window.innerHeight;
       const progress = Math.max(0, Math.min(1, -rect.top / h));
       const panels = track.children.length;
-      const pw = track.scrollWidth - (window.innerWidth - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar')));
+      const sidebar = window.innerWidth > 768 ? parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar')) : 0;
+      const pw = track.scrollWidth - (window.innerWidth - sidebar);
       track.style.transform = `translateX(${-progress * pw}px)`;
 
       const activePanel = Math.min(panels - 1, Math.floor(progress * panels));
