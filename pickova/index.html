@@ -352,7 +352,7 @@
        HORIZONTAL PRODUCTS SCROLL
        ═══════════════════════════════════════ */
     .products-section {
-      height: 700vh;
+      height: 800vh;
       position: relative;
     }
 
@@ -1286,11 +1286,20 @@
       const h = psec.offsetHeight - window.innerHeight;
       const progress = Math.max(0, Math.min(1, -rect.top / h));
       const panels = track.children.length;
-      const pw = track.scrollWidth - (window.innerWidth - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar')));
-      track.style.transform = `translateX(${-progress * pw}px)`;
+      const panelW = window.innerWidth - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar'));
 
-      const activePanel = Math.min(panels - 1, Math.floor(progress * panels));
-      dots.forEach((d, i) => d.classList.toggle('active', i === activePanel));
+      /* snap: zaokrouhlíme na nejbližší panel */
+      const rawPanel = progress * (panels - 1);
+      const snappedPanel = Math.round(rawPanel);
+      const snapProgress = snappedPanel / (panels - 1);
+
+      /* plynulý ease do snapu */
+      const diff = snapProgress - progress;
+      const eased = progress + diff * 0.35;
+
+      track.style.transform = `translateX(${-eased * (panels - 1) * panelW}px)`;
+
+      dots.forEach((d, i) => d.classList.toggle('active', i === snappedPanel));
     }
 
     /* ─── SIDEBAR NAV ────────────────────── */
