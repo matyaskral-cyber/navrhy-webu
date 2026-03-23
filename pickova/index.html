@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>magbag — Háčkované kabelky</title>
+  <meta name="description" content="Ručně háčkované kabelky na mobil. Slow fashion, český design." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sidebar: 72px;
+      --dark: #111111;
+      --bg: #fafafa;
+      --text: #111;
+      --text-mid: #555;
+      --text-light: #999;
+      --blue: #2956B2;
+      --lavender: #9B8BB4;
+      --ruby: #9B2335;
+      --blue-pastel: #DAEAF8;
+      --lavender-pastel: #E8E0F2;
+      --ruby-pastel: #F4DDE0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--dark); color: #fff; }
+
+    /* ═══════════════════════════════════════
+       SIDEBAR
+       ═══════════════════════════════════════ */
+    .sidebar {
+      position: fixed;
+      left: 0; top: 0;
+      width: var(--sidebar);
+      height: 100vh;
+      background: var(--dark);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 0;
+    }
+
+    .sidebar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+      cursor: pointer;
+      margin-bottom: 48px;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      flex: 1;
+    }
+
+    .sidebar-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .sidebar-dot:hover,
+    .sidebar-dot.active {
+      background: #fff;
+      border-color: #fff;
+    }
+
+    .sidebar-dot .dot-label {
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .sidebar-dot:hover .dot-label { opacity: 1; }
+
+    .sidebar-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .sidebar-cart {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .sidebar-cart svg { width: 20px; height: 20px; stroke: rgba(255,255,255,0.5); fill: none; stroke-width: 1.5; transition: stroke 0.3s; }
+    .sidebar-cart:hover svg { stroke: #fff; }
+
+    .cart-badge {
+      position: absolute;
+      top: -5px; right: -7px;
+      background: var(--ruby);
+      color: #fff;
+      font-size: 8px;
+      font-weight: 700;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cart-badge.visible { display: flex; }
+
+    .sidebar-social {
+      font-size: 10px;
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      letter-spacing: 1px;
+      writing-mode: vertical-rl;
+      transition: color 0.3s;
+    }
+
+    .sidebar-social:hover { color: rgba(255,255,255,0.8); }
+
+    /* ═══════════════════════════════════════
+       MAIN
+       ═══════════════════════════════════════ */
+    .main {
+      margin-left: var(--sidebar);
+    }
+
+    /* ═══════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 60px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-text { z-index: 1; }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 6vw, 88px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.4s forwards;
+    }
+
+    .hero-title em { font-style: italic; }
+
+    .hero-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-mid);
+      max-width: 340px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.6s forwards;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.8s forwards;
+      transition: gap 0.3s;
+    }
+
+    .hero-cta:hover { gap: 18px; }
+
+    .hero-cta span {
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: var(--text);
+    }
+
+    .hero-bubbles {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      min-height: 420px;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.5s forwards;
+    }
+
+    .bubble {
+      position: absolute;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      background: var(--bg-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transform: translate(var(--x), var(--y));
+      opacity: 0;
+      animation: bubblePop 0.6s ease calc(0.4s + var(--d, 0s)) forwards;
+      cursor: pointer;
+      transition: transform 0.4s, box-shadow 0.4s;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    }
+
+    .bubble:hover {
+      transform: translate(var(--x), var(--y)) scale(1.08);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      z-index: 5;
+    }
+
+    .bubble img {
+      width: 72%;
+      mix-blend-mode: multiply;
+      filter: contrast(1.05);
+    }
+
+    .bubble img.life {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mix-blend-mode: normal;
+      filter: none;
+    }
+
+    @keyframes bubblePop {
+      0% { opacity: 0; transform: translate(var(--x), var(--y)) scale(0.5); }
+      70% { transform: translate(var(--x), var(--y)) scale(1.05); }
+      100% { opacity: 1; transform: translate(var(--x), var(--y)) scale(1); }
+    }
+
+    /* legacy — keep for float animation ref */
+    .hero-circle {
+      display: none;
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 80px;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 1.2s forwards;
+    }
+
+    .hero-scroll-line {
+      width: 40px;
+      height: 1px;
+      background: var(--text-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-scroll-line::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--text);
+      animation: slideLine 2s ease-in-out infinite;
+    }
+
+    @keyframes slideLine {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* ═══════════════════════════════════════
+       HORIZONTAL PRODUCTS SCROLL
+       ═══════════════════════════════════════ */
+    .products-section {
+      height: 700vh;
+      position: relative;
+    }
+
+    .products-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .products-track {
+      display: flex;
+      height: 100%;
+      will-change: transform;
+    }
+
+    .product-panel {
+      min-width: calc(100vw - var(--sidebar));
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 60px 80px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .panel-index {
+      position: absolute;
+      top: 40px;
+      left: 80px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: rgba(0,0,0,0.15);
+    }
+
+    .panel-text {
+      max-width: 400px;
+    }
+
+    .panel-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.35);
+      margin-bottom: 16px;
+    }
+
+    .panel-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .panel-variant {
+      font-size: 14px;
+      color: var(--text-mid);
+      margin-bottom: 24px;
+    }
+
+    .panel-price {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 32px;
+    }
+
+    .panel-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text);
+      transition: gap 0.3s;
+    }
+
+    .panel-cta span {
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--text);
+    }
+
+    .product-panel:hover .panel-cta { gap: 16px; }
+
+    .panel-photo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .panel-photo img {
+      width: min(400px, 80%);
+      mix-blend-mode: multiply;
+      filter: contrast(1.05);
+      transition: transform 0.5s;
+    }
+
+    .panel-photo img.lifestyle {
+      mix-blend-mode: normal;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      filter: none;
+    }
+
+    .product-panel:hover .panel-photo img {
+      transform: scale(1.02);
+    }
+
+    /* Progress dots */
+    .products-progress {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .progress-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.12);
+      transition: all 0.3s;
+    }
+
+    .progress-dot.active {
+      background: var(--text);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* ═══════════════════════════════════════
+       ABOUT
+       ═══════════════════════════════════════ */
+    .about {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 80px;
+      background: #fff;
+    }
+
+    .about-photo {
+      aspect-ratio: 3/4;
+      max-width: 400px;
+      border-radius: 16px;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .about-photo-placeholder {
+      text-align: center;
+      color: #ccc;
+      font-size: 13px;
+    }
+
+    .about-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .about-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 400;
+      line-height: 1.25;
+      margin-bottom: 28px;
+    }
+
+    .about-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text-mid);
+      margin-bottom: 14px;
+      max-width: 440px;
+    }
+
+    .about-signature {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 28px;
+      margin-top: 28px;
+      opacity: 0.4;
+    }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════ */
+    .footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.5);
+      padding: 48px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .footer a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer a:hover { color: #fff; }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    /* ═══════════════════════════════════════
+       PRODUCT DETAIL OVERLAY
+       ═══════════════════════════════════════ */
+    .detail-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: var(--bg);
+      overflow-y: auto;
+      transform: translateY(100%);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .detail-overlay.active { transform: translateY(0); }
+
+    .detail-close {
+      position: fixed;
+      top: 28px;
+      left: calc(var(--sidebar) + 32px);
+      z-index: 210;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 24px;
+      font-size: 12px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-mid);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      transition: all 0.3s;
+    }
+
+    .detail-close:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
+    .detail-close svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    .detail-content {
+      margin-left: var(--sidebar);
+      max-width: 1200px;
+      padding: 100px 80px 80px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .viewer-wrap { position: sticky; top: 100px; }
+
+    .gallery-thumbs {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .gallery-thumb {
+      width: 64px; height: 64px;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      opacity: 0.4;
+      transition: all 0.3s;
+    }
+
+    .gallery-thumb:hover, .gallery-thumb.active { opacity: 1; border-color: var(--text); }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    .image-viewer {
+      aspect-ratio: 1;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    .image-viewer img { width: 100%; height: 100%; object-fit: cover; }
+
+    .image-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.85);
+      border: none;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      z-index: 2;
+      transition: background 0.3s;
+    }
+
+    .image-nav:hover { background: #fff; }
+    .image-nav.prev { left: 16px; }
+    .image-nav.next { right: 16px; }
+    .image-nav svg { width: 14px; height: 14px; stroke: var(--text); fill: none; stroke-width: 2; }
+
+    .detail-info { padding-top: 12px; }
+
+    .detail-brand {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+
+    .detail-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .detail-variant-label { font-size: 13px; color: var(--text-light); margin-bottom: 20px; }
+
+    .detail-price { font-size: 22px; font-weight: 500; margin-bottom: 20px; }
+
+    .detail-story {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-mid);
+      font-style: italic;
+      margin-bottom: 28px;
+      padding-left: 16px;
+      border-left: 2px solid #e0d8d0;
+    }
+
+    .swatches-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    .swatches { display: flex; gap: 12px; margin-bottom: 28px; }
+
+    .swatch {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      outline: 2px solid transparent;
+      outline-offset: 3px;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .swatch:hover { outline-color: #ccc; }
+    .swatch.active { outline-color: var(--text); }
+
+    .swatch-tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 9px;
+      white-space: nowrap;
+      background: var(--dark);
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 3px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .swatch:hover .swatch-tooltip { opacity: 1; }
+
+    .btn-cart {
+      width: 100%;
+      padding: 16px;
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-cart:hover { background: #333; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .btn-cart.added { background: #2E7D32; }
+
+    .detail-meta { margin-top: 32px; }
+
+    .meta-item {
+      display: flex;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 13px;
+    }
+
+    .meta-item:first-child { border-top: 1px solid #eee; }
+    .meta-label { font-weight: 500; }
+    .meta-value { color: var(--text-mid); }
+
+    .handmade-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      font-size: 11px;
+      color: var(--text-mid);
+    }
+
+    .detail-related {
+      margin-top: 100px;
+      padding-top: 48px;
+      border-top: 1px solid #eee;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .related-card { cursor: pointer; }
+
+    .related-card-img {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f0f0f0;
+      margin-bottom: 10px;
+    }
+
+    .related-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .related-card:hover img { transform: scale(1.03); }
+
+    .related-card-name { font-family: 'Playfair Display', serif; font-size: 14px; }
+    .related-card-price { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+    /* ═══════════════════════════════════════
+       CART SIDEBAR
+       ═══════════════════════════════════════ */
+    .cart-overlay-bg {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 300;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+      backdrop-filter: blur(4px);
+    }
+
+    .cart-overlay-bg.active { opacity: 1; pointer-events: all; }
+
+    .cart-sidebar {
+      position: fixed;
+      top: 0; right: 0;
+      width: min(400px, 85vw);
+      height: 100%;
+      background: #fff;
+      z-index: 310;
+      transform: translateX(100%);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-sidebar.active { transform: translateX(0); }
+
+    .cart-header {
+      padding: 22px 28px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-title { font-family: 'Playfair Display', serif; font-size: 18px; }
+
+    .cart-close { background: none; border: none; cursor: pointer; }
+    .cart-close svg { width: 18px; height: 18px; stroke: var(--text); fill: none; stroke-width: 1.5; }
+
+    .cart-items { flex: 1; overflow-y: auto; padding: 20px 28px; }
+
+    .cart-empty { text-align: center; padding: 60px 0; color: var(--text-light); font-size: 13px; }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .cart-item-img { width: 60px; height: 60px; border-radius: 8px; overflow: hidden; background: #f5f5f5; }
+    .cart-item-img img { width: 100%; height: 100%; object-fit: cover; }
+    .cart-item-name { font-size: 13px; font-weight: 500; }
+    .cart-item-variant { font-size: 11px; color: var(--text-light); margin-bottom: 6px; }
+
+    .cart-item-qty { display: flex; align-items: center; gap: 10px; }
+
+    .qty-btn {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      background: none;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .qty-btn:hover { border-color: var(--text); }
+
+    .cart-item-price { font-size: 13px; font-weight: 500; text-align: right; }
+    .cart-item-remove { font-size: 10px; color: var(--text-light); background: none; border: none; cursor: pointer; text-decoration: underline; margin-top: 4px; }
+
+    .cart-footer { padding: 20px 28px; border-top: 1px solid #eee; }
+    .cart-total { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .cart-total-label { font-size: 13px; color: var(--text-mid); }
+    .cart-total-price { font-size: 18px; font-weight: 600; }
+    .cart-shipping-note { font-size: 11px; color: var(--text-light); margin-bottom: 16px; }
+
+    .btn-checkout {
+      width: 100%;
+      padding: 14px;
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-checkout:hover { background: #333; }
+
+    /* ═══════════════════════════════════════
+       REVEAL
+       ═══════════════════════════════════════ */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+
+    [data-reveal].visible { opacity: 1; transform: translateY(0); }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; padding: 120px 48px 60px; text-align: center; }
+      .hero-sub { margin: 0 auto 40px; }
+      .hero-bubbles { margin-top: 40px; min-height: 320px; }
+      .hero-scroll { left: 48px; }
+      .product-panel { grid-template-columns: 1fr; padding: 60px 48px; text-align: center; }
+      .panel-text { max-width: 100%; margin: 0 auto; }
+      .panel-photo { margin-top: 32px; }
+      .about { grid-template-columns: 1fr; padding: 60px 48px; gap: 40px; }
+      .about-photo { max-width: 320px; margin: 0 auto; }
+      .detail-grid { grid-template-columns: 1fr; gap: 40px; }
+      .viewer-wrap { position: static; }
+      .detail-content { padding: 80px 48px 60px; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --sidebar: 0px; }
+      .sidebar { display: none; }
+
+      .mobile-nav {
+        display: flex !important;
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        background: var(--dark);
+        z-index: 100;
+        padding: 12px 24px;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .mobile-nav a, .mobile-nav button {
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.6);
+        font-size: 10px;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+      }
+
+      .mobile-nav svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+      .main { margin-left: 0; padding-bottom: 60px; }
+      .hero { padding: 80px 24px 60px; }
+      .hero-scroll { left: 24px; }
+      .products-section { height: auto; }
+      .products-sticky { position: static; height: auto; }
+      .products-track { flex-direction: column; }
+      .product-panel { min-width: 100%; min-height: 80vh; }
+      .about { padding: 60px 24px; }
+      .footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+      .detail-content { padding: 80px 24px 60px; margin-left: 0; }
+      .detail-close { left: 24px; }
+    }
+
+    .mobile-nav { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand" onclick="goHome()">MP</div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-dot active" data-section="hero" onclick="navTo('hero')">
+        <span class="dot-label">Domů</span>
+      </div>
+      <div class="sidebar-dot" data-section="products-section" onclick="navTo('products-section')">
+        <span class="dot-label">Kolekce</span>
+      </div>
+      <div class="sidebar-dot" data-section="about" onclick="navTo('about')">
+        <span class="dot-label">O mně</span>
+      </div>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="sidebar-cart" onclick="openCart()">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+      <a class="sidebar-social" href="https://instagram.com" target="_blank">IG</a>
+    </div>
+  </aside>
+
+  <!-- MOBILE NAV -->
+  <nav class="mobile-nav">
+    <a onclick="goHome()"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>Domů</a>
+    <a onclick="navTo('products-section')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Kolekce</a>
+    <button onclick="openCart()" style="position:relative"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Košík<span class="cart-badge" id="cartBadge2">0</span></button>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-text">
+        <div class="hero-eyebrow">Ruční práce · Český design</div>
+        <h1 class="hero-title">Háčkované<br>s <em>láskou</em></h1>
+        <p class="hero-sub">Každý kousek je originál. Navrženo a ručně vyrobeno v České republice z kvalitní bavlněné příze.</p>
+        <a class="hero-cta" onclick="navTo('products-section')">Prohlédnout kolekci <span></span></a>
+      </div>
+      <div class="hero-bubbles">
+        <div class="bubble" style="--size:200px;--bg-color:#DAEAF8;--x:-80px;--y:-30px;--d:0s" onclick="openDetail('royal-blue')"><img src="images/royal-blue-1.png" /></div>
+        <div class="bubble" style="--size:170px;--bg-color:#E8E0F2;--x:70px;--y:-60px;--d:0.1s" onclick="openDetail('lavender')"><img src="images/lavender-1.png" /></div>
+        <div class="bubble" style="--size:155px;--bg-color:#F4DDE0;--x:10px;--y:80px;--d:0.2s" onclick="openDetail('ruby')"><img src="images/ruby-1.png" /></div>
+        <div class="bubble" style="--size:130px;--bg-color:#DCE8E0;--x:-140px;--y:70px;--d:0.3s" onclick="openDetail('sage')"><img class="life" src="images/sage-detail.jpg" /></div>
+        <div class="bubble" style="--size:120px;--bg-color:#F0EAE0;--x:160px;--y:40px;--d:0.4s" onclick="openDetail('beige')"><img class="life" src="images/beige-model.jpg" /></div>
+        <div class="bubble" style="--size:110px;--bg-color:#E2DDD6;--x:-170px;--y:-80px;--d:0.5s" onclick="openDetail('bicolor')"><img class="life" src="images/bicolor-mag.jpg" /></div>
+        <div class="bubble" style="--size:100px;--bg-color:#EDD9DB;--x:140px;--y:-100px;--d:0.6s" onclick="openDetail('rosewood')"><img class="life" src="images/pink-bordeaux.jpg" /></div>
+      </div>
+      <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        Scroll
+      </div>
+    </section>
+
+    <!-- HORIZONTAL PRODUCTS -->
+    <section class="products-section" id="products-section">
+      <div class="products-sticky">
+        <div class="products-track" id="productsTrack">
+
+          <div class="product-panel" style="background:var(--blue-pastel)" onclick="openDetail('royal-blue')">
+            <div class="panel-index">01 / 07</div>
+            <div class="panel-text">
+              <div class="panel-label">Kabelka na mobil</div>
+              <div class="panel-name">Royal<br>Blue</div>
+              <div class="panel-variant">Crossbody · bavlněná příze</div>
+              <div class="panel-price">859 Kč</div>
+              <div class="panel-cta">Zobrazit detail <span></span></div>
+            </div>
+            <div class="panel-photo">
+              <img src="images/royal-blue-1.png" alt="Royal Blue" />
+            </div>
+          </div>
+
+          <div class="product-panel" style="background:var(--lavender-pastel)" onclick="openDetail('lavender')">
+            <div class="panel-index">02 / 07</div>
+            <div class="panel-text">
+              <div class="panel-label">Kabelka na mobil</div>
+              <div class="panel-name">Lavender</div>
+              <div class="panel-variant">Crossbody · bavlněná příze</div>
+              <div class="panel-price">859 Kč</div>
+              <div class="panel-cta">Zobrazit detail <span></span></div>
+            </div>
+            <div class="panel-photo">
+              <img src="images/lavender-1.png" alt="Lavender" />
+            </div>
+          </div>
+
+          <div class="product-panel" style="background:var(--ruby-pastel)" onclick="openDetail('ruby')">
+            <div class="panel-index">03 / 07</div>
+            <div class="panel-text">
+              <div class="panel-label">Kabelka na mobil</div>
+              <div class="panel-name">Ruby</div>
+              <div class="panel-variant">Crossbody · bavlněná příze</div>
+              <div class="panel-price">859 Kč</div>
+              <div class="panel-cta">Zobrazit detail <span></span></div>
+            </div>
+            <div class="panel-photo">
+              <img src="images/ruby-1.png" alt="Ruby" />
+            </div>
+          </div>
+
+          <div class="product-panel" style="background:#DCE8E0" onclick="openDetail('sage')">
+            <div class="panel-index">04 / 07</div>
+            <div class="panel-text">
+              <div class="panel-label">Kabelka</div>
+              <div class="panel-name">Sage</div>
+              <div class="panel-variant">Mini tote · bavlněná příze</div>
+              <div class="panel-price">990 Kč</div>
+              <div class="panel-cta">Zobrazit detail <span></span></div>
+            </div>
+            <div class="panel-photo">
+              <img class="lifestyle" src="images/sage-detail.jpg" alt="Sage" />
+            </div>
+          </div>
+
+          <div class="product-panel" style="background:#F0EAE0" onclick="openDetail('beige')">
+            <div class="panel-index">05 / 07</div>
+            <div class="panel-text">
+              <div class="panel-label">Kabelka</div>
+              <div class="panel-name">Sand</div>
+              <div class="panel-variant">Crossbody · bavlněná příze</div>
+              <div class="panel-price">859 Kč</div>
+              <div class="panel-cta">Zobrazit detail <span></span></div>
+            </div>
+            <div class="panel-photo">
+              <img class="lifestyle" src="images/beige-model.jpg" alt="Sand" />
+            </div>
+          </div>
+
+          <div class="product-panel" style="background:#E2DDD6" onclick="openDetail('bicolor')">
+            <div class="panel-index">06 / 07</div>
+            <div class="panel-text">
+              <div class="panel-label">Kabelka</div>
+              <div class="panel-name">Noir<br>&amp; Crème</div>
+              <div class="panel-variant">Mini tote · dvoubarevná</div>
+              <div class="panel-price">1 190 Kč</div>
+              <div class="panel-cta">Zobrazit detail <span></span></div>
+            </div>
+            <div class="panel-photo">
+              <img class="lifestyle" src="images/bicolor-mag.jpg" alt="Noir & Crème" />
+            </div>
+          </div>
+
+          <div class="product-panel" style="background:#EDD9DB" onclick="openDetail('rosewood')">
+            <div class="panel-index">07 / 07</div>
+            <div class="panel-text">
+              <div class="panel-label">Obal na notebook</div>
+              <div class="panel-name">Rosewood</div>
+              <div class="panel-variant">Sleeve · gradient dvoubarevný</div>
+              <div class="panel-price">1 490 Kč</div>
+              <div class="panel-cta">Zobrazit detail <span></span></div>
+            </div>
+            <div class="panel-photo">
+              <img class="lifestyle" src="images/pink-bordeaux.jpg" alt="Rosewood" />
+            </div>
+          </div>
+
+
+        </div>
+        <div class="products-progress" id="productsProgress">
+          <div class="progress-dot active"></div>
+          <div class="progress-dot"></div>
+          <div class="progress-dot"></div>
+          <div class="progress-dot"></div>
+          <div class="progress-dot"></div>
+          <div class="progress-dot"></div>
+          <div class="progress-dot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="about-photo" data-reveal>
+        <div style="width:100%;height:100%;background:#f0ede8;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:12px;letter-spacing:1px;text-transform:uppercase;">Foto již brzy</div>
+      </div>
+      <div data-reveal>
+        <div class="about-eyebrow">O mně</div>
+        <h2 class="about-title">Ahoj, jsem<br>magbag</h2>
+        <p class="about-text">Háčkovat mě naučila babička. Začínala jsem u nekonečných řetízků a ona mi trpělivě ukazovala, jak na to. Tehdy by mě ani ve snu nenapadlo, že mě háček a příze jednou takhle chytnou.</p>
+        <p class="about-text">Dnes tvořím háčkované kabelky, pouzdra na sluchátka nebo obaly na notebooky — vlastně cokoli, co si zaslouží originální a měkký obal. Každý kousek vzniká pomalu a s péčí, od prvního očka až po poslední steh. Žádné šablony, jen já, příze, háček a oblíbený playlist v uších.</p>
+        <p class="about-text">Baví mě, že každý kousek, který mi projde pod rukama, je jedinečný. Mám radost z každého momentu, kdy moje tvorba ožije v běžném životě — když si mou kabelku vezmete do města nebo v kavárně vytáhnete notebook v mém obalu. Dává mi smysl tvořit věci, které pak s vámi žijí váš každodenní příběh v ulicích města.</p>
+        <div class="about-signature">— Mag ♡</div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span>&copy; 2025 magbag</span>
+      <div class="footer-links">
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+        <a href="mailto:info@magdalenapickova.cz">Kontakt</a>
+        <span>Doprava zdarma nad 1 500 Kč</span>
+      </div>
+    </footer>
+  </main>
+
+  <!-- PRODUCT DETAIL -->
+  <div class="detail-overlay" id="detailOverlay">
+    <button class="detail-close" onclick="closeDetail()">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Zpět
+    </button>
+    <div class="detail-content">
+      <div class="detail-grid">
+        <div class="viewer-wrap">
+          <div class="image-viewer active" id="imageViewer">
+            <img id="imageViewerImg" src="" alt="" />
+            <button class="image-nav prev" onclick="prevImage()"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button class="image-nav next" onclick="nextImage()"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+          </div>
+          <div class="gallery-thumbs" id="galleryThumbs"></div>
+        </div>
+        <div class="detail-info">
+          <div class="detail-brand">magbag</div>
+          <h1 class="detail-name" id="detailName"></h1>
+          <div class="detail-variant-label" id="detailVariant"></div>
+          <div class="detail-price" id="detailPrice"></div>
+          <div class="swatches-label">Barva</div>
+          <div class="swatches" id="swatches"></div>
+          <button class="btn-cart" id="btnAddCart" onclick="addToCart()">Přidat do košíku</button>
+          <p class="detail-story" id="detailStory"></p>
+          <div class="detail-meta">
+            <div class="meta-item"><span class="meta-label">Materiál</span><span class="meta-value">100% bavlněná příze</span></div>
+            <div class="meta-item"><span class="meta-label">Rozměry</span><span class="meta-value">12 × 17,5 × 4 cm</span></div>
+            <div class="meta-item"><span class="meta-label">Péče</span><span class="meta-value">Ruční praní do 30 °C</span></div>
+          </div>
+          <div class="handmade-badge">♡ Vyrobeno ručně v České republice</div>
+        </div>
+      </div>
+      <div class="detail-related"><div class="about-eyebrow">Další barvy</div>
+        <div class="related-grid" id="relatedGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CART -->
+  <div class="cart-overlay-bg" id="cartOverlay" onclick="closeCart()"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <div class="cart-title">Košík</div>
+      <button class="cart-close" onclick="closeCart()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty">Košík je prázdný</div></div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total"><span class="cart-total-label">Celkem</span><span class="cart-total-price" id="cartTotal">0 Kč</span></div>
+      <div class="cart-shipping-note">Doprava zdarma nad 1 500 Kč</div>
+      <button class="btn-checkout" onclick="alert('Platební brána bude brzy k dispozici.')">Objednat</button>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script>
+    const products = {
+      'royal-blue': { id:'royal-blue', name:'Háčkovaná kabelka na mobil', variant:'Royal Blue', price:859, colorHex:'#2956B2', pastel:'#DAEAF8', story:'Modrá je moje srdcová. Tuhle kabelku jsem háčkovala jako úplně první — a dodneška je nejoblíbenější. Prostě klasika, co nikdy neomrzí.', images:['images/royal-blue-1.png','images/royal-blue-2.png','images/royal-blue-3.png'] },
+      'lavender':   { id:'lavender',   name:'Háčkovaná kabelka na mobil', variant:'Lavender',   price:859, colorHex:'#9B8BB4', pastel:'#E8E0F2', story:'Vznikla jednoho léta v kavárně. Chtěla jsem barvu, co voní levandulovým polem a hodí se ke všemu — od šatů po džíny.', images:['images/lavender-1.png','images/lavender-2.png','images/lavender-3.png'] },
+      'ruby':       { id:'ruby',       name:'Háčkovaná kabelka na mobil', variant:'Ruby',       price:859, colorHex:'#9B2335', pastel:'#F4DDE0', story:'Ruby je pro ty odvážnější. Chtěla jsem barvu, co přitáhne pohledy a dodá outfitu šmrnc. Když ji vidíte, poznáte ji.', images:['images/ruby-1.png','images/ruby-2.png','images/ruby-3.png'] },
+      'sage':       { id:'sage',       name:'Mini tote kabelka',          variant:'Sage',        price:990, colorHex:'#8FAF9B', pastel:'#DCE8E0', story:'Šalvějová zelená mě uklidňuje. Tuhle tote bag jsem háčkovala u otevřeného okna na jaře — a je na ní vidět ten klid.', images:['images/sage-detail.jpg','images/sage-pair.jpg'] },
+      'beige':      { id:'beige',      name:'Háčkovaná kabelka',          variant:'Sand',        price:859, colorHex:'#C4AD8F', pastel:'#F0EAE0', story:'Neutrální, elegantní a přitom originální. Sand se hodí ke všemu a je ideální pro ty, kdo chtějí jemnost bez kompromisů.', images:['images/beige-model.jpg'] },
+      'bicolor':    { id:'bicolor',    name:'Mini tote kabelka',          variant:'Noir & Crème', price:1190, colorHex:'#3D3029', pastel:'#E2DDD6', story:'Dvoubarevná kombinace, co mě napadla při koukání na staré filmy. Černobílá, ale úplně jinak — a překvapivě praktická.', images:['images/bicolor-mag.jpg'] },
+      'rosewood':   { id:'rosewood',   name:'Obal na notebook',           variant:'Rosewood',    price:1490, colorHex:'#B07080', pastel:'#EDD9DB', story:'Přechod z růžové do bordó — jako západ slunce v říjnu. Chtěla jsem, aby i notebook měl svůj měkký a originální obal.', images:['images/pink-bordeaux.jpg'] }
+    };
+
+    let cur = null, imgIdx = 0;
+    let cart = JSON.parse(localStorage.getItem('mp_cart') || '[]');
+
+    /* ─── HORIZONTAL SCROLL ──────────────── */
+    const psec = document.getElementById('products-section');
+    const track = document.getElementById('productsTrack');
+    const dots = document.querySelectorAll('.progress-dot');
+    const isMobile = () => window.innerWidth <= 768;
+
+    function updateHScroll() {
+      if (isMobile() || !psec || !track) return;
+      const rect = psec.getBoundingClientRect();
+      const h = psec.offsetHeight - window.innerHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / h));
+      const panels = track.children.length;
+      const pw = track.scrollWidth - (window.innerWidth - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar')));
+      track.style.transform = `translateX(${-progress * pw}px)`;
+
+      const activePanel = Math.min(panels - 1, Math.floor(progress * panels));
+      dots.forEach((d, i) => d.classList.toggle('active', i === activePanel));
+    }
+
+    /* ─── SIDEBAR NAV ────────────────────── */
+    const sidebarDots = document.querySelectorAll('.sidebar-dot');
+
+    function updateSidebarNav() {
+      const sections = ['hero', 'products-section', 'about'];
+      let active = 'hero';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= window.innerHeight / 2) active = id;
+      });
+      sidebarDots.forEach(d => d.classList.toggle('active', d.dataset.section === active));
+    }
+
+    window.addEventListener('scroll', () => { updateHScroll(); updateSidebarNav(); });
+
+    window.navTo = (id) => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    window.goHome = () => { closeDetail(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+    /* ─── IMAGE GALLERY ──────────────────── */
+    function updImg(){if(cur)document.getElementById('imageViewerImg').src=cur.images[imgIdx];}
+    function updThumbs(){document.querySelectorAll('.gallery-thumb').forEach((t,i)=>t.classList.toggle('active',i===imgIdx));}
+    window.nextImage=()=>{if(!cur)return;imgIdx=(imgIdx+1)%cur.images.length;updImg();updThumbs();};
+    window.prevImage=()=>{if(!cur)return;imgIdx=(imgIdx-1+cur.images.length)%cur.images.length;updImg();updThumbs();};
+
+    /* ─── DETAIL ─────────────────────────── */
+    window.openDetail=(id)=>{
+      cur=products[id];if(!cur)return;imgIdx=0;
+      document.getElementById('detailName').textContent=cur.name;
+      document.getElementById('detailVariant').textContent=cur.variant;
+      document.getElementById('detailPrice').textContent=cur.price+' Kč';
+      document.getElementById('detailStory').textContent=cur.story||'';
+      const sw=document.getElementById('swatches');sw.innerHTML='';
+      Object.values(products).forEach(p=>{const s=document.createElement('div');s.className='swatch'+(p.id===id?' active':'');s.style.background=p.colorHex;s.innerHTML=`<span class="swatch-tooltip">${p.variant}</span>`;s.onclick=()=>openDetail(p.id);sw.appendChild(s);});
+      const th=document.getElementById('galleryThumbs');th.innerHTML='';
+      cur.images.forEach((img,i)=>{const t=document.createElement('div');t.className='gallery-thumb'+(i===0?' active':'');t.innerHTML=`<img src="${img}" />`;t.onclick=()=>{imgIdx=i;updImg();updThumbs();};th.appendChild(t);});
+      const rg=document.getElementById('relatedGrid');rg.innerHTML='';
+      Object.values(products).filter(p=>p.id!==id).forEach(p=>{const c=document.createElement('div');c.className='related-card';c.onclick=()=>openDetail(p.id);c.innerHTML=`<div class="related-card-img"><img src="${p.images[0]}" /></div><div class="related-card-name">${p.variant}</div><div class="related-card-price">${p.price} Kč</div>`;rg.appendChild(c);});
+      const btn=document.getElementById('btnAddCart');btn.textContent='Přidat do košíku';btn.classList.remove('added');
+      updImg();
+      document.getElementById('detailOverlay').classList.add('active');
+      document.getElementById('detailOverlay').scrollTop=0;
+      document.body.style.overflow='hidden';
+    };
+    window.closeDetail=()=>{document.getElementById('detailOverlay').classList.remove('active');document.body.style.overflow='';};
+
+    /* ─── CART ────────────────────────────── */
+    function saveCart(){localStorage.setItem('mp_cart',JSON.stringify(cart));updBadge();renderCart();}
+    function updBadge(){const n=cart.reduce((s,i)=>s+i.qty,0);document.querySelectorAll('.cart-badge').forEach(b=>{b.textContent=n;b.classList.toggle('visible',n>0);});}
+    window.addToCart=()=>{if(!cur)return;const ex=cart.find(i=>i.id===cur.id);if(ex)ex.qty++;else cart.push({id:cur.id,name:cur.name,variant:cur.variant,price:cur.price,image:cur.images[0],qty:1});saveCart();const btn=document.getElementById('btnAddCart');btn.textContent='Přidáno ✓';btn.classList.add('added');setTimeout(()=>{btn.textContent='Přidat do košíku';btn.classList.remove('added');},1500);};
+    function renderCart(){const el=document.getElementById('cartItems'),ft=document.getElementById('cartFooter');if(!cart.length){el.innerHTML='<div class="cart-empty">Košík je prázdný</div>';ft.style.display='none';return;}ft.style.display='block';let total=0;el.innerHTML=cart.map((item,i)=>{total+=item.price*item.qty;return`<div class="cart-item"><div class="cart-item-img"><img src="${item.image}" /></div><div><div class="cart-item-name">${item.name}</div><div class="cart-item-variant">${item.variant}</div><div class="cart-item-qty"><button class="qty-btn" onclick="changeQty(${i},-1)">−</button><span>${item.qty}</span><button class="qty-btn" onclick="changeQty(${i},1)">+</button></div></div><div><div class="cart-item-price">${item.price*item.qty} Kč</div><button class="cart-item-remove" onclick="removeItem(${i})">Odebrat</button></div></div>`;}).join('');document.getElementById('cartTotal').textContent=total+' Kč';}
+    window.changeQty=(i,d)=>{cart[i].qty=Math.max(1,cart[i].qty+d);saveCart();};
+    window.removeItem=(i)=>{cart.splice(i,1);saveCart();};
+    window.openCart=()=>{document.getElementById('cartSidebar').classList.add('active');document.getElementById('cartOverlay').classList.add('active');};
+    window.closeCart=()=>{document.getElementById('cartSidebar').classList.remove('active');document.getElementById('cartOverlay').classList.remove('active');};
+
+    document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){if(document.getElementById('cartSidebar').classList.contains('active'))closeCart();else if(document.getElementById('detailOverlay').classList.contains('active'))closeDetail();}});
+
+    const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.1});
+    document.querySelectorAll('[data-reveal]').forEach(el=>obs.observe(el));
+
+    updBadge(); renderCart();
+  </script>
+</body>
+</html>
