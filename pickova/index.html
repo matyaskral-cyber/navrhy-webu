@@ -1341,7 +1341,7 @@
       document.getElementById('detailPrice').textContent=cur.price+' Kč';
       document.getElementById('detailStory').textContent=cur.story||'';
       const sw=document.getElementById('swatches');sw.innerHTML='';
-      Object.values(products).forEach(p=>{const s=document.createElement('div');s.className='swatch'+(p.id===id?' active':'');s.style.background=p.colorHex;s.innerHTML=`<span class="swatch-tooltip">${p.variant}</span>`;s.onclick=()=>openDetail(p.id);sw.appendChild(s);});
+      Object.values(products).filter(p=>p.name===cur.name).forEach(p=>{const s=document.createElement('div');s.className='swatch'+(p.id===id?' active':'');s.style.background=p.colorHex;s.innerHTML=`<span class="swatch-tooltip">${p.variant}</span>`;s.onclick=()=>openDetail(p.id);sw.appendChild(s);});
       const th=document.getElementById('galleryThumbs');th.innerHTML='';
       cur.images.forEach((img,i)=>{const t=document.createElement('div');t.className='gallery-thumb'+(i===0?' active':'');t.innerHTML=`<img src="${img}" />`;t.onclick=()=>{imgIdx=i;updImg();updThumbs();};th.appendChild(t);});
       const rg=document.getElementById('relatedGrid');rg.innerHTML='';
