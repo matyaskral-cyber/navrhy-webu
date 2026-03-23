@@ -352,7 +352,7 @@
        HORIZONTAL PRODUCTS SCROLL
        ═══════════════════════════════════════ */
     .products-section {
-      height: 700vh;
+      height: 800vh;
       position: relative;
     }
 
@@ -493,6 +493,245 @@
       background: var(--text);
       width: 24px;
       border-radius: 4px;
+    }
+
+    /* ═══════════════════════════════════════
+       CONFIGURATOR PANEL
+       ═══════════════════════════════════════ */
+    .config-panel {
+      min-width: calc(100vw - var(--sidebar));
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 60px 80px;
+      position: relative;
+      background: #F5F0EB;
+    }
+
+    .config-panel .panel-index {
+      position: absolute;
+      top: 40px;
+      left: 80px;
+    }
+
+    .config-left { max-width: 400px; }
+
+    .config-left .panel-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.35);
+      margin-bottom: 16px;
+    }
+
+    .config-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .config-left h2 em { font-style: italic; }
+
+    .config-left p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-mid);
+    }
+
+    .config-right {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .config-step-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+
+    .config-shapes {
+      display: flex;
+      gap: 12px;
+    }
+
+    .config-shape {
+      flex: 1;
+      padding: 16px 12px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+      text-align: center;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.25s;
+    }
+
+    .config-shape:hover { border-color: #aaa; }
+    .config-shape.active { border-color: var(--text); background: var(--text); color: #fff; }
+
+    .config-shape-icon {
+      font-size: 28px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .config-sizes {
+      display: flex;
+      gap: 10px;
+    }
+
+    .config-size {
+      padding: 10px 22px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.25s;
+    }
+
+    .config-size:hover { border-color: #aaa; }
+    .config-size.active { border-color: var(--text); background: var(--text); color: #fff; }
+
+    .config-colors {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .config-color {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      transition: all 0.25s;
+    }
+
+    .config-color:hover { outline-color: #ccc; }
+    .config-color.active { outline-color: var(--text); }
+
+    .config-bicolor-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .config-bicolor-toggle label {
+      font-size: 13px;
+      color: var(--text-mid);
+      cursor: pointer;
+    }
+
+    .config-toggle-switch {
+      position: relative;
+      width: 42px;
+      height: 24px;
+      background: #ddd;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+      border: none;
+      padding: 0;
+    }
+
+    .config-toggle-switch.active { background: var(--text); }
+
+    .config-toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+
+    .config-toggle-switch.active::after { transform: translateX(18px); }
+
+    .config-color-row2 {
+      display: none;
+      margin-top: 4px;
+    }
+
+    .config-color-row2.visible { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .config-color-row2-label {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-bottom: 6px;
+      display: none;
+    }
+
+    .config-color-row2-label.visible { display: block; }
+
+    .config-price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .config-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .config-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .config-cta:hover { background: #333; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+    @media (max-width: 1024px) {
+      .config-panel { grid-template-columns: 1fr; padding: 60px 48px; text-align: center; }
+      .config-left { max-width: 100%; margin: 0 auto 32px; }
+      .config-shapes { flex-wrap: wrap; justify-content: center; }
+      .config-sizes { justify-content: center; }
+      .config-colors, .config-color-row2 { justify-content: center; }
+      .config-price-row { justify-content: center; flex-direction: column; align-items: center; gap: 16px; }
+    }
+
+    @media (max-width: 768px) {
+      .config-panel { min-width: 100vw; padding: 40px 24px; grid-template-columns: 1fr; grid-template-rows: auto auto; }
+      .config-shapes { flex-direction: column; }
+      .config-shape { padding: 12px; }
     }
 
     /* ═══════════════════════════════════════
@@ -995,7 +1234,7 @@
       .hero-bubbles { min-height: 200px; transform: scale(0.45); transform-origin: center center; }
       .hero-bubbles .bubble:hover { transform: translate(var(--x), var(--y)) scale(1.05); }
       .hero-scroll { left: 24px; }
-      .products-section { height: 700vh; }
+      .products-section { height: 800vh; }
       .product-panel { min-width: 100vw; padding: 40px 24px; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
       .about { padding: 60px 24px; }
       .footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
@@ -1080,7 +1319,7 @@
         <div class="products-track" id="productsTrack">
 
           <div class="product-panel" style="background:var(--blue-pastel)" onclick="openDetail('royal-blue')">
-            <div class="panel-index">01 / 07</div>
+            <div class="panel-index">01 / 08</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka na mobil</div>
               <div class="panel-name">Royal<br>Blue</div>
@@ -1094,7 +1333,7 @@
           </div>
 
           <div class="product-panel" style="background:var(--lavender-pastel)" onclick="openDetail('lavender')">
-            <div class="panel-index">02 / 07</div>
+            <div class="panel-index">02 / 08</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka na mobil</div>
               <div class="panel-name">Lavender</div>
@@ -1108,7 +1347,7 @@
           </div>
 
           <div class="product-panel" style="background:var(--ruby-pastel)" onclick="openDetail('ruby')">
-            <div class="panel-index">03 / 07</div>
+            <div class="panel-index">03 / 08</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka na mobil</div>
               <div class="panel-name">Ruby</div>
@@ -1122,7 +1361,7 @@
           </div>
 
           <div class="product-panel" style="background:#DCE8E0" onclick="openDetail('sage')">
-            <div class="panel-index">04 / 07</div>
+            <div class="panel-index">04 / 08</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka</div>
               <div class="panel-name">Sage</div>
@@ -1136,7 +1375,7 @@
           </div>
 
           <div class="product-panel" style="background:#F0EAE0" onclick="openDetail('beige')">
-            <div class="panel-index">05 / 07</div>
+            <div class="panel-index">05 / 08</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka</div>
               <div class="panel-name">Sand</div>
@@ -1150,7 +1389,7 @@
           </div>
 
           <div class="product-panel" style="background:#E2DDD6" onclick="openDetail('bicolor')">
-            <div class="panel-index">06 / 07</div>
+            <div class="panel-index">06 / 08</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka</div>
               <div class="panel-name">Noir<br>&amp; Crème</div>
@@ -1164,7 +1403,7 @@
           </div>
 
           <div class="product-panel" style="background:#EDD9DB" onclick="openDetail('rosewood')">
-            <div class="panel-index">07 / 07</div>
+            <div class="panel-index">07 / 08</div>
             <div class="panel-text">
               <div class="panel-label">Obal na notebook</div>
               <div class="panel-name">Rosewood</div>
@@ -1177,10 +1416,83 @@
             </div>
           </div>
 
+          <!-- KONFIGURÁTOR NA MÍRU -->
+          <div class="config-panel" id="configPanel">
+            <div class="panel-index">08 / 08</div>
+            <div class="config-left">
+              <div class="panel-label">Na míru</div>
+              <h2>A teď to nejlepší — nesedla ti barva?<br><em>Sestav si vlastní.</em></h2>
+              <p>Vyber si tvar, velikost a barvu — a my ti uháčkujeme přesně to, co chceš. Každý kousek je originál.</p>
+            </div>
+            <div class="config-right">
+              <!-- TVAR -->
+              <div>
+                <div class="config-step-label">1. Tvar</div>
+                <div class="config-shapes">
+                  <div class="config-shape active" data-shape="crossbody" onclick="pickShape(this)">
+                    <span class="config-shape-icon">👜</span>
+                    Crossbody kabelka
+                  </div>
+                  <div class="config-shape" data-shape="tote" onclick="pickShape(this)">
+                    <span class="config-shape-icon">🛍</span>
+                    Mini tote
+                  </div>
+                  <div class="config-shape" data-shape="notebook" onclick="pickShape(this)">
+                    <span class="config-shape-icon">💻</span>
+                    Obal na notebook
+                  </div>
+                </div>
+              </div>
+              <!-- VELIKOST -->
+              <div>
+                <div class="config-step-label">2. Velikost</div>
+                <div class="config-sizes" id="configSizes">
+                  <div class="config-size active" data-size="S" onclick="pickSize(this)">S</div>
+                  <div class="config-size" data-size="M" onclick="pickSize(this)">M</div>
+                  <div class="config-size" data-size="L" onclick="pickSize(this)">L</div>
+                </div>
+              </div>
+              <!-- BARVA -->
+              <div>
+                <div class="config-step-label">3. Barva</div>
+                <div class="config-colors" id="configColors">
+                  <div class="config-color active" data-color="Modrá" style="background:#2956B2" onclick="pickColor(this)"></div>
+                  <div class="config-color" data-color="Levandulová" style="background:#9B8BB4" onclick="pickColor(this)"></div>
+                  <div class="config-color" data-color="Rubínová" style="background:#9B2335" onclick="pickColor(this)"></div>
+                  <div class="config-color" data-color="Šalvějová" style="background:#8FAF9B" onclick="pickColor(this)"></div>
+                  <div class="config-color" data-color="Béžová" style="background:#C4AD8F" onclick="pickColor(this)"></div>
+                  <div class="config-color" data-color="Černá" style="background:#222222" onclick="pickColor(this)"></div>
+                  <div class="config-color" data-color="Bílá" style="background:#F5F5F5;border:1px solid #ddd" onclick="pickColor(this)"></div>
+                  <div class="config-color" data-color="Růžová" style="background:#E8A0B4" onclick="pickColor(this)"></div>
+                </div>
+                <div class="config-bicolor-toggle">
+                  <button class="config-toggle-switch" id="bicolorToggle" onclick="toggleBicolor()"></button>
+                  <label onclick="toggleBicolor()">Dvoubarevná (+150 Kč)</label>
+                </div>
+                <div class="config-color-row2-label" id="colorRow2Label">Barva lemu</div>
+                <div class="config-color-row2" id="configColors2">
+                  <div class="config-color" data-color2="Modrá" style="background:#2956B2" onclick="pickColor2(this)"></div>
+                  <div class="config-color" data-color2="Levandulová" style="background:#9B8BB4" onclick="pickColor2(this)"></div>
+                  <div class="config-color" data-color2="Rubínová" style="background:#9B2335" onclick="pickColor2(this)"></div>
+                  <div class="config-color" data-color2="Šalvějová" style="background:#8FAF9B" onclick="pickColor2(this)"></div>
+                  <div class="config-color" data-color2="Béžová" style="background:#C4AD8F" onclick="pickColor2(this)"></div>
+                  <div class="config-color" data-color2="Černá" style="background:#222222" onclick="pickColor2(this)"></div>
+                  <div class="config-color" data-color2="Bílá" style="background:#F5F5F5;border:1px solid #ddd" onclick="pickColor2(this)"></div>
+                  <div class="config-color" data-color2="Růžová" style="background:#E8A0B4" onclick="pickColor2(this)"></div>
+                </div>
+              </div>
+              <!-- CENA + CTA -->
+              <div class="config-price-row">
+                <div class="config-price" id="configPrice">859 Kč</div>
+                <a class="config-cta" id="configCta" href="#">Chci na míru →</a>
+              </div>
+            </div>
+          </div>
 
         </div>
         <div class="products-progress" id="productsProgress">
           <div class="progress-dot active"></div>
+          <div class="progress-dot"></div>
           <div class="progress-dot"></div>
           <div class="progress-dot"></div>
           <div class="progress-dot"></div>
@@ -1370,6 +1682,104 @@
     document.querySelectorAll('[data-reveal]').forEach(el=>obs.observe(el));
 
     updBadge(); renderCart();
+
+    /* ─── KONFIGURÁTOR NA MÍRU ──────────── */
+    const cfgState = { shape: 'crossbody', size: 'S', color: 'Modrá', bicolor: false, color2: null };
+
+    const cfgSizeMap = {
+      crossbody: ['S', 'M', 'L'],
+      tote: ['S', 'M'],
+      notebook: ['13"', '15"', '16"']
+    };
+
+    const cfgBasePrice = { crossbody: 859, tote: 990, notebook: 1490 };
+
+    const cfgSizeSurcharge = {
+      crossbody: { S: 0, M: 100, L: 200 },
+      tote: { S: 0, M: 100 },
+      notebook: { '13"': 0, '15"': 100, '16"': 200 }
+    };
+
+    const cfgShapeLabels = { crossbody: 'Crossbody kabelka na mobil', tote: 'Mini tote kabelka', notebook: 'Obal na notebook' };
+
+    function cfgCalcPrice() {
+      let p = cfgBasePrice[cfgState.shape];
+      p += cfgSizeSurcharge[cfgState.shape][cfgState.size] || 0;
+      if (cfgState.bicolor) p += 150;
+      return p;
+    }
+
+    function cfgUpdatePrice() {
+      document.getElementById('configPrice').textContent = cfgCalcPrice().toLocaleString('cs-CZ') + ' Kč';
+      cfgUpdateMailto();
+    }
+
+    function cfgUpdateMailto() {
+      const p = cfgCalcPrice();
+      const parts = [
+        `Tvar: ${cfgShapeLabels[cfgState.shape]}`,
+        `Velikost: ${cfgState.size}`,
+        `Barva: ${cfgState.color}`
+      ];
+      if (cfgState.bicolor && cfgState.color2) parts.push(`Barva lemu: ${cfgState.color2}`);
+      parts.push(`Cena: ${p.toLocaleString('cs-CZ')} Kč`);
+      const subject = encodeURIComponent('Objednávka na míru – magbag');
+      const body = encodeURIComponent('Ahoj,\n\nmám zájem o kousek na míru:\n\n' + parts.join('\n') + '\n\nDěkuji!');
+      document.getElementById('configCta').href = `mailto:info@magdalenapickova.cz?subject=${subject}&body=${body}`;
+    }
+
+    function cfgRenderSizes() {
+      const cont = document.getElementById('configSizes');
+      const sizes = cfgSizeMap[cfgState.shape];
+      cont.innerHTML = sizes.map((s, i) =>
+        `<div class="config-size${i === 0 ? ' active' : ''}" data-size="${s}" onclick="pickSize(this)">${s}</div>`
+      ).join('');
+      cfgState.size = sizes[0];
+    }
+
+    window.pickShape = (el) => {
+      document.querySelectorAll('.config-shape').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+      cfgState.shape = el.dataset.shape;
+      cfgRenderSizes();
+      cfgUpdatePrice();
+    };
+
+    window.pickSize = (el) => {
+      document.querySelectorAll('.config-size').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+      cfgState.size = el.dataset.size;
+      cfgUpdatePrice();
+    };
+
+    window.pickColor = (el) => {
+      document.querySelectorAll('#configColors .config-color').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      cfgState.color = el.dataset.color;
+      cfgUpdatePrice();
+    };
+
+    window.pickColor2 = (el) => {
+      document.querySelectorAll('#configColors2 .config-color').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      cfgState.color2 = el.dataset.color2;
+      cfgUpdatePrice();
+    };
+
+    window.toggleBicolor = () => {
+      cfgState.bicolor = !cfgState.bicolor;
+      document.getElementById('bicolorToggle').classList.toggle('active', cfgState.bicolor);
+      document.getElementById('configColors2').classList.toggle('visible', cfgState.bicolor);
+      document.getElementById('colorRow2Label').classList.toggle('visible', cfgState.bicolor);
+      if (!cfgState.bicolor) cfgState.color2 = null;
+      cfgUpdatePrice();
+    };
+
+    // Prevent config panel click from opening detail
+    document.getElementById('configPanel').addEventListener('click', e => e.stopPropagation());
+
+    // Init
+    cfgUpdatePrice();
   </script>
 </body>
 </html>
