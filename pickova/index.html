@@ -627,6 +627,9 @@
     .config-size:hover { border-color: #aaa; }
     .config-size.active { border-color: var(--text); background: var(--text); color: #fff; }
 
+    .config-size { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .config-size-dims { font-size: 10px; font-weight: 400; opacity: 0.7; }
+
     .config-colors {
       display: flex;
       gap: 10px;
@@ -1711,9 +1714,20 @@
     const cfgState = { shape: 'crossbody', size: 'S', color: 'Modrá', bicolor: false, color2: null };
 
     const cfgSizeMap = {
-      crossbody: ['S', 'M', 'L'],
-      tote: ['S', 'M'],
-      notebook: ['13"', '15"', '16"']
+      crossbody: [
+        { label: 'S', desc: '12 × 17 cm' },
+        { label: 'M', desc: '14 × 20 cm' },
+        { label: 'L', desc: '16 × 23 cm' }
+      ],
+      tote: [
+        { label: 'S', desc: '22 × 20 cm' },
+        { label: 'M', desc: '28 × 25 cm' }
+      ],
+      notebook: [
+        { label: '13"', desc: '34 × 24 cm' },
+        { label: '15"', desc: '38 × 27 cm' },
+        { label: '16"', desc: '40 × 29 cm' }
+      ]
     };
 
     const cfgBasePrice = { crossbody: 859, tote: 990, notebook: 1490 };
@@ -1756,9 +1770,9 @@
       const cont = document.getElementById('configSizes');
       const sizes = cfgSizeMap[cfgState.shape];
       cont.innerHTML = sizes.map((s, i) =>
-        `<div class="config-size${i === 0 ? ' active' : ''}" data-size="${s}" onclick="pickSize(this)">${s}</div>`
+        `<div class="config-size${i === 0 ? ' active' : ''}" data-size="${s.label}" onclick="pickSize(this)"><strong>${s.label}</strong><span class="config-size-dims">${s.desc}</span></div>`
       ).join('');
-      cfgState.size = sizes[0];
+      cfgState.size = sizes[0].label;
     }
 
     window.pickShape = (el) => {
