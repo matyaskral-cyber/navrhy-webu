@@ -375,7 +375,7 @@
        HORIZONTAL PRODUCTS SCROLL
        ═══════════════════════════════════════ */
     .products-section {
-      height: 800vh;
+      height: 900vh;
       position: relative;
     }
 
@@ -752,9 +752,14 @@
     }
 
     @media (max-width: 768px) {
-      .config-panel { min-width: 100vw; padding: 40px 24px; grid-template-columns: 1fr; grid-template-rows: auto auto; }
+      .config-panel { min-width: 100vw; padding: 30px 20px; grid-template-columns: 1fr; grid-template-rows: auto auto; gap: 12px; }
+      .config-left { margin-bottom: 0; }
+      .config-left h2 { font-size: 24px; margin-bottom: 8px; }
+      .config-left p { font-size: 12px; margin-bottom: 0; }
+      .config-right { gap: 16px; }
       .config-shapes { flex-direction: column; }
-      .config-shape { padding: 12px; }
+      .config-shape { padding: 10px; font-size: 12px; }
+      .config-step-label { margin-bottom: 6px; }
     }
 
     /* ═══════════════════════════════════════
@@ -1259,7 +1264,7 @@
       .hero-bubbles { min-height: 200px; transform: scale(0.45); transform-origin: center center; position: relative; }
       .hero-bubbles .bubble:hover { transform: translate(var(--x), var(--y)) scale(1.05); }
       .hero-scroll { left: 24px; }
-      .products-section { height: 800vh; }
+      .products-section { height: 900vh; }
       .product-panel { min-width: 100vw; padding: 40px 24px; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
       .about { padding: 60px 24px; }
       .footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
@@ -1633,7 +1638,9 @@
       if (!psec || !track) return;
       const rect = psec.getBoundingClientRect();
       const h = psec.offsetHeight - window.innerHeight;
-      const progress = Math.max(0, Math.min(1, -rect.top / h));
+      const rawProgress = Math.max(0, Math.min(1, -rect.top / h));
+      // Brzda: scroll content zabere 85% výšky, posledních 15% drží konec
+      const progress = Math.min(1, rawProgress / 0.85);
       const panels = track.children.length;
       const sidebar = window.innerWidth > 768 ? parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar')) : 0;
       const pw = track.scrollWidth - (window.innerWidth - sidebar);
