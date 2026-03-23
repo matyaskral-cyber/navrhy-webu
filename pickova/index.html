@@ -1679,7 +1679,7 @@
       const dy = e.touches[0].clientY - swipeStartY;
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
         e.preventDefault();
-        window.scrollBy(0, -dx * 3);
+        window.scrollBy(0, -dx * 8);
         swipeStartX = e.touches[0].clientX;
         swipeStartY = e.touches[0].clientY;
       }
