@@ -203,16 +203,22 @@
     .hero-title em { font-style: normal; color: var(--mag-pink); }
 
     .hero-logo {
-      max-width: 180px;
-      margin-bottom: 28px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      width: clamp(320px, 40vw, 550px);
       opacity: 0;
-      animation: fadeUp 0.7s ease 0.1s forwards;
+      animation: fadeIn 1.2s ease 0.1s forwards;
+      z-index: 0;
+      pointer-events: none;
     }
 
     .hero-logo img {
       width: 100%;
       height: auto;
       display: block;
+      opacity: 0.06;
     }
 
     .hero-sub {
@@ -1202,6 +1208,7 @@
        ═══════════════════════════════════════ */
     @media (max-width: 1024px) {
       .hero { grid-template-columns: 1fr; padding: 120px 48px 60px; text-align: center; }
+      .hero-logo { top: 100px; left: 50%; transform: translateX(-50%); width: 280px; }
       .hero-sub { margin: 0 auto 40px; }
       .hero-bubbles { margin-top: 40px; min-height: 320px; }
       .hero-scroll { left: 48px; }
@@ -1248,6 +1255,8 @@
 
       .main { margin-left: 0; padding-bottom: 0; }
       .hero { padding: 80px 24px 60px; padding-top: 70px; }
+      .hero-logo { top: 80px; left: 50%; transform: translateX(-50%); width: 200px; }
+      .hero-logo img { opacity: 0.08; }
       .hero-bubbles { min-height: 200px; transform: scale(0.45); transform-origin: center center; }
       .hero-bubbles .bubble:hover { transform: translate(var(--x), var(--y)) scale(1.05); }
       .hero-scroll { left: 24px; }
