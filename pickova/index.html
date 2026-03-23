@@ -963,34 +963,38 @@
       :root { --sidebar: 0px; }
       .sidebar { display: none; }
 
-      .mobile-nav {
+      .mobile-nav { display: none !important; }
+
+      .mobile-header {
         display: flex !important;
         position: fixed;
-        bottom: 0; left: 0; right: 0;
-        background: var(--dark);
+        top: 0; left: 0; right: 0;
+        background: rgba(26,26,26,0.95);
+        backdrop-filter: blur(10px);
         z-index: 100;
-        padding: 12px 24px;
-        justify-content: space-around;
+        padding: 14px 20px;
+        justify-content: space-between;
         align-items: center;
       }
 
-      .mobile-nav a, .mobile-nav button {
-        background: none;
-        border: none;
-        color: rgba(255,255,255,0.6);
-        font-size: 10px;
-        text-decoration: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
+      .mobile-header-brand {
+        font-family: 'Playfair Display', serif;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
         cursor: pointer;
       }
 
-      .mobile-nav svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+      .mobile-header-cart {
+        background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; position: relative;
+      }
+      .mobile-header-cart svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
-      .main { margin-left: 0; padding-bottom: 60px; }
-      .hero { padding: 80px 24px 60px; }
+      .main { margin-left: 0; padding-bottom: 0; }
+      .hero { padding: 80px 24px 60px; padding-top: 70px; }
+      .hero-bubbles { min-height: 350px; }
+      .hero-bubbles .bubble { transform: translate(var(--x), var(--y)) scale(0.55); }
+      .hero-bubbles .bubble:hover { transform: translate(var(--x), var(--y)) scale(0.6); }
       .hero-scroll { left: 24px; }
       .products-section { height: 700vh; }
       .product-panel { min-width: 100vw; padding: 40px 24px; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
@@ -1001,6 +1005,7 @@
     }
 
     .mobile-nav { display: none; }
+    .mobile-header { display: none; }
   </style>
 </head>
 <body>
@@ -1034,6 +1039,15 @@
     <a onclick="navTo('products-section')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Kolekce</a>
     <button onclick="openCart()" style="position:relative"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>Košík<span class="cart-badge" id="cartBadge2">0</span></button>
   </nav>
+
+  <!-- MOBILE HEADER -->
+  <div class="mobile-header">
+    <div class="mobile-header-brand" onclick="goHome()">Mag</div>
+    <button class="mobile-header-cart" onclick="openCart()">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-badge" id="cartBadge3">0</span>
+    </button>
+  </div>
 
   <!-- MAIN -->
   <main class="main">
