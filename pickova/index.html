@@ -1659,6 +1659,35 @@
 
     window.addEventListener('scroll', () => { updateHScroll(); updateSidebarNav(); });
 
+    /* ─── TOUCH SWIPE PRO PRODUKTY ─────── */
+    let touchStartX = 0, touchStartY = 0, touchActive = false;
+    const sticky = document.querySelector('.products-sticky');
+
+    if (sticky) {
+      sticky.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchActive = true;
+      }, { passive: true });
+
+      sticky.addEventListener('touchmove', (e) => {
+        if (!touchActive) return;
+        const dx = e.touches[0].clientX - touchStartX;
+        const dy = e.touches[0].clientY - touchStartY;
+        // Pokud swipe je víc horizontální než vertikální
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+          e.preventDefault();
+          // Horizontální swipe → vertikální scroll (swipe vlevo = scroll dolů)
+          const scrollAmount = -dx * 2.5;
+          window.scrollBy(0, scrollAmount);
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        }
+      }, { passive: false });
+
+      sticky.addEventListener('touchend', () => { touchActive = false; }, { passive: true });
+    }
+
     window.navTo = (id) => {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
