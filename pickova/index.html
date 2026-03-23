@@ -375,7 +375,7 @@
        HORIZONTAL PRODUCTS SCROLL
        ═══════════════════════════════════════ */
     .products-section {
-      height: 900vh;
+      height: 800vh;
       position: relative;
     }
 
@@ -521,21 +521,17 @@
     /* ═══════════════════════════════════════
        CONFIGURATOR PANEL
        ═══════════════════════════════════════ */
-    .config-panel {
-      min-width: calc(100vw - var(--sidebar));
-      height: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 60px 80px;
-      position: relative;
+    .config-section {
       background: #F5F0EB;
     }
 
-    .config-panel .panel-index {
-      position: absolute;
-      top: 40px;
-      left: 80px;
+    .config-panel {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 80px;
+      position: relative;
     }
 
     .config-left { max-width: 400px; }
@@ -743,7 +739,7 @@
     .config-cta:hover { background: #333; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
 
     @media (max-width: 1024px) {
-      .config-panel { grid-template-columns: 1fr; padding: 60px 48px; text-align: center; }
+      .config-panel { grid-template-columns: 1fr; padding: 60px 48px; text-align: center; min-height: auto; }
       .config-left { max-width: 100%; margin: 0 auto 32px; }
       .config-shapes { flex-wrap: wrap; justify-content: center; }
       .config-sizes { justify-content: center; }
@@ -752,10 +748,7 @@
     }
 
     @media (max-width: 768px) {
-      .config-panel { min-width: 100vw; padding: 24px 20px; grid-template-columns: 1fr; grid-template-rows: auto auto; align-items: start; padding-top: 50px; }
-      .config-left h2 { font-size: 22px; margin-bottom: 6px; }
-      .config-left p { font-size: 12px; line-height: 1.5; }
-      .config-right { gap: 18px; }
+      .config-panel { padding: 48px 24px; grid-template-columns: 1fr; min-height: auto; }
       .config-shapes { flex-direction: row; }
       .config-shape { padding: 10px 6px; font-size: 11px; }
       .config-shape-icon { font-size: 22px; margin-bottom: 4px; }
@@ -1265,7 +1258,7 @@
       .hero-bubbles { min-height: 200px; transform: scale(0.45); transform-origin: center center; position: relative; }
       .hero-bubbles .bubble:hover { transform: translate(var(--x), var(--y)) scale(1.05); }
       .hero-scroll { left: 24px; }
-      .products-section { height: 900vh; }
+      .products-section { height: 800vh; }
       .product-panel { min-width: 100vw; padding: 40px 24px; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
       .about { padding: 60px 24px; }
       .footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
@@ -1351,7 +1344,7 @@
         <div class="products-track" id="productsTrack">
 
           <div class="product-panel" style="background:var(--blue-pastel)" onclick="openDetail('royal-blue')">
-            <div class="panel-index">01 / 08</div>
+            <div class="panel-index">01 / 07</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka na mobil</div>
               <div class="panel-name">Royal<br>Blue</div>
@@ -1365,7 +1358,7 @@
           </div>
 
           <div class="product-panel" style="background:var(--lavender-pastel)" onclick="openDetail('lavender')">
-            <div class="panel-index">02 / 08</div>
+            <div class="panel-index">02 / 07</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka na mobil</div>
               <div class="panel-name">Lavender</div>
@@ -1379,7 +1372,7 @@
           </div>
 
           <div class="product-panel" style="background:var(--ruby-pastel)" onclick="openDetail('ruby')">
-            <div class="panel-index">03 / 08</div>
+            <div class="panel-index">03 / 07</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka na mobil</div>
               <div class="panel-name">Ruby</div>
@@ -1393,7 +1386,7 @@
           </div>
 
           <div class="product-panel" style="background:#DCE8E0" onclick="openDetail('sage')">
-            <div class="panel-index">04 / 08</div>
+            <div class="panel-index">04 / 07</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka</div>
               <div class="panel-name">Sage</div>
@@ -1407,7 +1400,7 @@
           </div>
 
           <div class="product-panel" style="background:#F0EAE0" onclick="openDetail('beige')">
-            <div class="panel-index">05 / 08</div>
+            <div class="panel-index">05 / 07</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka</div>
               <div class="panel-name">Sand</div>
@@ -1421,7 +1414,7 @@
           </div>
 
           <div class="product-panel" style="background:#E2DDD6" onclick="openDetail('bicolor')">
-            <div class="panel-index">06 / 08</div>
+            <div class="panel-index">06 / 07</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka</div>
               <div class="panel-name">Noir<br>&amp; Crème</div>
@@ -1435,7 +1428,7 @@
           </div>
 
           <div class="product-panel" style="background:#EDD9DB" onclick="openDetail('rosewood')">
-            <div class="panel-index">07 / 08</div>
+            <div class="panel-index">07 / 07</div>
             <div class="panel-text">
               <div class="panel-label">Kabelka</div>
               <div class="panel-name">Rosewood</div>
@@ -1448,78 +1441,6 @@
             </div>
           </div>
 
-          <!-- KONFIGURÁTOR NA MÍRU -->
-          <div class="config-panel" id="configPanel">
-            <div class="panel-index">08 / 08</div>
-            <div class="config-left">
-              <div class="panel-label">Na míru</div>
-              <h2>A teď to nejlepší — nesedla ti barva?<br><em>Sestav si vlastní.</em></h2>
-              <p>Vyber si tvar, velikost a barvu — a my ti uháčkujeme přesně to, co chceš. Každý kousek je originál.</p>
-            </div>
-            <div class="config-right">
-              <!-- TVAR -->
-              <div>
-                <div class="config-step-label">1. Tvar</div>
-                <div class="config-shapes">
-                  <div class="config-shape active" data-shape="crossbody" onclick="pickShape(this)">
-                    <span class="config-shape-icon">📱</span>
-                    Crossbody kabelka
-                  </div>
-                  <div class="config-shape" data-shape="tote" onclick="pickShape(this)">
-                    <span class="config-shape-icon">👜</span>
-                    Mini tote
-                  </div>
-                  <div class="config-shape" data-shape="notebook" onclick="pickShape(this)">
-                    <span class="config-shape-icon">💻</span>
-                    Obal na notebook
-                  </div>
-                </div>
-              </div>
-              <!-- VELIKOST -->
-              <div>
-                <div class="config-step-label">2. Velikost</div>
-                <div class="config-sizes" id="configSizes">
-                  <div class="config-size active" data-size="S" onclick="pickSize(this)">S</div>
-                  <div class="config-size" data-size="M" onclick="pickSize(this)">M</div>
-                  <div class="config-size" data-size="L" onclick="pickSize(this)">L</div>
-                </div>
-              </div>
-              <!-- BARVA -->
-              <div>
-                <div class="config-step-label">3. Barva</div>
-                <div class="config-colors" id="configColors">
-                  <div class="config-color active" data-color="Modrá" style="background:#2956B2" onclick="pickColor(this)"></div>
-                  <div class="config-color" data-color="Levandulová" style="background:#9B8BB4" onclick="pickColor(this)"></div>
-                  <div class="config-color" data-color="Rubínová" style="background:#9B2335" onclick="pickColor(this)"></div>
-                  <div class="config-color" data-color="Šalvějová" style="background:#8FAF9B" onclick="pickColor(this)"></div>
-                  <div class="config-color" data-color="Béžová" style="background:#C4AD8F" onclick="pickColor(this)"></div>
-                  <div class="config-color" data-color="Černá" style="background:#222222" onclick="pickColor(this)"></div>
-                  <div class="config-color" data-color="Bílá" style="background:#F5F5F5;border:1px solid #ddd" onclick="pickColor(this)"></div>
-                  <div class="config-color" data-color="Růžová" style="background:#E8A0B4" onclick="pickColor(this)"></div>
-                </div>
-                <div class="config-bicolor-toggle">
-                  <button class="config-toggle-switch" id="bicolorToggle" onclick="toggleBicolor()"></button>
-                  <label onclick="toggleBicolor()">Dvoubarevná (+150 Kč)</label>
-                </div>
-                <div class="config-color-row2-label" id="colorRow2Label">Barva lemu</div>
-                <div class="config-color-row2" id="configColors2">
-                  <div class="config-color" data-color2="Modrá" style="background:#2956B2" onclick="pickColor2(this)"></div>
-                  <div class="config-color" data-color2="Levandulová" style="background:#9B8BB4" onclick="pickColor2(this)"></div>
-                  <div class="config-color" data-color2="Rubínová" style="background:#9B2335" onclick="pickColor2(this)"></div>
-                  <div class="config-color" data-color2="Šalvějová" style="background:#8FAF9B" onclick="pickColor2(this)"></div>
-                  <div class="config-color" data-color2="Béžová" style="background:#C4AD8F" onclick="pickColor2(this)"></div>
-                  <div class="config-color" data-color2="Černá" style="background:#222222" onclick="pickColor2(this)"></div>
-                  <div class="config-color" data-color2="Bílá" style="background:#F5F5F5;border:1px solid #ddd" onclick="pickColor2(this)"></div>
-                  <div class="config-color" data-color2="Růžová" style="background:#E8A0B4" onclick="pickColor2(this)"></div>
-                </div>
-              </div>
-              <!-- CENA + CTA -->
-              <div class="config-price-row">
-                <div class="config-price" id="configPrice">859 Kč</div>
-                <a class="config-cta" id="configCta" href="#">Chci na míru →</a>
-              </div>
-            </div>
-          </div>
 
         </div>
         <div class="products-progress" id="productsProgress">
@@ -1530,7 +1451,76 @@
           <div class="progress-dot"></div>
           <div class="progress-dot"></div>
           <div class="progress-dot"></div>
-          <div class="progress-dot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONFIGURÁTOR NA MÍRU -->
+    <section class="config-section" id="configPanel">
+      <div class="config-panel">
+        <div class="config-left">
+          <div class="panel-label">Na míru</div>
+          <h2>A teď to nejlepší — nesedla ti barva?<br><em>Sestav si vlastní.</em></h2>
+          <p>Vyber si tvar, velikost a barvu — a my ti uháčkujeme přesně to, co chceš. Každý kousek je originál.</p>
+        </div>
+        <div class="config-right">
+          <div>
+            <div class="config-step-label">1. Tvar</div>
+            <div class="config-shapes">
+              <div class="config-shape active" data-shape="crossbody" onclick="pickShape(this)">
+                <span class="config-shape-icon">📱</span>
+                Crossbody kabelka
+              </div>
+              <div class="config-shape" data-shape="tote" onclick="pickShape(this)">
+                <span class="config-shape-icon">👜</span>
+                Mini tote
+              </div>
+              <div class="config-shape" data-shape="notebook" onclick="pickShape(this)">
+                <span class="config-shape-icon">💻</span>
+                Obal na notebook
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="config-step-label">2. Velikost</div>
+            <div class="config-sizes" id="configSizes">
+              <div class="config-size active" data-size="S" onclick="pickSize(this)">S</div>
+              <div class="config-size" data-size="M" onclick="pickSize(this)">M</div>
+              <div class="config-size" data-size="L" onclick="pickSize(this)">L</div>
+            </div>
+          </div>
+          <div>
+            <div class="config-step-label">3. Barva</div>
+            <div class="config-colors" id="configColors">
+              <div class="config-color active" data-color="Modrá" style="background:#2956B2" onclick="pickColor(this)"></div>
+              <div class="config-color" data-color="Levandulová" style="background:#9B8BB4" onclick="pickColor(this)"></div>
+              <div class="config-color" data-color="Rubínová" style="background:#9B2335" onclick="pickColor(this)"></div>
+              <div class="config-color" data-color="Šalvějová" style="background:#8FAF9B" onclick="pickColor(this)"></div>
+              <div class="config-color" data-color="Béžová" style="background:#C4AD8F" onclick="pickColor(this)"></div>
+              <div class="config-color" data-color="Černá" style="background:#222222" onclick="pickColor(this)"></div>
+              <div class="config-color" data-color="Bílá" style="background:#F5F5F5;border:1px solid #ddd" onclick="pickColor(this)"></div>
+              <div class="config-color" data-color="Růžová" style="background:#E8A0B4" onclick="pickColor(this)"></div>
+            </div>
+            <div class="config-bicolor-toggle">
+              <button class="config-toggle-switch" id="bicolorToggle" onclick="toggleBicolor()"></button>
+              <label onclick="toggleBicolor()">Dvoubarevná (+150 Kč)</label>
+            </div>
+            <div class="config-color-row2-label" id="colorRow2Label">Barva lemu</div>
+            <div class="config-color-row2" id="configColors2">
+              <div class="config-color" data-color2="Modrá" style="background:#2956B2" onclick="pickColor2(this)"></div>
+              <div class="config-color" data-color2="Levandulová" style="background:#9B8BB4" onclick="pickColor2(this)"></div>
+              <div class="config-color" data-color2="Rubínová" style="background:#9B2335" onclick="pickColor2(this)"></div>
+              <div class="config-color" data-color2="Šalvějová" style="background:#8FAF9B" onclick="pickColor2(this)"></div>
+              <div class="config-color" data-color2="Béžová" style="background:#C4AD8F" onclick="pickColor2(this)"></div>
+              <div class="config-color" data-color2="Černá" style="background:#222222" onclick="pickColor2(this)"></div>
+              <div class="config-color" data-color2="Bílá" style="background:#F5F5F5;border:1px solid #ddd" onclick="pickColor2(this)"></div>
+              <div class="config-color" data-color2="Růžová" style="background:#E8A0B4" onclick="pickColor2(this)"></div>
+            </div>
+          </div>
+          <div class="config-price-row">
+            <div class="config-price" id="configPrice">859 Kč</div>
+            <a class="config-cta" id="configCta" href="#">Chci na míru →</a>
+          </div>
         </div>
       </div>
     </section>
