@@ -352,7 +352,7 @@
        HORIZONTAL PRODUCTS SCROLL
        ═══════════════════════════════════════ */
     .products-section {
-      height: 1400vh;
+      height: 700vh;
       position: relative;
     }
 
@@ -367,7 +367,6 @@
       display: flex;
       height: 100%;
       will-change: transform;
-      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .product-panel {
@@ -1281,26 +1280,17 @@
     const dots = document.querySelectorAll('.progress-dot');
     const isMobile = () => window.innerWidth <= 768;
 
-    let currentPanel = 0;
-    let snapCooldown = false;
     function updateHScroll() {
       if (isMobile() || !psec || !track) return;
       const rect = psec.getBoundingClientRect();
       const h = psec.offsetHeight - window.innerHeight;
       const progress = Math.max(0, Math.min(1, -rect.top / h));
       const panels = track.children.length;
-      const panelW = window.innerWidth - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar'));
+      const pw = track.scrollWidth - (window.innerWidth - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar')));
+      track.style.transform = `translateX(${-progress * pw}px)`;
 
-      const target = Math.round(progress * (panels - 1));
-      if (target !== currentPanel && !snapCooldown) {
-        /* max ±1 panel naráz */
-        currentPanel += target > currentPanel ? 1 : -1;
-        track.style.transform = `translateX(${-currentPanel * panelW}px)`;
-        snapCooldown = true;
-        setTimeout(() => { snapCooldown = false; }, 600);
-      }
-
-      dots.forEach((d, i) => d.classList.toggle('active', i === currentPanel));
+      const activePanel = Math.min(panels - 1, Math.floor(progress * panels));
+      dots.forEach((d, i) => d.classList.toggle('active', i === activePanel));
     }
 
     /* ─── SIDEBAR NAV ────────────────────── */
