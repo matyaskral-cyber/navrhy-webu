@@ -1282,6 +1282,7 @@
     const isMobile = () => window.innerWidth <= 768;
 
     let currentPanel = 0;
+    let snapCooldown = false;
     function updateHScroll() {
       if (isMobile() || !psec || !track) return;
       const rect = psec.getBoundingClientRect();
@@ -1290,11 +1291,13 @@
       const panels = track.children.length;
       const panelW = window.innerWidth - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar'));
 
-      /* snap na nejbližší panel */
-      const snapped = Math.round(progress * (panels - 1));
-      if (snapped !== currentPanel) {
-        currentPanel = snapped;
+      const target = Math.round(progress * (panels - 1));
+      if (target !== currentPanel && !snapCooldown) {
+        /* max ±1 panel naráz */
+        currentPanel += target > currentPanel ? 1 : -1;
         track.style.transform = `translateX(${-currentPanel * panelW}px)`;
+        snapCooldown = true;
+        setTimeout(() => { snapCooldown = false; }, 600);
       }
 
       dots.forEach((d, i) => d.classList.toggle('active', i === currentPanel));
