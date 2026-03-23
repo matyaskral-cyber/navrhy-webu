@@ -26,6 +26,8 @@
       --blue-pastel: #DAEAF8;
       --lavender-pastel: #E8E0F2;
       --ruby-pastel: #F4DDE0;
+      --mag-pink: #F2B4C4;
+      --mag-wine: #6B1A3A;
     }
 
     html { scroll-behavior: smooth; }
@@ -38,7 +40,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    ::selection { background: var(--dark); color: #fff; }
+    ::selection { background: var(--mag-wine); color: #fff; }
 
     /* ═══════════════════════════════════════
        SIDEBAR
@@ -170,6 +172,7 @@
       padding: 60px 80px;
       position: relative;
       overflow: hidden;
+      background: linear-gradient(135deg, #fafafa 0%, #FDF2F5 50%, #fafafa 100%);
     }
 
     .hero-text { z-index: 1; }
@@ -196,7 +199,20 @@
       animation: fadeUp 0.7s ease 0.4s forwards;
     }
 
-    .hero-title em { font-style: italic; }
+    .hero-title em { font-style: italic; color: var(--mag-wine); }
+
+    .hero-logo {
+      max-width: 180px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.1s forwards;
+    }
+
+    .hero-logo img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
 
     .hero-sub {
       font-size: 15px;
@@ -231,7 +247,7 @@
       display: inline-block;
       width: 40px;
       height: 1px;
-      background: var(--text);
+      background: var(--mag-wine);
     }
 
     .hero-bubbles {
@@ -1293,6 +1309,7 @@
     <!-- HERO -->
     <section class="hero" id="hero">
       <div class="hero-text">
+        <div class="hero-logo"><img src="images/mag-logo.png" alt="MAG" /></div>
         <div class="hero-eyebrow">Ruční práce · Český design</div>
         <h1 class="hero-title">Tvůj originál<br>pro <em>každý den</em></h1>
         <p class="hero-sub">Sluchátka, notebook nebo drobnosti, které chceš mít v bezpečí a po ruce. Dopřej svým věcem originální kabátek z poctivé bavlny, který s tebou bude žít tvůj každodenní příběh.</p>
