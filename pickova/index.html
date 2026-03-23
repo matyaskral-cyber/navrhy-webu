@@ -1673,24 +1673,19 @@
       }
     }, { passive: true });
 
-    document.addEventListener('touchend', (e) => {
+    document.addEventListener('touchmove', (e) => {
       if (!swiping) return;
-      swiping = false;
-      const dx = e.changedTouches[0].clientX - swipeStartX;
-      const dy = e.changedTouches[0].clientY - swipeStartY;
-      // Horizontální swipe (min 50px, víc než vertikální)
-      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-        const h = psec.offsetHeight - window.innerHeight;
-        const panels = track.children.length;
-        const panelScroll = h / panels;
-        // Swipe vlevo = další, swipe vpravo = předchozí
-        if (dx < 0) {
-          window.scrollBy({ top: panelScroll, behavior: 'smooth' });
-        } else {
-          window.scrollBy({ top: -panelScroll, behavior: 'smooth' });
-        }
+      const dx = e.touches[0].clientX - swipeStartX;
+      const dy = e.touches[0].clientY - swipeStartY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+        e.preventDefault();
+        window.scrollBy(0, -dx * 3);
+        swipeStartX = e.touches[0].clientX;
+        swipeStartY = e.touches[0].clientY;
       }
-    }, { passive: true });
+    }, { passive: false });
+
+    document.addEventListener('touchend', () => { swiping = false; }, { passive: true });
 
     window.navTo = (id) => {
       const el = document.getElementById(id);
