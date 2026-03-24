@@ -1659,6 +1659,42 @@
 
     window.addEventListener('scroll', () => { updateHScroll(); updateSidebarNav(); });
 
+    /* ─── SCROLL VE VŠECH SMĚRECH ──────── */
+    // PC: trackpad/kolečko horizontální → vertikální scroll
+    window.addEventListener('wheel', (e) => {
+      if (!psec) return;
+      const rect = psec.getBoundingClientRect();
+      if (rect.top <= 0 && rect.bottom >= window.innerHeight && Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        e.preventDefault();
+        window.scrollBy(0, e.deltaX);
+      }
+    }, { passive: false });
+
+    // Mobil: swipe doleva/doprava → vertikální scroll
+    let swStartX = 0, swStartY = 0, swActive = false;
+    document.addEventListener('touchstart', (e) => {
+      if (!psec) return;
+      const rect = psec.getBoundingClientRect();
+      if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
+        swStartX = e.touches[0].clientX;
+        swStartY = e.touches[0].clientY;
+        swActive = true;
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!swActive) return;
+      const dx = e.touches[0].clientX - swStartX;
+      const dy = e.touches[0].clientY - swStartY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+        e.preventDefault();
+        window.scrollBy(0, -dx * 3);
+        swStartX = e.touches[0].clientX;
+        swStartY = e.touches[0].clientY;
+      }
+    }, { passive: false });
+
+    document.addEventListener('touchend', () => { swActive = false; }, { passive: true });
 
     window.navTo = (id) => {
       const el = document.getElementById(id);
