@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>magbag — Háčkované kabelky</title>
-  <meta name="description" content="Ručně háčkované kabelky na mobil. Slow fashion, český design." />
+  <title>Šablona — Produkt</title>
+  <meta name="description" content="Šablona produktového webu." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Rubik:wght@800;900&display=swap" rel="stylesheet">
@@ -375,7 +375,7 @@
        HORIZONTAL PRODUCTS SCROLL
        ═══════════════════════════════════════ */
     .products-section {
-      height: 1000vh;
+      height: 400vh;
       position: relative;
     }
 
@@ -1261,7 +1261,7 @@
       .hero-bubbles { min-height: 200px; transform: scale(0.45); transform-origin: center center; position: relative; }
       .hero-bubbles .bubble:hover { transform: translate(var(--x), var(--y)) scale(1.05); }
       .hero-scroll { left: 24px; }
-      .products-section { height: 800vh; }
+      .products-section { height: 400vh; }
       .product-panel { min-width: 100vw; padding: 40px 24px; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
       .about { padding: 60px 24px; }
       .footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
@@ -1320,20 +1320,17 @@
     <!-- HERO -->
     <section class="hero" id="hero">
       <div class="hero-text">
-        <div class="hero-eyebrow">Ruční práce · Český design</div>
-        <h1 class="hero-title">Tvůj originál<br>pro <em>každý den</em></h1>
-        <p class="hero-sub">Sluchátka, notebook nebo drobnosti, které chceš mít v bezpečí a po ruce. Dopřej svým věcem originální kabátek z poctivé bavlny, který s tebou bude žít tvůj každodenní příběh.</p>
+        <div class="hero-eyebrow">Připravujeme · Již brzy</div>
+        <h1 class="hero-title">Název<br>pro <em>produkt</em></h1>
+        <p class="hero-sub">Popis produktu bude doplněn.</p>
         <a class="hero-cta" onclick="navTo('products-section')">Prohlédnout kolekci <span></span></a>
       </div>
       <div class="hero-bubbles">
-        <div class="hero-logo"><img src="images/mag-logo.png" alt="MAG" /></div>
-        <div class="bubble" style="--size:300px;--bg-color:#DAEAF8;--x:-100px;--y:-30px;--d:0s" onclick="openDetail('royal-blue')"><img src="images/royal-blue-1.png" /></div>
-        <div class="bubble" style="--size:255px;--bg-color:#E8E0F2;--x:130px;--y:-90px;--d:0.1s" onclick="openDetail('lavender')"><img src="images/lavender-1.png" /></div>
-        <div class="bubble" style="--size:230px;--bg-color:#F4DDE0;--x:20px;--y:130px;--d:0.2s" onclick="openDetail('ruby')"><img src="images/ruby-1.png" /></div>
-        <div class="bubble" style="--size:200px;--bg-color:#DCE8E0;--x:-250px;--y:110px;--d:0.3s" onclick="openDetail('sage')"><img class="life" src="images/sage-detail.jpg" /></div>
-        <div class="bubble" style="--size:185px;--bg-color:#F0EAE0;--x:230px;--y:60px;--d:0.4s" onclick="openDetail('beige')"><img class="life" src="images/beige-model.jpg" /></div>
-        <div class="bubble" style="--size:170px;--bg-color:#E2DDD6;--x:-280px;--y:-110px;--d:0.5s" onclick="openDetail('bicolor')"><img class="life" src="images/bicolor-mag.jpg" /></div>
-        <div class="bubble" style="--size:155px;--bg-color:#EDD9DB;--x:200px;--y:-150px;--d:0.6s" onclick="openDetail('rosewood')"><img class="life" src="images/pink-bordeaux.jpg" /></div>
+        <div class="bubble" style="--size:300px;--bg-color:#E8E8E8;--x:-100px;--y:-30px;--d:0s"></div>
+        <div class="bubble" style="--size:255px;--bg-color:#DEDEDE;--x:130px;--y:-90px;--d:0.1s"></div>
+        <div class="bubble" style="--size:230px;--bg-color:#D4D4D4;--x:20px;--y:130px;--d:0.2s"></div>
+        <div class="bubble" style="--size:200px;--bg-color:#E0E0E0;--x:-250px;--y:110px;--d:0.3s"></div>
+        <div class="bubble" style="--size:185px;--bg-color:#EAEAEA;--x:230px;--y:60px;--d:0.4s"></div>
       </div>
       <div class="hero-scroll">
         <div class="hero-scroll-line"></div>
@@ -1346,184 +1343,53 @@
       <div class="products-sticky">
         <div class="products-track" id="productsTrack">
 
-          <div class="product-panel" style="background:var(--blue-pastel)" onclick="openDetail('royal-blue')">
-            <div class="panel-index">01 / 07</div>
+          <div class="product-panel" style="background:#E8E8E8">
+            <div class="panel-index">01 / 03</div>
             <div class="panel-text">
-              <div class="panel-label">Kabelka na mobil</div>
-              <div class="panel-name">Royal<br>Blue</div>
-              <div class="panel-variant">Crossbody · bavlněná příze</div>
-              <div class="panel-price">859 Kč</div>
+              <div class="panel-label">Kategorie</div>
+              <div class="panel-name">Produkt 1</div>
+              <div class="panel-variant">Popis produktu</div>
+              <div class="panel-price">— Kč</div>
               <div class="panel-cta">Zobrazit detail <span></span></div>
             </div>
             <div class="panel-photo">
-              <img src="images/royal-blue-1.png" alt="Royal Blue" />
+              <div style="width:300px;height:300px;background:#ddd;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">Foto</div>
             </div>
           </div>
 
-          <div class="product-panel" style="background:var(--lavender-pastel)" onclick="openDetail('lavender')">
-            <div class="panel-index">02 / 07</div>
+          <div class="product-panel" style="background:#DEDEDE">
+            <div class="panel-index">02 / 03</div>
             <div class="panel-text">
-              <div class="panel-label">Kabelka na mobil</div>
-              <div class="panel-name">Lavender</div>
-              <div class="panel-variant">Crossbody · bavlněná příze</div>
-              <div class="panel-price">859 Kč</div>
+              <div class="panel-label">Kategorie</div>
+              <div class="panel-name">Produkt 2</div>
+              <div class="panel-variant">Popis produktu</div>
+              <div class="panel-price">— Kč</div>
               <div class="panel-cta">Zobrazit detail <span></span></div>
             </div>
             <div class="panel-photo">
-              <img src="images/lavender-1.png" alt="Lavender" />
+              <div style="width:300px;height:300px;background:#ccc;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">Foto</div>
             </div>
           </div>
 
-          <div class="product-panel" style="background:var(--ruby-pastel)" onclick="openDetail('ruby')">
-            <div class="panel-index">03 / 07</div>
+          <div class="product-panel" style="background:#D4D4D4">
+            <div class="panel-index">03 / 03</div>
             <div class="panel-text">
-              <div class="panel-label">Kabelka na mobil</div>
-              <div class="panel-name">Ruby</div>
-              <div class="panel-variant">Crossbody · bavlněná příze</div>
-              <div class="panel-price">859 Kč</div>
+              <div class="panel-label">Kategorie</div>
+              <div class="panel-name">Produkt 3</div>
+              <div class="panel-variant">Popis produktu</div>
+              <div class="panel-price">— Kč</div>
               <div class="panel-cta">Zobrazit detail <span></span></div>
             </div>
             <div class="panel-photo">
-              <img src="images/ruby-1.png" alt="Ruby" />
+              <div style="width:300px;height:300px;background:#bbb;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">Foto</div>
             </div>
           </div>
-
-          <div class="product-panel" style="background:#DCE8E0" onclick="openDetail('sage')">
-            <div class="panel-index">04 / 07</div>
-            <div class="panel-text">
-              <div class="panel-label">Kabelka</div>
-              <div class="panel-name">Sage</div>
-              <div class="panel-variant">Mini tote · bavlněná příze</div>
-              <div class="panel-price">990 Kč</div>
-              <div class="panel-cta">Zobrazit detail <span></span></div>
-            </div>
-            <div class="panel-photo">
-              <img class="lifestyle" src="images/sage-detail.jpg" alt="Sage" />
-            </div>
-          </div>
-
-          <div class="product-panel" style="background:#F0EAE0" onclick="openDetail('beige')">
-            <div class="panel-index">05 / 07</div>
-            <div class="panel-text">
-              <div class="panel-label">Kabelka</div>
-              <div class="panel-name">Sand</div>
-              <div class="panel-variant">Crossbody · bavlněná příze</div>
-              <div class="panel-price">859 Kč</div>
-              <div class="panel-cta">Zobrazit detail <span></span></div>
-            </div>
-            <div class="panel-photo">
-              <img class="lifestyle" src="images/beige-model.jpg" alt="Sand" />
-            </div>
-          </div>
-
-          <div class="product-panel" style="background:#E2DDD6" onclick="openDetail('bicolor')">
-            <div class="panel-index">06 / 07</div>
-            <div class="panel-text">
-              <div class="panel-label">Kabelka</div>
-              <div class="panel-name">Noir<br>&amp; Crème</div>
-              <div class="panel-variant">Mini tote · dvoubarevná</div>
-              <div class="panel-price">1 190 Kč</div>
-              <div class="panel-cta">Zobrazit detail <span></span></div>
-            </div>
-            <div class="panel-photo">
-              <img class="lifestyle" src="images/bicolor-mag.jpg" alt="Noir & Crème" />
-            </div>
-          </div>
-
-          <div class="product-panel" style="background:#EDD9DB" onclick="openDetail('rosewood')">
-            <div class="panel-index">07 / 07</div>
-            <div class="panel-text">
-              <div class="panel-label">Kabelka</div>
-              <div class="panel-name">Rosewood</div>
-              <div class="panel-variant">Crossbody · bavlněná příze</div>
-              <div class="panel-price">859 Kč</div>
-              <div class="panel-cta">Zobrazit detail <span></span></div>
-            </div>
-            <div class="panel-photo">
-              <img class="lifestyle" src="images/pink-bordeaux.jpg" alt="Rosewood" />
-            </div>
-          </div>
-
 
         </div>
         <div class="products-progress" id="productsProgress">
           <div class="progress-dot active"></div>
           <div class="progress-dot"></div>
           <div class="progress-dot"></div>
-          <div class="progress-dot"></div>
-          <div class="progress-dot"></div>
-          <div class="progress-dot"></div>
-          <div class="progress-dot"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- KONFIGURÁTOR NA MÍRU -->
-    <section class="config-section" id="configPanel">
-      <div class="config-panel">
-        <div class="config-left">
-          <div class="panel-label">Na míru</div>
-          <h2>A teď to nejlepší — nesedla ti barva?<br><em>Sestav si vlastní.</em></h2>
-          <p>Vyber si tvar, velikost a barvu — a já ti uháčkuji přesně to, co chceš. Každý kousek je originál.</p>
-        </div>
-        <div class="config-right">
-          <div>
-            <div class="config-step-label">1. Tvar</div>
-            <div class="config-shapes">
-              <div class="config-shape active" data-shape="crossbody" onclick="pickShape(this)">
-                <span class="config-shape-icon">📱</span>
-                Crossbody kabelka
-              </div>
-              <div class="config-shape" data-shape="tote" onclick="pickShape(this)">
-                <span class="config-shape-icon">👜</span>
-                Mini tote
-              </div>
-              <div class="config-shape" data-shape="notebook" onclick="pickShape(this)">
-                <span class="config-shape-icon">💻</span>
-                Obal na notebook
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="config-step-label">2. Velikost</div>
-            <div class="config-sizes" id="configSizes">
-              <div class="config-size active" data-size="S" onclick="pickSize(this)">S</div>
-              <div class="config-size" data-size="M" onclick="pickSize(this)">M</div>
-              <div class="config-size" data-size="L" onclick="pickSize(this)">L</div>
-            </div>
-          </div>
-          <div>
-            <div class="config-step-label">3. Barva</div>
-            <div class="config-colors" id="configColors">
-              <div class="config-color active" data-color="Modrá" style="background:#2956B2" onclick="pickColor(this)"></div>
-              <div class="config-color" data-color="Levandulová" style="background:#9B8BB4" onclick="pickColor(this)"></div>
-              <div class="config-color" data-color="Rubínová" style="background:#9B2335" onclick="pickColor(this)"></div>
-              <div class="config-color" data-color="Šalvějová" style="background:#8FAF9B" onclick="pickColor(this)"></div>
-              <div class="config-color" data-color="Béžová" style="background:#C4AD8F" onclick="pickColor(this)"></div>
-              <div class="config-color" data-color="Černá" style="background:#222222" onclick="pickColor(this)"></div>
-              <div class="config-color" data-color="Bílá" style="background:#F5F5F5;border:1px solid #ddd" onclick="pickColor(this)"></div>
-              <div class="config-color" data-color="Růžová" style="background:#E8A0B4" onclick="pickColor(this)"></div>
-            </div>
-            <div class="config-bicolor-toggle">
-              <button class="config-toggle-switch" id="bicolorToggle" onclick="toggleBicolor()"></button>
-              <label onclick="toggleBicolor()">Dvoubarevná (+150 Kč)</label>
-            </div>
-            <div class="config-color-row2-label" id="colorRow2Label">Barva lemu</div>
-            <div class="config-color-row2" id="configColors2">
-              <div class="config-color" data-color2="Modrá" style="background:#2956B2" onclick="pickColor2(this)"></div>
-              <div class="config-color" data-color2="Levandulová" style="background:#9B8BB4" onclick="pickColor2(this)"></div>
-              <div class="config-color" data-color2="Rubínová" style="background:#9B2335" onclick="pickColor2(this)"></div>
-              <div class="config-color" data-color2="Šalvějová" style="background:#8FAF9B" onclick="pickColor2(this)"></div>
-              <div class="config-color" data-color2="Béžová" style="background:#C4AD8F" onclick="pickColor2(this)"></div>
-              <div class="config-color" data-color2="Černá" style="background:#222222" onclick="pickColor2(this)"></div>
-              <div class="config-color" data-color2="Bílá" style="background:#F5F5F5;border:1px solid #ddd" onclick="pickColor2(this)"></div>
-              <div class="config-color" data-color2="Růžová" style="background:#E8A0B4" onclick="pickColor2(this)"></div>
-            </div>
-          </div>
-          <div class="config-price-row">
-            <div class="config-price" id="configPrice">859 Kč</div>
-            <a class="config-cta" id="configCta" href="#">Chci na míru →</a>
-          </div>
         </div>
       </div>
     </section>
@@ -1531,25 +1397,20 @@
     <!-- ABOUT -->
     <section class="about" id="about">
       <div class="about-photo" data-reveal>
-        <div style="width:100%;height:100%;background:#f0ede8;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:12px;letter-spacing:1px;text-transform:uppercase;">Foto již brzy</div>
+        <div style="width:100%;height:100%;background:#f0ede8;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:12px;letter-spacing:1px;text-transform:uppercase;">Foto</div>
       </div>
       <div data-reveal>
-        <div class="about-eyebrow">O mně</div>
-        <h2 class="about-title">Ahoj, jsem<br>Majda</h2>
-        <p class="about-text">Háčkovat mě naučila babička. Začínala jsem u nekonečných řetízků a ona mi trpělivě ukazovala, jak na to. Tehdy by mě ani ve snu nenapadlo, že mě háček a příze jednou takhle chytnou.</p>
-        <p class="about-text">Dnes tvořím háčkované kabelky, pouzdra na sluchátka nebo obaly na notebooky — vlastně cokoli, co si zaslouží originální a měkký obal. Každý kousek vzniká pomalu a s péčí, od prvního očka až po poslední steh. Žádné šablony, jen já, příze, háček a oblíbený playlist v uších.</p>
-        <p class="about-text">Baví mě, že každý kousek, který mi projde pod rukama, je jedinečný. Mám radost z každého momentu, kdy moje tvorba ožije v běžném životě — když si mou kabelku vezmete do města nebo v kavárně vytáhnete notebook v mém obalu. Dává mi smysl tvořit věci, které pak s vámi žijí váš každodenní příběh v ulicích města.</p>
-        <div class="about-signature">— Mag ♡</div>
+        <div class="about-eyebrow">O nás</div>
+        <h2 class="about-title">Příběh<br>značky</h2>
+        <p class="about-text">Text bude doplněn.</p>
       </div>
     </section>
 
     <!-- FOOTER -->
     <footer class="footer">
-      <span>&copy; 2025 magbag</span>
+      <span>&copy; 2025</span>
       <div class="footer-links">
-        <a href="https://instagram.com" target="_blank">Instagram</a>
-        <a href="mailto:info@magdalenapickova.cz">Kontakt</a>
-        <span>Doprava zdarma nad 1 500 Kč</span>
+        <a href="#">Kontakt</a>
       </div>
     </footer>
   </main>
@@ -1609,15 +1470,7 @@
 
   <!-- JS -->
   <script>
-    const products = {
-      'royal-blue': { id:'royal-blue', name:'Háčkovaná kabelka na mobil', variant:'Royal Blue', price:859, colorHex:'#2956B2', pastel:'#DAEAF8', story:'Modrá je moje srdcová. Tuhle kabelku jsem háčkovala jako úplně první — a dodneška je nejoblíbenější. Prostě klasika, co nikdy neomrzí.', images:['images/royal-blue-1.png','images/royal-blue-2.png','images/royal-blue-3.png'] },
-      'lavender':   { id:'lavender',   name:'Háčkovaná kabelka na mobil', variant:'Lavender',   price:859, colorHex:'#9B8BB4', pastel:'#E8E0F2', story:'Vznikla jednoho léta v kavárně. Chtěla jsem barvu, co voní levandulovým polem a hodí se ke všemu — od šatů po džíny.', images:['images/lavender-1.png','images/lavender-2.png','images/lavender-3.png'] },
-      'ruby':       { id:'ruby',       name:'Háčkovaná kabelka na mobil', variant:'Ruby',       price:859, colorHex:'#9B2335', pastel:'#F4DDE0', story:'Ruby je pro ty odvážnější. Chtěla jsem barvu, co přitáhne pohledy a dodá outfitu šmrnc. Když ji vidíte, poznáte ji.', images:['images/ruby-1.png','images/ruby-2.png','images/ruby-3.png'] },
-      'sage':       { id:'sage',       name:'Mini tote kabelka',          variant:'Sage',        price:990, colorHex:'#8FAF9B', pastel:'#DCE8E0', story:'Šalvějová zelená mě uklidňuje. Tuhle tote bag jsem háčkovala u otevřeného okna na jaře — a je na ní vidět ten klid.', images:['images/sage-detail.jpg','images/sage-pair.jpg'] },
-      'beige':      { id:'beige',      name:'Háčkovaná kabelka',          variant:'Sand',        price:859, colorHex:'#C4AD8F', pastel:'#F0EAE0', story:'Neutrální, elegantní a přitom originální. Sand se hodí ke všemu a je ideální pro ty, kdo chtějí jemnost bez kompromisů.', images:['images/beige-model.jpg'] },
-      'bicolor':    { id:'bicolor',    name:'Mini tote kabelka',          variant:'Noir & Crème', price:1190, colorHex:'#3D3029', pastel:'#E2DDD6', story:'Dvoubarevná kombinace, co mě napadla při koukání na staré filmy. Černobílá, ale úplně jinak — a překvapivě praktická.', images:['images/bicolor-mag.jpg'] },
-      'rosewood':   { id:'rosewood',   name:'Háčkovaná kabelka',           variant:'Rosewood',    price:859, colorHex:'#B07080', pastel:'#EDD9DB', story:'Přechod z růžové do bordó — jako západ slunce v říjnu. Měkká a originální kabelka pro každý den.', images:['images/pink-bordeaux.jpg'] }
-    };
+    const products = {};
 
     let cur = null, imgIdx = 0;
     let cart = JSON.parse(localStorage.getItem('mp_cart') || '[]');
