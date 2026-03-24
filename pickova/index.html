@@ -1682,19 +1682,24 @@
       }
     }, { passive: true });
 
+    let swDirection = null;
     document.addEventListener('touchmove', (e) => {
       if (!swActive) return;
       const dx = e.touches[0].clientX - swStartX;
       const dy = e.touches[0].clientY - swStartY;
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+      // Urči směr při prvním pohybu
+      if (!swDirection && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+        swDirection = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
+      }
+      if (swDirection === 'h') {
         e.preventDefault();
         window.scrollBy(0, -dx * 20);
-        swStartX = e.touches[0].clientX;
-        swStartY = e.touches[0].clientY;
       }
+      swStartX = e.touches[0].clientX;
+      swStartY = e.touches[0].clientY;
     }, { passive: false });
 
-    document.addEventListener('touchend', () => { swActive = false; }, { passive: true });
+    document.addEventListener('touchend', () => { swActive = false; swDirection = null; }, { passive: true });
 
     window.navTo = (id) => {
       const el = document.getElementById(id);
