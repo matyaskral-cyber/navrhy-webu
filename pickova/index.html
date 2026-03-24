@@ -1670,8 +1670,18 @@
       }
     }, { passive: false });
 
-    // Mobil: swipe doleva/doprava → vertikální scroll
-    let swStartX = 0, swStartY = 0, swActive = false, swDirection = null;
+    // Mobil: swipe doleva/doprava → přímo pohybuje trackem
+    let swStartX = 0, swStartY = 0, swActive = false, swDirection = null, swOffset = 0;
+
+    function getBaseTranslate() {
+      const rect = psec.getBoundingClientRect();
+      const h = psec.offsetHeight - window.innerHeight;
+      const rawProgress = Math.max(0, Math.min(1, -rect.top / h));
+      const progress = Math.min(1, rawProgress / 0.85);
+      const sidebar = window.innerWidth > 768 ? parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar')) : 0;
+      const pw = track.scrollWidth - (window.innerWidth - sidebar);
+      return -progress * pw;
+    }
 
     document.addEventListener('touchstart', (e) => {
       if (!psec) return;
@@ -1681,6 +1691,7 @@
         swStartY = e.touches[0].clientY;
         swActive = true;
         swDirection = null;
+        swOffset = 0;
       }
     }, { passive: true });
 
@@ -1697,22 +1708,34 @@
 
       if (swDirection === 'h') {
         e.preventDefault();
-        // Přímo nastavíme scroll pozici
-        const h = psec.offsetHeight - window.innerHeight;
-        const secTop = psec.offsetTop;
-        const panels = track.children.length;
-        const pxPerPanel = window.innerWidth;
-        // Kolik px scrollu odpovídá 1px horizontálního pohybu
-        const ratio = h / (pxPerPanel * panels);
-        const scrollDelta = -dx * ratio * panels;
-        window.scrollTo(0, window.scrollY + scrollDelta);
+        swOffset += (curX - swStartX);
+        const base = getBaseTranslate();
+        const sidebar = window.innerWidth > 768 ? parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar')) : 0;
+        const pw = track.scrollWidth - (window.innerWidth - sidebar);
+        const clamped = Math.max(-pw, Math.min(0, base + swOffset));
+        track.style.transform = `translateX(${clamped}px)`;
       }
 
       swStartX = curX;
       swStartY = curY;
     }, { passive: false });
 
-    document.addEventListener('touchend', () => { swActive = false; swDirection = null; }, { passive: true });
+    document.addEventListener('touchend', () => {
+      if (swActive && swDirection === 'h' && psec) {
+        // Synchronizuj scroll pozici s aktuální pozicí tracku
+        const sidebar = window.innerWidth > 768 ? parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar')) : 0;
+        const pw = track.scrollWidth - (window.innerWidth - sidebar);
+        const base = getBaseTranslate();
+        const finalPos = Math.max(-pw, Math.min(0, base + swOffset));
+        const progress = Math.min(1, Math.abs(finalPos) / pw);
+        const h = psec.offsetHeight - window.innerHeight;
+        const targetScroll = psec.offsetTop + progress * 0.85 * h;
+        window.scrollTo(0, targetScroll);
+      }
+      swActive = false;
+      swDirection = null;
+      swOffset = 0;
+    }, { passive: true });
 
     window.navTo = (id) => {
       const el = document.getElementById(id);
