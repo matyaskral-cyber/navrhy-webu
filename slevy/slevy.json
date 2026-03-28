@@ -2534,6 +2534,20 @@
     "url": "https://www.kupi.cz/sleva/energeticky-napoj-monster-energy"
   },
   {
+    "id": "a658c12",
+    "name": "Energetický nápoj Tiger",
+    "desc": "0.5 l",
+    "store": "albert",
+    "storeName": "Albert",
+    "category": "Energetické a iontové nápoje",
+    "emoji": "🥤",
+    "image": "https://img.kupi.cz/kupi/thumbs/energeticky-napoj-tiger_170_340.png",
+    "priceNew": 12.9,
+    "priceOld": 18.06,
+    "validUntil": "2026-03-31",
+    "url": "https://www.kupi.cz/sleva/energeticky-napoj-tiger"
+  },
+  {
     "id": "a542292",
     "name": "Filtry do konvice Maxtra Brita",
     "desc": "3 ks",
@@ -2714,20 +2728,6 @@
     "priceOld": 139.86,
     "validUntil": "2026-03-31",
     "url": "https://www.kupi.cz/sleva/kachna-vodnanska-kachna"
-  },
-  {
-    "id": "ac6f761",
-    "name": "Kapsička ovocná 100% Kubík",
-    "desc": "100 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Dětská výživa",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/kapsicka-ovocna-100-kubik_170_340.jpg",
-    "priceNew": 9.9,
-    "priceOld": 13.86,
-    "validUntil": "2026-03-31",
-    "url": "https://www.kupi.cz/sleva/kapsicka-ovocna-100-kubik"
   },
   {
     "id": "a79a55f",
@@ -3180,7 +3180,7 @@
   {
     "id": "aefecca",
     "name": "Nápoj ovocný Relax",
-    "desc": "1 l",
+    "desc": "0.33 l",
     "store": "albert",
     "storeName": "Albert",
     "category": "Džusy, nektary, nápoje",
@@ -3218,20 +3218,6 @@
     "priceOld": 26.46,
     "validUntil": "2026-04-05",
     "url": "https://www.kupi.cz/sleva/nealkoholicke-pivo-ochucene-birell"
-  },
-  {
-    "id": "a4c930d",
-    "name": "Nektar Relax",
-    "desc": "0.25 l",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Džusy, nektary, nápoje",
-    "emoji": "🥤",
-    "image": "https://img.kupi.cz/kupi/thumbs/nektar-relax-1_170_340.png",
-    "priceNew": 19.9,
-    "priceOld": 27.86,
-    "validUntil": "2026-03-31",
-    "url": "https://www.kupi.cz/sleva/nektar-relax"
   },
   {
     "id": "ab158d2",
@@ -3388,6 +3374,20 @@
     "url": "https://www.kupi.cz/sleva/osvezovac-vzduchu-bathroom-ambi-pur"
   },
   {
+    "id": "aec1f20",
+    "name": "Papír na pečení Fino",
+    "desc": "1 ks",
+    "store": "albert",
+    "storeName": "Albert",
+    "category": "Fólie a obaly",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/papir-na-peceni-fino_170_340.jpg",
+    "priceNew": 39.9,
+    "priceOld": 55.86,
+    "validUntil": "2026-04-05",
+    "url": "https://www.kupi.cz/sleva/papir-na-peceni-fino"
+  },
+  {
     "id": "ac72267",
     "name": "Paštiky Hamé",
     "desc": "48 g",
@@ -3524,7 +3524,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-12-ryze-horka-radegast_170_340.png",
     "priceNew": 21.9,
     "priceOld": 30.66,
-    "validUntil": "2026-03-31",
+    "validUntil": "2026-04-05",
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-12-ryze-horka-radegast"
   },
   {
@@ -4298,6 +4298,20 @@
     "url": "https://www.kupi.cz/sleva/cokolada-milka"
   },
   {
+    "id": "ka506b7",
+    "name": "Dekorativní zápich",
+    "desc": "1 ks",
+    "store": "kaufland",
+    "storeName": "Kaufland",
+    "category": "Doplňky do domácnosti",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/dekorativni-zapich_170_340.jpg",
+    "priceNew": 19.9,
+    "priceOld": 27.86,
+    "validUntil": "2026-03-29",
+    "url": "https://www.kupi.cz/sleva/dekorativni-zapich"
+  },
+  {
     "id": "k18e367",
     "name": "Džus Relax",
     "desc": "0.3 l",
@@ -4380,6 +4394,20 @@
     "priceOld": 167.86,
     "validUntil": "2026-03-31",
     "url": "https://www.kupi.cz/sleva/kapsle-dolce-gusto-nescafe"
+  },
+  {
+    "id": "k4c1936",
+    "name": "Kečup Gurmán Otma",
+    "desc": "520 g",
+    "store": "kaufland",
+    "storeName": "Kaufland",
+    "category": "Kečupy a protlaky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/kecup-gurman-otma_170_340.png",
+    "priceNew": 39.9,
+    "priceOld": 55.86,
+    "validUntil": "2026-03-31",
+    "url": "https://www.kupi.cz/sleva/kecup-gurman-otma"
   },
   {
     "id": "k0cb18c",
@@ -4636,7 +4664,7 @@
   {
     "id": "ka83796",
     "name": "Nápoj ovocný Relax",
-    "desc": "1 l",
+    "desc": "0.33 l",
     "store": "kaufland",
     "storeName": "Kaufland",
     "category": "Džusy, nektary, nápoje",
@@ -5138,20 +5166,6 @@
     "url": "https://www.kupi.cz/sleva/tekuty-odvapnovac-ecodecalk-delonghi"
   },
   {
-    "id": "kbad073",
-    "name": "Termix Mlékárna Kunín",
-    "desc": "90 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Dezerty a pudinky",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/termix-mlekarna-kunin-2_170_340.jpg",
-    "priceNew": 9.9,
-    "priceOld": 13.86,
-    "validUntil": "2026-03-31",
-    "url": "https://www.kupi.cz/sleva/termix-mlekarna-kunin"
-  },
-  {
     "id": "kdfaa64",
     "name": "Těstoviny semolinové Barilla",
     "desc": "500 g",
@@ -5192,20 +5206,6 @@
     "priceOld": 90.86,
     "validUntil": "2026-03-31",
     "url": "https://www.kupi.cz/sleva/tunak-sun-sea"
-  },
-  {
-    "id": "k070522",
-    "name": "Tyčinka Kofila Orion",
-    "desc": "35 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Čokoládové tyčinky",
-    "emoji": "🍫",
-    "image": "https://img.kupi.cz/kupi/thumbs/kofila-orion_170_340.png",
-    "priceNew": 11.9,
-    "priceOld": 16.66,
-    "validUntil": "2026-03-31",
-    "url": "https://www.kupi.cz/sleva/tycinka-kofila-orion"
   },
   {
     "id": "k5cab8e",
@@ -5328,9 +5328,9 @@
     "category": "Fólie a obaly",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/alobal-fino_170_340.jpg",
-    "priceNew": 40.9,
-    "priceOld": 57.26,
-    "validUntil": "",
+    "priceNew": 28.9,
+    "priceOld": 40.46,
+    "validUntil": "2026-03-31",
     "url": "https://www.kupi.cz/sleva/alobal-fino"
   },
   {
@@ -5964,20 +5964,6 @@
     "url": "https://www.kupi.cz/sleva/dalamanek"
   },
   {
-    "id": "tc4947e",
-    "name": "Deodorant sprej Rexona",
-    "desc": "150 ml",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Deodoranty a spreje",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/deodorant-sprej-rexona-1_170_340.jpg",
-    "priceNew": 36.9,
-    "priceOld": 51.66,
-    "validUntil": "2026-03-31",
-    "url": "https://www.kupi.cz/sleva/deodorant-sprej-rexona"
-  },
-  {
     "id": "tbf5552",
     "name": "Dezinfekční osvěžovač vzduchu Sanytol",
     "desc": "300 ml",
@@ -6060,20 +6046,6 @@
     "priceOld": 167.86,
     "validUntil": "",
     "url": "https://www.kupi.cz/sleva/energeticky-napoj-red-bull"
-  },
-  {
-    "id": "tfa7aa8",
-    "name": "Energetický nápoj Semtex",
-    "desc": "0.5 l",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Energetické a iontové nápoje",
-    "emoji": "🥤",
-    "image": "https://img.kupi.cz/kupi/thumbs/energeticky-napoj-semtex_170_340.jpg",
-    "priceNew": 17.9,
-    "priceOld": 25.06,
-    "validUntil": "2026-03-30",
-    "url": "https://www.kupi.cz/sleva/energeticky-napoj-semtex"
   },
   {
     "id": "ta7af1f",
@@ -6480,6 +6452,20 @@
     "priceOld": 40.46,
     "validUntil": "2026-03-31",
     "url": "https://www.kupi.cz/sleva/jiska-hotova-knorr"
+  },
+  {
+    "id": "t1d51c8",
+    "name": "Jogurt Fantasia Danone",
+    "desc": "100 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Dezerty a pudinky",
+    "emoji": "🥛",
+    "image": "https://img.kupi.cz/kupi/thumbs/dezert-fantasia-danone-1_170_340.jpg",
+    "priceNew": 14.9,
+    "priceOld": 20.86,
+    "validUntil": "2026-04-05",
+    "url": "https://www.kupi.cz/sleva/jogurt-fantasia-danone"
   },
   {
     "id": "t88beac",
@@ -6998,20 +6984,6 @@
     "priceOld": 32.06,
     "validUntil": "2026-04-08",
     "url": "https://www.kupi.cz/sleva/kvetinac"
-  },
-  {
-    "id": "t10e9ee",
-    "name": "Květináč rašelinový",
-    "desc": "24 ks",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Zahradní potřeby",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/kvetinac-raselinovy_170_340.jpg",
-    "priceNew": 62.9,
-    "priceOld": 88.06,
-    "validUntil": "2026-04-08",
-    "url": "https://www.kupi.cz/sleva/kvetinac-raselinovy"
   },
   {
     "id": "tc3af01",
@@ -7568,9 +7540,9 @@
     "category": "Káva",
     "emoji": "☕",
     "image": "https://img.kupi.cz/kupi/thumbs/mleta-kava-tchibo-exclusive_170_340.png",
-    "priceNew": 99.9,
-    "priceOld": 139.86,
-    "validUntil": "2026-03-27",
+    "priceNew": 109.9,
+    "priceOld": 153.86,
+    "validUntil": "2026-03-31",
     "url": "https://www.kupi.cz/sleva/mleta-kava-tchibo-exclusive"
   },
   {
@@ -7702,7 +7674,7 @@
   {
     "id": "t52f601",
     "name": "Nápoj ovocný Relax",
-    "desc": "1 l",
+    "desc": "0.33 l",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Džusy, nektary, nápoje",
@@ -7964,20 +7936,6 @@
     "priceOld": 111.86,
     "validUntil": "2026-04-10",
     "url": "https://www.kupi.cz/sleva/osvezovac-vzduchu-air-wick-napln"
-  },
-  {
-    "id": "t65542d",
-    "name": "Osvěžovač vzduchu Bathroom Ambi Pur",
-    "desc": "7.5 ml",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Vůně do bytu",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/osvezovac-vzduchu-bathroom-ambi-pur_170_340.jpg",
-    "priceNew": 119.9,
-    "priceOld": 167.86,
-    "validUntil": "2026-03-31",
-    "url": "https://www.kupi.cz/sleva/osvezovac-vzduchu-bathroom-ambi-pur"
   },
   {
     "id": "t18cdb5",
@@ -8470,20 +8428,6 @@
     "url": "https://www.kupi.cz/sleva/pizza-mrazena-ristorante-dr-oetker"
   },
   {
-    "id": "t487036",
-    "name": "Plastový květináč",
-    "desc": "1 ks",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Zahradní potřeby",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/plastovy-kvetinac_170_340.png",
-    "priceNew": 71.9,
-    "priceOld": 100.66,
-    "validUntil": "2026-04-08",
-    "url": "https://www.kupi.cz/sleva/plastovy-kvetinac"
-  },
-  {
     "id": "t97e44f",
     "name": "Pleny dětské Pampers Premium Care",
     "desc": "1 ks",
@@ -8524,6 +8468,20 @@
     "priceOld": 278.6,
     "validUntil": "2026-03-30",
     "url": "https://www.kupi.cz/sleva/pohlcovac-vlhkosti-aero-360-ceresit-nahradni-tablety"
+  },
+  {
+    "id": "t228177",
+    "name": "Pomazánka Milka",
+    "desc": "350 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Čokokrémy",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/pomazanka-milka_170_340.jpg",
+    "priceNew": 59.9,
+    "priceOld": 83.86,
+    "validUntil": "2026-03-29",
+    "url": "https://www.kupi.cz/sleva/pomazanka-milka"
   },
   {
     "id": "tf97021",
@@ -8736,6 +8694,20 @@
     "url": "https://www.kupi.cz/sleva/prosecco-doc-elysium"
   },
   {
+    "id": "t374c99",
+    "name": "Prostěradlo",
+    "desc": "",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Bytový textil",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/prosteradlo_170_340.jpg",
+    "priceNew": 249.0,
+    "priceOld": 348.6,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/prosteradlo"
+  },
+  {
     "id": "t586126",
     "name": "Prostředek na nádobí Jar",
     "desc": "0.45 l",
@@ -8832,20 +8804,6 @@
     "priceOld": 79.66,
     "validUntil": "",
     "url": "https://www.kupi.cz/sleva/sacky-mikrotenove-fino"
-  },
-  {
-    "id": "t32019c",
-    "name": "Sada bitů s ráčnovým šroubovákem Reikel",
-    "desc": "75 ks",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Dílna",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/sada-bitu-s-racnovym-sroubovakem-reikel_170_340.jpg",
-    "priceNew": 329.9,
-    "priceOld": 461.86,
-    "validUntil": "2026-04-08",
-    "url": "https://www.kupi.cz/sleva/sada-bitu-s-racnovym-sroubovakem-reikel"
   },
   {
     "id": "t817acd",
@@ -9210,6 +9168,34 @@
     "priceOld": 111.86,
     "validUntil": "2026-04-06",
     "url": "https://www.kupi.cz/sleva/syr-old-jersey-gouda-billa-premium"
+  },
+  {
+    "id": "t9aca11",
+    "name": "Sýr original Gervais",
+    "desc": "80 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Tavené sýry a žervé",
+    "emoji": "🧀",
+    "image": "https://img.kupi.cz/kupi/thumbs/syr-original-gervais_170_340.png",
+    "priceNew": 19.9,
+    "priceOld": 27.86,
+    "validUntil": "2026-04-05",
+    "url": "https://www.kupi.cz/sleva/syr-original-gervais"
+  },
+  {
+    "id": "t3096c6",
+    "name": "Sýr Snack Président",
+    "desc": "180 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Sýry",
+    "emoji": "🧀",
+    "image": "https://img.kupi.cz/kupi/thumbs/syr-snack-president_170_340.jpg",
+    "priceNew": 59.9,
+    "priceOld": 83.86,
+    "validUntil": "2026-04-05",
+    "url": "https://www.kupi.cz/sleva/syr-snack-president"
   },
   {
     "id": "t1fca70",
@@ -9742,6 +9728,20 @@
     "priceOld": 167.86,
     "validUntil": "2026-03-31",
     "url": "https://www.kupi.cz/sleva/vodka-hanacka"
+  },
+  {
+    "id": "tfe0096",
+    "name": "WC blok tuhý Power Aktiv Bref",
+    "desc": "50 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Čisticí prostředky",
+    "emoji": "🧼",
+    "image": "https://img.kupi.cz/kupi/thumbs/wc-blok-tuhy-power-aktiv-bref_170_340.jpg",
+    "priceNew": 99.9,
+    "priceOld": 139.86,
+    "validUntil": "2026-03-29",
+    "url": "https://www.kupi.cz/sleva/wc-blok-tuhy-power-aktiv-bref"
   },
   {
     "id": "tb79711",
