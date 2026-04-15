@@ -282,8 +282,7 @@ const SB_URL = 'https://yqklnqmcjloxwdtifkjb.supabase.co';
 const SB_KEY = 'sb_publishable_gZI-26x3NF4Dc5h-BuOpjg_3Y0n2Um-';
 
 const USERS = {
-  'admin': '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9',
-  'odberatel': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',
+  'petr': 'b23ba60fc222df288df4c3d3818a430bd14252c2d680f7a18172bc6dc4607d20',
 };
 
 let data = [], sort = { key: 'nazev', dir: 'asc' }, timer, currentUser = '';
@@ -313,7 +312,7 @@ function showApp() {
   document.getElementById('mainApp').classList.add('active');
   // Show upload button only for admin
   currentUser = sessionStorage.getItem('sk');
-  document.getElementById('btnUpload').style.display = currentUser === 'admin' ? '' : 'none';
+  document.getElementById('btnUpload').style.display = currentUser === 'petr' ? '' : 'none';
   load();
   timer = setInterval(load, 60000);
 }
