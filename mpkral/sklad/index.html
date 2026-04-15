@@ -132,12 +132,13 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 }
 .search-input:focus { border-color: var(--accent); }
 
-.table-wrap { padding: 0 24px 40px; overflow-x: auto; }
+.table-wrap { padding: 0 24px 40px; overflow: auto; max-height: calc(100vh - 130px); }
 table { width: 100%; border-collapse: collapse; font-size: 14px; }
+thead { position: sticky; top: 0; z-index: 10; }
 th {
   text-align: left;
   padding: 10px 16px;
-  background: var(--surface);
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
   font-size: 11px;
   text-transform: uppercase;
@@ -145,9 +146,6 @@ th {
   color: var(--text2);
   font-weight: 600;
   cursor: pointer;
-  position: sticky;
-  top: 53px;
-  z-index: 10;
 }
 th:hover { color: var(--text); }
 td {
