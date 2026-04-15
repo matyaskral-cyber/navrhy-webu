@@ -1,61 +1,5 @@
 [
   {
-    "id": "p81cb3f",
-    "name": "Pivo Zlatý Bažant sklo",
-    "desc": "0.5 l",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "PIVO",
-    "emoji": "🍺",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-100529-599106132-n2VAFNz-.jpg",
-    "priceNew": 12.9,
-    "priceOld": 17.42,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/pivo-zlaty-bazant-sklo-88100529"
-  },
-  {
-    "id": "p3f14f0",
-    "name": "Bonbóny Werther's Original",
-    "desc": "80 g",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "SLADKOSTI",
-    "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-102395-0664618331-PqEbfHND.jpg",
-    "priceNew": 16.9,
-    "priceOld": 32.9,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/bonbony-werthers-original-88102395"
-  },
-  {
-    "id": "pc42143",
-    "name": "Tyčinka Knoppers",
-    "desc": "40 g",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "ČOKOLÁDA",
-    "emoji": "🍫",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-107222-1788757569-xpP41aAG.jpg",
-    "priceNew": 12.9,
-    "priceOld": 16.9,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/tycinka-knoppers-88107222"
-  },
-  {
-    "id": "p9ed84d",
-    "name": "Jahody",
-    "desc": "500 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "OVOCE",
-    "emoji": "🍎",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-164102-0127959073-8kNRJfRP.jpg",
-    "priceNew": 34.9,
-    "priceOld": 47.12,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/jahody-88164102"
-  },
-  {
     "id": "pc9f82f",
     "name": "Kiwi 1ks",
     "desc": "1 ks",
@@ -63,25 +7,11 @@
     "storeName": "Penny",
     "category": "OVOCE",
     "emoji": "🍎",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-168202-1589146316-n3FlYwOZ.jpg",
-    "priceNew": 9.9,
-    "priceOld": 13.37,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-168202-0160526901-yW5vbtng.jpg",
+    "priceNew": 4.9,
+    "priceOld": 6.62,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/kiwi-1ks-88168202"
-  },
-  {
-    "id": "peeed08",
-    "name": "Avokádo 1 ks",
-    "desc": "1 ks",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "OVOCE",
-    "emoji": "🍎",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-168301-308257644-LNwi6OmB.jpg",
-    "priceNew": 14.9,
-    "priceOld": 20.12,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/avokado-1-ks-88168301"
   },
   {
     "id": "p7f1824",
@@ -91,53 +21,11 @@
     "storeName": "Penny",
     "category": "ZELENINA",
     "emoji": "🥦",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-176104-0328540075-pZvGwer9.jpg",
-    "priceNew": 24.9,
-    "priceOld": 33.62,
-    "validUntil": "2026-04-21",
-    "url": "https://www.penny.cz/products/okurka-salatova-88176104"
-  },
-  {
-    "id": "p3f4125",
-    "name": "Poděbradka Prolinie",
-    "desc": "1.5 l",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "NEALKOHOLICKÉ NÁPOJE",
-    "emoji": "🥤",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-200325-0116392964-XmYPxRL7.jpg",
-    "priceNew": 9.95,
-    "priceOld": 13.43,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/podebradka-prolinie-88200325"
-  },
-  {
-    "id": "p72563c",
-    "name": "Perník jahodový dortík Dubea",
-    "desc": "60 g",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "TRVANLIVÉ PEČIVO / VAFLE",
-    "emoji": "🍓",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-201158-28306312-u2qw2T1_.jpg",
-    "priceNew": 7.9,
-    "priceOld": 12.9,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/pernik-jahodovy-dortik-dubea-88201158"
-  },
-  {
-    "id": "p04654c",
-    "name": "Zmrzlina v oplatce kornout Rios",
-    "desc": "200 l",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "MRAŽENÁ ZMRZLINA",
-    "emoji": "🍦",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-201315-949995111-g96fvBdQ.jpg",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-176104-178364742-RPGwq_zS.jpg",
     "priceNew": 9.9,
     "priceOld": 13.37,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/zmrzlina-v-oplatce-kornout-rios-88201315"
+    "validUntil": "2026-04-21",
+    "url": "https://www.penny.cz/products/okurka-salatova-88176104"
   },
   {
     "id": "ped5372",
@@ -147,9 +35,9 @@
     "storeName": "Penny",
     "category": "HOŘČICE / KEČUP / KŘEN / KOŘENÍ",
     "emoji": "🧂",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-201340-0467208113-55maUor_.jpg",
-    "priceNew": 29.9,
-    "priceOld": 40.37,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-201340-79198596-1qrM0h9F.jpg",
+    "priceNew": 19.9,
+    "priceOld": 29.9,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/kren-strouhany-avokado-88201340"
   },
@@ -161,7 +49,7 @@
     "storeName": "Penny",
     "category": "ČAJ / KAKAO",
     "emoji": "🍵",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-201642-727690399-TN4cMMVN.jpg",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-201642-1641108682-7VKCvQV5.jpg",
     "priceNew": 99.9,
     "priceOld": 134.87,
     "validUntil": "2026-04-21",
@@ -175,9 +63,9 @@
     "storeName": "Penny",
     "category": "PEČIVO",
     "emoji": "🍞",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-201694-1642378469-rjqGw5jI.jpg",
-    "priceNew": 9.9,
-    "priceOld": 13.37,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-201694-0225028767-8y5T8S1r.jpg",
+    "priceNew": 5.9,
+    "priceOld": 7.97,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/kobliha-s-ovocnou-naplni-88201694"
   },
@@ -189,9 +77,9 @@
     "storeName": "Penny",
     "category": "ST WEB",
     "emoji": "🛒",
-    "image": "",
-    "priceNew": 239.9,
-    "priceOld": 323.87,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-203273-1808650457-FglIIRLx.jpg",
+    "priceNew": 159.9,
+    "priceOld": 215.87,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/becherovka-orange-und-ginger-20-88203273"
   },
@@ -203,39 +91,11 @@
     "storeName": "Penny",
     "category": "ZELENINOVÉ / OVOCNÉ KONZERVY",
     "emoji": "🥦",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-203998-0804426658-gfTcfZb_.jpg",
-    "priceNew": 69.9,
-    "priceOld": 94.37,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-203998-1356197291-tyQaN4An.jpg",
+    "priceNew": 36.9,
+    "priceOld": 69.9,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/kompot-broskve-pulene-88203998"
-  },
-  {
-    "id": "pb5ee73",
-    "name": "Pohanka Gustito",
-    "desc": "500 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "ZÁKLADNÍ POTRAVINY",
-    "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-204737-0159798102-u2u0C-X_.jpg",
-    "priceNew": 21.9,
-    "priceOld": 33.9,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/pohanka-gustito-88204737"
-  },
-  {
-    "id": "pb22dc6",
-    "name": "Oplatky CaféTime",
-    "desc": "175 g",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "TRVANLIVÉ PEČIVO / VAFLE",
-    "emoji": "🍞",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205186-1542759172-0w_-pK8m.jpg",
-    "priceNew": 19.9,
-    "priceOld": 25.9,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/oplatky-cafetime-88205186"
   },
   {
     "id": "pac8931",
@@ -245,9 +105,9 @@
     "storeName": "Penny",
     "category": "MASOVÉ KONZERVY / POMAZÁNKY",
     "emoji": "🥩",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205436-1448016631-oHTDrf3U.jpg",
-    "priceNew": 59.9,
-    "priceOld": 80.87,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205436-553980451-4j0d0Z9B.jpg",
+    "priceNew": 39.9,
+    "priceOld": 53.87,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/maso-veprove-gustito-88205436"
   },
@@ -257,11 +117,11 @@
     "desc": "150 kg",
     "store": "penny",
     "storeName": "Penny",
-    "category": "ST WEB",
-    "emoji": "🛒",
-    "image": "",
-    "priceNew": 49.9,
-    "priceOld": 67.37,
+    "category": "ZELENINOVÉ / OVOCNÉ KONZERVY",
+    "emoji": "🥦",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205460-089389505-h5M2O72n.jpg",
+    "priceNew": 19.9,
+    "priceOld": 49.9,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/kompot-boruvky-gustito-88205460"
   },
@@ -273,9 +133,9 @@
     "storeName": "Penny",
     "category": "SÝRY",
     "emoji": "🧀",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205608-1810443630-tAqdsY9Q.jpg",
-    "priceNew": 18.9,
-    "priceOld": 25.52,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205608-2132904462-R_zJ-x_F.jpg",
+    "priceNew": 12.9,
+    "priceOld": 17.42,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/syr-eidam-30-karlova-koruna-88205608"
   },
@@ -287,25 +147,11 @@
     "storeName": "Penny",
     "category": "SÝRY",
     "emoji": "🧀",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205706-0139615568-ZMhiG_AE.jpg",
-    "priceNew": 13.9,
-    "priceOld": 18.77,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205706-0144084920-r8aesJJx.jpg",
+    "priceNew": 9.9,
+    "priceOld": 13.37,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/syr-zerve-karlova-koruna-88205706"
-  },
-  {
-    "id": "p07f44e",
-    "name": "Smetanový jogurt Karlova Koruna",
-    "desc": "1 g",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "MLÉČNÉ VÝROBKY",
-    "emoji": "🧀",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205834-120561319--sjXBzIC.jpg",
-    "priceNew": 49.9,
-    "priceOld": 67.37,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/smetanovy-jogurt-karlova-koruna-88205834"
   },
   {
     "id": "p11fc1e",
@@ -315,39 +161,11 @@
     "storeName": "Penny",
     "category": "PARFUMERIE - NEPOTRAVINÁŘSKÉ ZBOŽÍ",
     "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205873-0148095072-1lIOaGPv.jpg",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205873-893578467-Qf59egJJ.jpg",
     "priceNew": 74.9,
     "priceOld": 101.12,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/toaletni-papir-wippy-88205873"
-  },
-  {
-    "id": "pae80ce",
-    "name": "Žampiony krájené Jardinelle",
-    "desc": "170 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "ST WEB",
-    "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-207553-0124200172-3FkvvkbO.jpg",
-    "priceNew": 17.9,
-    "priceOld": 24.16,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/zampiony-krajene-jardinelle-88207553"
-  },
-  {
-    "id": "p714745",
-    "name": "Toaletní papír Paloma",
-    "desc": "150 m",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "PARFUMERIE - NEPOTRAVINÁŘSKÉ ZBOŽÍ",
-    "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-208038-44150522-eLAgPVcM.jpg",
-    "priceNew": 49.9,
-    "priceOld": 67.37,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/toaletni-papir-paloma-88208038"
   },
   {
     "id": "p21cb4e",
@@ -357,25 +175,11 @@
     "storeName": "Penny",
     "category": "VEJCE",
     "emoji": "🥚",
-    "image": "",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-208230-0543672043-uHSQsXZM.jpg",
     "priceNew": 99.9,
     "priceOld": 134.87,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/vejce-cerstva-z-podestylky-m-88208230"
-  },
-  {
-    "id": "pa67970",
-    "name": "Mléko trvanlivé polotučné 1,5%",
-    "desc": "1 l",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "TRVANLIVÉ A STERILOVANÉ PRODUKTY",
-    "emoji": "🥛",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-213103-0169904257-rk1b8LfB.jpg",
-    "priceNew": 8.9,
-    "priceOld": 12.02,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/mleko-trvanlive-polotucne-15-88213103"
   },
   {
     "id": "padac94",
@@ -385,25 +189,11 @@
     "storeName": "Penny",
     "category": "TRVANLIVÉ A STERILOVANÉ PRODUKTY",
     "emoji": "🥛",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-213104-614278257-Dr1-g9FO.jpg",
-    "priceNew": 24.9,
-    "priceOld": 33.62,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-213104-1184979848-XRCXXpdB.jpg",
+    "priceNew": 14.9,
+    "priceOld": 20.12,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/mleko-trvanlive-plnotucne-35-boni-88213104"
-  },
-  {
-    "id": "p2ae361",
-    "name": "Těstoviny kolínka Penny",
-    "desc": "500 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "ZÁKLADNÍ POTRAVINY",
-    "emoji": "🍝",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-272549-1371196745-iDtY7xci.jpg",
-    "priceNew": 9.9,
-    "priceOld": 13.37,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/testoviny-kolinka-penny-88272549"
   },
   {
     "id": "p5ee2d1",
@@ -413,67 +203,11 @@
     "storeName": "Penny",
     "category": "UZENINY",
     "emoji": "🌭",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-300058-1683663437-2nGm1CQ6.jpg",
-    "priceNew": 19.9,
-    "priceOld": 26.86,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-300058-0207402191-Npfviayq.jpg",
+    "priceNew": 12.9,
+    "priceOld": 17.42,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/salam-sunkovy-reznikuv-talir-88300058"
-  },
-  {
-    "id": "pe64ca8",
-    "name": "Slanina anglická Řezníkův Talíř",
-    "desc": "100 g",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "UZENINY",
-    "emoji": "🌭",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-300059-0473057890-vFVdEgj5.jpg",
-    "priceNew": 17.9,
-    "priceOld": 24.16,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/slanina-anglicka-reznikuv-talir-88300059"
-  },
-  {
-    "id": "p68f30a",
-    "name": "Smetana ke šlehání 31% Boni",
-    "desc": "200 g",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "MLÉČNÉ VÝROBKY",
-    "emoji": "🧀",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-301423-2009992630-g-ypsLRx.jpg",
-    "priceNew": 19.9,
-    "priceOld": 26.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/smetana-ke-slehani-31-boni-88301423"
-  },
-  {
-    "id": "p912bfe",
-    "name": "Máslo 82% Boni",
-    "desc": "250 g",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "MLÉČNÉ VÝROBKY",
-    "emoji": "🧀",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-301827-0195052043-syJIKn4d.jpg",
-    "priceNew": 24.9,
-    "priceOld": 33.62,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/maslo-82-boni-88301827"
-  },
-  {
-    "id": "p34ef39",
-    "name": "Mozzarella Boni",
-    "desc": "125 g",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "SÝRY",
-    "emoji": "🧀",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302097-649195843-YcW4mDNP.jpg",
-    "priceNew": 14.9,
-    "priceOld": 20.12,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/mozzarella-boni-88302097"
   },
   {
     "id": "p770f4b",
@@ -483,9 +217,9 @@
     "storeName": "Penny",
     "category": "SLADKOSTI",
     "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302108-0155507190-JTLdwkJI.jpg",
-    "priceNew": 14.9,
-    "priceOld": 20.12,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302108-1830236878-N28LWE17.jpg",
+    "priceNew": 10.9,
+    "priceOld": 14.9,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/hambace-enjoy-88302108"
   },
@@ -497,9 +231,9 @@
     "storeName": "Penny",
     "category": "SLADKOSTI",
     "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302109-023441907--L-H8x7Z.jpg",
-    "priceNew": 14.9,
-    "priceOld": 20.12,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302109-985765007-wqx22QA2.jpg",
+    "priceNew": 10.9,
+    "priceOld": 14.9,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/kyseli-cervi-enjoy-88302109"
   },
@@ -511,9 +245,9 @@
     "storeName": "Penny",
     "category": "SLADKOSTI",
     "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302113-1143061068-6jEW5avn.jpg",
-    "priceNew": 14.9,
-    "priceOld": 20.12,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302113-1348804712-qyqzzRC4.jpg",
+    "priceNew": 10.9,
+    "priceOld": 14.9,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/sovicky-enjoy-88302113"
   },
@@ -525,25 +259,11 @@
     "storeName": "Penny",
     "category": "MRAŽENÁ ZMRZLINA",
     "emoji": "🥛",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302280-0152678039-bLzgVdSH.jpg",
-    "priceNew": 12.9,
-    "priceOld": 17.42,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302280-0187629658-O7lKYHyG.jpg",
+    "priceNew": 6.9,
+    "priceOld": 9.32,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/smetanova-zmrzlina-rios-88302280"
-  },
-  {
-    "id": "pbed112",
-    "name": "Rajčatový protlak Viva",
-    "desc": "140 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "ZELENINOVÉ / OVOCNÉ KONZERVY",
-    "emoji": "🥦",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-333305-0964154303-FE3AEZvz.jpg",
-    "priceNew": 11.9,
-    "priceOld": 19.9,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/rajcatovy-protlak-viva-88333305"
   },
   {
     "id": "pb46cc4",
@@ -553,39 +273,11 @@
     "storeName": "Penny",
     "category": "ZELENINOVÉ / OVOCNÉ KONZERVY",
     "emoji": "🥦",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-333306-0107944642-yMmAqvsY.jpg",
-    "priceNew": 19.9,
-    "priceOld": 26.86,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-333306-533805678-Ztvgcg8l.jpg",
+    "priceNew": 14.9,
+    "priceOld": 19.9,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/protlak-rajcatovy-san-fabio-88333306"
-  },
-  {
-    "id": "p619d2f",
-    "name": "Med luční Medokom",
-    "desc": "900 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "SLADIDLA",
-    "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-343112-944588344-gUy6wak6.jpg",
-    "priceNew": 99.9,
-    "priceOld": 134.87,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/med-lucni-medokom-88343112"
-  },
-  {
-    "id": "p4338b8",
-    "name": "Šproty Gran Mare",
-    "desc": "85 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "RYBÍ KONZERVY / MOŘSKÉ PLODY",
-    "emoji": "🐟",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-355311-262502707-kM67FmIn.jpg",
-    "priceNew": 21.9,
-    "priceOld": 29.57,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/sproty-gran-mare-88355311"
   },
   {
     "id": "pc854e4",
@@ -595,249 +287,305 @@
     "storeName": "Penny",
     "category": "ČOKOLÁDA",
     "emoji": "🍫",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-383208-0105618164-qFfcVCgH.jpg",
-    "priceNew": 39.9,
-    "priceOld": 53.87,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-383208-562366132-zUkKwR_s.jpg",
+    "priceNew": 29.9,
+    "priceOld": 39.9,
     "validUntil": "2026-04-21",
     "url": "https://www.penny.cz/products/cokoarasidy-88383208"
   },
   {
-    "id": "p1d0689",
-    "name": "Bonbóny Werther\"s Original",
-    "desc": "90 g",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "SLADKOSTI",
-    "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-391195-278668577-CDsCFRhh.jpg",
-    "priceNew": 16.9,
-    "priceOld": 32.9,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/bonbony-werthers-original-88391195"
-  },
-  {
-    "id": "pdb0bee",
-    "name": "Tatranky Opavia",
-    "desc": "47 g",
+    "id": "p4273e3",
+    "name": "Trubičky hořické Enjoy",
+    "desc": "38 g",
     "store": "penny",
     "storeName": "Penny",
     "category": "TRVANLIVÉ PEČIVO / VAFLE",
     "emoji": "🍞",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-401217-280270468-tIg7nLka.jpg",
-    "priceNew": 7.9,
-    "priceOld": 10.67,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/tatranky-opavia-88401217"
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-402403-1515328297-em-bp00J.jpg",
+    "priceNew": 11.9,
+    "priceOld": 15.9,
+    "validUntil": "2026-04-21",
+    "url": "https://www.penny.cz/products/trubicky-horicke-enjoy-88402403"
   },
   {
-    "id": "p6f3775",
-    "name": "Trubičky Alaska",
-    "desc": "18 g",
+    "id": "p2800d7",
+    "name": "Becherovka 38%",
+    "desc": "0.5 l",
     "store": "penny",
     "storeName": "Penny",
-    "category": "TRVANLIVÉ PEČIVO / VAFLE",
-    "emoji": "🍞",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-401367-0170891702-5LEPR-Cd.jpg",
-    "priceNew": 2.45,
-    "priceOld": 3.31,
-    "validUntil": "2026-04-14",
-    "url": "https://www.penny.cz/products/trubicky-alaska-88401367"
-  },
-  {
-    "id": "be2b051",
-    "name": "MAGGI Dobrý Hostinec Guláš 143g",
-    "desc": "143 kg",
-    "store": "billa",
-    "storeName": "Billa",
-    "category": "Hlavní jídla",
+    "category": "LIHOVINY",
     "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-231235-0749460448-FmCTG7Kl.jpg",
-    "priceNew": 39.9,
-    "priceOld": 53.87,
-    "validUntil": "",
-    "url": "https://www.billa.cz/produkt/maggi-dobry-hostinec-gulas-143g-82231235"
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-445210-0102599133-Px_qD7OX.jpg",
+    "priceNew": 159.9,
+    "priceOld": 215.87,
+    "validUntil": "2026-04-21",
+    "url": "https://www.penny.cz/products/becherovka-38-88445210"
   },
   {
-    "id": "ba1d029",
-    "name": "MAGGI Dobrý Hostinec Kuře na paprice 153g",
-    "desc": "153 kg",
+    "id": "p720381",
+    "name": "Budvar výčepní",
+    "desc": "0.5 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "PIVO",
+    "emoji": "🍺",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-451123-075667579-YRu03sro.jpg",
+    "priceNew": 10.9,
+    "priceOld": 14.72,
+    "validUntil": "2026-04-21",
+    "url": "https://www.penny.cz/products/budvar-vycepni-88451123"
+  },
+  {
+    "id": "pdd6013",
+    "name": "Mattoni jemná",
+    "desc": "1.5 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "NEALKOHOLICKÉ NÁPOJE",
+    "emoji": "🥤",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-461129-397232972-chnN1R42.jpg",
+    "priceNew": 11.9,
+    "priceOld": 16.07,
+    "validUntil": "2026-04-21",
+    "url": "https://www.penny.cz/products/mattoni-jemna-88461129"
+  },
+  {
+    "id": "pce406f",
+    "name": "Káva mletá Marila Standard",
+    "desc": "1 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "KÁVA",
+    "emoji": "☕",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-502121-7397890-4Yn5PBXP.jpg",
+    "priceNew": 199.9,
+    "priceOld": 269.87,
+    "validUntil": "2026-04-21",
+    "url": "https://www.penny.cz/products/kava-mleta-marila-standard-88502121"
+  },
+  {
+    "id": "b1c944a",
+    "name": "Knorr Hotová jíška světlá 250g",
+    "desc": "250 kg",
     "store": "billa",
     "storeName": "Billa",
-    "category": "Hlavní jídla",
-    "emoji": "🍗",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-231237-974958282-VDRXD7xW.jpg",
-    "priceNew": 39.9,
-    "priceOld": 53.87,
+    "category": "Jíšky a zahušťovadla",
+    "emoji": "🍲",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-228067-115780808-NwLVeMVZ.jpg",
+    "priceNew": 31.9,
+    "priceOld": 43.06,
     "validUntil": "",
-    "url": "https://www.billa.cz/produkt/maggi-dobry-hostinec-kure-na-paprice-153g-82231237"
+    "url": "https://www.billa.cz/produkt/knorr-hotova-jiska-svetla-250g-82228067"
   },
   {
-    "id": "b9e77a3",
-    "name": "MAGGI Amore Mio Šunka a sýr 140g",
-    "desc": "140 kg",
+    "id": "b61b5fc",
+    "name": "Knorr Hotová jíška tmavá 250g",
+    "desc": "250 kg",
     "store": "billa",
     "storeName": "Billa",
-    "category": "Hlavní jídla",
-    "emoji": "🧀",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-238819-0148741788-YEpI24XE.jpg",
-    "priceNew": 39.9,
-    "priceOld": 53.87,
+    "category": "Jíšky a zahušťovadla",
+    "emoji": "🍲",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-231536-0210700580-sW7KS_Y0.jpg",
+    "priceNew": 31.9,
+    "priceOld": 43.06,
     "validUntil": "",
-    "url": "https://www.billa.cz/produkt/maggi-amore-mio-sunka-a-syr-140g-82238819"
+    "url": "https://www.billa.cz/produkt/knorr-hotova-jiska-tmava-250g-82231536"
   },
   {
-    "id": "b29a887",
-    "name": "MAGGI Dobrý Hostinec Kuře na paprice pikant 146g",
-    "desc": "146 kg",
-    "store": "billa",
-    "storeName": "Billa",
-    "category": "Hlavní jídla",
-    "emoji": "🍗",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-249618-1722827893-dE4S9pQr.jpg",
-    "priceNew": 39.9,
-    "priceOld": 53.87,
-    "validUntil": "",
-    "url": "https://www.billa.cz/produkt/maggi-dobry-hostinec-kure-na-paprice-pikant-146g-82249618"
-  },
-  {
-    "id": "bbe1f4a",
-    "name": "MAGGI NÁPADY Zapečené kuře se žampiony a smetanou 30g",
-    "desc": "30 kg",
-    "store": "billa",
-    "storeName": "Billa",
-    "category": "Hlavní jídla",
-    "emoji": "🥛",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-251167-0111622897-knafY_AE.jpg",
-    "priceNew": 35.9,
-    "priceOld": 48.47,
-    "validUntil": "",
-    "url": "https://www.billa.cz/produkt/maggi-napady-zapecene-kure-se-zampiony-a-smetanou-30g-82251167"
-  },
-  {
-    "id": "b213194",
-    "name": "MAGGI NÁPADY Zapečené kuře se sýrovou omáčkou 32g",
-    "desc": "32 kg",
-    "store": "billa",
-    "storeName": "Billa",
-    "category": "Hlavní jídla",
-    "emoji": "🧀",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-264179-2041660324-Z9jKezxo.jpg",
-    "priceNew": 35.9,
-    "priceOld": 48.47,
-    "validUntil": "",
-    "url": "https://www.billa.cz/produkt/maggi-napady-zapecene-kure-se-syrovou-omackou-32g-82264179"
-  },
-  {
-    "id": "b3de403",
-    "name": "MAGGI Polévka s játrovými knedlíčky a nudlemi 50g",
-    "desc": "50 kg",
+    "id": "bac6c1d",
+    "name": "Knorr Písmenková polévka 82g",
+    "desc": "82 kg",
     "store": "billa",
     "storeName": "Billa",
     "category": "Polévky",
     "emoji": "🍲",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-274910-1577506590-M3aJmXNd.jpg",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-248800-0128413064-tHEc2E5i.jpg",
     "priceNew": 24.9,
     "priceOld": 33.62,
     "validUntil": "",
-    "url": "https://www.billa.cz/produkt/maggi-polevka-s-jatrovymi-knedlicky-a-nudlemi-50g-82274910"
+    "url": "https://www.billa.cz/produkt/knorr-pismenkova-polevka-82g-82248800"
   },
   {
-    "id": "b5022c8",
-    "name": "MAGGI Amore Mio Sýr a bylinky 146g",
-    "desc": "146 kg",
+    "id": "b62d6b8",
+    "name": "Knorr Krémová polévka s liškami 56g",
+    "desc": "56 kg",
     "store": "billa",
     "storeName": "Billa",
-    "category": "Hlavní jídla",
-    "emoji": "🧀",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-275086-0147756131-PupOoTKQ.jpg",
-    "priceNew": 39.9,
-    "priceOld": 53.87,
+    "category": "Polévky",
+    "emoji": "🍲",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-265686-1697779294-yrNDH_79.jpg",
+    "priceNew": 24.9,
+    "priceOld": 33.62,
     "validUntil": "",
-    "url": "https://www.billa.cz/produkt/maggi-amore-mio-syr-a-bylinky-146g-82275086"
+    "url": "https://www.billa.cz/produkt/knorr-kremova-polevka-s-liskami-56g-82265686"
   },
   {
-    "id": "b879357",
-    "name": "MAGGI Dobrý Hostinec Kuře na smetaně 142g",
-    "desc": "142 kg",
+    "id": "ba28be7",
+    "name": "Lagris Bramborová kaše 130g",
+    "desc": "130 kg",
     "store": "billa",
     "storeName": "Billa",
-    "category": "Hlavní jídla",
-    "emoji": "🥛",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-279413-933062662-WN0Nzo2m.jpg",
-    "priceNew": 39.9,
-    "priceOld": 53.87,
+    "category": "Přílohy",
+    "emoji": "🥔",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-284705-1696931956-9XUcoMdH.jpg",
+    "priceNew": 26.9,
+    "priceOld": 36.31,
     "validUntil": "",
-    "url": "https://www.billa.cz/produkt/maggi-dobry-hostinec-kure-na-smetane-142g-82279413"
+    "url": "https://www.billa.cz/produkt/lagris-bramborova-kase-130g-82284705"
   },
   {
-    "id": "b6e62b4",
-    "name": "Mozart Kugeln pralinky 148g",
-    "desc": "148 kg",
+    "id": "b62a5aa",
+    "name": "Lagris Bramborové těsto 400g",
+    "desc": "400 kg",
     "store": "billa",
     "storeName": "Billa",
-    "category": "Bonboniéry",
-    "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-268801-499450161-3tvZ_9hM.jpg",
-    "priceNew": 49.9,
-    "priceOld": 67.37,
+    "category": "Přílohy",
+    "emoji": "🥔",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-284706-715788164-iT2CrFYl.jpg",
+    "priceNew": 37.9,
+    "priceOld": 51.16,
     "validUntil": "",
-    "url": "https://www.billa.cz/produkt/mozart-kugeln-pralinky-148g-82268801"
+    "url": "https://www.billa.cz/produkt/lagris-bramborove-testo-400g-82284706"
   },
   {
-    "id": "bca7ea4",
-    "name": "merci Finest Selection výběr plněných a neplněných čokoládových pralinek 250g",
-    "desc": "250 kg",
+    "id": "bf9f89c",
+    "name": "Lagris Bramborové halušky 400g",
+    "desc": "400 kg",
+    "store": "billa",
+    "storeName": "Billa",
+    "category": "Přílohy",
+    "emoji": "🥔",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-284707-1474772318-snnu3KvU.jpg",
+    "priceNew": 32.9,
+    "priceOld": 44.41,
+    "validUntil": "",
+    "url": "https://www.billa.cz/produkt/lagris-bramborove-halusky-400g-82284707"
+  },
+  {
+    "id": "b157737",
+    "name": "CORNY proteinová tyčinka 30% mléčná čokoláda 50g",
+    "desc": "50 kg",
+    "store": "billa",
+    "storeName": "Billa",
+    "category": "Proteinová strava",
+    "emoji": "🍫",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-344979-1026907199-ECS8nJ0v.jpg",
+    "priceNew": 34.9,
+    "priceOld": 47.12,
+    "validUntil": "",
+    "url": "https://www.billa.cz/produkt/corny-proteinova-tycinka-30-mlecna-cokolada-50g-82344979"
+  },
+  {
+    "id": "b179bf3",
+    "name": "Toffifee Celá jádra lískových ořechů v karamelu s lískoořechovým krémem a čokoládou 125g",
+    "desc": "125 kg",
     "store": "billa",
     "storeName": "Billa",
     "category": "Bonboniéry",
     "emoji": "🍫",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-288119-2109842335-45U4LoEV.jpg",
-    "priceNew": 109.9,
-    "priceOld": 148.37,
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-287890-960609276-4Zuy3gjM.jpg",
+    "priceNew": 39.9,
+    "priceOld": 53.87,
     "validUntil": "",
-    "url": "https://www.billa.cz/produkt/merci-finest-selection-vyber-plnenych-a-neplnenych-cokoladovych-pralinek-250g-82288119"
+    "url": "https://www.billa.cz/produkt/toffifee-cela-jadra-liskovych-orechu-v-karamelu-s-liskoorechovym-kremem-a-cokoladou-125g-82287890"
   },
   {
-    "id": "b94b488",
-    "name": "merci Milk Selection výběr plněných a neplněných pralinek z mléčné čokolády 250g",
-    "desc": "250 kg",
+    "id": "b6ec6cd",
+    "name": "Bounty",
+    "desc": "57 kg",
     "store": "billa",
     "storeName": "Billa",
-    "category": "Bonboniéry",
-    "emoji": "🧀",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-116731-848188899-DiJYFfy8.jpg",
-    "priceNew": 109.9,
-    "priceOld": 148.37,
+    "category": "Čokoládové",
+    "emoji": "🍫",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-114116-0207306061-cyJhtl9o.jpg",
+    "priceNew": 17.9,
+    "priceOld": 24.16,
     "validUntil": "",
-    "url": "https://www.billa.cz/produkt/merci-milk-selection-vyber-plnenych-a-neplnenych-pralinek-z-mlecne-cokolady-250g-82116731"
+    "url": "https://www.billa.cz/produkt/bounty-82114116"
   },
   {
-    "id": "ba90d90",
-    "name": "ORION Studentská pečeť Mléčná čokoláda s arašídy, rozinkami a želé 170g",
-    "desc": "170 kg",
+    "id": "b7aa7a5",
+    "name": "Milky Way",
+    "desc": "21.5 kg",
     "store": "billa",
     "storeName": "Billa",
-    "category": "Mléčné čokolády ochucené",
-    "emoji": "🧀",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-149617-0211007233-jWpvV31Q.jpg",
-    "priceNew": 59.9,
-    "priceOld": 80.87,
+    "category": "Čokoládové",
+    "emoji": "🍫",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-114538-0156347481-bdbZI0W9.jpg",
+    "priceNew": 12.9,
+    "priceOld": 15.9,
     "validUntil": "",
-    "url": "https://www.billa.cz/produkt/orion-studentska-pecet-mlecna-cokolada-s-arasidy-rozinkami-a-zele-170g-82149617"
+    "url": "https://www.billa.cz/produkt/milky-way-82114538"
   },
   {
-    "id": "b37f3f2",
-    "name": "Sedita Original oplatky s kakaovou krémovou náplní 50g",
-    "desc": "50 kg",
+    "id": "b21e30a",
+    "name": "Opavia sušenky Zlaté Věnečky kakaové sušenky 150g",
+    "desc": "150 kg",
+    "store": "billa",
+    "storeName": "Billa",
+    "category": "Bez náplně",
+    "emoji": "🍪",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-163600-47901765-6bj8eYit.jpg",
+    "priceNew": 27.9,
+    "priceOld": 37.66,
+    "validUntil": "",
+    "url": "https://www.billa.cz/produkt/opavia-susenky-zlate-venecky-kakaove-susenky-150g-82163600"
+  },
+  {
+    "id": "b804710",
+    "name": "Opavia oplatky Kolonáda oříškočokoládové 140g",
+    "desc": "140 kg",
     "store": "billa",
     "storeName": "Billa",
     "category": "S náplní",
-    "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-163592-516872843-JxGkoVye.jpg",
-    "priceNew": 11.9,
-    "priceOld": 16.07,
+    "emoji": "🍫",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-163733-0197496371-dWvNJ0yM.jpg",
+    "priceNew": 34.9,
+    "priceOld": 47.12,
     "validUntil": "",
-    "url": "https://www.billa.cz/produkt/sedita-original-oplatky-s-kakaovou-kremovou-naplni-50g-82163592"
+    "url": "https://www.billa.cz/produkt/opavia-oplatky-kolonada-oriskocokoladove-140g-82163733"
+  },
+  {
+    "id": "bfb02a2",
+    "name": "Opavia sušenky Zlaté Věnečky žloutkové 150g",
+    "desc": "150 kg",
+    "store": "billa",
+    "storeName": "Billa",
+    "category": "Bez náplně",
+    "emoji": "🍪",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-163816-1150312484-ZVb-5Nbs.jpg",
+    "priceNew": 27.9,
+    "priceOld": 37.66,
+    "validUntil": "",
+    "url": "https://www.billa.cz/produkt/opavia-susenky-zlate-venecky-zloutkove-150g-82163816"
+  },
+  {
+    "id": "bb98a4a",
+    "name": "ORION Milena čokoládová tyčinka s krémovou náplní 32g",
+    "desc": "32 kg",
+    "store": "billa",
+    "storeName": "Billa",
+    "category": "Čokoládové",
+    "emoji": "🍫",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-163840-1867942225-ElVPiLcs.jpg",
+    "priceNew": 12.9,
+    "priceOld": 17.42,
+    "validUntil": "",
+    "url": "https://www.billa.cz/produkt/orion-milena-cokoladova-tycinka-s-kremovou-naplni-32g-82163840"
+  },
+  {
+    "id": "b2f6083",
+    "name": "Opavia sušenky Zlaté Polomáčené hořké 100g",
+    "desc": "100 kg",
+    "store": "billa",
+    "storeName": "Billa",
+    "category": "Bez náplně",
+    "emoji": "🍪",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-175455-0153578308-D8nPRjPr.jpg",
+    "priceNew": 19.9,
+    "priceOld": 26.86,
+    "validUntil": "",
+    "url": "https://www.billa.cz/produkt/opavia-susenky-zlate-polomacene-horke-100g-82175455"
   },
   {
     "id": "l083619",
@@ -852,20 +600,6 @@
     "priceOld": 49.9,
     "validUntil": "2033-07-01",
     "url": "https://www.lidl.cz/p/maslova-vanocka-s-mandlemi-a-rozinkami/p10001714"
-  },
-  {
-    "id": "l051c3f",
-    "name": "FRANCOUZSKÁ BAGETA",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Chléb a pečivo",
-    "emoji": "🍞",
-    "image": "https://imgproxy-retcat.assets.schwarz/Hnn90293FScPOl2b05U0j8loYWo7pTYYR4gwg4bgtF0/sm:1/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS84RUJDNEE5RkE0RTJGQjJDNzY5ODlENEI/xNkNBRUQ3RkVDNDdEMDlBNEYwMDM5Qjc5RjNCRDFFMUFFOTA3MUNGLmpwZw.jpg",
-    "priceNew": 5,
-    "priceOld": 7.5,
-    "validUntil": "2033-07-01",
-    "url": "https://www.lidl.cz/p/francouzska-bageta/p10001743"
   },
   {
     "id": "lca6609",
@@ -1006,6 +740,20 @@
     "priceOld": 9.32,
     "validUntil": "2033-07-01",
     "url": "https://www.lidl.cz/p/ovesne-pecivo-s-medem/p10048369"
+  },
+  {
+    "id": "lfe8a23",
+    "name": "Šnek s citronovým krémem",
+    "desc": "145 g",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Chléb a pečivo",
+    "emoji": "🍋",
+    "image": "https://imgproxy-retcat.assets.schwarz/i_Cm6XPFW6aG-R0iW3mOipjTYNljNYSLBqtuy29ZW1M/sm:1/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS8zMEQ2QTQ2MThDMkY4RTA2QkNEMjk1M0E/zOENGMzAxNTgyNDE2RjFCM0UxRTE2MzBFQ0QwREMzOUQzQTdDMDgzLnBuZw.png",
+    "priceNew": 21.9,
+    "priceOld": 29.57,
+    "validUntil": "2033-07-01",
+    "url": "https://www.lidl.cz/p/snek-s-citronovym-kremem/p10048463"
   },
   {
     "id": "lc78827",
@@ -1904,6 +1652,20 @@
     "url": "https://www.lidl.cz/p/lupilu-chlapecke-boxerky-3-kusy/p100398274"
   },
   {
+    "id": "aa4c5ad",
+    "name": "Actimel Danone",
+    "desc": "100 g",
+    "store": "albert",
+    "storeName": "Albert",
+    "category": "Mléčné a jogurtové nápoje",
+    "emoji": "🧀",
+    "image": "https://img.kupi.cz/kupi/thumbs/actimel-danone-1_170_340.jpg",
+    "priceNew": 79.9,
+    "priceOld": 111.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/actimel-danone"
+  },
+  {
     "id": "afb150e",
     "name": "Alobal Fino",
     "desc": "1 ks",
@@ -1954,23 +1716,23 @@
     "category": "Prací prostředky",
     "emoji": "🧺",
     "image": "https://img.kupi.cz/kupi/thumbs/avivaz-lenor_170_340.jpg",
-    "priceNew": 149.9,
-    "priceOld": 209.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 99.9,
+    "priceOld": 139.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/avivaz-lenor"
   },
   {
     "id": "a8bee05",
     "name": "Aviváž Silan",
-    "desc": "0.77 l",
+    "desc": "1.1 l",
     "store": "albert",
     "storeName": "Albert",
     "category": "Prací prostředky",
     "emoji": "🧺",
     "image": "https://img.kupi.cz/kupi/thumbs/avivaz-silan_170_340.png",
-    "priceNew": 89.9,
-    "priceOld": 125.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 159.0,
+    "priceOld": 222.6,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/avivaz-silan"
   },
   {
@@ -2002,20 +1764,6 @@
     "url": "https://www.kupi.cz/sleva/bageta"
   },
   {
-    "id": "a7bd58d",
-    "name": "Bageta francouzská",
-    "desc": "110 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Slané pečivo",
-    "emoji": "🍞",
-    "image": "https://img.kupi.cz/kupi/thumbs/bageta-francouzska_170_340.png",
-    "priceNew": 8.9,
-    "priceOld": 12.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/bageta-francouzska"
-  },
-  {
     "id": "a41f7d0",
     "name": "Becherovka",
     "desc": "0.2 l",
@@ -2030,18 +1778,18 @@
     "url": "https://www.kupi.cz/sleva/becherovka"
   },
   {
-    "id": "ae69181",
-    "name": "Bílý jogurt selský Hollandia",
-    "desc": "200 g",
+    "id": "a0bacb3",
+    "name": "Bonbony JoJo",
+    "desc": "60 g",
     "store": "albert",
     "storeName": "Albert",
-    "category": "Jogurty",
-    "emoji": "🥛",
-    "image": "https://img.kupi.cz/kupi/thumbs/bily-jogurt-selsky-hollandia_170_340.png",
-    "priceNew": 9.9,
-    "priceOld": 13.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/bily-jogurt-selsky-hollandia"
+    "category": "Bonbony a žvýkačky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/bonbony-jojo-1_170_340.jpg",
+    "priceNew": 29.9,
+    "priceOld": 41.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/bonbony-jojo"
   },
   {
     "id": "ad17021",
@@ -2086,6 +1834,20 @@
     "url": "https://www.kupi.cz/sleva/bylinny-liker-jagermeister"
   },
   {
+    "id": "ae883b0",
+    "name": "Česneková pomazánka se sýrem",
+    "desc": "100 g",
+    "store": "albert",
+    "storeName": "Albert",
+    "category": "Pomazánky",
+    "emoji": "🧀",
+    "image": "https://img.kupi.cz/kupi/thumbs/cesnekova-pomazanka-se-syrem_170_340.jpg",
+    "priceNew": 16.9,
+    "priceOld": 23.66,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/cesnekova-pomazanka-se-syrem"
+  },
+  {
     "id": "afe075f",
     "name": "Chipsy Bohemia Chips",
     "desc": "60 g",
@@ -2128,20 +1890,6 @@
     "url": "https://www.kupi.cz/sleva/cibule-kuchynska-zluta"
   },
   {
-    "id": "a261f0e",
-    "name": "Čistič WC gelový Domestos",
-    "desc": "700 ml",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Čisticí prostředky",
-    "emoji": "🧼",
-    "image": "https://img.kupi.cz/kupi/thumbs/cistic-wc-gelovy-domestos-1_170_340.jpg",
-    "priceNew": 39.9,
-    "priceOld": 55.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/cistic-wc-gelovy-domestos"
-  },
-  {
     "id": "a227f78",
     "name": "Čokoláda Excellence Lindt",
     "desc": "100 g",
@@ -2164,24 +1912,10 @@
     "category": "Tabulkové čokolády",
     "emoji": "🍫",
     "image": "https://img.kupi.cz/kupi/thumbs/cokolada-studentska-pecet-orion_170_340.png",
-    "priceNew": 69.9,
-    "priceOld": 97.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 54.9,
+    "priceOld": 76.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/cokolada-studentska-pecet-orion"
-  },
-  {
-    "id": "a5d30f4",
-    "name": "Cola Royal Crown",
-    "desc": "1.33 l",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Limonády",
-    "emoji": "🥤",
-    "image": "https://img.kupi.cz/kupi/thumbs/cola-crown-royal_170_340.jpg",
-    "priceNew": 26.9,
-    "priceOld": 37.66,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/cola-royal-crown"
   },
   {
     "id": "a76396f",
@@ -2196,20 +1930,6 @@
     "priceOld": 11.06,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/croissant"
-  },
-  {
-    "id": "a45baac",
-    "name": "Cukr krupice TTD",
-    "desc": "1 kg",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Cukry a sladidla",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/cukr-krupice-ttd-1_170_340.jpg",
-    "priceNew": 15.9,
-    "priceOld": 22.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/cukr-krupice-ttd"
   },
   {
     "id": "a943d34",
@@ -2228,7 +1948,7 @@
   {
     "id": "a761c60",
     "name": "Dalamánek",
-    "desc": "70 g",
+    "desc": "82 g",
     "store": "albert",
     "storeName": "Albert",
     "category": "Slané pečivo",
@@ -2252,6 +1972,20 @@
     "priceOld": 13.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/donut"
+  },
+  {
+    "id": "a0e2dd0",
+    "name": "Džus Pfanner",
+    "desc": "1 l",
+    "store": "albert",
+    "storeName": "Albert",
+    "category": "Džusy, nektary, nápoje",
+    "emoji": "🥤",
+    "image": "https://img.kupi.cz/kupi/thumbs/dzus-pfanner-1_170_340.png",
+    "priceNew": 69.9,
+    "priceOld": 97.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/dzus-pfanner"
   },
   {
     "id": "a459fb7",
@@ -2348,7 +2082,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/instantni-kava-jacobs-velvet_170_340.jpg",
     "priceNew": 249.0,
     "priceOld": 348.6,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/instantni-kava-jacobs-velvet"
   },
   {
@@ -2380,23 +2114,9 @@
     "url": "https://www.kupi.cz/sleva/instantni-kavy-nescafe-gold"
   },
   {
-    "id": "a9d9e80",
-    "name": "Instantní polévka YumYum",
-    "desc": "60 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Instantní polévky",
-    "emoji": "🍲",
-    "image": "https://img.kupi.cz/kupi/thumbs/instantni-polevka-yumyum_170_340.jpg",
-    "priceNew": 13.9,
-    "priceOld": 19.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/instantni-polevka-yumyum"
-  },
-  {
     "id": "a646925",
     "name": "Jahody",
-    "desc": "400 g",
+    "desc": "500 g",
     "store": "albert",
     "storeName": "Albert",
     "category": "Jahody a lesní plody",
@@ -2406,34 +2126,6 @@
     "priceOld": 139.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/jahody"
-  },
-  {
-    "id": "af6c915",
-    "name": "Játra tresčí Giana",
-    "desc": "115 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Konzervované ryby",
-    "emoji": "🐟",
-    "image": "https://img.kupi.cz/kupi/thumbs/tresci-jatra-giana_170_340.jpg",
-    "priceNew": 49.9,
-    "priceOld": 69.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/jatra-tresci-giana"
-  },
-  {
-    "id": "a0579d4",
-    "name": "Jídla instantní Dobrý hostinec Maggi",
-    "desc": "118 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Instantní jídla a směsi",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/jidla-instantni-dobry-hostinec-maggi-1_170_340.jpg",
-    "priceNew": 39.9,
-    "priceOld": 55.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/jidla-instantni-dobry-hostinec-maggi"
   },
   {
     "id": "a7a235a",
@@ -2450,20 +2142,6 @@
     "url": "https://www.kupi.cz/sleva/jiska-hotova-knorr"
   },
   {
-    "id": "ad6b09e",
-    "name": "Jogurt Müller Mix",
-    "desc": "130 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Jogurty",
-    "emoji": "🥛",
-    "image": "https://img.kupi.cz/kupi/thumbs/jogurt-mueller-mix_170_340.jpg",
-    "priceNew": 12.9,
-    "priceOld": 18.06,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/jogurt-mueller-mix"
-  },
-  {
     "id": "a96066b",
     "name": "Kachna Vodňanská kachna",
     "desc": "1 kg",
@@ -2478,23 +2156,23 @@
     "url": "https://www.kupi.cz/sleva/kachna-vodnanska-kachna"
   },
   {
-    "id": "afc23c0",
-    "name": "Kapsle Cafissimo Tchibo",
-    "desc": "10 ks",
+    "id": "a9d40ad",
+    "name": "Kapsičky pro kočky Whiskas",
+    "desc": "85 g",
     "store": "albert",
     "storeName": "Albert",
-    "category": "Káva",
-    "emoji": "☕",
-    "image": "https://img.kupi.cz/kupi/thumbs/kapsle-cafissimo-tchibo_170_340.png",
-    "priceNew": 79.9,
-    "priceOld": 111.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/kapsle-cafissimo-tchibo"
+    "category": "Výrobky a krmivo pro kočky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/kapsicky-pro-kocky-whiskas_170_340.png",
+    "priceNew": 289.0,
+    "priceOld": 404.6,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/kapsicky-pro-kocky-whiskas"
   },
   {
     "id": "a79a55f",
     "name": "Kapsle do myčky Platinum Jar",
-    "desc": "45 ks",
+    "desc": "65 ks",
     "store": "albert",
     "storeName": "Albert",
     "category": "Mycí prostředky",
@@ -2508,7 +2186,7 @@
   {
     "id": "afe9fb9",
     "name": "Kapsle Dolce Gusto Nescafé",
-    "desc": "1 ks",
+    "desc": "16 ks",
     "store": "albert",
     "storeName": "Albert",
     "category": "Káva",
@@ -2516,13 +2194,13 @@
     "image": "https://img.kupi.cz/kupi/thumbs/kapsle-dolce-gusto-nescafe-2_170_340.jpg",
     "priceNew": 199.0,
     "priceOld": 278.6,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/kapsle-dolce-gusto-nescafe"
   },
   {
     "id": "a93e651",
     "name": "Kapsle Tassimo Jacobs",
-    "desc": "1 ks",
+    "desc": "16 ks",
     "store": "albert",
     "storeName": "Albert",
     "category": "Káva",
@@ -2536,7 +2214,7 @@
   {
     "id": "af86dba",
     "name": "Kartáček na zuby Curaprox",
-    "desc": "1 ks",
+    "desc": "3 ks",
     "store": "albert",
     "storeName": "Albert",
     "category": "Ústní hygiena",
@@ -2550,7 +2228,7 @@
   {
     "id": "a736e43",
     "name": "Kečup Heinz",
-    "desc": "342 g",
+    "desc": "700 ml",
     "store": "albert",
     "storeName": "Albert",
     "category": "Kečupy a protlaky",
@@ -2574,20 +2252,6 @@
     "priceOld": 83.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/kecup-hellmanns"
-  },
-  {
-    "id": "af2d19a",
-    "name": "Kiwi",
-    "desc": "1 ks",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Banány a exotické ovoce",
-    "emoji": "🍎",
-    "image": "https://img.kupi.cz/kupi/thumbs/kiwi_170_340.jpg",
-    "priceNew": 4.9,
-    "priceOld": 6.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/kiwi"
   },
   {
     "id": "a6a413e",
@@ -2640,9 +2304,9 @@
     "category": "Drůbež",
     "emoji": "🍗",
     "image": "https://img.kupi.cz/kupi/thumbs/kureci-prsni-rizky-albert_170_340.jpg",
-    "priceNew": 99.9,
-    "priceOld": 139.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 129.9,
+    "priceOld": 181.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/kureci-prsni-rizky-albert"
   },
   {
@@ -2702,6 +2366,20 @@
     "url": "https://www.kupi.cz/sleva/limonada-coca-cola"
   },
   {
+    "id": "acebd9b",
+    "name": "Limonáda Fanta",
+    "desc": "0.3 l",
+    "store": "albert",
+    "storeName": "Albert",
+    "category": "Limonády",
+    "emoji": "🥤",
+    "image": "https://img.kupi.cz/kupi/thumbs/limonada-fanta-1_170_340.jpg",
+    "priceNew": 36.9,
+    "priceOld": 51.66,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/limonada-fanta"
+  },
+  {
     "id": "a392a4a",
     "name": "Limonáda Pepsi",
     "desc": "0.25 l",
@@ -2724,9 +2402,9 @@
     "category": "Tavené sýry a žervé",
     "emoji": "🧀",
     "image": "https://img.kupi.cz/kupi/thumbs/lucina-4_170_340.jpg",
-    "priceNew": 19.9,
-    "priceOld": 27.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 29.9,
+    "priceOld": 41.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/lucina"
   },
   {
@@ -2772,48 +2450,6 @@
     "url": "https://www.kupi.cz/sleva/margarin-classic-rama"
   },
   {
-    "id": "a9b611a",
-    "name": "Máslo bez laktózy Free From Nature's Promise",
-    "desc": "125 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Másla",
-    "emoji": "🧈",
-    "image": "https://img.kupi.cz/kupi/thumbs/maslo-bez-laktozy-free-from-natures-promise_170_340.png",
-    "priceNew": 34.9,
-    "priceOld": 48.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/maslo-bez-laktozy-free-from-natures-promise"
-  },
-  {
-    "id": "a4f4e70",
-    "name": "Máslo bio Nature's Promise",
-    "desc": "125 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Másla",
-    "emoji": "🧈",
-    "image": "https://img.kupi.cz/kupi/thumbs/maslo-bio-natures-promise_170_340.jpg",
-    "priceNew": 38.9,
-    "priceOld": 54.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/maslo-bio-natures-promise"
-  },
-  {
-    "id": "aec9456",
-    "name": "Máslo Česká chuť",
-    "desc": "250 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Másla",
-    "emoji": "🧈",
-    "image": "https://img.kupi.cz/kupi/thumbs/maslo-ceska-chut_170_340.png",
-    "priceNew": 26.9,
-    "priceOld": 37.66,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/maslo-ceska-chut"
-  },
-  {
     "id": "ac522d2",
     "name": "Máslo Jihočeské Madeta",
     "desc": "250 g",
@@ -2826,20 +2462,6 @@
     "priceOld": 55.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/maslo-jihoceske-madeta"
-  },
-  {
-    "id": "acd5c1b",
-    "name": "Medovník Original",
-    "desc": "150 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Dorty a zákusky",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/medovnik-original_170_340.jpg",
-    "priceNew": 29.9,
-    "priceOld": 41.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/medovnik-original"
   },
   {
     "id": "acf3e08",
@@ -2856,20 +2478,6 @@
     "url": "https://www.kupi.cz/sleva/mleko-trvanlive-jihoceske-madeta-15-polotucne"
   },
   {
-    "id": "a48f064",
-    "name": "Mléko trvanlivé Jihočeské Madeta - 3,5% plnotučné",
-    "desc": "1 l",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Mléko",
-    "emoji": "🥛",
-    "image": "https://img.kupi.cz/kupi/thumbs/mleko-trvanlive-jihoceske-madeta-35-plnotucne-1_170_340.png",
-    "priceNew": 14.9,
-    "priceOld": 20.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/mleko-trvanlive-jihoceske-madeta-35-plnotucne"
-  },
-  {
     "id": "ac4c5d4",
     "name": "Mléko trvanlivé Tatra - 1,5% polotučné",
     "desc": "1 l",
@@ -2882,20 +2490,6 @@
     "priceOld": 12.46,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/mleko-trvanlive-tatra-15-polotucne"
-  },
-  {
-    "id": "aa23bfd",
-    "name": "Mletá káva Jacobs Krönung",
-    "desc": "250 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Káva",
-    "emoji": "☕",
-    "image": "https://img.kupi.cz/kupi/thumbs/mleta-kava-jacobs-kronung-1_170_340.jpg",
-    "priceNew": 99.9,
-    "priceOld": 139.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/mleta-kava-jacobs-kronung"
   },
   {
     "id": "a7c2d09",
@@ -2920,9 +2514,9 @@
     "category": "Káva",
     "emoji": "☕",
     "image": "https://img.kupi.cz/kupi/thumbs/mleta-kava-tchibo-exclusive_170_340.png",
-    "priceNew": 199.0,
-    "priceOld": 278.6,
-    "validUntil": "2026-04-14",
+    "priceNew": 99.9,
+    "priceOld": 139.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/mleta-kava-tchibo-exclusive"
   },
   {
@@ -2954,20 +2548,6 @@
     "url": "https://www.kupi.cz/sleva/mouka-babiccina-volba"
   },
   {
-    "id": "ab37085",
-    "name": "Mrkev",
-    "desc": "1 kg",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Mrkev a kořenová zelenina",
-    "emoji": "🥦",
-    "image": "https://img.kupi.cz/kupi/thumbs/mrkev-2_170_340.jpg",
-    "priceNew": 29.9,
-    "priceOld": 41.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/mrkev"
-  },
-  {
     "id": "ab8ac5f",
     "name": "Nanuk Magnum Algida",
     "desc": "85 ml",
@@ -2976,9 +2556,9 @@
     "category": "Zmrzliny",
     "emoji": "🍦",
     "image": "https://img.kupi.cz/kupi/thumbs/nanuk-magnum-algida-1_170_340.png",
-    "priceNew": 32.9,
-    "priceOld": 46.06,
-    "validUntil": "2026-04-14",
+    "priceNew": 94.9,
+    "priceOld": 132.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/nanuk-magnum-algida"
   },
   {
@@ -3004,24 +2584,10 @@
     "category": "Zmrzliny",
     "emoji": "🍦",
     "image": "https://img.kupi.cz/kupi/thumbs/nanuk-mroz-prima_170_340.jpg",
-    "priceNew": 16.9,
-    "priceOld": 23.66,
-    "validUntil": "2026-04-14",
+    "priceNew": 15.9,
+    "priceOld": 22.26,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/nanuk-mroz-prima"
-  },
-  {
-    "id": "aed6444",
-    "name": "Nealkoholické pivo Birell",
-    "desc": "0.33 l",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Pivo nealkoholické",
-    "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/nealkoholicke-pivo-birell-1_170_340.png",
-    "priceNew": 13.9,
-    "priceOld": 19.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/nealkoholicke-pivo-birell"
   },
   {
     "id": "aad172a",
@@ -3036,20 +2602,6 @@
     "priceOld": 76.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/nealkoholicke-pivo-ochucene-birell"
-  },
-  {
-    "id": "ab158d2",
-    "name": "Nutella",
-    "desc": "350 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Čokokrémy",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/nutella-2_170_340.jpg",
-    "priceNew": 89.9,
-    "priceOld": 125.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/nutella"
   },
   {
     "id": "aea4464",
@@ -3110,7 +2662,7 @@
   {
     "id": "ad14ce3",
     "name": "Olivový olej extra panenský Exclusive Franz Josef Kaiser",
-    "desc": "500 ml",
+    "desc": "0.5 l",
     "store": "albert",
     "storeName": "Albert",
     "category": "Tuky a oleje",
@@ -3152,7 +2704,7 @@
   {
     "id": "a46ee8c",
     "name": "Oplatky Horalky Sedita",
-    "desc": "50 g",
+    "desc": "27 g",
     "store": "albert",
     "storeName": "Albert",
     "category": "Oplatky, perníky a trubičky",
@@ -3174,64 +2726,8 @@
     "image": "https://img.kupi.cz/kupi/thumbs/oplatky-mila-sedita_170_340.jpg",
     "priceNew": 59.9,
     "priceOld": 83.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/oplatky-mila-sedita"
-  },
-  {
-    "id": "a889078",
-    "name": "Osvěžovač vzduchu Bathroom Ambi Pur",
-    "desc": "7.5 ml",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Vůně do bytu",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/osvezovac-vzduchu-bathroom-ambi-pur_170_340.jpg",
-    "priceNew": 169.0,
-    "priceOld": 236.6,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/osvezovac-vzduchu-bathroom-ambi-pur"
-  },
-  {
-    "id": "a9f52c1",
-    "name": "Osvěžovač vzduchu elektrický Air Wick",
-    "desc": "19 ml",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Vůně do bytu",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/elektricky-osvezovac-airwick_170_340.jpg",
-    "priceNew": 119.9,
-    "priceOld": 167.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/osvezovac-vzduchu-elektricky-air-wick"
-  },
-  {
-    "id": "acc7e9c",
-    "name": "Paprika červená",
-    "desc": "0.5 kg",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Rajčata a papriky",
-    "emoji": "🍅",
-    "image": "https://img.kupi.cz/kupi/thumbs/paprika-cervena-1_170_340.png",
-    "priceNew": 89.9,
-    "priceOld": 125.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/paprika-cervena"
-  },
-  {
-    "id": "af3f9e3",
-    "name": "Pařížský salát",
-    "desc": "100 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Saláty",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/parizsky-salat_170_340.png",
-    "priceNew": 12.9,
-    "priceOld": 18.06,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/parizsky-salat"
   },
   {
     "id": "ac72267",
@@ -3284,9 +2780,9 @@
     "category": "Pivo",
     "emoji": "🍺",
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetle-vycepni-10-branik-1_170_340.jpg",
-    "priceNew": 42.9,
-    "priceOld": 60.06,
-    "validUntil": "2026-04-14",
+    "priceNew": 14.9,
+    "priceOld": 20.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pivo-svetle-vycepni-10-branik"
   },
   {
@@ -3298,9 +2794,9 @@
     "category": "Pivo",
     "emoji": "🍺",
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetle-vycepni-10-staropramen_170_340.jpg",
-    "priceNew": 9.9,
-    "priceOld": 13.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 15.9,
+    "priceOld": 22.26,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pivo-svetle-vycepni-10-staropramen"
   },
   {
@@ -3342,7 +2838,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetle-vycepni-razna-10-radegast-1_170_340.jpg",
     "priceNew": 13.9,
     "priceOld": 19.46,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pivo-svetle-vycepni-razna-10-radegast"
   },
   {
@@ -3354,10 +2850,24 @@
     "category": "Pivo",
     "emoji": "🍺",
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-11-excelent_170_340.png",
+    "priceNew": 19.9,
+    "priceOld": 27.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-excelent"
+  },
+  {
+    "id": "ab2fa31",
+    "name": "Pivo světlý ležák 11° Medium Starobrno",
+    "desc": "0.5 l",
+    "store": "albert",
+    "storeName": "Albert",
+    "category": "Pivo",
+    "emoji": "🍺",
+    "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-11-medium-starobrno_170_340.png",
     "priceNew": 12.9,
     "priceOld": 18.06,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-excelent"
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-medium-starobrno"
   },
   {
     "id": "a27aeec",
@@ -3374,62 +2884,6 @@
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-medium-velkopopovicky-kozel"
   },
   {
-    "id": "ae8b8f9",
-    "name": "Pivo světlý ležák 11° Šerák Holba",
-    "desc": "0.5 l",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Pivo",
-    "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-11-serak-holba_170_340.jpg",
-    "priceNew": 12.9,
-    "priceOld": 18.06,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-serak-holba"
-  },
-  {
-    "id": "a8f3e3c",
-    "name": "Pivo světlý ležák 11° Svijanský Máz Svijany",
-    "desc": "0.5 l",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Pivo",
-    "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-11-svijansky-maz-svijany_170_340.png",
-    "priceNew": 15.9,
-    "priceOld": 22.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-svijansky-maz-svijany"
-  },
-  {
-    "id": "aee4614",
-    "name": "Pivo světlý ležák 11° Zlatopramen",
-    "desc": "0.5 l",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Pivo",
-    "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/pivo-zlatopramen-11-1_170_340.jpg",
-    "priceNew": 33.9,
-    "priceOld": 47.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-zlatopramen"
-  },
-  {
-    "id": "a528e14",
-    "name": "Pivo světlý ležák 12° Ryze hořká Radegast",
-    "desc": "0.33 l",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Pivo",
-    "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-12-ryze-horka-radegast_170_340.png",
-    "priceNew": 19.9,
-    "priceOld": 27.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-12-ryze-horka-radegast"
-  },
-  {
     "id": "a054f13",
     "name": "Pivo světlý ležák 12° Zlatý Bažant",
     "desc": "0.5 l",
@@ -3444,32 +2898,18 @@
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-12-zlaty-bazant"
   },
   {
-    "id": "ae41ceb",
-    "name": "Pivo světlý ležák Heineken",
-    "desc": "0.33 l",
+    "id": "ab1b2e1",
+    "name": "Pivo světlý ležák Premium Klášter",
+    "desc": "0.5 l",
     "store": "albert",
     "storeName": "Albert",
     "category": "Pivo",
     "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-heineken_170_340.png",
-    "priceNew": 19.9,
-    "priceOld": 27.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-heineken"
-  },
-  {
-    "id": "afd8729",
-    "name": "Pivo světlý ležák Original Budweiser Budvar",
-    "desc": "0.33 l",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Pivo",
-    "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-original-budweiser-budvar_170_340.jpg",
-    "priceNew": 19.9,
-    "priceOld": 27.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-original-budweiser-budvar"
+    "image": "https://img.kupi.cz/kupi/thumbs/pivo-klaster-premium_170_340.jpg",
+    "priceNew": 11.9,
+    "priceOld": 16.66,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-premium-klaster"
   },
   {
     "id": "aa7d17c",
@@ -3488,7 +2928,7 @@
   {
     "id": "a359391",
     "name": "Pizza mražená Ristorante Dr. Oetker",
-    "desc": "320 g",
+    "desc": "355 g",
     "store": "albert",
     "storeName": "Albert",
     "category": "Mražená pizza",
@@ -3514,18 +2954,18 @@
     "url": "https://www.kupi.cz/sleva/pleny-detske-pampers"
   },
   {
-    "id": "ae59510",
-    "name": "Pletenec plněný",
-    "desc": "78 g",
+    "id": "a081cd4",
+    "name": "Pleny dětské Pampers Premium Care",
+    "desc": "72 ks",
     "store": "albert",
     "storeName": "Albert",
-    "category": "Sladké pečivo",
-    "emoji": "🍞",
-    "image": "https://img.kupi.cz/kupi/thumbs/pletenec-plneny_170_340.jpg",
-    "priceNew": 11.9,
-    "priceOld": 16.66,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pletenec-plneny"
+    "category": "Pleny a vlhčené ubrousky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/pleny-detske-pampers-premium-care_170_340.png",
+    "priceNew": 349.0,
+    "priceOld": 488.6,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/pleny-detske-pampers-premium-care"
   },
   {
     "id": "ad887b1",
@@ -3544,7 +2984,7 @@
   {
     "id": "a88521c",
     "name": "Prací gel Ariel",
-    "desc": "4,5 l",
+    "desc": "3,15 l",
     "store": "albert",
     "storeName": "Albert",
     "category": "Prací prostředky",
@@ -3572,7 +3012,7 @@
   {
     "id": "a1a7a70",
     "name": "Prací gel Perwoll",
-    "desc": "1 ks",
+    "desc": "2 ks",
     "store": "albert",
     "storeName": "Albert",
     "category": "Prací prostředky",
@@ -3582,34 +3022,6 @@
     "priceOld": 516.6,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/praci-gel-perwoll"
-  },
-  {
-    "id": "a9d0308",
-    "name": "Prací gel Woolite",
-    "desc": "1 ks",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Prací prostředky",
-    "emoji": "🧺",
-    "image": "https://img.kupi.cz/kupi/thumbs/praci-gel-woolite_170_340.png",
-    "priceNew": 199.0,
-    "priceOld": 278.6,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/praci-gel-woolite"
-  },
-  {
-    "id": "a830349",
-    "name": "Prací prášek Persil",
-    "desc": "2,75 kg",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Prací prostředky",
-    "emoji": "🧺",
-    "image": "https://img.kupi.cz/kupi/thumbs/praci-prasek-persil_170_340.png",
-    "priceNew": 349.0,
-    "priceOld": 488.6,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/praci-prasek-persil"
   },
   {
     "id": "a97a4e0",
@@ -3636,36 +3048,8 @@
     "image": "https://img.kupi.cz/kupi/thumbs/prostredek-na-nadobi-jar_170_340.jpg",
     "priceNew": 129.9,
     "priceOld": 181.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/prostredek-na-nadobi-jar"
-  },
-  {
-    "id": "ac5bb61",
-    "name": "Rajčata keříková",
-    "desc": "1 kg",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Rajčata a papriky",
-    "emoji": "🍅",
-    "image": "https://img.kupi.cz/kupi/thumbs/rajcata-kerikova_170_340.jpg",
-    "priceNew": 89.9,
-    "priceOld": 125.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/rajcata-kerikova"
-  },
-  {
-    "id": "a5fe62f",
-    "name": "Rybí filé mražené Nowaco",
-    "desc": "300 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Mražené maso, drůbež a ryby",
-    "emoji": "🥩",
-    "image": "https://img.kupi.cz/kupi/thumbs/rybi-file-mrazene-nowaco_170_340.png",
-    "priceNew": 79.9,
-    "priceOld": 111.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/rybi-file-mrazene-nowaco"
   },
   {
     "id": "ac606ad",
@@ -3710,6 +3094,20 @@
     "url": "https://www.kupi.cz/sleva/salat-s-tunakem-giana"
   },
   {
+    "id": "a69d458",
+    "name": "Salát vlašský",
+    "desc": "100 g",
+    "store": "albert",
+    "storeName": "Albert",
+    "category": "Saláty",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/salat-vlassky_170_340.jpg",
+    "priceNew": 13.9,
+    "priceOld": 19.46,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/salat-vlassky"
+  },
+  {
     "id": "a8cf069",
     "name": "Sirup Jupí",
     "desc": "0.7 l",
@@ -3732,9 +3130,9 @@
     "category": "Sirupy a koncentráty",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/sirup-yo_170_340.jpg",
-    "priceNew": 49.9,
-    "priceOld": 69.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 54.9,
+    "priceOld": 76.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/sirup-yo"
   },
   {
@@ -3752,18 +3150,18 @@
     "url": "https://www.kupi.cz/sleva/smetana-ke-slehani-mlekarna-kunin-31"
   },
   {
-    "id": "a5a40ac",
-    "name": "Sušená rajčata v oleji Exclusive Franz Josef Kaiser",
-    "desc": "180 g",
+    "id": "aec71af",
+    "name": "Sprchový gel STR8",
+    "desc": "150 ml",
     "store": "albert",
     "storeName": "Albert",
-    "category": "Ostatní lahůdky",
-    "emoji": "🍅",
-    "image": "https://img.kupi.cz/kupi/thumbs/rajcata-susena-kaiser-franz-josef_170_340.jpg",
-    "priceNew": 36.9,
-    "priceOld": 51.66,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/susena-rajcata-v-oleji-exclusive-franz-josef-kaiser"
+    "category": "Péče o tělo",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/sprchovy-gel-str8-1_170_340.jpg",
+    "priceNew": 49.9,
+    "priceOld": 69.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/sprchovy-gel-str8"
   },
   {
     "id": "aa1282f",
@@ -3788,9 +3186,9 @@
     "category": "Sýry",
     "emoji": "🧀",
     "image": "https://img.kupi.cz/kupi/thumbs/syr-hermelin-kral-syru_170_340.png",
-    "priceNew": 49.9,
-    "priceOld": 69.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 29.9,
+    "priceOld": 41.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/syr-hermelin-kral-syru"
   },
   {
@@ -3802,9 +3200,9 @@
     "category": "Sýry",
     "emoji": "🧀",
     "image": "https://img.kupi.cz/kupi/thumbs/syr-hermelin-sedlcansky_170_340.png",
-    "priceNew": 29.9,
-    "priceOld": 41.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 59.9,
+    "priceOld": 83.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/syr-hermelin-sedlcansky"
   },
   {
@@ -3834,34 +3232,6 @@
     "priceOld": 55.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/tatarska-omacka-hellmanns"
-  },
-  {
-    "id": "ad8b6cb",
-    "name": "Tekuté mýdlo Mitia - náhradní náplň",
-    "desc": "1000 ml",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Péče o ruce a nohy",
-    "emoji": "🧼",
-    "image": "https://img.kupi.cz/kupi/thumbs/tekute-mydlo-mitia-nahradni-napln-1_170_340.jpg",
-    "priceNew": 39.9,
-    "priceOld": 55.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/tekute-mydlo-mitia-nahradni-napln"
-  },
-  {
-    "id": "a49000b",
-    "name": "Těstoviny Barilla",
-    "desc": "500 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Těstoviny",
-    "emoji": "🍝",
-    "image": "https://img.kupi.cz/kupi/thumbs/testoviny-barilla-1_170_340.jpg",
-    "priceNew": 29.9,
-    "priceOld": 41.86,
-    "validUntil": "2026-04-21",
-    "url": "https://www.kupi.cz/sleva/testoviny-barilla"
   },
   {
     "id": "ad5c28f",
@@ -3906,34 +3276,6 @@
     "url": "https://www.kupi.cz/sleva/tunak-rio-mare"
   },
   {
-    "id": "a2cfdcb",
-    "name": "Tuňákový salát Exclusive Franz Josef Kaiser",
-    "desc": "160 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Konzervované maso a hotová jídla",
-    "emoji": "🥩",
-    "image": "https://img.kupi.cz/kupi/thumbs/tunakovy-salat-exclusive-kaiser-franz-josef_170_340.jpg",
-    "priceNew": 39.9,
-    "priceOld": 55.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/tunakovy-salat-exclusive-franz-josef-kaiser"
-  },
-  {
-    "id": "acc7793",
-    "name": "Tuzemák Jindřichohradecký Fruko Schulz",
-    "desc": "0.5 l",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Rum a ostatní destiláty",
-    "emoji": "🥃",
-    "image": "https://img.kupi.cz/kupi/thumbs/tuzemak-jindrichohradecky_170_340.jpg",
-    "priceNew": 119.9,
-    "priceOld": 167.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/tuzemak-jindrichohradecky-fruko-schulz"
-  },
-  {
     "id": "ad6d839",
     "name": "Tyčinka Margot Orion",
     "desc": "40 g",
@@ -3962,20 +3304,6 @@
     "url": "https://www.kupi.cz/sleva/ustni-voda-listerine"
   },
   {
-    "id": "a12b09d",
-    "name": "Vepřová krkovice bez kosti",
-    "desc": "1 kg",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Vepřové maso",
-    "emoji": "🥩",
-    "image": "https://img.kupi.cz/kupi/thumbs/veprova-krkovice-bez-kosti_170_340.jpg",
-    "priceNew": 69.9,
-    "priceOld": 97.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/veprova-krkovice-bez-kosti"
-  },
-  {
     "id": "ad56159",
     "name": "Vepřová pečeně bez kosti",
     "desc": "1 kg",
@@ -3990,9 +3318,23 @@
     "url": "https://www.kupi.cz/sleva/veprova-pecene-bez-kosti"
   },
   {
+    "id": "adc7f30",
+    "name": "Whiskey irská Honey Tullamore Dew",
+    "desc": "0.7 l",
+    "store": "albert",
+    "storeName": "Albert",
+    "category": "Whisky a bourbon",
+    "emoji": "🥃",
+    "image": "https://img.kupi.cz/kupi/thumbs/whiskey-irska-honey-tullamore-dew_170_340.png",
+    "priceNew": 299.0,
+    "priceOld": 418.6,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/whiskey-irska-honey-tullamore-dew"
+  },
+  {
     "id": "a159ab3",
     "name": "Whiskey irská Tullamore Dew",
-    "desc": "0.5 l",
+    "desc": "0.7 l",
     "store": "albert",
     "storeName": "Albert",
     "category": "Whisky a bourbon",
@@ -4002,20 +3344,6 @@
     "priceOld": 418.6,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/whiskey-irska-tullamore-dew"
-  },
-  {
-    "id": "a5c8cf8",
-    "name": "Zavináče",
-    "desc": "100 g",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Ostatní lahůdky",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/zavinace-1_170_340.png",
-    "priceNew": 18.9,
-    "priceOld": 26.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/zavinace"
   },
   {
     "id": "a789f48",
@@ -4032,18 +3360,18 @@
     "url": "https://www.kupi.cz/sleva/zmrzlina-v-kelimku-ben-jerrys"
   },
   {
-    "id": "aa49f65",
-    "name": "Zmrzlina ve vaničce Carte D'or Algida",
-    "desc": "825 ml",
-    "store": "albert",
-    "storeName": "Albert",
-    "category": "Zmrzliny",
-    "emoji": "🍦",
-    "image": "https://img.kupi.cz/kupi/thumbs/zmrzlina-ve-vanicce-carte-dor-algida_170_340.png",
-    "priceNew": 89.9,
-    "priceOld": 125.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/zmrzlina-ve-vanicce-carte-dor-algida"
+    "id": "k1c8a05",
+    "name": "Actimel Danone",
+    "desc": "100 g",
+    "store": "kaufland",
+    "storeName": "Kaufland",
+    "category": "Mléčné a jogurtové nápoje",
+    "emoji": "🧀",
+    "image": "https://img.kupi.cz/kupi/thumbs/actimel-danone-1_170_340.jpg",
+    "priceNew": 39.9,
+    "priceOld": 55.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/actimel-danone"
   },
   {
     "id": "k446257",
@@ -4058,34 +3386,6 @@
     "priceOld": 181.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/avivaz-lenor"
-  },
-  {
-    "id": "k68e0ea",
-    "name": "Avokádo",
-    "desc": "1 ks",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Banány a exotické ovoce",
-    "emoji": "🍎",
-    "image": "https://img.kupi.cz/kupi/thumbs/avokado_170_340.jpg",
-    "priceNew": 34.9,
-    "priceOld": 48.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/avokado"
-  },
-  {
-    "id": "k8eb554",
-    "name": "Bageta francouzská",
-    "desc": "110 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Slané pečivo",
-    "emoji": "🍞",
-    "image": "https://img.kupi.cz/kupi/thumbs/bageta-francouzska_170_340.png",
-    "priceNew": 5.9,
-    "priceOld": 8.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/bageta-francouzska"
   },
   {
     "id": "k198da3",
@@ -4116,34 +3416,6 @@
     "url": "https://www.kupi.cz/sleva/becherovka"
   },
   {
-    "id": "k86f51a",
-    "name": "Bílý jogurt selský Hollandia",
-    "desc": "200 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Jogurty",
-    "emoji": "🥛",
-    "image": "https://img.kupi.cz/kupi/thumbs/bily-jogurt-selsky-hollandia_170_340.png",
-    "priceNew": 44.9,
-    "priceOld": 62.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/bily-jogurt-selsky-hollandia"
-  },
-  {
-    "id": "k10ee25",
-    "name": "Bonboniéra Toffifee Storck",
-    "desc": "125 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Bonboniéry",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/bonboniera-toffifee-storck_170_340.jpg",
-    "priceNew": 35.9,
-    "priceOld": 50.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/bonboniera-toffifee-storck"
-  },
-  {
     "id": "k1e40b7",
     "name": "Borůvky",
     "desc": "125 g",
@@ -4172,18 +3444,18 @@
     "url": "https://www.kupi.cz/sleva/brandy-5-metaxa"
   },
   {
-    "id": "k248239",
-    "name": "Celer bulva",
-    "desc": "1 kg",
+    "id": "kcdd26b",
+    "name": "Cereálie Nestlé",
+    "desc": "300 g",
     "store": "kaufland",
     "storeName": "Kaufland",
-    "category": "Mrkev a kořenová zelenina",
-    "emoji": "🥦",
-    "image": "https://img.kupi.cz/kupi/thumbs/celer-bulva_170_340.jpg",
-    "priceNew": 9.9,
-    "priceOld": 13.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/celer-bulva"
+    "category": "Cereálie a kukuřičné lupínky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/cerealie-nestle-1_170_340.jpg",
+    "priceNew": 64.9,
+    "priceOld": 90.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/cerealie-nestle"
   },
   {
     "id": "kdfff50",
@@ -4214,20 +3486,6 @@
     "url": "https://www.kupi.cz/sleva/chipsy-lays"
   },
   {
-    "id": "k4b4a5f",
-    "name": "Čokoláda Studentská pečeť Orion",
-    "desc": "90 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Tabulkové čokolády",
-    "emoji": "🍫",
-    "image": "https://img.kupi.cz/kupi/thumbs/cokolada-studentska-pecet-orion_170_340.png",
-    "priceNew": 54.9,
-    "priceOld": 76.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/cokolada-studentska-pecet-orion"
-  },
-  {
     "id": "k8b3df7",
     "name": "Cola Royal Crown",
     "desc": "1.33 l",
@@ -4240,48 +3498,6 @@
     "priceOld": 34.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/cola-royal-crown"
-  },
-  {
-    "id": "k8fa324",
-    "name": "Cukr krupice Korunní",
-    "desc": "1 kg",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Cukry a sladidla",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/cukr-krupice-korunni_170_340.png",
-    "priceNew": 15.9,
-    "priceOld": 22.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/cukr-krupice-korunni"
-  },
-  {
-    "id": "k167228",
-    "name": "Cukr krystal Korunní",
-    "desc": "1 kg",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Cukry a sladidla",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/cukr-krystal-korunni_170_340.png",
-    "priceNew": 15.9,
-    "priceOld": 22.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/cukr-krystal-korunni"
-  },
-  {
-    "id": "k1aeab4",
-    "name": "Dalamánek",
-    "desc": "70 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Slané pečivo",
-    "emoji": "🍞",
-    "image": "https://img.kupi.cz/kupi/thumbs/dalamanek_170_340.jpg",
-    "priceNew": 3.9,
-    "priceOld": 5.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/dalamanek"
   },
   {
     "id": "k9e83c2",
@@ -4326,18 +3542,18 @@
     "url": "https://www.kupi.cz/sleva/energeticky-napoj-tiger"
   },
   {
-    "id": "k9eaa3a",
-    "name": "Hotová jídla Snadno a rychle Hamé",
-    "desc": "400 g",
+    "id": "kee6559",
+    "name": "Hliníková pánev",
+    "desc": "1 ks",
     "store": "kaufland",
     "storeName": "Kaufland",
-    "category": "Hotová jídla a přílohy",
-    "emoji": "🍲",
-    "image": "https://img.kupi.cz/kupi/thumbs/hotova-jidla-snadno-a-rychle-hame_170_340.jpg",
-    "priceNew": 49.9,
-    "priceOld": 69.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/hotova-jidla-snadno-a-rychle-hame"
+    "category": "Kuchyňské potřeby",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/hlinikova-panev_170_340.jpg",
+    "priceNew": 129.9,
+    "priceOld": 181.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/hlinikova-panev"
   },
   {
     "id": "k329b39",
@@ -4354,34 +3570,6 @@
     "url": "https://www.kupi.cz/sleva/hrozny-bile-bezsemenne"
   },
   {
-    "id": "kfc8c41",
-    "name": "Hrozny tmavé bezsemenné",
-    "desc": "0.5 kg",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Hroznové víno a melouny",
-    "emoji": "🍇",
-    "image": "https://img.kupi.cz/kupi/thumbs/hrozny-tmave-bezsemenne-1_170_340.jpg",
-    "priceNew": 39.9,
-    "priceOld": 55.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/hrozny-tmave-bezsemenne"
-  },
-  {
-    "id": "k372600",
-    "name": "Instantní kakao Granko Orion",
-    "desc": "200 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Instantní nápoje",
-    "emoji": "🥤",
-    "image": "https://img.kupi.cz/kupi/thumbs/instantni-kakao-granko-orion_170_340.png",
-    "priceNew": 69.9,
-    "priceOld": 97.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/instantni-kakao-granko-orion"
-  },
-  {
     "id": "k365c86",
     "name": "Instantní kávy Nescafé",
     "desc": "100 g",
@@ -4396,23 +3584,9 @@
     "url": "https://www.kupi.cz/sleva/instantni-kavy-nescafe"
   },
   {
-    "id": "k115ea0",
-    "name": "Jablka Red Prince",
-    "desc": "1 kg",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Jablka a hrušky",
-    "emoji": "🍎",
-    "image": "https://img.kupi.cz/kupi/thumbs/jablka-red-prince_170_340.jpg",
-    "priceNew": 17.9,
-    "priceOld": 25.06,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/jablka-red-prince"
-  },
-  {
     "id": "kdd7189",
     "name": "Jahody",
-    "desc": "400 g",
+    "desc": "500 g",
     "store": "kaufland",
     "storeName": "Kaufland",
     "category": "Jahody a lesní plody",
@@ -4426,7 +3600,7 @@
   {
     "id": "kc4a670",
     "name": "Kaiserka",
-    "desc": "55 g",
+    "desc": "60 g",
     "store": "kaufland",
     "storeName": "Kaufland",
     "category": "Slané pečivo",
@@ -4438,46 +3612,18 @@
     "url": "https://www.kupi.cz/sleva/kaiserka"
   },
   {
-    "id": "kc37d92",
-    "name": "Kartáček na zuby Curaprox",
-    "desc": "1 ks",
+    "id": "k18ecfb",
+    "name": "Kapsle do myčky Jar",
+    "desc": "46 ks",
     "store": "kaufland",
     "storeName": "Kaufland",
-    "category": "Ústní hygiena",
-    "emoji": "🧻",
-    "image": "https://img.kupi.cz/kupi/thumbs/kartacek-na-zuby-curaprox-1_170_340.jpg",
-    "priceNew": 249.9,
-    "priceOld": 349.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/kartacek-na-zuby-curaprox"
-  },
-  {
-    "id": "kae2780",
-    "name": "Kobliha s ovocnou náplní",
-    "desc": "65 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Sladké pečivo",
-    "emoji": "🍞",
-    "image": "https://img.kupi.cz/kupi/thumbs/kobliha-s-ovocnou-naplni_170_340.jpg",
-    "priceNew": 5.9,
-    "priceOld": 8.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/kobliha-s-ovocnou-naplni"
-  },
-  {
-    "id": "k6b0199",
-    "name": "Kofola",
-    "desc": "0.33 l",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Limonády",
-    "emoji": "🥤",
-    "image": "https://img.kupi.cz/kupi/thumbs/kofola_170_340.png",
-    "priceNew": 26.9,
-    "priceOld": 37.66,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/kofola"
+    "category": "Mycí prostředky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/kapsle-do-mycky-jar_170_340.png",
+    "priceNew": 399.9,
+    "priceOld": 559.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/kapsle-do-mycky-jar"
   },
   {
     "id": "kb1ab87",
@@ -4494,48 +3640,6 @@
     "url": "https://www.kupi.cz/sleva/kureci-kridla"
   },
   {
-    "id": "k6d1a4e",
-    "name": "Kuřecí prsní řízky mražené",
-    "desc": "0.5 kg",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Mražené maso, drůbež a ryby",
-    "emoji": "🥩",
-    "image": "https://img.kupi.cz/kupi/thumbs/kureci-prsni-rizky-mrazene_170_340.png",
-    "priceNew": 59.9,
-    "priceOld": 83.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/kureci-prsni-rizky-mrazene"
-  },
-  {
-    "id": "kf9255b",
-    "name": "Kuřecí stehna",
-    "desc": "1 kg",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Drůbež",
-    "emoji": "🍗",
-    "image": "https://img.kupi.cz/kupi/thumbs/kureci-stehna_170_340.jpg",
-    "priceNew": 84.9,
-    "priceOld": 118.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/kureci-stehna"
-  },
-  {
-    "id": "k73f698",
-    "name": "Ledové kaštany Orion",
-    "desc": "45 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Čokoládové tyčinky",
-    "emoji": "🍫",
-    "image": "https://img.kupi.cz/kupi/thumbs/ledove-kastany-orion-2_170_340.jpg",
-    "priceNew": 9.9,
-    "priceOld": 13.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/ledove-kastany-orion"
-  },
-  {
     "id": "kebe4eb",
     "name": "Limonáda Coca Cola",
     "desc": "0.3 l",
@@ -4550,6 +3654,34 @@
     "url": "https://www.kupi.cz/sleva/limonada-coca-cola"
   },
   {
+    "id": "kf845b5",
+    "name": "Limonáda Mirinda",
+    "desc": "0.25 l",
+    "store": "kaufland",
+    "storeName": "Kaufland",
+    "category": "Limonády",
+    "emoji": "🥤",
+    "image": "https://img.kupi.cz/kupi/thumbs/limonada-mirinda_170_340.jpg",
+    "priceNew": 10.0,
+    "priceOld": 14.0,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/limonada-mirinda"
+  },
+  {
+    "id": "k8399b0",
+    "name": "Limonáda Mountain Dew",
+    "desc": "0.33 l",
+    "store": "kaufland",
+    "storeName": "Kaufland",
+    "category": "Limonády",
+    "emoji": "🥤",
+    "image": "https://img.kupi.cz/kupi/thumbs/napoj-mountain-dew_170_340.jpg",
+    "priceNew": 10.0,
+    "priceOld": 14.0,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/limonada-mountain-dew"
+  },
+  {
     "id": "k497649",
     "name": "Limonáda Pepsi",
     "desc": "0.25 l",
@@ -4558,9 +3690,9 @@
     "category": "Limonády",
     "emoji": "🥤",
     "image": "https://img.kupi.cz/kupi/thumbs/limonada-pepsi_170_340.png",
-    "priceNew": 99.9,
-    "priceOld": 139.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 10.0,
+    "priceOld": 14.0,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/limonada-pepsi"
   },
   {
@@ -4620,20 +3752,6 @@
     "url": "https://www.kupi.cz/sleva/maslo-olma"
   },
   {
-    "id": "kec682f",
-    "name": "Mléko trvanlivé Jihočeské Madeta - 3,5% plnotučné",
-    "desc": "1 l",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Mléko",
-    "emoji": "🥛",
-    "image": "https://img.kupi.cz/kupi/thumbs/mleko-trvanlive-jihoceske-madeta-35-plnotucne-1_170_340.png",
-    "priceNew": 12.9,
-    "priceOld": 18.06,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/mleko-trvanlive-jihoceske-madeta-35-plnotucne"
-  },
-  {
     "id": "kbb1b80",
     "name": "Mléko trvanlivé Mlékárna Kunín - 1,5% polotučné",
     "desc": "1 l",
@@ -4646,6 +3764,20 @@
     "priceOld": 139.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/mleko-trvanlive-mlekarna-kunin-15-polotucne"
+  },
+  {
+    "id": "k78ccb1",
+    "name": "Mletá káva Grand Aroma Douwe Egberts",
+    "desc": "250 g",
+    "store": "kaufland",
+    "storeName": "Kaufland",
+    "category": "Káva",
+    "emoji": "☕",
+    "image": "https://img.kupi.cz/kupi/thumbs/mleta-kava-grand-aroma-douwe-egberts_170_340.jpg",
+    "priceNew": 99.9,
+    "priceOld": 139.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/mleta-kava-grand-aroma-douwe-egberts"
   },
   {
     "id": "kf9d346",
@@ -4662,76 +3794,6 @@
     "url": "https://www.kupi.cz/sleva/mleta-kava-standard-jihlavanka"
   },
   {
-    "id": "k8b61fb",
-    "name": "Mleté kávy Jihlavanka",
-    "desc": "150 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Káva",
-    "emoji": "☕",
-    "image": "https://img.kupi.cz/kupi/thumbs/mlete-kavy-jihlavanka_170_340.jpg",
-    "priceNew": 50.0,
-    "priceOld": 70.0,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/mlete-kavy-jihlavanka"
-  },
-  {
-    "id": "k009f84",
-    "name": "Nanuk Míša",
-    "desc": "55 ml",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Zmrzliny",
-    "emoji": "🍦",
-    "image": "https://img.kupi.cz/kupi/thumbs/nanuk-misa_170_340.jpg",
-    "priceNew": 12.9,
-    "priceOld": 18.06,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/nanuk-misa"
-  },
-  {
-    "id": "k7170bf",
-    "name": "Nápoj mléčný Müllermilch Müller",
-    "desc": "400 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Mléčné a jogurtové nápoje",
-    "emoji": "🧀",
-    "image": "https://img.kupi.cz/kupi/thumbs/napoj-mlecny-mullermilch-muller_170_340.jpg",
-    "priceNew": 15.9,
-    "priceOld": 22.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/napoj-mlecny-mullermilch-muller"
-  },
-  {
-    "id": "k135309",
-    "name": "Nealkoholické pivo Birell",
-    "desc": "0.33 l",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Pivo nealkoholické",
-    "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/nealkoholicke-pivo-birell-1_170_340.png",
-    "priceNew": 13.9,
-    "priceOld": 19.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/nealkoholicke-pivo-birell"
-  },
-  {
-    "id": "ke6160a",
-    "name": "Ochucená voda Dobrá voda",
-    "desc": "1.5 l",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Minerální a pramenité vody",
-    "emoji": "💧",
-    "image": "https://img.kupi.cz/kupi/thumbs/ochucena-voda-dobra-voda_170_340.jpg",
-    "priceNew": 11.9,
-    "priceOld": 16.66,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/ochucena-voda-dobra-voda"
-  },
-  {
     "id": "k7abcd0",
     "name": "Okurka salátová - hadovka",
     "desc": "1 ks",
@@ -4740,24 +3802,24 @@
     "category": "Okurky a saláty",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/okurka-hadovka_170_340.jpg",
-    "priceNew": 14.9,
-    "priceOld": 20.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 54.9,
+    "priceOld": 76.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/okurka-salatova-hadovka"
   },
   {
-    "id": "kf07081",
-    "name": "Oplatky Kolonáda Opavia",
-    "desc": "50 g",
+    "id": "k62f3b9",
+    "name": "Omáčky na těstoviny Exclusive Franz Josef Kaiser",
+    "desc": "340 g",
     "store": "kaufland",
     "storeName": "Kaufland",
-    "category": "Oplatky, perníky a trubičky",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/oplatky-kolonada-opavia-1_170_340.jpg",
-    "priceNew": 10.0,
-    "priceOld": 14.0,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/oplatky-kolonada-opavia"
+    "category": "Dresinky a omáčky",
+    "emoji": "🍝",
+    "image": "https://img.kupi.cz/kupi/thumbs/omacky-na-testoviny-franz-josef-kaiser_170_340.jpg",
+    "priceNew": 36.9,
+    "priceOld": 51.66,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/omacky-na-testoviny-exclusive-franz-josef-kaiser"
   },
   {
     "id": "k9ef833",
@@ -4796,9 +3858,9 @@
     "category": "Paštiky",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/pastiky-hame_170_340.png",
-    "priceNew": 12.9,
-    "priceOld": 18.06,
-    "validUntil": "2026-04-14",
+    "priceNew": 9.9,
+    "priceOld": 13.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pastiky-hame"
   },
   {
@@ -4816,46 +3878,18 @@
     "url": "https://www.kupi.cz/sleva/pivo-pilsner-urquell"
   },
   {
-    "id": "kb8b652",
-    "name": "Pivo světlé výčepní 10°  Velkopopovický Kozel",
+    "id": "k8724a5",
+    "name": "Pivo světlý ležák 11° Medium Starobrno",
     "desc": "0.5 l",
     "store": "kaufland",
     "storeName": "Kaufland",
     "category": "Pivo",
     "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetle-vycepni-10-velkopopovicky-kozel-1_170_340.jpg",
-    "priceNew": 16.9,
-    "priceOld": 23.66,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pivo-svetle-vycepni-10-velkopopovicky-kozel"
-  },
-  {
-    "id": "k15d20c",
-    "name": "Pivo světlé výčepní Rázná 10° Radegast",
-    "desc": "0.5 l",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Pivo",
-    "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetle-vycepni-razna-10-radegast-1_170_340.jpg",
-    "priceNew": 13.9,
-    "priceOld": 19.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pivo-svetle-vycepni-razna-10-radegast"
-  },
-  {
-    "id": "k2bfc81",
-    "name": "Pivo světlý ležák 11° Bernard",
-    "desc": "0.5 l",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Pivo",
-    "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/pivo-bernard-11-svetly-lezak_170_340.jpg",
+    "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-11-medium-starobrno_170_340.png",
     "priceNew": 15.9,
     "priceOld": 22.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-bernard"
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-medium-starobrno"
   },
   {
     "id": "k49c0c8",
@@ -4870,20 +3904,6 @@
     "priceOld": 16.66,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-serak-holba"
-  },
-  {
-    "id": "k7aae12",
-    "name": "Pivo světlý ležák 11° Zlatopramen",
-    "desc": "0.5 l",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Pivo",
-    "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/pivo-zlatopramen-11-1_170_340.jpg",
-    "priceNew": 33.9,
-    "priceOld": 47.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-zlatopramen"
   },
   {
     "id": "k4b05f0",
@@ -4914,23 +3934,9 @@
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-ratar-radegast"
   },
   {
-    "id": "k13bb62",
-    "name": "Pizza mražená Ristorante Dr. Oetker",
-    "desc": "320 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Mražená pizza",
-    "emoji": "🧊",
-    "image": "https://img.kupi.cz/kupi/thumbs/pizza-mrazena-ristorante-dr-oetker-1_170_340.jpg",
-    "priceNew": 49.9,
-    "priceOld": 69.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pizza-mrazena-ristorante-dr-oetker"
-  },
-  {
     "id": "k39b296",
     "name": "Pletenec plněný",
-    "desc": "78 g",
+    "desc": "84 g",
     "store": "kaufland",
     "storeName": "Kaufland",
     "category": "Sladké pečivo",
@@ -4978,37 +3984,23 @@
     "category": "Citrusové plody",
     "emoji": "🍊",
     "image": "https://img.kupi.cz/kupi/thumbs/pomerance_170_340.jpg",
-    "priceNew": 54.9,
-    "priceOld": 76.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 33.9,
+    "priceOld": 47.46,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pomerance"
-  },
-  {
-    "id": "k278be8",
-    "name": "Popcorn Jolly Time",
-    "desc": "100 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Oříšky a popcorn",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/popcorn-jolly-time-1_170_340.jpg",
-    "priceNew": 19.9,
-    "priceOld": 27.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/popcorn-jolly-time"
   },
   {
     "id": "kb25ea0",
     "name": "Prací gel Ariel",
-    "desc": "4,5 l",
+    "desc": "3,15 l",
     "store": "kaufland",
     "storeName": "Kaufland",
     "category": "Prací prostředky",
     "emoji": "🧺",
     "image": "https://img.kupi.cz/kupi/thumbs/praci-gel-ariel-1_170_340.png",
-    "priceNew": 419.9,
-    "priceOld": 587.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 349.9,
+    "priceOld": 489.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/praci-gel-ariel"
   },
   {
@@ -5024,20 +4016,6 @@
     "priceOld": 349.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/praci-gel-persil"
-  },
-  {
-    "id": "kba6865",
-    "name": "Prací gel Perwoll",
-    "desc": "1 ks",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Prací prostředky",
-    "emoji": "🧺",
-    "image": "https://img.kupi.cz/kupi/thumbs/praci-gel-perwoll-1_170_340.png",
-    "priceNew": 279.9,
-    "priceOld": 391.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/praci-gel-perwoll"
   },
   {
     "id": "kb5edc0",
@@ -5096,34 +4074,6 @@
     "url": "https://www.kupi.cz/sleva/prostredek-na-nadobi-jar"
   },
   {
-    "id": "kcdde92",
-    "name": "Rybí prsty předsmažené mražené Nowaco",
-    "desc": "250 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Hotová mražená jídla",
-    "emoji": "🐟",
-    "image": "https://img.kupi.cz/kupi/thumbs/rybi-prsty-predsmazene-mrazene-nowaco-1_170_340.png",
-    "priceNew": 34.9,
-    "priceOld": 48.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/rybi-prsty-predsmazene-mrazene-nowaco"
-  },
-  {
-    "id": "kd526b1",
-    "name": "Rýže parboiled Vitana",
-    "desc": "400 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Rýže",
-    "emoji": "🍚",
-    "image": "https://img.kupi.cz/kupi/thumbs/ryze-parboiled-vitana_170_340.png",
-    "priceNew": 39.9,
-    "priceOld": 55.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/ryze-parboiled-vitana"
-  },
-  {
     "id": "k97d263",
     "name": "Salám Křemešník kostelecký Kostelecké uzeniny",
     "desc": "100 g",
@@ -5152,65 +4102,37 @@
     "url": "https://www.kupi.cz/sleva/salat-ledovy"
   },
   {
-    "id": "kad9c86",
-    "name": "Salát rybí v majonéze Varmuža",
-    "desc": "150 g",
+    "id": "kbc9ac0",
+    "name": "Slunečnicový olej Slunka Fabio",
+    "desc": "1 l",
     "store": "kaufland",
     "storeName": "Kaufland",
-    "category": "Saláty",
-    "emoji": "🐟",
-    "image": "https://img.kupi.cz/kupi/thumbs/salat-rybi-v-majoneze-varmuza_170_340.jpg",
-    "priceNew": 19.9,
-    "priceOld": 27.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/salat-rybi-v-majoneze-varmuza"
+    "category": "Tuky a oleje",
+    "emoji": "🫒",
+    "image": "https://img.kupi.cz/kupi/thumbs/slunecnicovy-olej-slunka-fabio_170_340.png",
+    "priceNew": 34.9,
+    "priceOld": 48.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/slunecnicovy-olej-slunka-fabio"
   },
   {
-    "id": "kdcfe80",
-    "name": "Salát s tuňákem Giana",
-    "desc": "185 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Konzervované maso a hotová jídla",
-    "emoji": "🥩",
-    "image": "https://img.kupi.cz/kupi/thumbs/salat-s-tunakem-giana-1_170_340.jpg",
-    "priceNew": 29.9,
-    "priceOld": 41.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/salat-s-tunakem-giana"
-  },
-  {
-    "id": "kfdda6f",
-    "name": "Sirup Jupí",
-    "desc": "0.7 l",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Sirupy a koncentráty",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/sirup-jupi-2_170_340.jpg",
-    "priceNew": 139.9,
-    "priceOld": 195.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/sirup-jupi"
-  },
-  {
-    "id": "ke55853",
-    "name": "Smetana ke šlehání Mlékárna Kunín 31%",
-    "desc": "200 ml",
+    "id": "k3701ec",
+    "name": "Smetana ke šlehání Olma 33%",
+    "desc": "200 g",
     "store": "kaufland",
     "storeName": "Kaufland",
     "category": "Smetany",
     "emoji": "🥛",
-    "image": "https://img.kupi.cz/kupi/thumbs/smetana-ke-slehani-kunin-31_170_340.jpg",
+    "image": "https://img.kupi.cz/kupi/thumbs/smetana-ke-slehani-olma-33_170_340.jpg",
     "priceNew": 19.9,
     "priceOld": 27.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/smetana-ke-slehani-mlekarna-kunin-31"
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/smetana-ke-slehani-olma-33"
   },
   {
     "id": "kff0f73",
     "name": "Sušenky BeBe Dobré ráno Opavia",
-    "desc": "50 g",
+    "desc": "50.6 g",
     "store": "kaufland",
     "storeName": "Kaufland",
     "category": "Piškoty a sušenky",
@@ -5220,34 +4142,6 @@
     "priceOld": 65.66,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/susenky-bebe-dobre-rano-opavia"
-  },
-  {
-    "id": "kbed864",
-    "name": "Sušenky Biscoff Lotus",
-    "desc": "50 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Piškoty a sušenky",
-    "emoji": "🍪",
-    "image": "https://img.kupi.cz/kupi/thumbs/susenky-biscoff-lotus_170_340.png",
-    "priceNew": 27.9,
-    "priceOld": 39.06,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/susenky-biscoff-lotus"
-  },
-  {
-    "id": "k9dabce",
-    "name": "Sýr Eidam 30%",
-    "desc": "100 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Sýry",
-    "emoji": "🧀",
-    "image": "https://img.kupi.cz/kupi/thumbs/syr-eidam-30_170_340.jpg",
-    "priceNew": 11.9,
-    "priceOld": 16.66,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/syr-eidam-30"
   },
   {
     "id": "k45b010",
@@ -5262,6 +4156,20 @@
     "priceOld": 83.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/syr-hermelin-sedlcansky"
+  },
+  {
+    "id": "k9d824b",
+    "name": "Tablety do myčky Finish",
+    "desc": "94 ks",
+    "store": "kaufland",
+    "storeName": "Kaufland",
+    "category": "Mycí prostředky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/tablety-do-mycky-finish-4_170_340.jpg",
+    "priceNew": 289.9,
+    "priceOld": 405.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/tablety-do-mycky-finish"
   },
   {
     "id": "k859181",
@@ -5290,34 +4198,6 @@
     "priceOld": 36.26,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/testoviny-panzani"
-  },
-  {
-    "id": "kaf5b97",
-    "name": "Toustový chléb Sandwich Soft Ölz",
-    "desc": "375 g",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Chléb",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/toustovy-chleb-sandwich-soft-olz_170_340.png",
-    "priceNew": 52.9,
-    "priceOld": 74.06,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/toustovy-chleb-sandwich-soft-olz"
-  },
-  {
-    "id": "kd0ba07",
-    "name": "Travní směs Dosev Mr. Garden Agro",
-    "desc": "1 kg",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Květiny a osiva",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/travni-smes-dosev-mr-garden-agro_170_340.jpg",
-    "priceNew": 119.9,
-    "priceOld": 167.86,
-    "validUntil": "2026-04-21",
-    "url": "https://www.kupi.cz/sleva/travni-smes-dosev-mr-garden-agro"
   },
   {
     "id": "kf78fa8",
@@ -5362,46 +4242,46 @@
     "url": "https://www.kupi.cz/sleva/ustni-voda-listerine"
   },
   {
-    "id": "k4b9695",
-    "name": "Valašská kyška Mlékárna Valašské Meziříčí",
-    "desc": "400 ml",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Mléčné a jogurtové nápoje",
-    "emoji": "🧀",
-    "image": "https://img.kupi.cz/kupi/thumbs/valasska-kyska-mlekarna-valasske-mezirici_170_340.jpg",
-    "priceNew": 10.0,
-    "priceOld": 14.0,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/valasska-kyska-mlekarna-valasske-mezirici"
-  },
-  {
-    "id": "k5bf92e",
-    "name": "Whiskey irská Tullamore Dew",
-    "desc": "0.5 l",
-    "store": "kaufland",
-    "storeName": "Kaufland",
-    "category": "Whisky a bourbon",
-    "emoji": "🥃",
-    "image": "https://img.kupi.cz/kupi/thumbs/whiskey-irska-tullamore-dew_170_340.png",
-    "priceNew": 299.9,
-    "priceOld": 419.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/whiskey-irska-tullamore-dew"
-  },
-  {
-    "id": "k75d87f",
-    "name": "Zelí hlávkové bílé",
+    "id": "kf53279",
+    "name": "Vepřová pečeně bez kosti K-Mistři od Fochu z Modletic",
     "desc": "1 kg",
     "store": "kaufland",
     "storeName": "Kaufland",
-    "category": "Ostatní zelenina",
-    "emoji": "🥦",
-    "image": "https://img.kupi.cz/kupi/thumbs/zeli-hlavkove-bile_170_340.jpg",
-    "priceNew": 9.9,
-    "priceOld": 13.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/zeli-hlavkove-bile"
+    "category": "Vepřové maso",
+    "emoji": "🥩",
+    "image": "https://img.kupi.cz/kupi/thumbs/veprova-pecene-bez-kosti-k-mistri-od-fochu-z-modletic-1_170_340.jpg",
+    "priceNew": 89.9,
+    "priceOld": 125.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/veprova-pecene-bez-kosti-k-mistri-od-fochu-z-modletic"
+  },
+  {
+    "id": "k5dd99a",
+    "name": "Vepřový bok bez kosti K-Mistři od Fochu z Modletic",
+    "desc": "1 kg",
+    "store": "kaufland",
+    "storeName": "Kaufland",
+    "category": "Vepřové maso",
+    "emoji": "🥩",
+    "image": "https://img.kupi.cz/kupi/thumbs/veprovy-bok-bez-kosti-k-mistri-od-fochu-z-modletic_170_340.jpg",
+    "priceNew": 84.9,
+    "priceOld": 118.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/veprovy-bok-bez-kosti-k-mistri-od-fochu-z-modletic"
+  },
+  {
+    "id": "ka59a64",
+    "name": "Vlhčené ubrousky na nábytek K-Classic",
+    "desc": "80 ks",
+    "store": "kaufland",
+    "storeName": "Kaufland",
+    "category": "Úklidové pomůcky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/vlhcene-ubrousky-na-nabytek-k-classic_170_340.jpg",
+    "priceNew": 19.9,
+    "priceOld": 27.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/vlhcene-ubrousky-na-nabytek-k-classic"
   },
   {
     "id": "k1b738f",
@@ -5432,6 +4312,20 @@
     "url": "https://www.kupi.cz/sleva/zrnkova-kava-intermezzo-segafredo"
   },
   {
+    "id": "tfe6d2c",
+    "name": "Actimel Danone",
+    "desc": "100 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Mléčné a jogurtové nápoje",
+    "emoji": "🧀",
+    "image": "https://img.kupi.cz/kupi/thumbs/actimel-danone-1_170_340.jpg",
+    "priceNew": 89.9,
+    "priceOld": 125.86,
+    "validUntil": "2026-04-16",
+    "url": "https://www.kupi.cz/sleva/actimel-danone"
+  },
+  {
     "id": "t533286",
     "name": "Alobal Fino",
     "desc": "1 ks",
@@ -5444,6 +4338,20 @@
     "priceOld": 55.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/alobal-fino"
+  },
+  {
+    "id": "t57349a",
+    "name": "Anglická slanina Pikok",
+    "desc": "100 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Ostatní uzeniny",
+    "emoji": "🌭",
+    "image": "https://img.kupi.cz/kupi/thumbs/anglicka-slanina-pikok-1_170_340.jpg",
+    "priceNew": 17.9,
+    "priceOld": 25.06,
+    "validUntil": "2026-04-19",
+    "url": "https://www.kupi.cz/sleva/anglicka-slanina-pikok"
   },
   {
     "id": "tbfb064",
@@ -5470,7 +4378,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/aperitiv-aperol_170_340.jpg",
     "priceNew": 239.9,
     "priceOld": 335.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/aperitiv-aperol"
   },
   {
@@ -5504,7 +4412,7 @@
   {
     "id": "t1b0aa8",
     "name": "Aviváž Silan",
-    "desc": "0.77 l",
+    "desc": "1.1 l",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Prací prostředky",
@@ -5526,7 +4434,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/avokado_170_340.jpg",
     "priceNew": 14.9,
     "priceOld": 20.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-15",
     "url": "https://www.kupi.cz/sleva/avokado"
   },
   {
@@ -5546,15 +4454,15 @@
   {
     "id": "ta5683c",
     "name": "Bageta francouzská",
-    "desc": "110 g",
+    "desc": "230 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Slané pečivo",
     "emoji": "🍞",
     "image": "https://img.kupi.cz/kupi/thumbs/bageta-francouzska_170_340.png",
-    "priceNew": 5.9,
-    "priceOld": 8.26,
-    "validUntil": "2026-04-14",
+    "priceNew": 19.9,
+    "priceOld": 27.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/bageta-francouzska"
   },
   {
@@ -5580,9 +4488,9 @@
     "category": "Párky a klobásy",
     "emoji": "🌭",
     "image": "https://img.kupi.cz/kupi/thumbs/bavorske-party-klobasky-grill-party_170_340.jpg",
-    "priceNew": 59.9,
-    "priceOld": 83.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 44.9,
+    "priceOld": 62.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/bavorske-party-klobasky-grill-party"
   },
   {
@@ -5608,9 +4516,9 @@
     "category": "Jogurty",
     "emoji": "🥛",
     "image": "https://img.kupi.cz/kupi/thumbs/bily-jogurt-selsky-hollandia_170_340.png",
-    "priceNew": 44.9,
-    "priceOld": 62.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 9.9,
+    "priceOld": 13.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/bily-jogurt-selsky-hollandia"
   },
   {
@@ -5622,9 +4530,9 @@
     "category": "Sekt",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/bohemia-sekt-demi-sec-1_170_340.png",
-    "priceNew": 129.9,
-    "priceOld": 181.86,
-    "validUntil": "2026-04-30",
+    "priceNew": 109.9,
+    "priceOld": 153.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/bohemia-sekt-demi-sec"
   },
   {
@@ -5678,9 +4586,9 @@
     "category": "Rum a ostatní destiláty",
     "emoji": "🥃",
     "image": "https://img.kupi.cz/kupi/thumbs/bozkov-tradicni_170_340.png",
-    "priceNew": 129.9,
-    "priceOld": 181.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 199.9,
+    "priceOld": 279.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/bozkov-tradicni"
   },
   {
@@ -5726,6 +4634,20 @@
     "url": "https://www.kupi.cz/sleva/bylinny-liker-jagermeister"
   },
   {
+    "id": "t225fbe",
+    "name": "Česneková pomazánka se sýrem",
+    "desc": "100 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Pomazánky",
+    "emoji": "🧀",
+    "image": "https://img.kupi.cz/kupi/thumbs/cesnekova-pomazanka-se-syrem_170_340.jpg",
+    "priceNew": 16.9,
+    "priceOld": 23.66,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/cesnekova-pomazanka-se-syrem"
+  },
+  {
     "id": "t5b0a32",
     "name": "Chipsy Bohemia Chips",
     "desc": "60 g",
@@ -5762,9 +4684,9 @@
     "category": "Chléb",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/chleb-bez-lepku-pan-blanco-schar_170_340.jpg",
-    "priceNew": 44.9,
-    "priceOld": 62.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 67.0,
+    "priceOld": 93.8,
+    "validUntil": "",
     "url": "https://www.kupi.cz/sleva/chleb-bez-lepku-pan-blanco-schar"
   },
   {
@@ -5782,18 +4704,18 @@
     "url": "https://www.kupi.cz/sleva/chleb-fit-den-penam"
   },
   {
-    "id": "t803844",
-    "name": "Chléb žitný",
-    "desc": "550 g",
+    "id": "t34d27d",
+    "name": "Chléb konzumní",
+    "desc": "500 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Chléb",
     "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/chleb-zitny_170_340.jpg",
-    "priceNew": 28.9,
-    "priceOld": 40.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/chleb-zitny"
+    "image": "https://img.kupi.cz/kupi/thumbs/chleb-konzumni_170_340.jpg",
+    "priceNew": 21.9,
+    "priceOld": 30.66,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/chleb-konzumni"
   },
   {
     "id": "t4d06dd",
@@ -5874,9 +4796,9 @@
     "category": "Tabulkové čokolády",
     "emoji": "🍫",
     "image": "https://img.kupi.cz/kupi/thumbs/cokolada-studentska-pecet-orion_170_340.png",
-    "priceNew": 69.9,
-    "priceOld": 97.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 49.9,
+    "priceOld": 69.86,
+    "validUntil": "2026-04-30",
     "url": "https://www.kupi.cz/sleva/cokolada-studentska-pecet-orion"
   },
   {
@@ -5944,9 +4866,9 @@
     "category": "Sladké pečivo",
     "emoji": "🍞",
     "image": "https://img.kupi.cz/kupi/thumbs/croissant-7-days_170_340.png",
-    "priceNew": 8.9,
-    "priceOld": 12.46,
-    "validUntil": "2026-04-14",
+    "priceNew": 14.9,
+    "priceOld": 20.86,
+    "validUntil": "2026-04-30",
     "url": "https://www.kupi.cz/sleva/croissant-7-days"
   },
   {
@@ -5964,20 +4886,6 @@
     "url": "https://www.kupi.cz/sleva/cukr-krupice-cukrovar-vrbatky"
   },
   {
-    "id": "ta3c6bb",
-    "name": "Cukr krupice Korunní",
-    "desc": "1 kg",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Cukry a sladidla",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/cukr-krupice-korunni_170_340.png",
-    "priceNew": 15.9,
-    "priceOld": 22.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/cukr-krupice-korunni"
-  },
-  {
     "id": "tcb5b83",
     "name": "Cukr krupice TTD",
     "desc": "1 kg",
@@ -5986,10 +4894,24 @@
     "category": "Cukry a sladidla",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/cukr-krupice-ttd-1_170_340.jpg",
+    "priceNew": 17.9,
+    "priceOld": 25.06,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/cukr-krupice-ttd"
+  },
+  {
+    "id": "t744fc3",
+    "name": "Cukr krystal",
+    "desc": "1 kg",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Cukry a sladidla",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/cukr-krystal_170_340.jpg",
     "priceNew": 15.9,
     "priceOld": 22.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/cukr-krupice-ttd"
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/cukr-krystal"
   },
   {
     "id": "tf23837",
@@ -6036,15 +4958,15 @@
   {
     "id": "te16141",
     "name": "Dalamánek",
-    "desc": "70 g",
+    "desc": "82 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Slané pečivo",
     "emoji": "🍞",
     "image": "https://img.kupi.cz/kupi/thumbs/dalamanek_170_340.jpg",
-    "priceNew": 3.9,
-    "priceOld": 5.46,
-    "validUntil": "2026-04-14",
+    "priceNew": 4.9,
+    "priceOld": 6.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/dalamanek"
   },
   {
@@ -6058,7 +4980,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/deodorant-sprej-rexona-1_170_340.jpg",
     "priceNew": 59.9,
     "priceOld": 83.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "",
     "url": "https://www.kupi.cz/sleva/deodorant-sprej-rexona"
   },
   {
@@ -6072,7 +4994,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/dezinfekcni-osvezovac-vzduchu-sanytol_170_340.jpg",
     "priceNew": 84.9,
     "priceOld": 118.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "",
     "url": "https://www.kupi.cz/sleva/dezinfekcni-osvezovac-vzduchu-sanytol"
   },
   {
@@ -6098,9 +5020,9 @@
     "category": "Dorty a zákusky",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/dort-marlenka-1_170_340.jpg",
-    "priceNew": 219.0,
-    "priceOld": 306.6,
-    "validUntil": "2026-04-14",
+    "priceNew": 229.9,
+    "priceOld": 321.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/dort-marlenka"
   },
   {
@@ -6160,18 +5082,32 @@
     "url": "https://www.kupi.cz/sleva/energeticky-napoj-tiger"
   },
   {
-    "id": "t1a4382",
-    "name": "Filé z Aljašky mražené Nowaco",
-    "desc": "400 g",
+    "id": "t0f2aa5",
+    "name": "Fólie potravinová Fino",
+    "desc": "1 ks",
     "store": "tesco",
     "storeName": "Tesco",
-    "category": "Mražené maso, drůbež a ryby",
-    "emoji": "🥩",
-    "image": "https://img.kupi.cz/kupi/thumbs/file-z-aljasky-mrazene-nowaco_170_340.png",
-    "priceNew": 149.9,
-    "priceOld": 209.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/file-z-aljasky-mrazene-nowaco"
+    "category": "Fólie a obaly",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/folie-potravinova-fino_170_340.jpg",
+    "priceNew": 41.9,
+    "priceOld": 58.66,
+    "validUntil": "2026-04-27",
+    "url": "https://www.kupi.cz/sleva/folie-potravinova-fino"
+  },
+  {
+    "id": "td65166",
+    "name": "Hadřík Actifibre Vileda",
+    "desc": "1 ks",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Úklidové pomůcky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/hadr-actifibre-vileda_170_340.png",
+    "priceNew": 43.9,
+    "priceOld": 61.46,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/hadrik-actifibre-vileda"
   },
   {
     "id": "t9aa00e",
@@ -6188,20 +5124,6 @@
     "url": "https://www.kupi.cz/sleva/hotova-jidla-good-lunch-bonduelle"
   },
   {
-    "id": "t38e172",
-    "name": "Hotová jídla Snadno a rychle Hamé",
-    "desc": "400 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Hotová jídla a přílohy",
-    "emoji": "🍲",
-    "image": "https://img.kupi.cz/kupi/thumbs/hotova-jidla-snadno-a-rychle-hame_170_340.jpg",
-    "priceNew": 49.9,
-    "priceOld": 69.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/hotova-jidla-snadno-a-rychle-hame"
-  },
-  {
     "id": "t2adb00",
     "name": "Hovězí přední bez kosti - kližka",
     "desc": "1 kg",
@@ -6214,20 +5136,6 @@
     "priceOld": 348.6,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/hovezi-predni-bez-kosti-klizka"
-  },
-  {
-    "id": "t152dc2",
-    "name": "Hranolky vlnky mražené Nowaco",
-    "desc": "750 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Mražené přílohy",
-    "emoji": "🧊",
-    "image": "https://img.kupi.cz/kupi/thumbs/hranolky-vlnky-mrazene-nowaco_170_340.png",
-    "priceNew": 39.9,
-    "priceOld": 55.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/hranolky-vlnky-mrazene-nowaco"
   },
   {
     "id": "t046671",
@@ -6324,21 +5232,21 @@
     "image": "https://img.kupi.cz/kupi/thumbs/instantni-kava-jacobs-velvet_170_340.jpg",
     "priceNew": 249.0,
     "priceOld": 348.6,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/instantni-kava-jacobs-velvet"
   },
   {
     "id": "t4ff30c",
     "name": "Instantní káva Nescafé Classic",
-    "desc": "100 g",
+    "desc": "200 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Káva",
     "emoji": "☕",
     "image": "https://img.kupi.cz/kupi/thumbs/instantni-kava-nescafe-classic-1_170_340.png",
-    "priceNew": 69.0,
-    "priceOld": 96.6,
-    "validUntil": "2026-04-14",
+    "priceNew": 149.9,
+    "priceOld": 209.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/instantni-kava-nescafe-classic"
   },
   {
@@ -6368,20 +5276,6 @@
     "priceOld": 231.0,
     "validUntil": "2026-04-30",
     "url": "https://www.kupi.cz/sleva/instantni-kava-nescafe-gold-crema"
-  },
-  {
-    "id": "tb1be1f",
-    "name": "Instantní káva Nescafé Gold Original",
-    "desc": "200 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Káva",
-    "emoji": "☕",
-    "image": "https://img.kupi.cz/kupi/thumbs/instantni-kava-nescafe-gold-original_170_340.png",
-    "priceNew": 149.9,
-    "priceOld": 209.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/instantni-kava-nescafe-gold-original"
   },
   {
     "id": "tba6ed6",
@@ -6426,18 +5320,18 @@
     "url": "https://www.kupi.cz/sleva/instantni-kavy-nescafe-gold"
   },
   {
-    "id": "t3f775f",
-    "name": "Instantní polévka YumYum",
-    "desc": "60 g",
+    "id": "t9ee654",
+    "name": "Instantní polévka do hrnečku Vitana",
+    "desc": "27 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Instantní polévky",
     "emoji": "🍲",
-    "image": "https://img.kupi.cz/kupi/thumbs/instantni-polevka-yumyum_170_340.jpg",
-    "priceNew": 13.9,
-    "priceOld": 19.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/instantni-polevka-yumyum"
+    "image": "https://img.kupi.cz/kupi/thumbs/instantni-polevka-do-hrnecku-vitana_170_340.jpg",
+    "priceNew": 10.0,
+    "priceOld": 14.0,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/instantni-polevka-do-hrnecku-vitana"
   },
   {
     "id": "t4d5300",
@@ -6448,15 +5342,15 @@
     "category": "Jablka a hrušky",
     "emoji": "🍎",
     "image": "https://img.kupi.cz/kupi/thumbs/jablka-golden-delicious_170_340.png",
-    "priceNew": 24.9,
-    "priceOld": 34.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 29.9,
+    "priceOld": 41.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/jablka-golden-delicious"
   },
   {
     "id": "tda21ff",
     "name": "Jahody",
-    "desc": "400 g",
+    "desc": "500 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Jahody a lesní plody",
@@ -6464,22 +5358,36 @@
     "image": "https://img.kupi.cz/kupi/thumbs/jahody_170_340.jpg",
     "priceNew": 34.9,
     "priceOld": 48.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-19",
     "url": "https://www.kupi.cz/sleva/jahody"
   },
   {
     "id": "t3bc794",
     "name": "Jahody Billa Bonvia",
-    "desc": "500 g",
+    "desc": "900 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Jahody a lesní plody",
     "emoji": "🍓",
     "image": "https://img.kupi.cz/kupi/thumbs/jahody-billa-bonvia-1_170_340.jpg",
-    "priceNew": 34.9,
-    "priceOld": 48.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 99.9,
+    "priceOld": 139.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/jahody-billa-bonvia"
+  },
+  {
+    "id": "tcb512b",
+    "name": "Játra kuřecí mražená",
+    "desc": "0.5 kg",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Mražené maso, drůbež a ryby",
+    "emoji": "🥩",
+    "image": "https://img.kupi.cz/kupi/thumbs/jatra-kureci-mrazena_170_340.jpg",
+    "priceNew": 19.9,
+    "priceOld": 27.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/jatra-kureci-mrazena"
   },
   {
     "id": "t9c4147",
@@ -6490,15 +5398,15 @@
     "category": "Konzervované ryby",
     "emoji": "🐟",
     "image": "https://img.kupi.cz/kupi/thumbs/tresci-jatra-giana_170_340.jpg",
-    "priceNew": 49.9,
-    "priceOld": 69.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 52.9,
+    "priceOld": 74.06,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/jatra-tresci-giana"
   },
   {
     "id": "tacef81",
     "name": "Jídla instantní Dobrý hostinec Maggi",
-    "desc": "118 g",
+    "desc": "185 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Instantní jídla a směsi",
@@ -6518,10 +5426,24 @@
     "category": "Ostatní výrobky pro vaření a pečení",
     "emoji": "🍲",
     "image": "https://img.kupi.cz/kupi/thumbs/jiska-hotova-knorr_170_340.jpg",
-    "priceNew": 23.9,
-    "priceOld": 33.46,
-    "validUntil": "2026-04-14",
+    "priceNew": 27.9,
+    "priceOld": 39.06,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/jiska-hotova-knorr"
+  },
+  {
+    "id": "t1d51c8",
+    "name": "Jogurt Fantasia Danone",
+    "desc": "118 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Dezerty a pudinky",
+    "emoji": "🥛",
+    "image": "https://img.kupi.cz/kupi/thumbs/dezert-fantasia-danone-1_170_340.jpg",
+    "priceNew": 14.9,
+    "priceOld": 20.86,
+    "validUntil": "2026-05-05",
+    "url": "https://www.kupi.cz/sleva/jogurt-fantasia-danone"
   },
   {
     "id": "tb86dfa",
@@ -6552,20 +5474,6 @@
     "url": "https://www.kupi.cz/sleva/jogurt-smetanove-pokuseni-florian-olma"
   },
   {
-    "id": "t0a80e7",
-    "name": "Kachna mražená",
-    "desc": "2.1 kg",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Mražené maso, drůbež a ryby",
-    "emoji": "🥩",
-    "image": "https://img.kupi.cz/kupi/thumbs/kachna-mrazena-2_170_340.jpg",
-    "priceNew": 199.9,
-    "priceOld": 279.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/kachna-mrazena"
-  },
-  {
     "id": "tb3c330",
     "name": "Kachna Vodňanská kachna",
     "desc": "1 kg",
@@ -6582,7 +5490,7 @@
   {
     "id": "t0e9cf0",
     "name": "Kaiserka",
-    "desc": "55 g",
+    "desc": "60 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Slané pečivo",
@@ -6608,9 +5516,23 @@
     "url": "https://www.kupi.cz/sleva/kaiserka-cerealni"
   },
   {
+    "id": "tce0cb3",
+    "name": "Kapsičky pro kočky Whiskas",
+    "desc": "85 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Výrobky a krmivo pro kočky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/kapsicky-pro-kocky-whiskas_170_340.png",
+    "priceNew": 269.9,
+    "priceOld": 377.86,
+    "validUntil": "2026-04-28",
+    "url": "https://www.kupi.cz/sleva/kapsicky-pro-kocky-whiskas"
+  },
+  {
     "id": "tf944eb",
     "name": "Kapsle Cafissimo Tchibo",
-    "desc": "10 ks",
+    "desc": "1 ks",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Káva",
@@ -6622,9 +5544,23 @@
     "url": "https://www.kupi.cz/sleva/kapsle-cafissimo-tchibo"
   },
   {
+    "id": "t37dda7",
+    "name": "Kapsle do myčky Jar",
+    "desc": "46 ks",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Mycí prostředky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/kapsle-do-mycky-jar_170_340.png",
+    "priceNew": 159.0,
+    "priceOld": 222.6,
+    "validUntil": "2026-04-30",
+    "url": "https://www.kupi.cz/sleva/kapsle-do-mycky-jar"
+  },
+  {
     "id": "t1cd816",
     "name": "Kapsle do myčky Platinum Jar",
-    "desc": "45 ks",
+    "desc": "65 ks",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Mycí prostředky",
@@ -6638,7 +5574,7 @@
   {
     "id": "tb8aff5",
     "name": "Kapsle Dolce Gusto Nescafé",
-    "desc": "1 ks",
+    "desc": "16 ks",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Káva",
@@ -6646,13 +5582,13 @@
     "image": "https://img.kupi.cz/kupi/thumbs/kapsle-dolce-gusto-nescafe-2_170_340.jpg",
     "priceNew": 199.0,
     "priceOld": 278.6,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/kapsle-dolce-gusto-nescafe"
   },
   {
     "id": "ta800d3",
     "name": "Kapsle Tassimo Jacobs",
-    "desc": "1 ks",
+    "desc": "16 ks",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Káva",
@@ -6666,7 +5602,7 @@
   {
     "id": "tacb3da",
     "name": "Kartáček na zuby Curaprox",
-    "desc": "1 ks",
+    "desc": "3 ks",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Ústní hygiena",
@@ -6680,7 +5616,7 @@
   {
     "id": "t2a0bc1",
     "name": "Kečup Heinz",
-    "desc": "342 g",
+    "desc": "700 ml",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Kečupy a protlaky",
@@ -6704,6 +5640,20 @@
     "priceOld": 83.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/kecup-hellmanns"
+  },
+  {
+    "id": "ta9dcec",
+    "name": "Knedlík bramborový",
+    "desc": "500 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Hotová jídla a přílohy",
+    "emoji": "🥔",
+    "image": "https://img.kupi.cz/kupi/thumbs/knedlik-bramborovy_170_340.jpg",
+    "priceNew": 32.9,
+    "priceOld": 46.06,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/knedlik-bramborovy"
   },
   {
     "id": "tf8e6b6",
@@ -6762,6 +5712,34 @@
     "url": "https://www.kupi.cz/sleva/kornbageta"
   },
   {
+    "id": "t44d3de",
+    "name": "Krůtí mleté maso Tesco",
+    "desc": "0.5 kg",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Drůbež",
+    "emoji": "🥩",
+    "image": "https://img.kupi.cz/kupi/thumbs/kruti-mlete-maso-tesco-1_170_340.jpg",
+    "priceNew": 89.9,
+    "priceOld": 125.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/kruti-mlete-maso-tesco"
+  },
+  {
+    "id": "t500631",
+    "name": "Krůtí prsa",
+    "desc": "1 kg",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Drůbež",
+    "emoji": "🍗",
+    "image": "https://img.kupi.cz/kupi/thumbs/kruti-prsa-1_170_340.jpg",
+    "priceNew": 179.9,
+    "priceOld": 251.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/kruti-prsa"
+  },
+  {
     "id": "tf1417c",
     "name": "Krůtí prsní řízky",
     "desc": "1 kg",
@@ -6814,49 +5792,21 @@
     "image": "https://img.kupi.cz/kupi/thumbs/kure_170_340.jpg",
     "priceNew": 59.9,
     "priceOld": 83.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-19",
     "url": "https://www.kupi.cz/sleva/kure"
-  },
-  {
-    "id": "tcca37e",
-    "name": "Kuře grilované",
-    "desc": "1 ks",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Hotová jídla a přílohy",
-    "emoji": "🍗",
-    "image": "https://img.kupi.cz/kupi/thumbs/kure-grilovane_170_340.png",
-    "priceNew": 99.9,
-    "priceOld": 139.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/kure-grilovane"
-  },
-  {
-    "id": "t0e7102",
-    "name": "Kuře Tesco",
-    "desc": "1 kg",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Drůbež",
-    "emoji": "🍗",
-    "image": "https://img.kupi.cz/kupi/thumbs/kure-chlazene-tesco_170_340.jpg",
-    "priceNew": 64.9,
-    "priceOld": 90.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/kure-tesco"
   },
   {
     "id": "t3d910b",
     "name": "Kuřecí čtvrtky",
-    "desc": "1 kg",
+    "desc": "0.6 kg",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Drůbež",
     "emoji": "🍗",
     "image": "https://img.kupi.cz/kupi/thumbs/kureci-ctvrtky-1_170_340.jpg",
-    "priceNew": 48.9,
-    "priceOld": 68.46,
-    "validUntil": "2026-04-14",
+    "priceNew": 59.9,
+    "priceOld": 83.86,
+    "validUntil": "2026-04-15",
     "url": "https://www.kupi.cz/sleva/kureci-ctvrtky"
   },
   {
@@ -6888,20 +5838,6 @@
     "url": "https://www.kupi.cz/sleva/kureci-kridla"
   },
   {
-    "id": "t680935",
-    "name": "Kuřecí prsa s kostí",
-    "desc": "1 kg",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Drůbež",
-    "emoji": "🍗",
-    "image": "https://img.kupi.cz/kupi/thumbs/kureci-prsa-s-kosti_170_340.jpg",
-    "priceNew": 129.9,
-    "priceOld": 181.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/kureci-prsa-s-kosti"
-  },
-  {
     "id": "tf66bed",
     "name": "Kuřecí prsní řízky",
     "desc": "1 kg",
@@ -6924,9 +5860,9 @@
     "category": "Drůbež",
     "emoji": "🍗",
     "image": "https://img.kupi.cz/kupi/thumbs/kureci-prsni-rizky-albert_170_340.jpg",
-    "priceNew": 99.9,
-    "priceOld": 139.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 129.9,
+    "priceOld": 181.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/kureci-prsni-rizky-albert"
   },
   {
@@ -6938,9 +5874,9 @@
     "category": "Mražené maso, drůbež a ryby",
     "emoji": "🥩",
     "image": "https://img.kupi.cz/kupi/thumbs/kureci-prsni-rizky-mrazene_170_340.png",
-    "priceNew": 59.9,
-    "priceOld": 83.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 94.9,
+    "priceOld": 132.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/kureci-prsni-rizky-mrazene"
   },
   {
@@ -6980,9 +5916,9 @@
     "category": "Drůbež",
     "emoji": "🍗",
     "image": "https://img.kupi.cz/kupi/thumbs/kureci-stehenni-rizky_170_340.jpg",
-    "priceNew": 99.9,
-    "priceOld": 139.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 89.9,
+    "priceOld": 125.86,
+    "validUntil": "2026-04-28",
     "url": "https://www.kupi.cz/sleva/kureci-stehenni-rizky"
   },
   {
@@ -7008,9 +5944,9 @@
     "category": "Drůbež",
     "emoji": "🍗",
     "image": "https://img.kupi.cz/kupi/thumbs/kureci-stehna_170_340.jpg",
-    "priceNew": 67.9,
-    "priceOld": 95.06,
-    "validUntil": "2026-04-14",
+    "priceNew": 69.9,
+    "priceOld": 97.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/kureci-stehna"
   },
   {
@@ -7042,6 +5978,20 @@
     "url": "https://www.kupi.cz/sleva/kureci-stehna-tesco"
   },
   {
+    "id": "t7acecb",
+    "name": "Kuřecí stripsy mražené Nowaco",
+    "desc": "0.5 kg",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Hotová mražená jídla",
+    "emoji": "🍗",
+    "image": "https://img.kupi.cz/kupi/thumbs/kureci-stripsy-mrazene-nowaco_170_340.png",
+    "priceNew": 119.9,
+    "priceOld": 167.86,
+    "validUntil": "2026-05-05",
+    "url": "https://www.kupi.cz/sleva/kureci-stripsy-mrazene-nowaco"
+  },
+  {
     "id": "tc3af01",
     "name": "Ledové kaštany Orion",
     "desc": "45 g",
@@ -7050,9 +6000,9 @@
     "category": "Čokoládové tyčinky",
     "emoji": "🍫",
     "image": "https://img.kupi.cz/kupi/thumbs/ledove-kastany-orion-2_170_340.jpg",
-    "priceNew": 9.9,
-    "priceOld": 13.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 12.9,
+    "priceOld": 18.06,
+    "validUntil": "2026-04-30",
     "url": "https://www.kupi.cz/sleva/ledove-kastany-orion"
   },
   {
@@ -7066,13 +6016,13 @@
     "image": "https://img.kupi.cz/kupi/thumbs/limonada-coca-cola_170_340.png",
     "priceNew": 29.9,
     "priceOld": 41.86,
-    "validUntil": "2026-04-21",
+    "validUntil": "2026-04-19",
     "url": "https://www.kupi.cz/sleva/limonada-coca-cola"
   },
   {
     "id": "t670e98",
     "name": "Limonáda Coca Cola Zero",
-    "desc": "0.33 l",
+    "desc": "1.75 l",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Limonády",
@@ -7080,7 +6030,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/limonada-coca-cola-zero_170_340.png",
     "priceNew": 29.9,
     "priceOld": 41.86,
-    "validUntil": "2026-04-21",
+    "validUntil": "2026-04-19",
     "url": "https://www.kupi.cz/sleva/limonada-coca-cola-zero"
   },
   {
@@ -7092,9 +6042,9 @@
     "category": "Limonády",
     "emoji": "🥤",
     "image": "https://img.kupi.cz/kupi/thumbs/limonada-pepsi_170_340.png",
-    "priceNew": 24.9,
-    "priceOld": 34.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 26.9,
+    "priceOld": 37.66,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/limonada-pepsi"
   },
   {
@@ -7106,8 +6056,8 @@
     "category": "Ryby a mořské plody",
     "emoji": "🐟",
     "image": "https://img.kupi.cz/kupi/thumbs/losos-filety_170_340.png",
-    "priceNew": 29.9,
-    "priceOld": 41.86,
+    "priceNew": 28.9,
+    "priceOld": 40.46,
     "validUntil": "2026-04-19",
     "url": "https://www.kupi.cz/sleva/losos-filety"
   },
@@ -7120,9 +6070,9 @@
     "category": "Tavené sýry a žervé",
     "emoji": "🧀",
     "image": "https://img.kupi.cz/kupi/thumbs/lucina-4_170_340.jpg",
-    "priceNew": 19.9,
-    "priceOld": 27.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 13.9,
+    "priceOld": 19.46,
+    "validUntil": "2026-04-30",
     "url": "https://www.kupi.cz/sleva/lucina"
   },
   {
@@ -7134,9 +6084,9 @@
     "category": "Majonézy a tatarské omáčky",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/majoneza-hellmann-s_170_340.png",
-    "priceNew": 25.9,
-    "priceOld": 36.26,
-    "validUntil": "2026-04-14",
+    "priceNew": 44.9,
+    "priceOld": 62.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/majoneza-hellmann-s"
   },
   {
@@ -7164,7 +6114,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/mandarinky_170_340.jpg",
     "priceNew": 29.9,
     "priceOld": 41.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/mandarinky"
   },
   {
@@ -7190,8 +6140,8 @@
     "category": "Margaríny",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/margarin-flora_170_340.png",
-    "priceNew": 47.9,
-    "priceOld": 67.06,
+    "priceNew": 44.9,
+    "priceOld": 62.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/margarin-flora"
   },
@@ -7208,62 +6158,6 @@
     "priceOld": 50.26,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/maslo"
-  },
-  {
-    "id": "t43ad46",
-    "name": "Máslo bez laktózy Free From Nature's Promise",
-    "desc": "125 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Másla",
-    "emoji": "🧈",
-    "image": "https://img.kupi.cz/kupi/thumbs/maslo-bez-laktozy-free-from-natures-promise_170_340.png",
-    "priceNew": 34.9,
-    "priceOld": 48.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/maslo-bez-laktozy-free-from-natures-promise"
-  },
-  {
-    "id": "tc27f39",
-    "name": "Máslo bio Nature's Promise",
-    "desc": "125 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Másla",
-    "emoji": "🧈",
-    "image": "https://img.kupi.cz/kupi/thumbs/maslo-bio-natures-promise_170_340.jpg",
-    "priceNew": 38.9,
-    "priceOld": 54.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/maslo-bio-natures-promise"
-  },
-  {
-    "id": "t35784a",
-    "name": "Máslo Boni",
-    "desc": "250 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Másla",
-    "emoji": "🧈",
-    "image": "https://img.kupi.cz/kupi/thumbs/maslo-boni_170_340.png",
-    "priceNew": 24.9,
-    "priceOld": 34.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/maslo-boni"
-  },
-  {
-    "id": "t249853",
-    "name": "Máslo Česká chuť",
-    "desc": "250 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Másla",
-    "emoji": "🧈",
-    "image": "https://img.kupi.cz/kupi/thumbs/maslo-ceska-chut_170_340.png",
-    "priceNew": 26.9,
-    "priceOld": 37.66,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/maslo-ceska-chut"
   },
   {
     "id": "t35a381",
@@ -7378,6 +6272,20 @@
     "url": "https://www.kupi.cz/sleva/maslo-tatra"
   },
   {
+    "id": "te9f1fa",
+    "name": "Máslo z Vysočiny Lacrum",
+    "desc": "250 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Másla",
+    "emoji": "🧈",
+    "image": "https://img.kupi.cz/kupi/thumbs/maslo-lacrum_170_340.jpg",
+    "priceNew": 29.9,
+    "priceOld": 41.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/maslo-z-vysociny-lacrum"
+  },
+  {
     "id": "t81f0b7",
     "name": "Maso vepřové ve vlastní šťávě Meining",
     "desc": "400 g",
@@ -7394,15 +6302,15 @@
   {
     "id": "t86f412",
     "name": "Medovník Original",
-    "desc": "150 g",
+    "desc": "750 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Dorty a zákusky",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/medovnik-original_170_340.jpg",
-    "priceNew": 29.9,
-    "priceOld": 41.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 169.9,
+    "priceOld": 237.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/medovnik-original"
   },
   {
@@ -7456,9 +6364,9 @@
     "category": "Mléko",
     "emoji": "🥛",
     "image": "https://img.kupi.cz/kupi/thumbs/mleko-trvanlive-jihoceske-madeta-35-plnotucne-1_170_340.png",
-    "priceNew": 12.9,
-    "priceOld": 18.06,
-    "validUntil": "2026-04-14",
+    "priceNew": 15.9,
+    "priceOld": 22.26,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/mleko-trvanlive-jihoceske-madeta-35-plnotucne"
   },
   {
@@ -7470,8 +6378,8 @@
     "category": "Mléko",
     "emoji": "🥛",
     "image": "https://img.kupi.cz/kupi/thumbs/mleko-trvanlive-kunin-1-5-polotucne_170_340.png",
-    "priceNew": 13.9,
-    "priceOld": 19.46,
+    "priceNew": 8.9,
+    "priceOld": 12.46,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/mleko-trvanlive-mlekarna-kunin-15-polotucne"
   },
@@ -7498,10 +6406,24 @@
     "category": "Mléko",
     "emoji": "🥛",
     "image": "https://img.kupi.cz/kupi/thumbs/mleko-trvanlive-tesco-15-polotucne_170_340.png",
-    "priceNew": 8.9,
-    "priceOld": 12.46,
-    "validUntil": "2026-04-14",
+    "priceNew": 14.9,
+    "priceOld": 20.86,
+    "validUntil": "2026-05-05",
     "url": "https://www.kupi.cz/sleva/mleko-trvanlive-tesco-15-polotucne"
+  },
+  {
+    "id": "t37707d",
+    "name": "Mletá káva Grand Aroma Douwe Egberts",
+    "desc": "250 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Káva",
+    "emoji": "☕",
+    "image": "https://img.kupi.cz/kupi/thumbs/mleta-kava-grand-aroma-douwe-egberts_170_340.jpg",
+    "priceNew": 96.5,
+    "priceOld": 135.1,
+    "validUntil": "2026-04-30",
+    "url": "https://www.kupi.cz/sleva/mleta-kava-grand-aroma-douwe-egberts"
   },
   {
     "id": "t2b603a",
@@ -7568,10 +6490,24 @@
     "category": "Káva",
     "emoji": "☕",
     "image": "https://img.kupi.cz/kupi/thumbs/mleta-kava-tchibo-exclusive_170_340.png",
-    "priceNew": 199.0,
-    "priceOld": 278.6,
-    "validUntil": "2026-04-14",
+    "priceNew": 99.9,
+    "priceOld": 139.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/mleta-kava-tchibo-exclusive"
+  },
+  {
+    "id": "t642c04",
+    "name": "Mleté maso mix",
+    "desc": "0.5 kg",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Ostatní maso",
+    "emoji": "🥩",
+    "image": "https://img.kupi.cz/kupi/thumbs/mlete-maso-mix_170_340.jpg",
+    "priceNew": 128.9,
+    "priceOld": 180.46,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/mlete-maso-mix"
   },
   {
     "id": "t7dc87b",
@@ -7598,7 +6534,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/mouka-babiccina-volba_170_340.jpg",
     "priceNew": 19.9,
     "priceOld": 27.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/mouka-babiccina-volba"
   },
   {
@@ -7640,7 +6576,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/nanuk-misa_170_340.jpg",
     "priceNew": 12.9,
     "priceOld": 18.06,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/nanuk-misa"
   },
   {
@@ -7658,18 +6594,18 @@
     "url": "https://www.kupi.cz/sleva/nanuk-mroz-prima"
   },
   {
-    "id": "tefa6a5",
-    "name": "Nápoj instantní obilninový Caro Original Nestlé",
-    "desc": "200 g",
+    "id": "t4d7f40",
+    "name": "Nápoj Pulpy Cappy",
+    "desc": "1 l",
     "store": "tesco",
     "storeName": "Tesco",
-    "category": "Instantní nápoje",
+    "category": "Džusy, nektary, nápoje",
     "emoji": "🥤",
-    "image": "https://img.kupi.cz/kupi/thumbs/caro-original-nestle_170_340.jpg",
-    "priceNew": 109.0,
-    "priceOld": 152.6,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/napoj-instantni-obilninovy-caro-original-nestle"
+    "image": "https://img.kupi.cz/kupi/thumbs/napoj-pulpy-cappy_170_340.png",
+    "priceNew": 29.9,
+    "priceOld": 41.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/napoj-pulpy-cappy"
   },
   {
     "id": "t0a354b",
@@ -7680,9 +6616,9 @@
     "category": "Pivo nealkoholické",
     "emoji": "🍺",
     "image": "https://img.kupi.cz/kupi/thumbs/nealkoholicke-pivo-birell-1_170_340.png",
-    "priceNew": 13.9,
-    "priceOld": 19.46,
-    "validUntil": "2026-04-14",
+    "priceNew": 15.9,
+    "priceOld": 22.26,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/nealkoholicke-pivo-birell"
   },
   {
@@ -7722,9 +6658,9 @@
     "category": "Čokokrémy",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/nutella-2_170_340.jpg",
-    "priceNew": 85.9,
-    "priceOld": 120.26,
-    "validUntil": "2026-04-14",
+    "priceNew": 89.9,
+    "priceOld": 125.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/nutella"
   },
   {
@@ -7792,9 +6728,9 @@
     "category": "Konzervovaná a nakládaná zelenina",
     "emoji": "🥦",
     "image": "https://img.kupi.cz/kupi/thumbs/okurky-delikates-efko_170_340.jpg",
-    "priceNew": 44.9,
-    "priceOld": 62.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 46.9,
+    "priceOld": 65.66,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/okurky-delikates-efko"
   },
   {
@@ -7828,7 +6764,7 @@
   {
     "id": "t5e087e",
     "name": "Olivový olej extra panenský Exclusive Franz Josef Kaiser",
-    "desc": "500 ml",
+    "desc": "0.5 l",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Tuky a oleje",
@@ -7842,7 +6778,7 @@
   {
     "id": "t87286f",
     "name": "Olivový olej extra panenský Ondoliva",
-    "desc": "0.5 l",
+    "desc": "1 l",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Tuky a oleje",
@@ -7852,20 +6788,6 @@
     "priceOld": 279.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/olivovy-olej-extra-panensky-ondoliva"
-  },
-  {
-    "id": "t340491",
-    "name": "Olivy černé  Exclusive Franz Josef Kaiser",
-    "desc": "300 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Ostatní lahůdky",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/olivy-cerne-bez-pecky-franz-josef_170_340.jpg",
-    "priceNew": 39.9,
-    "priceOld": 55.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/olivy-cerne-exclusive-franz-josef-kaiser"
   },
   {
     "id": "t4b097f",
@@ -7910,20 +6832,6 @@
     "url": "https://www.kupi.cz/sleva/olivy-plnene-exclusive-franz-josef-kaiser"
   },
   {
-    "id": "t3c1f57",
-    "name": "Omáčka Panzani",
-    "desc": "400 ml",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Polotovary",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/omacka-panzani-1_170_340.jpg",
-    "priceNew": 44.9,
-    "priceOld": 62.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/omacka-panzani"
-  },
-  {
     "id": "tdabd20",
     "name": "Oplatky Fidorka Opavia",
     "desc": "30 g",
@@ -7940,7 +6848,7 @@
   {
     "id": "t8d2043",
     "name": "Oplatky Horalky Sedita",
-    "desc": "50 g",
+    "desc": "27 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Oplatky, perníky a trubičky",
@@ -7950,6 +6858,34 @@
     "priceOld": 13.96,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/oplatky-horalky-sedita"
+  },
+  {
+    "id": "t2e9ba5",
+    "name": "Oplatky Kolonáda Opavia",
+    "desc": "140 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Oplatky, perníky a trubičky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/oplatky-kolonada-opavia-1_170_340.jpg",
+    "priceNew": 54.9,
+    "priceOld": 76.86,
+    "validUntil": "2026-04-19",
+    "url": "https://www.kupi.cz/sleva/oplatky-kolonada-opavia"
+  },
+  {
+    "id": "t9897ac",
+    "name": "Oplatky Manner",
+    "desc": "200 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Oplatky, perníky a trubičky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/oplatky-manner_170_340.png",
+    "priceNew": 57.9,
+    "priceOld": 81.06,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/oplatky-manner"
   },
   {
     "id": "t9db97a",
@@ -7966,20 +6902,6 @@
     "url": "https://www.kupi.cz/sleva/oplatky-mila-sedita"
   },
   {
-    "id": "t65542d",
-    "name": "Osvěžovač vzduchu Bathroom Ambi Pur",
-    "desc": "7.5 ml",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Vůně do bytu",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/osvezovac-vzduchu-bathroom-ambi-pur_170_340.jpg",
-    "priceNew": 79.9,
-    "priceOld": 111.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/osvezovac-vzduchu-bathroom-ambi-pur"
-  },
-  {
     "id": "t619695",
     "name": "Osvěžovač vzduchu elektrický Air Wick",
     "desc": "19 ml",
@@ -7988,9 +6910,9 @@
     "category": "Vůně do bytu",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/elektricky-osvezovac-airwick_170_340.jpg",
-    "priceNew": 119.9,
-    "priceOld": 167.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 99.9,
+    "priceOld": 139.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/osvezovac-vzduchu-elektricky-air-wick"
   },
   {
@@ -8006,20 +6928,6 @@
     "priceOld": 125.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/osvezovac-vzduchu-freshmatic-air-wick-napln"
-  },
-  {
-    "id": "t10dea6",
-    "name": "Osvěžovač vzduchu Penny",
-    "desc": "150 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Vůně do bytu",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/osvezovac-vzduchu-penny_170_340.png",
-    "priceNew": 14.9,
-    "priceOld": 20.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/osvezovac-vzduchu-penny"
   },
   {
     "id": "tdc198e",
@@ -8060,7 +6968,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/panenka-veprova_170_340.jpg",
     "priceNew": 149.9,
     "priceOld": 209.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/panenka-veprova"
   },
   {
@@ -8072,9 +6980,9 @@
     "category": "Fólie a obaly",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/papir-na-peceni-alufix_170_340.jpg",
-    "priceNew": 37.9,
-    "priceOld": 53.06,
-    "validUntil": "2026-04-14",
+    "priceNew": 109.9,
+    "priceOld": 153.86,
+    "validUntil": "",
     "url": "https://www.kupi.cz/sleva/papir-na-peceni-alufix"
   },
   {
@@ -8120,20 +7028,6 @@
     "url": "https://www.kupi.cz/sleva/paprika-cervena"
   },
   {
-    "id": "t1880d8",
-    "name": "Pařížský salát",
-    "desc": "100 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Saláty",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/parizsky-salat_170_340.png",
-    "priceNew": 12.9,
-    "priceOld": 18.06,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/parizsky-salat"
-  },
-  {
     "id": "tc4a952",
     "name": "Paštika Májka Hamé",
     "desc": "45 g",
@@ -8156,9 +7050,9 @@
     "category": "Paštiky",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/pastiky-hame_170_340.png",
-    "priceNew": 12.9,
-    "priceOld": 18.06,
-    "validUntil": "2026-04-14",
+    "priceNew": 14.9,
+    "priceOld": 20.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pastiky-hame"
   },
   {
@@ -8188,6 +7082,20 @@
     "priceOld": 88.06,
     "validUntil": "2026-04-30",
     "url": "https://www.kupi.cz/sleva/pate-rio-mare"
+  },
+  {
+    "id": "t388646",
+    "name": "Pikantní sýrová pomazánka s česnekem Varmuža",
+    "desc": "400 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Pomazánky",
+    "emoji": "🧀",
+    "image": "https://img.kupi.cz/kupi/thumbs/pikantni-syrova-pomazanka-s-cesnekem-varmuza_170_340.jpg",
+    "priceNew": 62.61,
+    "priceOld": 87.65,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/pikantni-syrova-pomazanka-s-cesnekem-varmuza"
   },
   {
     "id": "t391926",
@@ -8226,9 +7134,9 @@
     "category": "Pivo",
     "emoji": "🍺",
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetle-vycepni-10-branik-1_170_340.jpg",
-    "priceNew": 37.9,
-    "priceOld": 53.06,
-    "validUntil": "2026-04-14",
+    "priceNew": 9.9,
+    "priceOld": 13.86,
+    "validUntil": "2026-04-28",
     "url": "https://www.kupi.cz/sleva/pivo-svetle-vycepni-10-branik"
   },
   {
@@ -8240,9 +7148,9 @@
     "category": "Pivo",
     "emoji": "🍺",
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetle-vycepni-10-staropramen_170_340.jpg",
-    "priceNew": 9.9,
-    "priceOld": 13.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 11.5,
+    "priceOld": 16.1,
+    "validUntil": "2026-04-30",
     "url": "https://www.kupi.cz/sleva/pivo-svetle-vycepni-10-staropramen"
   },
   {
@@ -8270,7 +7178,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetle-vycepni-original-10-gambrinus_170_340.png",
     "priceNew": 12.9,
     "priceOld": 18.06,
-    "validUntil": "2026-04-19",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pivo-svetle-vycepni-original-10-gambrinus"
   },
   {
@@ -8288,20 +7196,6 @@
     "url": "https://www.kupi.cz/sleva/pivo-svetle-vycepni-razna-10-radegast"
   },
   {
-    "id": "t9dac32",
-    "name": "Pivo světlý ležák 11° Bernard",
-    "desc": "0.5 l",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Pivo",
-    "emoji": "🍺",
-    "image": "https://img.kupi.cz/kupi/thumbs/pivo-bernard-11-svetly-lezak_170_340.jpg",
-    "priceNew": 15.9,
-    "priceOld": 22.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-bernard"
-  },
-  {
     "id": "t724762",
     "name": "Pivo světlý ležák 11° Excelent",
     "desc": "0.5 l",
@@ -8312,8 +7206,22 @@
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-11-excelent_170_340.png",
     "priceNew": 12.9,
     "priceOld": 18.06,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-excelent"
+  },
+  {
+    "id": "tad7dcb",
+    "name": "Pivo světlý ležák 11° Medium Starobrno",
+    "desc": "0.5 l",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Pivo",
+    "emoji": "🍺",
+    "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-11-medium-starobrno_170_340.png",
+    "priceNew": 12.9,
+    "priceOld": 18.06,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-medium-starobrno"
   },
   {
     "id": "te59bcf",
@@ -8340,7 +7248,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-11-serak-holba_170_340.jpg",
     "priceNew": 11.9,
     "priceOld": 16.66,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-15",
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-serak-holba"
   },
   {
@@ -8354,13 +7262,13 @@
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-11-svijansky-maz-svijany_170_340.png",
     "priceNew": 10.9,
     "priceOld": 15.26,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-11-svijansky-maz-svijany"
   },
   {
     "id": "t094bec",
     "name": "Pivo světlý ležák 11° Zlatopramen",
-    "desc": "0.5 l",
+    "desc": "1.5 l",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Pivo",
@@ -8380,10 +7288,24 @@
     "category": "Pivo",
     "emoji": "🍺",
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-12-krusovice_170_340.jpg",
-    "priceNew": 36.9,
-    "priceOld": 51.66,
-    "validUntil": "2026-04-14",
+    "priceNew": 17.9,
+    "priceOld": 25.06,
+    "validUntil": "2026-04-28",
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-12-krusovice"
+  },
+  {
+    "id": "t971e13",
+    "name": "Pivo světlý ležák 12° Maestic Argus",
+    "desc": "0.5 l",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Pivo",
+    "emoji": "🍺",
+    "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-12-maestic-argus-1_170_340.jpg",
+    "priceNew": 8.9,
+    "priceOld": 12.46,
+    "validUntil": "2026-04-19",
+    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-12-maestic-argus"
   },
   {
     "id": "tecf37b",
@@ -8396,7 +7318,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-12-ryze-horka-radegast_170_340.png",
     "priceNew": 19.9,
     "priceOld": 27.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-19",
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-12-ryze-horka-radegast"
   },
   {
@@ -8410,7 +7332,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-12-zlaty-bazant_170_340.png",
     "priceNew": 12.9,
     "priceOld": 18.06,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-12-zlaty-bazant"
   },
   {
@@ -8424,7 +7346,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-heineken_170_340.png",
     "priceNew": 19.9,
     "priceOld": 27.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-heineken"
   },
   {
@@ -8436,10 +7358,24 @@
     "category": "Pivo",
     "emoji": "🍺",
     "image": "https://img.kupi.cz/kupi/thumbs/pivo-svetly-lezak-original-budweiser-budvar_170_340.jpg",
-    "priceNew": 14.9,
-    "priceOld": 20.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 18.9,
+    "priceOld": 26.46,
+    "validUntil": "2026-04-30",
     "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-original-budweiser-budvar"
+  },
+  {
+    "id": "t94a7dd",
+    "name": "Pivo světlý ležák Premium Klášter",
+    "desc": "0.5 l",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Pivo",
+    "emoji": "🍺",
+    "image": "https://img.kupi.cz/kupi/thumbs/pivo-klaster-premium_170_340.jpg",
+    "priceNew": 11.9,
+    "priceOld": 16.66,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/pivo-svetly-lezak-premium-klaster"
   },
   {
     "id": "t8079b7",
@@ -8472,7 +7408,7 @@
   {
     "id": "td1f404",
     "name": "Pizza mražená Ristorante Dr. Oetker",
-    "desc": "320 g",
+    "desc": "355 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Mražená pizza",
@@ -8484,9 +7420,23 @@
     "url": "https://www.kupi.cz/sleva/pizza-mrazena-ristorante-dr-oetker"
   },
   {
+    "id": "t97e44f",
+    "name": "Pleny dětské Pampers Premium Care",
+    "desc": "72 ks",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Pleny a vlhčené ubrousky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/pleny-detske-pampers-premium-care_170_340.png",
+    "priceNew": 249.0,
+    "priceOld": 348.6,
+    "validUntil": "2026-04-30",
+    "url": "https://www.kupi.cz/sleva/pleny-detske-pampers-premium-care"
+  },
+  {
     "id": "t1c26c2",
     "name": "Pletenec plněný",
-    "desc": "78 g",
+    "desc": "84 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Sladké pečivo",
@@ -8498,17 +7448,31 @@
     "url": "https://www.kupi.cz/sleva/pletenec-plneny"
   },
   {
+    "id": "tb7ebe6",
+    "name": "Pohlcovač vlhkosti Aero 360° Ceresit",
+    "desc": "1 ks",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Ostatní potřeby pro domácnost",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/pohlcovac-vlhkosti-aero-360-ceresit_170_340.png",
+    "priceNew": 369.0,
+    "priceOld": 516.6,
+    "validUntil": "",
+    "url": "https://www.kupi.cz/sleva/pohlcovac-vlhkosti-aero-360-ceresit"
+  },
+  {
     "id": "ta0f1e3",
     "name": "Pohlcovač vlhkosti Aero 360° Ceresit - náhradní tablety",
-    "desc": "450 g",
+    "desc": "2 ks",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Ostatní potřeby pro domácnost",
     "emoji": "🛒",
     "image": "https://img.kupi.cz/kupi/thumbs/pohlcovac-vlhkosti-aero-360-ceresit-nahradni-tablety_170_340.jpg",
-    "priceNew": 299.0,
-    "priceOld": 418.6,
-    "validUntil": "2026-04-14",
+    "priceNew": 239.9,
+    "priceOld": 335.86,
+    "validUntil": "",
     "url": "https://www.kupi.cz/sleva/pohlcovac-vlhkosti-aero-360-ceresit-nahradni-tablety"
   },
   {
@@ -8550,7 +7514,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/pomazanka-cottage-krajanek-1_170_340.jpg",
     "priceNew": 19.9,
     "priceOld": 27.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-30",
     "url": "https://www.kupi.cz/sleva/pomazanka-cottage-krajanek"
   },
   {
@@ -8576,9 +7540,9 @@
     "category": "Citrusové plody",
     "emoji": "🍊",
     "image": "https://img.kupi.cz/kupi/thumbs/pomerance-billa-bonvia_170_340.jpg",
-    "priceNew": 26.9,
-    "priceOld": 37.66,
-    "validUntil": "2026-04-14",
+    "priceNew": 24.9,
+    "priceOld": 34.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/pomerance-billa-bonvia"
   },
   {
@@ -8598,7 +7562,7 @@
   {
     "id": "t4dedbc",
     "name": "Prací gel Ariel",
-    "desc": "4,5 l",
+    "desc": "3,15 l",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Prací prostředky",
@@ -8608,6 +7572,20 @@
     "priceOld": 488.6,
     "validUntil": "2026-04-30",
     "url": "https://www.kupi.cz/sleva/praci-gel-ariel"
+  },
+  {
+    "id": "te7e1e9",
+    "name": "Prací gel Gold Passion",
+    "desc": "",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Prací prostředky",
+    "emoji": "🧺",
+    "image": "https://img.kupi.cz/kupi/thumbs/praci-gel-gold-passion_170_340.jpg",
+    "priceNew": 199.0,
+    "priceOld": 278.6,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/praci-gel-gold-passion"
   },
   {
     "id": "t5509a7",
@@ -8626,15 +7604,15 @@
   {
     "id": "te2e669",
     "name": "Prací gel Perwoll",
-    "desc": "1 ks",
+    "desc": "2 ks",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Prací prostředky",
     "emoji": "🧺",
     "image": "https://img.kupi.cz/kupi/thumbs/praci-gel-perwoll-1_170_340.png",
-    "priceNew": 279.9,
-    "priceOld": 391.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 329.9,
+    "priceOld": 461.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/praci-gel-perwoll"
   },
   {
@@ -8722,20 +7700,6 @@
     "url": "https://www.kupi.cz/sleva/pripravek-proti-hmyzu-sprej-biolit"
   },
   {
-    "id": "t8fa2bd",
-    "name": "Přípravek proti létajícímu a lezoucímu hmyzu sprej Biolit",
-    "desc": "300 ml",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Prostředky proti hmyzu",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/pripravek-proti-lezoucimu-a-letajicimu-hmyzu-biolit_170_340.jpg",
-    "priceNew": 72.9,
-    "priceOld": 102.06,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pripravek-proti-letajicimu-a-lezoucimu-hmyzu-sprej-biolit"
-  },
-  {
     "id": "t3b3f44",
     "name": "Přírodní voda De Montage",
     "desc": "0.5 l",
@@ -8762,6 +7726,20 @@
     "priceOld": 18.06,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/prirodni-voda-magnesia"
+  },
+  {
+    "id": "t831b41",
+    "name": "Prosecco Laurenza DOC",
+    "desc": "0.75 l",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Sekt",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/prosecco-laurenza-doc_170_340.jpg",
+    "priceNew": 49.9,
+    "priceOld": 69.86,
+    "validUntil": "2026-04-16",
+    "url": "https://www.kupi.cz/sleva/prosecco-laurenza-doc"
   },
   {
     "id": "t3f35a0",
@@ -8806,20 +7784,6 @@
     "url": "https://www.kupi.cz/sleva/prostredek-na-nadobi-jar"
   },
   {
-    "id": "t5c612a",
-    "name": "Pytle na odpadky 35 l Fino",
-    "desc": "35 l",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Fólie a obaly",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/odpadkove-pytle-35-l-fino_170_340.jpg",
-    "priceNew": 17.9,
-    "priceOld": 25.06,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/pytle-na-odpadky-35-l-fino"
-  },
-  {
     "id": "tcaca60",
     "name": "Pytle na odpadky 60 l Fino",
     "desc": "60 l",
@@ -8836,15 +7800,15 @@
   {
     "id": "tc9aa31",
     "name": "Rajčata cherry",
-    "desc": "0.1 kg",
+    "desc": "0.2 kg",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Rajčata a papriky",
     "emoji": "🍅",
     "image": "https://img.kupi.cz/kupi/thumbs/rajcata-cherry-1_170_340.jpg",
-    "priceNew": 11.9,
-    "priceOld": 16.66,
-    "validUntil": "2026-04-14",
+    "priceNew": 59.9,
+    "priceOld": 83.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/rajcata-cherry"
   },
   {
@@ -8874,6 +7838,20 @@
     "priceOld": 69.86,
     "validUntil": "2026-04-26",
     "url": "https://www.kupi.cz/sleva/repkovy-olej"
+  },
+  {
+    "id": "t6ab2cb",
+    "name": "Řízky vepřové z kýty Vocílka",
+    "desc": "1 kg",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Vepřové maso",
+    "emoji": "🥩",
+    "image": "https://img.kupi.cz/kupi/thumbs/veprovy-steak-z-kyty-vocilka-1_170_340.jpg",
+    "priceNew": 119.9,
+    "priceOld": 167.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/rizky-veprove-z-kyty-vocilka"
   },
   {
     "id": "t53e95c",
@@ -8906,15 +7884,15 @@
   {
     "id": "t3e793c",
     "name": "Rýže parboiled Vitana",
-    "desc": "400 g",
+    "desc": "800 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Rýže",
     "emoji": "🍚",
     "image": "https://img.kupi.cz/kupi/thumbs/ryze-parboiled-vitana_170_340.png",
-    "priceNew": 39.9,
-    "priceOld": 55.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 44.9,
+    "priceOld": 62.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/ryze-parboiled-vitana"
   },
   {
@@ -8940,9 +7918,9 @@
     "category": "Konzervované maso a hotová jídla",
     "emoji": "🥩",
     "image": "https://img.kupi.cz/kupi/thumbs/salat-insalatissime-rio-mare_170_340.jpg",
-    "priceNew": 149.9,
-    "priceOld": 209.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 124.9,
+    "priceOld": 174.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/salat-insalatissime-rio-mare"
   },
   {
@@ -8974,6 +7952,20 @@
     "url": "https://www.kupi.cz/sleva/salat-ledovy-albert"
   },
   {
+    "id": "t43388b",
+    "name": "Salát pochoutkový",
+    "desc": "100 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Saláty",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/salat-pochoutkovy-1_170_340.png",
+    "priceNew": 17.9,
+    "priceOld": 25.06,
+    "validUntil": "2026-04-18",
+    "url": "https://www.kupi.cz/sleva/salat-pochoutkovy"
+  },
+  {
     "id": "tdea84c",
     "name": "Salát rybí v majonéze Varmuža",
     "desc": "150 g",
@@ -9002,6 +7994,20 @@
     "url": "https://www.kupi.cz/sleva/salat-s-tunakem-giana"
   },
   {
+    "id": "t804689",
+    "name": "Salát vlašský",
+    "desc": "100 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Saláty",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/salat-vlassky_170_340.jpg",
+    "priceNew": 13.9,
+    "priceOld": 19.46,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/salat-vlassky"
+  },
+  {
     "id": "t772a97",
     "name": "Sardinky Giana",
     "desc": "125 g",
@@ -9014,20 +8020,6 @@
     "priceOld": 32.06,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/sardinky-giana"
-  },
-  {
-    "id": "t123c71",
-    "name": "Schůdky",
-    "desc": "1 ks",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Dílna",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/schudky-1_170_340.png",
-    "priceNew": 449.0,
-    "priceOld": 628.6,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/schudky"
   },
   {
     "id": "t1a8234",
@@ -9054,7 +8046,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/sirup-yo_170_340.jpg",
     "priceNew": 49.9,
     "priceOld": 69.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-19",
     "url": "https://www.kupi.cz/sleva/sirup-yo"
   },
   {
@@ -9072,6 +8064,20 @@
     "url": "https://www.kupi.cz/sleva/slunecnicovy-olej-penny"
   },
   {
+    "id": "t72d217",
+    "name": "Směs na krtkův dort Dr. Oetker",
+    "desc": "410 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Instantní jídla a směsi",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/smes-na-krtkuv-dort-dr-oetker-1_170_340.jpg",
+    "priceNew": 59.9,
+    "priceOld": 83.86,
+    "validUntil": "2026-04-19",
+    "url": "https://www.kupi.cz/sleva/smes-na-krtkuv-dort-dr-oetker"
+  },
+  {
     "id": "tccf425",
     "name": "Smetana ke šlehání Mlékárna Kunín 31%",
     "desc": "200 ml",
@@ -9086,6 +8092,20 @@
     "url": "https://www.kupi.cz/sleva/smetana-ke-slehani-mlekarna-kunin-31"
   },
   {
+    "id": "t876239",
+    "name": "Sprchový gel Nivea",
+    "desc": "250 ml",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Péče o tělo",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/sprchovy-gel-nivea_170_340.png",
+    "priceNew": 74.9,
+    "priceOld": 104.86,
+    "validUntil": "2026-04-26",
+    "url": "https://www.kupi.cz/sleva/sprchovy-gel-nivea"
+  },
+  {
     "id": "t9fa276",
     "name": "Šunka od kosti Pure Pikok",
     "desc": "100 g",
@@ -9098,6 +8118,20 @@
     "priceOld": 34.86,
     "validUntil": "2026-04-15",
     "url": "https://www.kupi.cz/sleva/sunka-od-kosti-pure-pikok"
+  },
+  {
+    "id": "t00abd1",
+    "name": "Šunka pražská od kosti nejvyšší jakosti LE&CO",
+    "desc": "100 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Šunky a salámy",
+    "emoji": "🥩",
+    "image": "https://img.kupi.cz/kupi/thumbs/sunka-prazska-od-kosti-le-co-1_170_340.png",
+    "priceNew": 19.9,
+    "priceOld": 27.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/sunka-prazska-od-kosti-nejvyssi-jakosti-le-co"
   },
   {
     "id": "t60bac4",
@@ -9136,15 +8170,15 @@
     "category": "Ostatní lahůdky",
     "emoji": "🍅",
     "image": "https://img.kupi.cz/kupi/thumbs/rajcata-susena-kaiser-franz-josef_170_340.jpg",
-    "priceNew": 36.9,
-    "priceOld": 51.66,
-    "validUntil": "2026-04-14",
+    "priceNew": 39.9,
+    "priceOld": 55.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/susena-rajcata-v-oleji-exclusive-franz-josef-kaiser"
   },
   {
     "id": "t74ec94",
     "name": "Sušenky BeBe Dobré ráno Opavia",
-    "desc": "50 g",
+    "desc": "50.6 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Piškoty a sušenky",
@@ -9170,20 +8204,6 @@
     "url": "https://www.kupi.cz/sleva/susenky-biscoff-lotus"
   },
   {
-    "id": "ta0589a",
-    "name": "Sušenky Koka Zlaté Opavia",
-    "desc": "180 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Piškoty a sušenky",
-    "emoji": "🍪",
-    "image": "https://img.kupi.cz/kupi/thumbs/susenky-koka-zlate-opavia_170_340.jpg",
-    "priceNew": 26.9,
-    "priceOld": 37.66,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/susenky-koka-zlate-opavia"
-  },
-  {
     "id": "td6e29d",
     "name": "Sushi box",
     "desc": "1 ks",
@@ -9198,6 +8218,20 @@
     "url": "https://www.kupi.cz/sleva/sushi-box"
   },
   {
+    "id": "t68f2a5",
+    "name": "Svačinka zeleninový tvaroh Milko",
+    "desc": "140 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Pomazánky",
+    "emoji": "🧀",
+    "image": "https://img.kupi.cz/kupi/thumbs/svacinka-zeleninovy-tvaroh-milko_170_340.jpg",
+    "priceNew": 18.5,
+    "priceOld": 25.9,
+    "validUntil": "2026-04-26",
+    "url": "https://www.kupi.cz/sleva/svacinka-zeleninovy-tvaroh-milko"
+  },
+  {
     "id": "tab7ea6",
     "name": "Sýr Camembert na gril Grill Party",
     "desc": "450 g",
@@ -9206,10 +8240,24 @@
     "category": "Sýry",
     "emoji": "🧀",
     "image": "https://img.kupi.cz/kupi/thumbs/syr-camembert-na-gril-grill-party_170_340.jpg",
-    "priceNew": 99.9,
-    "priceOld": 139.86,
-    "validUntil": "2026-04-28",
+    "priceNew": 89.9,
+    "priceOld": 125.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/syr-camembert-na-gril-grill-party"
+  },
+  {
+    "id": "t2bd1e5",
+    "name": "Sýr Cottage Jihočeský Madeta",
+    "desc": "150 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Sýry",
+    "emoji": "🧀",
+    "image": "https://img.kupi.cz/kupi/thumbs/syr-cottage-jihocesky-madeta-2_170_340.png",
+    "priceNew": 65.78,
+    "priceOld": 92.09,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/syr-cottage-jihocesky-madeta"
   },
   {
     "id": "tb942af",
@@ -9248,9 +8296,9 @@
     "category": "Sýry",
     "emoji": "🧀",
     "image": "https://img.kupi.cz/kupi/thumbs/syr-hermelin-kral-syru_170_340.png",
-    "priceNew": 49.9,
-    "priceOld": 69.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 29.9,
+    "priceOld": 41.86,
+    "validUntil": "2026-04-19",
     "url": "https://www.kupi.cz/sleva/syr-hermelin-kral-syru"
   },
   {
@@ -9262,9 +8310,9 @@
     "category": "Sýry",
     "emoji": "🧀",
     "image": "https://img.kupi.cz/kupi/thumbs/syr-hermelin-sedlcansky_170_340.png",
-    "priceNew": 529.0,
-    "priceOld": 740.6,
-    "validUntil": "2026-04-14",
+    "priceNew": 28.9,
+    "priceOld": 40.46,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/syr-hermelin-sedlcansky"
   },
   {
@@ -9282,18 +8330,46 @@
     "url": "https://www.kupi.cz/sleva/syr-obalovany-mrazeny-nowaco"
   },
   {
+    "id": "t57ec92",
+    "name": "Sýr tavený Veselá kráva",
+    "desc": "120 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Tavené sýry a žervé",
+    "emoji": "🧀",
+    "image": "https://img.kupi.cz/kupi/thumbs/syr-taveny-vesela-krava-1_170_340.png",
+    "priceNew": 52.9,
+    "priceOld": 74.06,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/syr-taveny-vesela-krava"
+  },
+  {
     "id": "t8b9063",
     "name": "Sýr tvarůžky olomoucké A.W.",
-    "desc": "167 g",
+    "desc": "100 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Sýry",
     "emoji": "🧀",
     "image": "https://img.kupi.cz/kupi/thumbs/olomoucke-tvaruzky_170_340.jpg",
-    "priceNew": 49.9,
-    "priceOld": 69.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 27.9,
+    "priceOld": 39.06,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/syr-tvaruzky-olomoucke-a-w"
+  },
+  {
+    "id": "tbb686d",
+    "name": "Sýry Président",
+    "desc": "100 g",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Sýry",
+    "emoji": "🧀",
+    "image": "https://img.kupi.cz/kupi/thumbs/syry-president_170_340.jpg",
+    "priceNew": 31.9,
+    "priceOld": 44.66,
+    "validUntil": "2026-05-05",
+    "url": "https://www.kupi.cz/sleva/syry-president"
   },
   {
     "id": "t071e9c",
@@ -9324,20 +8400,6 @@
     "url": "https://www.kupi.cz/sleva/tatarsky-biftek-dobre-maso"
   },
   {
-    "id": "t4293bd",
-    "name": "Těstoviny Barilla",
-    "desc": "500 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Těstoviny",
-    "emoji": "🍝",
-    "image": "https://img.kupi.cz/kupi/thumbs/testoviny-barilla-1_170_340.jpg",
-    "priceNew": 27.9,
-    "priceOld": 39.06,
-    "validUntil": "2026-04-21",
-    "url": "https://www.kupi.cz/sleva/testoviny-barilla"
-  },
-  {
     "id": "t7ae439",
     "name": "Těstoviny Panzani",
     "desc": "500 g",
@@ -9350,20 +8412,6 @@
     "priceOld": 69.86,
     "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/testoviny-panzani"
-  },
-  {
-    "id": "t9bf3ff",
-    "name": "Těstoviny plněné  mražené Pelmeni Povar",
-    "desc": "400 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Hotová mražená jídla",
-    "emoji": "🍲",
-    "image": "https://img.kupi.cz/kupi/thumbs/testoviny-plnene-mrazene-pelmeni-povar_170_340.jpg",
-    "priceNew": 44.9,
-    "priceOld": 62.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/testoviny-plnene-mrazene-pelmeni-povar"
   },
   {
     "id": "t3bc7c2",
@@ -9394,20 +8442,6 @@
     "url": "https://www.kupi.cz/sleva/toaletni-papir-3vrstvy-deluxe-zewa"
   },
   {
-    "id": "t9af507",
-    "name": "Toaletní papír 3vrstvý Harmony",
-    "desc": "8 ks",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Toaletní papír",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/toaletni-papir-3vrstvy-harmony-1_170_340.jpg",
-    "priceNew": 49.9,
-    "priceOld": 69.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/toaletni-papir-3vrstvy-harmony"
-  },
-  {
     "id": "tf57d68",
     "name": "Toaletní papír 3vrstvý Tento",
     "desc": "8 ks",
@@ -9424,21 +8458,21 @@
   {
     "id": "tfc5c96",
     "name": "Tortilla Santa Maria",
-    "desc": "200 g",
+    "desc": "320 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Ostatní pečivo",
     "emoji": "🍞",
     "image": "https://img.kupi.cz/kupi/thumbs/tortilla-santa-maria-1_170_340.jpg",
-    "priceNew": 53.9,
-    "priceOld": 75.46,
-    "validUntil": "2026-04-14",
+    "priceNew": 67.9,
+    "priceOld": 95.06,
+    "validUntil": "",
     "url": "https://www.kupi.cz/sleva/tortilla-santa-maria"
   },
   {
     "id": "t2a2ff3",
     "name": "Toustový chléb Sandwich Soft Ölz",
-    "desc": "375 g",
+    "desc": "750 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Chléb",
@@ -9446,22 +8480,8 @@
     "image": "https://img.kupi.cz/kupi/thumbs/toustovy-chleb-sandwich-soft-olz_170_340.png",
     "priceNew": 52.9,
     "priceOld": 74.06,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-05-05",
     "url": "https://www.kupi.cz/sleva/toustovy-chleb-sandwich-soft-olz"
-  },
-  {
-    "id": "tddde6f",
-    "name": "Tousty ďábelské Hamé",
-    "desc": "120 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Pomazánky",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/tousty-dabelske-hame_170_340.png",
-    "priceNew": 25.9,
-    "priceOld": 36.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/tousty-dabelske-hame"
   },
   {
     "id": "t4fcd46",
@@ -9528,15 +8548,15 @@
     "category": "Konzervované ryby",
     "emoji": "🐟",
     "image": "https://img.kupi.cz/kupi/thumbs/tunak-rio-mare-2_170_340.jpg",
-    "priceNew": 149.9,
-    "priceOld": 209.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 109.9,
+    "priceOld": 153.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/tunak-rio-mare"
   },
   {
     "id": "t7e0ab5",
     "name": "Tuňák steak v oleji Exclusive Franz Josef Kaiser",
-    "desc": "170 g",
+    "desc": "150 g",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Konzervované ryby",
@@ -9584,9 +8604,9 @@
     "category": "Čokoládové tyčinky",
     "emoji": "🍫",
     "image": "https://img.kupi.cz/kupi/thumbs/tycinka-margot-orion-1_170_340.jpg",
-    "priceNew": 12.5,
-    "priceOld": 17.5,
-    "validUntil": "2026-04-14",
+    "priceNew": 12.9,
+    "priceOld": 18.06,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/tycinka-margot-orion"
   },
   {
@@ -9640,24 +8660,10 @@
     "category": "Vepřové maso",
     "emoji": "🥩",
     "image": "https://img.kupi.cz/kupi/thumbs/veprova-krkovice-bez-kosti_170_340.jpg",
-    "priceNew": 69.9,
-    "priceOld": 97.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 89.9,
+    "priceOld": 125.86,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/veprova-krkovice-bez-kosti"
-  },
-  {
-    "id": "t6a5c56",
-    "name": "Vepřová krkovice bez kosti Tesco",
-    "desc": "1 kg",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Vepřové maso",
-    "emoji": "🥩",
-    "image": "https://img.kupi.cz/kupi/thumbs/veprova-krkovice-bez-kosti-tesco_170_340.png",
-    "priceNew": 79.9,
-    "priceOld": 111.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/veprova-krkovice-bez-kosti-tesco"
   },
   {
     "id": "t53b28b",
@@ -9668,9 +8674,9 @@
     "category": "Vepřové maso",
     "emoji": "🥩",
     "image": "https://img.kupi.cz/kupi/thumbs/veprova-kyta-bez-kosti_170_340.jpg",
-    "priceNew": 64.9,
-    "priceOld": 90.86,
-    "validUntil": "2026-04-14",
+    "priceNew": 83.9,
+    "priceOld": 117.46,
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/veprova-kyta-bez-kosti"
   },
   {
@@ -9702,46 +8708,46 @@
     "url": "https://www.kupi.cz/sleva/veprova-plec-bez-kosti"
   },
   {
-    "id": "tb22100",
-    "name": "Vepřový bok bez kosti",
-    "desc": "1 kg",
+    "id": "t05a2f0",
+    "name": "Vína Brise de France",
+    "desc": "0.75 l",
     "store": "tesco",
     "storeName": "Tesco",
-    "category": "Vepřové maso",
-    "emoji": "🥩",
-    "image": "https://img.kupi.cz/kupi/thumbs/veprovy-bok-bez-kosti_170_340.jpg",
-    "priceNew": 95.9,
-    "priceOld": 134.26,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/veprovy-bok-bez-kosti"
+    "category": "Víno ostatní",
+    "emoji": "🍷",
+    "image": "https://img.kupi.cz/kupi/thumbs/vina-brise-de-france_170_340.jpg",
+    "priceNew": 84.9,
+    "priceOld": 118.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/vina-brise-de-france"
   },
   {
-    "id": "t5bf52f",
-    "name": "Vepřový bok s kostí",
-    "desc": "1 kg",
+    "id": "tefe8c5",
+    "name": "Vlhčené ubrousky na nábytek K-Classic",
+    "desc": "80 ks",
     "store": "tesco",
     "storeName": "Tesco",
-    "category": "Vepřové maso",
-    "emoji": "🥩",
-    "image": "https://img.kupi.cz/kupi/thumbs/veprovy-bok-s-kosti_170_340.jpg",
-    "priceNew": 99.9,
-    "priceOld": 139.86,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/veprovy-bok-s-kosti"
+    "category": "Úklidové pomůcky",
+    "emoji": "🛒",
+    "image": "https://img.kupi.cz/kupi/thumbs/vlhcene-ubrousky-na-nabytek-k-classic_170_340.jpg",
+    "priceNew": 19.9,
+    "priceOld": 27.86,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/vlhcene-ubrousky-na-nabytek-k-classic"
   },
   {
-    "id": "t95b29f",
-    "name": "Voda ochucená Ondrášovka",
+    "id": "tf85f26",
+    "name": "Vodka extra jemná St. Nicolaus",
     "desc": "0.5 l",
     "store": "tesco",
     "storeName": "Tesco",
-    "category": "Minerální a pramenité vody",
+    "category": "Vodka",
     "emoji": "💧",
-    "image": "https://img.kupi.cz/kupi/thumbs/voda-ochucena-ondrasovka_170_340.png",
-    "priceNew": 11.9,
-    "priceOld": 16.66,
+    "image": "https://img.kupi.cz/kupi/thumbs/vodka-extra-jemna-st-nicolaus_170_340.jpg",
+    "priceNew": 109.9,
+    "priceOld": 153.86,
     "validUntil": "2026-04-21",
-    "url": "https://www.kupi.cz/sleva/voda-ochucena-ondrasovka"
+    "url": "https://www.kupi.cz/sleva/vodka-extra-jemna-st-nicolaus"
   },
   {
     "id": "tb79711",
@@ -9758,9 +8764,23 @@
     "url": "https://www.kupi.cz/sleva/whiskey-honey-jack-daniels"
   },
   {
+    "id": "t60b56e",
+    "name": "Whiskey irská Honey Tullamore Dew",
+    "desc": "0.7 l",
+    "store": "tesco",
+    "storeName": "Tesco",
+    "category": "Whisky a bourbon",
+    "emoji": "🥃",
+    "image": "https://img.kupi.cz/kupi/thumbs/whiskey-irska-honey-tullamore-dew_170_340.png",
+    "priceNew": 299.0,
+    "priceOld": 418.6,
+    "validUntil": "2026-04-21",
+    "url": "https://www.kupi.cz/sleva/whiskey-irska-honey-tullamore-dew"
+  },
+  {
     "id": "tbc1992",
     "name": "Whiskey irská Tullamore Dew",
-    "desc": "0.5 l",
+    "desc": "0.7 l",
     "store": "tesco",
     "storeName": "Tesco",
     "category": "Whisky a bourbon",
@@ -9770,20 +8790,6 @@
     "priceOld": 558.6,
     "validUntil": "2026-04-30",
     "url": "https://www.kupi.cz/sleva/whiskey-irska-tullamore-dew"
-  },
-  {
-    "id": "t6696c4",
-    "name": "Zavináče",
-    "desc": "100 g",
-    "store": "tesco",
-    "storeName": "Tesco",
-    "category": "Ostatní lahůdky",
-    "emoji": "🛒",
-    "image": "https://img.kupi.cz/kupi/thumbs/zavinace-1_170_340.png",
-    "priceNew": 18.9,
-    "priceOld": 26.46,
-    "validUntil": "2026-04-14",
-    "url": "https://www.kupi.cz/sleva/zavinace"
   },
   {
     "id": "t3175d5",
@@ -9838,7 +8844,7 @@
     "image": "https://img.kupi.cz/kupi/thumbs/zmrzlina-ve-vanicce-carte-dor-algida_170_340.png",
     "priceNew": 64.9,
     "priceOld": 90.86,
-    "validUntil": "2026-04-14",
+    "validUntil": "2026-04-21",
     "url": "https://www.kupi.cz/sleva/zmrzlina-ve-vanicce-carte-dor-algida"
   },
   {
