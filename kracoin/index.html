@@ -6,736 +6,640 @@
   <title>Kracoin — $KRA</title>
   <meta name="description" content="Kracoin ($KRA) — The greenest coin on Solana.">
   <link rel="icon" type="image/png" href="images/logo-coin.png">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0a0a0a;
-      --bg2: #111110;
-      --cream: #e8e4df;
-      --muted: #7a7570;
-      --accent: #c9a84c;
-      --accent2: #e8cc6a;
-      --green: #4a9e5c;
-      --text: #f5f0eb;
+      --bg: #f6f4f0;
+      --bg2: #edeae4;
+      --dark: #1a1a18;
+      --dark2: #0e1a0e;
+      --green: #1d6b35;
+      --green-light: #27a04b;
+      --gold: #c4982a;
+      --gold-light: #e8b830;
+      --muted: #8a857d;
+      --text: #1a1a18;
+      --card: #ffffff;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       background: var(--bg);
       color: var(--text);
-      cursor: none;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    ::selection {
-      background: var(--accent);
-      color: var(--bg);
-    }
+    ::selection { background: var(--green); color: #fff; }
 
-    /* Custom cursor */
-    .cursor-dot {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.1s;
-      mix-blend-mode: difference;
-    }
-
-    .cursor-ring {
-      position: fixed;
-      width: 36px;
-      height: 36px;
-      border: 1.5px solid var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transition: all 0.15s ease-out;
-      mix-blend-mode: difference;
-    }
-
-    .cursor-ring.hover {
-      width: 60px;
-      height: 60px;
-      border-color: var(--accent2);
-      opacity: 0.6;
-    }
-
-    @media (max-width: 768px) {
-      .cursor-dot, .cursor-ring { display: none; }
-      body { cursor: auto; }
-    }
+    a { text-decoration: none; }
 
     /* Nav */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      padding: 1.5rem 3rem;
+      padding: 1rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 100;
-      mix-blend-mode: difference;
+      backdrop-filter: blur(16px);
+      background: rgba(246, 244, 240, 0.85);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .nav-logo {
-      font-family: 'Space Grotesk', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .nav-logo span {
       font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--text);
-      text-decoration: none;
+      font-size: 1rem;
+      color: var(--dark);
       letter-spacing: -0.02em;
     }
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 1.5rem;
       align-items: center;
     }
 
     .nav-links a {
       color: var(--muted);
-      text-decoration: none;
       font-size: 0.85rem;
-      font-weight: 400;
+      font-weight: 500;
       transition: color 0.3s;
-      letter-spacing: 0.02em;
     }
 
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover { color: var(--dark); }
 
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
+    .nav-buy {
+      background: var(--green);
+      color: #fff !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      transition: all 0.3s;
+    }
+
+    .nav-buy:hover {
+      background: var(--green-light);
+      color: #fff !important;
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 640px) {
+      .nav-links a:not(.nav-buy) { display: none; }
     }
 
     /* Hero */
     .hero {
-      min-height: 100vh;
+      min-height: 100svh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0 3rem;
-      position: relative;
-    }
-
-    .hero-inner {
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
       align-items: center;
-      gap: 4rem;
-    }
-
-    .hero-text h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(3rem, 8vw, 7rem);
-      font-weight: 700;
-      line-height: 0.95;
-      letter-spacing: -0.04em;
-      margin-bottom: 2rem;
-    }
-
-    .hero-text h1 .accent { color: var(--accent); }
-
-    .hero-text p {
-      color: var(--muted);
-      font-size: 1.05rem;
-      font-weight: 300;
-      line-height: 1.7;
-      max-width: 480px;
-      margin-bottom: 2.5rem;
-    }
-
-    .hero-cta {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      background: var(--accent);
-      color: var(--bg);
-      text-decoration: none;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .hero-cta:hover {
-      background: var(--accent2);
-      transform: translateY(-2px);
-    }
-
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .hero-logo-img {
-      width: 340px;
-      height: 340px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 80px rgba(201, 168, 76, 0.15));
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 2.5rem;
-      right: 3rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-
-    .scroll-line {
-      width: 40px;
-      height: 1px;
-      background: var(--muted);
+      text-align: center;
+      padding: 6rem 1.5rem 3rem;
+      background: linear-gradient(180deg, #e8f5ec 0%, var(--bg) 60%);
       position: relative;
       overflow: hidden;
     }
 
-    .scroll-line::after {
-      content: '';
-      position: absolute;
-      left: -100%;
-      top: 0;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--card);
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--green);
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green-light);
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero-logo {
+      width: 140px;
+      height: 140px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-logo img {
       width: 100%;
       height: 100%;
-      background: var(--accent);
-      animation: scrollPulse 2s infinite;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 40px rgba(29, 107, 53, 0.15));
     }
 
-    @keyframes scrollPulse {
-      0% { left: -100%; }
-      100% { left: 100%; }
+    .hero h1 {
+      font-size: clamp(2.8rem, 10vw, 5.5rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.25rem;
     }
 
-    @media (max-width: 768px) {
-      .hero { padding: 0 1.5rem; }
-      .hero-inner { grid-template-columns: 1fr; text-align: center; }
-      .hero-text p { margin-left: auto; margin-right: auto; }
-      .hero-logo-img { width: 200px; height: 200px; }
-      .hero-visual { order: -1; }
-      .scroll-indicator { display: none; }
+    .hero h1 .green { color: var(--green); }
+
+    .hero p {
+      color: var(--muted);
+      font-size: clamp(1rem, 3vw, 1.15rem);
+      font-weight: 400;
+      line-height: 1.6;
+      max-width: 440px;
+      margin: 0 auto 2rem;
     }
 
-    /* Reveal animation */
+    .hero-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--green-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(29, 107, 53, 0.2);
+    }
+
+    .btn-secondary {
+      background: var(--card);
+      color: var(--dark);
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(0,0,0,0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Ticker strip */
+    .ticker-strip {
+      background: var(--dark2);
+      color: #fff;
+      padding: 0.9rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-content {
+      display: inline-block;
+      animation: ticker 20s linear infinite;
+    }
+
+    .ticker-content span {
+      display: inline-block;
+      margin-right: 3rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .ticker-content .gold { color: var(--gold-light); }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Bento grid */
+    .bento-section {
+      padding: 4rem 1.5rem;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .bento-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bento-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    }
+
+    .bento-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .bento-card.dark {
+      background: var(--dark2);
+      color: #fff;
+    }
+
+    .bento-card.dark .bento-label { color: var(--green-light); }
+    .bento-card.dark .bento-desc { color: rgba(255,255,255,0.5); }
+
+    .bento-card.green {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .bento-card.green .bento-label { color: rgba(255,255,255,0.7); }
+    .bento-card.green .bento-desc { color: rgba(255,255,255,0.6); }
+
+    .bento-card.gold-bg {
+      background: linear-gradient(135deg, #f9ecc8, #f5e0a0);
+      color: var(--dark);
+    }
+
+    .bento-card.gold-bg .bento-label { color: var(--gold); }
+
+    .bento-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.75rem;
+    }
+
+    .bento-title {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+    }
+
+    .bento-big {
+      font-size: clamp(2.2rem, 7vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .bento-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .bento-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-card { padding: 1.5rem 1.25rem; }
+    }
+
+    /* Steps */
+    .steps-section {
+      padding: 4rem 1.5rem 5rem;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .steps-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .steps-header h2 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .step-item {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      transition: all 0.3s;
+    }
+
+    .step-item:hover {
+      border-color: var(--green);
+    }
+
+    .step-num {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      border-radius: 12px;
+      background: var(--green);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .step-text h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.01em;
+    }
+
+    .step-text p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    /* CTA */
+    .cta-section {
+      margin: 0 1.5rem 4rem;
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+      background: var(--dark2);
+      border-radius: 24px;
+      padding: 4rem 2rem;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle, rgba(29, 107, 53, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(2rem, 7vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,0.5);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .cta-section .btn-primary {
+      position: relative;
+      background: var(--gold-light);
+      color: var(--dark);
+    }
+
+    .cta-section .btn-primary:hover {
+      background: var(--gold);
+      box-shadow: 0 8px 24px rgba(232, 184, 48, 0.25);
+    }
+
+    /* Footer */
+    footer {
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      line-height: 1.6;
+    }
+
+    /* Reveal */
     .reveal {
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(24px);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* Divider */
-    .divider {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 3rem;
-    }
-
-    .divider-line {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.2), transparent);
-    }
-
-    /* Section base */
-    .section {
-      padding: 8rem 3rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      font-weight: 500;
-    }
-
-    .section-heading {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
-    }
-
-    .section-sub {
-      color: var(--muted);
-      font-size: 1rem;
-      font-weight: 300;
-      line-height: 1.7;
-      max-width: 550px;
-    }
-
-    @media (max-width: 768px) {
-      .section { padding: 5rem 1.5rem; }
-    }
-
-    /* About */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      margin-top: 4rem;
-      align-items: start;
-    }
-
-    .about-left .about-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-    }
-
-    .about-left h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-    }
-
-    .about-left p {
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.8;
-      margin-bottom: 1rem;
-    }
-
-    .about-right {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .about-value {
-      padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .about-value:last-child { border-bottom: none; }
-
-    .about-value h4 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.01em;
-    }
-
-    .about-value p {
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 300;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-    }
-
-    /* Steps */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      margin-top: 4rem;
-      background: rgba(255,255,255,0.04);
-    }
-
-    .step {
-      padding: 3rem 2.5rem;
-      background: var(--bg);
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-    }
-
-    .step:hover {
-      background: var(--accent);
-    }
-
-    .step:hover .step-num,
-    .step:hover h3,
-    .step:hover p { color: var(--bg); }
-
-    .step-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 4rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.06);
-      line-height: 1;
-      margin-bottom: 2rem;
-      transition: color 0.5s;
-    }
-
-    .step h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      letter-spacing: -0.01em;
-      transition: color 0.5s;
-    }
-
-    .step p {
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 300;
-      line-height: 1.7;
-      transition: color 0.5s;
-    }
-
-    @media (max-width: 768px) {
-      .steps { grid-template-columns: 1fr; }
-    }
-
-    /* Tokenomics */
-    .token-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      margin-top: 4rem;
-      align-items: center;
-    }
-
-    .token-big {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      color: var(--accent);
-    }
-
-    .token-big-label {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: 0.75rem;
-      font-weight: 300;
-    }
-
-    .token-facts {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .token-fact {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .token-fact:last-child { border-bottom: none; padding-bottom: 0; }
-
-    .token-fact-label {
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 300;
-    }
-
-    .token-fact-value {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-    }
-
-    @media (max-width: 768px) {
-      .token-grid { grid-template-columns: 1fr; gap: 3rem; }
-    }
-
-    /* CTA */
-    .cta-section {
-      padding: 10rem 3rem;
-      text-align: center;
-      position: relative;
-    }
-
-    .cta-section h2 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: 2rem;
-    }
-
-    .cta-section h2 .accent { color: var(--accent); }
-
-    .cta-section p {
-      color: var(--muted);
-      font-size: 1rem;
-      font-weight: 300;
-      margin-bottom: 3rem;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      padding: 1.25rem 3.5rem;
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      text-decoration: none;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .cta-btn:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
-
-    @media (max-width: 768px) {
-      .cta-section { padding: 6rem 1.5rem; }
-    }
-
-    /* Footer */
-    footer {
-      padding: 2rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid rgba(255,255,255,0.04);
-      color: var(--muted);
-      font-size: 0.75rem;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    footer a:hover { color: var(--accent); }
-
-    @media (max-width: 768px) {
-      footer {
-        flex-direction: column;
-        gap: 0.5rem;
-        text-align: center;
-        padding: 1.5rem;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <div class="cursor-dot" id="cursorDot"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-
+  <!-- Nav -->
   <nav>
-    <a href="#" class="nav-logo">KRA</a>
+    <a href="#" class="nav-logo">
+      <img src="images/logo-coin.png" alt="KRA">
+      <span>Kracoin</span>
+    </a>
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#buy">Buy</a>
-      <a href="#tokenomics">Tokenomics</a>
-      <a href="https://pump.fun" target="_blank">Trade</a>
+      <a href="https://pump.fun" target="_blank" class="nav-buy">Buy $KRA</a>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <h1 class="reveal">The<br>greenest<br><span class="accent">coin.</span></h1>
-        <p class="reveal">Powered by nature, fueled by community. Kracoin is a meme with roots — no promises, just vibes and gains.</p>
-        <a href="https://pump.fun" target="_blank" class="hero-cta reveal">Buy $KRA</a>
-      </div>
-      <div class="hero-visual reveal">
-        <img src="images/logo-coin.png" alt="Kracoin" class="hero-logo-img">
-      </div>
+    <div class="hero-badge reveal">
+      <div class="dot"></div>
+      Live on Solana
     </div>
-    <div class="scroll-indicator">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
+    <div class="hero-logo reveal">
+      <img src="images/logo-coin.png" alt="Kracoin">
     </div>
-  </section>
-
-  <div class="divider"><div class="divider-line"></div></div>
-
-  <!-- About -->
-  <section class="section" id="about">
-    <div class="section-label reveal">About</div>
-    <h2 class="section-heading reveal">Not just another<br>memecoin.</h2>
-    <p class="section-sub reveal">Built different. Launched fair. Grown organically.</p>
-
-    <div class="about-grid">
-      <div class="about-left reveal">
-        <h3>Born from nature,<br>built for Solana.</h3>
-        <p>Kracoin is a community-driven token inspired by the power of the green leaf. No VC funding. No insider deals. No roadmap full of empty promises.</p>
-        <p>Just a coin, a community, and a belief that the greenest things grow the tallest.</p>
-      </div>
-      <div class="about-right">
-        <div class="about-value reveal">
-          <h4>Fair launch</h4>
-          <p>Launched on pump.fun — everyone had equal access from day one. No presale, no private rounds.</p>
-        </div>
-        <div class="about-value reveal">
-          <h4>Zero tax</h4>
-          <p>0% buy and sell tax. What you trade is what you get. No hidden fees, no dev wallet drain.</p>
-        </div>
-        <div class="about-value reveal">
-          <h4>Community first</h4>
-          <p>100% community owned. The KRA army decides where this goes. We're just along for the ride.</p>
-        </div>
-      </div>
+    <h1 class="reveal">The greenest<br><span class="green">coin.</span></h1>
+    <p class="reveal">Powered by nature, fueled by community. No promises — just vibes and gains.</p>
+    <div class="hero-buttons reveal">
+      <a href="https://pump.fun" target="_blank" class="btn-primary">Buy $KRA &#8599;</a>
+      <a href="#about" class="btn-secondary">Learn more</a>
     </div>
   </section>
 
-  <div class="divider"><div class="divider-line"></div></div>
+  <!-- Ticker -->
+  <div class="ticker-strip">
+    <div class="ticker-content">
+      <span>$KRA</span>
+      <span class="gold">Solana</span>
+      <span>Fair Launch</span>
+      <span class="gold">0% Tax</span>
+      <span>Community Owned</span>
+      <span class="gold">pump.fun</span>
+      <span>$KRA</span>
+      <span class="gold">Solana</span>
+      <span>Fair Launch</span>
+      <span class="gold">0% Tax</span>
+      <span>Community Owned</span>
+      <span class="gold">pump.fun</span>
+      <span>$KRA</span>
+      <span class="gold">Solana</span>
+      <span>Fair Launch</span>
+      <span class="gold">0% Tax</span>
+      <span>Community Owned</span>
+      <span class="gold">pump.fun</span>
+    </div>
+  </div>
 
-  <!-- How to buy -->
-  <section class="section" id="buy">
-    <div class="section-label reveal">How to buy</div>
-    <h2 class="section-heading reveal">Three steps.<br>That's it.</h2>
-    <div class="steps">
-      <div class="step reveal">
-        <div class="step-num">01</div>
-        <h3>Get a wallet</h3>
-        <p>Download Phantom from phantom.app. It's a browser extension — Chrome, Brave, Firefox. Takes 30 seconds.</p>
+  <!-- Bento -->
+  <section class="bento-section" id="about">
+    <div class="bento-grid">
+
+      <div class="bento-card wide dark reveal">
+        <div class="bento-label">What is Kracoin</div>
+        <div class="bento-title">A memecoin with roots.</div>
+        <div class="bento-desc">Community-driven token on Solana. No VC funding, no insider deals. Launched fair on pump.fun — everyone had equal access from day one.</div>
       </div>
-      <div class="step reveal">
-        <div class="step-num">02</div>
-        <h3>Get SOL</h3>
-        <p>Buy Solana on Coinbase, Binance, or directly in Phantom with a card. Send it to your wallet address.</p>
+
+      <div class="bento-card green reveal">
+        <div class="bento-label">Supply</div>
+        <div class="bento-big">1B</div>
+        <div class="bento-desc" style="margin-top:0.5rem">Total $KRA tokens</div>
       </div>
-      <div class="step reveal">
-        <div class="step-num">03</div>
-        <h3>Swap for $KRA</h3>
-        <p>Go to pump.fun, find Kracoin, connect Phantom, enter amount, confirm. You're in the KRA army now.</p>
+
+      <div class="bento-card gold-bg reveal">
+        <div class="bento-label">Tax</div>
+        <div class="bento-big">0%</div>
+        <div class="bento-desc" style="margin-top:0.5rem">No buy or sell tax. Ever.</div>
       </div>
+
+      <div class="bento-card reveal">
+        <img src="images/logo-square.png" alt="" class="bento-logo">
+        <div class="bento-label">Network</div>
+        <div class="bento-title">Built on Solana</div>
+        <div class="bento-desc">Fast, cheap, scalable. Tradeable on pump.fun and Raydium.</div>
+      </div>
+
+      <div class="bento-card reveal">
+        <div class="bento-label">Community</div>
+        <div class="bento-title">100% owned by you</div>
+        <div class="bento-desc">No dev wallet, no locked tokens. The KRA army decides where this goes.</div>
+      </div>
+
     </div>
   </section>
 
-  <div class="divider"><div class="divider-line"></div></div>
-
-  <!-- Tokenomics -->
-  <section class="section" id="tokenomics">
-    <div class="section-label reveal">Tokenomics</div>
-    <h2 class="section-heading reveal">Simple numbers.<br>No tricks.</h2>
-
-    <div class="token-grid">
-      <div class="reveal">
-        <div class="token-big">1,000,000,000</div>
-        <div class="token-big-label">Total supply of $KRA</div>
+  <!-- Steps -->
+  <section class="steps-section" id="buy">
+    <div class="steps-header reveal">
+      <h2>How to buy <span style="color:var(--green)">$KRA</span></h2>
+    </div>
+    <div class="steps-list">
+      <div class="step-item reveal">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h3>Get Phantom wallet</h3>
+          <p>Download from phantom.app — browser extension for Chrome, Brave, Firefox. Takes 30 seconds to set up.</p>
+        </div>
       </div>
-      <div class="token-facts reveal">
-        <div class="token-fact">
-          <span class="token-fact-label">Network</span>
-          <span class="token-fact-value">Solana</span>
+      <div class="step-item reveal">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h3>Get some SOL</h3>
+          <p>Buy Solana on Coinbase, Binance, or directly in Phantom with a card. Send to your wallet.</p>
         </div>
-        <div class="token-fact">
-          <span class="token-fact-label">Tax</span>
-          <span class="token-fact-value">0%</span>
-        </div>
-        <div class="token-fact">
-          <span class="token-fact-label">Launch</span>
-          <span class="token-fact-value">pump.fun</span>
-        </div>
-        <div class="token-fact">
-          <span class="token-fact-label">Ownership</span>
-          <span class="token-fact-value">Community</span>
-        </div>
-        <div class="token-fact">
-          <span class="token-fact-label">Presale</span>
-          <span class="token-fact-value">None</span>
+      </div>
+      <div class="step-item reveal">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h3>Swap for $KRA</h3>
+          <p>Go to pump.fun, find Kracoin, connect your Phantom wallet and swap SOL for $KRA. You're in.</p>
         </div>
       </div>
     </div>
   </section>
-
-  <div class="divider"><div class="divider-line"></div></div>
 
   <!-- CTA -->
-  <section class="cta-section">
-    <h2 class="reveal">Join the<br><span class="accent">KRA army.</span></h2>
-    <p class="reveal">The greenest rocket on Solana is fueled and ready.</p>
-    <a href="https://pump.fun" target="_blank" class="cta-btn reveal">Buy $KRA</a>
+  <section class="cta-section reveal">
+    <h2>Join the<br>KRA army.</h2>
+    <p>The greenest rocket on Solana is ready.</p>
+    <a href="https://pump.fun" target="_blank" class="btn-primary">Buy $KRA now &#8599;</a>
   </section>
 
   <!-- Footer -->
   <footer>
-    <span>&copy; 2026 Kracoin ($KRA)</span>
-    <span>Not financial advice. DYOR.</span>
+    <p>&copy; 2026 Kracoin ($KRA) &middot; Not financial advice. DYOR.</p>
   </footer>
 
   <script>
-    // Custom cursor
-    const dot = document.getElementById('cursorDot');
-    const ring = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      dot.style.left = mx - 4 + 'px';
-      dot.style.top = my - 4 + 'px';
-    });
-
-    function animateRing() {
-      rx += (mx - rx) * 0.15;
-      ry += (my - ry) * 0.15;
-      ring.style.left = rx - 18 + 'px';
-      ring.style.top = ry - 18 + 'px';
-      requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    // Hover effect on interactive elements
-    document.querySelectorAll('a, button, .step').forEach(el => {
-      el.addEventListener('mouseenter', () => ring.classList.add('hover'));
-      el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
-    });
-
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+    // Reveal on scroll
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Stagger reveals
-    document.querySelectorAll('.section, .hero').forEach(section => {
-      const reveals = section.querySelectorAll('.reveal');
-      reveals.forEach((el, i) => {
-        el.style.transitionDelay = (i * 0.1) + 's';
+    // Stagger
+    document.querySelectorAll('.bento-grid, .steps-list').forEach(container => {
+      container.querySelectorAll('.reveal').forEach((el, i) => {
+        el.style.transitionDelay = (i * 0.08) + 's';
       });
     });
   </script>
