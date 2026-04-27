@@ -3,608 +3,739 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kracoin ($KRA) — The Greenest Coin on Solana</title>
-  <meta name="description" content="Kracoin ($KRA) — Powered by nature, fueled by community. The greenest meme coin on Solana.">
+  <title>Kracoin — $KRA</title>
+  <meta name="description" content="Kracoin ($KRA) — The greenest coin on Solana.">
   <link rel="icon" type="image/png" href="images/logo-coin.png">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --dark: #0a1a0a;
-      --dark2: #0f2610;
-      --green: #1a5c2a;
-      --green-light: #2d8a3e;
-      --gold: #c9a84c;
-      --gold-light: #e8cc6a;
-      --white: #f0f0e8;
-      --gray: #9ca89c;
+      --bg: #0a0a0a;
+      --bg2: #111110;
+      --cream: #e8e4df;
+      --muted: #7a7570;
+      --accent: #c9a84c;
+      --accent2: #e8cc6a;
+      --green: #4a9e5c;
+      --text: #f5f0eb;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--dark);
-      color: var(--white);
+      background: var(--bg);
+      color: var(--text);
+      cursor: none;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--dark); }
-    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 4px; }
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
 
-    /* Navigation */
+    /* Custom cursor */
+    .cursor-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s;
+      mix-blend-mode: difference;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.15s ease-out;
+      mix-blend-mode: difference;
+    }
+
+    .cursor-ring.hover {
+      width: 60px;
+      height: 60px;
+      border-color: var(--accent2);
+      opacity: 0.6;
+    }
+
+    @media (max-width: 768px) {
+      .cursor-dot, .cursor-ring { display: none; }
+      body { cursor: auto; }
+    }
+
+    /* Nav */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      padding: 1rem 2rem;
+      padding: 1.5rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 100;
-      backdrop-filter: blur(20px);
-      background: rgba(10, 26, 10, 0.8);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+      mix-blend-mode: difference;
     }
 
-    nav .logo-nav {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-    }
-
-    nav .logo-nav img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-
-    nav .logo-nav span {
-      font-weight: 900;
-      font-size: 1.3rem;
-      color: var(--gold);
-    }
-
-    nav .nav-links {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    nav .nav-links a {
-      color: var(--gray);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    nav .nav-links a:hover { color: var(--gold); }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.75rem;
-      border-radius: 50px;
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 1.1rem;
+      color: var(--text);
       text-decoration: none;
-      transition: all 0.3s;
-      cursor: pointer;
-      border: none;
+      letter-spacing: -0.02em;
     }
 
-    .btn-gold {
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: var(--dark);
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
     }
 
-    .btn-gold:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.3);
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      transition: color 0.3s;
+      letter-spacing: 0.02em;
     }
 
-    .btn-outline {
-      border: 2px solid var(--gold);
-      color: var(--gold);
-      background: transparent;
-    }
+    .nav-links a:hover { color: var(--text); }
 
-    .btn-outline:hover {
-      background: var(--gold);
-      color: var(--dark);
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
     }
 
     /* Hero */
     .hero {
       min-height: 100vh;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      text-align: center;
-      padding: 8rem 2rem 4rem;
+      padding: 0 3rem;
+      position: relative;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .hero-text h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-text h1 .accent { color: var(--accent); }
+
+    .hero-text p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--accent);
+      color: var(--bg);
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-cta:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-logo-img {
+      width: 340px;
+      height: 340px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 80px rgba(201, 168, 76, 0.15));
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 40px;
+      height: 1px;
+      background: var(--muted);
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
+    .scroll-line::after {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 50% 50%, rgba(45, 138, 62, 0.08) 0%, transparent 50%);
-      animation: pulse 8s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.5; }
-      50% { transform: scale(1.1); opacity: 1; }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 700px;
-    }
-
-    .hero-logo {
-      width: 220px;
-      height: 220px;
-      margin: 0 auto 2rem;
-      animation: float 4s ease-in-out infinite;
-      filter: drop-shadow(0 20px 60px rgba(201, 168, 76, 0.2));
-    }
-
-    .hero-logo img {
+      left: -100%;
+      top: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      background: var(--accent);
+      animation: scrollPulse 2s infinite;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+    @keyframes scrollPulse {
+      0% { left: -100%; }
+      100% { left: 100%; }
     }
 
-    .hero h1 {
-      font-size: 4rem;
-      font-weight: 900;
-      margin-bottom: 0.5rem;
-      line-height: 1.1;
+    @media (max-width: 768px) {
+      .hero { padding: 0 1.5rem; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-text p { margin-left: auto; margin-right: auto; }
+      .hero-logo-img { width: 200px; height: 200px; }
+      .hero-visual { order: -1; }
+      .scroll-indicator { display: none; }
     }
 
-    .hero h1 .kra { color: var(--green-light); }
-    .hero h1 .coin { color: var(--gold); }
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-    .hero .ticker {
-      display: inline-block;
-      background: rgba(201, 168, 76, 0.15);
-      border: 1px solid rgba(201, 168, 76, 0.3);
-      padding: 0.3rem 1rem;
-      border-radius: 50px;
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Divider */
+    .divider {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    .divider-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.2), transparent);
+    }
+
+    /* Section base */
+    .section {
+      padding: 8rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .section-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
       font-weight: 700;
-      color: var(--gold);
-      font-size: 1.1rem;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
       margin-bottom: 1.5rem;
     }
 
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--gray);
-      margin-bottom: 2.5rem;
-      line-height: 1.6;
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 550px;
     }
 
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* Floating particles */
-    .particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .particle {
-      position: absolute;
-      font-size: 1.5rem;
-      opacity: 0.1;
-      animation: drift 15s infinite linear;
-    }
-
-    @keyframes drift {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-      10% { opacity: 0.15; }
-      90% { opacity: 0.15; }
-      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-    }
-
-    /* Stats */
-    .stats {
-      padding: 2rem;
-      background: var(--dark2);
-      border-top: 1px solid rgba(201, 168, 76, 0.1);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.1);
-    }
-
-    .stats-grid {
-      max-width: 900px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-      text-align: center;
-    }
-
-    .stat-item h3 {
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: var(--gold);
-    }
-
-    .stat-item p {
-      color: var(--gray);
-      font-size: 0.85rem;
-      margin-top: 0.25rem;
-    }
-
-    /* Sections */
-    section {
-      padding: 6rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .section-title h2 {
-      font-size: 2.5rem;
-      font-weight: 900;
-      margin-bottom: 0.75rem;
-    }
-
-    .section-title h2 .gold { color: var(--gold); }
-
-    .section-title p {
-      color: var(--gray);
-      font-size: 1.1rem;
+    @media (max-width: 768px) {
+      .section { padding: 5rem 1.5rem; }
     }
 
     /* About */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
+      gap: 6rem;
+      margin-top: 4rem;
+      align-items: start;
     }
 
-    .about-img {
-      text-align: center;
+    .about-left .about-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
     }
 
-    .about-img img {
-      width: 280px;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    .about-left h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
     }
 
-    .about-text h3 {
-      font-size: 1.5rem;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-
-    .about-text p {
-      color: var(--gray);
+    .about-left p {
+      color: var(--muted);
+      font-weight: 300;
       line-height: 1.8;
       margin-bottom: 1rem;
     }
 
-    /* How to buy */
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    .about-right {
+      display: flex;
+      flex-direction: column;
       gap: 2rem;
     }
 
-    .step-card {
-      background: var(--dark2);
-      border: 1px solid rgba(201, 168, 76, 0.1);
-      border-radius: 16px;
-      padding: 2rem;
-      text-align: center;
-      transition: all 0.3s;
+    .about-value {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    .step-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-5px);
-      box-shadow: 0 10px 40px rgba(201, 168, 76, 0.1);
-    }
+    .about-value:last-child { border-bottom: none; }
 
-    .step-number {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: var(--dark);
-      font-weight: 900;
-      font-size: 1.3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.25rem;
-    }
-
-    .step-card h3 {
+    .about-value h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
       font-size: 1.1rem;
-      margin-bottom: 0.75rem;
-      color: var(--white);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
     }
 
-    .step-card p {
-      color: var(--gray);
+    .about-value p {
+      color: var(--muted);
       font-size: 0.9rem;
+      font-weight: 300;
       line-height: 1.6;
     }
 
-    /* Tokenomics */
-    .tokenomics-card {
-      background: var(--dark2);
-      border: 1px solid rgba(201, 168, 76, 0.15);
-      border-radius: 20px;
-      padding: 3rem;
-      text-align: center;
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
     }
 
-    .token-supply {
-      font-size: 3rem;
-      font-weight: 900;
-      color: var(--gold);
-      margin-bottom: 0.5rem;
-    }
-
-    .token-details {
+    /* Steps */
+    .steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 2rem;
+      gap: 1px;
+      margin-top: 4rem;
+      background: rgba(255,255,255,0.04);
     }
 
-    .token-detail h4 {
-      color: var(--gold);
+    .step {
+      padding: 3rem 2.5rem;
+      background: var(--bg);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .step:hover {
+      background: var(--accent);
+    }
+
+    .step:hover .step-num,
+    .step:hover h3,
+    .step:hover p { color: var(--bg); }
+
+    .step-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.06);
+      line-height: 1;
+      margin-bottom: 2rem;
+      transition: color 0.5s;
+    }
+
+    .step h3 {
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 1.2rem;
-      margin-bottom: 0.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      transition: color 0.5s;
     }
 
-    .token-detail p {
-      color: var(--gray);
+    .step p {
+      color: var(--muted);
       font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.7;
+      transition: color 0.5s;
+    }
+
+    @media (max-width: 768px) {
+      .steps { grid-template-columns: 1fr; }
+    }
+
+    /* Tokenomics */
+    .token-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      margin-top: 4rem;
+      align-items: center;
+    }
+
+    .token-big {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .token-big-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 0.75rem;
+      font-weight: 300;
+    }
+
+    .token-facts {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .token-fact {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .token-fact:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .token-fact-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+
+    .token-fact-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .token-grid { grid-template-columns: 1fr; gap: 3rem; }
     }
 
     /* CTA */
-    .cta {
+    .cta-section {
+      padding: 10rem 3rem;
       text-align: center;
-      padding: 6rem 2rem;
-      background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+      position: relative;
     }
 
-    .cta h2 {
-      font-size: 2.5rem;
-      font-weight: 900;
-      margin-bottom: 1rem;
-    }
-
-    .cta p {
-      color: var(--gray);
-      font-size: 1.1rem;
+    .cta-section h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
       margin-bottom: 2rem;
+    }
+
+    .cta-section h2 .accent { color: var(--accent); }
+
+    .cta-section p {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 300;
+      margin-bottom: 3rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 1.25rem 3.5rem;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cta-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    @media (max-width: 768px) {
+      .cta-section { padding: 6rem 1.5rem; }
     }
 
     /* Footer */
     footer {
-      padding: 2rem;
-      text-align: center;
-      border-top: 1px solid rgba(201, 168, 76, 0.1);
-      color: var(--gray);
-      font-size: 0.85rem;
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 0.75rem;
     }
 
     footer a {
-      color: var(--gold);
+      color: var(--muted);
       text-decoration: none;
+      transition: color 0.3s;
     }
 
-    /* Responsive */
+    footer a:hover { color: var(--accent); }
+
     @media (max-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
-      .hero-logo { width: 160px; height: 160px; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .about-grid { grid-template-columns: 1fr; text-align: center; }
-      .steps-grid { grid-template-columns: 1fr; }
-      .token-details { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Nav -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
   <nav>
-    <a href="#" class="logo-nav">
-      <img src="images/logo-coin.png" alt="KRA">
-      <span>KRACOIN</span>
-    </a>
+    <a href="#" class="nav-logo">KRA</a>
     <div class="nav-links">
       <a href="#about">About</a>
-      <a href="#buy">How to Buy</a>
+      <a href="#buy">Buy</a>
       <a href="#tokenomics">Tokenomics</a>
-      <a href="https://pump.fun" target="_blank" class="btn btn-gold btn-sm">Buy $KRA</a>
+      <a href="https://pump.fun" target="_blank">Trade</a>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="particles" id="particles"></div>
-    <div class="hero-content">
-      <div class="hero-logo">
-        <img src="images/logo-full.png" alt="Kracoin Logo">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1 class="reveal">The<br>greenest<br><span class="accent">coin.</span></h1>
+        <p class="reveal">Powered by nature, fueled by community. Kracoin is a meme with roots — no promises, just vibes and gains.</p>
+        <a href="https://pump.fun" target="_blank" class="hero-cta reveal">Buy $KRA</a>
       </div>
-      <div class="ticker">$KRA</div>
-      <h1><span class="kra">KRA</span><span class="coin">COIN</span></h1>
-      <p>The greenest coin on Solana. Powered by nature, fueled by community. No promises, just vibes and gains.</p>
-      <div class="hero-buttons">
-        <a href="https://pump.fun" target="_blank" class="btn btn-gold">Buy $KRA on Pump.fun</a>
-        <a href="#about" class="btn btn-outline">Learn More</a>
+      <div class="hero-visual reveal">
+        <img src="images/logo-coin.png" alt="Kracoin" class="hero-logo-img">
       </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
     </div>
   </section>
 
-  <!-- Stats -->
-  <div class="stats">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <h3>1B</h3>
-        <p>Total Supply</p>
-      </div>
-      <div class="stat-item">
-        <h3>SOL</h3>
-        <p>Blockchain</p>
-      </div>
-      <div class="stat-item">
-        <h3>0%</h3>
-        <p>Tax</p>
-      </div>
-      <div class="stat-item">
-        <h3>100%</h3>
-        <p>Community</p>
-      </div>
-    </div>
-  </div>
+  <div class="divider"><div class="divider-line"></div></div>
 
   <!-- About -->
-  <section id="about">
-    <div class="section-title">
-      <h2>What is <span class="gold">Kracoin</span>?</h2>
-      <p>The memecoin that grows on you</p>
-    </div>
+  <section class="section" id="about">
+    <div class="section-label reveal">About</div>
+    <h2 class="section-heading reveal">Not just another<br>memecoin.</h2>
+    <p class="section-sub reveal">Built different. Launched fair. Grown organically.</p>
+
     <div class="about-grid">
-      <div class="about-img">
-        <img src="images/logo-square.png" alt="Kracoin">
+      <div class="about-left reveal">
+        <h3>Born from nature,<br>built for Solana.</h3>
+        <p>Kracoin is a community-driven token inspired by the power of the green leaf. No VC funding. No insider deals. No roadmap full of empty promises.</p>
+        <p>Just a coin, a community, and a belief that the greenest things grow the tallest.</p>
       </div>
-      <div class="about-text">
-        <h3>Born from Nature</h3>
-        <p>Kracoin is a community-driven memecoin on Solana inspired by the power of nature. We're building a movement — not just a token.</p>
-        <p>No VC funding. No insider deals. Just a green leaf, a golden coin, and a community that believes in the vibes.</p>
-        <h3>Why $KRA?</h3>
-        <p>Because the greenest coins grow the tallest. Join the KRA army and be part of something organic.</p>
+      <div class="about-right">
+        <div class="about-value reveal">
+          <h4>Fair launch</h4>
+          <p>Launched on pump.fun — everyone had equal access from day one. No presale, no private rounds.</p>
+        </div>
+        <div class="about-value reveal">
+          <h4>Zero tax</h4>
+          <p>0% buy and sell tax. What you trade is what you get. No hidden fees, no dev wallet drain.</p>
+        </div>
+        <div class="about-value reveal">
+          <h4>Community first</h4>
+          <p>100% community owned. The KRA army decides where this goes. We're just along for the ride.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- How to Buy -->
-  <section id="buy">
-    <div class="section-title">
-      <h2>How to <span class="gold">Buy</span></h2>
-      <p>Get your $KRA in 3 simple steps</p>
-    </div>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <h3>Get a Wallet</h3>
-        <p>Download <strong>Phantom Wallet</strong> from phantom.app. Available as a browser extension for Chrome, Brave, Firefox.</p>
+  <div class="divider"><div class="divider-line"></div></div>
+
+  <!-- How to buy -->
+  <section class="section" id="buy">
+    <div class="section-label reveal">How to buy</div>
+    <h2 class="section-heading reveal">Three steps.<br>That's it.</h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3>Get a wallet</h3>
+        <p>Download Phantom from phantom.app. It's a browser extension — Chrome, Brave, Firefox. Takes 30 seconds.</p>
       </div>
-      <div class="step-card">
-        <div class="step-number">2</div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
         <h3>Get SOL</h3>
-        <p>Buy Solana (SOL) on any exchange like Coinbase or Binance, or directly in Phantom with a card. Send it to your wallet.</p>
+        <p>Buy Solana on Coinbase, Binance, or directly in Phantom with a card. Send it to your wallet address.</p>
       </div>
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <h3>Buy $KRA</h3>
-        <p>Go to <strong>pump.fun</strong>, search for Kracoin ($KRA), connect your Phantom wallet, and swap SOL for $KRA.</p>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h3>Swap for $KRA</h3>
+        <p>Go to pump.fun, find Kracoin, connect Phantom, enter amount, confirm. You're in the KRA army now.</p>
       </div>
     </div>
   </section>
+
+  <div class="divider"><div class="divider-line"></div></div>
 
   <!-- Tokenomics -->
-  <section id="tokenomics">
-    <div class="section-title">
-      <h2><span class="gold">Tokenomics</span></h2>
-      <p>Simple. Fair. Transparent.</p>
-    </div>
-    <div class="tokenomics-card">
-      <div class="token-supply">1,000,000,000</div>
-      <p style="color: var(--gray); font-size: 1.1rem;">Total Supply of $KRA</p>
-      <div class="token-details">
-        <div class="token-detail">
-          <h4>0% Tax</h4>
-          <p>No buy or sell tax. Ever.</p>
+  <section class="section" id="tokenomics">
+    <div class="section-label reveal">Tokenomics</div>
+    <h2 class="section-heading reveal">Simple numbers.<br>No tricks.</h2>
+
+    <div class="token-grid">
+      <div class="reveal">
+        <div class="token-big">1,000,000,000</div>
+        <div class="token-big-label">Total supply of $KRA</div>
+      </div>
+      <div class="token-facts reveal">
+        <div class="token-fact">
+          <span class="token-fact-label">Network</span>
+          <span class="token-fact-value">Solana</span>
         </div>
-        <div class="token-detail">
-          <h4>Fair Launch</h4>
-          <p>Launched on pump.fun. No presale, no insider allocation.</p>
+        <div class="token-fact">
+          <span class="token-fact-label">Tax</span>
+          <span class="token-fact-value">0%</span>
         </div>
-        <div class="token-detail">
-          <h4>Community</h4>
-          <p>100% community owned and driven.</p>
+        <div class="token-fact">
+          <span class="token-fact-label">Launch</span>
+          <span class="token-fact-value">pump.fun</span>
+        </div>
+        <div class="token-fact">
+          <span class="token-fact-label">Ownership</span>
+          <span class="token-fact-value">Community</span>
+        </div>
+        <div class="token-fact">
+          <span class="token-fact-label">Presale</span>
+          <span class="token-fact-value">None</span>
         </div>
       </div>
     </div>
   </section>
 
+  <div class="divider"><div class="divider-line"></div></div>
+
   <!-- CTA -->
-  <div class="cta">
-    <h2>Join the <span style="color: var(--gold);">KRA Army</span></h2>
-    <p>Don't miss the greenest rocket on Solana. Get your $KRA today.</p>
-    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-      <a href="https://pump.fun" target="_blank" class="btn btn-gold">Buy $KRA Now</a>
-    </div>
-  </div>
+  <section class="cta-section">
+    <h2 class="reveal">Join the<br><span class="accent">KRA army.</span></h2>
+    <p class="reveal">The greenest rocket on Solana is fueled and ready.</p>
+    <a href="https://pump.fun" target="_blank" class="cta-btn reveal">Buy $KRA</a>
+  </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2026 Kracoin ($KRA) &mdash; The Greenest Coin on Solana</p>
-    <p style="margin-top: 0.5rem; font-size: 0.75rem;">This is a memecoin. Not financial advice. Always DYOR.</p>
+    <span>&copy; 2026 Kracoin ($KRA)</span>
+    <span>Not financial advice. DYOR.</span>
   </footer>
 
-  <!-- Floating leaf particles -->
   <script>
-    const container = document.getElementById('particles');
-    const leaves = ['🌿', '🍃', '💰', '🪙'];
-    for (let i = 0; i < 20; i++) {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      p.textContent = leaves[Math.floor(Math.random() * leaves.length)];
-      p.style.left = Math.random() * 100 + '%';
-      p.style.animationDelay = Math.random() * 15 + 's';
-      p.style.animationDuration = (10 + Math.random() * 10) + 's';
-      container.appendChild(p);
-    }
+    // Custom cursor
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx - 4 + 'px';
+      dot.style.top = my - 4 + 'px';
+    });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.15;
+      ry += (my - ry) * 0.15;
+      ring.style.left = rx - 18 + 'px';
+      ring.style.top = ry - 18 + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    // Hover effect on interactive elements
+    document.querySelectorAll('a, button, .step').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Stagger reveals
+    document.querySelectorAll('.section, .hero').forEach(section => {
+      const reveals = section.querySelectorAll('.reveal');
+      reveals.forEach((el, i) => {
+        el.style.transitionDelay = (i * 0.1) + 's';
       });
     });
   </script>
