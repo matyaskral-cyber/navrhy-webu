@@ -242,6 +242,7 @@ tr:hover td { background: rgba(59,130,246,.03); }
 
   <div class="toolbar">
     <input type="text" class="search-input" id="searchInput" placeholder="Hledat...">
+    <button class="btn-small" onclick="exportExcel()" style="margin-left:10px">⬇ Export Excel</button>
   </div>
 
   <div class="table-wrap">
@@ -365,6 +366,18 @@ function render() {
 }
 
 function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function exportExcel() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  let d = [...data];
+  if (q) d = d.filter(i => (i.nazev||'').toLowerCase().includes(q) || (i.kod||'').toLowerCase().includes(q) || (i.carovy_kod||'').toLowerCase().includes(q));
+  const rows = d.map(i => ({ 'Kód': i.kod||'', 'Čárový kód': i.carovy_kod||'', 'Název': i.nazev||'', 'Množství': i.mnozstvi||0 }));
+  const ws = XLSX.utils.json_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Sklad');
+  const datum = new Date().toISOString().slice(0,10);
+  XLSX.writeFile(wb, `sklad_mpkral_${datum}.xlsx`);
+}
 
 // ==========================================
 // UPLOAD EXCEL (admin only)
