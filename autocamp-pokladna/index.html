@@ -324,6 +324,26 @@
     .history-time { font-size: 0.78rem; color: var(--muted); }
     .history-amount { font-weight: 700; color: var(--green); font-size: 0.9rem; }
     .history-detail { font-size: 0.72rem; color: var(--muted); }
+
+    /* Print – 58mm thermal receipt */
+    @media print {
+      *, *::before, *::after { color: #000 !important; background: #fff !important; }
+      body { padding: 0; margin: 0; width: 48mm; font-size: 11px; }
+      .header, .section-label, .btn-grid, .kosik-section, .bottom-bar,
+      .history-section, .modal-overlay, .modal-actions, .modal-handle { display: none !important; }
+      #printReceipt {
+        display: block !important;
+        font-family: 'Courier New', monospace;
+        font-size: 11px;
+        line-height: 1.4;
+        white-space: pre-wrap;
+        word-break: break-all;
+        padding: 0;
+        margin: 0;
+      }
+      @page { size: 58mm auto; margin: 2mm; }
+    }
+    #printReceipt { display: none; }
   </style>
 </head>
 <body>
@@ -366,12 +386,15 @@
     </div>
   </div>
 
+  <div id="printReceipt"></div>
+
   <div class="modal-overlay" id="modal" onclick="closeModal(event)">
     <div class="modal" onclick="event.stopPropagation()">
       <div class="modal-handle"></div>
       <div class="receipt" id="receiptText"></div>
       <div class="modal-actions">
         <button class="btn-copy" onclick="copyReceipt()">Kopírovat</button>
+        <button class="btn-copy" onclick="printReceipt()">🖨 Tisk</button>
         <button class="btn-close-modal" onclick="document.getElementById('modal').classList.remove('show')">Zavřít</button>
       </div>
     </div>
@@ -540,6 +563,13 @@ function copyReceipt() {
     document.getElementById('modal').classList.remove('show');
     resetAll();
   });
+}
+
+function printReceipt() {
+  const { text, total } = getReceiptText();
+  document.getElementById('printReceipt').textContent = text;
+  saveToHistory(total);
+  window.print();
 }
 
 function shareReceipt() {
