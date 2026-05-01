@@ -9,20 +9,22 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     :root {
-      --bg: #f5f5f0;
-      --card: #fff;
-      --green: #2d7a3a;
-      --green-light: #e8f5ec;
-      --dark: #1a1a18;
-      --muted: #888;
-      --border: #e8e6e2;
-      --red: #d44;
+      --bg: #0c1220;
+      --card: #1e293b;
+      --card-hover: #2d3a4f;
+      --green: #22c55e;
+      --green-dark: #16a34a;
+      --gold: #e8b830;
+      --red: #ef4444;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --border: #334155;
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--bg);
-      color: var(--dark);
-      padding-bottom: 160px;
+      color: var(--text);
+      padding-bottom: 170px;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -31,112 +33,184 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: var(--green);
-      color: #fff;
-      padding: 14px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .header h1 { font-size: 1.1rem; font-weight: 700; }
-    .header .reset {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: #fff;
-      padding: 6px 14px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
-    /* Noci */
-    .noci-bar {
       background: var(--card);
       border-bottom: 1px solid var(--border);
       padding: 12px 16px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
     }
-    .noci-bar label { font-weight: 600; font-size: 0.95rem; }
+    .header h1 { font-size: 1rem; font-weight: 700; }
+    .header h1 span { color: var(--green); }
+    .header-right {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
     .noci-control {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 6px;
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 4px 6px;
     }
     .noci-control button {
-      width: 36px; height: 36px;
-      border-radius: 10px;
-      border: 1.5px solid var(--border);
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      border: none;
       background: var(--card);
-      font-size: 1.2rem;
+      color: var(--text);
+      font-size: 1.1rem;
       font-weight: 700;
-      color: var(--dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    .noci-control span {
-      font-size: 1.3rem;
-      font-weight: 700;
-      min-width: 28px;
+    .noci-control .noci-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      min-width: 50px;
       text-align: center;
     }
+    .noci-control .noci-val {
+      font-weight: 700;
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .btn-reset {
+      background: var(--red);
+      border: none;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
 
-    /* Section */
-    .section-title {
-      padding: 14px 16px 6px;
-      font-size: 0.7rem;
+    /* Button grid */
+    .section-label {
+      padding: 12px 16px 6px;
+      font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
       color: var(--muted);
     }
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 6px 16px 12px;
+    }
+    .pos-btn {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 8px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.12s;
+      position: relative;
+      overflow: hidden;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .pos-btn:active {
+      transform: scale(0.95);
+      background: var(--green);
+      border-color: var(--green);
+    }
+    .pos-btn.has-qty {
+      border-color: var(--green);
+      background: rgba(34, 197, 94, 0.1);
+    }
+    .pos-btn .btn-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .pos-btn .btn-price {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .pos-btn.has-qty .btn-price { color: var(--green); }
+    .pos-btn .btn-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      background: var(--green);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+    }
+    .pos-btn.has-qty .btn-badge { display: flex; }
+    .pos-btn .btn-subtotal {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--gold);
+      display: none;
+      margin-top: 2px;
+    }
+    .pos-btn.has-qty .btn-subtotal { display: block; }
 
-    /* Items */
-    .items { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .item {
+    /* Košík */
+    .kosik-section {
+      padding: 0 16px;
+      margin-top: 4px;
+    }
+    .kosik-item {
       display: flex;
       align-items: center;
-      padding: 10px 16px;
-      border-bottom: 1px solid var(--border);
-      gap: 12px;
+      justify-content: space-between;
+      background: var(--card);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 4px;
     }
-    .item:last-child { border-bottom: none; }
-    .item-info { flex: 1; min-width: 0; }
-    .item-name { font-size: 0.92rem; font-weight: 500; }
-    .item-price { font-size: 0.78rem; color: var(--muted); }
-    .item-controls {
+    .kosik-left {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .item-controls button {
-      width: 34px; height: 34px;
-      border-radius: 10px;
-      border: 1.5px solid var(--border);
-      background: var(--card);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--dark);
+    .kosik-qty {
+      background: var(--green);
+      color: #fff;
+      min-width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .item-controls button.minus { color: var(--red); }
-    .item-controls button.plus { background: var(--green-light); color: var(--green); border-color: var(--green-light); }
-    .item-controls .qty {
+    .kosik-name { font-size: 0.85rem; font-weight: 500; }
+    .kosik-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .kosik-price { font-size: 0.85rem; font-weight: 700; color: var(--gold); }
+    .kosik-remove {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      border: none;
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--red);
       font-size: 1.1rem;
       font-weight: 700;
-      min-width: 24px;
-      text-align: center;
-    }
-    .item-total {
-      font-size: 0.9rem;
-      font-weight: 700;
-      min-width: 60px;
-      text-align: right;
-      color: var(--green);
+      cursor: pointer;
     }
 
     /* Bottom bar */
@@ -157,8 +231,8 @@
       align-items: center;
       margin-bottom: 10px;
     }
-    .total-label { font-size: 1rem; font-weight: 600; }
-    .total-amount { font-size: 1.5rem; font-weight: 800; color: var(--green); }
+    .total-label { font-size: 0.9rem; color: var(--muted); }
+    .total-amount { font-size: 1.6rem; font-weight: 800; color: var(--green); }
     .bottom-buttons {
       display: flex;
       gap: 8px;
@@ -176,19 +250,19 @@
     .btn-share {
       padding: 14px 18px;
       border-radius: 12px;
-      border: 1.5px solid var(--border);
+      border: 1px solid var(--border);
       background: var(--card);
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--dark);
+      color: var(--text);
     }
 
-    /* Receipt modal */
+    /* Modal */
     .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.6);
       z-index: 100;
       align-items: flex-end;
       justify-content: center;
@@ -219,6 +293,7 @@
       padding: 16px;
       border-radius: 12px;
       margin-bottom: 12px;
+      color: var(--text);
     }
     .modal-actions {
       display: flex;
@@ -233,49 +308,51 @@
       font-weight: 700;
     }
     .btn-copy { background: var(--green); color: #fff; }
-    .btn-close-modal { background: var(--bg); color: var(--dark); }
+    .btn-close-modal { background: var(--bg); color: var(--text); }
 
     /* Historie */
-    .history-section { margin-top: 8px; }
+    .history-section { padding: 0 16px; margin-top: 8px; }
     .history-item {
       background: var(--card);
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 4px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .history-time { font-size: 0.82rem; color: var(--muted); }
-    .history-amount { font-weight: 700; color: var(--green); }
-    .history-detail { font-size: 0.78rem; color: var(--muted); }
+    .history-time { font-size: 0.78rem; color: var(--muted); }
+    .history-amount { font-weight: 700; color: var(--green); font-size: 0.9rem; }
+    .history-detail { font-size: 0.72rem; color: var(--muted); }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <h1>Zvůle Pokladna</h1>
-    <button class="reset" onclick="resetAll()">Reset</button>
-  </div>
-
-  <div class="noci-bar">
-    <label>Počet nocí</label>
-    <div class="noci-control">
-      <button onclick="setNoci(-1)">-</button>
-      <span id="nociVal">1</span>
-      <button onclick="setNoci(1)">+</button>
+    <h1><span>Zvůle</span> Pokladna</h1>
+    <div class="header-right">
+      <div class="noci-control">
+        <button onclick="setNoci(-1)">−</button>
+        <div class="noci-label"><span class="noci-val" id="nociVal">1</span> noc</div>
+        <button onclick="setNoci(1)">+</button>
+      </div>
+      <button class="btn-reset" onclick="resetAll()">Reset</button>
     </div>
   </div>
 
-  <div class="section-title">Osoby</div>
-  <div class="items" id="osoby"></div>
+  <div class="section-label">Osoby</div>
+  <div class="btn-grid" id="grid-osoby"></div>
 
-  <div class="section-title">Ubytování / Vozidla</div>
-  <div class="items" id="vozidla"></div>
+  <div class="section-label">Stany & Vozidla</div>
+  <div class="btn-grid" id="grid-vozidla"></div>
 
-  <div class="section-title">Poplatky</div>
-  <div class="items" id="poplatky"></div>
+  <div class="section-label">Poplatky</div>
+  <div class="btn-grid" id="grid-poplatky"></div>
 
-  <div class="section-title">Historie</div>
+  <div class="section-label">Košík</div>
+  <div class="kosik-section" id="kosik"></div>
+
+  <div class="section-label">Historie</div>
   <div class="history-section" id="historie"></div>
 
   <div class="bottom-bar">
@@ -303,77 +380,107 @@
 <script>
 const CENIK = {
   osoby: [
-    { id: 'dospely', name: 'Osoba nad 15 let', price: 100 },
-    { id: 'dite', name: 'Dítě 3–15 let', price: 50 },
-    { id: 'zvire', name: 'Domácí zvíře', price: 100 },
+    { id: 'dospely', name: 'Osoba 15+', price: 100 },
+    { id: 'dite', name: 'Dítě 3–15', price: 50 },
+    { id: 'zvire', name: 'Zvíře', price: 100 },
   ],
   vozidla: [
-    { id: 'stan_maly', name: 'Stan malý (2 os.)', price: 50 },
-    { id: 'stan_velky', name: 'Stan velký (4 os.) nad 4m2', price: 100 },
+    { id: 'stan_maly', name: 'Stan malý', price: 50 },
+    { id: 'stan_velky', name: 'Stan velký', price: 100 },
     { id: 'karavan', name: 'Karavan', price: 50 },
     { id: 'obytne_auto', name: 'Obytné auto', price: 100 },
-    { id: 'auto', name: 'Automobil', price: 100 },
+    { id: 'auto', name: 'Auto', price: 100 },
     { id: 'motorka', name: 'Motorka', price: 50 },
-    { id: 'elektrina', name: 'Připojení na el. proud', price: 150 },
+    { id: 'elektrina', name: 'Elektřina', price: 150 },
   ],
   poplatky: [
-    { id: 'mistni_poplatek', name: 'Poplatek za rekreační pobyt', price: 20, note: 'pro Obecní úřad' },
+    { id: 'mistni_poplatek', name: 'Rekr. poplatek', price: 20 },
   ]
 };
 
 let noci = 1;
 let quantities = {};
-let history = JSON.parse(localStorage.getItem('zvule_history') || '[]');
+let hist = JSON.parse(localStorage.getItem('zvule_history') || '[]');
 
 function init() {
   Object.values(CENIK).flat().forEach(item => { quantities[item.id] = 0; });
-  renderItems('osoby', CENIK.osoby);
-  renderItems('vozidla', CENIK.vozidla);
-  renderItems('poplatky', CENIK.poplatky);
+  renderGrid('grid-osoby', CENIK.osoby);
+  renderGrid('grid-vozidla', CENIK.vozidla);
+  renderGrid('grid-poplatky', CENIK.poplatky);
   renderHistory();
-  updateTotal();
+  updateAll();
 }
 
-function renderItems(containerId, items) {
-  const el = document.getElementById(containerId);
-  el.innerHTML = items.map(item => `
-    <div class="item">
-      <div class="item-info">
-        <div class="item-name">${item.name}</div>
-        <div class="item-price">${item.price} Kč/noc${item.note ? ' · ' + item.note : ''}</div>
-      </div>
-      <div class="item-controls">
-        <button class="minus" onclick="changeQty('${item.id}', -1)">−</button>
-        <span class="qty" id="qty_${item.id}">0</span>
-        <button class="plus" onclick="changeQty('${item.id}', 1)">+</button>
-      </div>
-      <div class="item-total" id="total_${item.id}"></div>
+function renderGrid(containerId, items) {
+  document.getElementById(containerId).innerHTML = items.map(item => `
+    <div class="pos-btn" id="btn_${item.id}" onclick="changeQty('${item.id}', 1)">
+      <div class="btn-badge" id="badge_${item.id}">0</div>
+      <div class="btn-name">${item.name}</div>
+      <div class="btn-price">${item.price} Kč</div>
+      <div class="btn-subtotal" id="sub_${item.id}"></div>
     </div>
   `).join('');
 }
 
 function changeQty(id, delta) {
   quantities[id] = Math.max(0, (quantities[id] || 0) + delta);
-  document.getElementById('qty_' + id).textContent = quantities[id];
-  updateTotal();
+  updateAll();
 }
 
 function setNoci(delta) {
   noci = Math.max(1, noci + delta);
   document.getElementById('nociVal').textContent = noci;
-  updateTotal();
+  // update noc label
+  const label = document.querySelector('.noci-label');
+  label.innerHTML = `<span class="noci-val">${noci}</span> ${noci === 1 ? 'noc' : noci < 5 ? 'noci' : 'nocí'}`;
+  updateAll();
 }
 
-function updateTotal() {
+function updateAll() {
   let total = 0;
-  Object.values(CENIK).flat().forEach(item => {
+  const allItems = Object.values(CENIK).flat();
+  allItems.forEach(item => {
     const q = quantities[item.id] || 0;
     const subtotal = q * item.price * noci;
-    const el = document.getElementById('total_' + item.id);
-    if (el) el.textContent = subtotal > 0 ? subtotal + ' Kč' : '';
     total += subtotal;
+
+    const btn = document.getElementById('btn_' + item.id);
+    const badge = document.getElementById('badge_' + item.id);
+    const sub = document.getElementById('sub_' + item.id);
+
+    badge.textContent = q;
+    btn.classList.toggle('has-qty', q > 0);
+    sub.textContent = q > 0 ? subtotal + ' Kč' : '';
   });
+
   document.getElementById('totalAmount').textContent = total.toLocaleString('cs') + ' Kč';
+  renderKosik();
+}
+
+function renderKosik() {
+  const el = document.getElementById('kosik');
+  const allItems = Object.values(CENIK).flat();
+  const active = allItems.filter(item => quantities[item.id] > 0);
+
+  if (active.length === 0) {
+    el.innerHTML = '<div style="color:var(--muted);font-size:0.82rem;padding:8px 0;">Klikněte na položku pro přidání</div>';
+    return;
+  }
+
+  el.innerHTML = active.map(item => {
+    const q = quantities[item.id];
+    const subtotal = q * item.price * noci;
+    return `<div class="kosik-item">
+      <div class="kosik-left">
+        <div class="kosik-qty">${q}</div>
+        <div class="kosik-name">${item.name}</div>
+      </div>
+      <div class="kosik-right">
+        <div class="kosik-price">${subtotal} Kč</div>
+        <button class="kosik-remove" onclick="changeQty('${item.id}', -1)">−</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function getReceiptText() {
@@ -397,9 +504,7 @@ function getReceiptText() {
       const label = `${q}x ${item.name}`;
       const price = `${subtotal} Kč`;
       lines.push(label.padEnd(24) + price.padStart(8));
-      if (noci > 1) {
-        lines.push(`   ${q} × ${item.price} Kč × ${noci} nocí`);
-      }
+      if (noci > 1) lines.push(`   ${q} × ${item.price} Kč × ${noci} nocí`);
     }
   });
 
@@ -418,26 +523,20 @@ function showReceipt() {
 }
 
 function closeModal(e) {
-  if (e.target === e.currentTarget) {
-    document.getElementById('modal').classList.remove('show');
-  }
+  if (e.target === e.currentTarget) document.getElementById('modal').classList.remove('show');
+}
+
+function saveToHistory(total) {
+  hist.unshift({ time: new Date().toISOString(), total, noci, items: { ...quantities } });
+  if (hist.length > 50) hist.pop();
+  localStorage.setItem('zvule_history', JSON.stringify(hist));
+  renderHistory();
 }
 
 function copyReceipt() {
   const { text, total } = getReceiptText();
   navigator.clipboard.writeText(text).then(() => {
-    // Save to history
-    history.unshift({
-      time: new Date().toISOString(),
-      total: total,
-      noci: noci,
-      items: { ...quantities }
-    });
-    if (history.length > 50) history.pop();
-    localStorage.setItem('zvule_history', JSON.stringify(history));
-    renderHistory();
-
-    alert('Účtenka zkopírována!');
+    saveToHistory(total);
     document.getElementById('modal').classList.remove('show');
     resetAll();
   });
@@ -446,17 +545,8 @@ function copyReceipt() {
 function shareReceipt() {
   const { text, total } = getReceiptText();
   if (navigator.share) {
-    navigator.share({ title: 'Účtenka Zvůle', text: text });
-    // Save to history
-    history.unshift({
-      time: new Date().toISOString(),
-      total: total,
-      noci: noci,
-      items: { ...quantities }
-    });
-    if (history.length > 50) history.pop();
-    localStorage.setItem('zvule_history', JSON.stringify(history));
-    renderHistory();
+    navigator.share({ title: 'Účtenka Zvůle', text });
+    saveToHistory(total);
   } else {
     showReceipt();
   }
@@ -464,11 +554,11 @@ function shareReceipt() {
 
 function renderHistory() {
   const el = document.getElementById('historie');
-  if (history.length === 0) {
+  if (hist.length === 0) {
     el.innerHTML = '<div class="history-item"><span class="history-time">Zatím žádné účtenky</span></div>';
     return;
   }
-  el.innerHTML = history.slice(0, 20).map(h => {
+  el.innerHTML = hist.slice(0, 20).map(h => {
     const d = new Date(h.time);
     const dateStr = d.toLocaleDateString('cs-CZ');
     const timeStr = d.toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' });
@@ -476,7 +566,7 @@ function renderHistory() {
     return `<div class="history-item">
       <div>
         <div class="history-time">${dateStr} ${timeStr}</div>
-        <div class="history-detail">${h.noci} noc${h.noci > 1 ? 'í' : ''} · ${itemCount} položek</div>
+        <div class="history-detail">${h.noci} ${h.noci === 1 ? 'noc' : h.noci < 5 ? 'noci' : 'nocí'} · ${itemCount} pol.</div>
       </div>
       <div class="history-amount">${h.total.toLocaleString('cs')} Kč</div>
     </div>`;
@@ -486,9 +576,9 @@ function renderHistory() {
 function resetAll() {
   noci = 1;
   document.getElementById('nociVal').textContent = 1;
+  document.querySelector('.noci-label').innerHTML = '<span class="noci-val">1</span> noc';
   Object.keys(quantities).forEach(k => quantities[k] = 0);
-  document.querySelectorAll('.qty').forEach(el => el.textContent = '0');
-  updateTotal();
+  updateAll();
 }
 
 init();
