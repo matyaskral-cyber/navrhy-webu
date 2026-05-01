@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Zvůle Pokladna</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    :root {
+      --bg: #f5f5f0;
+      --card: #fff;
+      --green: #2d7a3a;
+      --green-light: #e8f5ec;
+      --dark: #1a1a18;
+      --muted: #888;
+      --border: #e8e6e2;
+      --red: #d44;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      padding-bottom: 160px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--green);
+      color: #fff;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 1.1rem; font-weight: 700; }
+    .header .reset {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Noci */
+    .noci-bar {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .noci-bar label { font-weight: 600; font-size: 0.95rem; }
+    .noci-control {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .noci-control button {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .noci-control span {
+      font-size: 1.3rem;
+      font-weight: 700;
+      min-width: 28px;
+      text-align: center;
+    }
+
+    /* Section */
+    .section-title {
+      padding: 14px 16px 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* Items */
+    .items { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .item {
+      display: flex;
+      align-items: center;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+    }
+    .item:last-child { border-bottom: none; }
+    .item-info { flex: 1; min-width: 0; }
+    .item-name { font-size: 0.92rem; font-weight: 500; }
+    .item-price { font-size: 0.78rem; color: var(--muted); }
+    .item-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .item-controls button {
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .item-controls button.minus { color: var(--red); }
+    .item-controls button.plus { background: var(--green-light); color: var(--green); border-color: var(--green-light); }
+    .item-controls .qty {
+      font-size: 1.1rem;
+      font-weight: 700;
+      min-width: 24px;
+      text-align: center;
+    }
+    .item-total {
+      font-size: 0.9rem;
+      font-weight: 700;
+      min-width: 60px;
+      text-align: right;
+      color: var(--green);
+    }
+
+    /* Bottom bar */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 12px 16px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      z-index: 50;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .total-label { font-size: 1rem; font-weight: 600; }
+    .total-amount { font-size: 1.5rem; font-weight: 800; color: var(--green); }
+    .bottom-buttons {
+      display: flex;
+      gap: 8px;
+    }
+    .btn-receipt {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      background: var(--green);
+      color: #fff;
+    }
+    .btn-share {
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    /* Receipt modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 100;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: var(--card);
+      width: 100%;
+      max-width: 500px;
+      border-radius: 20px 20px 0 0;
+      padding: 20px 16px;
+      padding-bottom: calc(20px + env(safe-area-inset-bottom));
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+    .modal-handle {
+      width: 36px; height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: 0 auto 16px;
+    }
+    .receipt {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      background: var(--bg);
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .modal-actions button {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .btn-copy { background: var(--green); color: #fff; }
+    .btn-close-modal { background: var(--bg); color: var(--dark); }
+
+    /* Historie */
+    .history-section { margin-top: 8px; }
+    .history-item {
+      background: var(--card);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .history-time { font-size: 0.82rem; color: var(--muted); }
+    .history-amount { font-weight: 700; color: var(--green); }
+    .history-detail { font-size: 0.78rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Zvůle Pokladna</h1>
+    <button class="reset" onclick="resetAll()">Reset</button>
+  </div>
+
+  <div class="noci-bar">
+    <label>Počet nocí</label>
+    <div class="noci-control">
+      <button onclick="setNoci(-1)">-</button>
+      <span id="nociVal">1</span>
+      <button onclick="setNoci(1)">+</button>
+    </div>
+  </div>
+
+  <div class="section-title">Osoby</div>
+  <div class="items" id="osoby"></div>
+
+  <div class="section-title">Ubytování / Vozidla</div>
+  <div class="items" id="vozidla"></div>
+
+  <div class="section-title">Poplatky</div>
+  <div class="items" id="poplatky"></div>
+
+  <div class="section-title">Historie</div>
+  <div class="history-section" id="historie"></div>
+
+  <div class="bottom-bar">
+    <div class="total-row">
+      <div class="total-label">Celkem</div>
+      <div class="total-amount" id="totalAmount">0 Kč</div>
+    </div>
+    <div class="bottom-buttons">
+      <button class="btn-receipt" onclick="showReceipt()">Účtenka</button>
+      <button class="btn-share" onclick="shareReceipt()">Sdílet</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-handle"></div>
+      <div class="receipt" id="receiptText"></div>
+      <div class="modal-actions">
+        <button class="btn-copy" onclick="copyReceipt()">Kopírovat</button>
+        <button class="btn-close-modal" onclick="document.getElementById('modal').classList.remove('show')">Zavřít</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+const CENIK = {
+  osoby: [
+    { id: 'dospely', name: 'Dospělá osoba', price: 120 },
+    { id: 'dite', name: 'Dítě 3–15 let', price: 100 },
+    { id: 'zvire', name: 'Domácí zvíře', price: 100 },
+  ],
+  vozidla: [
+    { id: 'stan_maly', name: 'Stan malý (2 os.)', price: 100 },
+    { id: 'stan_velky', name: 'Stan velký (4 os.)', price: 130 },
+    { id: 'karavan', name: 'Karavan', price: 150 },
+    { id: 'obytne_auto', name: 'Obytné auto', price: 200 },
+    { id: 'auto', name: 'Auto', price: 100 },
+    { id: 'motorka', name: 'Motorka', price: 70 },
+    { id: 'elektrina', name: 'Elektřina', price: 150 },
+  ],
+  poplatky: [
+    { id: 'mistni_poplatek', name: 'Místní poplatek z pobytu', price: 20, note: 'osv.: děti do 18, ZTP/P' },
+  ]
+};
+
+let noci = 1;
+let quantities = {};
+let history = JSON.parse(localStorage.getItem('zvule_history') || '[]');
+
+function init() {
+  Object.values(CENIK).flat().forEach(item => { quantities[item.id] = 0; });
+  renderItems('osoby', CENIK.osoby);
+  renderItems('vozidla', CENIK.vozidla);
+  renderItems('poplatky', CENIK.poplatky);
+  renderHistory();
+  updateTotal();
+}
+
+function renderItems(containerId, items) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = items.map(item => `
+    <div class="item">
+      <div class="item-info">
+        <div class="item-name">${item.name}</div>
+        <div class="item-price">${item.price} Kč/noc${item.note ? ' · ' + item.note : ''}</div>
+      </div>
+      <div class="item-controls">
+        <button class="minus" onclick="changeQty('${item.id}', -1)">−</button>
+        <span class="qty" id="qty_${item.id}">0</span>
+        <button class="plus" onclick="changeQty('${item.id}', 1)">+</button>
+      </div>
+      <div class="item-total" id="total_${item.id}"></div>
+    </div>
+  `).join('');
+}
+
+function changeQty(id, delta) {
+  quantities[id] = Math.max(0, (quantities[id] || 0) + delta);
+  document.getElementById('qty_' + id).textContent = quantities[id];
+  updateTotal();
+}
+
+function setNoci(delta) {
+  noci = Math.max(1, noci + delta);
+  document.getElementById('nociVal').textContent = noci;
+  updateTotal();
+}
+
+function updateTotal() {
+  let total = 0;
+  Object.values(CENIK).flat().forEach(item => {
+    const q = quantities[item.id] || 0;
+    const subtotal = q * item.price * noci;
+    const el = document.getElementById('total_' + item.id);
+    if (el) el.textContent = subtotal > 0 ? subtotal + ' Kč' : '';
+    total += subtotal;
+  });
+  document.getElementById('totalAmount').textContent = total.toLocaleString('cs') + ' Kč';
+}
+
+function getReceiptText() {
+  const now = new Date();
+  const date = now.toLocaleDateString('cs-CZ');
+  const time = now.toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' });
+  let lines = [];
+  lines.push('================================');
+  lines.push('    AUTOCAMP ZVŮLE');
+  lines.push('================================');
+  lines.push(`Datum: ${date}  ${time}`);
+  lines.push(`Nocí:  ${noci}`);
+  lines.push('--------------------------------');
+
+  let total = 0;
+  Object.values(CENIK).flat().forEach(item => {
+    const q = quantities[item.id] || 0;
+    if (q > 0) {
+      const subtotal = q * item.price * noci;
+      total += subtotal;
+      const label = `${q}x ${item.name}`;
+      const price = `${subtotal} Kč`;
+      lines.push(label.padEnd(24) + price.padStart(8));
+      if (noci > 1) {
+        lines.push(`   ${q} × ${item.price} Kč × ${noci} nocí`);
+      }
+    }
+  });
+
+  lines.push('--------------------------------');
+  lines.push(`CELKEM`.padEnd(24) + `${total.toLocaleString('cs')} Kč`.padStart(8));
+  lines.push('================================');
+  lines.push('Děkujeme za návštěvu!');
+  lines.push('www.zvule.cz');
+  return { text: lines.join('\n'), total };
+}
+
+function showReceipt() {
+  const { text } = getReceiptText();
+  document.getElementById('receiptText').textContent = text;
+  document.getElementById('modal').classList.add('show');
+}
+
+function closeModal(e) {
+  if (e.target === e.currentTarget) {
+    document.getElementById('modal').classList.remove('show');
+  }
+}
+
+function copyReceipt() {
+  const { text, total } = getReceiptText();
+  navigator.clipboard.writeText(text).then(() => {
+    // Save to history
+    history.unshift({
+      time: new Date().toISOString(),
+      total: total,
+      noci: noci,
+      items: { ...quantities }
+    });
+    if (history.length > 50) history.pop();
+    localStorage.setItem('zvule_history', JSON.stringify(history));
+    renderHistory();
+
+    alert('Účtenka zkopírována!');
+    document.getElementById('modal').classList.remove('show');
+    resetAll();
+  });
+}
+
+function shareReceipt() {
+  const { text, total } = getReceiptText();
+  if (navigator.share) {
+    navigator.share({ title: 'Účtenka Zvůle', text: text });
+    // Save to history
+    history.unshift({
+      time: new Date().toISOString(),
+      total: total,
+      noci: noci,
+      items: { ...quantities }
+    });
+    if (history.length > 50) history.pop();
+    localStorage.setItem('zvule_history', JSON.stringify(history));
+    renderHistory();
+  } else {
+    showReceipt();
+  }
+}
+
+function renderHistory() {
+  const el = document.getElementById('historie');
+  if (history.length === 0) {
+    el.innerHTML = '<div class="history-item"><span class="history-time">Zatím žádné účtenky</span></div>';
+    return;
+  }
+  el.innerHTML = history.slice(0, 20).map(h => {
+    const d = new Date(h.time);
+    const dateStr = d.toLocaleDateString('cs-CZ');
+    const timeStr = d.toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' });
+    const itemCount = Object.values(h.items).reduce((a, b) => a + b, 0);
+    return `<div class="history-item">
+      <div>
+        <div class="history-time">${dateStr} ${timeStr}</div>
+        <div class="history-detail">${h.noci} noc${h.noci > 1 ? 'í' : ''} · ${itemCount} položek</div>
+      </div>
+      <div class="history-amount">${h.total.toLocaleString('cs')} Kč</div>
+    </div>`;
+  }).join('');
+}
+
+function resetAll() {
+  noci = 1;
+  document.getElementById('nociVal').textContent = 1;
+  Object.keys(quantities).forEach(k => quantities[k] = 0);
+  document.querySelectorAll('.qty').forEach(el => el.textContent = '0');
+  updateTotal();
+}
+
+init();
+</script>
+
+</body>
+</html>
