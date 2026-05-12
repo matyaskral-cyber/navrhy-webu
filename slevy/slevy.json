@@ -14,6 +14,20 @@
     "url": "https://www.penny.cz/products/pivo-zlaty-bazant-sklo-88100529"
   },
   {
+    "id": "p1b00fe",
+    "name": "Aperol Bitter 11%",
+    "desc": "0.7 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "ST WEB",
+    "emoji": "🛒",
+    "image": "",
+    "priceNew": 249.9,
+    "priceOld": 337.37,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/aperol-bitter-11-88100953"
+  },
+  {
     "id": "p66db17",
     "name": "Smetana ke šlehání 33% Olma",
     "desc": "200 g",
@@ -54,6 +68,20 @@
     "priceOld": 40.37,
     "validUntil": "2026-05-12",
     "url": "https://www.penny.cz/products/brumik-5pack-opavia-88103365"
+  },
+  {
+    "id": "p805fba",
+    "name": "Listové těsto chlazené Penny To G",
+    "desc": "275 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "UZENINY",
+    "emoji": "🌭",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-147202-0685543055-t7aYeZJS.jpg",
+    "priceNew": 17.9,
+    "priceOld": 24.16,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/listove-testo-chlazene-penny-to-g-88147202"
   },
   {
     "id": "p939dbc",
@@ -112,6 +140,20 @@
     "url": "https://www.penny.cz/products/podebradka-prolinie-88200325"
   },
   {
+    "id": "p7fb2a8",
+    "name": "Fruit gummies Enjoy",
+    "desc": "35 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "produkty s PENNY kartou",
+    "emoji": "🛒",
+    "image": "",
+    "priceNew": 19.9,
+    "priceOld": 24.9,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/fruit-gummies-enjoy-88202554"
+  },
+  {
     "id": "pc2214a",
     "name": "Paštika Svačinka Hamé",
     "desc": "105 kg",
@@ -140,6 +182,76 @@
     "url": "https://www.penny.cz/products/pastika-matej-hame-88203013"
   },
   {
+    "id": "p043ed0",
+    "name": "Modry Portugal BiB",
+    "desc": "3 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "VÍNO A SEKT",
+    "emoji": "🍷",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-203891-715217444-w_erhbkv.jpg",
+    "priceNew": 99.9,
+    "priceOld": 134.87,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/modry-portugal-bib-88203891"
+  },
+  {
+    "id": "p35415a",
+    "name": "Veltlinské zelené BiB",
+    "desc": "3 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "VÍNO A SEKT",
+    "emoji": "🍷",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-203892-67784421-kXUKTM4S.jpg",
+    "priceNew": 99.9,
+    "priceOld": 134.87,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/veltlinske-zelene-bib-88203892"
+  },
+  {
+    "id": "p5d39c3",
+    "name": "Toaletní papír Classic Ooops!",
+    "desc": "253.12 m",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "PARFUMERIE - NEPOTRAVINÁŘSKÉ ZBOŽÍ",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-204408-1044504197-vWJUZ3vA.jpg",
+    "priceNew": 74.9,
+    "priceOld": 101.12,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/toaletni-papir-classic-ooops-88204408"
+  },
+  {
+    "id": "pe30043",
+    "name": "Pepsi/Mirinda",
+    "desc": "2.5 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "NEALKOHOLICKÉ NÁPOJE",
+    "emoji": "🥤",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-204431-0197019952-a0pe1AWX.jpg",
+    "priceNew": 28.9,
+    "priceOld": 39.02,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/pepsimirinda-88204431"
+  },
+  {
+    "id": "pb507a9",
+    "name": "Smetana zakysaná 16% Karlova Koruna",
+    "desc": "200 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "MLÉČNÉ VÝROBKY",
+    "emoji": "🧀",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205322-1343043832-mJKxk0V4.jpg",
+    "priceNew": 9.9,
+    "priceOld": 13.37,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/smetana-zakysana-16-karlova-koruna-88205322"
+  },
+  {
     "id": "pb5b311",
     "name": "Fernet Stock Standard 30%",
     "desc": "0.5 l",
@@ -152,6 +264,20 @@
     "priceOld": 134.87,
     "validUntil": "2026-05-12",
     "url": "https://www.penny.cz/products/fernet-stock-standard-30-88205379"
+  },
+  {
+    "id": "p7b2eb4",
+    "name": "Trubičky CaféTime",
+    "desc": "280 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "TRVANLIVÉ PEČIVO / VAFLE",
+    "emoji": "🍞",
+    "image": "",
+    "priceNew": 26.9,
+    "priceOld": 39.9,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/trubicky-cafetime-88205408"
   },
   {
     "id": "pa42926",
@@ -182,6 +308,20 @@
     "url": "https://www.penny.cz/products/villa-bellucci-crystal-edition-88205996"
   },
   {
+    "id": "p849922",
+    "name": "Sýr Eidam 30% plátky Karlova Koruna",
+    "desc": "100 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "SÝRY",
+    "emoji": "🧀",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205998-0102248419-dH4ksiWx.jpg",
+    "priceNew": 14.9,
+    "priceOld": 20.12,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/syr-eidam-30-platky-karlova-koruna-88205998"
+  },
+  {
     "id": "p250bf6",
     "name": "Birell Pomelo & Grep",
     "desc": "0.5 l",
@@ -194,6 +334,20 @@
     "priceOld": 25.52,
     "validUntil": "2026-05-12",
     "url": "https://www.penny.cz/products/birell-pomelo-und-grep-88207894"
+  },
+  {
+    "id": "p202256",
+    "name": "Vejce podestýlková M",
+    "desc": "30 ks",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "ST WEB",
+    "emoji": "🥚",
+    "image": "",
+    "priceNew": 129.9,
+    "priceOld": 175.37,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/vejce-podestylkova-m-88208035"
   },
   {
     "id": "pd11e5f",
@@ -238,6 +392,34 @@
     "url": "https://www.penny.cz/products/zmrzlina-manhattan-88245294"
   },
   {
+    "id": "p4822d7",
+    "name": "Moravská švestka 38%",
+    "desc": "0.5 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "LIHOVINY",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-300141-396064726-79PAmA3n.jpg",
+    "priceNew": 129.9,
+    "priceOld": 175.37,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/moravska-svestka-38-88300141"
+  },
+  {
+    "id": "pfd1b64",
+    "name": "Moravská hruška 38%",
+    "desc": "0.5 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "LIHOVINY",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-300142-0448407145-LXozKJZ2.jpg",
+    "priceNew": 129.9,
+    "priceOld": 175.37,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/moravska-hruska-38-88300142"
+  },
+  {
     "id": "pc42143",
     "name": "Tyčinka Knoppers",
     "desc": "40 g",
@@ -252,6 +434,132 @@
     "url": "https://www.penny.cz/products/tycinka-knoppers-88300955"
   },
   {
+    "id": "p8f4e9f",
+    "name": "Gel na praní Pallor",
+    "desc": "3 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "PRANÍ",
+    "emoji": "🛒",
+    "image": "",
+    "priceNew": 89.9,
+    "priceOld": 124.9,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/gel-na-prani-pallor-88301054"
+  },
+  {
+    "id": "pb47057",
+    "name": "Salám Vysočina krájená Řezníkův talíř",
+    "desc": "100 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "UZENINY",
+    "emoji": "🌭",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-301238-1341688841-0Wj9JAK7.jpg",
+    "priceNew": 15.9,
+    "priceOld": 21.47,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/salam-vysocina-krajena-reznikuv-talir-88301238"
+  },
+  {
+    "id": "p19ff53",
+    "name": "Ubrousky absorbující barvy Pallor",
+    "desc": "24 ks",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "PRANÍ",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-301416-448912277-3I3WT2aa.jpg",
+    "priceNew": 26.9,
+    "priceOld": 41.9,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/ubrousky-absorbujici-barvy-pallor-88301416"
+  },
+  {
+    "id": "pa00433",
+    "name": "Prostředek na mytí povrchů Sidolux",
+    "desc": "1 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "ČISTIČE",
+    "emoji": "🧼",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-301718-0114451560-POJy2O4I.jpg",
+    "priceNew": 34.9,
+    "priceOld": 59.9,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/prostredek-na-myti-povrchu-sidolux-88301718"
+  },
+  {
+    "id": "p912bfe",
+    "name": "Máslo 82% Boni",
+    "desc": "250 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "MLÉČNÉ VÝROBKY",
+    "emoji": "🧀",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-301827-0195052043-syJIKn4d.jpg",
+    "priceNew": 22.9,
+    "priceOld": 30.91,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/maslo-82-boni-88301827"
+  },
+  {
+    "id": "p770f4b",
+    "name": "Hambáče Enjoy",
+    "desc": "80 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "SLADKOSTI",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302108-1830236878-N28LWE17.jpg",
+    "priceNew": 10.9,
+    "priceOld": 14.9,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/hambace-enjoy-88302108"
+  },
+  {
+    "id": "p538928",
+    "name": "Kyselí červi Enjoy",
+    "desc": "80 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "SLADKOSTI",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302109-985765007-wqx22QA2.jpg",
+    "priceNew": 10.9,
+    "priceOld": 14.9,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/kyseli-cervi-enjoy-88302109"
+  },
+  {
+    "id": "p148b4a",
+    "name": "Sovičky Enjoy",
+    "desc": "80 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "SLADKOSTI",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302113-1348804712-qyqzzRC4.jpg",
+    "priceNew": 10.9,
+    "priceOld": 14.9,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/sovicky-enjoy-88302113"
+  },
+  {
+    "id": "pb37a70",
+    "name": "Polévka instantní nudlová YumYum",
+    "desc": "60 kg",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "POLÉVKY / OMÁČKY",
+    "emoji": "🍲",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-311185-2080324384-gKm_XLee.jpg",
+    "priceNew": 9.9,
+    "priceOld": 13.37,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/polevka-instantni-nudlova-yumyum-88311185"
+  },
+  {
     "id": "pabe0d1",
     "name": "Polévka do hrnečku Vitana",
     "desc": "27 kg",
@@ -264,6 +572,20 @@
     "priceOld": 13.9,
     "validUntil": "2026-05-12",
     "url": "https://www.penny.cz/products/polevka-do-hrnecku-vitana-88311239"
+  },
+  {
+    "id": "pb39aff",
+    "name": "Tuňákový salát Mexico Giana",
+    "desc": "185 kg",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "RYBÍ KONZERVY / MOŘSKÉ PLODY",
+    "emoji": "🐟",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-355209-46808603-j0FiHX16.jpg",
+    "priceNew": 29.9,
+    "priceOld": 40.37,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/tunakovy-salat-mexico-giana-88355209"
   },
   {
     "id": "p4338b8",
@@ -336,18 +658,18 @@
     "url": "https://www.penny.cz/products/susenky-zlate-polomacene-opavia-88401329"
   },
   {
-    "id": "p652f09",
-    "name": "Salám šunkový zauzený Řezníkův Talíř",
-    "desc": "100 g",
+    "id": "p005610",
+    "name": "Radegast Ryze hořká 12 sklo",
+    "desc": "0.5 l",
     "store": "penny",
     "storeName": "Penny",
-    "category": "UZENINY",
-    "emoji": "🌭",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-93003-478562559-YKT5GEhN.jpg",
-    "priceNew": 14.9,
-    "priceOld": 20.12,
-    "validUntil": "2026-05-12",
-    "url": "https://www.penny.cz/products/salam-sunkovy-zauzeny-reznikuv-talir-8893003"
+    "category": "PIVO",
+    "emoji": "🍺",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-451113-0742905145-lhxkcgzJ.jpg",
+    "priceNew": 19.9,
+    "priceOld": 26.86,
+    "validUntil": "2026-05-20",
+    "url": "https://www.penny.cz/products/radegast-ryze-horka-12-sklo-88451113"
   },
   {
     "id": "b4599d7",
@@ -560,20 +882,6 @@
     "url": "https://www.lidl.cz/p/podestylkova-vejce-m/p10028105"
   },
   {
-    "id": "lf25a6f",
-    "name": "Kuřecí prsní řízky",
-    "desc": "Dostupné pouze ve vybraných prodejnách.",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Klobásy a maso",
-    "emoji": "🥩",
-    "image": "https://imgproxy-retcat.assets.schwarz/j5bN7E3YJlkzIC8mrcPvjzRV1oKy30O1Nw7rZjQvPms/sm:1/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9EMEJGQkJDNUUxRDE4NDgyQjM0ODFGNDA/zMTJGQzlERTE0OTRFRjkzOUVEQTUwQjQxMUU5MEM4QjQxQTI1NkNGLnBuZw.png",
-    "priceNew": 89.95,
-    "priceOld": 111.45,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/kureci-prsni-rizky/p10050599"
-  },
-  {
     "id": "l395a50",
     "name": "Secco Bianco/Rosato",
     "desc": "",
@@ -586,6 +894,34 @@
     "priceOld": 19.9,
     "validUntil": "2030-04-01",
     "url": "https://www.lidl.cz/p/secco-bianco-rosato/p10048796"
+  },
+  {
+    "id": "l686694",
+    "name": "Únětické pivo 10,7° PET",
+    "desc": "Dostupné pouze ve vybraných prodejnách",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Nápoje",
+    "emoji": "🥤",
+    "image": "https://imgproxy-retcat.assets.schwarz/bpZA0TAGQEHF7GfE12pCUnjCfSyBn9mp6bDWppDhmnU/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9FN0M5NDFDMDU0RUQzRTRGNzdDMTQwNEQ/0QTM3QTYwNERBODAwRkVFMjkzQUQ4NzcwODFGQjg5MDlDNUY5MDRGLnBuZw.png",
+    "priceNew": 84.9,
+    "priceOld": 114.62,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/uneticke-pivo-10-7-pet/p10052176"
+  },
+  {
+    "id": "lf25a6f",
+    "name": "Kuřecí prsní řízky",
+    "desc": "Dostupné pouze ve vybraných prodejnách.",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Klobásy a maso",
+    "emoji": "🥩",
+    "image": "https://imgproxy-retcat.assets.schwarz/j5bN7E3YJlkzIC8mrcPvjzRV1oKy30O1Nw7rZjQvPms/sm:1/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9EMEJGQkJDNUUxRDE4NDgyQjM0ODFGNDA/zMTJGQzlERTE0OTRFRjkzOUVEQTUwQjQxMUU5MEM4QjQxQTI1NkNGLnBuZw.png",
+    "priceNew": 89.95,
+    "priceOld": 111.45,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/kureci-prsni-rizky/p10050599"
   },
   {
     "id": "l77edbb",
@@ -602,6 +938,20 @@
     "url": "https://www.lidl.cz/p/sushi/p10045390"
   },
   {
+    "id": "lc6a30e",
+    "name": "MADETA Trvanlivé mléko plnotučné",
+    "desc": "1 l",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Sýry a mléčné výrobky (včetně másla a sýrů)",
+    "emoji": "🧀",
+    "image": "https://imgproxy-retcat.assets.schwarz/-k2ZDGKU9O1m1uRBW5Rkw2HFaiNOEetaBuO69tD2x5c/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS84QzI3OUE5MTlDNUMwMDUwOEFBMTE1QTU/xRjg1NEFGNEFBQjM3NzE4QTNCREMzMkFGNjhDMjcxNjMyNUU2M0U1LnBuZw.png",
+    "priceNew": 12.9,
+    "priceOld": 17.42,
+    "validUntil": "2026-05-13",
+    "url": "https://www.lidl.cz/p/madeta-trvanlive-mleko-plnotucne/p10051955"
+  },
+  {
     "id": "lf0f4f7",
     "name": "Trvanlivé mléko 1,5%",
     "desc": "1 l",
@@ -614,62 +964,6 @@
     "priceOld": 14.9,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/trvanlive-mleko-1-5/p10051912"
-  },
-  {
-    "id": "l2e7759",
-    "name": "Bio jogurt bílý 3,8%, tuku",
-    "desc": "150 g",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Sýry a mléčné výrobky (včetně másla a sýrů)",
-    "emoji": "🧀",
-    "image": "https://imgproxy-retcat.assets.schwarz/yxRkadbmgmF6jQkX9Rs5WZ4KkpgdjfgeMsmZ5rQepec/sm:1/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50LzlEN0VGMUJDM0VGMDNENDZFREUxNjgwN0/Q1M0UyQTY3QzREMDlBQzQ4QjNGODc1NTdEMTA1NzRBMzlGMzFFNzkucG5n.png",
-    "priceNew": 9.9,
-    "priceOld": 11.9,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/bio-jogurt-bily-3-8-tuku/p10045699"
-  },
-  {
-    "id": "l9ff019",
-    "name": "Hamburgerová bulka",
-    "desc": "85 g",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Chléb a pečivo",
-    "emoji": "🍞",
-    "image": "https://imgproxy-retcat.assets.schwarz/hyfRlF4VRHvYEs938HImSP62qrKU-o6a4anjS5RPWKs/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9DNDU0NTk5NkNFQzA4NDU4RDI1NzBGN0M/zMUZCQTlEN0UyQjU1QzNENUY1QUQ5MUI2NUU0OEZDQkI1MDQ0OTA2LnBuZw.png",
-    "priceNew": 6.9,
-    "priceOld": 9.9,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/hamburgerova-bulka/p10050541"
-  },
-  {
-    "id": "l4f7bb7",
-    "name": "Big Sushi Set",
-    "desc": "Dostupné pouze ve vybraných prodejnách",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "hotová jídla (kromě mražené pizzy atd. a pečiva)",
-    "emoji": "🍞",
-    "image": "https://imgproxy-retcat.assets.schwarz/Z-pHawb0BcdpXK_FscFvvYUx8dppY8pvF2Q6_zYOXw4/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9FMzlBRjBGNDA1MTJGNzU3RUNBQUY4QjF/DQzMxOUMyQzdCODNBRkQ0NzI1OTIxMkE5Njc5M0U2MDBDNTFFNTc2LnBuZw.png",
-    "priceNew": 249.9,
-    "priceOld": 337.37,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/big-sushi-set/p10050104"
-  },
-  {
-    "id": "lfac3aa",
-    "name": "Bezlaktózové trvanlivé mléko 1,5%",
-    "desc": "1 l",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Sýry a mléčné výrobky (včetně másla a sýrů)",
-    "emoji": "🧀",
-    "image": "https://imgproxy-retcat.assets.schwarz/1i-kHJbHYs2Jp0-Y7Y8OkkF5LSJh5yMPtZ6U60olwRk/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50LzJGQzQ2MEY1NTExMENGNTk2RjBCOTc3OT/lFRDVCNzk1OTg5NjQ2MTBGNDhCNjNFM0I0QzcwOUIwRDk4RTNGMzUucG5n.png",
-    "priceNew": 18.9,
-    "priceOld": 19.9,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/bezlaktozove-trvanlive-mleko-1-5/p10051914"
   },
   {
     "id": "l144184",
@@ -686,6 +980,48 @@
     "url": "https://www.lidl.cz/p/philadelphia-original/p10050111"
   },
   {
+    "id": "l9ff019",
+    "name": "Hamburgerová bulka",
+    "desc": "85 g",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Chléb a pečivo",
+    "emoji": "🍞",
+    "image": "https://imgproxy-retcat.assets.schwarz/hyfRlF4VRHvYEs938HImSP62qrKU-o6a4anjS5RPWKs/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9DNDU0NTk5NkNFQzA4NDU4RDI1NzBGN0M/zMUZCQTlEN0UyQjU1QzNENUY1QUQ5MUI2NUU0OEZDQkI1MDQ0OTA2LnBuZw.png",
+    "priceNew": 6.9,
+    "priceOld": 9.9,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/hamburgerova-bulka/p10050541"
+  },
+  {
+    "id": "lfac3aa",
+    "name": "Bezlaktózové trvanlivé mléko 1,5%",
+    "desc": "1 l",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Sýry a mléčné výrobky (včetně másla a sýrů)",
+    "emoji": "🧀",
+    "image": "https://imgproxy-retcat.assets.schwarz/1i-kHJbHYs2Jp0-Y7Y8OkkF5LSJh5yMPtZ6U60olwRk/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50LzJGQzQ2MEY1NTExMENGNTk2RjBCOTc3OT/lFRDVCNzk1OTg5NjQ2MTBGNDhCNjNFM0I0QzcwOUIwRDk4RTNGMzUucG5n.png",
+    "priceNew": 18.9,
+    "priceOld": 19.9,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/bezlaktozove-trvanlive-mleko-1-5/p10051914"
+  },
+  {
+    "id": "le17f8f",
+    "name": "SNACK DAY Bramborové chipsy",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Občerstvení a cukrovinky",
+    "emoji": "🥔",
+    "image": "https://imgproxy-retcat.assets.schwarz/6F1CbnnnpRgAuuXU5HeTjBw0XfKjCGulU-RxYohd1A4/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS8wQzU5Q0MxM0VDNDQ2NkMwRTFFRkFERTA/4M0E1MTc0RkNGMjVEN0M2QTM3RTdFOTY5N0RDQkRDRjhENDA4MzZGLnBuZw.png",
+    "priceNew": 19.93,
+    "priceOld": 29.9,
+    "validUntil": "2026-05-17",
+    "url": "https://www.lidl.cz/p/snack-day-bramborove-chipsy/p10039866"
+  },
+  {
     "id": "le2ee01",
     "name": "PILOS Mozzarella classic/light",
     "desc": "125 g",
@@ -698,20 +1034,6 @@
     "priceOld": 22.9,
     "validUntil": "2026-05-17",
     "url": "https://www.lidl.cz/p/pilos-mozzarella-classic-light/p10049207"
-  },
-  {
-    "id": "le3295f",
-    "name": "Ballino Zmrzlina v oplatce",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Mražené potraviny (Mražené potraviny)",
-    "emoji": "🍦",
-    "image": "https://imgproxy-retcat.assets.schwarz/qXTBu9BGkeYwJypUf40AEHMX3tN-LYNdw_XG9CrLrco/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50L0ExOEI5MUUxMzc5Mzc4MTE5OUJGMjMzOD/UzMDYyMjEyQTk1MUJCMkZFQzQwNDRFNjZDMEE1OURFMjFCQkI3MUMucG5n.png",
-    "priceNew": 4.9,
-    "priceOld": 6.62,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/ballino-zmrzlina-v-oplatce/p10052980"
   },
   {
     "id": "l13766f",
@@ -742,20 +1064,6 @@
     "url": "https://www.lidl.cz/p/grillmeister-plynovy-gril-6-1-bocni-horak-18-kw/p100399659"
   },
   {
-    "id": "ld20ea0",
-    "name": "PARKSIDE PERFORMANCE® Robotická sekačka na trávu PPAMR 1250 A1 Smart & Free – včetně akumulátoru a nabíjecí stanice",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Zahradní technika a zahradní nářadí",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcpdeacfaec8b094ced874b11d898975ec3.jpg",
-    "priceNew": 16999,
-    "priceOld": 22948.65,
-    "validUntil": "2026-05-17",
-    "url": "https://www.lidl.cz/p/parkside-performance-roboticka-sekacka-na-travu-ppamr-1250-a1-smart-free-vcetne-akumulatoru-a-nabijeci-stanice/p100405120"
-  },
-  {
     "id": "l93b613",
     "name": "PARKSIDE PERFORMANCE® Benzínová sekačka na trávu s elektrickým startováním PPBRM 53 B2",
     "desc": "",
@@ -770,20 +1078,6 @@
     "url": "https://www.lidl.cz/p/parkside-performance-benzinova-sekacka-na-travu-s-elektrickym-startovanim-ppbrm-53-b2/p100406090"
   },
   {
-    "id": "l7f61cc",
-    "name": "PARKSIDE® Aku strunová sekačka PRTA 20-Li D3 – bez akumulátoru a nabíječky",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Zahradní technika a zahradní nářadí",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcp7e518844525c44b0b062b7863c2e710d.jpg",
-    "priceNew": 499.9,
-    "priceOld": 674.87,
-    "validUntil": "2026-05-17",
-    "url": "https://www.lidl.cz/p/parkside-aku-strunova-sekacka-prta-20-li-d3-bez-akumulatoru-a-nabijecky/p100399743"
-  },
-  {
     "id": "l9dd23a",
     "name": "PARKSIDE® Zahradní domek na nářadí M",
     "desc": "",
@@ -796,34 +1090,6 @@
     "priceOld": 3899,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/parkside-zahradni-domek-na-naradi-m/p100405386"
-  },
-  {
-    "id": "l4111f5",
-    "name": "PARKSIDE PERFORMANCE® Aku kombinované kladivo PKHAP 2034-Li B1 – bez akumulátoru a nabíječky",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Bateriové nástroje",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcp859b4545a91246529fab3ad234821f7f.jpg",
-    "priceNew": 1999,
-    "priceOld": 2698.65,
-    "validUntil": "2026-05-17",
-    "url": "https://www.lidl.cz/p/parkside-performance-aku-kombinovane-kladivo-pkhap-2034-li-b1-bez-akumulatoru-a-nabijecky/p100396831"
-  },
-  {
-    "id": "l3e9c27",
-    "name": "lupilu® Dětské kryté pískoviště",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Hračky",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcpaa1c7278592342b0b5c0a8d1f5669818.jpg",
-    "priceNew": 699,
-    "priceOld": 1099,
-    "validUntil": "2026-03-22",
-    "url": "https://www.lidl.cz/p/lupilu-detske-kryte-piskoviste/p100400239"
   },
   {
     "id": "lc9f4b0",
@@ -868,6 +1134,20 @@
     "url": "https://www.lidl.cz/p/karcher-vysokotlaky-cistic-khd-3/p100386724"
   },
   {
+    "id": "l3e9c27",
+    "name": "lupilu® Dětské kryté pískoviště",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Hračky",
+    "emoji": "🛒",
+    "image": "https://www.lidl.cz/assets/gcpaa1c7278592342b0b5c0a8d1f5669818.jpg",
+    "priceNew": 699,
+    "priceOld": 1099,
+    "validUntil": "2026-03-22",
+    "url": "https://www.lidl.cz/p/lupilu-detske-kryte-piskoviste/p100400239"
+  },
+  {
     "id": "l92872e",
     "name": "PARKSIDE PERFORMANCE® Jednoruční svorka, 900 mm / Sada jednoručních svorek, 300 mm",
     "desc": "",
@@ -908,34 +1188,6 @@
     "priceOld": 199.9,
     "validUntil": "2026-05-17",
     "url": "https://www.lidl.cz/p/parkside-performance-sada-vrutu/p100405817"
-  },
-  {
-    "id": "l729c01",
-    "name": "PARKSIDE® Univerzální lano, 30 m",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Dílna & hardware",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcp27cccfd6cd0b4bf7a491dc6ba0db8cf1.jpg",
-    "priceNew": 99.9,
-    "priceOld": 119.9,
-    "validUntil": "2026-05-17",
-    "url": "https://www.lidl.cz/p/parkside-univerzalni-lano-30-m/p100397884"
-  },
-  {
-    "id": "l147080",
-    "name": "PARKSIDE® Zavlažovací kužely",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Květiny, rostliny a rostlinné doplňky",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcp7e13b6826c50466db20b792089b37c67.jpg",
-    "priceNew": 79.9,
-    "priceOld": 129.9,
-    "validUntil": "2026-05-17",
-    "url": "https://www.lidl.cz/p/parkside-zavlazovaci-kuzely/p100405150"
   },
   {
     "id": "lf4124e",
@@ -1162,20 +1414,6 @@
     "url": "https://www.lidl.cz/p/livarno-frote-osuska-70-x-140-cm/p100399252"
   },
   {
-    "id": "le637c5",
-    "name": "LIVARNO® Froté ručník, 50 x 100 cm, 2 kusy",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Koupelna",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcpf20e0c2133f24bce9a3d7d58906634f2.jpg",
-    "priceNew": 149.9,
-    "priceOld": 189.9,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/livarno-frote-rucnik-50-x-100-cm-2-kusy/p100399199"
-  },
-  {
     "id": "l131548",
     "name": "CRIVIT Sada na badminton",
     "desc": "",
@@ -1244,20 +1482,6 @@
     "priceOld": 99.9,
     "validUntil": "2026-03-01",
     "url": "https://www.lidl.cz/p/livarno-ulozny-kos-o-20-cm/p100399322"
-  },
-  {
-    "id": "l798f7b",
-    "name": "LIVARNO® Lavice s úložným prostorem, 50 x 30 x 30 cm",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Pokoj pro děti a kojence",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcp16c2fe86d7204693af8d525b071eb8f5.jpg",
-    "priceNew": 149.9,
-    "priceOld": 269.9,
-    "validUntil": "2026-03-01",
-    "url": "https://www.lidl.cz/p/livarno-lavice-s-uloznym-prostorem-50-x-30-x-30-cm/p100399296"
   },
   {
     "id": "lfb09a5",
@@ -1386,18 +1610,32 @@
     "url": "https://www.lidl.cz/p/esmara-damska-prosivana-bunda/p100382984"
   },
   {
-    "id": "l0298d2",
-    "name": "esmara® Dámské úpletové šaty",
+    "id": "l213781",
+    "name": "esmara® Dámské úpletové šaty (béžová)",
     "desc": "",
     "store": "lidl",
     "storeName": "Lidl",
     "category": "Dámská móda",
     "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcpef2e1fd89df642c9a33a7d4710bb2397.jpg",
+    "image": "https://www.lidl.cz/assets/gcp5e0117a0d5664b5db2fdfb55a7c650ec.jpg",
     "priceNew": 249.9,
     "priceOld": 349.9,
     "validUntil": "",
-    "url": "https://www.lidl.cz/p/esmara-damske-upletove-saty/p100382453"
+    "url": "https://www.lidl.cz/p/esmara-damske-upletove-saty/p100382453801"
+  },
+  {
+    "id": "l3650a4",
+    "name": "esmara® Dámské úpletové šaty (šedá)",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Dámská móda",
+    "emoji": "🛒",
+    "image": "https://www.lidl.cz/assets/gcp59a705f8bf9744bcb13c9185784a2715.jpg",
+    "priceNew": 249.9,
+    "priceOld": 349.9,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/esmara-damske-upletove-saty/p100382453802"
   },
   {
     "id": "la21dad",
@@ -1412,20 +1650,6 @@
     "priceOld": 279.9,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/esmara-damske-sifonove-saty/p100381244802"
-  },
-  {
-    "id": "lc67856",
-    "name": "esmara® Dámské šifonové šaty (černá)",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Dámská móda",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcpd72332fb4cf94f7ba541e977c0a262e1.jpg",
-    "priceNew": 149.9,
-    "priceOld": 279.9,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/esmara-damske-sifonove-saty/p100381244801"
   },
   {
     "id": "lfff489",
@@ -1510,20 +1734,6 @@
     "priceOld": 169.9,
     "validUntil": "2026-05-17",
     "url": "https://www.lidl.cz/p/esmara-damske-palazzo-kalhoty-wide-leg/p100405301"
-  },
-  {
-    "id": "lcc0b4a",
-    "name": "esmara® Dámské kalhoty se širokými nohavicemi, módní 7/8 délka",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Dámská móda",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcpe1f08432e77c4a0eb503afba74ae3a09.jpg",
-    "priceNew": 129.9,
-    "priceOld": 175.37,
-    "validUntil": "2025-06-15",
-    "url": "https://www.lidl.cz/p/esmara-damske-kalhoty-se-sirokymi-nohavicemi-modni-7-8-delka/p100389887"
   },
   {
     "id": "l3c29a1",
