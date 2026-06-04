@@ -476,20 +476,6 @@
     "url": "https://www.billa.cz/produkt/pez-figurka-2-pez-stanglicky-ovocne-82112680"
   },
   {
-    "id": "b7f0a89",
-    "name": "PEZ Fizzy Hello Kitty",
-    "desc": "30 kg",
-    "store": "billa",
-    "storeName": "Billa",
-    "category": "Komprimáty",
-    "emoji": "🛒",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-112763-1139326954-xNs6OeeO.jpg",
-    "priceNew": 16.9,
-    "priceOld": 24.9,
-    "validUntil": "",
-    "url": "https://www.billa.cz/produkt/pez-fizzy-hello-kitty-82112763"
-  },
-  {
     "id": "b6ec6cd",
     "name": "Bounty",
     "desc": "57 kg",
@@ -602,20 +588,6 @@
     "url": "https://www.billa.cz/produkt/opavia-susenky-zlate-polomacene-horke-100g-82175455"
   },
   {
-    "id": "lbf4ef6",
-    "name": "Jihoamerický Rump steak",
-    "desc": "Dostupné pouze ve vybraných prodejnách",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Klobásy a maso",
-    "emoji": "🥩",
-    "image": "https://imgproxy-retcat.assets.schwarz/6Bd96P6xW7HQeoEH-kffJ2UDw0AODk3j7mooKz27PUE/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS85RDVFRjg2MEREQzhGMjQ1RDZCNzMxNUY/2NEE1OUYyQkI4MURFMDU3QjEwQkNFMEMyNEMzNDc4MjAyNkVENDQ0LmpwZw.jpg",
-    "priceNew": 79.9,
-    "priceOld": 107.87,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/jihoamericky-rump-steak/p10047367"
-  },
-  {
     "id": "l77edbb",
     "name": "Sushi",
     "desc": "168 g",
@@ -628,6 +600,20 @@
     "priceOld": 107.87,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/sushi/p10045390"
+  },
+  {
+    "id": "lbf4ef6",
+    "name": "Jihoamerický Rump steak",
+    "desc": "Dostupné pouze ve vybraných prodejnách",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Klobásy a maso",
+    "emoji": "🥩",
+    "image": "https://imgproxy-retcat.assets.schwarz/6Bd96P6xW7HQeoEH-kffJ2UDw0AODk3j7mooKz27PUE/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS85RDVFRjg2MEREQzhGMjQ1RDZCNzMxNUY/2NEE1OUYyQkI4MURFMDU3QjEwQkNFMEMyNEMzNDc4MjAyNkVENDQ0LmpwZw.jpg",
+    "priceNew": 79.9,
+    "priceOld": 107.87,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/jihoamericky-rump-steak/p10047367"
   },
   {
     "id": "l69ff41",
@@ -672,20 +658,6 @@
     "url": "https://www.lidl.cz/p/allini-secco-rosato-bianco/p10053185"
   },
   {
-    "id": "lc652eb",
-    "name": "Gelatelli Karamelový kornout s karamelovou náplní",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Mražené potraviny (Mražené potraviny)",
-    "emoji": "🧊",
-    "image": "https://imgproxy-retcat.assets.schwarz/y1W6TaXppR80zpJwP2OWRuViHAyQAaXs1w-URrqH5Zc/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50LzRENDUwMEI1RkIyODQzMjQzM0JCQzU0QU/Q0MUFCMzJCOUQ2OTM0Q0RBMDZBRTQyRTlDMzBENDYyNUUyQ0YxMUEucG5n.png",
-    "priceNew": 14.9,
-    "priceOld": 20.12,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/gelatelli-karamelovy-kornout-s-karamelovou-naplni/p10052972"
-  },
-  {
     "id": "l69ec4e",
     "name": "BRITA Náhradní filtrační patrona MAXTRA PRO Pure Performance (Balení po 6 kusech)",
     "desc": "",
@@ -700,20 +672,6 @@
     "url": "https://www.lidl.cz/p/brita-nahradni-filtracni-patrona-maxtra-pro-pure-performance/p100397638001"
   },
   {
-    "id": "l1d6f8a",
-    "name": "Gelatelli Vanilkový kornout s lesními plody",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Mražené potraviny (Mražené potraviny)",
-    "emoji": "🧊",
-    "image": "https://imgproxy-retcat.assets.schwarz/WzbnVEvi22Y9X-zDGzC4UfpIn_lYBJSdie2k7709ctw/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50Lzc3OTk4M0IxNUE2Q0VCNDYxNjVDOTc4ME/E3RERGOTZCMTExNjgwNjdBNEMwMkYzRTk4QjAwMzNENjQ1RTBFMTcucG5n.png",
-    "priceNew": 14.9,
-    "priceOld": 20.12,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/gelatelli-vanilkovy-kornout-s-lesnimi-plody/p10052970"
-  },
-  {
     "id": "l1a8fe1",
     "name": "Gelatelli Proteinový nanuk čokoládový",
     "desc": "",
@@ -726,6 +684,20 @@
     "priceOld": 13.37,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/gelatelli-proteinovy-nanuk-cokoladovy/p10053016"
+  },
+  {
+    "id": "lbba628",
+    "name": "Torti 2-minutové",
+    "desc": "500 g",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "hotová jídla (kromě mražené pizzy atd. a pečiva)",
+    "emoji": "🍞",
+    "image": "https://imgproxy-retcat.assets.schwarz/c7D1_g6hID3VRdF5j_TaQbGFl5wt8oGmDTmGKLT87f4/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50LzBFQ0I3QzlCOEI1MjU1MjRCM0ZERUFCNk/UyODlGN0I1NDk2OEFFNkIyMzUzNDQwM0RFMEREQjlBQjMwMERGM0UucG5n.png",
+    "priceNew": 17.9,
+    "priceOld": 24.16,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/torti-2-minutove/p10051902"
   },
   {
     "id": "l395a50",
@@ -756,18 +728,32 @@
     "url": "https://www.lidl.cz/p/secco-bianco/p10052471"
   },
   {
-    "id": "le3295f",
-    "name": "Ballino Zmrzlina v oplatce",
+    "id": "l773231",
+    "name": "ARGUS ARGUS Radler Citrus mix plech",
     "desc": "",
     "store": "lidl",
     "storeName": "Lidl",
-    "category": "Mražené potraviny (Mražené potraviny)",
-    "emoji": "🍦",
-    "image": "https://imgproxy-retcat.assets.schwarz/qXTBu9BGkeYwJypUf40AEHMX3tN-LYNdw_XG9CrLrco/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50L0ExOEI5MUUxMzc5Mzc4MTE5OUJGMjMzOD/UzMDYyMjEyQTk1MUJCMkZFQzQwNDRFNjZDMEE1OURFMjFCQkI3MUMucG5n.png",
-    "priceNew": 4.9,
-    "priceOld": 6.62,
+    "category": "Nápoje",
+    "emoji": "🥤",
+    "image": "https://imgproxy-retcat.assets.schwarz/R5hhnJskwP2C0HLMAkdr3ZfCTpsS8ZKXscWP2aMXfrs/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50Lzc1REIyN0NGMjcyNjJGQ0VEMTM0RDNDME/M5RTU4RTkxQjAxNjA3MjAzOTZBQ0JGNUQwOUJCODhDRDNDNzBERTUucG5n.png",
+    "priceNew": 16.9,
+    "priceOld": 22.82,
     "validUntil": "",
-    "url": "https://www.lidl.cz/p/ballino-zmrzlina-v-oplatce/p10052980"
+    "url": "https://www.lidl.cz/p/argus-argus-radler-citrus-mix-plech/p10052946"
+  },
+  {
+    "id": "ld6621e",
+    "name": "Brambory rané",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Ovoce a zelenina",
+    "emoji": "🍎",
+    "image": "https://imgproxy-retcat.assets.schwarz/RIuWaPcW357-HVmIkgtqVJotz_cgVcbB6uRp3iFeafo/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50LzM1QzJCN0I1RUM2Nzk4NkZFNkRGNTgyOD/Q1RjRERTZENTVGODc3RTE1NzgwNjkxNDAyQzNFODQ1MkFCQzVCREUucG5n.png",
+    "priceNew": 19.9,
+    "priceOld": 34.9,
+    "validUntil": "2026-06-14",
+    "url": "https://www.lidl.cz/p/brambory-rane/p10053873"
   },
   {
     "id": "l0e88fb",
@@ -1750,18 +1736,32 @@
     "url": "https://www.lidl.cz/p/crivit-panske-funkcni-kratasy/p100406540"
   },
   {
-    "id": "l85a4e5",
-    "name": "esmara Men Pánská obuv „Sneaker\"",
+    "id": "l9725e6",
+    "name": "esmara Men Pánská obuv „Sneaker\" (béžová)",
     "desc": "",
     "store": "lidl",
     "storeName": "Lidl",
     "category": "Pánské oblečení",
     "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcpa1020bdebf5940448ce9e305e5738218.jpg",
+    "image": "https://www.lidl.cz/assets/gcp428279932fdb451c96fc4f15d4ba4983.jpg",
     "priceNew": 299.9,
     "priceOld": 369.9,
     "validUntil": "2026-06-07",
-    "url": "https://www.lidl.cz/p/esmara-men-panska-obuv-sneaker/p100405353"
+    "url": "https://www.lidl.cz/p/esmara-men-panska-obuv-sneaker/p100405353801"
+  },
+  {
+    "id": "lc58336",
+    "name": "esmara Men Pánská obuv „Sneaker\" (navy modrá)",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Pánské oblečení",
+    "emoji": "🛒",
+    "image": "https://www.lidl.cz/assets/gcp3fc5142e876c4e5c90e2ad404f4081a0.jpg",
+    "priceNew": 299.9,
+    "priceOld": 369.9,
+    "validUntil": "2026-06-07",
+    "url": "https://www.lidl.cz/p/esmara-men-panska-obuv-sneaker/p100405353802"
   },
   {
     "id": "lffe57b",
@@ -1832,20 +1832,6 @@
     "priceOld": 159.9,
     "validUntil": "2026-06-07",
     "url": "https://www.lidl.cz/p/divci-plavky/p100406264"
-  },
-  {
-    "id": "la09628",
-    "name": "lupilu® Chlapecká mušelínová souprava, 2dílná (modrá)",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Dětské oblečení",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcp00e7f86d37d34e28a8e913c0e682d045.jpg",
-    "priceNew": 99.9,
-    "priceOld": 169.9,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/lupilu-chlapecka-muselinova-souprava-2dilna/p100400660802"
   },
   {
     "id": "laf45a2",
