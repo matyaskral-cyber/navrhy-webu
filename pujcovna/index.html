@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Půjčovna">
+  <meta name="theme-color" content="#0c1220">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="icon" href="icon-192.png">
+  <title>Půjčovna Zvůle</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
+    input, textarea { -webkit-user-select: text; user-select: text; }
+    :root {
+      --bg: #0c1220;
+      --bg2: #111827;
+      --card: #1e293b;
+      --card2: #2d3a4f;
+      --green: #22c55e;
+      --green-d: #16a34a;
+      --blue: #3b82f6;
+      --gold: #e8b830;
+      --red: #ef4444;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --border: #334155;
+    }
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: calc(80px + env(safe-area-inset-bottom));
+      overscroll-behavior: none;
+    }
+
+    /* Header */
+    .header {
+      position: sticky; top: 0; z-index: 40;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 18px;
+      padding-top: calc(14px + env(safe-area-inset-top));
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .header h1 { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.01em; }
+    .header h1 span { color: var(--green); }
+    .header .clock { font-size: 1rem; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+    /* Views */
+    .view { display: none; padding: 8px 14px 20px; }
+    .view.active { display: block; }
+
+    .section-label {
+      padding: 14px 4px 8px;
+      font-size: 0.7rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+    }
+
+    /* Catalog grid */
+    .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    @media (min-width: 640px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+    .cat-btn {
+      background: var(--card); border: 2px solid var(--border);
+      border-radius: 18px; padding: 18px 12px; text-align: center;
+      cursor: pointer; transition: transform .1s, background .1s;
+      min-height: 130px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 6px; position: relative;
+    }
+    .cat-btn:active { transform: scale(.95); background: var(--card2); }
+    .cat-btn .emoji { font-size: 2.6rem; line-height: 1; }
+    .cat-btn .name { font-size: 1rem; font-weight: 700; line-height: 1.15; }
+    .cat-btn .rate { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+    .cat-btn .out-badge {
+      position: absolute; top: 8px; right: 8px;
+      background: var(--blue); color: #fff; font-size: 0.72rem; font-weight: 800;
+      padding: 3px 8px; border-radius: 9px; display: none;
+    }
+    .cat-btn.has-out .out-badge { display: block; }
+    .cat-btn .stock { font-size: 0.72rem; color: var(--green); font-weight: 700; }
+    .cat-btn .stock.none { color: var(--red); }
+    .cat-btn.soldout { opacity: 0.55; }
+
+    /* Active rental cards */
+    .empty { color: var(--muted); text-align: center; padding: 40px 20px; font-size: 0.95rem; }
+    .rental {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 14px 16px; margin-bottom: 10px;
+    }
+    .rental-top { display: flex; align-items: center; gap: 12px; }
+    .rental-emoji { font-size: 2rem; }
+    .rental-info { flex: 1; min-width: 0; }
+    .rental-name { font-size: 1.05rem; font-weight: 700; }
+    .rental-name .cnt { color: var(--green); }
+    .rental-sub { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+    .rental-right { text-align: right; }
+    .rental-elapsed { font-size: 1.05rem; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--gold); }
+    .rental-price { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+    .rental-actions { display: flex; gap: 8px; margin-top: 12px; }
+    .btn { border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: transform .08s; }
+    .btn:active { transform: scale(.96); }
+    .btn-return { flex: 1; padding: 13px; background: var(--green); color: #fff; font-size: 0.95rem; }
+    .btn-cancel { padding: 13px 16px; background: rgba(239,68,68,.15); color: var(--red); font-size: 0.95rem; }
+    .paid-tag {
+      display: inline-block; background: rgba(34,197,94,.14); color: var(--green);
+      font-size: 0.74rem; font-weight: 700; padding: 3px 9px; border-radius: 7px; margin-top: 6px;
+    }
+    .kauce-tag {
+      display: inline-block; background: rgba(232,184,48,.15); color: var(--gold);
+      font-size: 0.74rem; font-weight: 700; padding: 2px 8px; border-radius: 7px; margin-top: 6px;
+    }
+    .rental.overdue { border-color: var(--red); background: rgba(239,68,68,.08); }
+    .rental.overdue .rental-elapsed { color: var(--red); }
+    .over-tag {
+      display: inline-block; background: var(--red); color: #fff; margin-left: 6px;
+      font-size: 0.7rem; font-weight: 800; padding: 3px 8px; border-radius: 7px;
+      animation: blink 1s steps(2,start) infinite;
+    }
+    @keyframes blink { 50% { opacity: .35; } }
+    .btn-extend { padding: 13px 14px; background: var(--card2); color: var(--text); font-size: 0.92rem; }
+    .nav .nav-badge.over { animation: blink 0.8s steps(2,start) infinite; }
+    .stat-top { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 8px; }
+    .stat-top .srow { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 3px 0; }
+    .stat-top .srow span { color: var(--text); }
+    .stat-top .srow b { color: var(--gold); }
+    /* Výběr délky */
+    .dur-pick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .dur-pick button {
+      padding: 14px 6px; border-radius: 12px; border: 2px solid var(--border);
+      background: var(--card); color: var(--text); font-size: 0.92rem; font-weight: 700;
+    }
+    .dur-pick button.sel { border-color: var(--green); background: rgba(34,197,94,.12); color: var(--green); }
+    .custom-hours { display: flex; align-items: center; gap: 14px; margin-top: 12px; justify-content: space-between; }
+    .custom-hours .ch-lbl { font-size: 0.9rem; font-weight: 700; color: var(--muted); }
+
+    /* Dnešek */
+    .summary { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px; }
+    .stat { background: var(--card); border-radius: 16px; padding: 16px; }
+    .stat .big { font-size: 1.7rem; font-weight: 800; }
+    .stat .lbl { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+    .stat.full { grid-column: 1 / -1; }
+    .stat .big.green { color: var(--green); }
+    .split { display: flex; gap: 14px; margin-top: 8px; }
+    .split div { font-size: 0.85rem; color: var(--muted); }
+    .split b { color: var(--text); }
+    .hist-item {
+      background: var(--card); border-radius: 12px; padding: 12px 14px; margin-bottom: 6px;
+      display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    }
+    .hist-left .l1 { font-size: 0.92rem; font-weight: 600; }
+    .hist-left .l2 { font-size: 0.76rem; color: var(--muted); margin-top: 2px; }
+    .hist-amt { font-weight: 800; color: var(--green); font-size: 1rem; white-space: nowrap; }
+    .hist-amt .pay { display: block; font-size: 0.68rem; color: var(--muted); font-weight: 600; text-align: right; }
+
+    /* Pokladna */
+    .cash-break { background: var(--card); border-radius: 16px; padding: 14px 16px; margin-top: 10px; }
+    .cash-break div { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; font-size: 0.92rem; }
+    .cash-break div + div { border-top: 1px solid var(--border); }
+    .cash-break span { color: var(--muted); }
+    .cash-break b { font-weight: 700; }
+    .cash-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .cash-actions .btn { padding: 15px 6px; background: var(--card); color: var(--text); border: 1px solid var(--border); font-size: 0.9rem; font-weight: 700; }
+    .cash-actions .btn:active { background: var(--card2); }
+
+    /* Settings */
+    .set-item {
+      background: var(--card); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .set-item .emoji { font-size: 1.8rem; }
+    .set-item .si-info { flex: 1; }
+    .set-item .si-name { font-weight: 700; }
+    .set-item .si-rate { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+    .set-item .si-edit { padding: 9px 14px; background: var(--card2); color: var(--text); border-radius: 10px; font-size: 0.85rem; font-weight: 700; }
+    .btn-wide { width: 100%; padding: 15px; border-radius: 14px; font-size: 0.95rem; font-weight: 700; margin-top: 6px; }
+    .btn-add { background: var(--blue); color: #fff; }
+    .btn-danger { background: rgba(239,68,68,.15); color: var(--red); margin-top: 18px; }
+
+    /* Bottom nav */
+    .nav {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+      background: var(--card); border-top: 1px solid var(--border);
+      display: flex; padding-bottom: env(safe-area-inset-bottom);
+    }
+    .nav button {
+      flex: 1; background: none; border: none; color: var(--muted);
+      padding: 10px 4px 8px; font-size: 0.7rem; font-weight: 700;
+      display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; position: relative;
+    }
+    .nav button .ic { font-size: 1.5rem; }
+    .nav button.active { color: var(--green); }
+    .nav .nav-badge {
+      position: absolute; top: 4px; right: 50%; margin-right: -22px;
+      background: var(--red); color: #fff; font-size: 0.65rem; font-weight: 800;
+      min-width: 18px; height: 18px; border-radius: 9px; padding: 0 4px;
+      display: none; align-items: center; justify-content: center;
+    }
+    .nav .nav-badge.show { display: flex; }
+
+    /* Modal */
+    .overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.65);
+      z-index: 100; align-items: flex-end; justify-content: center;
+    }
+    .overlay.show { display: flex; }
+    .sheet {
+      background: var(--bg2); width: 100%; max-width: 520px;
+      border-radius: 22px 22px 0 0; padding: 8px 18px 18px;
+      padding-bottom: calc(18px + env(safe-area-inset-bottom));
+      max-height: 92vh; overflow-y: auto; animation: up .22s ease;
+    }
+    @keyframes up { from { transform: translateY(40px); opacity: .5; } to { transform: translateY(0); opacity: 1; } }
+    .handle { width: 40px; height: 5px; background: var(--border); border-radius: 3px; margin: 6px auto 16px; }
+    .sheet h2 { font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; text-align: center; }
+    .sheet .sub { text-align: center; color: var(--muted); font-size: 0.85rem; margin-bottom: 18px; }
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .05em; }
+    .field input, .field select, .field textarea {
+      width: 100%; background: var(--card); border: 1px solid var(--border); color: var(--text);
+      border-radius: 12px; padding: 14px; font-size: 1.05rem; font-family: inherit;
+    }
+    .field input:focus, .field select:focus { outline: none; border-color: var(--green); }
+    .stepper { display: flex; align-items: center; gap: 0; }
+    .stepper button {
+      width: 56px; height: 56px; font-size: 1.6rem; font-weight: 800;
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+    }
+    .stepper button:first-child { border-radius: 12px 0 0 12px; }
+    .stepper button:last-child { border-radius: 0 12px 12px 0; }
+    .stepper .val { flex: 1; text-align: center; font-size: 1.5rem; font-weight: 800; background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); height: 56px; line-height: 56px; }
+    .pay-toggle { display: flex; gap: 10px; }
+    .pay-toggle button {
+      flex: 1; padding: 16px; border-radius: 12px; border: 2px solid var(--border);
+      background: var(--card); color: var(--muted); font-size: 1rem; font-weight: 700;
+    }
+    .pay-toggle button.sel { border-color: var(--green); background: rgba(34,197,94,.12); color: var(--green); }
+    .price-box { background: var(--card); border-radius: 14px; padding: 16px; text-align: center; margin-bottom: 14px; }
+    .price-box .pb-time { font-size: 0.85rem; color: var(--muted); }
+    .price-box .pb-amt { font-size: 2.4rem; font-weight: 800; color: var(--green); margin: 4px 0; font-variant-numeric: tabular-nums; }
+    .price-edit { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 6px; }
+    .price-edit input { width: 110px; text-align: center; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 10px; padding: 8px; font-size: 1.1rem; font-weight: 700; }
+    .sheet-actions { display: flex; gap: 10px; margin-top: 8px; }
+    .btn-primary { flex: 2; padding: 17px; background: var(--green); color: #fff; border-radius: 14px; font-size: 1.05rem; font-weight: 800; border: none; }
+    .btn-ghost { flex: 1; padding: 17px; background: var(--card); color: var(--text); border-radius: 14px; font-size: 1rem; font-weight: 700; border: none; }
+    .emoji-pick { display: flex; flex-wrap: wrap; gap: 8px; }
+    .emoji-pick button { width: 50px; height: 50px; font-size: 1.5rem; border-radius: 12px; border: 2px solid var(--border); background: var(--card); }
+    .emoji-pick button.sel { border-color: var(--green); }
+    .toast {
+      position: fixed; bottom: calc(96px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%);
+      background: var(--green-d); color: #fff; padding: 12px 22px; border-radius: 30px;
+      font-weight: 700; font-size: 0.9rem; z-index: 200; opacity: 0; transition: opacity .25s, transform .25s;
+      pointer-events: none; box-shadow: 0 8px 24px rgba(0,0,0,.4); white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+    .row2 { display: flex; gap: 12px; }
+    .row2 .field { flex: 1; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1><span>Půjčovna</span> Zvůle</h1>
+    <div class="clock" id="clock">--:--</div>
+  </div>
+
+  <!-- PŮJČIT -->
+  <div class="view active" id="view-pujcit">
+    <div class="section-label">Co půjčit</div>
+    <div class="cat-grid" id="catGrid"></div>
+  </div>
+
+  <!-- AKTIVNÍ -->
+  <div class="view" id="view-aktivni">
+    <div class="section-label">Právě půjčené</div>
+    <div id="activeList"></div>
+  </div>
+
+  <!-- DNEŠEK -->
+  <div class="view" id="view-dnesek">
+    <div class="section-label">Dnešní tržba</div>
+    <div class="summary">
+      <div class="stat full">
+        <div class="big green" id="dayTotal">0 Kč</div>
+        <div class="lbl">Tržba dnes (hotovost)</div>
+      </div>
+      <div class="stat"><div class="big" id="dayCount">0</div><div class="lbl">Výpůjček</div></div>
+      <div class="stat"><div class="big" id="dayActive">0</div><div class="lbl">Venku teď</div></div>
+    </div>
+    <div class="section-label">Dnešní výpůjčky</div>
+    <div id="dayList"></div>
+    <button class="btn btn-wide btn-add" onclick="openStats()" style="margin-top:14px">📊 Souhrn za období</button>
+    <button class="btn btn-wide btn-danger" onclick="askCloseDay()" style="margin-top:8px">Uzavřít den (přehled)</button>
+  </div>
+
+  <!-- POKLADNA -->
+  <div class="view" id="view-pokladna">
+    <div class="section-label">Stav pokladny (hotovost)</div>
+    <div class="stat full" style="text-align:center">
+      <div class="big green" id="cashBalance" style="font-size:2.4rem">0 Kč</div>
+      <div class="lbl">V kase teď</div>
+    </div>
+    <div class="cash-break">
+      <div><span>Počáteční</span><b id="cbInit">0 Kč</b></div>
+      <div><span>+ Tržby hotovost</span><b id="cbSales" style="color:var(--green)">0 Kč</b></div>
+      <div><span>+ Vklady</span><b id="cbVklad" style="color:var(--green)">0 Kč</b></div>
+      <div><span>− Výběry</span><b id="cbVyber" style="color:var(--red)">0 Kč</b></div>
+    </div>
+    <div class="cash-actions">
+      <button class="btn" onclick="askCash('vyber')">− Výběr</button>
+      <button class="btn" onclick="askCash('vklad')">+ Vklad</button>
+      <button class="btn" onclick="askCash('pocatek')">Počáteční stav</button>
+    </div>
+    <div class="section-label">Pohyby pokladny</div>
+    <div id="cashList"></div>
+  </div>
+
+  <!-- NASTAVENÍ -->
+  <div class="view" id="view-nastaveni">
+    <div class="section-label">Položky a ceny</div>
+    <div id="setList"></div>
+    <button class="btn btn-wide btn-add" onclick="openItemEdit(null)">+ Přidat položku</button>
+    <button class="btn btn-wide btn-danger" onclick="exportData()">Záloha / export dat</button>
+  </div>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button data-view="pujcit" class="active" onclick="switchView('pujcit')"><span class="ic">🚣</span>Půjčit</button>
+    <button data-view="aktivni" onclick="switchView('aktivni')"><span class="ic">⏱️</span>Aktivní<span class="nav-badge" id="navBadge">0</span></button>
+    <button data-view="dnesek" onclick="switchView('dnesek')"><span class="ic">💰</span>Dnešek</button>
+    <button data-view="pokladna" onclick="switchView('pokladna')"><span class="ic">💵</span>Pokladna</button>
+    <button data-view="nastaveni" onclick="switchView('nastaveni')"><span class="ic">⚙️</span>Nastavení</button>
+  </div>
+
+  <!-- MODAL ROOT -->
+  <div class="overlay" id="overlay" onclick="closeSheet(event)">
+    <div class="sheet" id="sheet" onclick="event.stopPropagation()"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+/* ============ DATA ============ */
+const LS = {
+  items: 'puj_items', active: 'puj_active', hist: 'puj_history',
+  cashInit: 'puj_cashinit', cashOps: 'puj_cashops'
+};
+const DEFAULT_ITEMS = [
+  { id: 'lodicka',    name: 'Loďička',    emoji: '🚣', mode: 'cas', rateHour: 100, rateDay: 400, stock: 6 },
+  { id: 'slapadlo',   name: 'Šlapadlo',   emoji: '🚲', mode: 'cas', rateHour: 150, rateDay: 600, stock: 4 },
+  { id: 'minigolf',   name: 'Minigolf',   emoji: '⛳', mode: 'kus', flatPrice: 60, stock: 4 },
+  { id: 'trampolina', name: 'Trampolína', emoji: '🤸', mode: 'cas', rateHour: 80,  rateDay: 0, stock: 1 },
+  { id: 'paddle',     name: 'Paddleboard',emoji: '🏄', mode: 'cas', rateHour: 150, rateDay: 500, stock: 3 },
+];
+const DURATIONS = [
+  { label: '30 min', min: 30 }, { label: '1 h', min: 60 }, { label: '2 h', min: 120 },
+  { label: '3 h', min: 180 }, { label: 'půl dne', min: 240 }, { label: 'celý den', min: 600 },
+];
+const EMOJIS = ['🚣','🚲','⛳','🤸','🏄','🛶','🚤','🎣','🏓','🎾','⚽','🏐','🚴','🛷','🎿','🏕️','🔥','🪑','⛺','🧺'];
+
+let items = load(LS.items, DEFAULT_ITEMS);
+let active = load(LS.active, []);
+let hist = load(LS.hist, []);
+let cashInit = load(LS.cashInit, 0);
+let cashOps = load(LS.cashOps, []);
+let curView = 'pujcit';
+
+function load(key, def) {
+  try { const v = JSON.parse(localStorage.getItem(key)); return v ?? def; }
+  catch { return def; }
+}
+function save() {
+  localStorage.setItem(LS.items, JSON.stringify(items));
+  localStorage.setItem(LS.active, JSON.stringify(active));
+  localStorage.setItem(LS.hist, JSON.stringify(hist));
+  localStorage.setItem(LS.cashInit, JSON.stringify(cashInit));
+  localStorage.setItem(LS.cashOps, JSON.stringify(cashOps));
+}
+function itemById(id) { return items.find(i => i.id === id) || {}; }
+function outCount(id) { return active.filter(r => r.itemId === id).reduce((a,r)=>a+r.count, 0); }
+function available(it) { return it.stock > 0 ? Math.max(0, it.stock - outCount(it.id)) : Infinity; }
+function uid() { return Date.now().toString(36) + Math.floor(performance.now()*1000%1e6).toString(36); }
+
+/* ============ PRICE CALC ============ */
+function elapsedMs(r) { return Date.now() - r.start; }
+function fmtElapsed(ms) {
+  const totalMin = Math.floor(ms / 60000);
+  const h = Math.floor(totalMin / 60), m = totalMin % 60;
+  return h > 0 ? `${h}h ${m}min` : `${m}min`;
+}
+function dueMs(r) { return r.durMin ? (r.start + r.durMin*60000) : (r.start + 36e8); }
+function isOverdue(r) { return r.durMin && Date.now() > r.start + r.durMin*60000; }
+function dueLabel(r) {
+  if (!r.durMin) return fmtElapsed(elapsedMs(r));
+  const left = (r.start + r.durMin*60000) - Date.now();
+  if (left >= 0) return 'zbývá ' + fmtElapsed(left);
+  return '+' + fmtElapsed(-left);
+}
+function priceFor(it, durMin, count) {
+  if (it.mode === 'kus') return (it.flatPrice || 0) * count;
+  let per = Math.round((durMin / 60) * (it.rateHour || 0));
+  if (it.rateDay && it.rateDay > 0) per = Math.min(per, it.rateDay);
+  return per * count;
+}
+function kc(n) { return (n || 0).toLocaleString('cs-CZ') + ' Kč'; }
+
+/* ============ VIEWS ============ */
+function switchView(v) {
+  curView = v;
+  document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+  document.getElementById('view-' + v).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+  window.scrollTo(0, 0);
+  if (v === 'aktivni') renderActive();
+  if (v === 'dnesek') renderDnesek();
+  if (v === 'pokladna') renderPokladna();
+  if (v === 'nastaveni') renderSettings();
+}
+
+function renderCatalog() {
+  const grid = document.getElementById('catGrid');
+  grid.innerHTML = items.map(it => {
+    const out = outCount(it.id);
+    const avail = available(it);
+    const rate = it.mode === 'kus' ? `${kc(it.flatPrice)}/ks` : `${kc(it.rateHour)}/h`;
+    const soldOut = it.stock > 0 && avail <= 0;
+    const stockLine = it.stock > 0 ? `<div class="stock ${soldOut?'none':''}">${soldOut ? 'vše půjčeno' : avail + ' z ' + it.stock + ' k dispozici'}</div>` : '';
+    return `<div class="cat-btn ${out ? 'has-out' : ''} ${soldOut?'soldout':''}" onclick="openNewRental('${it.id}')">
+      <div class="out-badge">${out} venku</div>
+      <div class="emoji">${it.emoji}</div>
+      <div class="name">${it.name}</div>
+      <div class="rate">${rate}</div>
+      ${stockLine}
+    </div>`;
+  }).join('') || '<div class="empty">Žádné položky. Přidej je v Nastavení.</div>';
+}
+
+function renderActive() {
+  const el = document.getElementById('activeList');
+  if (!active.length) { el.innerHTML = '<div class="empty">Nic není půjčené 🎉</div>'; return; }
+  el.innerHTML = active.slice().sort((a,b)=>dueMs(a)-dueMs(b)).map(r => {
+    const it = itemById(r.itemId);
+    const since = new Date(r.start).toLocaleTimeString('cs-CZ', {hour:'2-digit',minute:'2-digit'});
+    let timeLbl, sub;
+    const who = [r.name, r.phone].filter(Boolean).join(' · ');
+    if (r.durMin) {
+      const until = new Date(r.start + r.durMin*60000).toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'});
+      timeLbl = `<span class="liveDue" data-id="${r.id}">${dueLabel(r)}</span>`;
+      sub = `${since}–${until}${who ? ' · ' + who : ''}`;
+    } else {
+      timeLbl = `<span class="liveDue" data-id="${r.id}">${fmtElapsed(elapsedMs(r))}</span>`;
+      sub = `od ${since}${who ? ' · ' + who : ''}`;
+    }
+    return `<div class="rental ${r.durMin && isOverdue(r) ? 'overdue' : ''}">
+      <div class="rental-top">
+        <div class="rental-emoji">${it.emoji}</div>
+        <div class="rental-info">
+          <div class="rental-name">${it.name} <span class="cnt">×${r.count}</span></div>
+          <div class="rental-sub">${sub}</div>
+          <span class="paid-tag">Zaplaceno ${kc(r.price)} · ${r.pay==='karta'?'💳':'💵'}</span>
+          ${r.durMin && isOverdue(r) ? '<span class="over-tag">⚠ PŘEKROČENO</span>' : ''}
+        </div>
+        <div class="rental-right">
+          <div class="rental-elapsed">${timeLbl}</div>
+        </div>
+      </div>
+      <div class="rental-actions">
+        <button class="btn btn-return" onclick="markReturned('${r.id}')">✓ Vráceno</button>
+        ${r.durMin ? `<button class="btn btn-extend" onclick="openExtend('${r.id}')">+ Prodloužit</button>` : ''}
+        <button class="btn btn-cancel" onclick="cancelRental('${r.id}')">Storno</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function todayHist() {
+  const d = new Date(); d.setHours(0,0,0,0); const t0 = d.getTime();
+  return hist.filter(h => (h.time||h.end||0) >= t0);
+}
+function renderDnesek() {
+  const th = todayHist();
+  const total = th.reduce((a,h)=>a+h.price, 0);
+  document.getElementById('dayTotal').textContent = kc(total);
+  document.getElementById('dayCount').textContent = th.length;
+  document.getElementById('dayActive').textContent = active.reduce((a,r)=>a+r.count,0);
+
+  const el = document.getElementById('dayList');
+  if (!th.length) { el.innerHTML = '<div class="empty">Zatím žádná výpůjčka dnes</div>'; return; }
+  el.innerHTML = th.slice().sort((a,b)=>(b.time||0)-(a.time||0)).map(h => {
+    const it = itemById(h.itemId);
+    const time = new Date(h.time||h.end||0).toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'});
+    const durTxt = h.durMin ? (DURATIONS.find(d=>d.min===h.durMin)?.label || Math.round(h.durMin/60)+'h') : '';
+    return `<div class="hist-item">
+      <div class="hist-left">
+        <div class="l1">${it.emoji||'•'} ${it.name||h.itemName||'?'} ×${h.count}</div>
+        <div class="l2">${time}${durTxt?' · '+durTxt:''}${h.name?' · '+h.name:''}</div>
+      </div>
+      <div class="hist-amt">${kc(h.price)}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ---- PRODLOUŽENÍ ---- */
+const EXTEND_OPTS = [
+  { label: '+15 min', min: 15 }, { label: '+30 min', min: 30 }, { label: '+1 h', min: 60 }, { label: '+2 h', min: 120 },
+];
+let exId = null, exMin = 30, exPay = 'hotovost', exPrice = 0;
+function openExtend(id) {
+  const r = active.find(x=>x.id===id); if (!r) return;
+  exId = id; exMin = 30; exPay = 'hotovost';
+  const it = itemById(r.itemId);
+  openSheet(`
+    <h2>Prodloužit ${it.emoji} ${it.name}</h2>
+    <div class="sub">×${r.count} · ${kc(it.rateHour)}/h</div>
+    <div class="field">
+      <label>O kolik</label>
+      <div class="dur-pick" id="exPick">
+        ${EXTEND_OPTS.map(o=>`<button class="${o.min===30?'sel':''}" onclick="exSet(${o.min},this)">${o.label}</button>`).join('')}
+      </div>
+    </div>
+    <div class="price-box">
+      <div class="pb-time">Doplatek</div>
+      <div class="pb-amt" id="exAmt">0 Kč</div>
+      <div class="price-edit">
+        <span style="color:var(--muted);font-size:.85rem">Upravit:</span>
+        <input id="exPriceInput" type="number" inputmode="numeric" value="0" oninput="exEdit()">
+        <span style="color:var(--muted)">Kč</span>
+      </div>
+    </div>
+    <div class="sheet-actions">
+      <button class="btn-ghost" onclick="hideSheet()">Zpět</button>
+      <button class="btn-primary" onclick="doExtend()">Prodloužit · zaplaceno</button>
+    </div>
+  `);
+  exRecalc();
+}
+function exSet(min, btn) {
+  exMin = min;
+  document.querySelectorAll('#exPick button').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel'); exRecalc();
+}
+function exRecalc() {
+  const r = active.find(x=>x.id===exId); const it = itemById(r.itemId);
+  exPrice = Math.round((exMin/60) * (it.rateHour||0) * r.count);
+  document.getElementById('exAmt').textContent = kc(exPrice);
+  document.getElementById('exPriceInput').value = exPrice;
+}
+function exEdit() {
+  exPrice = parseInt(document.getElementById('exPriceInput').value)||0;
+  document.getElementById('exAmt').textContent = kc(exPrice);
+}
+function doExtend() {
+  const r = active.find(x=>x.id===exId); if (!r) return;
+  const it = itemById(r.itemId);
+  r.durMin = (r.durMin||0) + exMin;
+  r.price = (r.price||0) + exPrice;
+  r.alerted = false; // po prodloužení znovu hlídat čas
+  hist.push({
+    id: uid(), itemId: it.id, itemName: it.name + ' (prodloužení)', count: r.count,
+    name: r.name, phone: r.phone, time: Date.now(), durMin: exMin, price: exPrice, pay: exPay
+  });
+  save(); hideSheet(); renderActive(); updateBadges();
+  toast(`Prodlouženo o ${exMin} min · ${kc(exPrice)} ✓`);
+}
+
+/* ---- POKLADNA ---- */
+function cashSalesTotal() { return hist.filter(h => h.pay === 'hotovost').reduce((a,h)=>a+h.price, 0); }
+function cashVklad() { return cashOps.filter(o=>o.type==='vklad').reduce((a,o)=>a+o.amount,0); }
+function cashVyber() { return cashOps.filter(o=>o.type==='vyber').reduce((a,o)=>a+o.amount,0); }
+function cashBalance() { return cashInit + cashSalesTotal() + cashVklad() - cashVyber(); }
+
+function renderPokladna() {
+  document.getElementById('cashBalance').textContent = kc(cashBalance());
+  document.getElementById('cbInit').textContent = kc(cashInit);
+  document.getElementById('cbSales').textContent = '+ ' + kc(cashSalesTotal());
+  document.getElementById('cbVklad').textContent = '+ ' + kc(cashVklad());
+  document.getElementById('cbVyber').textContent = '− ' + kc(cashVyber());
+
+  const el = document.getElementById('cashList');
+  if (!cashOps.length) { el.innerHTML = '<div class="empty">Žádné ruční pohyby. Nastav počáteční stav ráno.</div>'; return; }
+  el.innerHTML = cashOps.slice().sort((a,b)=>b.time-a.time).map(o => {
+    const d = new Date(o.time);
+    const when = d.toLocaleDateString('cs-CZ',{day:'numeric',month:'numeric'}) + ' ' + d.toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'});
+    const lbl = o.type==='vyber' ? 'Výběr' : o.type==='vklad' ? 'Vklad' : 'Počáteční stav';
+    const sign = o.type==='vyber' ? '−' : '+';
+    const col = o.type==='vyber' ? 'var(--red)' : 'var(--green)';
+    return `<div class="hist-item">
+      <div class="hist-left">
+        <div class="l1">${lbl}</div>
+        <div class="l2">${when}${o.note?' · '+o.note:''}</div>
+      </div>
+      <div class="hist-amt" style="color:${col}">${sign} ${kc(o.amount)}
+        <button class="btn" onclick="delCashOp('${o.id}')" style="background:none;color:var(--muted);font-size:1rem;padding:0 6px">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+let cashType = 'vyber';
+function askCash(type) {
+  cashType = type;
+  const titles = { vyber: 'Výběr z pokladny', vklad: 'Vklad do pokladny', pocatek: 'Počáteční stav pokladny' };
+  const subs = {
+    vyber: 'Kolik vybíráš (odvod tržby, nákup...)',
+    vklad: 'Kolik přidáváš do kasy',
+    pocatek: 'Kolik je v kase na začátku směny (drobné na vracení)'
+  };
+  openSheet(`
+    <h2>${titles[type]}</h2>
+    <div class="sub">${subs[type]}</div>
+    <div class="field">
+      <label>Částka (Kč)</label>
+      <input id="cashAmt" type="number" inputmode="numeric" placeholder="0" value="${type==='pocatek'?cashInit||'':''}">
+    </div>
+    <div class="field">
+      <label>Poznámka (nepovinné)</label>
+      <input id="cashNote" type="text" autocomplete="off" placeholder="${type==='vyber'?'např. odvod majiteli':'např. ranní drobné'}">
+    </div>
+    <div class="sheet-actions">
+      <button class="btn-ghost" onclick="hideSheet()">Zpět</button>
+      <button class="btn-primary" onclick="doCash()">Uložit</button>
+    </div>
+  `);
+  setTimeout(()=>document.getElementById('cashAmt').focus(), 50);
+}
+function doCash() {
+  const amt = parseInt(document.getElementById('cashAmt').value) || 0;
+  const note = (document.getElementById('cashNote').value||'').trim();
+  if (amt <= 0) { toast('Zadej částku'); return; }
+  if (cashType === 'pocatek') {
+    cashInit = amt;
+  } else {
+    cashOps.push({ id: uid(), type: cashType, amount: amt, time: Date.now(), note });
+  }
+  save(); hideSheet(); renderPokladna();
+  toast('Uloženo ✓');
+}
+function delCashOp(id) {
+  cashOps = cashOps.filter(o=>o.id!==id); save(); renderPokladna();
+  toast('Smazáno');
+}
+
+function renderSettings() {
+  const el = document.getElementById('setList');
+  el.innerHTML = items.map(it => {
+    const rate = (it.mode === 'kus'
+      ? `Kus · ${kc(it.flatPrice)}`
+      : `Čas · ${kc(it.rateHour)}/h${it.rateDay?' · den '+kc(it.rateDay):''}`)
+      + (it.stock>0 ? ` · ${it.stock} ks` : '');
+    return `<div class="set-item">
+      <div class="emoji">${it.emoji}</div>
+      <div class="si-info"><div class="si-name">${it.name}</div><div class="si-rate">${rate}</div></div>
+      <button class="btn si-edit" onclick="openItemEdit('${it.id}')">Upravit</button>
+    </div>`;
+  }).join('') || '<div class="empty">Žádné položky</div>';
+}
+
+function updateBadges() {
+  const n = active.length;
+  const b = document.getElementById('navBadge');
+  b.textContent = n; b.classList.toggle('show', n > 0);
+}
+
+/* ============ SHEETS ============ */
+function openSheet(html) {
+  document.getElementById('sheet').innerHTML = '<div class="handle"></div>' + html;
+  document.getElementById('overlay').classList.add('show');
+}
+function closeSheet(e) {
+  if (!e || e.target === document.getElementById('overlay')) hideSheet();
+}
+function hideSheet() { document.getElementById('overlay').classList.remove('show'); }
+
+/* --- Nové půjčení (platí se hned na začátku, bez kauce) --- */
+let nrItem = null, nrCount = 1, nrDur = 60, nrPay = 'hotovost', nrPrice = 0, nrCustom = false, nrHours = 1, nrMax = Infinity;
+function openNewRental(id) {
+  nrItem = itemById(id); nrCount = 1; nrDur = 60; nrPay = 'hotovost'; nrCustom = false; nrHours = 1;
+  const it = nrItem;
+  nrMax = available(it);
+  if (nrMax <= 0) { toast(`${it.name}: vše je půjčené`); return; }
+  const rateInfo = it.mode==='kus' ? `${kc(it.flatPrice)} / kus` : `${kc(it.rateHour)} / hodina${it.rateDay?` · ${kc(it.rateDay)} / den`:''}`;
+  const availInfo = it.stock > 0 ? ` · ${nrMax} k dispozici` : '';
+  openSheet(`
+    <h2>${it.emoji} ${it.name}</h2>
+    <div class="sub">${rateInfo}${availInfo}</div>
+    <div class="field">
+      <label>Počet kusů</label>
+      <div class="stepper">
+        <button onclick="nrStep(-1)">−</button>
+        <div class="val" id="nrCount">1</div>
+        <button onclick="nrStep(1)">+</button>
+      </div>
+    </div>
+    ${it.mode==='cas' ? `<div class="field">
+      <label>Na jak dlouho</label>
+      <div class="dur-pick" id="durPick">
+        ${DURATIONS.map(d=>`<button class="${d.min===60?'sel':''}" onclick="nrSetDur(${d.min},this)">${d.label}</button>`).join('')}
+        <button id="durCustomBtn" onclick="nrCustomToggle(this)">✏️ Vlastní</button>
+      </div>
+      <div class="custom-hours" id="customHours" style="display:none">
+        <span class="ch-lbl">Počet hodin</span>
+        <div class="stepper" style="max-width:220px">
+          <button onclick="nrCustomStep(-1)">−</button>
+          <div class="val" id="nrHours">1</div>
+          <button onclick="nrCustomStep(1)">+</button>
+        </div>
+      </div>
+    </div>` : ''}
+    <div class="row2">
+      <div class="field">
+        <label>Jméno (nepovinné)</label>
+        <input id="nrName" type="text" placeholder="např. Novák, chata 5" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>Telefon (nepovinné)</label>
+        <input id="nrPhone" type="tel" inputmode="tel" placeholder="606..." autocomplete="off">
+      </div>
+    </div>
+    <div class="price-box">
+      <div class="pb-time" id="nrDurLbl">${it.mode==='kus'?'Pevná cena':'1 hodina'}</div>
+      <div class="pb-amt" id="nrAmt">0 Kč</div>
+      <div class="price-edit">
+        <span style="color:var(--muted);font-size:.85rem">Upravit:</span>
+        <input id="nrPriceInput" type="number" inputmode="numeric" value="0" oninput="nrPriceEdit()">
+        <span style="color:var(--muted)">Kč</span>
+      </div>
+    </div>
+    <div class="sheet-actions">
+      <button class="btn-ghost" onclick="hideSheet()">Zpět</button>
+      <button class="btn-primary" onclick="startRental()">Zaplaceno · půjčit</button>
+    </div>
+  `);
+  nrRecalc();
+}
+function nrStep(d) {
+  nrCount = Math.min(nrMax, Math.max(1, nrCount + d));
+  document.getElementById('nrCount').textContent = nrCount;
+  if (d > 0 && nrCount >= nrMax && nrMax !== Infinity) toast('Víc už není skladem');
+  nrRecalc();
+}
+function nrSetDur(min, btn) {
+  nrCustom = false; nrDur = min;
+  document.getElementById('customHours').style.display = 'none';
+  document.querySelectorAll('#durPick button').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  const d = DURATIONS.find(x=>x.min===min);
+  document.getElementById('nrDurLbl').textContent = d ? d.label : '';
+  nrRecalc();
+}
+function nrCustomToggle(btn) {
+  nrCustom = true;
+  document.querySelectorAll('#durPick button').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  document.getElementById('customHours').style.display = 'flex';
+  nrCustomApply();
+}
+function nrCustomStep(d) {
+  nrHours = Math.max(1, nrHours + d);
+  document.getElementById('nrHours').textContent = nrHours;
+  nrCustomApply();
+}
+function nrCustomApply() {
+  nrDur = nrHours * 60;
+  document.getElementById('nrDurLbl').textContent = nrHours + ' h';
+  nrRecalc();
+}
+function nrRecalc() {
+  // Vlastní = vždy za hodinu, čistě se násobí (bez denního stropu)
+  nrPrice = nrCustom ? (nrHours * (nrItem.rateHour||0) * nrCount) : priceFor(nrItem, nrDur, nrCount);
+  document.getElementById('nrAmt').textContent = kc(nrPrice);
+  document.getElementById('nrPriceInput').value = nrPrice;
+}
+function nrPriceEdit() {
+  nrPrice = parseInt(document.getElementById('nrPriceInput').value) || 0;
+  document.getElementById('nrAmt').textContent = kc(nrPrice);
+}
+function startRental() {
+  const it = nrItem;
+  const name = (document.getElementById('nrName').value || '').trim();
+  const phone = (document.getElementById('nrPhone').value || '').trim();
+  const now = Date.now();
+  // platba se zaznamená hned (počítá se do tržby)
+  hist.push({
+    id: uid(), itemId: it.id, itemName: it.name, count: nrCount, name, phone,
+    time: now, durMin: it.mode==='kus'?0:nrDur, price: nrPrice, pay: nrPay
+  });
+  // přidá mezi aktivní (co je venku), dokud se nevrátí
+  active.push({
+    id: uid(), itemId: it.id, count: nrCount, name, phone,
+    start: now, durMin: it.mode==='kus'?0:nrDur, price: nrPrice, pay: nrPay
+  });
+  save();
+  hideSheet(); renderCatalog(); updateBadges();
+  toast(`${it.emoji} ${it.name} ×${nrCount} · ${kc(nrPrice)} ✓`);
+  switchView('aktivni');
+}
+
+/* --- Vrácení (jen vrátí vybavení, peníze už jsou zaplacené) --- */
+function markReturned(id) {
+  active = active.filter(x => x.id !== id); save();
+  renderActive(); renderCatalog(); updateBadges();
+  toast('Vráceno ✓');
+}
+function cancelRental(id) {
+  const r = active.find(x => x.id === id); if (!r) return;
+  const it = itemById(r.itemId);
+  openSheet(`
+    <h2>Stornovat?</h2>
+    <div class="sub">${it.emoji} ${it.name} ×${r.count} — smaže se z aktivních <b>i</b> z dnešní tržby (${kc(r.price)}), jako by se to nestalo.</div>
+    <div class="sheet-actions">
+      <button class="btn-ghost" onclick="hideSheet()">Ne</button>
+      <button class="btn-primary" style="background:var(--red)" onclick="doCancel('${id}')">Ano, stornovat</button>
+    </div>
+  `);
+}
+function doCancel(id) {
+  const r = active.find(x => x.id === id);
+  active = active.filter(x => x.id !== id);
+  // odeber i odpovídající platbu z historie (storno = vrátit peníze)
+  if (r) {
+    const hi = hist.findIndex(h => h.itemId===r.itemId && h.count===r.count && h.price===r.price && Math.abs(h.time-r.start)<5000);
+    if (hi >= 0) hist.splice(hi, 1);
+  }
+  save();
+  hideSheet(); renderActive(); renderCatalog(); renderDnesek(); updateBadges();
+  toast('Stornováno');
+}
+
+/* --- Úprava položky --- */
+let eiId = null, eiEmoji = '🚣', eiMode = 'cas';
+function openItemEdit(id) {
+  const it = id ? itemById(id) : { name:'', emoji:'🚣', mode:'cas', rateHour:100, rateDay:0, flatPrice:50, stock:0 };
+  eiId = id; eiEmoji = it.emoji; eiMode = it.mode;
+  openSheet(`
+    <h2>${id ? 'Upravit položku' : 'Nová položka'}</h2>
+    <div class="field">
+      <label>Název</label>
+      <input id="eiName" type="text" value="${it.name||''}" placeholder="např. Kajak">
+    </div>
+    <div class="field">
+      <label>Ikona</label>
+      <div class="emoji-pick" id="emojiPick">
+        ${EMOJIS.map(e=>`<button class="${e===it.emoji?'sel':''}" onclick="pickEmoji('${e}',this)">${e}</button>`).join('')}
+      </div>
+    </div>
+    <div class="field">
+      <label>Způsob účtování</label>
+      <div class="pay-toggle" id="modeToggle">
+        <button class="${it.mode==='cas'?'sel':''}" onclick="setMode('cas')">⏱️ Za čas</button>
+        <button class="${it.mode==='kus'?'sel':''}" onclick="setMode('kus')">⛳ Za kus</button>
+      </div>
+    </div>
+    <div id="modeFields"></div>
+    <div class="field">
+      <label>Počet kusů celkem / sklad (0 = nehlídat)</label>
+      <input id="eiStock" type="number" inputmode="numeric" value="${it.stock||0}">
+    </div>
+    <div class="sheet-actions">
+      ${id?`<button class="btn-ghost" style="color:var(--red)" onclick="deleteItem('${id}')">Smazat</button>`:''}
+      <button class="btn-primary" onclick="saveItem()">Uložit</button>
+    </div>
+  `);
+  renderModeFields(it);
+}
+function pickEmoji(e, btn) {
+  eiEmoji = e;
+  document.querySelectorAll('#emojiPick button').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+function setMode(m) {
+  eiMode = m;
+  document.querySelectorAll('#modeToggle button').forEach((b,i)=>b.classList.toggle('sel',(i===0)===(m==='cas')));
+  renderModeFields(itemById(eiId) || {});
+}
+function renderModeFields(it) {
+  const el = document.getElementById('modeFields');
+  if (eiMode === 'cas') {
+    el.innerHTML = `<div class="row2">
+      <div class="field"><label>Cena / hodina</label><input id="eiHour" type="number" inputmode="numeric" value="${it.rateHour||0}"></div>
+      <div class="field"><label>Cena / den (0 = bez)</label><input id="eiDay" type="number" inputmode="numeric" value="${it.rateDay||0}"></div>
+    </div>`;
+  } else {
+    el.innerHTML = `<div class="field"><label>Cena za kus</label><input id="eiFlat" type="number" inputmode="numeric" value="${it.flatPrice||0}"></div>`;
+  }
+}
+function saveItem() {
+  const name = (document.getElementById('eiName').value||'').trim();
+  if (!name) { toast('Zadej název'); return; }
+  const obj = {
+    id: eiId || ('it_' + uid()),
+    name, emoji: eiEmoji, mode: eiMode,
+    stock: parseInt(document.getElementById('eiStock').value)||0
+  };
+  if (eiMode === 'cas') {
+    obj.rateHour = parseInt(document.getElementById('eiHour').value)||0;
+    obj.rateDay = parseInt(document.getElementById('eiDay').value)||0;
+  } else {
+    obj.flatPrice = parseInt(document.getElementById('eiFlat').value)||0;
+  }
+  if (eiId) { const i = items.findIndex(x=>x.id===eiId); items[i] = {...items[i], ...obj}; }
+  else { items.push(obj); }
+  save(); hideSheet(); renderSettings(); renderCatalog();
+  toast('Uloženo ✓');
+}
+function deleteItem(id) {
+  if (active.some(r=>r.itemId===id)) { toast('Nejde smazat – je půjčeno'); return; }
+  items = items.filter(x=>x.id!==id); save();
+  hideSheet(); renderSettings(); renderCatalog();
+  toast('Smazáno');
+}
+
+/* --- Uzávěrka dne --- */
+function askCloseDay() {
+  const th = todayHist();
+  const total = th.reduce((a,h)=>a+h.price,0);
+  openSheet(`
+    <h2>Uzávěrka dne</h2>
+    <div class="sub">${new Date().toLocaleDateString('cs-CZ')}</div>
+    <div class="price-box">
+      <div class="pb-time">Tržba dnes (hotovost)</div>
+      <div class="pb-amt">${kc(total)}</div>
+      <div style="margin-top:8px;color:var(--muted);font-size:.85rem">${th.length} výpůjček · ${active.length} stále venku<br>Stav pokladny: <b>${kc(cashBalance())}</b></div>
+    </div>
+    <div class="sub" style="margin-bottom:14px">Data zůstávají uložená. Tohle je jen přehled k odeslání/zapsání.</div>
+    <div class="sheet-actions">
+      <button class="btn-ghost" onclick="hideSheet()">Zavřít</button>
+      <button class="btn-primary" onclick="copyDay()">Kopírovat přehled</button>
+    </div>
+  `);
+}
+function copyDay() {
+  const th = todayHist();
+  const total = th.reduce((a,h)=>a+h.price,0);
+  let t = `PŮJČOVNA ZVŮLE — ${new Date().toLocaleDateString('cs-CZ')}\n`;
+  t += `Tržba dnes (hotovost): ${kc(total)}\n`;
+  t += `Stav pokladny: ${kc(cashBalance())}\n`;
+  t += `Výpůjček: ${th.length}\n--------------------\n`;
+  th.slice().sort((a,b)=>(a.time||0)-(b.time||0)).forEach(h=>{
+    const time = new Date(h.time||h.end||0).toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'});
+    t += `${time}  ${h.itemName} ×${h.count}  ${kc(h.price)}\n`;
+  });
+  navigator.clipboard?.writeText(t).then(()=>toast('Zkopírováno ✓')).catch(()=>{});
+  hideSheet();
+}
+
+/* --- Statistiky / souhrn za období --- */
+function statsFor(t0) {
+  const rows = hist.filter(h => (h.time||h.end||0) >= t0);
+  const total = rows.reduce((a,h)=>a+h.price,0);
+  const cash = rows.filter(h=>h.pay==='hotovost').reduce((a,h)=>a+h.price,0);
+  const card = rows.filter(h=>h.pay==='karta').reduce((a,h)=>a+h.price,0);
+  const byItem = {};
+  rows.forEach(h => { const k = (h.itemName||'?').replace(' (prodloužení)',''); byItem[k] = (byItem[k]||0) + h.count; });
+  const top = Object.entries(byItem).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  return { total, cash, card, count: rows.length, top };
+}
+function statBlock(title, t0) {
+  const s = statsFor(t0);
+  const top = s.top.length ? s.top.map(([n,c])=>`<div class="srow"><span>${n}</span><b>${c}×</b></div>`).join('') : '<div class="srow"><span style="color:var(--muted)">—</span></div>';
+  return `<div class="stat full" style="margin-bottom:10px">
+    <div class="big green">${kc(s.total)}</div>
+    <div class="lbl">${title} · ${s.count} výpůjček</div>
+    <div class="stat-top">${top}</div>
+  </div>`;
+}
+function openStats() {
+  openSheet(`
+    <h2>📊 Souhrn</h2>
+    <div class="sub">Tržby a nejčastěji půjčené</div>
+    ${(()=>{ const d=new Date(); d.setHours(0,0,0,0); return statBlock('Dnes', d.getTime()); })()}
+    ${statBlock('Posledních 7 dní', Date.now()-7*864e5)}
+    ${statBlock('Posledních 30 dní', Date.now()-30*864e5)}
+    <div class="sheet-actions">
+      <button class="btn-primary" onclick="hideSheet()">Zavřít</button>
+    </div>
+  `);
+}
+
+/* --- Export --- */
+function exportData() {
+  const data = JSON.stringify({ items, active, hist, cashInit, cashOps, exported: new Date().toISOString() }, null, 2);
+  navigator.clipboard?.writeText(data).then(()=>toast('Záloha zkopírována do schránky')).catch(()=>{
+    openSheet(`<h2>Záloha dat</h2><div class="field"><textarea rows="10" readonly>${data}</textarea></div><div class="sheet-actions"><button class="btn-primary" onclick="hideSheet()">OK</button></div>`);
+  });
+}
+
+/* --- Toast --- */
+let toastT;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(()=>el.classList.remove('show'), 2000);
+}
+
+/* --- Zvuk při překročení času (Web Audio, funguje offline) --- */
+let audioCtx = null;
+function ensureAudio() {
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){} }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+document.addEventListener('click', ensureAudio, { once: false });
+function beep() {
+  if (!audioCtx) return;
+  [0, 0.32].forEach(delay => {
+    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = 'sine'; o.frequency.value = 880;
+    o.connect(g); g.connect(audioCtx.destination);
+    const t = audioCtx.currentTime + delay;
+    g.gain.setValueAtTime(0.001, t);
+    g.gain.exponentialRampToValueAtTime(0.4, t + 0.03);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+    o.start(t); o.stop(t + 0.3);
+  });
+}
+
+/* --- Tick: clock + live timers + hlídání času --- */
+function tick() {
+  const now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'});
+
+  // hlídání překročení času (běží i mimo záložku Aktivní)
+  let overdue = 0, newOver = false;
+  active.forEach(r => {
+    if (r.durMin && isOverdue(r)) {
+      overdue++;
+      if (!r.alerted) { r.alerted = true; newOver = true; }
+    }
+  });
+  if (newOver) { beep(); save(); if (curView==='aktivni') renderActive(); }
+  const b = document.getElementById('navBadge');
+  if (b) b.classList.toggle('over', overdue > 0);
+
+  if (curView === 'aktivni') {
+    document.querySelectorAll('.liveDue').forEach(sp => {
+      const r = active.find(x=>x.id===sp.dataset.id);
+      if (r) {
+        sp.textContent = dueLabel(r);
+        const card = sp.closest('.rental');
+        if (card) card.classList.toggle('overdue', isOverdue(r));
+      }
+    });
+  }
+}
+
+/* ============ INIT ============ */
+renderCatalog();
+updateBadges();
+tick();
+setInterval(tick, 1000);
+
+/* Service worker — po 1. načtení appka jede offline */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
