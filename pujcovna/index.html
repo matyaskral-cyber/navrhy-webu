@@ -179,6 +179,8 @@
     .set-item .si-edit { padding: 9px 14px; background: var(--card2); color: var(--text); border-radius: 10px; font-size: 0.85rem; font-weight: 700; }
     .btn-wide { width: 100%; padding: 15px; border-radius: 14px; font-size: 0.95rem; font-weight: 700; margin-top: 6px; }
     .btn-add { background: var(--blue); color: #fff; }
+    .btn-send { background: var(--green); color: #fff; }
+    .send-status { font-size: 0.8rem; color: var(--muted); text-align: center; padding: 8px 4px 0; }
     .btn-danger { background: rgba(239,68,68,.15); color: var(--red); margin-top: 18px; }
 
     /* Bottom nav */
@@ -293,7 +295,9 @@
     </div>
     <div class="section-label">Dnešní výpůjčky</div>
     <div id="dayList"></div>
-    <button class="btn btn-wide btn-add" onclick="openStats()" style="margin-top:14px">📊 Souhrn za období</button>
+    <button class="btn btn-wide btn-send" onclick="sendReport(true)" style="margin-top:14px">📤 Odeslat přehled k Matyášovi</button>
+    <div id="sendStatus" class="send-status"></div>
+    <button class="btn btn-wide btn-add" onclick="openStats()" style="margin-top:10px">📊 Souhrn za období</button>
     <button class="btn btn-wide btn-danger" onclick="askCloseDay()" style="margin-top:8px">Uzavřít den (přehled)</button>
   </div>
 
@@ -324,6 +328,15 @@
     <div class="section-label">Položky a ceny</div>
     <div id="setList"></div>
     <button class="btn btn-wide btn-add" onclick="openItemEdit(null)">+ Přidat položku</button>
+
+    <div class="section-label">Odesílání přehledu (e-mail po wifi)</div>
+    <div class="set-item" style="display:block">
+      <div class="si-rate" style="margin-bottom:8px">Adresa „pošťáka" (Apps Script). Když je vyplněná, appka po připojení na wifi sama jednou denně pošle přehled.</div>
+      <input id="cfgUrl" type="url" inputmode="url" placeholder="https://script.google.com/.../exec" autocomplete="off"
+        style="width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:12px;font-size:0.9rem">
+      <button class="btn btn-wide btn-add" onclick="saveSendUrl()" style="margin-top:8px">Uložit adresu</button>
+    </div>
+
     <button class="btn btn-wide btn-danger" onclick="exportData()">Záloha / export dat</button>
   </div>
 
@@ -347,7 +360,8 @@
 /* ============ DATA ============ */
 const LS = {
   items: 'puj_items', active: 'puj_active', hist: 'puj_history',
-  cashInit: 'puj_cashinit', cashOps: 'puj_cashops'
+  cashInit: 'puj_cashinit', cashOps: 'puj_cashops',
+  sendUrl: 'puj_sendurl', lastSent: 'puj_lastsent'
 };
 const DEFAULT_ITEMS = [
   { id: 'lodicka',    name: 'Loďička',    emoji: '🚣', mode: 'cas', rateHour: 100, rateDay: 400, stock: 6 },
@@ -367,6 +381,8 @@ let active = load(LS.active, []);
 let hist = load(LS.hist, []);
 let cashInit = load(LS.cashInit, 0);
 let cashOps = load(LS.cashOps, []);
+let sendUrl = load(LS.sendUrl, '');
+let lastSent = load(LS.lastSent, { day: '', time: 0 });
 let curView = 'pujcit';
 
 function load(key, def) {
@@ -379,6 +395,8 @@ function save() {
   localStorage.setItem(LS.hist, JSON.stringify(hist));
   localStorage.setItem(LS.cashInit, JSON.stringify(cashInit));
   localStorage.setItem(LS.cashOps, JSON.stringify(cashOps));
+  localStorage.setItem(LS.sendUrl, JSON.stringify(sendUrl));
+  localStorage.setItem(LS.lastSent, JSON.stringify(lastSent));
 }
 function itemById(id) { return items.find(i => i.id === id) || {}; }
 function outCount(id) { return active.filter(r => r.itemId === id).reduce((a,r)=>a+r.count, 0); }
@@ -487,6 +505,13 @@ function renderDnesek() {
   document.getElementById('dayTotal').textContent = kc(total);
   document.getElementById('dayCount').textContent = th.length;
   document.getElementById('dayActive').textContent = active.reduce((a,r)=>a+r.count,0);
+
+  const ss = document.getElementById('sendStatus');
+  if (ss) {
+    if (!sendUrl) ss.innerHTML = '⚠️ Odesílání zatím nenastavené (Nastavení → Odesílání)';
+    else if (lastSent.time) ss.innerHTML = `Naposled odesláno: ${new Date(lastSent.time).toLocaleString('cs-CZ')}` + (hasUnsent()?' · <b style="color:var(--gold)">jsou nové výpůjčky</b>':' · vše odesláno');
+    else ss.innerHTML = 'Zatím neodesláno';
+  }
 
   const el = document.getElementById('dayList');
   if (!th.length) { el.innerHTML = '<div class="empty">Zatím žádná výpůjčka dnes</div>'; return; }
@@ -644,7 +669,12 @@ function delCashOp(id) {
   toast('Smazáno');
 }
 
+function saveSendUrl() {
+  sendUrl = (document.getElementById('cfgUrl').value || '').trim();
+  save(); toast(sendUrl ? 'Adresa uložena ✓' : 'Adresa smazána');
+}
 function renderSettings() {
+  const u = document.getElementById('cfgUrl'); if (u) u.value = sendUrl || '';
   const el = document.getElementById('setList');
   el.innerHTML = items.map(it => {
     const rate = (it.mode === 'kus'
@@ -988,6 +1018,61 @@ function exportData() {
   });
 }
 
+/* --- Odeslání přehledu e-mailem (přes endpoint, když je wifi) --- */
+function todayStr() { const d = new Date(); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
+function hasUnsent() { return hist.some(h => (h.time||h.end||0) > (lastSent.time||0)); }
+
+function buildReport() {
+  const since = lastSent.time || 0;
+  const rows = hist.filter(h => (h.time||h.end||0) > since).sort((a,b)=>(a.time||0)-(b.time||0));
+  const total = rows.reduce((a,h)=>a+h.price,0);
+  let txt = `PŮJČOVNA ZVŮLE — ${new Date().toLocaleString('cs-CZ')}\n`;
+  txt += `Nové výpůjčky od posledního odeslání: ${rows.length}\n`;
+  txt += `Tržba (hotovost): ${kc(total)}\n`;
+  txt += `Stav pokladny: ${kc(cashBalance())}\n`;
+  txt += `Stále venku: ${active.reduce((a,r)=>a+r.count,0)} ks\n`;
+  txt += `--------------------\n`;
+  rows.forEach(h => {
+    const t = new Date(h.time||h.end||0).toLocaleString('cs-CZ');
+    txt += `${t}  ${h.itemName} ×${h.count}  ${kc(h.price)}${h.name?' · '+h.name:''}${h.phone?' · '+h.phone:''}\n`;
+  });
+  if (!rows.length) txt += '(žádné nové výpůjčky)\n';
+  return {
+    type: 'pujcovna',
+    date: new Date().toLocaleString('cs-CZ'),
+    total, count: rows.length, cash: cashBalance(),
+    summary: txt,
+    backup: { items, active, hist, cashInit, cashOps }
+  };
+}
+
+async function sendReport(manual) {
+  if (!sendUrl) { if (manual) toast('Není nastavený cíl (Nastavení → Odesílání)'); return false; }
+  if (!navigator.onLine) { if (manual) toast('Není internet — zkus to na wifi'); return false; }
+  try {
+    await fetch(sendUrl, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(buildReport())
+    });
+    lastSent = { day: todayStr(), time: Date.now() };
+    save();
+    if (manual) toast('Přehled odeslán ✓');
+    return true;
+  } catch (e) {
+    if (manual) toast('Odeslání selhalo — zkus znovu');
+    return false;
+  }
+}
+
+// automaticky: max 1× za den, jen když je wifi a něco nového
+function autoTrySend() {
+  if (navigator.onLine && sendUrl && lastSent.day !== todayStr() && hasUnsent()) {
+    sendReport(false);
+  }
+}
+window.addEventListener('online', autoTrySend);
+
 /* --- Toast --- */
 let toastT;
 function toast(msg) {
@@ -1051,6 +1136,8 @@ renderCatalog();
 updateBadges();
 tick();
 setInterval(tick, 1000);
+autoTrySend();              // zkus odeslat hned po startu (když je wifi)
+setInterval(autoTrySend, 5*60*1000);  // a pak občas kontroluj
 
 /* Service worker — po 1. načtení appka jede offline */
 if ('serviceWorker' in navigator) {
