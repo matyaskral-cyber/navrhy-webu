@@ -259,6 +259,29 @@
       pointer-events: none; box-shadow: 0 8px 24px rgba(0,0,0,.4); white-space: nowrap;
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+
+    /* Tiskový report / PDF */
+    #printReport { display: none; }
+    @media print {
+      body { padding: 0 !important; background: #fff !important; }
+      body > *:not(#printReport) { display: none !important; }
+      #printReport {
+        display: block !important; color: #111; background: #fff;
+        font-family: -apple-system, 'Segoe UI', sans-serif; padding: 8mm;
+      }
+      #printReport h1 { font-size: 20px; margin: 0 0 2px; }
+      #printReport .pdate { color: #555; font-size: 12px; margin-bottom: 14px; }
+      #printReport .pbig { font-size: 26px; font-weight: 800; margin: 2px 0; }
+      #printReport .pgrid { display: flex; gap: 24px; margin: 10px 0 16px; }
+      #printReport .pgrid div span { display: block; font-size: 11px; color: #555; }
+      #printReport .pgrid div b { font-size: 16px; }
+      #printReport table { width: 100%; border-collapse: collapse; font-size: 12px; }
+      #printReport th, #printReport td { text-align: left; padding: 6px 4px; border-bottom: 1px solid #ddd; }
+      #printReport th { border-bottom: 2px solid #333; font-size: 11px; text-transform: uppercase; color: #555; }
+      #printReport td.r, #printReport th.r { text-align: right; }
+      #printReport .pfoot { margin-top: 16px; font-size: 11px; color: #777; }
+      @page { size: A4; margin: 10mm; }
+    }
     .row2 { display: flex; gap: 12px; }
     .row2 .field { flex: 1; }
   </style>
@@ -295,8 +318,8 @@
     </div>
     <div class="section-label">Dnešní výpůjčky</div>
     <div id="dayList"></div>
-    <button class="btn btn-wide btn-send" onclick="sendReport(true)" style="margin-top:14px">📤 Odeslat přehled k Matyášovi</button>
-    <div id="sendStatus" class="send-status"></div>
+    <button class="btn btn-wide btn-send" onclick="printDay()" style="margin-top:14px">💾 Uložit PDF s tržbou (pro e-mail)</button>
+    <div class="send-status">Vyrobí PDF → ulož do tabletu / pošli mailem ručně</div>
     <button class="btn btn-wide btn-add" onclick="openStats()" style="margin-top:10px">📊 Souhrn za období</button>
     <button class="btn btn-wide btn-danger" onclick="askCloseDay()" style="margin-top:8px">Uzavřít den (přehled)</button>
   </div>
@@ -355,6 +378,7 @@
   </div>
 
   <div class="toast" id="toast"></div>
+  <div id="printReport"></div>
 
 <script>
 /* ============ DATA ============ */
@@ -1016,6 +1040,42 @@ function exportData() {
   navigator.clipboard?.writeText(data).then(()=>toast('Záloha zkopírována do schránky')).catch(()=>{
     openSheet(`<h2>Záloha dat</h2><div class="field"><textarea rows="10" readonly>${data}</textarea></div><div class="sheet-actions"><button class="btn-primary" onclick="hideSheet()">OK</button></div>`);
   });
+}
+
+/* --- PDF s tržbou (přes tisk → "Uložit jako PDF", funguje offline) --- */
+function printDay() {
+  const th = todayHist().slice().sort((a,b)=>(a.time||0)-(b.time||0));
+  const total = th.reduce((a,h)=>a+h.price,0);
+  const d = new Date();
+  const dateStr = d.toLocaleDateString('cs-CZ', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+  const rows = th.map(h => {
+    const t = new Date(h.time||h.end||0).toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'});
+    const who = [h.name, h.phone].filter(Boolean).join(', ');
+    return `<tr><td>${t}</td><td>${h.itemName} ×${h.count}</td><td>${who||'—'}</td><td class="r">${kc(h.price)}</td></tr>`;
+  }).join('') || `<tr><td colspan="4" style="color:#777;padding:12px 4px">Žádné výpůjčky.</td></tr>`;
+
+  document.getElementById('printReport').innerHTML = `
+    <h1>Půjčovna Zvůle — denní tržba</h1>
+    <div class="pdate">${dateStr}</div>
+    <div class="pbig">${kc(total)}</div>
+    <div style="font-size:12px;color:#555;margin-bottom:6px">Tržba dnes (hotovost)</div>
+    <div class="pgrid">
+      <div><span>Výpůjček</span><b>${th.length}</b></div>
+      <div><span>Stav pokladny</span><b>${kc(cashBalance())}</b></div>
+      <div><span>Stále venku</span><b>${active.reduce((a,r)=>a+r.count,0)} ks</b></div>
+    </div>
+    <table>
+      <thead><tr><th>Čas</th><th>Položka</th><th>Zákazník</th><th class="r">Cena</th></tr></thead>
+      <tbody>${rows}</tbody>
+      <tfoot><tr><th colspan="3">Celkem</th><th class="r">${kc(total)}</th></tr></tfoot>
+    </table>
+    <div class="pfoot">Vytvořeno v appce Půjčovna Zvůle · ${d.toLocaleString('cs-CZ')}</div>
+  `;
+  // hezký název PDF souboru
+  const fn = `Pujcovna-Zvule-${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const orig = document.title;
+  document.title = fn;
+  setTimeout(() => { window.print(); document.title = orig; }, 100);
 }
 
 /* --- Odeslání přehledu e-mailem (přes endpoint, když je wifi) --- */
