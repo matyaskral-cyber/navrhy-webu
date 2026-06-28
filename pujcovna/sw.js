@@ -1,6 +1,6 @@
 /* Service worker pro Půjčovnu Zvůle — offline cache.
    Po každé změně appky zvyš číslo verze (CACHE), ať se klientům stáhne nová verze. */
-const CACHE = 'pujcovna-v3';
+const CACHE = 'pujcovna-v4';
 const ASSETS = [
   './',
   './index.html',

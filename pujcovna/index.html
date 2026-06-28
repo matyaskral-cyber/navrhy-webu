@@ -979,28 +979,12 @@ function askCloseDay() {
       <div class="pb-amt">${kc(total)}</div>
       <div style="margin-top:8px;color:var(--muted);font-size:.85rem">${th.length} výpůjček · ${active.length} stále venku<br>Stav pokladny: <b>${kc(cashBalance())}</b></div>
     </div>
-    <div class="sub" style="margin-bottom:14px">Data zůstávají uložená. Tohle je jen přehled k odeslání/zapsání.</div>
+    <div class="sub" style="margin-bottom:14px">Data zůstávají uložená. Přehled k odeslání udělej přes „💾 Uložit PDF s tržbou".</div>
     <div class="sheet-actions">
-      <button class="btn-ghost" onclick="hideSheet()">Zavřít</button>
-      <button class="btn-primary" onclick="copyDay()">Kopírovat přehled</button>
+      <button class="btn-primary" onclick="hideSheet()">Zavřít</button>
     </div>
   `);
 }
-function copyDay() {
-  const th = todayHist();
-  const total = th.reduce((a,h)=>a+h.price,0);
-  let t = `PŮJČOVNA ZVŮLE — ${new Date().toLocaleDateString('cs-CZ')}\n`;
-  t += `Tržba dnes (hotovost): ${kc(total)}\n`;
-  t += `Stav pokladny: ${kc(cashBalance())}\n`;
-  t += `Výpůjček: ${th.length}\n--------------------\n`;
-  th.slice().sort((a,b)=>(a.time||0)-(b.time||0)).forEach(h=>{
-    const time = new Date(h.time||h.end||0).toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'});
-    t += `${time}  ${h.itemName} ×${h.count}  ${kc(h.price)}\n`;
-  });
-  navigator.clipboard?.writeText(t).then(()=>toast('Zkopírováno ✓')).catch(()=>{});
-  hideSheet();
-}
-
 /* --- Statistiky / souhrn za období --- */
 function statsFor(t0) {
   const rows = hist.filter(h => (h.time||h.end||0) >= t0);
