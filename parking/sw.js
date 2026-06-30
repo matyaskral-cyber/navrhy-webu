@@ -1,5 +1,5 @@
 // Service worker — offline cache pro parkovací appku
-const CACHE = 'parking-v2';
+const CACHE = 'parking-v3';
 const FILES = [
   './',
   './index.html',

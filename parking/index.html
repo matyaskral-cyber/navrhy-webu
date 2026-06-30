@@ -160,8 +160,18 @@
       <div class="hint">Smaže celou evidenci dokladů (např. po zkoušení). Nevratné.</div>
     </div>
     <div class="card">
-      <label>Test tisku</label>
-      <button class="btn btn-grey btn-sm" onclick="testPrint()" style="margin-top:4px">🖨️ Zkušební doklad</button>
+      <label>Tiskárna — Bluetooth termo (Cashino PTP-II)</label>
+      <div id="btStatus" style="font-size:14px; font-weight:700; margin-bottom:10px; color:var(--muted)">○ Nepřipojeno</div>
+      <button class="btn btn-blue btn-sm" onclick="btConnect()" style="width:100%; margin-bottom:8px">🔌 Připojit tiskárnu</button>
+      <button class="btn btn-grey btn-sm" onclick="testPrint()" style="width:100%">🖨️ Zkušební tisk</button>
+      <div class="set-row" style="margin-top:14px"><label>Diakritika na účtence</label>
+        <div class="seg" style="margin:0">
+          <button type="button" id="dia0" onclick="setDia(false)">S diakritikou</button>
+          <button type="button" id="dia1" onclick="setDia(true)">Bez diakritiky</button>
+        </div>
+        <div class="hint">Když text vychází zpřeházený (ě š č ř ž), přepni na „Bez diakritiky".</div>
+      </div>
+      <div class="hint">Připoj 1× v tabletu (musí být spárovaná v Bluetoothu). Když po čase přestane tisknout, ťukni znovu „Připojit".</div>
     </div>
   </section>
 </main>
@@ -179,7 +189,7 @@
 
 <script>
 // ===== Stav / nastavení =====
-const DEF = { nazev:'Autocamp Zvůle', ico:'47239905', dic:'CZ47239905', dph:21, adresa:'Sportovní 197, 378 62 Kunžák', cena:50, prefix:'P', sirka:80 };
+const DEF = { nazev:'Autocamp Zvůle', ico:'47239905', dic:'CZ47239905', dph:21, adresa:'Sportovní 197, 378 62 Kunžák', cena:50, prefix:'P', sirka:58, strip:false };
 let SET = load('park_set', DEF);
 let DOK = load('park_dok', []);   // {cislo, spz, dny, cena, ts}
 let dny = 1;
@@ -246,6 +256,7 @@ function setPrintWidth(mm){
 function fmtDT(ts){ const d=new Date(ts); return d.toLocaleDateString('cs-CZ')+' '+d.toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'}); }
 function kc(x){ return (Math.round(x*100)/100).toFixed(2).replace('.',','); }
 function printReceipt(rec){
+  if(BT.char || (navigator.bluetooth && BT.dev)){ btPrint(rec); return; }   // Bluetooth termo má přednost
   setPrintWidth(SET.sirka);
   const platce = SET.dic && SET.dph>0;
   const zaklad = platce ? rec.cena/(1+SET.dph/100) : rec.cena;
@@ -321,7 +332,10 @@ function exportCSV(){
 function fillSet(){
   s_nazev.value=SET.nazev; s_ico.value=SET.ico; s_dic.value=SET.dic||''; s_adresa.value=SET.adresa;
   s_cena.value=SET.cena; s_dph.value=SET.dph; s_prefix.value=SET.prefix; setW(SET.sirka);
+  setDiaUI(SET.strip); btUpdateStatus();
 }
+function setDiaUI(strip){ document.getElementById('dia0').classList.toggle('active',!strip); document.getElementById('dia1').classList.toggle('active',!!strip); }
+function setDia(strip){ SET.strip=strip; save(); setDiaUI(strip); toast(strip?'Bez diakritiky':'S diakritikou'); }
 function setW(mm){ SET.sirka=mm; document.getElementById('w58').classList.toggle('active',mm===58); document.getElementById('w80').classList.toggle('active',mm===80); }
 function saveSet(){
   SET.nazev=s_nazev.value.trim()||DEF.nazev;
@@ -357,8 +371,101 @@ function toast(m){ const e=document.getElementById('toast'); e.textContent=m; e.
 // auto-uppercase SPZ
 document.getElementById('spz').addEventListener('input',e=>{ e.target.value=e.target.value.toUpperCase(); });
 
+// ===== Bluetooth termo tisk (ESC/POS) =====
+const BT = { dev:null, char:null };
+const PRINT_SVC = '000018f0-0000-1000-8000-00805f9b34fb';
+const PRINT_CHR = '00002af1-0000-1000-8000-00805f9b34fb';
+
+function btUpdateStatus(){
+  const el=document.getElementById('btStatus'); if(!el) return;
+  if(BT.char){ el.textContent='● Připojeno: '+((BT.dev&&BT.dev.name)||'tiskárna'); el.style.color='var(--green)'; }
+  else if(BT.dev){ el.textContent='○ Spárováno (připojí se při tisku)'; el.style.color='var(--gold)'; }
+  else { el.textContent='○ Nepřipojeno'; el.style.color='var(--muted)'; }
+}
+async function btConnect(){
+  if(!navigator.bluetooth){ toast('Tablet/prohlížeč nepodporuje Bluetooth tisk'); return; }
+  try{
+    toast('Vyber tiskárnu…');
+    BT.dev = await navigator.bluetooth.requestDevice({ acceptAllDevices:true, optionalServices:[PRINT_SVC] });
+    BT.dev.addEventListener('gattserverdisconnected', ()=>{ BT.char=null; btUpdateStatus(); });
+    await btGatt();
+    toast('Tiskárna připojena ✓'); btUpdateStatus();
+  }catch(e){ toast('Připojení zrušeno'); btUpdateStatus(); }
+}
+async function btGatt(){
+  const srv = await BT.dev.gatt.connect();
+  let ch=null;
+  try{ const s=await srv.getPrimaryService(PRINT_SVC); ch=await s.getCharacteristic(PRINT_CHR); }
+  catch(e){
+    const svcs = await srv.getPrimaryServices();
+    for(const s of svcs){ const chs=await s.getCharacteristics(); for(const c of chs){ if(c.properties.write||c.properties.writeWithoutResponse){ ch=c; break; } } if(ch) break; }
+  }
+  if(!ch) throw new Error('no char');
+  BT.char=ch;
+}
+async function btEnsure(){
+  if(BT.char && BT.dev && BT.dev.gatt.connected) return true;
+  if(BT.dev){ try{ await btGatt(); return true; }catch(e){} }
+  return false;
+}
+async function btPrint(rec){
+  if(!(await btEnsure())){ toast('Tiskárna nepřipojena — Nastavení → Připojit'); go('set'); return; }
+  try{ await writeChunks(BT.char, escpos(rec)); toast('Vytištěno ✓'); }
+  catch(e){ BT.char=null; btUpdateStatus(); toast('Tisk selhal — zkus Připojit znovu'); }
+}
+async function writeChunks(ch, bytes){
+  const size=180;
+  for(let i=0;i<bytes.length;i+=size){
+    const part=bytes.slice(i,i+size);
+    if(ch.properties.writeWithoutResponse) await ch.writeValueWithoutResponse(part);
+    else await ch.writeValue(part);
+    await new Promise(r=>setTimeout(r,18));
+  }
+}
+const CP852={'á':0xA0,'č':0x9F,'ď':0xD4,'é':0x82,'ě':0xD8,'í':0xA1,'ň':0xE5,'ó':0xA2,'ř':0xFD,'š':0xE7,'ť':0x9C,'ú':0xA3,'ů':0x85,'ý':0xEC,'ž':0xA7,'Á':0xB5,'Č':0xAC,'Ď':0xD2,'É':0x90,'Ě':0xB7,'Í':0xD6,'Ň':0xD5,'Ó':0xE0,'Ř':0xE8,'Š':0xE6,'Ť':0x9B,'Ú':0xE9,'Ů':0xDE,'Ý':0xED,'Ž':0xA6};
+const NODIA={'á':'a','č':'c','ď':'d','é':'e','ě':'e','í':'i','ň':'n','ó':'o','ř':'r','š':'s','ť':'t','ú':'u','ů':'u','ý':'y','ž':'z','Á':'A','Č':'C','Ď':'D','É':'E','Ě':'E','Í':'I','Ň':'N','Ó':'O','Ř':'R','Š':'S','Ť':'T','Ú':'U','Ů':'U','Ý':'Y','Ž':'Z'};
+function pushStr(b,s){ for(const ch of s){ const code=ch.charCodeAt(0);
+  if(code<128){ b.push(code); }
+  else if(SET.strip){ b.push((NODIA[ch]||'?').charCodeAt(0)); }
+  else if(CP852[ch]!=null){ b.push(CP852[ch]); }
+  else { b.push((NODIA[ch]||'?').charCodeAt(0)); } } }
+function escpos(rec){
+  const W=32, b=[], ESC=0x1B, GS=0x1D;
+  const raw=(...x)=>x.forEach(v=>b.push(v));
+  const txt=s=>pushStr(b,s);
+  const nl=(n)=>{ for(let i=0;i<(n||1);i++) b.push(0x0A); };
+  const line=()=>{ txt('-'.repeat(W)); nl(); };
+  const lr=(l,r)=>{ const sp=Math.max(1,W-l.length-r.length); txt(l+' '.repeat(sp)+r); nl(); };
+  raw(ESC,0x40);                       // init
+  if(!SET.strip) raw(ESC,0x74,18);     // codepage PC852
+  raw(ESC,0x61,1);                     // center
+  raw(ESC,0x45,1); txt(SET.nazev); nl(); raw(ESC,0x45,0);
+  txt(SET.adresa); nl();
+  txt('IČO: '+SET.ico+(SET.dic?'  DIČ: '+SET.dic:'')); nl();
+  line();
+  const platce = SET.dic && SET.dph>0;
+  raw(ESC,0x45,1); txt(platce?'ZJEDNODUŠENÝ DAŇOVÝ DOKLAD':'PARKOVACÍ DOKLAD'); nl(); raw(ESC,0x45,0);
+  txt('č. '+rec.cislo); nl();
+  line();
+  raw(ESC,0x61,0);                     // left
+  lr('Datum:', fmtDT(rec.ts));
+  raw(GS,0x21,0x01); txt('SPZ: '+rec.spz); nl(); raw(GS,0x21,0x00);
+  lr('Parkování:', rec.dny+' '+slovoDen(rec.dny));
+  line();
+  if(platce){ const z=rec.cena/(1+SET.dph/100); lr('Základ daně:', kc(z)+' Kč'); lr('DPH '+SET.dph+' %:', kc(rec.cena-z)+' Kč'); }
+  raw(GS,0x21,0x01); raw(ESC,0x45,1); lr('CELKEM:', rec.cena+' Kč'); raw(ESC,0x45,0); raw(GS,0x21,0x00);
+  raw(ESC,0x61,1); txt('zaplaceno hotově'); nl();
+  line();
+  txt('Děkujeme a přejeme'); nl(); txt('příjemný pobyt'); nl();
+  nl(4);
+  return new Uint8Array(b);
+}
+
 // ===== Init =====
 refreshPrice(); setPrintWidth(SET.sirka);
+if(navigator.bluetooth && navigator.bluetooth.getDevices){
+  navigator.bluetooth.getDevices().then(ds=>{ if(ds&&ds[0]){ BT.dev=ds[0]; BT.dev.addEventListener('gattserverdisconnected',()=>{BT.char=null;btUpdateStatus();}); btUpdateStatus(); } }).catch(()=>{});
+}
 if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
 </script>
 </body>
