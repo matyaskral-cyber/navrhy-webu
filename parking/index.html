@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0c1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Parkování — Autocamp Zvůle</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; -webkit-user-select:none; user-select:none; }
+  :root{
+    --bg:#0c1220; --bg2:#111827; --card:#1e293b; --card2:#2d3a4f;
+    --green:#22c55e; --green-d:#16a34a; --blue:#3b82f6; --gold:#e8b830;
+    --red:#ef4444; --text:#e2e8f0; --muted:#64748b; --border:#334155;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  body{ background:var(--bg); color:var(--text); min-height:100vh; padding-bottom:88px; }
+  input{ font-family:inherit; }
+  header{ background:var(--bg2); padding:16px 18px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:10; }
+  header h1{ font-size:19px; font-weight:800; letter-spacing:.3px; }
+  header .clock{ font-size:13px; color:var(--muted); text-align:right; font-variant-numeric:tabular-nums; }
+  main{ padding:18px; max-width:560px; margin:0 auto; }
+  .tab{ display:none; } .tab.active{ display:block; }
+  .card{ background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px; margin-bottom:16px; }
+  label{ display:block; font-size:13px; color:var(--muted); margin-bottom:7px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; }
+  .spz-input{ width:100%; background:var(--bg); border:2px solid var(--border); border-radius:14px; color:var(--text); font-size:34px; font-weight:800; text-align:center; padding:18px 12px; letter-spacing:2px; text-transform:uppercase; outline:none; }
+  .spz-input:focus{ border-color:var(--blue); }
+  .field{ width:100%; background:var(--bg); border:2px solid var(--border); border-radius:12px; color:var(--text); font-size:17px; padding:13px 14px; outline:none; -webkit-user-select:text; user-select:text; }
+  .field:focus{ border-color:var(--blue); }
+  .days{ display:flex; align-items:center; gap:14px; justify-content:center; margin:6px 0; }
+  .days button{ width:58px; height:58px; border-radius:50%; border:none; background:var(--card2); color:var(--text); font-size:30px; font-weight:700; cursor:pointer; }
+  .days .val{ font-size:26px; font-weight:800; min-width:120px; text-align:center; }
+  .price-box{ text-align:center; padding:10px 0 4px; }
+  .price-box .amt{ font-size:46px; font-weight:900; color:var(--green); line-height:1; }
+  .price-box .sub{ font-size:13px; color:var(--muted); margin-top:6px; }
+  .btn{ width:100%; border:none; border-radius:16px; padding:20px; font-size:20px; font-weight:800; cursor:pointer; color:#fff; }
+  .btn-green{ background:var(--green); } .btn-green:active{ background:var(--green-d); }
+  .btn-blue{ background:var(--blue); } .btn-grey{ background:var(--card2); } .btn-red{ background:var(--red); }
+  .btn-sm{ padding:11px 14px; font-size:14px; border-radius:10px; width:auto; }
+  .nav{ position:fixed; bottom:0; left:0; right:0; background:var(--bg2); border-top:1px solid var(--border); display:flex; z-index:20; padding-bottom:env(safe-area-inset-bottom); }
+  .nav button{ flex:1; background:none; border:none; color:var(--muted); padding:11px 4px 13px; font-size:11px; font-weight:600; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .nav button .ic{ font-size:23px; }
+  .nav button.active{ color:var(--blue); }
+  .row{ display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid var(--border); }
+  .row:last-child{ border-bottom:none; }
+  .row .spz{ font-size:18px; font-weight:800; letter-spacing:1px; }
+  .row .meta{ font-size:12px; color:var(--muted); margin-top:2px; }
+  .row .right{ text-align:right; }
+  .row .kc{ font-size:17px; font-weight:800; color:var(--green); }
+  .stat{ display:flex; gap:12px; margin-bottom:16px; }
+  .stat .box{ flex:1; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+  .stat .box .n{ font-size:30px; font-weight:900; }
+  .stat .box .l{ font-size:12px; color:var(--muted); margin-top:3px; }
+  .seg{ display:flex; gap:8px; margin-bottom:14px; }
+  .seg button{ flex:1; background:var(--card); border:1px solid var(--border); color:var(--muted); border-radius:10px; padding:10px; font-size:13px; font-weight:700; cursor:pointer; }
+  .seg button.active{ background:var(--blue); color:#fff; border-color:var(--blue); }
+  .toast{ position:fixed; left:50%; bottom:110px; transform:translateX(-50%) translateY(20px); background:var(--green-d); color:#fff; padding:14px 26px; border-radius:30px; font-weight:700; font-size:15px; opacity:0; transition:.3s; z-index:50; pointer-events:none; box-shadow:0 8px 30px rgba(0,0,0,.4); white-space:nowrap; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+  .empty{ text-align:center; color:var(--muted); padding:40px 10px; font-size:15px; }
+  .set-row{ margin-bottom:14px; }
+  .hint{ font-size:12px; color:var(--muted); margin-top:6px; line-height:1.4; }
+
+  /* ====== TERMO ÚČTENKA (tisk) ====== */
+  #receipt{ display:none; }
+  @media print{
+    body{ background:#fff; padding:0; }
+    body > *:not(#receipt){ display:none !important; }
+    #receipt{ display:block; color:#000; font-family:'Courier New',monospace; font-size:13px; line-height:1.45; padding:4mm 2mm; }
+    #receipt .c{ text-align:center; }
+    #receipt .big{ font-size:16px; font-weight:bold; }
+    #receipt .xl{ font-size:20px; font-weight:bold; }
+    #receipt hr{ border:none; border-top:1px dashed #000; margin:6px 0; }
+    #receipt table{ width:100%; border-collapse:collapse; }
+    #receipt td{ padding:1px 0; }
+    #receipt td.r{ text-align:right; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🅿️ Parkování</h1>
+  <div class="clock" id="clock"></div>
+</header>
+
+<main>
+  <!-- ===== PARKOVAT ===== -->
+  <section class="tab active" id="tab-park">
+    <div class="card">
+      <label>SPZ vozidla</label>
+      <input class="spz-input" id="spz" placeholder="1AB 2345" autocomplete="off" autocapitalize="characters" inputmode="text">
+    </div>
+    <div class="card">
+      <label>Počet dní</label>
+      <div class="days">
+        <button onclick="chDays(-1)">−</button>
+        <div class="val"><span id="dnyVal">1</span> <span id="dnySlovo">den</span></div>
+        <button onclick="chDays(1)">+</button>
+      </div>
+      <div class="price-box">
+        <div class="amt" id="priceAmt">50 Kč</div>
+        <div class="sub" id="priceSub">1 den × 50 Kč</div>
+      </div>
+    </div>
+    <button class="btn btn-green" onclick="zaplatit()">💵 Zaplaceno hotově → Tisk dokladu</button>
+  </section>
+
+  <!-- ===== DOKLADY ===== -->
+  <section class="tab" id="tab-dok">
+    <div class="seg">
+      <button class="active" data-per="today" onclick="setPer('today')">Dnes</button>
+      <button data-per="7" onclick="setPer('7')">7 dní</button>
+      <button data-per="all" onclick="setPer('all')">Vše</button>
+    </div>
+    <div class="stat">
+      <div class="box"><div class="n" id="stCount">0</div><div class="l">dokladů</div></div>
+      <div class="box"><div class="n" id="stSum" style="color:var(--green)">0 Kč</div><div class="l">tržba hotově</div></div>
+    </div>
+    <div style="display:flex; gap:8px; margin-bottom:14px">
+      <button class="btn btn-blue btn-sm" style="flex:1" onclick="exportCSV()">📋 Kopírovat pro účtování (CSV)</button>
+    </div>
+    <div class="card" style="padding:6px 18px" id="dokList"></div>
+  </section>
+
+  <!-- ===== NASTAVENÍ ===== -->
+  <section class="tab" id="tab-set">
+    <div class="card">
+      <div class="set-row"><label>Název</label><input class="field" id="s_nazev"></div>
+      <div class="set-row"><label>IČO</label><input class="field" id="s_ico" inputmode="numeric"></div>
+      <div class="set-row"><label>DIČ (plátce DPH)</label><input class="field" id="s_dic" placeholder="CZ47239905"></div>
+      <div class="set-row"><label>Adresa</label><input class="field" id="s_adresa"></div>
+      <div class="set-row" style="display:flex; gap:10px">
+        <div style="flex:1"><label>Cena za den (Kč)</label><input class="field" id="s_cena" inputmode="numeric"></div>
+        <div style="flex:1"><label>Sazba DPH (%)</label><input class="field" id="s_dph" inputmode="numeric"></div>
+      </div>
+      <div class="set-row"><label>Prefix čísla dokladu</label><input class="field" id="s_prefix"></div>
+      <div class="set-row"><label>Šířka termo účtenky</label>
+        <div class="seg" style="margin:0">
+          <button type="button" id="w58" onclick="setW(58)">58 mm</button>
+          <button type="button" id="w80" onclick="setW(80)">80 mm</button>
+        </div>
+      </div>
+      <button class="btn btn-green" style="margin-top:6px" onclick="saveSet()">Uložit nastavení</button>
+    </div>
+    <div class="card">
+      <label>Záloha dat</label>
+      <div style="display:flex; gap:8px; margin-top:6px">
+        <button class="btn btn-blue btn-sm" style="flex:1" onclick="zalohaExport()">📤 Export do schránky</button>
+        <button class="btn btn-grey btn-sm" style="flex:1" onclick="zalohaImport()">📥 Import</button>
+      </div>
+      <div class="hint">Otevři appku 1× na wifi, pak „Přidat na plochu" — funguje i bez internetu. Doklady jsou uložené v tabletu.</div>
+    </div>
+    <div class="card">
+      <label>Zkušební / smazání dokladů</label>
+      <button class="btn btn-red btn-sm" onclick="smazatVse()" style="margin-top:4px">🗑️ Vymazat všechny doklady</button>
+      <div class="hint">Smaže celou evidenci dokladů (např. po zkoušení). Nevratné.</div>
+    </div>
+    <div class="card">
+      <label>Test tisku</label>
+      <button class="btn btn-grey btn-sm" onclick="testPrint()" style="margin-top:4px">🖨️ Zkušební doklad</button>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<!-- skrytá termo účtenka pro tisk -->
+<div id="receipt"></div>
+
+<nav class="nav">
+  <button class="active" id="nav-park" onclick="go('park')"><span class="ic">🅿️</span>Parkovat</button>
+  <button id="nav-dok" onclick="go('dok')"><span class="ic">🧾</span>Doklady</button>
+  <button id="nav-set" onclick="go('set')"><span class="ic">⚙️</span>Nastavení</button>
+</nav>
+
+<script>
+// ===== Stav / nastavení =====
+const DEF = { nazev:'Autocamp Zvůle', ico:'47239905', dic:'CZ47239905', dph:21, adresa:'Sportovní 197, 378 62 Kunžák', cena:50, prefix:'P', sirka:80 };
+let SET = load('park_set', DEF);
+let DOK = load('park_dok', []);   // {cislo, spz, dny, cena, ts}
+let dny = 1;
+let per = 'today';
+
+function load(k,d){ try{ const v=JSON.parse(localStorage.getItem(k)); return v??d; }catch(e){ return d; } }
+function save(){ localStorage.setItem('park_set', JSON.stringify(SET)); localStorage.setItem('park_dok', JSON.stringify(DOK)); }
+function pad(n,l){ return String(n).padStart(l,'0'); }
+
+// ===== Hodiny =====
+function tick(){
+  const d=new Date();
+  document.getElementById('clock').innerHTML = d.toLocaleDateString('cs-CZ',{day:'numeric',month:'numeric'})+'<br>'+d.toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'});
+}
+setInterval(tick,1000); tick();
+
+// ===== Navigace =====
+function go(t){
+  document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(e=>e.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  document.getElementById('nav-'+t).classList.add('active');
+  if(t==='dok') renderDok();
+  if(t==='set') fillSet();
+}
+
+// ===== Dny / cena =====
+function slovoDen(n){ return n===1?'den':(n<5?'dny':'dní'); }
+function chDays(d){ dny=Math.max(1,Math.min(60,dny+d)); refreshPrice(); }
+function refreshPrice(){
+  document.getElementById('dnyVal').textContent = dny;
+  document.getElementById('dnySlovo').textContent = slovoDen(dny);
+  const c = dny*SET.cena;
+  document.getElementById('priceAmt').textContent = c+' Kč';
+  document.getElementById('priceSub').textContent = dny+' '+slovoDen(dny)+' × '+SET.cena+' Kč';
+}
+
+// ===== Číslo dokladu =====
+function cisloDokladu(){
+  const d=new Date();
+  const day = d.getFullYear().toString().slice(2)+pad(d.getMonth()+1,2)+pad(d.getDate(),2);
+  const dnes = DOK.filter(x=> x.cislo.includes('-'+day+'-')).length + 1;
+  return SET.prefix + '-' + day + '-' + pad(dnes,3);
+}
+
+// ===== Zaplatit + tisk =====
+function zaplatit(){
+  const spzEl=document.getElementById('spz');
+  const spz=spzEl.value.trim().toUpperCase();
+  if(!spz){ toast('Zadej SPZ'); spzEl.focus(); return; }
+  const rec={ cislo:cisloDokladu(), spz, dny, cena:dny*SET.cena, ts:Date.now() };
+  DOK.unshift(rec); save();
+  printReceipt(rec);
+  spzEl.value=''; dny=1; refreshPrice();
+  toast('Doklad '+rec.cislo+' vytištěn ✓');
+}
+
+// ===== Termo účtenka =====
+function setPrintWidth(mm){
+  let st=document.getElementById('printSize');
+  if(!st){ st=document.createElement('style'); st.id='printSize'; document.head.appendChild(st); }
+  st.textContent = '@media print{ @page{ size:'+mm+'mm auto; margin:0; } #receipt{ width:'+mm+'mm; } }';
+}
+function fmtDT(ts){ const d=new Date(ts); return d.toLocaleDateString('cs-CZ')+' '+d.toLocaleTimeString('cs-CZ',{hour:'2-digit',minute:'2-digit'}); }
+function kc(x){ return (Math.round(x*100)/100).toFixed(2).replace('.',','); }
+function printReceipt(rec){
+  setPrintWidth(SET.sirka);
+  const platce = SET.dic && SET.dph>0;
+  const zaklad = platce ? rec.cena/(1+SET.dph/100) : rec.cena;
+  const dphCastka = rec.cena - zaklad;
+  const dphRows = platce ? `
+      <tr><td>Základ daně:</td><td class="r">${kc(zaklad)} Kč</td></tr>
+      <tr><td>DPH ${SET.dph} %:</td><td class="r">${kc(dphCastka)} Kč</td></tr>` : '';
+  document.getElementById('receipt').innerHTML = `
+    <div class="c big">${SET.nazev}</div>
+    <div class="c">${SET.adresa}</div>
+    <div class="c">IČO: ${SET.ico}${SET.dic?'  DIČ: '+SET.dic:''}</div>
+    <hr>
+    <div class="c big">${platce?'ZJEDNODUŠENÝ DAŇOVÝ DOKLAD':'PARKOVACÍ DOKLAD'}</div>
+    <div class="c">č. ${rec.cislo}</div>
+    <hr>
+    <table>
+      <tr><td>Datum:</td><td class="r">${fmtDT(rec.ts)}</td></tr>
+      <tr><td>SPZ:</td><td class="r big">${rec.spz}</td></tr>
+      <tr><td>Parkování:</td><td class="r">${rec.dny} ${slovoDen(rec.dny)}</td></tr>
+    </table>
+    <hr>
+    <table>${dphRows}
+      <tr><td class="big">CELKEM:</td><td class="r xl">${rec.cena} Kč</td></tr>
+      <tr><td colspan="2" class="c">zaplaceno hotově</td></tr>
+    </table>
+    <hr>
+    <div class="c">Děkujeme a přejeme příjemný pobyt</div>
+    <div class="c" style="margin-top:4px">&nbsp;</div>`;
+  window.print();
+}
+function testPrint(){ printReceipt({ cislo:'P-TEST', spz:'1AB 2345', dny:1, cena:SET.cena, ts:Date.now() }); }
+
+// ===== Doklady přehled =====
+function setPer(p){ per=p; document.querySelectorAll('.seg [data-per]').forEach(b=>b.classList.toggle('active', b.dataset.per===p)); renderDok(); }
+function filtr(){
+  if(per==='all') return DOK;
+  const now=new Date();
+  if(per==='today'){ const s=new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime(); return DOK.filter(x=>x.ts>=s); }
+  if(per==='7'){ const s=now.getTime()-7*864e5; return DOK.filter(x=>x.ts>=s); }
+  return DOK;
+}
+function renderDok(){
+  const list=filtr();
+  document.getElementById('stCount').textContent=list.length;
+  document.getElementById('stSum').textContent=list.reduce((a,b)=>a+b.cena,0)+' Kč';
+  const el=document.getElementById('dokList');
+  if(!list.length){ el.innerHTML='<div class="empty">Žádné doklady</div>'; return; }
+  el.innerHTML=list.map(r=>`
+    <div class="row">
+      <div>
+        <div class="spz">${r.spz}</div>
+        <div class="meta">${r.cislo} · ${fmtDT(r.ts)} · ${r.dny} ${slovoDen(r.dny)}</div>
+      </div>
+      <div class="right">
+        <div class="kc">${r.cena} Kč</div>
+        <button class="btn btn-grey btn-sm" style="margin-top:4px;font-size:12px;padding:6px 10px" onclick="reprint(${r.ts})">🖨️ Znovu</button>
+      </div>
+    </div>`).join('');
+}
+function reprint(ts){ const r=DOK.find(x=>x.ts===ts); if(r) printReceipt(r); }
+
+// ===== Export pro účtování =====
+function exportCSV(){
+  const list=filtr();
+  if(!list.length){ toast('Nic k exportu'); return; }
+  let csv='Cislo dokladu;Datum;SPZ;Dny;Cena Kc\n';
+  list.slice().reverse().forEach(r=>{ csv+=`${r.cislo};${fmtDT(r.ts)};${r.spz};${r.dny};${r.cena}\n`; });
+  csv+=`;;;CELKEM;${list.reduce((a,b)=>a+b.cena,0)}\n`;
+  copy(csv); toast('Zkopírováno ('+list.length+' dokladů)');
+}
+
+// ===== Nastavení =====
+function fillSet(){
+  s_nazev.value=SET.nazev; s_ico.value=SET.ico; s_dic.value=SET.dic||''; s_adresa.value=SET.adresa;
+  s_cena.value=SET.cena; s_dph.value=SET.dph; s_prefix.value=SET.prefix; setW(SET.sirka);
+}
+function setW(mm){ SET.sirka=mm; document.getElementById('w58').classList.toggle('active',mm===58); document.getElementById('w80').classList.toggle('active',mm===80); }
+function saveSet(){
+  SET.nazev=s_nazev.value.trim()||DEF.nazev;
+  SET.ico=s_ico.value.trim();
+  SET.dic=s_dic.value.trim();
+  SET.adresa=s_adresa.value.trim();
+  SET.cena=Math.max(0,parseInt(s_cena.value)||0);
+  SET.dph=Math.max(0,parseFloat(s_dph.value)||0);
+  SET.prefix=(s_prefix.value.trim()||'P').toUpperCase();
+  save(); refreshPrice(); toast('Nastavení uloženo ✓');
+}
+
+// ===== Smazat všechny doklady =====
+function smazatVse(){
+  if(!DOK.length){ toast('Žádné doklady'); return; }
+  if(!confirm('Opravdu smazat všech '+DOK.length+' dokladů? Nevratné.')) return;
+  DOK=[]; save(); renderDok(); toast('Doklady smazány');
+}
+
+// ===== Záloha =====
+function zalohaExport(){ copy(JSON.stringify({set:SET,dok:DOK})); toast('Záloha ve schránce'); }
+function zalohaImport(){
+  const t=prompt('Vlož zálohu (JSON):'); if(!t) return;
+  try{ const o=JSON.parse(t); if(o.set)SET=o.set; if(o.dok)DOK=o.dok; save(); fillSet(); refreshPrice(); toast('Importováno ✓'); }
+  catch(e){ toast('Špatná data'); }
+}
+
+// ===== Pomocné =====
+function copy(t){ navigator.clipboard?.writeText(t).catch(()=>{ const a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select(); document.execCommand('copy'); a.remove(); }); }
+let toT;
+function toast(m){ const e=document.getElementById('toast'); e.textContent=m; e.classList.add('show'); clearTimeout(toT); toT=setTimeout(()=>e.classList.remove('show'),2200); }
+
+// auto-uppercase SPZ
+document.getElementById('spz').addEventListener('input',e=>{ e.target.value=e.target.value.toUpperCase(); });
+
+// ===== Init =====
+refreshPrice(); setPrintWidth(SET.sirka);
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+</script>
+</body>
+</html>
