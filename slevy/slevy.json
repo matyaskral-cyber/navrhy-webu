@@ -714,34 +714,6 @@
     "url": "https://www.lidl.cz/p/allini-prosecco-treviso/p10052483"
   },
   {
-    "id": "l42d462",
-    "name": "MONIN Sirup",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Nealkoholické nápoje",
-    "emoji": "🥤",
-    "image": "https://imgproxy-retcat.assets.schwarz/ntrphwZvSvwojgF3-tPX7qR3jYZ8jj3MV3HJdKCIbLM/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS80RUI1REE2RjEwQkZEMDVFNTQzQjAxNkE/wNzAyNzNDQTU0NTJERDUwMDM0RTdBMTdEQjAyNjIxOEIwMEI1NzNBLnBuZw.png",
-    "priceNew": 99.9,
-    "priceOld": 134.87,
-    "validUntil": "2026-07-12",
-    "url": "https://www.lidl.cz/p/monin-sirup/p10054810"
-  },
-  {
-    "id": "l4f9d1d",
-    "name": "ARGUS ARGUS 10 Original",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Pivo a cider",
-    "emoji": "🍺",
-    "image": "https://imgproxy-retcat.assets.schwarz/5yg-eoHajeLN_05CAQUYQDSZsXJX5tQynjMQ4XLrvKU/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9GOUM5NUI5QTAxREFGQ0Y1NjJDMzkzNUY/yQjM5MUM0QjY1NjNGQjc5M0QwMEQ4QUU3MERDRDQzNzFDRjNBNjM2LnBuZw.png",
-    "priceNew": 7.9,
-    "priceOld": 11.9,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/argus-argus-10-original/p10053383"
-  },
-  {
     "id": "l961b35",
     "name": "ALLINI Secco Rosato/Bianco",
     "desc": "",
@@ -754,6 +726,34 @@
     "priceOld": 16.07,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/allini-secco-rosato-bianco/p10053185"
+  },
+  {
+    "id": "l954ecb",
+    "name": "BELLAROM Zrnková káva",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Káva, čaj a kakao",
+    "emoji": "☕",
+    "image": "https://imgproxy-retcat.assets.schwarz/fsX9_TwieXszou0173yt5HKiRamf6fHURs0Js5reTmg/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9DMURGNTJBQkUzRkExOUI5OTM5QTVGNTF/EOERBRjE1QjEyMTM0MUEwRjI5NUEyNkZBNEE1MTZFRkE3ODQ3MEZBLnBuZw.png",
+    "priceNew": 299.9,
+    "priceOld": 404.87,
+    "validUntil": "2026-07-12",
+    "url": "https://www.lidl.cz/p/bellarom-zrnkova-kava/p10054831"
+  },
+  {
+    "id": "l42d462",
+    "name": "MONIN Sirup",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Nealkoholické nápoje",
+    "emoji": "🥤",
+    "image": "https://imgproxy-retcat.assets.schwarz/ntrphwZvSvwojgF3-tPX7qR3jYZ8jj3MV3HJdKCIbLM/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS80RUI1REE2RjEwQkZEMDVFNTQzQjAxNkE/wNzAyNzNDQTU0NTJERDUwMDM0RTdBMTdEQjAyNjIxOEIwMEI1NzNBLnBuZw.png",
+    "priceNew": 99.9,
+    "priceOld": 134.87,
+    "validUntil": "2026-07-12",
+    "url": "https://www.lidl.cz/p/monin-sirup/p10054810"
   },
   {
     "id": "la722a3",
@@ -770,46 +770,18 @@
     "url": "https://www.lidl.cz/p/tresne/p10053710"
   },
   {
-    "id": "l9d1f27",
-    "name": "BUDWEISER Budvar original",
+    "id": "l4f9d1d",
+    "name": "ARGUS ARGUS 10 Original",
     "desc": "",
     "store": "lidl",
     "storeName": "Lidl",
     "category": "Pivo a cider",
     "emoji": "🍺",
-    "image": "https://imgproxy-retcat.assets.schwarz/VhHKrBymKZMJELeqm3-D2-yJ5bD1uP3oTucvYGjrbjw/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9FQjhFOUFFQzJGNTkyMTBFRDBDMjE1QTQ/zQkEwMUY4RDkxODc5QkY0MTUxQ0U1RkVDNDcyMjA5M0VDN0EyRjYwLnBuZw.png",
-    "priceNew": 18.9,
-    "priceOld": 24.9,
-    "validUntil": "2026-07-19",
-    "url": "https://www.lidl.cz/p/budweiser-budvar-original/p10054203"
-  },
-  {
-    "id": "lf0f4f7",
-    "name": "Trvanlivé mléko 1,5%",
-    "desc": "1 l",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Mléko a smetana",
-    "emoji": "🥛",
-    "image": "https://imgproxy-retcat.assets.schwarz/f4FU7CL2oN0jM8ezO_s2NPo9qZXaoITRxbuCWXQzUOQ/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50LzE1QkU5QTcyOEVCRUUxRUQ4NThBQjE2Qz/M3NDIxOEYzMzc5NjU4NTFBQkIwMUEwMTQ3Q0VFM0VEMDgyOTgyRDcucG5n.png",
-    "priceNew": 12.9,
-    "priceOld": 17.42,
+    "image": "https://imgproxy-retcat.assets.schwarz/5yg-eoHajeLN_05CAQUYQDSZsXJX5tQynjMQ4XLrvKU/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9GOUM5NUI5QTAxREFGQ0Y1NjJDMzkzNUY/yQjM5MUM0QjY1NjNGQjc5M0QwMEQ4QUU3MERDRDQzNzFDRjNBNjM2LnBuZw.png",
+    "priceNew": 7.9,
+    "priceOld": 11.9,
     "validUntil": "",
-    "url": "https://www.lidl.cz/p/trvanlive-mleko-1-5/p10051912"
-  },
-  {
-    "id": "lfac3aa",
-    "name": "Bezlaktózové trvanlivé mléko 1,5%",
-    "desc": "1 l",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Mléko a smetana",
-    "emoji": "🥛",
-    "image": "https://imgproxy-retcat.assets.schwarz/1i-kHJbHYs2Jp0-Y7Y8OkkF5LSJh5yMPtZ6U60olwRk/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50LzJGQzQ2MEY1NTExMENGNTk2RjBCOTc3OT/lFRDVCNzk1OTg5NjQ2MTBGNDhCNjNFM0I0QzcwOUIwRDk4RTNGMzUucG5n.png",
-    "priceNew": 18.9,
-    "priceOld": 25.52,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/bezlaktozove-trvanlive-mleko-1-5/p10051914"
+    "url": "https://www.lidl.cz/p/argus-argus-10-original/p10053383"
   },
   {
     "id": "l118171",
@@ -826,18 +798,18 @@
     "url": "https://www.lidl.cz/p/brambory-prilohove/p10052856"
   },
   {
-    "id": "l14d71d",
-    "name": "Ochucený jogurt jahoda",
-    "desc": "150 g",
+    "id": "l4f7bb7",
+    "name": "Big Sushi Set",
+    "desc": "Dostupné pouze ve vybraných prodejnách",
     "store": "lidl",
     "storeName": "Lidl",
-    "category": "Jogurt",
-    "emoji": "🥛",
-    "image": "https://imgproxy-retcat.assets.schwarz/IVmT_CtLMYucTh_LAPVouogNn0C4GmXRNAAGAGvdo0Y/sm:1/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS82MTBGNzIzNzVEMUNEQTE1ODY2QkE5Rjl/BOEYwN0IwQjRGQ0JGRTVFM0ZCOEVBMjUwODdDQjFBNDIyODVDRUNFLmpwZw.jpg",
-    "priceNew": 14.9,
-    "priceOld": 20.12,
+    "category": "Ryby a mořské plody",
+    "emoji": "🐟",
+    "image": "https://imgproxy-retcat.assets.schwarz/Z-pHawb0BcdpXK_FscFvvYUx8dppY8pvF2Q6_zYOXw4/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9FMzlBRjBGNDA1MTJGNzU3RUNBQUY4QjF/DQzMxOUMyQzdCODNBRkQ0NzI1OTIxMkE5Njc5M0U2MDBDNTFFNTc2LnBuZw.png",
+    "priceNew": 249.9,
+    "priceOld": 337.37,
     "validUntil": "",
-    "url": "https://www.lidl.cz/p/ochuceny-jogurt-jahoda/p10048236"
+    "url": "https://www.lidl.cz/p/big-sushi-set/p10050104"
   },
   {
     "id": "l69ff41",
@@ -852,6 +824,34 @@
     "priceOld": 21.47,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/trvanlive-mleko-3-5/p10051913"
+  },
+  {
+    "id": "l9ff019",
+    "name": "Hamburgerová bulka",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Pečivo a drobné pečivo",
+    "emoji": "🍞",
+    "image": "https://imgproxy-retcat.assets.schwarz/iU7ZSXmh-c7Wu07lw5eLP_R4qoYDMHjAJjJTYq6dG0U/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS85MTUzQjk1MjlCRjIyNEIxQzIxRjc0NzI/0RjMwOTY5RDNFQjQxODVBM0NDMEQzNzUzOUQzQjBFNDdGOEE4MzY4LnBuZw.png",
+    "priceNew": 6.9,
+    "priceOld": 9.9,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/hamburgerova-bulka/p10050541"
+  },
+  {
+    "id": "l9d1f27",
+    "name": "BUDWEISER Budvar original",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Pivo a cider",
+    "emoji": "🍺",
+    "image": "https://imgproxy-retcat.assets.schwarz/VhHKrBymKZMJELeqm3-D2-yJ5bD1uP3oTucvYGjrbjw/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9FQjhFOUFFQzJGNTkyMTBFRDBDMjE1QTQ/zQkEwMUY4RDkxODc5QkY0MTUxQ0U1RkVDNDcyMjA5M0VDN0EyRjYwLnBuZw.png",
+    "priceNew": 18.9,
+    "priceOld": 24.9,
+    "validUntil": "2026-07-19",
+    "url": "https://www.lidl.cz/p/budweiser-budvar-original/p10054203"
   },
   {
     "id": "l395a50",
