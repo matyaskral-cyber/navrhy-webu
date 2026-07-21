@@ -1274,20 +1274,6 @@
     "url": "https://www.billa.cz/produkt/orion-ledove-kastany-tycinka-v-horke-cokolade-s-kakaovooriskovou-naplni-45g-82202495"
   },
   {
-    "id": "le17f8f",
-    "name": "SNACK DAY Bramborové chipsy",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Sýrové pochoutky",
-    "emoji": "🧀",
-    "image": "https://imgproxy-retcat.assets.schwarz/N-E376YelZIYGOWjpGGDrL6Ey-DEE63y44MtB-kSQbU/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS84MDEyQzIzNjRDNUY0NzM5NkYyQUQyRkE/5RUE0QzczMzdDNkVEODQzRDE3N0I4QTBENEYzOUI0NUFBNzZEQzc1LnBuZw.png",
-    "priceNew": 19.9,
-    "priceOld": 29.9,
-    "validUntil": "2026-07-26",
-    "url": "https://www.lidl.cz/p/snack-day-bramborove-chipsy/p10055172"
-  },
-  {
     "id": "l4f9d1d",
     "name": "ARGUS ARGUS 10 Original",
     "desc": "",
@@ -1300,6 +1286,20 @@
     "priceOld": 11.9,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/argus-argus-10-original/p10053383"
+  },
+  {
+    "id": "le17f8f",
+    "name": "SNACK DAY Bramborové chipsy",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Sýrové pochoutky",
+    "emoji": "🧀",
+    "image": "https://imgproxy-retcat.assets.schwarz/N-E376YelZIYGOWjpGGDrL6Ey-DEE63y44MtB-kSQbU/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS84MDEyQzIzNjRDNUY0NzM5NkYyQUQyRkE/5RUE0QzczMzdDNkVEODQzRDE3N0I4QTBENEYzOUI0NUFBNzZEQzc1LnBuZw.png",
+    "priceNew": 19.9,
+    "priceOld": 29.9,
+    "validUntil": "2026-07-26",
+    "url": "https://www.lidl.cz/p/snack-day-bramborove-chipsy/p10055172"
   },
   {
     "id": "lc27098",
@@ -1316,20 +1316,6 @@
     "url": "https://www.lidl.cz/p/pilos-trvanlive-mleko-plnotucne/p10055058"
   },
   {
-    "id": "l9ff019",
-    "name": "Hamburgerová bulka",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Pečivo a drobné pečivo",
-    "emoji": "🍞",
-    "image": "https://imgproxy-retcat.assets.schwarz/iU7ZSXmh-c7Wu07lw5eLP_R4qoYDMHjAJjJTYq6dG0U/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS85MTUzQjk1MjlCRjIyNEIxQzIxRjc0NzI/0RjMwOTY5RDNFQjQxODVBM0NDMEQzNzUzOUQzQjBFNDdGOEE4MzY4LnBuZw.png",
-    "priceNew": 6.9,
-    "priceOld": 9.9,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/hamburgerova-bulka/p10050541"
-  },
-  {
     "id": "l95fed9",
     "name": "Whey protein",
     "desc": "",
@@ -1342,6 +1328,20 @@
     "priceOld": 349.9,
     "validUntil": "2026-07-22",
     "url": "https://www.lidl.cz/p/whey-protein/p10055114"
+  },
+  {
+    "id": "l9ff019",
+    "name": "Hamburgerová bulka",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Pečivo a drobné pečivo",
+    "emoji": "🍞",
+    "image": "https://imgproxy-retcat.assets.schwarz/iU7ZSXmh-c7Wu07lw5eLP_R4qoYDMHjAJjJTYq6dG0U/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS85MTUzQjk1MjlCRjIyNEIxQzIxRjc0NzI/0RjMwOTY5RDNFQjQxODVBM0NDMEQzNzUzOUQzQjBFNDdGOEE4MzY4LnBuZw.png",
+    "priceNew": 6.9,
+    "priceOld": 9.9,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/hamburgerova-bulka/p10050541"
   },
   {
     "id": "l365151",
@@ -1358,32 +1358,18 @@
     "url": "https://www.lidl.cz/p/pudingovy-snek-s-cokoladou-skoricovy-snek/p10055083"
   },
   {
-    "id": "l32ab7d",
-    "name": "Anglická bagetka",
-    "desc": "",
+    "id": "l69ff41",
+    "name": "Trvanlivé mléko 3,5%",
+    "desc": "1 l",
     "store": "lidl",
     "storeName": "Lidl",
-    "category": "Čerstvý chléb",
-    "emoji": "🛒",
-    "image": "https://imgproxy-retcat.assets.schwarz/rTdAlQzQ9d7dAJoWhHF0T2yky0UrvZRd-UodxKRz8VY/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS8wRjgyQjMzODk3RkVBQTNFNTIzQTI2Q0R/BRDdCOEE1NTI4RTM0QkUxNTJCMzgxQzM3MzFFRkZGQjZGQ0Y1RDIxLnBuZw.png",
-    "priceNew": 12.9,
-    "priceOld": 16.9,
-    "validUntil": "2026-07-22",
-    "url": "https://www.lidl.cz/p/anglicka-bagetka/p10044912"
-  },
-  {
-    "id": "l011e4a",
-    "name": "Dalamánek",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Pečivo a drobné pečivo",
-    "emoji": "🍞",
-    "image": "https://imgproxy-retcat.assets.schwarz/N-L8LRZzBC1rls5e0lZnDTov7BoOhzByYLCB6tmiKLo/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS82MDE1NzQ5MjM3OTgyNTJGRkM1MkQ2ODQ/wMTJDQ0QyNEI5NEQyNTAyREIwQTRBMzUyMzgyMjM5NUMwQ0RFOTkxLnBuZw.png",
-    "priceNew": 5.18,
-    "priceOld": 6.9,
-    "validUntil": "2026-07-26",
-    "url": "https://www.lidl.cz/p/dalamanek/p10026331"
+    "category": "Mléko a smetana",
+    "emoji": "🥛",
+    "image": "https://imgproxy-retcat.assets.schwarz/DlgC6BBZqUa_J2Q1BbjCVl52pPESgM5uoCHcqvPVuzE/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50L0I2OUVEMzg2MzJFNDQyNjYyQ0QzREJBQj/JFODlDMzBFMjlFNjE3QTREOTIyQjM0RTk0NERGREQ2RDUwNDlDOTQucG5n.png",
+    "priceNew": 15.9,
+    "priceOld": 21.47,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/trvanlive-mleko-3-5/p10051913"
   },
   {
     "id": "la1f398",
@@ -1398,6 +1384,20 @@
     "priceOld": 21.47,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/argus-argus-11-premium/p10052257"
+  },
+  {
+    "id": "l011e4a",
+    "name": "Dalamánek",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Pečivo a drobné pečivo",
+    "emoji": "🍞",
+    "image": "https://imgproxy-retcat.assets.schwarz/N-L8LRZzBC1rls5e0lZnDTov7BoOhzByYLCB6tmiKLo/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS82MDE1NzQ5MjM3OTgyNTJGRkM1MkQ2ODQ/wMTJDQ0QyNEI5NEQyNTAyREIwQTRBMzUyMzgyMjM5NUMwQ0RFOTkxLnBuZw.png",
+    "priceNew": 5.18,
+    "priceOld": 6.9,
+    "validUntil": "2026-07-26",
+    "url": "https://www.lidl.cz/p/dalamanek/p10026331"
   },
   {
     "id": "ld8afa3",
