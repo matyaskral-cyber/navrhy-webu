@@ -1,33 +1,5 @@
 [
   {
-    "id": "p1b1867",
-    "name": "Kuřecí stehenní steak XXL chlazený",
-    "desc": "1 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "MASO",
-    "emoji": "🥩",
-    "image": "",
-    "priceNew": 109.9,
-    "priceOld": 148.37,
-    "validUntil": "2026-08-04",
-    "url": "https://www.penny.cz/products/kureci-stehenni-steak-xxl-chlazeny-88100077"
-  },
-  {
-    "id": "p8b58b8",
-    "name": "Vepřová kýta bez kosti",
-    "desc": "1 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "MASO",
-    "emoji": "🥩",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-100161-1839453797-uxvMQRQN.jpg",
-    "priceNew": 54.9,
-    "priceOld": 74.12,
-    "validUntil": "2026-08-04",
-    "url": "https://www.penny.cz/products/veprova-kyta-bez-kosti-88100161"
-  },
-  {
     "id": "pc6c8a8",
     "name": "Sýr Camembert Boni",
     "desc": "90 g",
@@ -112,20 +84,6 @@
     "url": "https://www.penny.cz/products/rezy-kakaove-sedita-88202386"
   },
   {
-    "id": "p801c83",
-    "name": "Pikantní čalamáda",
-    "desc": "380 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "ZELENINOVÉ / OVOCNÉ KONZERVY",
-    "emoji": "🥦",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-203303-765217029-64JIft5N.jpg",
-    "priceNew": 29.9,
-    "priceOld": 40.37,
-    "validUntil": "2026-08-04",
-    "url": "https://www.penny.cz/products/pikantni-calamada-88203303"
-  },
-  {
     "id": "pde413c",
     "name": "Dunajská čalamáda",
     "desc": "380 kg",
@@ -196,20 +154,6 @@
     "url": "https://www.penny.cz/products/pomazanka-buckova-gustito-88205439"
   },
   {
-    "id": "pa56c28",
-    "name": "Čertovy topinky Gustito",
-    "desc": "100 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "MASOVÉ KONZERVY / POMAZÁNKY",
-    "emoji": "🥩",
-    "image": "",
-    "priceNew": 17.9,
-    "priceOld": 24.16,
-    "validUntil": "2026-08-04",
-    "url": "https://www.penny.cz/products/certovy-topinky-gustito-88205441"
-  },
-  {
     "id": "pa42926",
     "name": "Sýr Eidam 30% Karlova Koruna",
     "desc": "100 g",
@@ -252,20 +196,6 @@
     "url": "https://www.penny.cz/products/ryze-dlouhozrnna-20-lagris-88205828"
   },
   {
-    "id": "p615b26",
-    "name": "Rýže parboiled + 20% Lagris",
-    "desc": "1.2 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "ZÁKLADNÍ POTRAVINY",
-    "emoji": "🍚",
-    "image": "",
-    "priceNew": 34.9,
-    "priceOld": 47.12,
-    "validUntil": "2026-08-04",
-    "url": "https://www.penny.cz/products/ryze-parboiled-20-lagris-88205829"
-  },
-  {
     "id": "pff4d29",
     "name": "Hrášek jemný Jardinelle",
     "desc": "280 kg",
@@ -278,20 +208,6 @@
     "priceOld": 20.12,
     "validUntil": "2026-08-04",
     "url": "https://www.penny.cz/products/hrasek-jemny-jardinelle-88207288"
-  },
-  {
-    "id": "p5d2aac",
-    "name": "Kukuřice sterilovaná Jardinelle",
-    "desc": "285 kg",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "ZELENINOVÉ / OVOCNÉ KONZERVY",
-    "emoji": "🥦",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-207916-0310828889-cwNPOmcE.jpg",
-    "priceNew": 16.9,
-    "priceOld": 22.82,
-    "validUntil": "2026-08-04",
-    "url": "https://www.penny.cz/products/kukurice-sterilovana-jardinelle-88207916"
   },
   {
     "id": "p7f3106",
@@ -320,20 +236,6 @@
     "priceOld": 16.07,
     "validUntil": "2026-08-04",
     "url": "https://www.penny.cz/products/horalky-sedita-88209125"
-  },
-  {
-    "id": "pa1ceb0",
-    "name": "Tuňák žlutoploutvý steak",
-    "desc": "1000 g",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "ST WEB",
-    "emoji": "🐟",
-    "image": "",
-    "priceNew": 299.0,
-    "priceOld": 403.65,
-    "validUntil": "2026-08-04",
-    "url": "https://www.penny.cz/products/tunak-zlutoploutvy-steak-88209147"
   },
   {
     "id": "p538303",
@@ -399,25 +301,11 @@
     "storeName": "Penny",
     "category": "MRAŽENÁ ZMRZLINA",
     "emoji": "🍦",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302223-115880259-fLUwvVkd.jpg",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302224-124868000-5ncaWnHB.jpg",
     "priceNew": 9.9,
     "priceOld": 13.37,
     "validUntil": "2026-08-04",
-    "url": "https://www.penny.cz/products/zmrzlina-v-oplatkovem-kornoutu-rios-88302223"
-  },
-  {
-    "id": "paefb8e",
-    "name": "Zmrzlina Rios",
-    "desc": "200 l",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "MRAŽENÁ ZMRZLINA",
-    "emoji": "🍦",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302225-1199680007-yC-bN8d-.jpg",
-    "priceNew": 9.9,
-    "priceOld": 13.37,
-    "validUntil": "2026-08-04",
-    "url": "https://www.penny.cz/products/zmrzlina-rios-88302225"
+    "url": "https://www.penny.cz/products/zmrzlina-v-oplatkovem-kornoutu-rios-88302224"
   },
   {
     "id": "p13e29b",
@@ -614,6 +502,62 @@
     "priceOld": 13.37,
     "validUntil": "2026-08-04",
     "url": "https://www.penny.cz/products/dobra-voda-88461203"
+  },
+  {
+    "id": "pcf465a",
+    "name": "Kofola Original PET",
+    "desc": "1.5 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "ST WEB",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-464236-165118011-p9CqPrXp.jpg",
+    "priceNew": 14.9,
+    "priceOld": 20.12,
+    "validUntil": "2026-08-04",
+    "url": "https://www.penny.cz/products/kofola-original-pet-88464236"
+  },
+  {
+    "id": "pa7788f",
+    "name": "Káva Instant Classic Nescafe",
+    "desc": "200 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "KÁVA",
+    "emoji": "☕",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-503105-0589793915-ndqFoHOE.jpg",
+    "priceNew": 129.9,
+    "priceOld": 175.37,
+    "validUntil": "2026-08-04",
+    "url": "https://www.penny.cz/products/kava-instant-classic-nescafe-88503105"
+  },
+  {
+    "id": "p0e3b0d",
+    "name": "Káva Instant Crema Nescafe",
+    "desc": "200 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "KÁVA",
+    "emoji": "☕",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-503120-0532239879-1n0iaqw7.jpg",
+    "priceNew": 129.9,
+    "priceOld": 175.37,
+    "validUntil": "2026-08-04",
+    "url": "https://www.penny.cz/products/kava-instant-crema-nescafe-88503120"
+  },
+  {
+    "id": "pb6fb6e",
+    "name": "Špekáčky výběrové Řezníkův Talíř",
+    "desc": "600 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "UZENINY",
+    "emoji": "🌭",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-92302-01403790425-o6_6UXW-.jpg",
+    "priceNew": 69.9,
+    "priceOld": 94.37,
+    "validUntil": "2026-08-04",
+    "url": "https://www.penny.cz/products/spekacky-vyberove-reznikuv-talir-8892302"
   },
   {
     "id": "b5c227e",
@@ -882,6 +826,20 @@
     "url": "https://www.billa.cz/produkt/milka-alpine-milk-mlecna-cokolada-z-alpskeho-mleka-90-g-82202942"
   },
   {
+    "id": "b179bf3",
+    "name": "Toffifee Celá jádra lískových ořechů v karamelu s lískoořechovým krémem a čokoládou 125g",
+    "desc": "125 kg",
+    "store": "billa",
+    "storeName": "Billa",
+    "category": "Bonboniéry",
+    "emoji": "🍫",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-287890-960609276-4Zuy3gjM.jpg",
+    "priceNew": 29.9,
+    "priceOld": 54.9,
+    "validUntil": "",
+    "url": "https://www.billa.cz/produkt/toffifee-cela-jadra-liskovych-orechu-v-karamelu-s-liskoorechovym-kremem-a-cokoladou-125g-82287890"
+  },
+  {
     "id": "be1c8eb",
     "name": "Pez Figurka + 2 Pez štangličky ovocné",
     "desc": "17 kg",
@@ -1008,34 +966,6 @@
     "url": "https://www.lidl.cz/p/tresne/p10053710"
   },
   {
-    "id": "l4f9d1d",
-    "name": "ARGUS ARGUS 10 Original",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Pivo a cider",
-    "emoji": "🍺",
-    "image": "https://imgproxy-retcat.assets.schwarz/5yg-eoHajeLN_05CAQUYQDSZsXJX5tQynjMQ4XLrvKU/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9GOUM5NUI5QTAxREFGQ0Y1NjJDMzkzNUY/yQjM5MUM0QjY1NjNGQjc5M0QwMEQ4QUU3MERDRDQzNzFDRjNBNjM2LnBuZw.png",
-    "priceNew": 7.9,
-    "priceOld": 11.9,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/argus-argus-10-original/p10053383"
-  },
-  {
-    "id": "l4f608b",
-    "name": "SEGAFREDO Caffé Crema Collezione",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Káva, čaj a kakao",
-    "emoji": "☕",
-    "image": "https://imgproxy-retcat.assets.schwarz/saaIkM7plmDpuvL8NjvZ1iAwusOqbAHPbbbMpiNKOcE/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9BMzJCQzk1MDY0ODdBRTM1QTUyMkVBRTl/BNjZCOEQ4NTJGQ0NBRkYwQTFDOTQ1NUMwQ0E2RThGMTk4ODYxNDAwLnBuZw.png",
-    "priceNew": 349.9,
-    "priceOld": 472.37,
-    "validUntil": "2026-08-02",
-    "url": "https://www.lidl.cz/p/segafredo-caffe-crema-collezione/p10053810"
-  },
-  {
     "id": "l69ff41",
     "name": "Trvanlivé mléko 3,5%",
     "desc": "1 l",
@@ -1050,18 +980,18 @@
     "url": "https://www.lidl.cz/p/trvanlive-mleko-3-5/p10051913"
   },
   {
-    "id": "lc652eb",
-    "name": "Gelatelli Karamelový kornout s karamelovou náplní",
+    "id": "l4f9d1d",
+    "name": "ARGUS ARGUS 10 Original",
     "desc": "",
     "store": "lidl",
     "storeName": "Lidl",
-    "category": "zmrzlina",
-    "emoji": "🍦",
-    "image": "https://imgproxy-retcat.assets.schwarz/y1W6TaXppR80zpJwP2OWRuViHAyQAaXs1w-URrqH5Zc/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50LzRENDUwMEI1RkIyODQzMjQzM0JCQzU0QU/Q0MUFCMzJCOUQ2OTM0Q0RBMDZBRTQyRTlDMzBENDYyNUUyQ0YxMUEucG5n.png",
-    "priceNew": 14.9,
-    "priceOld": 20.12,
+    "category": "Pivo a cider",
+    "emoji": "🍺",
+    "image": "https://imgproxy-retcat.assets.schwarz/5yg-eoHajeLN_05CAQUYQDSZsXJX5tQynjMQ4XLrvKU/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9GOUM5NUI5QTAxREFGQ0Y1NjJDMzkzNUY/yQjM5MUM0QjY1NjNGQjc5M0QwMEQ4QUU3MERDRDQzNzFDRjNBNjM2LnBuZw.png",
+    "priceNew": 7.9,
+    "priceOld": 11.9,
     "validUntil": "",
-    "url": "https://www.lidl.cz/p/gelatelli-karamelovy-kornout-s-karamelovou-naplni/p10052972"
+    "url": "https://www.lidl.cz/p/argus-argus-10-original/p10053383"
   },
   {
     "id": "l445a66",
@@ -1078,18 +1008,18 @@
     "url": "https://www.lidl.cz/p/ballino-kornout-pistaciovy/p10052964"
   },
   {
-    "id": "l828a36",
-    "name": "Pita chléb",
-    "desc": "200 g",
+    "id": "lc652eb",
+    "name": "Gelatelli Karamelový kornout s karamelovou náplní",
+    "desc": "",
     "store": "lidl",
     "storeName": "Lidl",
-    "category": "Toasty a trvanlivé pečivo",
-    "emoji": "🍞",
-    "image": "https://imgproxy-retcat.assets.schwarz/VebvRJC_3IxZXpGGqwc7xSVZLhu7oOm2voYW18OC7_8/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9FRjk0MkJEMEI3NjE2Q0UwOUQzRTQzODB/FMEI2N0IyMDkyODBFOUQ1NEFFOEU2NjY1RjI2NzhEQkFCNjcyNzYzLnBuZw.png",
-    "priceNew": 13.9,
-    "priceOld": 17.9,
-    "validUntil": "2026-08-02",
-    "url": "https://www.lidl.cz/p/pita-chleb/p10051276"
+    "category": "zmrzlina",
+    "emoji": "🍦",
+    "image": "https://imgproxy-retcat.assets.schwarz/y1W6TaXppR80zpJwP2OWRuViHAyQAaXs1w-URrqH5Zc/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50LzRENDUwMEI1RkIyODQzMjQzM0JCQzU0QU/Q0MUFCMzJCOUQ2OTM0Q0RBMDZBRTQyRTlDMzBENDYyNUUyQ0YxMUEucG5n.png",
+    "priceNew": 14.9,
+    "priceOld": 20.12,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/gelatelli-karamelovy-kornout-s-karamelovou-naplni/p10052972"
   },
   {
     "id": "le37bbe",
@@ -1106,6 +1036,34 @@
     "url": "https://www.lidl.cz/p/svijany-svijansky-maz/p10051612"
   },
   {
+    "id": "l828a36",
+    "name": "Pita chléb",
+    "desc": "200 g",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Toasty a trvanlivé pečivo",
+    "emoji": "🍞",
+    "image": "https://imgproxy-retcat.assets.schwarz/VebvRJC_3IxZXpGGqwc7xSVZLhu7oOm2voYW18OC7_8/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9FRjk0MkJEMEI3NjE2Q0UwOUQzRTQzODB/FMEI2N0IyMDkyODBFOUQ1NEFFOEU2NjY1RjI2NzhEQkFCNjcyNzYzLnBuZw.png",
+    "priceNew": 13.9,
+    "priceOld": 17.9,
+    "validUntil": "2026-08-02",
+    "url": "https://www.lidl.cz/p/pita-chleb/p10051276"
+  },
+  {
+    "id": "l042c4a",
+    "name": "PERLENBACHER PERLENBACHER Radler Citron",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Pivo a cider",
+    "emoji": "🍋",
+    "image": "https://imgproxy-retcat.assets.schwarz/StZ1agVS1v7R4UMg1hQzkjALtXf3eRyGNuUTBHuMPkE/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9EMjdFNTc0MzU0OTM0RDk2OTgzRjZBMjc/wQzU4NkJBNjc3OEEyRUNGQzAyNUVGRTg2MDZFRTIwRkQwQzAyOEZDLnBuZw.png",
+    "priceNew": 13.9,
+    "priceOld": 18.77,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/perlenbacher-perlenbacher-radler-citron/p10052944"
+  },
+  {
     "id": "lf0f4f7",
     "name": "Trvanlivé mléko 1,5%",
     "desc": "1 l",
@@ -1120,18 +1078,32 @@
     "url": "https://www.lidl.cz/p/trvanlive-mleko-1-5/p10051912"
   },
   {
-    "id": "lc464fb",
-    "name": "Vodní meloun",
-    "desc": "",
+    "id": "l99c546",
+    "name": "Tvarohový šáteček s ovocnou náplní",
+    "desc": "30 g",
     "store": "lidl",
     "storeName": "Lidl",
-    "category": "Ovoce",
-    "emoji": "🍎",
-    "image": "https://imgproxy-retcat.assets.schwarz/VnOjcNK_oyif9T9VQL9qtg6BpdIkIqpxty7Mp0EvVj8/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS8yN0JDN0U0MEQyN0ExMDZERDg1MTlGRUM/wQUUyRjdDRkE4MkZDMjg2MkU4MjJCM0U0MjNCRTc0ODYyMTlDN0E4LnBuZw.png",
-    "priceNew": 7.9,
-    "priceOld": 17.9,
+    "category": "Sladké pečivo",
+    "emoji": "🧀",
+    "image": "https://imgproxy-retcat.assets.schwarz/MEo1TGrRGEYgTt_S83gRuXtWygydP8mmbKNij7oNRGg/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9BRjk1MDEwMzg0MkYxQ0Q2Njg5RTUyNjd/DOEE3NDM4NDY4NkI0RjY1NjRGMTQxOTI3OUQxNEU2OEQ2ODc1QUY2LnBuZw.png",
+    "priceNew": 4.9,
+    "priceOld": 6.62,
     "validUntil": "2026-08-02",
-    "url": "https://www.lidl.cz/p/vodni-meloun/p10052773"
+    "url": "https://www.lidl.cz/p/tvarohovy-satecek-s-ovocnou-naplni/p10047353"
+  },
+  {
+    "id": "l75909a",
+    "name": "Baguette Premium",
+    "desc": "Dostupné pouze ve vybraných prodejnách",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Chlazená hotová jídla",
+    "emoji": "🍲",
+    "image": "https://imgproxy-retcat.assets.schwarz/TynFVMXbMcRFbWT3L47GTfYJAeOJTriCQp15aminM0I/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS82OTJGQjdGMEZCRDY4MUZEMDQ0NTQwMTg/5Q0U3MTg0MEQzNUM2M0Y5OEE2MERBNUUzRjRFOThDRjJDRTQwQjNBLnBuZw.png",
+    "priceNew": 59.9,
+    "priceOld": 80.87,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/baguette-premium/p10050108"
   },
   {
     "id": "l425286",
