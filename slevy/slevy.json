@@ -812,18 +812,18 @@
     "url": "https://www.lidl.cz/p/trvanlive-mleko-3-5/p10051913"
   },
   {
-    "id": "l997e8a",
-    "name": "Vepřová panenská svíčková",
-    "desc": "",
+    "id": "lbf4ef6",
+    "name": "Jihoamerický Rump steak",
+    "desc": "Dostupné pouze ve vybraných prodejnách",
     "store": "lidl",
     "storeName": "Lidl",
-    "category": "Vepřové maso",
+    "category": "hovězí maso",
     "emoji": "🥩",
-    "image": "https://imgproxy-retcat.assets.schwarz/mW0MRV9x6aG9STuqg9yzk1LtaKLnQTmethzpIHnLKUQ/sm:0/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9COTIxN0JBNTRBQjc4QTk0NjFEMkE2QzN/GNjRDNkIwRkM4RUYwOUMyNTdFREIxODg2MEREQTA1Mjk1MDhFMTU0LnBuZw.png",
-    "priceNew": 129.9,
-    "priceOld": 175.37,
-    "validUntil": "2026-08-16",
-    "url": "https://www.lidl.cz/p/veprova-panenska-svickova/p10050990"
+    "image": "https://imgproxy-retcat.assets.schwarz/6Bd96P6xW7HQeoEH-kffJ2UDw0AODk3j7mooKz27PUE/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS85RDVFRjg2MEREQzhGMjQ1RDZCNzMxNUY/2NEE1OUYyQkI4MURFMDU3QjEwQkNFMEMyNEMzNDc4MjAyNkVENDQ0LmpwZw.jpg",
+    "priceNew": 79.9,
+    "priceOld": 107.87,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/jihoamericky-rump-steak/p10047367"
   },
   {
     "id": "lf0f4f7",
@@ -854,20 +854,6 @@
     "url": "https://www.lidl.cz/p/cerealni-bagetka/p10054197"
   },
   {
-    "id": "ld213d6",
-    "name": "Ballino Eis Cabana Mix",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "zmrzlina",
-    "emoji": "🍦",
-    "image": "https://imgproxy-retcat.assets.schwarz/u_OVd0Ap4zhfPM5niiYeHM40KRpv6JospknCGF3QRvc/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50L0NEMkYxQkUxNDY5MTY4QzZCNkNDNEM4OE/UzN0I4MUREODU2QjI0OTI5OTU4REZGMDcwQzgxMTg0NTQ4NkMwQjYucG5n.png",
-    "priceNew": 24.9,
-    "priceOld": 33.62,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/ballino-eis-cabana-mix/p10053058"
-  },
-  {
     "id": "ld8afa3",
     "name": "Coca - Cola Monster Energy Drink Ultra White",
     "desc": "",
@@ -882,20 +868,6 @@
     "url": "https://www.lidl.cz/p/coca-cola-monster-energy-drink-ultra-white/p10054139"
   },
   {
-    "id": "le4c339",
-    "name": "Brynmor Flapjack pistácie bezl",
-    "desc": "Dostupné pouze ve vybraných prodejnách",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Sušenky a pečivo",
-    "emoji": "🍞",
-    "image": "https://imgproxy-retcat.assets.schwarz/RTWvWYkzrhLc9QLWkEMqysvL0EGIeFL_k4mZhhR2MTE/sm:1/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvaW50L0I3RDg5ODc3NzczOURDMDYxNjVCMDU4Nk/M1NjBFMkJCQ0MzQjJGMTFEOUQzMEU0NjY3N0Q1MzZDNEM2RjM2QUMucG5n.png",
-    "priceNew": 34.9,
-    "priceOld": 47.12,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/brynmor-flapjack-pistacie-bezl/p10052115"
-  },
-  {
     "id": "l840447",
     "name": "SANYTOL Dezinfekce na prádlo",
     "desc": "",
@@ -908,6 +880,34 @@
     "priceOld": 168.9,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/sanytol-dezinfekce-na-pradlo/p10054543"
+  },
+  {
+    "id": "lf25a6f",
+    "name": "Kuřecí prsní řízky",
+    "desc": "Dostupné pouze ve vybraných prodejnách.",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "drůbež",
+    "emoji": "🍗",
+    "image": "https://imgproxy-retcat.assets.schwarz/j5bN7E3YJlkzIC8mrcPvjzRV1oKy30O1Nw7rZjQvPms/sm:1/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9EMEJGQkJDNUUxRDE4NDgyQjM0ODFGNDA/zMTJGQzlERTE0OTRFRjkzOUVEQTUwQjQxMUU5MEM4QjQxQTI1NkNGLnBuZw.png",
+    "priceNew": 89.95,
+    "priceOld": 111.45,
+    "validUntil": "",
+    "url": "https://www.lidl.cz/p/kureci-prsni-rizky/p10050599"
+  },
+  {
+    "id": "lc464fb",
+    "name": "Vodní meloun",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Ovoce",
+    "emoji": "🍎",
+    "image": "https://imgproxy-retcat.assets.schwarz/1DuiUESjo7Y24uPx0wfDOOOuhHwaY6SwGDzSyqaanUQ/sm:0/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS8yN0JDN0U0MEQyN0ExMDZERDg1MTlGRUM/wQUUyRjdDRkE4MkZDMjg2MkU4MjJCM0U0MjNCRTc0ODYyMTlDN0E4LnBuZw.png",
+    "priceNew": 7.9,
+    "priceOld": 19.9,
+    "validUntil": "2026-08-16",
+    "url": "https://www.lidl.cz/p/vodni-meloun/p10052773"
   },
   {
     "id": "ld20ea0",
