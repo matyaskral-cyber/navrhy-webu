@@ -1,5 +1,19 @@
 [
   {
+    "id": "p00a5a9",
+    "name": "Hanácká kyselka PET",
+    "desc": "1.5 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "ST WEB",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-100809-0885814075-GBCcgNmt.jpg",
+    "priceNew": 9.9,
+    "priceOld": 13.37,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/hanacka-kyselka-pet-88100809"
+  },
+  {
     "id": "pd9d548",
     "name": "Gemerka magnezium a kalcium jemně perlivá",
     "desc": "1.5 l",
@@ -12,6 +26,20 @@
     "priceOld": 13.37,
     "validUntil": "2026-08-25",
     "url": "https://www.penny.cz/products/gemerka-magnezium-a-kalcium-jemne-perliva-88104034"
+  },
+  {
+    "id": "pc5794a",
+    "name": "Sýr Hermelín Král sýrů",
+    "desc": "120 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "SÝRY",
+    "emoji": "🧀",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-113324-0123024682-08KycEum.jpg",
+    "priceNew": 29.9,
+    "priceOld": 40.37,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/syr-hermelin-kral-syru-88113324"
   },
   {
     "id": "p7f1824",
@@ -42,6 +70,48 @@
     "url": "https://www.penny.cz/products/veprove-melnene-maso-xxl-88200409"
   },
   {
+    "id": "p530057",
+    "name": "Instantní čaj mix Penny",
+    "desc": "350 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "ČAJ / KAKAO",
+    "emoji": "🍵",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-200837-606993342-i0JtOh3Y.jpg",
+    "priceNew": 19.9,
+    "priceOld": 33.9,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/instantni-caj-mix-penny-88200837"
+  },
+  {
+    "id": "p71dd82",
+    "name": "Jíška světlá Vitana",
+    "desc": "190 kg",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "ZÁKLADNÍ POTRAVINY",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-201031-1314056569-JdcfQGZc.jpg",
+    "priceNew": 24.9,
+    "priceOld": 55.9,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/jiska-svetla-vitana-88201031"
+  },
+  {
+    "id": "pb9ab1c",
+    "name": "Jíška tmavá Vitana",
+    "desc": "190 kg",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "ZÁKLADNÍ POTRAVINY",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-201032-0879231742-E914VWx2.jpg",
+    "priceNew": 24.9,
+    "priceOld": 55.9,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/jiska-tmava-vitana-88201032"
+  },
+  {
     "id": "p361de0",
     "name": "Máslo jihočeské",
     "desc": "250 g",
@@ -70,6 +140,20 @@
     "url": "https://www.penny.cz/products/toaletni-papir-68m-wippy-88201322"
   },
   {
+    "id": "p25e9b0",
+    "name": "Kobliha s ovocnou náplní",
+    "desc": "65 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "PEČIVO",
+    "emoji": "🍞",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-201694-418452542-1AoeG7Zb.jpg",
+    "priceNew": 4.9,
+    "priceOld": 6.62,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/kobliha-s-ovocnou-naplni-88201694"
+  },
+  {
     "id": "p8d2a5b",
     "name": "Tuňák drcený Marinna",
     "desc": "135 kg",
@@ -82,6 +166,20 @@
     "priceOld": 33.9,
     "validUntil": "2026-08-25",
     "url": "https://www.penny.cz/products/tunak-drceny-marinna-88202192"
+  },
+  {
+    "id": "p15e3ab",
+    "name": "Čaj Fat Burner, Ginko Bercoff",
+    "desc": "30 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "ČAJ / KAKAO",
+    "emoji": "🍵",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-203428-0119153647-OQ8X2_6n.jpg",
+    "priceNew": 24.9,
+    "priceOld": 37.9,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/caj-fat-burner-ginko-bercoff-88203428"
   },
   {
     "id": "pb5ee73",
@@ -112,6 +210,48 @@
     "url": "https://www.penny.cz/products/kuskus-gustito-88205299"
   },
   {
+    "id": "p2099e2",
+    "name": "Multivitamín Karlova Koruna",
+    "desc": "1.5 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "produkty s PENNY kartou",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205304-0134336668-WYXrKJx9.jpg",
+    "priceNew": 17.9,
+    "priceOld": 22.9,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/multivitamin-karlova-koruna-88205304"
+  },
+  {
+    "id": "pf35e45",
+    "name": "Ledový čaj Karlova Koruna",
+    "desc": "1.5 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "produkty s PENNY kartou",
+    "emoji": "🍵",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205309-469281024-6MxfvJpz.jpg",
+    "priceNew": 14.9,
+    "priceOld": 19.9,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/ledovy-caj-karlova-koruna-88205309"
+  },
+  {
+    "id": "p8ea450",
+    "name": "Ledový zelený čaj Karlova Koruna",
+    "desc": "1.5 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "produkty s PENNY kartou",
+    "emoji": "🍵",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205310-016665998-zskb_9U9.jpg",
+    "priceNew": 14.9,
+    "priceOld": 19.9,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/ledovy-zeleny-caj-karlova-koruna-88205310"
+  },
+  {
     "id": "pa42926",
     "name": "Sýr Eidam 30% Karlova Koruna",
     "desc": "100 g",
@@ -138,6 +278,34 @@
     "priceOld": 33.9,
     "validUntil": "2026-08-25",
     "url": "https://www.penny.cz/products/gustito-bulgur-88205827"
+  },
+  {
+    "id": "p0e901f",
+    "name": "Rýže dlouhozrnná +20% Lagris",
+    "desc": "1.2 kg",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "ZÁKLADNÍ POTRAVINY",
+    "emoji": "🍚",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205828-1785664933-s0spRb1M.jpg",
+    "priceNew": 29.9,
+    "priceOld": 59.9,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/ryze-dlouhozrnna-20-lagris-88205828"
+  },
+  {
+    "id": "p849922",
+    "name": "Sýr Eidam 30% plátky Karlova Koruna",
+    "desc": "100 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "SÝRY",
+    "emoji": "🧀",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-205998-0589900056-RGugOKDD.jpg",
+    "priceNew": 14.9,
+    "priceOld": 20.12,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/syr-eidam-30-platky-karlova-koruna-88205998"
   },
   {
     "id": "p3a266a",
@@ -182,6 +350,20 @@
     "url": "https://www.penny.cz/products/gel-na-prani-ariel-88208753"
   },
   {
+    "id": "p82227e",
+    "name": "Tablety do myčky All in One Jar Original",
+    "desc": "41 ks",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "ST WEB",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-208798-0132086216-fHmbH8fx.jpg",
+    "priceNew": 129.9,
+    "priceOld": 175.37,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/tablety-do-mycky-all-in-one-jar-original-88208798"
+  },
+  {
     "id": "pc3d7c9",
     "name": "Pepsi",
     "desc": "2.5 l",
@@ -208,6 +390,48 @@
     "priceOld": 40.37,
     "validUntil": "2026-08-25",
     "url": "https://www.penny.cz/products/mirinda-25l-88209193"
+  },
+  {
+    "id": "p11fc1e",
+    "name": "Toaletní papír Wippy",
+    "desc": "141.68 m",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "ST WEB",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-209358-753929560-ixPnv2VF.jpg",
+    "priceNew": 29.9,
+    "priceOld": 40.37,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/toaletni-papir-wippy-88209358"
+  },
+  {
+    "id": "pc8234a",
+    "name": "Mirinda Orange",
+    "desc": "1.5 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "NEALKOHOLICKÉ NÁPOJE",
+    "emoji": "🥤",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-209472-918972596-JPfvkmi8.jpg",
+    "priceNew": 19.9,
+    "priceOld": 26.86,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/mirinda-orange-88209472"
+  },
+  {
+    "id": "pa5de88",
+    "name": "Smetana ke šlehání 31% Milkeria",
+    "desc": "200 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "MLÉČNÉ VÝROBKY",
+    "emoji": "🧀",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-209510-1951091522-XZYYx93N.jpg",
+    "priceNew": 19.9,
+    "priceOld": 26.86,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/smetana-ke-slehani-31-milkeria-88209510"
   },
   {
     "id": "p83b2a3",
@@ -294,6 +518,62 @@
     "url": "https://www.penny.cz/products/konzerva-pro-psy-haryk-88302044"
   },
   {
+    "id": "p48e172",
+    "name": "Tradiční pomazánkové Boni",
+    "desc": "200 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "MLÉČNÉ VÝROBKY",
+    "emoji": "🧀",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302066-0164956550-jxdLNG_Y.jpg",
+    "priceNew": 19.9,
+    "priceOld": 26.86,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/tradicni-pomazankove-boni-88302066"
+  },
+  {
+    "id": "pd9adfe",
+    "name": "Zmrzlina v oplatkovém kornoutu Rios",
+    "desc": "200 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "MRAŽENÁ ZMRZLINA",
+    "emoji": "🍦",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302223-0115595341-LLPYDHmm.jpg",
+    "priceNew": 9.9,
+    "priceOld": 13.37,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/zmrzlina-v-oplatkovem-kornoutu-rios-88302223"
+  },
+  {
+    "id": "p5a72b1",
+    "name": "Káva Instant Velvet Crema Gold Jacobs",
+    "desc": "180 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "KÁVA",
+    "emoji": "☕",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-302287-068311809-IDL-rwo4.jpg",
+    "priceNew": 129.9,
+    "priceOld": 175.37,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/kava-instant-velvet-crema-gold-jacobs-88302287"
+  },
+  {
+    "id": "p280766",
+    "name": "Vývar hovězí Vitana",
+    "desc": "112 kg",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "POLÉVKY / OMÁČKY",
+    "emoji": "🥩",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-332122-2135196099-MODsCtzq.jpg",
+    "priceNew": 24.9,
+    "priceOld": 42.9,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/vyvar-hovezi-vitana-88332122"
+  },
+  {
     "id": "pfe7052",
     "name": "Olivy zelené Franz Josef Kaiser",
     "desc": "130 kg",
@@ -322,6 +602,48 @@
     "url": "https://www.penny.cz/products/okurky-57cm-znojmia-88369114"
   },
   {
+    "id": "pd54dd9",
+    "name": "Kinder Joy",
+    "desc": "20 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "SLADKOSTI",
+    "emoji": "🛒",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-384511-0612655417-gkOMHAqq.jpg",
+    "priceNew": 26.9,
+    "priceOld": 36.31,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/kinder-joy-88384511"
+  },
+  {
+    "id": "pdb0bee",
+    "name": "Tatranky Opavia",
+    "desc": "47 g",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "TRVANLIVÉ PEČIVO / VAFLE",
+    "emoji": "🍞",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-401217-0773413749-LLMEoLCE.jpg",
+    "priceNew": 7.9,
+    "priceOld": 10.67,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/tatranky-opavia-88401217"
+  },
+  {
+    "id": "p83cb83",
+    "name": "Hanácká vodka",
+    "desc": "0.5 l",
+    "store": "penny",
+    "storeName": "Penny",
+    "category": "LIHOVINY",
+    "emoji": "💧",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-442339-888927206-nDKnLVNi.jpg",
+    "priceNew": 119.9,
+    "priceOld": 161.87,
+    "validUntil": "2026-09-01",
+    "url": "https://www.penny.cz/products/hanacka-vodka-88442339"
+  },
+  {
     "id": "p2800d7",
     "name": "Becherovka 38%",
     "desc": "0.5 l",
@@ -334,34 +656,6 @@
     "priceOld": 202.37,
     "validUntil": "2026-08-25",
     "url": "https://www.penny.cz/products/becherovka-38-88445210"
-  },
-  {
-    "id": "p2c8e65",
-    "name": "Pivo 11 Svijanský Máz sklo",
-    "desc": "0.5 l",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "PIVO",
-    "emoji": "🍺",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-451184-0108613078-pzdUdzDx.jpg",
-    "priceNew": 10.9,
-    "priceOld": 14.72,
-    "validUntil": "2026-08-25",
-    "url": "https://www.penny.cz/products/pivo-11-svijansky-maz-sklo-88451184"
-  },
-  {
-    "id": "pf24da8",
-    "name": "Salám Herkules krájený Řezníkův Talíř",
-    "desc": "100 g",
-    "store": "penny",
-    "storeName": "Penny",
-    "category": "UZENINY",
-    "emoji": "🌭",
-    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/32972516-a6f1-4f49-9e95-d4bdd5b0d77d/88-94195-1322486516-QFY-cume.jpg",
-    "priceNew": 19.9,
-    "priceOld": 26.86,
-    "validUntil": "2026-08-25",
-    "url": "https://www.penny.cz/products/salam-herkules-krajeny-reznikuv-talir-8894195"
   },
   {
     "id": "b4599d7",
@@ -994,6 +1288,20 @@
     "url": "https://www.billa.cz/produkt/milka-wholenut-mlecna-cokolada-z-alpskeho-mleka-s-celymi-jadry-liskovych-orechu-95-g-82202944"
   },
   {
+    "id": "b456fe6",
+    "name": "Milka Yoghurt mléčná čokoláda z alpského mléka s jogurtovou náplní 100 g",
+    "desc": "100 kg",
+    "store": "billa",
+    "storeName": "Billa",
+    "category": "Mléčné čokolády ochucené",
+    "emoji": "🧀",
+    "image": "https://images.cdn.europe-west1.gcp.commercetools.com/1df039f1-4705-4f79-aa90-cf907a6ec063/82-202947-1690171031-pq-B_49B.jpg",
+    "priceNew": 34.9,
+    "priceOld": 47.12,
+    "validUntil": "",
+    "url": "https://www.billa.cz/produkt/milka-yoghurt-mlecna-cokolada-z-alpskeho-mleka-sjogurtovou-naplni-100-g-82202947"
+  },
+  {
     "id": "l472dee",
     "name": "SCRUB DADDY Čisticí houbička",
     "desc": "",
@@ -1282,8 +1590,8 @@
     "category": "Dílna & hardware",
     "emoji": "🛒",
     "image": "https://www.lidl.cz/assets/gcpb83f021671b74b1b8a897428ebe6a593.jpg",
-    "priceNew": 299.9,
-    "priceOld": 349.9,
+    "priceNew": 349.9,
+    "priceOld": 472.37,
     "validUntil": "2026-08-30",
     "url": "https://www.lidl.cz/p/parkside-sada-diamantovych-vrtaku-na-dlazdice-5dilna/p100407406"
   },
@@ -1296,8 +1604,8 @@
     "category": "Dílna & hardware",
     "emoji": "🛒",
     "image": "https://www.lidl.cz/assets/gcp063af27c6b2249c1a3b08a9e72f4e718.jpg",
-    "priceNew": 49.9,
-    "priceOld": 79.9,
+    "priceNew": 79.9,
+    "priceOld": 107.87,
     "validUntil": "2026-08-30",
     "url": "https://www.lidl.cz/p/parkside-tesneni-sprchovych-dveri-2-kusy/p100407492"
   },
@@ -1582,20 +1890,6 @@
     "url": "https://www.lidl.cz/p/sensiplast-kolenni-bandaz-s-chladicimi-polstarky/p100397534"
   },
   {
-    "id": "l071135",
-    "name": "LIVARNO HOME Sada potravinových dóz / kořenek",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Skladování a organizace",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcp7b570ad1af6144e6b43fb9058c006600.jpg",
-    "priceNew": 99.9,
-    "priceOld": 169.9,
-    "validUntil": "2025-11-02",
-    "url": "https://www.lidl.cz/p/livarno-home-sada-potravinovych-doz-korenek/p100385112"
-  },
-  {
     "id": "l296f28",
     "name": "REMINGTON Kulma na vlasy Shine Therapy S8507",
     "desc": "",
@@ -1636,20 +1930,6 @@
     "priceOld": 599.9,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/emma-lozni-povleceni-renforce-140-x-200-cm-70-x-90-cm/p100406125"
-  },
-  {
-    "id": "l864ad8",
-    "name": "EMMA Ložní povlečení Renforcé, 200 x 220 cm, 70 x 90 cm",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Ložnice",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcpaff6120ea21b4809a883077cf7d5c19a.jpg",
-    "priceNew": 599.9,
-    "priceOld": 999.9,
-    "validUntil": "",
-    "url": "https://www.lidl.cz/p/emma-lozni-povleceni-renforce-200-x-220-cm-70-x-90-cm/p100406148"
   },
   {
     "id": "l22ce7b",
@@ -1995,7 +2275,7 @@
     "storeName": "Lidl",
     "category": "Kempování a outdoor",
     "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcp7c552cf2d50144f6a23a316c360b5dc7.jpg",
+    "image": "https://www.lidl.cz/assets/gcp8bb2990ffeed47d79eb95c3e5afa4e9f.png",
     "priceNew": 499.9,
     "priceOld": 649.9,
     "validUntil": "2026-08-30",
@@ -2142,6 +2422,20 @@
     "url": "https://www.lidl.cz/p/lupilu-detska-softshellova-bunda/p100408940"
   },
   {
+    "id": "l135a52",
+    "name": "LUPILU® Dětská softshellová bunda (světle růžová)",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Dětské oblečení 2-8 let",
+    "emoji": "🛒",
+    "image": "https://www.lidl.cz/assets/gcpaf67b29135604231b396d878c125205f.jpg",
+    "priceNew": 299.9,
+    "priceOld": 359.9,
+    "validUntil": "2026-08-30",
+    "url": "https://www.lidl.cz/p/lupilu-detska-softshellova-bunda/p100409118801"
+  },
+  {
     "id": "ld7fb9c",
     "name": "LUPILU® Dětská mikina",
     "desc": "",
@@ -2184,18 +2478,32 @@
     "url": "https://www.lidl.cz/p/crivit-divci-chlapecka-nepromokava-bunda/p100392043"
   },
   {
-    "id": "l459534",
-    "name": "CRIVIT Dívčí softshellová bunda",
+    "id": "l279387",
+    "name": "CRIVIT Dívčí softshellová bunda (černá)",
     "desc": "",
     "store": "lidl",
     "storeName": "Lidl",
     "category": "Kempování a outdoor",
     "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcp5d89a784ec3a4ff7b73a7c6f801739c0.jpg",
+    "image": "https://www.lidl.cz/assets/gcpc8a48dc24a9e4cd0ac66b6bd2be52a11.jpg",
     "priceNew": 229.9,
     "priceOld": 349.9,
     "validUntil": "2026-08-30",
-    "url": "https://www.lidl.cz/p/crivit-divci-softshellova-bunda/p100409024"
+    "url": "https://www.lidl.cz/p/crivit-divci-softshellova-bunda/p100409024801"
+  },
+  {
+    "id": "l39ad49",
+    "name": "CRIVIT Dívčí softshellová bunda (vzorovaná/růžová)",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Kempování a outdoor",
+    "emoji": "🛒",
+    "image": "https://www.lidl.cz/assets/gcp3f49c3dea54b428482a5cb5a49930a44.jpg",
+    "priceNew": 229.9,
+    "priceOld": 349.9,
+    "validUntil": "2026-08-30",
+    "url": "https://www.lidl.cz/p/crivit-divci-softshellova-bunda/p100409024802"
   },
   {
     "id": "lf4c6a0",
@@ -2210,6 +2518,20 @@
     "priceOld": 149.9,
     "validUntil": "2026-08-30",
     "url": "https://www.lidl.cz/p/lupilu-divci-dzeginy/p100398207"
+  },
+  {
+    "id": "l1eb07d",
+    "name": "LUPILU® Dětská softshellová bunda (zelená)",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Dětské oblečení 2-8 let",
+    "emoji": "🛒",
+    "image": "https://www.lidl.cz/assets/gcp745735c8e23e4b049ce4fe7194033a3b.jpg",
+    "priceNew": 299.9,
+    "priceOld": 359.9,
+    "validUntil": "2026-08-30",
+    "url": "https://www.lidl.cz/p/lupilu-detska-softshellova-bunda/p100409118802"
   },
   {
     "id": "l7a5be4",
