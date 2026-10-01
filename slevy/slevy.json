@@ -938,6 +938,20 @@
     "url": "https://www.lidl.cz/p/pilos-mozzarella/p10007489"
   },
   {
+    "id": "ldcafc6",
+    "name": "Holandský karbanátek s goudou",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Mražené hotové pokrmy",
+    "emoji": "🍲",
+    "image": "https://imgproxy-retcat.assets.schwarz/0CtM48EN3wLolJiOJct1CDdlFWoJqKucHBiYGskQJJM/sm:0/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9GQjEzNjc2Q0I0NjZCQkVGOEFBRkZBRDQ/2NUVEMjMzRUEyRjlFNDhBODhBMkRCMzlFMUFCOEZDQTk3RUUyNjE0LnBuZw.png",
+    "priceNew": 99.9,
+    "priceOld": 129.9,
+    "validUntil": "2026-10-04",
+    "url": "https://www.lidl.cz/p/holandsky-karbanatek-s-goudou/p10036241"
+  },
+  {
     "id": "l541cd9",
     "name": "GAMBRINUS 10 originál",
     "desc": "",
@@ -992,20 +1006,6 @@
     "priceOld": 21.47,
     "validUntil": "2026-10-04",
     "url": "https://www.lidl.cz/p/tolstolobik-bily/p10050218"
-  },
-  {
-    "id": "l2d1d82",
-    "name": "COOL Nealko",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Nealkoholické lihoviny",
-    "emoji": "🥃",
-    "image": "https://imgproxy-retcat.assets.schwarz/fJTnytdC_z_TzAwEvO7esuT4x6XahOkNNbj2I13Npi0/sm:0/exar:1:ce/w:427/h:320/cz/M6Ly9wcm9kLWNhd/GFsb2ctbWVkaWEvY3ovMS9FQzA3MzNEMTQyMDg3NDdEMzQ5MkUwOTM/4OUM4Rjc2OTBCNDMwNUVENUExNDZBNEJCNjQxNEU2QzIyMDBCNEJFLnBuZw.png",
-    "priceNew": 13.9,
-    "priceOld": 23.9,
-    "validUntil": "2026-10-04",
-    "url": "https://www.lidl.cz/p/cool-nealko/p10051461"
   },
   {
     "id": "l8fb642",
@@ -1540,20 +1540,6 @@
     "url": "https://www.lidl.cz/p/brita-filtracni-konvice-marella/p100388054"
   },
   {
-    "id": "l556bea",
-    "name": "SANITAS Inhalátor SIH 13",
-    "desc": "",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Zdraví a wellness",
-    "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcp003f0080f4844d329316009103d1e92c.jpg",
-    "priceNew": 499.9,
-    "priceOld": 963.9,
-    "validUntil": "2026-07-26",
-    "url": "https://www.lidl.cz/p/sanitas-inhalator-sih-13/p100408359"
-  },
-  {
     "id": "la8fbf2",
     "name": "SENSIPLAST® Shiatsu masážní polštář SSM 12 A1",
     "desc": "",
@@ -1652,18 +1638,32 @@
     "url": "https://www.lidl.cz/p/crelando-kreativni-sada-koralku/p100408421"
   },
   {
-    "id": "l2ce5cf",
-    "name": "CRIVIT Dámská funkční vesta",
+    "id": "l964782",
+    "name": "CRIVIT Dámská funkční vesta (růžová)",
     "desc": "",
     "store": "lidl",
     "storeName": "Lidl",
     "category": "Běh",
     "emoji": "🛒",
-    "image": "https://www.lidl.cz/assets/gcp9dfcfce3083e47cb993f9d86e8c322f1.jpg",
+    "image": "https://www.lidl.cz/assets/gcpded60f825ffc41ab91b449a11eee8b23.jpg",
     "priceNew": 229.9,
     "priceOld": 349.9,
     "validUntil": "2026-10-04",
-    "url": "https://www.lidl.cz/p/crivit-damska-funkcni-vesta/p100400133"
+    "url": "https://www.lidl.cz/p/crivit-damska-funkcni-vesta/p100400133801"
+  },
+  {
+    "id": "l31f967",
+    "name": "CRIVIT Dámská funkční vesta (navy modrá)",
+    "desc": "",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Běh",
+    "emoji": "🛒",
+    "image": "https://www.lidl.cz/assets/gcp88ff024ae34b44619ee05a8154ec0b8b.jpg",
+    "priceNew": 229.9,
+    "priceOld": 349.9,
+    "validUntil": "2026-10-04",
+    "url": "https://www.lidl.cz/p/crivit-damska-funkcni-vesta/p100400133802"
   },
   {
     "id": "l6a0a65",
