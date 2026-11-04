@@ -5,8 +5,10 @@ Spuštění: python3 posli-email.py komu@email.cz "Předmět" "Text emailu"
 Nebo:     python3 posli-email.py   (interaktivní režim)
 """
 
+import os
 import smtplib
 import ssl
+import subprocess
 import sys
 from email.mime.text import MIMEText
 from email.header import Header
@@ -16,9 +18,23 @@ from email.utils import formataddr
 SMTP_SERVER = "smtp.seznam.cz"
 SMTP_PORT = 465
 EMAIL = "info@ksh-partners.cz"
-HESLO = "RzH&tCgL!MF%9p!9"
 JMENO = "Matyáš Král"
 # ============================================
+
+
+
+def heslo():
+    """Heslo pro aplikace k info@ (Seznam): proměnná KSH_INFO_HESLO, jinak Klíčenka:
+    security add-generic-password -s ksh-info-smtp -a info@ksh-partners.cz -w"""
+    h = os.environ.get("KSH_INFO_HESLO")
+    if not h:
+        r = subprocess.run(["security", "find-generic-password", "-s", "ksh-info-smtp", "-a", EMAIL, "-w"],
+                           capture_output=True, text=True)
+        h = r.stdout.strip()
+    if not h:
+        sys.exit("Chybí heslo: nastav KSH_INFO_HESLO, nebo ho ulož do Klíčenky (viz heslo() v tomto souboru).")
+    return h
+
 
 PODPIS = """
 --
@@ -40,7 +56,7 @@ def posli(komu, predmet, text, s_podpisem=True):
     try:
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, context=context) as server:
-            server.login(EMAIL, HESLO)
+            server.login(EMAIL, heslo())
             server.sendmail(EMAIL, komu, msg.as_string())
         print(f"Odesláno → {komu}")
     except Exception as e:
