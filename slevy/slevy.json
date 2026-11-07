@@ -1078,6 +1078,48 @@
     "url": "https://www.lidl.cz/p/jablecna-kapsa/p11006401"
   },
   {
+    "id": "l44f0f4",
+    "name": "Žampiony zahradní",
+    "desc": "400 g",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Zelenina",
+    "emoji": "🥦",
+    "image": "https://www.lidl.cz/assets/gcp67f1773654dc4c50bcaa536da6aaf00c.png",
+    "priceNew": 34.9,
+    "priceOld": 44.9,
+    "validUntil": "2026-11-15",
+    "url": "https://www.lidl.cz/p/zampiony-zahradni/p11029536"
+  },
+  {
+    "id": "l8dc042",
+    "name": "Salátová srdíčka",
+    "desc": "3 ks",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Zelenina",
+    "emoji": "🥦",
+    "image": "https://www.lidl.cz/assets/gcp29803ebf03b3435b916f61dab9a23cb3.png",
+    "priceNew": 26.9,
+    "priceOld": 39.9,
+    "validUntil": "2026-11-15",
+    "url": "https://www.lidl.cz/p/salatova-srdicka/p11029873"
+  },
+  {
+    "id": "l3f4b01",
+    "name": "Červené hrozny stolní",
+    "desc": "1 kg",
+    "store": "lidl",
+    "storeName": "Lidl",
+    "category": "Ovoce",
+    "emoji": "🍎",
+    "image": "https://www.lidl.cz/assets/gcpc110ea78906d4fd7a82b92ba8717bb89.png",
+    "priceNew": 49.9,
+    "priceOld": 67.37,
+    "validUntil": "2026-11-15",
+    "url": "https://www.lidl.cz/p/cervene-hrozny-stolni/p11030016"
+  },
+  {
     "id": "l3064f0",
     "name": "Mandarinky",
     "desc": "1 kg",
@@ -1090,34 +1132,6 @@
     "priceOld": 49.9,
     "validUntil": "2026-11-15",
     "url": "https://www.lidl.cz/p/mandarinky/p11030024"
-  },
-  {
-    "id": "l4f8de2",
-    "name": "Brokolice",
-    "desc": "500 g",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Zelenina",
-    "emoji": "🥦",
-    "image": "https://www.lidl.cz/assets/gcpbea0d8b51cf940e9b8a4c65c658dc9bc.png",
-    "priceNew": 29.9,
-    "priceOld": 39.9,
-    "validUntil": "2026-11-15",
-    "url": "https://www.lidl.cz/p/brokolice/p11151157"
-  },
-  {
-    "id": "ld9f0ee",
-    "name": "Jablka červená",
-    "desc": "1 kg",
-    "store": "lidl",
-    "storeName": "Lidl",
-    "category": "Ovoce",
-    "emoji": "🍎",
-    "image": "https://www.lidl.cz/assets/gcp2d0d8ac9accf4785821dde06c1597fd1.png",
-    "priceNew": 18.9,
-    "priceOld": 32.9,
-    "validUntil": "2026-11-15",
-    "url": "https://www.lidl.cz/p/jablka-cervena/p11214563"
   },
   {
     "id": "l09661b",
@@ -1268,7 +1282,7 @@
     "category": "Kuchyně a jídelna",
     "emoji": "🛒",
     "image": "https://www.lidl.cz/assets/gcp03637d2fda254e21bb0ed18b21215375.jpg",
-    "priceNew": 99.9,
+    "priceNew": 79.9,
     "priceOld": 129.9,
     "validUntil": "2026-09-06",
     "url": "https://www.lidl.cz/p/livarno-ubrus-sada-behounu/p100409377"
@@ -1576,7 +1590,7 @@
     "category": "Koupelna",
     "emoji": "🛒",
     "image": "https://www.lidl.cz/assets/gcp20c3dac635f244c791233aca635a2995.jpg",
-    "priceNew": 399.9,
+    "priceNew": 299.9,
     "priceOld": 799.9,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/livarno-bambusovy-regal-se-3-kosi/p100401549"
@@ -1590,8 +1604,8 @@
     "category": "Krása a péče o tělo",
     "emoji": "🛒",
     "image": "https://www.lidl.cz/assets/gcpdd44e9669b3349a4a47d50c1a763b293.jpg",
-    "priceNew": 349.9,
-    "priceOld": 549.9,
+    "priceNew": 549.9,
+    "priceOld": 742.37,
     "validUntil": "",
     "url": "https://www.lidl.cz/p/cien-beauty-elektricky-holici-strojek-sfr-3-7/p100395232"
   },
