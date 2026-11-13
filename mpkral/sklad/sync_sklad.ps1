@@ -5,7 +5,14 @@
 param([string]$ExcelPath)
 
 $SUPABASE_URL = "https://yqklnqmcjloxwdtifkjb.supabase.co"
-$SUPABASE_KEY = "sb_publishable_gZI-26x3NF4Dc5h-BuOpjg_3Y0n2Um-"
+# Tajny klic (sb_secret_...) se NEUKLADA do gitu. Je v souboru supabase_secret.txt
+# vedle tohoto skriptu (Supabase -> Project Settings -> API Keys -> Secret keys).
+$secretFile = Join-Path $PSScriptRoot "supabase_secret.txt"
+if (-not (Test-Path $secretFile)) {
+    Write-Host "CHYBA: Chybi soubor supabase_secret.txt vedle skriptu." -ForegroundColor Red
+    exit 1
+}
+$SUPABASE_KEY = (Get-Content $secretFile -Raw).Trim()
 
 if (-not $ExcelPath) {
     $folders = @(
