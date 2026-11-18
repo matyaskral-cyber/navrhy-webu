@@ -221,7 +221,7 @@ tr:hover td { background: rgba(59,130,246,.03); }
   <div class="login-box">
     <div class="login-logo">M+P Král</div>
     <div class="login-sub">Skladové zásoby</div>
-    <input type="text" class="login-input" id="loginUser" placeholder="Uživatel" autocomplete="username">
+    <input type="email" class="login-input" id="loginUser" placeholder="E-mail" autocomplete="username">
     <input type="password" class="login-input" id="loginPass" placeholder="Heslo" autocomplete="current-password">
     <button class="login-btn" onclick="doLogin()">Přihlásit</button>
     <div class="login-error" id="loginError">Nesprávné údaje</div>
@@ -280,27 +280,66 @@ tr:hover td { background: rgba(59,130,246,.03); }
 const SB_URL = 'https://yqklnqmcjloxwdtifkjb.supabase.co';
 const SB_KEY = 'sb_publishable_gZI-26x3NF4Dc5h-BuOpjg_3Y0n2Um-';
 
-const USERS = {
-  'petr': 'b23ba60fc222df288df4c3d3818a430bd14252c2d680f7a18172bc6dc4607d20',
-  'propom': '7edf6267c31f6bcc781ec0907a6314fe4d05e23c3f56a74f77ab6643f91e2f56',
-};
-
 let data = [], sort = { key: 'nazev', dir: 'asc' }, timer, currentUser = '';
 
-async function sha256(s) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+// Přihlášení přes Supabase Auth. Data chrání RLS v databázi (viz supabase_rls.sql),
+// klíč SB_KEY je veřejný (publishable) a sám o sobě k datům nepustí.
+const SESSION_KEY = 'sk_session';
+
+function getSession() {
+  try { return JSON.parse(sessionStorage.getItem(SESSION_KEY)); } catch { return null; }
+}
+
+function saveSession(r) {
+  const s = { access_token: r.access_token, refresh_token: r.refresh_token,
+              expires_at: Math.floor(Date.now() / 1000) + (r.expires_in || 3600) };
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify(s));
+  return s;
+}
+
+function jwtPayload(token) {
+  try { return JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'))); } catch { return {}; }
+}
+
+async function authRequest(grant, body) {
+  const r = await fetch(`${SB_URL}/auth/v1/token?grant_type=${grant}`, {
+    method: 'POST',
+    headers: { 'apikey': SB_KEY, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) throw new Error(r.status);
+  return saveSession(await r.json());
+}
+
+// Vrátí platný access token (obnoví ho, když brzy vyprší), jinak odhlásí
+async function token() {
+  let s = getSession();
+  if (!s) { doLogout(); throw new Error('Nepřihlášen'); }
+  if (s.expires_at - 60 < Date.now() / 1000) {
+    try { s = await authRequest('refresh_token', { refresh_token: s.refresh_token }); }
+    catch { doLogout(); throw new Error('Přihlášení vypršelo'); }
+  }
+  return s.access_token;
+}
+
+async function authHeaders(extra = {}) {
+  return { 'apikey': SB_KEY, 'Authorization': `Bearer ${await token()}`, ...extra };
 }
 
 async function doLogin() {
-  const u = document.getElementById('loginUser').value.trim().toLowerCase();
-  const h = await sha256(document.getElementById('loginPass').value);
-  if (USERS[u] === h) { sessionStorage.setItem('sk', u); currentUser = u; showApp(); }
-  else { document.getElementById('loginError').style.display = 'block'; }
+  const email = document.getElementById('loginUser').value.trim().toLowerCase();
+  const password = document.getElementById('loginPass').value;
+  try {
+    await authRequest('password', { email, password });
+    document.getElementById('loginError').style.display = 'none';
+    showApp();
+  } catch {
+    document.getElementById('loginError').style.display = 'block';
+  }
 }
 
 function doLogout() {
-  sessionStorage.removeItem('sk');
+  sessionStorage.removeItem(SESSION_KEY);
   currentUser = '';
   document.getElementById('mainApp').classList.remove('active');
   document.getElementById('loginScreen').style.display = 'flex';
@@ -310,22 +349,25 @@ function doLogout() {
 function showApp() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('mainApp').classList.add('active');
-  // Show upload button only for admin
-  currentUser = sessionStorage.getItem('sk');
-  document.getElementById('btnUpload').style.display = currentUser === 'petr' ? '' : 'none';
+  // Tlačítko nahrání jen pro admina (zápis stejně hlídá RLS v databázi)
+  const claims = jwtPayload(getSession().access_token);
+  currentUser = claims.email || '';
+  const isAdmin = (claims.app_metadata || {}).sklad_role === 'admin';
+  document.getElementById('btnUpload').style.display = isAdmin ? '' : 'none';
   load();
   timer = setInterval(load, 60000);
 }
 
 document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
-if (sessionStorage.getItem('sk')) showApp();
+if (getSession()) showApp();
 
 async function load() {
   try {
     const r = await fetch(`${SB_URL}/rest/v1/sklad?select=kod,carovy_kod,nazev,mnozstvi&order=nazev.asc`, {
-      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+      headers: await authHeaders()
     });
+    if (r.status === 401) { doLogout(); return; }
     if (!r.ok) throw new Error(r.status);
     data = await r.json();
     render();
@@ -446,20 +488,19 @@ async function processFile(file) {
     status.textContent = `Nalezeno ${items.length} položek, nahrávám...`;
 
     // Delete old data
-    await fetch(`${SB_URL}/rest/v1/sklad?id=gt.0`, {
+    const del = await fetch(`${SB_URL}/rest/v1/sklad?id=gt.0`, {
       method: 'DELETE',
-      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}`, 'Prefer': 'return=minimal' }
+      headers: await authHeaders({ 'Prefer': 'return=minimal' })
     });
+    if (!del.ok) throw new Error(`HTTP ${del.status}`);
 
     // Insert new data
     const resp = await fetch(`${SB_URL}/rest/v1/sklad`, {
       method: 'POST',
-      headers: {
-        'apikey': SB_KEY,
-        'Authorization': `Bearer ${SB_KEY}`,
+      headers: await authHeaders({
         'Content-Type': 'application/json',
         'Prefer': 'return=minimal'
-      },
+      }),
       body: JSON.stringify(items)
     });
 

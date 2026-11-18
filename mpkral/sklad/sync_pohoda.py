@@ -21,7 +21,9 @@ from datetime import datetime
 # CONFIG
 # ============================================
 SUPABASE_URL = "https://yqklnqmcjloxwdtifkjb.supabase.co"
-SUPABASE_KEY = "sb_publishable_gZI-26x3NF4Dc5h-BuOpjg_3Y0n2Um-"
+# Tajný klíč (sb_secret_...) se NEUKLÁDÁ do gitu. Je v souboru supabase_secret.txt
+# vedle skriptu (Supabase → Project Settings → API Keys → Secret keys).
+SECRET_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "supabase_secret.txt")
 
 # Výchozí cesta k Excel exportu (Pohoda uloží na plochu)
 DEFAULT_EXCEL = os.path.join(os.path.expanduser("~"), "Desktop", "Zásoby.xlsx")
@@ -91,8 +93,17 @@ def read_stock_excel(path):
     return items
 
 
+def load_secret_key():
+    if not os.path.exists(SECRET_FILE):
+        log(f"CHYBA: Chybí soubor {SECRET_FILE}")
+        sys.exit(1)
+    with open(SECRET_FILE, encoding="utf-8") as f:
+        return f.read().strip()
+
+
 def upload_to_supabase(items):
     """Nahraje položky do Supabase (smaže staré, vloží nové)."""
+    SUPABASE_KEY = load_secret_key()
     log(f"Nahrávám {len(items)} položek do Supabase...")
 
     headers = {
